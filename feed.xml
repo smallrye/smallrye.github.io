@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2018-06-29T15:42:24+00:00</updated><id>https://www.smallrye.io/</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Welcome to SmallRye</title><link href="https://www.smallrye.io/2018/06/28/welcome.html" rel="alternate" type="text/html" title="Welcome to SmallRye" /><published>2018-06-28T00:00:00+00:00</published><updated>2018-06-28T00:00:00+00:00</updated><id>https://www.smallrye.io/2018/06/28/welcome</id><content type="html" xml:base="https://www.smallrye.io/2018/06/28/welcome.html">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;SmallRye welcomes you to our new community for developing shared
+implementations of Eclipse MicroProfile specifications!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt; &lt;!-- more --&gt; &lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Right now we&amp;#8217;re still in the process of seeding the initial versions of
+the repositories for each Eclipse MicroProfile specification implementation.
+As they&amp;#8217;re released we will be updating the overview page and creating
+a page specific to each implementation on the website.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Currently we have released the following implementations:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;strong&gt;Config&lt;/strong&gt;, &lt;strong&gt;REST Client&lt;/strong&gt;, &lt;strong&gt;Open API&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The plan is to have the remainder migrated and released within the next couple of weeks.&lt;/p&gt;
+&lt;/div&gt;</content><author><name></name></author><summary type="html">SmallRye welcomes you to our new community for developing shared implementations of Eclipse MicroProfile specifications! +</summary></entry></feed>

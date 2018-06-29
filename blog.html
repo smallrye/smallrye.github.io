@@ -1,0 +1,18 @@
+---
+layout: default
+title: Blog
+faicon: fa-book
+---
+
+{% for post in site.posts %}
+  <div class="row">
+      <section>
+        <span>{{ post.date | date: "%b %-d, %Y" }} - 
+            <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+        </span>
+        <span>{{ post.excerpt | remove: '<p>' | remove: '</p>' | remove : '+' }}
+            <a href="{{ post.url | prepend: site.baseurl }}">Read more ....</a>
+        </span>
+      </section>
+  </div>
+{% endfor %}

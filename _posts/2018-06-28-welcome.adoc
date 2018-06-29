@@ -1,0 +1,17 @@
+= Welcome to SmallRye
+
+SmallRye welcomes you to our new community for developing shared
+implementations of Eclipse MicroProfile specifications!
+
++++ <!-- more --> +++
+
+Right now we're still in the process of seeding the initial versions of
+the repositories for each Eclipse MicroProfile specification implementation.
+As they're released we will be updating the overview page and creating
+a page specific to each implementation on the website.
+
+Currently we have released the following implementations:
+
+*Config*, *REST Client*, *Open API*
+
+The plan is to have the remainder migrated and released within the next couple of weeks.

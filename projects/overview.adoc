@@ -29,7 +29,7 @@
 
 |https://github.com/smallrye/smallrye-opentracing[OpenTracing]
 |1.1
-|http://repo1.maven.org/maven2/io/smallrye/smallrye-opentracing/1.1.0/smallrye-opentracingi-1.1.0.jar[1.1.0]
+|http://repo1.maven.org/maven2/io/smallrye/smallrye-opentracing/1.1.0/smallrye-opentracing-1.1.0.jar[1.1.0]
 |
 |&#10003;
 |===

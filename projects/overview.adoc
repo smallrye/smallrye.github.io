@@ -25,7 +25,7 @@
 |1.0
 |http://repo1.maven.org/maven2/io/smallrye/smallrye-health/1.0.2/smallrye-health-1.0.2.jar[1.0.2]
 |&#10003;
-|
+|&#10003;
 
 |https://github.com/smallrye/smallrye-jwt[JWT]
 |1.1
@@ -37,13 +37,13 @@
 |1.1
 |http://repo1.maven.org/maven2/io/smallrye/smallrye-metrics/1.1.1/smallrye-metrics-1.1.1.jar[1.1.1]
 |&#10003;
-|
+|&#10003;
 
 |https://github.com/smallrye/smallrye-open-api[OpenAPI]
 |1.0.1
 |http://repo1.maven.org/maven2/io/smallrye/smallrye-open-api/1.0.2/smallrye-open-api-1.0.2.jar[1.0.2]
 |&#10003;
-|
+|&#10003;
 
 |https://github.com/smallrye/smallrye-opentracing[OpenTracing]
 |1.1

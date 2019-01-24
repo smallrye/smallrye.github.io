@@ -40,7 +40,7 @@
 
 |https://github.com/smallrye/smallrye-metrics[Metrics]
 |1.1
-|http://repo1.maven.org/maven2/io/smallrye/smallrye-metrics/1.1.2/smallrye-metrics-1.1.2.jar[1.1.2]
+|http://repo1.maven.org/maven2/io/smallrye/smallrye-metrics/1.1.3/smallrye-metrics-1.1.3.jar[1.1.3]
 |&#10003;
 |&#10003;
 |
@@ -59,9 +59,16 @@
 |&#10003;
 |
 
+|https://github.com/smallrye/smallrye-reactive-messaging[Reactive Messaging]
+|1.0-SNAPSHOT
+|https://repo1.maven.org/maven2/io/smallrye/reactive/smallrye-reactive-messaging/0.0.3/smallrye-reactive-messaging-0.0.3.jar[0.0.3]
+|
+|
+|
+
 |https://github.com/smallrye/smallrye-reactive-streams-operators[Reactive Streams Operators]
-|1.0-RC4
-|https://repo1.maven.org/maven2/io/smallrye/reactive/smallrye-reactive-streams-operators/0.4.0/smallrye-reactive-streams-operators-0.4.0.jar[0.4.0]
+|1.0
+|https://repo1.maven.org/maven2/io/smallrye/reactive/smallrye-reactive-streams-operators/1.0.0/smallrye-reactive-streams-operators-1.0.0.jar[1.0.0]
 |
 |
 |&#10003;

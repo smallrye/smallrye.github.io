@@ -1,7 +1,7 @@
 = Projects Overview
 :page-layout: default
 
-[cols=6,options="header"]
+[cols=5,options="header"]
 |===
 |Spec Name
 |Spec Version

@@ -1,4 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2019-03-07T08:43:46+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">SmallRye adds MicroProfile 2.2 support!</title><link href="https://www.smallrye.io/2019/03/06/microprofile-2-2.html" rel="alternate" type="text/html" title="SmallRye adds MicroProfile 2.2 support!" /><published>2019-03-06T00:00:00+00:00</published><updated>2019-03-06T00:00:00+00:00</updated><id>https://www.smallrye.io/2019/03/06/microprofile-2-2</id><content type="html" xml:base="https://www.smallrye.io/2019/03/06/microprofile-2-2.html">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2019-03-07T12:05:03+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">SmallRye on GraalVM with Quarkus!</title><link href="https://www.smallrye.io/2019/03/07/graalvm-quarkus.html" rel="alternate" type="text/html" title="SmallRye on GraalVM with Quarkus!" /><published>2019-03-07T00:00:00+00:00</published><updated>2019-03-07T00:00:00+00:00</updated><id>https://www.smallrye.io/2019/03/07/graalvm-quarkus</id><content type="html" xml:base="https://www.smallrye.io/2019/03/07/graalvm-quarkus.html">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Marvel at SmallRye on GraalVM with Quarkus!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt; &lt;!-- more --&gt; &lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;If you haven&amp;#8217;t heard already, today &lt;a href=&quot;https://quarkus.io/&quot;&gt;Quarkus&lt;/a&gt; was released!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;a href=&quot;https://quarkus.io/&quot;&gt;Quarkus&lt;/a&gt; is a new open source project for &lt;em&gt;Supersonic Subatomic Java&lt;/em&gt;!
+Bringing a Kubernetes Native Java stack tailored for GraalVM and OpenJDK Hotspot,
+crafted from the best of breed Java libraries and standards.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Additional details of Quarkus are on the &lt;a href=&quot;https://quarkus.io/&quot;&gt;website&lt;/a&gt;
+and announcement &lt;a href=&quot;https://developers.redhat.com/blog/2019/03/07/quarkus-next-generation-kubernetes-native-java-framework&quot;&gt;blog&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;How is the announcement of &lt;a href=&quot;https://quarkus.io/&quot;&gt;Quarkus&lt;/a&gt; important for SmallRye?
+&lt;a href=&quot;https://quarkus.io/&quot;&gt;Quarkus&lt;/a&gt; has extensions for each of the SmallRye implementations,
+enabling a user to create a &lt;a href=&quot;https://quarkus.io/&quot;&gt;Quarkus&lt;/a&gt; application using SmallRye,
+and thus &lt;a href=&quot;https://microprofile.io/&quot;&gt;Eclipse MicroProfile&lt;/a&gt;.
+You can now create an application with amazingly fast boot time,
+and incredibly low RSS memory (not just the heap size!),
+with &lt;a href=&quot;https://microprofile.io/&quot;&gt;Eclipse MicroProfile&lt;/a&gt; APIs.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;We look forward to hearing how developers enjoy the speed and memory performance in containers!&lt;/p&gt;
+&lt;/div&gt;</content><author><name></name></author><summary type="html">Marvel at SmallRye on GraalVM with Quarkus! +</summary></entry><entry><title type="html">SmallRye adds MicroProfile 2.2 support!</title><link href="https://www.smallrye.io/2019/03/06/microprofile-2-2.html" rel="alternate" type="text/html" title="SmallRye adds MicroProfile 2.2 support!" /><published>2019-03-06T00:00:00+00:00</published><updated>2019-03-06T00:00:00+00:00</updated><id>https://www.smallrye.io/2019/03/06/microprofile-2-2</id><content type="html" xml:base="https://www.smallrye.io/2019/03/06/microprofile-2-2.html">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;SmallRye now has all implementations passing the TCKs for MicroProfile 2.2 specifications!&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;

@@ -1,0 +1,27 @@
+= SmallRye on GraalVM with Quarkus!
+:uri-quarkus: https://quarkus.io/
+:uri-quarkus-blog: https://developers.redhat.com/blog/2019/03/07/quarkus-next-generation-kubernetes-native-java-framework
+:uri-microprofile: https://microprofile.io/
+
+Marvel at SmallRye on GraalVM with Quarkus!
+
++++ <!-- more --> +++
+
+If you haven't heard already, today {uri-quarkus}[Quarkus] was released!
+
+{uri-quarkus}[Quarkus] is a new open source project for _Supersonic Subatomic Java_!
+Bringing a Kubernetes Native Java stack tailored for GraalVM and OpenJDK Hotspot,
+crafted from the best of breed Java libraries and standards.
+
+Additional details of Quarkus are on the {uri-quarkus}[website]
+and announcement {uri-quarkus-blog}[blog].
+
+How is the announcement of {uri-quarkus}[Quarkus] important for SmallRye?
+{uri-quarkus}[Quarkus] has extensions for each of the SmallRye implementations,
+enabling a user to create a {uri-quarkus}[Quarkus] application using SmallRye,
+and thus {uri-microprofile}[Eclipse MicroProfile].
+You can now create an application with amazingly fast boot time,
+and incredibly low RSS memory (not just the heap size!),
+with {uri-microprofile}[Eclipse MicroProfile] APIs.
+
+We look forward to hearing how developers enjoy the speed and memory performance in containers!

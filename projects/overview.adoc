@@ -39,6 +39,12 @@
 |&#10003;
 |&#10003;
 
+|https://github.com/smallrye/smallrye-context-propagation[Context Propagation]
+|1.0-RC1
+|http://repo1.maven.org/maven2/io/smallrye/smallrye-context-propagation/1.0.1/smallrye-context-propagation-1.0.1.jar[1.0.1]
+|
+|
+
 |https://github.com/smallrye/smallrye-fault-tolerance[Fault Tolerance]
 |2.0
 |http://repo1.maven.org/maven2/io/smallrye/smallrye-fault-tolerance/2.0.0/smallrye-fault-tolerance-2.0.0.jar[2.0.0]

@@ -1,0 +1,12 @@
+// PROJECT color palette
+
+$white: #FAFAEF;
+$light-blue: #69C2DF;
+$dark-blue: #5B5974;
+$orange: #F37B53;
+$black: #585855;
+
+// Overwrites link colors in /core/colors.scss
+$link : $white;
+$link-hover : #69C2DF;
+$link-visited : #5B5974;

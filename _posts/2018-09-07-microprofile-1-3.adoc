@@ -1,21 +1,25 @@
 = SmallRye adds MicroProfile 1.3 support!
+:page-layout: post
+:page-title: SmallRye adds MicroProfile 1.3 support
+:page-synopsis: SmallRye now has all implementations passing the TCKs for MicroProfile 1.3 specifications!
+:page-tags: [announcement, microprofile]
+:page-date: 2018-09-07 14:00:00.000 -0500
+:page-author: kenfinnigan
 
 SmallRye now has all implementations passing the TCKs for MicroProfile 1.3 specifications!
 
-+++ <!-- more --> +++
+The full list of completed implementations:
 
-SmallRye now has all MicroProfile 1.3 implementations complete:
+* Config 1.3
+* Fault Tolerance 1.0
+* Health 1.0
+* JWT 1.1
+* Metrics 1.1
+* OpenAPI 1.0.1
+* OpenTracing 1.1
+* REST Client 1.0
 
-Config 1.3, 
-Fault Tolerance 1.0,
-Health 1.0,
-JWT 1.1,
-Metrics 1.1,
-OpenAPI 1.0.1,
-OpenTracing 1.1,
-REST Client 1.0
-
-Check out https://www.smallrye.io/projects/overview for all the details!
+Check out the link:/projects[Projects page] for all the details!
 
 One important to note is that some of these implementations are already compliant
 MicroProfile 1.4! The team is in the process of implementing updates to the

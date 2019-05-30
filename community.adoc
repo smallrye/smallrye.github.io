@@ -1,0 +1,31 @@
+= SmallRye - Community
+:page-layout: community
+
+== Getting help
+
+=== Discussions
+
+Mailing list::
+You can ask questions on our mailing list.
+Join the Google group via email smallrye+subscribe@googlegroups.com or by visiting the Google Groups page https://groups.google.com/d/forum/smallrye.
+
+Live chat on Gitter::
+
+If you prefer live chat with the developers, we have a https://gitter.im/smallrye-io/community[Gitter] room.
+
+== An Open Project
+
+SmallRye is an Open Source project licensed under the https://www.apache.org/licenses/LICENSE-2.0[Apache License version 2.0].
+
+== Code and issue tracker
+
+The source code is hosted in the https://github.com/smallrye[SmallRye] organization on GitHub.
+If you need to report a bug or request a new feature, look for any existing issues in the GitHub repository for the specific project.
+If you don’t find any, create a new issue.
+
+== Contributing
+
+There are a lot of ways to contribute to SmallRye development:
+
+- Writing documentation
+- Fixing bugs or even just opening an issue

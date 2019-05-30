@@ -1,0 +1,58 @@
+.header.navigation {
+  .logo-wrapper {
+    display: inline-block;
+    margin-top: 2.5rem; 
+    width: 16rem;
+  }
+  .nav-container {
+    a {
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      color: $white;
+      font-weight: 300;
+      height: 55px;
+      &.active,
+      &:hover{
+        color: $light-blue;
+        border-bottom: 4px solid $light-blue;
+      }
+    }
+  }
+  @media screen and (max-width: 1300px) {
+    .nav-container a {
+      font-size: 1rem;
+    }
+  }
+  @media screen and (max-width: 1024px) {
+    .logo-wrapper {
+      margin-top: 1rem; 
+    }
+    .nav-container {
+      a, 
+      a.active,
+      a:hover,
+      a:focus,
+      a:active {
+        border-bottom: none;
+        color: $dark-blue;
+      }
+      .nav-list {
+        background-color: $light-blue;
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 0;
+        top: -67px;
+      }
+    }
+  }
+  @media screen and (max-width: 480px) {
+    .logo-wrapper {
+      margin-top: 1.5rem;
+      .project-logo {
+        max-width: 10rem;
+      }
+    }
+  }
+}
+.navigation-wrapper {
+  margin: 0 0 6rem 0;
+}

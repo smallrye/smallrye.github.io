@@ -1,0 +1,14 @@
+clementescoffier:
+  name: "Clement Escoffier"
+  email: "clement.escoffier@redhat.com"
+  emailhash: "f85a377b48d0f1f77a04cbcdbf62bcb5"
+  job_title: ""
+  twitter: "clementplop"
+  bio: "Clement Escoffier (@clementplop) is Reactive Chief Architect at Red Hat. He had several professional lives, from academic positions to management. Currently, he is mainly working as a Quarkus and Vert.x developer. He has been involved in projects and products touching many domains and technologies such as OSGi, mobile app development, continuous delivery, DevOps... His main area of interest is software engineering - processes, methods, tools that make the development of software more efficient and also more fun. Clement is an active contributor to many open-source projects such as Apache Felix, iPOJO, Wisdom Framework, and Eclipse Vert.x, Eclipse MicroProfile and, Quarkus."
+kenfinnigan:
+  name: "Ken Finnigan"
+  email: "ken@kenfinnigan.me"
+  emailhash: "74e721dd22b0d509b85746c5edf559c8"
+  job_title: "SmallRye lead"
+  twitter: "kenfinnigan"
+  bio: 'Ken is a Senior Principal Software Engineer for Red Hat Middleware and has been a consultant and software engineer for over 20 years with enterprises throughout the world. Ken leads the SmallRye project, which implements the Eclipse MicroProfile specifications while also looking to innovate with Cloud Native development. As part of his work on SmallRye, Ken is heavily involved in the Eclipse MicroProfile community to develop specifications for Java microservices in the Cloud. Ken has previously served as the project lead for Thorntail and LiveOak, along with other JBoss projects. Ken recently published “Enterprise Java Microservices” and has previously written two books, including "JBoss Weld CDI for Java Platform."'

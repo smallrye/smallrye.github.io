@@ -1,11 +1,15 @@
 = SmallRye on GraalVM with Quarkus!
+:page-layout: post
+:page-title: SmallRye on GraalVM with Quarkus!
+:page-synopsis: Quarkus utilizes SmallRye on GraalVM. Marvel at its supersonic subatomic speed!
+:page-tags: [announcement, quarkus]
+:page-date: 2019-03-07 14:00:00.000 -0500
+:page-author: kenfinnigan
 :uri-quarkus: https://quarkus.io/
 :uri-quarkus-blog: https://developers.redhat.com/blog/2019/03/07/quarkus-next-generation-kubernetes-native-java-framework
 :uri-microprofile: https://microprofile.io/
 
 Marvel at SmallRye on GraalVM with Quarkus!
-
-+++ <!-- more --> +++
 
 If you haven't heard already, today {uri-quarkus}[Quarkus] was released!
 

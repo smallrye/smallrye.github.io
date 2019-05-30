@@ -1,0 +1,31 @@
+footer_text: "SmallRye is open source under <a href='https://www.apache.org/licenses/LICENSE-2.0' target='_blank'>Apache Software License 2.0</a>.
+<br /><br />This website was built with <a href='https://jekyllrb.com/' target='_blank'>Jekyll</a> is hosted on
+<a href='https://pages.github.com/' target='_blank'>Github Pages</a> and is completely open source.
+If you want to make it better, <a href='https://github.com/smallrye/smallrye.github.io' target='_blank'>fork the website</a>
+and show us what you’ve got."
+
+links:
+  - title: Navigation
+    subfolderitems:
+      - page: Home
+        url: /
+  - title: Contribute
+    subfolderitems:
+      - page: Follow us
+        url: https://twitter.com/smallrye_io
+      - page: GitHub
+        url: https://github.com/smallrye
+  - title: Get Help
+    subfolderitems:
+      - page: Chatroom
+        url: https://gitter.im/smallrye-io/community
+      - page: Google&nbsp;Groups
+        url: https://groups.google.com/d/forum/smallrye
+
+more_links:
+  - title: External Links
+    subfolderitems:
+      - page: Eclipse MicroProfile
+        url: https://microprofile.io/
+      - page: Eclipse MicroProfile on GitHub
+        url: https://github.com/eclipse?utf8=✓&q=microprofile

@@ -1,0 +1,41 @@
+.homepage-hero-band {
+  padding-bottom: 6rem;
+
+  .home-hero {
+    text-align: center;
+    padding-bottom: 4rem;
+    margin: 8rem auto;
+    @media screen and (max-width: 768px) {
+      margin: 0 auto;
+    }
+
+    p {
+      max-width: 550px;
+      margin: 1rem auto 3rem auto;
+    }
+  }
+
+  .project-logo {
+    max-width: 35rem;
+  }
+  .scroll-down {
+    margin: 3rem auto 0 auto;
+    display: block;
+    width: 32px;
+    height: 32px;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+    transform: scale(1);
+    
+    &:before {
+      transform: rotate(-45deg);
+      display: block;
+      width: 25px;
+      height: 25px;
+      content: "";
+      border: 2px solid white;
+      border-width: 0px 0 2px 2px;
+    }
+  }
+
+}

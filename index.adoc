@@ -1,3 +1,0 @@
-= SmallRye
-:page-layout: home
-:page-headerclass: alt

@@ -1,0 +1,101 @@
+= Projects Overview
+:page-layout: base
+
+[cols=5,options="header"]
+|===
+|Spec Name
+|Spec Version
+|Impl Version
+|MP 2.1
+|MP 2.2
+
+|http://cdi-spec.org/[CDI]
+|2.0
+|N/A
+|&#10003;
+|&#10003;
+
+|https://github.com/jax-rs[JAX-RS]
+|2.1
+|N/A
+|&#10003;
+|&#10003;
+
+|https://javaee.github.io/jsonp/[JSON-P]
+|1.1
+|N/A
+|&#10003;
+|&#10003;
+
+|http://json-b.net/[JSON-B]
+|1.0
+|N/A
+|&#10003;
+|&#10003;
+
+|https://github.com/smallrye/smallrye-config[Config]
+|1.3
+|http://repo1.maven.org/maven2/io/smallrye/smallrye-config/1.3.5/smallrye-config-1.3.5.jar[1.3.5]
+|&#10003;
+|&#10003;
+
+|https://github.com/smallrye/smallrye-context-propagation[Context Propagation]
+|1.0-RC1
+|http://repo1.maven.org/maven2/io/smallrye/smallrye-context-propagation/1.0.1/smallrye-context-propagation-1.0.1.jar[1.0.1]
+|
+|
+
+|https://github.com/smallrye/smallrye-fault-tolerance[Fault Tolerance]
+|2.0
+|http://repo1.maven.org/maven2/io/smallrye/smallrye-fault-tolerance/2.0.0/smallrye-fault-tolerance-2.0.0.jar[2.0.0]
+|
+|&#10003;
+
+|https://github.com/smallrye/smallrye-health[Health]
+|1.0
+|http://repo1.maven.org/maven2/io/smallrye/smallrye-health/1.0.2/smallrye-health-1.0.2.jar[1.0.2]
+|&#10003;
+|&#10003;
+
+|https://github.com/smallrye/smallrye-jwt[JWT]
+|1.1
+|http://repo1.maven.org/maven2/io/smallrye/smallrye-jwt/1.1.1/smallrye-jwt-1.1.1.jar[1.1.1]
+|&#10003;
+|&#10003;
+
+|https://github.com/smallrye/smallrye-metrics[Metrics]
+|1.1
+|http://repo1.maven.org/maven2/io/smallrye/smallrye-metrics/1.1.3/smallrye-metrics-1.1.3.jar[1.1.3]
+|&#10003;
+|&#10003;
+
+|https://github.com/smallrye/smallrye-open-api[OpenAPI]
+|1.1.2
+|http://repo1.maven.org/maven2/io/smallrye/smallrye-open-api/1.1.1/smallrye-open-api-1.1.1.jar[1.1.1]
+|&#10003;
+|&#10003;
+
+|https://github.com/smallrye/smallrye-opentracing[OpenTracing]
+|1.3.1
+|http://repo1.maven.org/maven2/io/smallrye/smallrye-opentracing/1.3.0/smallrye-opentracing-1.3.0.jar[1.3.0]
+|&#10003;
+|&#10003;
+
+|https://github.com/smallrye/smallrye-reactive-messaging[Reactive Messaging]
+|1.0-SNAPSHOT
+|https://repo1.maven.org/maven2/io/smallrye/reactive/smallrye-reactive-messaging/0.0.4/smallrye-reactive-messaging-0.0.4.jar[0.0.4]
+|
+|
+
+|https://github.com/smallrye/smallrye-reactive-streams-operators[Reactive Streams Operators]
+|1.0
+|https://repo1.maven.org/maven2/io/smallrye/reactive/smallrye-reactive-streams-operators/1.0.2/smallrye-reactive-streams-operators-1.0.2.jar[1.0.2]
+|
+|
+
+|https://github.com/smallrye/smallrye-rest-client[REST Client]
+|1.2.1
+|http://repo1.maven.org/maven2/io/smallrye/smallrye-rest-client/1.2.1/smallrye-rest-client-1.2.1.jar[1.2.1]
+|&#10003;
+|&#10003;
+|===

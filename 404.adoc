@@ -1,6 +1,0 @@
-= 404
-:page-layout: default
-
-*Page not found :(*
-
-The requested page could not be found.

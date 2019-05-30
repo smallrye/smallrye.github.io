@@ -1,9 +1,13 @@
 = Welcome to SmallRye
+:page-layout: post
+:page-title: Welcome to SmallRye
+:page-synopsis: SmallRye welcomes you to our new community for developing shared implementations of Eclipse MicroProfile specifications!
+:page-tags: [announcement]
+:page-date: 2018-06-28 14:00:00.000 -0500
+:page-author: kenfinnigan
 
 SmallRye welcomes you to our new community for developing shared
 implementations of Eclipse MicroProfile specifications!
-
-+++ <!-- more --> +++
 
 Right now we're still in the process of seeding the initial versions of
 the repositories for each Eclipse MicroProfile specification implementation.

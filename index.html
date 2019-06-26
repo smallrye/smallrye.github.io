@@ -1,167 +1,228 @@
-<!DOCTYPE HTML>
-<!--
-	Twenty by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+<!DOCTYPE html>
 <html>
 
-    <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<head>
   <title>SmallRye</title>
+  <script id="adobe_dtm" src="https://www.redhat.com/dtm.js" type="text/javascript"></script>
+  <script src="/assets/javascript/highlightjs-pack.js" type="text/javascript"></script>
+  <META HTTP-EQUIV="Content-Security-Policy" CONTENT="default-src 'none'; script-src 'self' www.redhat.com assets.adobedtm.com jsonip.com ajax.googleapis.com www.googletagmanager.com www.google-analytics.com use.fontawesome.com; style-src 'self'  fonts.googleapis.com use.fontawesome.com; img-src 'self' *; media-src 'self' ; frame-src www.googletagmanager.com; frame-ancestors 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; font-src 'self' use.fontawesome.com fonts.gstatic.com;">
+  <META CONTENT="DENY" HTTP-EQUIV="X-Frame-Options">
+  <META CONTENT="1; mode=block" HTTP-EQUIV="X-XSS-Protection">
+  <META CONTENT="nosniff" HTTP-EQUIV="X-Content-Type-Options">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
-  <link rel="canonical" href="https://www.smallrye.io/">
+  <link rel="shortcut icon" type="image/png" href="/favicon.ico" >
   <link rel="stylesheet" href="/assets/css/main.css" />
-  <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-  <link rel="alternate" type="application/rss+xml" title="SmallRye" href="https://www.smallrye.io/feed.xml">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+  <!-- Syntax highlighting -->
+  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
-    <body class="index is-preload">
-		<div id="page-wrapper">
+<body class="homepage">
 
-            <!-- Header -->
-<header id="header" class="alt">
-    <h1 id="logo"><a href="/index.html">SmallRye</a></h1>
-    <nav id="nav">
-        <ul>
-            <li class="current"><a href="/index.html">Welcome</a></li>
-            <li class=""><a href="/blog">Blog</a></li>
-            <li class="submenu ">
-                <a href="#">Projects</a>
-                <ul>
-                    <li><a href="/projects/overview">Overview</a></li>
-                </ul>
+  <div class="content">
+    <div class="navigation-wrapper">
+  <div class="width-12-12">
+    <div class="header navigation">
+      <div class="logo-wrapper">
+        <a href="/"><img class="project-logo" title="SmallRye" src="/assets/images/smallrye_project_logo.svg"></a>
+      </div>
+      <div class="nav-container">
+        <nav>
+          <div class="nav-mobile"><a id="nav-toggle" href="#!"><span></span></a></div>
+          <ul class="nav-list">
+            <li>
+              <a href="/projects/" class="">Projects</a>
             </li>
-            <li class="submenu">
-                <a href="#">Community</a>
-                <ul>
-                    <li><a href="https://groups.google.com/forum/#!forum/smallrye" target="_blank">Forums</a></li>
-                    <li><a href="https://github.com/smallrye" target="_blank">GitHub</a></li>
-                </ul>
+            <li>
+              <a href="/community/" class="">Community</a>
             </li>
-        </ul>
-    </nav>
-</header>
+            <li>
+              <a href="/blog/" class="">Blog</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
 
-            <!-- Banner -->
-<section id="banner">
+    <div class="smallrye-homepage">
+    <div class="grid-wrapper homepage-hero-band">
+    <div class="grid__item width-12-12">
+        <div class="home-hero">
+            <img src="/assets/images/smallrye_project_logo.svg" class="project-logo" title="SmallRye">
+            <h2>Helping Java Developers deliver for tomorrow</h2>
+            <p>APIs and implementations tailored for Cloud development,
+                <br/>including <a href="http://microprofile.io/" target="_blank">Eclipse MicroProfile</a></p>
+            <a href="#" class="scroll-down" address="true"></a>
+        </div>
+    </div>
+</div>
 
-    <!--
-        ".inner" is set up as an inline-block so it automatically expands
-        in both directions to fit whatever's inside it. This means it won't
-        automatically wrap lines, so be sure to use line breaks where
-        appropriate (<br />).
-    -->
-    <div class="inner">
+    <div class="full-width-bg component homepage-highlights-band">
+    <div class="width-12-12 highlights-alternating-inline-block">
 
-        <header>
-            <h2>SmallRye</h2>
-        </header>
-        <p>Community driven implementations
-        <br />
-        of <a href="http://microprofile.io/" target="_blank">Eclipse MicroProfile</a>.</p>
-        <footer>
-            <ul class="buttons stacked">
-                <li><a href="#main" class="button fit scrolly">Tell Me More</a></li>
-            </ul>
-        </footer>
-
+        <div class="grid-wrapper">
+            <div class="width-4-12 width-12-12-m block-content">
+                <h2>Cloud Native development</h2>
+                <p>SmallRye improves the developer experience for
+                    Cloud Native development through implementing
+                    Eclipse MicroProfile. Offering important functionality
+                    for Cloud environments.</p>
+            </div>
+            <div class="width-4-12 width-12-12-m block-content">
+                <h2>Community implementations</h2>
+                <p>SmallRye develops implementations of Eclipse MicroProfile
+                    that are usable by any vendor or project.
+                    Come join the community to contribute to shared implementations
+                    of the specifications.</p>
+            </div>
+            <div class="width-4-12 width-12-12-m block-content">
+                <h2>Containers are great!</h2>
+                <p>With containers being the new operating system,
+                    it's important that developers are able to build applications
+                    that can easily be deployed to container environments.</p>
+            </div>
+        </div>
     </div>
 
-</section>
+    <div class="grid-wrapper">
+        <div class="grid__item width-8-12 width-12-12-m">
+            <h2>SmallRye Usage</h2>
+            <p>SmallRye is included with the following projects, go check them out to use SmallRye in your applications!</p>
+        </div>
+    </div>
+    <div class="grid-wrapper used-by-band">
+        <div class="grid__item width-2-12 width-4-12-m block">
+            <a href="https://quarkus.io/" target="_blank">
+                <img src="/assets/images/logoset_quarkus.png">
+                <span>Quarkus</span>
+            </a>
+        </div>
+        <div class="grid__item width-2-12 width-4-12-m block">
+            <a href="http://thorntail.io" target="_blank">
+                <img src="/assets/images/logoset_thorntail.png">
+                <span>Thorntail</span>
+            </a>
+        </div>
+        <div class="grid__item width-2-12 width-4-12-m block">
+            <a href="https://wildfly.org" target="_blank">
+                <img src="/assets/images/logoset_wildfly.png">
+                <span>WildFly</span>
+            </a>
+        </div>
+        <div class="grid__item width-2-12 width-4-12-m block">
+            <a href="https://openliberty.io/" target="_blank">
+                <img src="/assets/images/logoset_openliberty.png">
+                <span>Open Liberty</span>
+            </a>
+        </div>
+    </div>
+</div>
+    <div class="full-width-bg component feedback-community-band">
+  <div class="grid-wrapper">
+    <div class="grid__item width-6-12 width-12-12-m">
+      <h3>Feedback and Help</h3>
+      <p>You can contact the SmallRye project team using:</p>
+      <ul>
+        <li>Chat using <a href="https://gitter.im/smallrye-io/community" target="_blank">Gitter</a></li>
+        <li>Ask questions or discuss contributions in the <a href="https://groups.google.com/d/forum/smallrye" target="_blank">SmallRye Google Group</a></li>
+      </ul>
+      <p>Your help is more than welcome! Don’t hesitate to join us.</p>
+    </div>
+    <div class="grid__item width-6-12 width-12-12-m">
+      <h3>Join the SmallRye Community</h3>
+      <p>
+        Check out our <a href="https://github.com/smallrye" target="_blank">GitHub</a> for details on reporting issues and the process for submitting pull requests.<br /><br />
+        Every contribution is valuable. It can be a bug report, an example application, a feature request, a fix in the documentation or just feedback.
+      </p>
+    </div>
+  </div>
+</div>
 
+</div>
 
-            <article id="main">
-                <section class="wrapper style1 container special">
-                    <div class="row">
-                        <div class="col-4 col-12-narrower">
+  </div>
 
-                            <section>
-                                <span class="icon featured fa-cloud"></span>
-                                <header>
-                                    <h3>Cloud Native development</h3>
-                                </header>
-                                <p>SmallRye improves the developer experience for
-                                    Cloud Native development through implementing
-                                    Eclipse MicroProfile. Offering important functionality
-                                    for Cloud environments.</p>
-                            </section>
+  <div class="content project-footer">
+  <div class="footer-section">
+    <div class="logo-wrapper">
+      <a href="/"><img src="/assets/images/smallrye_project_logo.svg" class="project-logo" title="SmallRye"></a>
+    </div>
+  </div>
+  <div class="grid-wrapper">
+    <p class="grid__item width-3-12">SmallRye is open source under <a href='https://www.apache.org/licenses/LICENSE-2.0' target='_blank'>Apache Software License 2.0</a>. <br /><br />This website was built with <a href='https://jekyllrb.com/' target='_blank'>Jekyll</a> is hosted on <a href='https://pages.github.com/' target='_blank'>Github Pages</a> and is completely open source. If you want to make it better, <a href='https://github.com/smallrye/smallrye.github.io' target='_blank'>fork the website</a> and show us what you’ve got.</p>
 
-                        </div>
-                        <div class="col-4 col-12-narrower">
-
-                            <section>
-                                <span class="icon featured fa-code"></span>
-                                <header>
-                                    <h3>Community implementations</h3>
-                                </header>
-                                <p>SmallRye develops implementations of Eclipse MicroProfile
-                                    that are usable by any vendor or project.
-                                    Come join the community to contribute to shared implementations
-                                    of the specifications.</p>
-                            </section>
-
-                        </div>
-                        <div class="col-4 col-12-narrower">
-
-                            <section>
-                                <span class="icon featured fa-ship"></span>
-                                <header>
-                                    <h3>Containers are great!</h3>
-                                </header>
-                                <p>With containers being the new operating system,
-                                    it's important that developers are able to build applications
-                                    that can easily be deployed to container environments.</p>
-                            </section>
-
-                        </div>
-                    </div>
-                </section>
-            </article>
-
-            <!-- Call To Action -->
-<section id="cta">
-
-    <header>
-        <h2>Ready to do <strong>contribute</strong>?</h2>
-        <p>Come by the forums or GitHub to ask questions and help out.</p>
-    </header>
-    <footer>
-        <ul class="buttons">
-            <li><a href="https://groups.google.com/forum/#!forum/smallrye" target="_blank" class="button primary">Forums</a></li>
-            <li><a href="https://github.com/smallrye" target="_blank" class="button">GitHub</a></li>
+    
+      <div class="width-1-12 project-links">
+        <span>Navigation</span>
+        <ul class="footer-links width-1-12">
+          
+            <li><a href="/">Home</a></li>
+          
         </ul>
-    </footer>
+      </div>
+    
+      <div class="width-1-12 project-links">
+        <span>Contribute</span>
+        <ul class="footer-links width-1-12">
+          
+            <li><a href="https://twitter.com/smallrye_io">Follow us</a></li>
+          
+            <li><a href="https://github.com/smallrye">GitHub</a></li>
+          
+        </ul>
+      </div>
+    
+      <div class="width-1-12 project-links">
+        <span>Get Help</span>
+        <ul class="footer-links width-1-12">
+          
+            <li><a href="https://gitter.im/smallrye-io/community">Chatroom</a></li>
+          
+            <li><a href="https://groups.google.com/d/forum/smallrye">Google&nbsp;Groups</a></li>
+          
+        </ul>
+      </div>
+    
 
-</section>
+    
+      <div class="width-6-12 more-links">
+        <span>External Links</span>
+        <ul class="footer-links">
+          
+            <li><a href="https://microprofile.io/" target="_blank">Eclipse MicroProfile</a></li>
+          
+            <li><a href="https://github.com/eclipse?utf8=✓&q=microprofile" target="_blank">Eclipse MicroProfile on GitHub</a></li>
+          
+        </ul>
+      </div>
+    
+  </div>
+</div>
+  <div class="content redhat-footer">
+  <div class="grid-wrapper">
+    <span class="licence">
+      <i class="fab fa-creative-commons"></i><i class="fab fa-creative-commons-by"></i> <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">CC by 3.0</a>
+      | <a href="https://www.redhat.com/en/about/privacy-policy">Red Hat Privacy Policy</a>
+    </span>
+    <span class="redhat">
+      a Red Hat sponsored project   
+    </span>
+    <span class="redhat-logo">
+      <a href="https://www.redhat.com/" target="_blank"><img src="/assets/images/redhat_reversed.svg"></a>
+    </span>
+  </div>
+</div>
 
-            <!-- Footer -->
-<footer id="footer">
 
-    <ul class="icons">
-        <li><a href="https://twitter.com/smallrye_io" class="icon circle fa-twitter" target="_blank"><span class="label">Twitter</span></a></li>
-        <li><a href="https://github.com/smallrye" class="icon circle fa-github" target="_blank"><span class="label">Github</span></a></li>
-    </ul>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script type="text/javascript" src="/assets/javascript/mobile-nav.js"></script>
+  <script type="text/javascript" src="/assets/javascript/scroll-down.js"></script>
+  <script type="text/javascript" src="/assets/javascript/satellite.js"></script>
+</body>
 
-    <ul class="copyright">
-        <li>&copy; SmallRye</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-    </ul>
-
-</footer>
-
-
-		</div>
-
-        <!-- Scripts -->
-<script src="/assets/js/jquery.min.js"></script>
-<script src="/assets/js/jquery.dropotron.min.js"></script>
-<script src="/assets/js/jquery.scrolly.min.js"></script>
-<script src="/assets/js/jquery.scrollex.min.js"></script>
-<script src="/assets/js/browser.min.js"></script>
-<script src="/assets/js/breakpoints.min.js"></script>
-<script src="/assets/js/util.js"></script>
-<script src="/assets/js/main.js"></script>
-
-	</body>
 </html>

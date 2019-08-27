@@ -9,18 +9,18 @@ This document outlines the process by which existing project committers can nomi
 == Nomination Process
 
 Upon recognizing that an external contributor has beneficially contributed to a SmallRye project,
-over an extended period, they can follow this process to nominate them:
+over an extended period, existing committers can follow this process to nominate them:
 
-* Create a GitHub issue in the particular SmallRye project detailing:
+* Post to the https://groups.google.com/d/forum/smallrye[Google Group] with the subject *[VOTE] xxx for SmallRye xxx committer*.
+The posting should detail:
 ** The person being nominated, including a link to their GitHub profile
 ** Brief reason on why they're being nominated
 ** Links to some contributions they've made to the project
-* Add the *Nomination* label to the GitHub issue
-* Post to the https://groups.google.com/d/forum/smallrye[Google Group] with the subject *Nominating xxx for SmallRye xxx*,
-including a link to the issue
-* The nomination will be posted to Twitter
-* Anyone can comment on the nomination issue. However, only existing committers will have a binding vote
-* After 10 days the vote will end and the result will be posted in the https://groups.google.com/d/forum/smallrye[Google Group]
+* Anyone can comment on the posting. However, only existing committers will have a binding vote
+* After 7 days the vote will end and the result will be posted in the https://groups.google.com/d/forum/smallrye[Google Group]
+** A positive result is determined by Consensus Approval, i.e. at least 3 +1 votes and no -1 vote.
+** Any -1 vote must include the reasoning, and the committer should be prepared to defend their vote.
 
 
-Once the vote is complete, the nominee will be notified when committer access has been granted to the SmallRye project.
+Once the vote is complete, the nominee will be asked if they accept the nomination,
+after which they will be notified when committer access has been granted to the particular SmallRye project.

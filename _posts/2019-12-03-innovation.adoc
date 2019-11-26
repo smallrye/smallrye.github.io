@@ -29,7 +29,7 @@ It's much harder to create an API from ideas and have it be useful
 than to define a specification based on an already working implementation.
 
 How does this relate to how {uri-smallrye}[SmallRye] develops implementations?
-Since it's creation {uri-smallrye}[SmallRye] was purposefully focused on implementing the {uri-microprofile}[MicroProfile] specifications,
+Since its creation {uri-smallrye}[SmallRye] was purposefully focused on implementing the {uri-microprofile}[MicroProfile] specifications,
 while seeking to improve the specifications and TCKs when issues were found.
 Having reached a point where the implementations are stable and easily kept in line with modifications to existing specifications,
 it frees those working on the project to shift our focus to innovation!
@@ -41,12 +41,19 @@ We have a few initiatives that are underway where we are beginning to innovate w
 We've begun work on an entirely new implementation for Fault Tolerance, see https://github.com/smallrye/smallrye-fault-tolerance/issues/102[here],
 which aims to be reactive friendly while still enabling the same functionality for imperative programming.
 In https://github.com/smallrye/smallrye-config[SmallRye Config] we will be investigating how to implement support for
-using a partial configuration in the creation of later ConfigSources and ConfigSourceProviders.
+using a pre captured configuration during the creation of later ``ConfigSource``s and ``ConfigSourceProvider``s,
+allowing configuration to be used to create latter stage configuration instances.
 There are also other innovations underway within the reactive sphere of {uri-smallrye}[SmallRye] that we intend to announce soon.
 
+In addition to innovation within {uri-smallrye}[SmallRye] projects,
+we're in the process of accepting the donation from the https://github.com/microprofile-extensions[MicroProfile Extensions] project.
+The https://github.com/microprofile-extensions[MicroProfile Extensions] project includes many new `ConfigSource` and `Converter` types
+that will be added to {uri-smallrye}[SmallRye]. A big thanks to Phillip and Derek for agreeing to this and pushing it forward.
+
 All this innovation in {uri-smallrye}[SmallRye] is great,
-but doesn't that mean that user code is no longer portable between different {uri-microprofile}[MicroProfile] implementations?
-In the short term, it does, which is unfortunate but necessary to foster innovation related to existing specifications.
+but what does that mean for {uri-microprofile}[MicroProfile] specifications?
+Do they have these new innovations as well?
+In the short term, no they wouldn't.
 The medium to longer-term goal for any innovation created in {uri-smallrye}[SmallRye] is for it to be proposed to existing
 or new {uri-microprofile}[MicroProfile] specifications.
 

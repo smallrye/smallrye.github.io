@@ -21,8 +21,9 @@ either as new specifications or changes to an existing specification?
 Questions like these,
 and others like them,
 are what I hear often from those not familiar with exactly how {uri-microprofile}[MicroProfile] operates.
-Unlike how the JCP operated in the past when defining Java EE specifications,
+Unlike how the JCP typically operated in the past when defining Java EE specifications,
 {uri-microprofile}[MicroProfile] takes a very different approach.
+Bean Validation took a similar approach as {uri-microprofile}[MicroProfile].
 In {uri-microprofile}[MicroProfile] we define specifications based on existing implementations and usage within projects,
 as it offers a greater indication that what's being proposed is useful to developers.
 It's much harder to create an API from ideas and have it be useful

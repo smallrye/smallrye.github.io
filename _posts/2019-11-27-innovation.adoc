@@ -49,7 +49,8 @@ There are also other innovations underway within the reactive sphere of {uri-sma
 In addition to innovation within {uri-smallrye}[SmallRye] projects,
 we're in the process of accepting the donation from the https://github.com/microprofile-extensions[MicroProfile Extensions] project.
 The https://github.com/microprofile-extensions[MicroProfile Extensions] project includes many new `ConfigSource` and `Converter` types
-that will be added to {uri-smallrye}[SmallRye]. A big thanks to Phillip and Derek for agreeing to this and pushing it forward.
+that will be added to {uri-smallrye}[SmallRye].
+A big thanks to https://github.com/phillip-kruger[Phillip] and https://github.com/derekm[Derek] for agreeing to this and pushing it forward.
 
 All this innovation in {uri-smallrye}[SmallRye] is great,
 but what does that mean for {uri-microprofile}[MicroProfile] specifications?

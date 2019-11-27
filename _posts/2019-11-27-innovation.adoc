@@ -1,0 +1,62 @@
+= SmallRye Innovation
+:page-layout: post
+:page-title: SmallRye Innovation for Eclipse MicroProfile
+:page-synopsis: How does SmallRye go beyond just implementing Eclipse MicroProfile specifications?
+:page-tags: [announcement, microprofile]
+:page-date: 2019-11-27 14:00:00.000 -0500
+:page-author: kenfinnigan
+:uri-smallrye: https://smallrye.io
+:uri-microprofile: https://microprofile.io/
+
+{uri-smallrye}[SmallRye] implements {uri-microprofile}[Eclipse MicroProfile] specifications for use within any runtime.
+Currently, SmallRye is included in https://quarkus.io/[Quarkus],
+https://thorntail.io[Thorntail], https://wildfly.org[WildFly],
+and the reactive implementations are part of https://openliberty.io/[Open Liberty].
+
+That's great, but that's only implementing what's been defined by a specification.
+Does {uri-smallrye}[SmallRye] only implement the specifications "_as is_"?
+How do new ideas get added to {uri-microprofile}[MicroProfile],
+either as new specifications or changes to an existing specification?
+
+Questions like these,
+and others like them,
+are what I hear often from those not familiar with exactly how {uri-microprofile}[MicroProfile] operates.
+Unlike how the JCP typically operated in the past when defining Java EE specifications,
+{uri-microprofile}[MicroProfile] takes a very different approach.
+Bean Validation took a similar approach as {uri-microprofile}[MicroProfile].
+In {uri-microprofile}[MicroProfile] we define specifications based on existing implementations and usage within projects,
+as it offers a greater indication that what's being proposed is useful to developers.
+It's much harder to create an API from ideas and have it be useful
+than to define a specification based on an already working implementation.
+
+How does this relate to how {uri-smallrye}[SmallRye] develops implementations?
+Since its creation {uri-smallrye}[SmallRye] was purposefully focused on implementing the {uri-microprofile}[MicroProfile] specifications,
+while seeking to improve the specifications and TCKs when issues were found.
+Having reached a point where the implementations are stable and easily kept in line with modifications to existing specifications,
+it frees those working on the project to shift our focus to innovation!
+
+What type of innovation are we talking about?
+In theory, it could be absolutely anything.
+In practice, we're not proposing a complete free for all, as that leads to churn without results.
+We have a few initiatives that are underway where we are beginning to innovate with {uri-microprofile}[MicroProfile].
+We've begun work on an entirely new implementation for Fault Tolerance, see https://github.com/smallrye/smallrye-fault-tolerance/issues/102[here],
+which aims to be reactive friendly while still enabling the same functionality for imperative programming.
+In https://github.com/smallrye/smallrye-config[SmallRye Config] we will be investigating how to implement support for
+using a pre captured configuration during the creation of later ``ConfigSource``s and ``ConfigSourceProvider``s,
+allowing configuration to be used to create latter stage configuration instances.
+There are also other innovations underway within the reactive sphere of {uri-smallrye}[SmallRye] that we intend to announce soon.
+
+In addition to innovation within {uri-smallrye}[SmallRye] projects,
+we're in the process of accepting the donation from the https://github.com/microprofile-extensions[MicroProfile Extensions] project.
+The https://github.com/microprofile-extensions[MicroProfile Extensions] project includes many new `ConfigSource` and `Converter` types
+that will be added to {uri-smallrye}[SmallRye]. A big thanks to Phillip and Derek for agreeing to this and pushing it forward.
+
+All this innovation in {uri-smallrye}[SmallRye] is great,
+but what does that mean for {uri-microprofile}[MicroProfile] specifications?
+Do they have these new innovations as well?
+In the short term, no they wouldn't.
+The medium to longer-term goal for any innovation created in {uri-smallrye}[SmallRye] is for it to be proposed to existing
+or new {uri-microprofile}[MicroProfile] specifications.
+
+If you'd like to contribute to {uri-smallrye}[SmallRye] and help us deliver innovation to {uri-microprofile}[MicroProfile],
+come by our https://groups.google.com/d/forum/smallrye[forum] and take a look at the issues in any of the projects on https://github.com/smallrye[GitHub].

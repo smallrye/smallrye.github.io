@@ -1,4 +1,64 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2019-11-13T21:38:33+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">SmallRye on GraalVM with Quarkus!</title><link href="https://www.smallrye.io/blog/graalvm-quarkus/" rel="alternate" type="text/html" title="SmallRye on GraalVM with Quarkus!" /><published>2019-03-07T19:00:00+00:00</published><updated>2019-03-07T19:00:00+00:00</updated><id>https://www.smallrye.io/blog/graalvm-quarkus</id><content type="html" xml:base="https://www.smallrye.io/blog/graalvm-quarkus/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2019-11-27T16:51:53+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">SmallRye Innovation for Eclipse MicroProfile</title><link href="https://www.smallrye.io/blog/innovation/" rel="alternate" type="text/html" title="SmallRye Innovation for Eclipse MicroProfile" /><published>2019-11-27T19:00:00+00:00</published><updated>2019-11-27T19:00:00+00:00</updated><id>https://www.smallrye.io/blog/innovation</id><content type="html" xml:base="https://www.smallrye.io/blog/innovation/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;a href=&quot;https://smallrye.io&quot;&gt;SmallRye&lt;/a&gt; implements &lt;a href=&quot;https://microprofile.io/&quot;&gt;Eclipse MicroProfile&lt;/a&gt; specifications for use within any runtime.
+Currently, SmallRye is included in &lt;a href=&quot;https://quarkus.io/&quot;&gt;Quarkus&lt;/a&gt;,
+&lt;a href=&quot;https://thorntail.io&quot;&gt;Thorntail&lt;/a&gt;, &lt;a href=&quot;https://wildfly.org&quot;&gt;WildFly&lt;/a&gt;,
+and the reactive implementations are part of &lt;a href=&quot;https://openliberty.io/&quot;&gt;Open Liberty&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;That&amp;#8217;s great, but that&amp;#8217;s only implementing what&amp;#8217;s been defined by a specification.
+Does &lt;a href=&quot;https://smallrye.io&quot;&gt;SmallRye&lt;/a&gt; only implement the specifications &quot;&lt;em&gt;as is&lt;/em&gt;&quot;?
+How do new ideas get added to &lt;a href=&quot;https://microprofile.io/&quot;&gt;MicroProfile&lt;/a&gt;,
+either as new specifications or changes to an existing specification?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Questions like these,
+and others like them,
+are what I hear often from those not familiar with exactly how &lt;a href=&quot;https://microprofile.io/&quot;&gt;MicroProfile&lt;/a&gt; operates.
+Unlike how the JCP typically operated in the past when defining Java EE specifications,
+&lt;a href=&quot;https://microprofile.io/&quot;&gt;MicroProfile&lt;/a&gt; takes a very different approach.
+Bean Validation took a similar approach as &lt;a href=&quot;https://microprofile.io/&quot;&gt;MicroProfile&lt;/a&gt;.
+In &lt;a href=&quot;https://microprofile.io/&quot;&gt;MicroProfile&lt;/a&gt; we define specifications based on existing implementations and usage within projects,
+as it offers a greater indication that what&amp;#8217;s being proposed is useful to developers.
+It&amp;#8217;s much harder to create an API from ideas and have it be useful
+than to define a specification based on an already working implementation.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;How does this relate to how &lt;a href=&quot;https://smallrye.io&quot;&gt;SmallRye&lt;/a&gt; develops implementations?
+Since its creation &lt;a href=&quot;https://smallrye.io&quot;&gt;SmallRye&lt;/a&gt; was purposefully focused on implementing the &lt;a href=&quot;https://microprofile.io/&quot;&gt;MicroProfile&lt;/a&gt; specifications,
+while seeking to improve the specifications and TCKs when issues were found.
+Having reached a point where the implementations are stable and easily kept in line with modifications to existing specifications,
+it frees those working on the project to shift our focus to innovation!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;What type of innovation are we talking about?
+In theory, it could be absolutely anything.
+In practice, we&amp;#8217;re not proposing a complete free for all, as that leads to churn without results.
+We have a few initiatives that are underway where we are beginning to innovate with &lt;a href=&quot;https://microprofile.io/&quot;&gt;MicroProfile&lt;/a&gt;.
+We&amp;#8217;ve begun work on an entirely new implementation for Fault Tolerance, see &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues/102&quot;&gt;here&lt;/a&gt;,
+which aims to be reactive friendly while still enabling the same functionality for imperative programming.
+In &lt;a href=&quot;https://github.com/smallrye/smallrye-config&quot;&gt;SmallRye Config&lt;/a&gt; we will be investigating how to implement support for
+using a pre captured configuration during the creation of later &lt;code&gt;ConfigSource&lt;/code&gt;s and &lt;code&gt;ConfigSourceProvider&lt;/code&gt;s,
+allowing configuration to be used to create latter stage configuration instances.
+There are also other innovations underway within the reactive sphere of &lt;a href=&quot;https://smallrye.io&quot;&gt;SmallRye&lt;/a&gt; that we intend to announce soon.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;In addition to innovation within &lt;a href=&quot;https://smallrye.io&quot;&gt;SmallRye&lt;/a&gt; projects,
+we&amp;#8217;re in the process of accepting the donation from the &lt;a href=&quot;https://github.com/microprofile-extensions&quot;&gt;MicroProfile Extensions&lt;/a&gt; project.
+The &lt;a href=&quot;https://github.com/microprofile-extensions&quot;&gt;MicroProfile Extensions&lt;/a&gt; project includes many new &lt;code&gt;ConfigSource&lt;/code&gt; and &lt;code&gt;Converter&lt;/code&gt; types
+that will be added to &lt;a href=&quot;https://smallrye.io&quot;&gt;SmallRye&lt;/a&gt;. A big thanks to Phillip and Derek for agreeing to this and pushing it forward.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;All this innovation in &lt;a href=&quot;https://smallrye.io&quot;&gt;SmallRye&lt;/a&gt; is great,
+but what does that mean for &lt;a href=&quot;https://microprofile.io/&quot;&gt;MicroProfile&lt;/a&gt; specifications?
+Do they have these new innovations as well?
+In the short term, no they wouldn&amp;#8217;t.
+The medium to longer-term goal for any innovation created in &lt;a href=&quot;https://smallrye.io&quot;&gt;SmallRye&lt;/a&gt; is for it to be proposed to existing
+or new &lt;a href=&quot;https://microprofile.io/&quot;&gt;MicroProfile&lt;/a&gt; specifications.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;If you&amp;#8217;d like to contribute to &lt;a href=&quot;https://smallrye.io&quot;&gt;SmallRye&lt;/a&gt; and help us deliver innovation to &lt;a href=&quot;https://microprofile.io/&quot;&gt;MicroProfile&lt;/a&gt;,
+come by our &lt;a href=&quot;https://groups.google.com/d/forum/smallrye&quot;&gt;forum&lt;/a&gt; and take a look at the issues in any of the projects on &lt;a href=&quot;https://github.com/smallrye&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ken Finnigan</name><email>ken@kenfinnigan.me</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">SmallRye on GraalVM with Quarkus!</title><link href="https://www.smallrye.io/blog/graalvm-quarkus/" rel="alternate" type="text/html" title="SmallRye on GraalVM with Quarkus!" /><published>2019-03-07T19:00:00+00:00</published><updated>2019-03-07T19:00:00+00:00</updated><id>https://www.smallrye.io/blog/graalvm-quarkus</id><content type="html" xml:base="https://www.smallrye.io/blog/graalvm-quarkus/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Marvel at SmallRye on GraalVM with Quarkus!&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;

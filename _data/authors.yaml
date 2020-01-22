@@ -12,3 +12,10 @@ kenfinnigan:
   job_title: "SmallRye lead"
   twitter: "kenfinnigan"
   bio: 'Ken is a Senior Principal Software Engineer for Red Hat Middleware and has been a consultant and software engineer for over 20 years with enterprises throughout the world. Ken leads the SmallRye project, which implements the Eclipse MicroProfile specifications while also looking to innovate with Cloud Native development. As part of his work on SmallRye, Ken is heavily involved in the Eclipse MicroProfile community to develop specifications for Java microservices in the Cloud. Ken has previously served as the project lead for Thorntail and LiveOak, along with other JBoss projects. Ken recently published “Enterprise Java Microservices” and has previously written two books, including "JBoss Weld CDI for Java Platform."'
+lthon:
+  name: "Ladislav Thon"
+  email: "ladicek@gmail.com"
+  emailhash: "238e8b2100a5366b226234b946026462"
+  job_title: ""
+  twitter: "_Ladicek"
+  bio: 'Ladislav is a Senior Software Engineer at Red Hat, where he leads the Thorntail project and contributes to MicroProfile. Previously, he led the Red Hat OpenShift Application Runtimes QE team, and before that spent a few years in the JBoss Enterprise Application Platform QE team. He has been working as a developer for more than a decade, and besides programming, he likes good books and craft beer.'

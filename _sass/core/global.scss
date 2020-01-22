@@ -184,7 +184,11 @@ code, pre {
 }
 
 pre {
-  padding: .5rem 1rem;
+  padding: 1rem;
+}
+
+pre code {
+  padding: 0;
 }
 
 hr {

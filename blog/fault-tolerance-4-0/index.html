@@ -55,7 +55,9 @@
 <p><a href="https://github.com/smallrye/smallrye-fault-tolerance">SmallRye Fault Tolerance</a> is our implementation of <a href="https://github.com/eclipse/microprofile-fault-tolerance">Eclipse MicroProfile Fault Tolerance</a>.
 It was originally based on <a href="https://github.com/Netflix/Hystrix">Hystrix</a>, the Netflix library for latency and fault tolerance in distributed systems.
 Lately, we realized that Hystrix is not the best fit for implementing MicroProfile Fault Tolerance, because Hystrix meshes all fault tolerance concerns into one, while MicroProfile Fault Tolerance describes mostly a layered architecture.
-The MicroProfile Fault Tolerance specification also requires certain features that Hystrix intentionally doesn&#8217;t provide; most importantly, the ability to interrupt threads that Hystrix itself didn&#8217;t create.</p>
+The MicroProfile Fault Tolerance specification also requires certain features that Hystrix intentionally doesn&#8217;t provide; most importantly, the ability to interrupt threads that Hystrix itself didn&#8217;t create.
+Last but not least, Hystrix is in maintenance mode, and hasn&#8217;t been actively developed for more than a year.
+When we tried to update to latest Hystrix version, we even faced breaking changes.</p>
 </div>
 <div class="paragraph">
 <p>We have been talking on and off about removing Hystrix and using our own implementation of core fault tolerance strategies, one that would be better suited as a base for implementing MicroProfile Fault Tolerance, but only a few months ago did we finally start working on it.
@@ -257,7 +259,7 @@ The idea is that we would prototype that API in SmallRye and if it proves worthy
 For that reason, we would probably mark these prototypes as experimental API, and if they get specified in MicroProfile, we&#8217;d rapidly deprecate and remove them.</p>
 </div>
 <div class="paragraph">
-<p>There&#8217;s also some implementation aspects that we&#8217;d like to finetune.</p>
+<p>There are also some implementation aspects that we&#8217;d like to finetune.</p>
 </div>
 <div class="paragraph">
 <p>The metrics collection and configuration handling code mostly comes from the old implementation, and is due for serious refactoring.</p>

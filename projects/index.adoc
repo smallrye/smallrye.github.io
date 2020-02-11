@@ -81,11 +81,11 @@
 
 |https://github.com/smallrye/smallrye-context-propagation[Context Propagation]
 |1.0
-|https://repo1.maven.org/maven2/io/smallrye/smallrye-context-propagation/1.0.11/smallrye-context-propagation-1.0.11.jar[1.0.11]
+|https://repo1.maven.org/maven2/io/smallrye/smallrye-context-propagation/1.0.12/smallrye-context-propagation-1.0.12.jar[1.0.12]
 
 |https://github.com/smallrye/smallrye-reactive-messaging[Reactive Messaging]
-|1.0
-|https://repo1.maven.org/maven2/io/smallrye/reactive/smallrye-reactive-messaging/1.0.8/smallrye-reactive-messaging-1.0.8.jar[1.0.8]
+|1.1
+|https://repo1.maven.org/maven2/io/smallrye/reactive/smallrye-reactive-messaging-provider/1.1.0/smallrye-reactive-messaging-provider-1.1.0.jar[1.1.0]
 
 |https://github.com/smallrye/smallrye-reactive-streams-operators[Reactive Streams Operators]
 |1.0.1

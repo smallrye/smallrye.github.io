@@ -1,0 +1,30 @@
+:page-layout: post
+:page-title: Fault Tolerance 4.1
+:page-synopsis: SmallRye Fault Tolerance 4.1 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2020-02-17 13:00:00.000 +0100
+:page-author: lthon
+:uri-quarkus-update: https://github.com/quarkusio/quarkus/pull/7204
+
+= Fault Tolerance 4.1
+
+MicroProfile Fault Tolerance 2.1 was released just 2 weeks ago, and it didn't take us long to fully implement.
+Today, we announce availability of SmallRye Fault Tolerance 4.1, a compliant implementation of MicroProfile Fault Tolerance 2.1.
+Here's a list of the important changes in the specification:
+
+- The `@Retry.retryOn` and `abortOn` attributes no longer ignore `Throwable.class`, to be consistent with other annotations that also specify exceptions.
+  Only `@Retry` had a requirement that `Throwable` is to be ignored.
+- Related to the previous item is that the specification now admits that throwing custom ``Throwable``s results in nonportable behavior.
+  Fortunately, the use cases for throwing something that isn't an `Exception` (nor an `Error`) should be very rare.
+- Also, the behavior was previously unspecified when the `@Retry.retryOn` and `abortOn` attributes overlap.
+  It is now specified that the `abortOn` attribute "wins" over `retryOn`.
+- The `@CircuitBreaker.skipOn` attribute was added, to complement the existing `failOn` attribute.
+  When the attributes overlap, `skipOn` "wins" over `failOn`.
+- The `@Fallback.applyOn` and `skipOn` attributes were also added.
+  When they overlap, `skipOn` "wins" over `applyOn`.
+- It is now specified that during the `@Asynchronous` method execution, the CDI request context is always active.
+  The specification previously did not require that.
+
+This release is also aligned with other SmallRye projects (Config and Metrics) that also recently released a new version in preparation of MicroProfile 3.3 platform release.
+
+Enjoy the new SmallRye Fault Tolerance, it is {uri-quarkus-update}[coming] in the next Quarkus release!

@@ -1,0 +1,28 @@
+site:
+  title: SmallRye documentation
+  start_page: index::index.adoc
+content:
+  sources:
+  - url: .. # common module containing just the main index
+    start_path: docs
+    branches: HEAD
+  - url: https://github.com/smallrye/smallrye-metrics.git
+    branches: 2.4.x
+    start_path: doc
+# uncomment after the docs are merged    
+#  - url: https://github.com/smallrye/smallrye-reactive-messaging.git
+#    branches: master
+#    start_path: doc
+ui:
+  bundle:
+    url: https://github.com/smallrye/smallrye-antora-ui/blob/master/build/ui-bundle.zip?raw=true
+    snapshot: true
+# FIXME: These are variables used in the Reactive Messaging documentation. Antora 2.2 does not support
+# defining them in a component descriptor, so we keep them here temporarily.
+# After Antora 2.3.0 is released, move this to the component descriptor
+asciidoc:
+  attributes:
+    version: '1.1.0'
+    weld-version: '3.1.3.Final'
+    smallrye-streams-version: '1.0.10'
+    smallrye-config-version: '1.6.2'

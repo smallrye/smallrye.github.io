@@ -42,6 +42,7 @@ exclude:
   - LICENSE
   - README.md
   - .idea
+  - docs
 #   - node_modules
 #   - vendor/bundle/
 #   - vendor/cache/

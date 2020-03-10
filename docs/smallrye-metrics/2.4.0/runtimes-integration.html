@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Integrating into runtimes :: SmallRye documentation</title>
+    <meta name="generator" content="Antora 2.2.0">
+    <link rel="stylesheet" href="../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">SmallRye documentation</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Projects</a>
+
+          <!-- TODO: This is the navigation. Do we want it here? -->
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="../../index/index/index.html">Index</a>
+            <a class="navbar-item" href="index.html">SmallRye Metrics</a>
+          </div>
+
+        </div>
+        <a class="navbar-item" href="https://smallrye.io/" alt=>SmallRye.io main website</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="smallrye-metrics" data-version="2.4.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">SmallRye Metrics</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html">Index</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Features on top of the specification</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="extended-metadata.html">Extended metadata</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="runtimes-integration.html">Integrating SmallRye Metrics into runtimes</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#cdi-extension">CDI Extension</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#base-vendor-metrics">Base and vendor metrics</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<!-- This is the default navigation panel in the bottom left corner. We aren't using it, but let's keep it commented out
+    should we change our minds about it -->
+<!--
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">SmallRye Metrics</span>
+    <span class="version">2.4.0</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <span class="title">Index</span>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../index/index/index.html">index</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <span class="title">SmallRye Metrics</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">2.4.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+-->
+    </div>
+  </aside>
+</div>
+<main>
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index/index/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">SmallRye Metrics</a></li>
+    <li><a href="runtimes-integration.html">Integrating SmallRye Metrics into runtimes</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-metrics/edit/2.4.x/doc/modules/ROOT/pages/runtimes-integration.adoc">Edit this Page</a></div>
+  </div>
+<article class="doc">
+<h1 class="page">Integrating into runtimes</h1>
+<div class="sect1">
+<h2 id="cdi-extension"><a class="anchor" href="#cdi-extension"></a>CDI Extension for eager registration of annotated application metrics</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>SmallRye Metrics provides a CDI extension which takes care of the annotation scanning and then registering
+all detected metrics at deployment time. If your runtime supports CDI extensions, just make sure that
+the <code>io.smallrye.metrics.setup.MetricCdiInjectionExtension</code> extension is active. It is mandatory
+to register metrics beforehand, because the metric interceptors expect metrics to already exist when
+the interceptor is invoked (with the exception of Gauges, where registration is performed in a
+<code>@PostConstruct</code> method of the interceptor, that means when the owning bean is being instantiated).</p>
+</div>
+<div class="paragraph">
+<p>If the target runtime does not support CDI extensions, a different strategy must be devised
+for scanning the deployment and registering annotated metrics.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="base-vendor-metrics"><a class="anchor" href="#base-vendor-metrics"></a>Activating base and vendor metrics</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Base and vendor metrics are registered at deployment time by the <code>io.smallrye.metrics.setup.JmxRegistrar</code>
+class. It is necessary to instantiate it and invoke <code>jmxRegistrar.init()</code>. The definitions of base and vendor
+metrics are read from the file <code>base-metrics.properties</code> and <code>vendor-metrics.properties</code>, which should be available
+as a resource under the path <code>/io/smallrye/metrics/*-metrics.properties</code> for either the classloader that
+loaded the <code>JmxRegistrar</code> class (higher precedence) or the thread context class loader (lower precedence).</p>
+</div>
+<div class="paragraph">
+<p>These files reference management MBeans as the sources of metric values, so they can only be used for metrics
+that are obtained from MBeans, and only in cases when JMX is available at runtime. Furthermore, only
+Counters and Gauges are currently supported through this file. In other cases, a different
+approach must be devised to register base and vendor metrics.</p>
+</div>
+<div class="sect2">
+<h3 id="_base_metrics_properties_and_vendor_metrics_properties_file_schema"><a class="anchor" href="#_base_metrics_properties_and_vendor_metrics_properties_file_schema"></a>base-metrics.properties and vendor-metrics.properties file schema</h3>
+<div class="paragraph">
+<p>These files list all base and vendor metrics through usage of a regular Java properties file.
+The schema is as following:</p>
+</div>
+<div class="paragraph">
+<p>For simple metrics (where one MBean property corresponds to one metric), you will need these properties:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Property key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Property meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">METRIC_NAME.displayName</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The display name of the metric</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">METRIC_NAME.type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The type of the metric (can be <code>counter</code> or <code>gauge</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">METRIC_NAME.unit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The unit of the metric as a string (you can use <code>none</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">METRIC_NAME.description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The description of the metric</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">METRIC_NAME.mbean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reference to a JMX property including the <code>ObjectName</code> of the owning MBean.
+For example, <code>java.lang:type=ClassLoading/TotalLoadedClassCount</code>
+to obtain the total of all loaded classes in the JVM.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</article>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

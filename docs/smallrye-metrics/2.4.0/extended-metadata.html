@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Extended metadata :: SmallRye documentation</title>
+    <meta name="generator" content="Antora 2.2.0">
+    <link rel="stylesheet" href="../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">SmallRye documentation</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Projects</a>
+
+          <!-- TODO: This is the navigation. Do we want it here? -->
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="../../index/index/index.html">Index</a>
+            <a class="navbar-item" href="index.html">SmallRye Metrics</a>
+          </div>
+
+        </div>
+        <a class="navbar-item" href="https://smallrye.io/" alt=>SmallRye.io main website</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="smallrye-metrics" data-version="2.4.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">SmallRye Metrics</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html">Index</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Features on top of the specification</span>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="extended-metadata.html">Extended metadata</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="runtimes-integration.html">Integrating SmallRye Metrics into runtimes</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="runtimes-integration.html#cdi-extension">CDI Extension</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="runtimes-integration.html#base-vendor-metrics">Base and vendor metrics</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<!-- This is the default navigation panel in the bottom left corner. We aren't using it, but let's keep it commented out
+    should we change our minds about it -->
+<!--
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">SmallRye Metrics</span>
+    <span class="version">2.4.0</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <span class="title">Index</span>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../index/index/index.html">index</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <span class="title">SmallRye Metrics</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">2.4.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+-->
+    </div>
+  </aside>
+</div>
+<main>
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index/index/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">SmallRye Metrics</a></li>
+    <li>Features on top of the specification</li>
+    <li><a href="extended-metadata.html">Extended metadata</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-metrics/edit/2.4.x/doc/modules/ROOT/pages/extended-metadata.adoc">Edit this Page</a></div>
+  </div>
+<article class="doc">
+<h1 class="page">Extended metadata</h1>
+<div class="paragraph">
+<p>SmallRye Metrics provides its own class for metadata, <code>io.smallrye.metrics.ExtendedMetadata</code>,
+which contains a few additional fields. Usage of this is not mandatory, unless you need to make
+use of these extra fields.</p>
+</div>
+<div class="paragraph">
+<p>The extra fields are:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Field</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mbean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The expression designating the JMX MBean property from which the value of this metric will be retrieved.
+This is meant to be used only for base and vendor metrics, see
+<a href="runtimes-integration.html#base-vendor-metrics" class="page">Base and vendor metrics</a> for more information</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">multi</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Is set to <code>true</code> if <code>mbean</code> expression contains placeholders and therefore multiple metrics can potentially
+be created out of this definition.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">prependsScopeToOpenMetricsName</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional configuration to prepend the microprofile scope to the metric name when it is exported
+to the OpenMetrics format. By default, the option is empty() and will not be taken into account.
+If true, the scope is prepended to the metric name when the OpenMetrics
+name is generated (e.g. <code>vendor_foo</code>}.
+If false, the scope is added to the metric tags instead (e.g. <code>foo{microprofile_scope="vendor"</code>}.
+This option has precedence over the global configuration (config property <code>smallrye.metrics.usePrefixForScope</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">skipsScopeInOpenMetricsExportCompletely</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If <code>true</code>, then the metrics scope will be omitted completely when exporting the metric. For example, instead of
+<code>application_metric1</code>, the OpenMetrics key will be just <code>metric1</code>. This can be useful
+for various special compatibility use cases. However, dropping the scope means that if there are metrics with
+the same name under multiple scopes, they might not be distinguishable in the OpenMetrics output.
+This is currently not handled in any way in SmallRye, so the user should make sure this will not happen.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">openMetricsKeyOverride</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If set, this property overrides the OpenMetrics key under which the metric will be presented in an OpenMetrics export.
+Normal export rules defined by the MicroProfile Metrics specification are therefore ignored. Only applies to non-compound
+metrics, that is counters and gauges.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The <code>ExtendedMetadata</code> class also comes with a fluent builder - <code>io.smallrye.metrics.ExtendedMetadataBuilder</code>.</p>
+</div>
+</article>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

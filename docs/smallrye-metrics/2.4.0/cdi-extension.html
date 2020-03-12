@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Integrating into runtimes :: SmallRye documentation</title>
+    <title>CDI Extension for eager registration of annotated application metrics :: SmallRye documentation</title>
     <meta name="generator" content="Antora 2.2.0">
     <link rel="stylesheet" href="../../_/css/site.css">
   </head>
@@ -57,15 +57,21 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="runtimes-integration.html">Integrating SmallRye Metrics into runtimes</a>
+    <span class="nav-text">Integrating SmallRye Metrics into runtimes</span>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#cdi-extension">CDI Extension</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="cdi-extension.html">CDI Extension</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#base-vendor-metrics">Base and vendor metrics</a>
+    <a class="nav-link" href="base-and-vendor-metrics.html">Base and vendor metrics</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="metric-registry-lifecycle.html">Metric registry lifecycle</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jaxrs-metrics.html">JAX-RS metrics</a>
   </li>
 </ul>
   </li>
@@ -112,16 +118,14 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">SmallRye Metrics</a></li>
-    <li><a href="runtimes-integration.html">Integrating SmallRye Metrics into runtimes</a></li>
+    <li>Integrating SmallRye Metrics into runtimes</li>
+    <li><a href="cdi-extension.html">CDI Extension</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-metrics/edit/2.4.x/doc/modules/ROOT/pages/runtimes-integration.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-metrics/edit/2.4.x/doc/modules/ROOT/pages/cdi-extension.adoc">Edit this Page</a></div>
   </div>
 <article class="doc">
-<h1 class="page">Integrating into runtimes</h1>
-<div class="sect1">
-<h2 id="cdi-extension"><a class="anchor" href="#cdi-extension"></a>CDI Extension for eager registration of annotated application metrics</h2>
-<div class="sectionbody">
+<h1 class="page">CDI Extension for eager registration of annotated application metrics</h1>
 <div class="paragraph">
 <p>SmallRye Metrics provides a CDI extension which takes care of the annotation scanning and then registering
 all detected metrics at deployment time. If your runtime supports CDI extensions, just make sure that
@@ -133,70 +137,6 @@ the interceptor is invoked (with the exception of Gauges, where registration is 
 <div class="paragraph">
 <p>If the target runtime does not support CDI extensions, a different strategy must be devised
 for scanning the deployment and registering annotated metrics.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="base-vendor-metrics"><a class="anchor" href="#base-vendor-metrics"></a>Activating base and vendor metrics</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Base and vendor metrics are registered at deployment time by the <code>io.smallrye.metrics.setup.JmxRegistrar</code>
-class. It is necessary to instantiate it and invoke <code>jmxRegistrar.init()</code>. The definitions of base and vendor
-metrics are read from the file <code>base-metrics.properties</code> and <code>vendor-metrics.properties</code>, which should be available
-as a resource under the path <code>/io/smallrye/metrics/*-metrics.properties</code> for either the classloader that
-loaded the <code>JmxRegistrar</code> class (higher precedence) or the thread context class loader (lower precedence).</p>
-</div>
-<div class="paragraph">
-<p>These files reference management MBeans as the sources of metric values, so they can only be used for metrics
-that are obtained from MBeans, and only in cases when JMX is available at runtime. Furthermore, only
-Counters and Gauges are currently supported through this file. In other cases, a different
-approach must be devised to register base and vendor metrics.</p>
-</div>
-<div class="sect2">
-<h3 id="_base_metrics_properties_and_vendor_metrics_properties_file_schema"><a class="anchor" href="#_base_metrics_properties_and_vendor_metrics_properties_file_schema"></a>base-metrics.properties and vendor-metrics.properties file schema</h3>
-<div class="paragraph">
-<p>These files list all base and vendor metrics through usage of a regular Java properties file.
-The schema is as following:</p>
-</div>
-<div class="paragraph">
-<p>For simple metrics (where one MBean property corresponds to one metric), you will need these properties:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Property key</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Property meaning</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">METRIC_NAME.displayName</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The display name of the metric</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">METRIC_NAME.type</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The type of the metric (can be <code>counter</code> or <code>gauge</code>)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">METRIC_NAME.unit</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The unit of the metric as a string (you can use <code>none</code>)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">METRIC_NAME.description</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The description of the metric</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">METRIC_NAME.mbean</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Reference to a JMX property including the <code>ObjectName</code> of the owning MBean.
-For example, <code>java.lang:type=ClassLoading/TotalLoadedClassCount</code>
-to obtain the total of all loaded classes in the JVM.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
 </div>
 </article>
 </main>

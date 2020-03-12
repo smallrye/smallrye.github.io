@@ -59,13 +59,19 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="runtimes-integration.html">Integrating SmallRye Metrics into runtimes</a>
+    <span class="nav-text">Integrating SmallRye Metrics into runtimes</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="runtimes-integration.html#cdi-extension">CDI Extension</a>
+    <a class="nav-link" href="cdi-extension.html">CDI Extension</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="runtimes-integration.html#base-vendor-metrics">Base and vendor metrics</a>
+    <a class="nav-link" href="base-and-vendor-metrics.html">Base and vendor metrics</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="metric-registry-lifecycle.html">Metric registry lifecycle</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jaxrs-metrics.html">JAX-RS metrics</a>
   </li>
 </ul>
   </li>
@@ -142,7 +148,7 @@ use of these extra fields.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">mbean</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The expression designating the JMX MBean property from which the value of this metric will be retrieved.
 This is meant to be used only for base and vendor metrics, see
-<a href="runtimes-integration.html#base-vendor-metrics" class="page">Base and vendor metrics</a> for more information</p></td>
+<a href="#runtimes-integration.adoc#base-vendor-metrics" class="page unresolved">Base and vendor metrics</a> for more information</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">multi</p></td>

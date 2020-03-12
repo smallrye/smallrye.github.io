@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>SmallRye Metrics Documentation :: SmallRye documentation</title>
+    <title>JAX-RS metrics :: SmallRye documentation</title>
     <meta name="generator" content="Antora 2.2.0">
     <link rel="stylesheet" href="../../_/css/site.css">
   </head>
@@ -45,7 +45,7 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="index.html">Index</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -70,7 +70,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="metric-registry-lifecycle.html">Metric registry lifecycle</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="jaxrs-metrics.html">JAX-RS metrics</a>
   </li>
 </ul>
@@ -118,53 +118,40 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">SmallRye Metrics</a></li>
-    <li><a href="index.html">Index</a></li>
+    <li>Integrating SmallRye Metrics into runtimes</li>
+    <li><a href="jaxrs-metrics.html">JAX-RS metrics</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-metrics/edit/2.4.x/doc/modules/ROOT/pages/index.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-metrics/edit/2.4.x/doc/modules/ROOT/pages/jaxrs-metrics.adoc">Edit this Page</a></div>
   </div>
 <article class="doc">
-<h1 class="page">SmallRye Metrics Documentation</h1>
-<div id="preamble">
-<div class="sectionbody">
+<h1 class="page">JAX-RS metrics</h1>
 <div class="paragraph">
-<p>SmallRye Metrics 2.4 is an implementation of the MicroProfile Metrics 2.3 specification.</p>
-</div>
-<div class="paragraph">
-<p>Runtimes that currently use it as their metrics implementation include:</p>
+<p>SmallRye Metrics 2.4 supports the optional JAX-RS metrics as defined in the specification. To enable collection of
+JAX-RS metrics for an application, it is necessary to apply two filters:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://quarkus.io/">Quarkus</a></p>
+<p><code>io.smallrye.metrics.jaxrs.JaxRsMetricsFilter</code> - a JAX-RS <code>ContainerRequestFilter</code></p>
 </li>
 <li>
-<p><a href="https://wildfly.org/">WildFly</a></p>
-</li>
-<li>
-<p><a href="https://thorntail.io/">Thorntail</a></p>
+<p><code>io.smallrye.metrics.jaxrs.JaxRsMetricsServletFilter</code> - a servlet filter</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>The reason for using two filters is that unfortunately, JAX-RS specification does not require <code>ContainerResponseFilter</code>-s
+to be invoked when request handling ended in an unmapped exception. That&#8217;s why we need to use a servlet filter instead
+to be able to hook into the responses even in these cases.</p>
 </div>
+<div class="paragraph">
+<p>If the target runtime does not support servlets, a different mechanism needs to be used that will be able to hook into
+JAX-RS responses and will mimic the functionality of <code>JaxRsMetricsServletFilter</code>.</p>
 </div>
-<div class="sect1">
-<h2 id="more-resources"><a class="anchor" href="#more-resources"></a>More Resources</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://github.com/smallrye/smallrye-metrics/">SmallRye Metrics GitHub project repository</a></p>
-</li>
-<li>
-<p><a href="https://github.com/eclipse/microprofile-metrics/">Eclipse MicroProfile Metrics repository</a></p>
-</li>
-<li>
-<p><a href="https://download.eclipse.org/microprofile/microprofile-metrics-2.3/microprofile-metrics-spec-2.3.html">MicroProfile Metrics 2.3 specification text</a></p>
-</li>
-</ul>
-</div>
-</div>
+<div class="paragraph">
+<p>At the moment, there is no general mechanism to register JAX-RS metrics eagerly at deployment time - metric for each JAX-RS method
+is registered as soon as that method is invoked.</p>
 </div>
 </article>
 </main>

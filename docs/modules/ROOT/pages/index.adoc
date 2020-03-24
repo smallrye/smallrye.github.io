@@ -2,5 +2,6 @@
 
 Welcome to the SmallRye documentation site. Pick the project you're interested in from the list below.
 
+* xref:smallrye-config:ROOT:index.adoc[SmallRye Config]
 * xref:smallrye-metrics:ROOT:index.adoc[SmallRye Metrics]
 // * xref:smallrye-reactive-messaging:ROOT:index.adoc[SmallRye Reactive Messaging]

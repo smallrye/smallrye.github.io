@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: SmallRye documentation</title>
+    <meta name="generator" content="Antora 2.3.0-beta.1">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">SmallRye documentation</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Projects</a>
+
+          <!-- TODO: This is the navigation. Do we want it here? -->
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="../../../index/index/index.html">Index</a>
+            <a class="navbar-item" href="../index.html">SmallRye Config</a>
+            <a class="navbar-item" href="../../../smallrye-metrics/2.4.0/index.html">SmallRye Metrics</a>
+          </div>
+
+        </div>
+        <a class="navbar-item" href="https://smallrye.io/" alt=>SmallRye.io main website</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="smallrye-config" data-version="1.7.1">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">SmallRye Config</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Index</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Extensions</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="config-sources.html">Config Sources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../interceptors/interceptors.html">Interceptors</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<!-- This is the default navigation panel in the bottom left corner. We aren't using it, but let's keep it commented out
+    should we change our minds about it -->
+<!--
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">SmallRye Config</span>
+    <span class="version">1.7.1</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <span class="title">Index</span>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../index/index/index.html">index</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <span class="title">SmallRye Config</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.7.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <span class="title">SmallRye Metrics</span>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../smallrye-metrics/2.4.0/index.html">2.4.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+-->
+    </div>
+  </aside>
+</div>
+<main>
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../../index/index/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-config/edit/master/doc/modules/ROOT/pages/config-sources/configvalueproperties-config-source.adoc">Edit this Page</a></div>
+  </div>
+<article class="doc">
+<div class="sect1">
+<h2 id="configvalueproperties-config-source"><a class="anchor" href="#configvalueproperties-config-source"></a>Config Value Properties Config Source</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Creates a Config Source with <code>ConfigValue</code> support from a properties file (referenced by its URL).</p>
+</div>
+<div class="paragraph">
+<p>The <code>ConfigValue</code> is a metadata object, containing additional information to each configuration. This includes the
+Config Source origin, ordinal, or the line number from where the Config was loaded. This is useful for debugging
+information.</p>
+</div>
+<div class="sect2">
+<h3 id="_usage"><a class="anchor" href="#_usage"></a>Usage</h3>
+<div class="paragraph">
+<p>This Config Source is not automatically registered. This means that need to provide your own
+<code>ConfigSourceProvider</code> implementation and registration via <code>ServiceLoader</code> to use this Config Source like documented in
+MicroProfile Config <code>ConfigSource</code> specification.</p>
+</div>
+</div>
+</div>
+</div>
+</article>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

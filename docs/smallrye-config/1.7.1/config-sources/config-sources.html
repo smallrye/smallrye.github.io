@@ -132,6 +132,9 @@ and <code>microprofile-config.properties</code> file), SmallRye Config provides 
 <p><a href="#properties-config-source">Properties Config Source</a></p>
 </li>
 <li>
+<p><a href="#configvalueproperties-config-source">Config Value Properties Config Source</a></p>
+</li>
+<li>
 <p><a href="#filesystem-config-source">FileSystem Config Source</a></p>
 </li>
 <li>
@@ -154,6 +157,27 @@ and <code>microprofile-config.properties</code> file), SmallRye Config provides 
 <p>Creates a ConfigSource from Java <code>Properties</code> or <code>Map&lt;String, String&gt;</code> objects or a properties file (referenced by
 its URL). Check
 <a href="https://github.com/smallrye/smallrye-config/blob/master/implementation/src/main/java/io/smallrye/config/PropertiesConfigSource.java">PropertiesConfigSource.java</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configvalueproperties-config-source"><a class="anchor" href="#configvalueproperties-config-source"></a>Config Value Properties Config Source</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Creates a Config Source with <code>ConfigValue</code> support from a properties file (referenced by its URL).</p>
+</div>
+<div class="paragraph">
+<p>The <code>ConfigValue</code> is a metadata object, containing additional information to each configuration. This includes the
+Config Source origin, ordinal, or the line number from where the Config was loaded. This is useful for debugging
+information.</p>
+</div>
+<div class="sect2">
+<h3 id="_usage"><a class="anchor" href="#_usage"></a>Usage</h3>
+<div class="paragraph">
+<p>This Config Source is not automatically registered. This means that need to provide your own
+<code>ConfigSourceProvider</code> implementation and registration via <code>ServiceLoader</code> to use this Config Source like documented in
+MicroProfile Config <code>ConfigSource</code> specification.</p>
+</div>
 </div>
 </div>
 </div>
@@ -198,7 +222,7 @@ the property key and its textual content is the property value).</p>
 <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap">Kubernetes ConfigMap</a>.</p>
 </div>
 <div class="sect2">
-<h3 id="_usage"><a class="anchor" href="#_usage"></a>Usage</h3>
+<h3 id="_usage_2"><a class="anchor" href="#_usage_2"></a>Usage</h3>
 <div class="paragraph">
 <p>To use the FileSystem Config Source, add the following to your Maven <code>pom.xml</code>:</p>
 </div>
@@ -242,7 +266,7 @@ MicroProfile Config <code>ConfigSource</code> specification.</p>
 <p>These configuration files have a lower priority than the default sources.</p>
 </div>
 <div class="sect2">
-<h3 id="_usage_2"><a class="anchor" href="#_usage_2"></a>Usage</h3>
+<h3 id="_usage_3"><a class="anchor" href="#_usage_3"></a>Usage</h3>
 <div class="paragraph">
 <p>To use the HOCON Config Source, add the following to your Maven <code>pom.xml</code>:</p>
 </div>
@@ -272,7 +296,7 @@ loads the configuration from the file <code>microprofile-config.yaml</code>.</p>
 <p>This Config Source has a higher priority than the default <code>microprofile-config.properties</code>.</p>
 </div>
 <div class="sect2">
-<h3 id="_usage_3"><a class="anchor" href="#_usage_3"></a>Usage</h3>
+<h3 id="_usage_4"><a class="anchor" href="#_usage_4"></a>Usage</h3>
 <div class="paragraph">
 <p>To use the YAML Config Source, add the following to your Maven <code>pom.xml</code>:</p>
 </div>
@@ -302,7 +326,7 @@ loads the configuration from the file <code>microprofile-config.yaml</code>.</p>
 subscribe to updates to the configuration parameters.</p>
 </div>
 <div class="sect2">
-<h3 id="_usage_4"><a class="anchor" href="#_usage_4"></a>Usage</h3>
+<h3 id="_usage_5"><a class="anchor" href="#_usage_5"></a>Usage</h3>
 <div class="paragraph">
 <p>To use the HOCON Config Source, add the following to your Maven <code>pom.xml</code>:</p>
 </div>

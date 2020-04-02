@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: SmallRye documentation</title>
+    <meta name="generator" content="Antora 2.3.0-beta.1">
+    <link rel="stylesheet" href="../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">SmallRye documentation</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Projects</a>
+
+          <!-- TODO: This is the navigation. Do we want it here? -->
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="../../index/index/index.html">Index</a>
+            <a class="navbar-item" href="../index.html">SmallRye Config</a>
+            <a class="navbar-item" href="../../smallrye-metrics/2.4.0/index.html">SmallRye Metrics</a>
+          </div>
+
+        </div>
+        <a class="navbar-item" href="https://smallrye.io/" alt=>SmallRye.io main website</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="smallrye-config" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">SmallRye Config</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Index</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Extensions</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../config-sources/config-sources.html">Config Sources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../converters/converters.html">Converters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../interceptors/interceptors.html">Interceptors</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="cdi.html">CDI</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<!-- This is the default navigation panel in the bottom left corner. We aren't using it, but let's keep it commented out
+    should we change our minds about it -->
+<!--
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">SmallRye Config</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <span class="title">Index</span>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../index/index/index.html">index</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <span class="title">SmallRye Config</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <span class="title">SmallRye Metrics</span>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../smallrye-metrics/2.4.0/index.html">2.4.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+-->
+    </div>
+  </aside>
+</div>
+<main>
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index/index/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-config/edit/master/doc/modules/ROOT/pages/cdi/config-events.adoc">Edit this Page</a></div>
+  </div>
+<article class="doc">
+<div class="sect1">
+<h2 id="config-events"><a class="anchor" href="#config-events"></a>Config Events</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Config Events extension allows you to fire change events on Config Sources.</p>
+</div>
+<div class="sect2">
+<h3 id="_usage"><a class="anchor" href="#_usage"></a>Usage</h3>
+<div class="paragraph">
+<p>To use the Config Events, add the following to your Maven <code>pom.xml</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;io.smallrye.config&lt;/groupId&gt;
+    &lt;artifactId&gt;smallrye-config-events&lt;/artifactId&gt;
+    &lt;version&gt;{version}&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_events"><a class="anchor" href="#_events"></a>Events</h3>
+<div class="paragraph">
+<p>The CDI Event is a <code>ChangeEvent</code> and contains the following fields:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>String key</p>
+</li>
+<li>
+<p>Optional&lt;String&gt; oldValue</p>
+</li>
+<li>
+<p>String newValue</p>
+</li>
+<li>
+<p>Type type</p>
+</li>
+<li>
+<p>String fromSource</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>ChangeEvent</code> can be of any of the following types:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>NEW - When you create a new key and value (i.e. the key does not exist anywhere in any config source)</p>
+</li>
+<li>
+<p>UPDATE - When you update a value of an existing key (i.e. the key and value exist somewhere in a config source)</p>
+</li>
+<li>
+<p>REMOVE - When you remove the value from the source (and that changed the overall config)</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_observing_events"><a class="anchor" href="#_observing_events"></a>Observing Events</h4>
+<div class="paragraph">
+<p>You can listen to all or some of these events, filtering by <code>type</code> and/or <code>key</code> and/or <code>source</code>, example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Getting all config event
+public void all(@Observes ChangeEvent changeEvent){
+    log.log(Level.SEVERE, "ALL: Received a config change event: {0}", changeEvent);
+}
+
+// Get only new values
+public void newValue(@Observes @TypeFilter(Type.NEW) ChangeEvent changeEvent){
+    log.log(Level.SEVERE, "NEW: Received a config change event: {0}", changeEvent);
+}
+
+// Get only override values
+public void overrideValue(@Observes @TypeFilter(Type.UPDATE) ChangeEvent changeEvent){
+    log.log(Level.SEVERE, "UPDATE: Received a config change event: {0}", changeEvent);
+}
+
+// Get only revert values
+public void revertValue(@Observes @TypeFilter(Type.REMOVE) ChangeEvent changeEvent){
+    log.log(Level.SEVERE, "REMOVE: Received a config change event: {0}", changeEvent);
+}
+
+// Getting all config event when key is some.key
+public void allForKey(@Observes @KeyFilter("some.key") ChangeEvent changeEvent){
+    log.log(Level.SEVERE, "ALL for key [some.key]: Received a config change event: {0}", changeEvent);
+}
+
+// Getting all config event when key is some.key for new events
+public void newForKey(@Observes @TypeFilter(Type.NEW) @KeyFilter("some.key") ChangeEvent changeEvent){
+    log.log(Level.SEVERE, "NEW for key [some.key]: Received a config change event: {0}", changeEvent);
+}
+
+// Getting all config event when key is some.key for override events
+public void overrideForKey(@Observes @TypeFilter(Type.UPDATE) @KeyFilter("some.key") ChangeEvent changeEvent){
+    log.log(Level.SEVERE, "UPDATE for key [some.key]: Received a config change event: {0}", changeEvent);
+}
+
+// Getting all config event when key is some.key for revert events
+public void revertForKey(@Observes @TypeFilter(Type.REMOVE) @KeyFilter("some.key") ChangeEvent changeEvent){
+    log.log(Level.SEVERE, "REMOVE for key [some.key]: Received a config change event: {0}", changeEvent);
+}
+
+// Getting all config events for a certain source
+public void allForSource(@Observes @SourceFilter("MemoryConfigSource") ChangeEvent changeEvent){
+    log.log(Level.SEVERE, "ALL for source [MemoryConfigSource]: Received a config change event: {0}", changeEvent);
+}
+
+// Getting all config events for a certain source
+public void allForSourceAndKey(@Observes @SourceFilter("MemoryConfigSource") @KeyFilter("some.key")  ChangeEvent changeEvent){
+    log.log(Level.SEVERE, "ALL for source [MemoryConfigSource] and for key [some.key]: Received a config change event: {0}", changeEvent);
+}
+
+// Getting all config events for a certain source
+public void overrideForSourceAndKey(@Observes @TypeFilter(Type.UPDATE) @SourceFilter("MemoryConfigSource") @KeyFilter("some.key")  ChangeEvent changeEvent){
+    log.log(Level.SEVERE, "UPDATE for source [MemoryConfigSource] and for key [some.key]: Received a config change event: {0}", changeEvent);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note: You can filter by including the <code>@TypeFilter</code> and/or the <code>@KeyFilter</code> and/or the <code>@SourceFilter</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_pattern_matching_on_field"><a class="anchor" href="#_pattern_matching_on_field"></a>Pattern matching on field.</h4>
+<div class="paragraph">
+<p>You might want to listen for fields that match a certain regex.</p>
+</div>
+<div class="paragraph">
+<p>Example, listen to all keys that starts with <code>some.</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@RegexFilter("^some\\..+")
+public void allForPatternMatchOnKey(@Observes ChangeEvent changeEvent){
+    log.log(Level.SEVERE, "Pattern match on key: Received a config change event: {0}", changeEvent);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By default, it will match on <code>key</code>, however you also listen on another field, for example, listen to all <code>oldValue</code>
+that starts with <code>some.</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@RegexFilter(onField = Field.oldValue, value = "^some\\..+")
+public void allForPatternMatchOnOldValue(@Observes ChangeEvent changeEvent){
+    log.log(Level.SEVERE, "Pattern match on old value: Received a config change event: {0}", changeEvent);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can Match on the following fields of the <code>ChangeEvent</code> object:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>key</p>
+</li>
+<li>
+<p>oldValue</p>
+</li>
+<li>
+<p>newValue</p>
+</li>
+<li>
+<p>fromSource</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_implementing_events_in_a_configsource"><a class="anchor" href="#_implementing_events_in_a_configsource"></a>Implementing Events in a ConfigSource</h3>
+<div class="paragraph">
+<p>The <code>ChangeEventNotifier</code> allows you to detect changes and fire the appropriate events.</p>
+</div>
+<div class="paragraph">
+<p>To use it in your own source:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Get a snapshot of the properties before the change.</p>
+</li>
+<li>
+<p>Get a snapshot of the properties after the change.</p>
+</li>
+<li>
+<p>Call <code>detectChangesAndFire</code> method:</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Map&lt;String,String&gt; before = new HashMap&lt;&gt;(configSource.getProperties());
+memoryConfigSource.getProperties().remove(key);
+Map&lt;String,String&gt; after = new HashMap&lt;&gt;(configSource.getProperties());
+ChangeEventNotifier.getInstance().detectChangesAndFire(before, after,configSource.getName());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>or if you know the change and do not need detection:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">configSource.getProperties().remove(key);
+ChangeEventNotifier.getInstance().fire(new ChangeEvent(Type.REMOVE,key,getOptionalOldValue(oldValue),null,configSource.getName()));</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

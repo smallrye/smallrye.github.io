@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Metric registry lifecycle :: SmallRye documentation</title>
+    <title>Untitled :: SmallRye documentation</title>
     <meta name="generator" content="Antora 2.3.0-beta.1">
     <link rel="stylesheet" href="../../_/css/site.css">
   </head>
@@ -26,8 +26,8 @@
           <!-- TODO: This is the navigation. Do we want it here? -->
           <div class="navbar-dropdown">
             <a class="navbar-item" href="../../index/index/index.html">Index</a>
-            <a class="navbar-item" href="../../smallrye-config/index.html">SmallRye Config</a>
-            <a class="navbar-item" href="index.html">SmallRye Metrics</a>
+            <a class="navbar-item" href="../index.html">SmallRye Config</a>
+            <a class="navbar-item" href="../../smallrye-metrics/2.4.0/index.html">SmallRye Metrics</a>
           </div>
 
         </div>
@@ -37,42 +37,33 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="smallrye-metrics" data-version="2.4.0">
+<div class="nav-container" data-component="smallrye-config" data-version="master">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="index.html">SmallRye Metrics</a></h3>
+    <h3 class="title"><a href="../index.html">SmallRye Config</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="index.html">Index</a>
+    <a class="nav-link" href="../index.html">Index</a>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Features on top of the specification</span>
+    <span class="nav-text">Extensions</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="extended-metadata.html">Extended metadata</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
-    <span class="nav-text">Integrating SmallRye Metrics into runtimes</span>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cdi-extension.html">CDI Extension</a>
+    <a class="nav-link" href="config-sources.html">Config Sources</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="base-and-vendor-metrics.html">Base and vendor metrics</a>
-  </li>
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="metric-registry-lifecycle.html">Metric registry lifecycle</a>
+    <a class="nav-link" href="../converters/converters.html">Converters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="jaxrs-metrics.html">JAX-RS metrics</a>
+    <a class="nav-link" href="../interceptors/interceptors.html">Interceptors</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../cdi/cdi.html">CDI</a>
   </li>
 </ul>
   </li>
@@ -86,8 +77,8 @@
 <!--
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
-    <span class="title">SmallRye Metrics</span>
-    <span class="version">2.4.0</span>
+    <span class="title">SmallRye Config</span>
+    <span class="version">master</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -98,19 +89,19 @@
         </li>
       </ul>
     </li>
-    <li class="component">
+    <li class="component is-current">
       <span class="title">SmallRye Config</span>
       <ul class="versions">
-        <li class="version is-latest">
-          <a href="../../smallrye-config/index.html">master</a>
+        <li class="version is-current is-latest">
+          <a href="../index.html">master</a>
         </li>
       </ul>
     </li>
-    <li class="component is-current">
+    <li class="component">
       <span class="title">SmallRye Metrics</span>
       <ul class="versions">
-        <li class="version is-current is-latest">
-          <a href="index.html">2.4.0</a>
+        <li class="version is-latest">
+          <a href="../../smallrye-metrics/2.4.0/index.html">2.4.0</a>
         </li>
       </ul>
     </li>
@@ -125,27 +116,39 @@
 <button class="nav-toggle"></button>
   <a href="../../index/index/index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
-  <ul>
-    <li><a href="index.html">SmallRye Metrics</a></li>
-    <li>Integrating SmallRye Metrics into runtimes</li>
-    <li><a href="metric-registry-lifecycle.html">Metric registry lifecycle</a></li>
-  </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-metrics/edit/2.4.x/doc/modules/ROOT/pages/metric-registry-lifecycle.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-config/edit/master/doc/modules/ROOT/pages/config-sources/yaml-config-source.adoc">Edit this Page</a></div>
   </div>
 <article class="doc">
-<h1 class="page">Metric registry lifecycle</h1>
+<div class="sect1">
+<h2 id="yaml-config-source"><a class="anchor" href="#yaml-config-source"></a>YAML Config Source</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Lifecycle of metric registries is controlled by the <code>io.smallrye.metrics.MetricRegistries</code> application-scoped bean.
-If it is necessary to drop and recreate a metric registry during runtime, it is possible to call
-<code>MetricRegistries.drop(MetricRegistry.Type)</code> to drop one particular registry, or <code>MetricRegistries.dropAll()</code>.
-After a metric registry is dropped, a new empty registry will be automatically initialized  when a reference to the
-particular registry type is being requested.</p>
+<p>This Config Source allows you to use a <code>yaml</code> file to describe your configuration. By default, the YAML Config Source
+loads the configuration from the file <code>microprofile-config.yaml</code>.</p>
 </div>
 <div class="paragraph">
-<p>The <code>io.smallrye.metrics.MetricRegistries</code> class is also meant to be public API, so applications are allowed
-to use its static method <code>get</code> to obtain references
-to metric registries without having to inject them using CDI.</p>
+<p>This Config Source has a higher priority than the default <code>microprofile-config.properties</code>.</p>
+</div>
+<div class="sect2">
+<h3 id="_usage"><a class="anchor" href="#_usage"></a>Usage</h3>
+<div class="paragraph">
+<p>To use the YAML Config Source, add the following to your Maven <code>pom.xml</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;io.smallrye.config&lt;/groupId&gt;
+    &lt;artifactId&gt;smallrye-config-source-yaml&lt;/artifactId&gt;
+    &lt;version&gt;{version}&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This Config Source will automatically register with your application.</p>
+</div>
+</div>
+</div>
 </div>
 </article>
 </main>

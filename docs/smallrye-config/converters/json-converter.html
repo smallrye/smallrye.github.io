@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Untitled :: SmallRye documentation</title>
     <meta name="generator" content="Antora 2.3.0-beta.1">
-    <link rel="stylesheet" href="../../../_/css/site.css">
+    <link rel="stylesheet" href="../../_/css/site.css">
   </head>
   <body class="article">
 <header class="header">
   <nav class="navbar">
     <div class="navbar-brand">
-      <a class="navbar-item" href="../../..">SmallRye documentation</a>
+      <a class="navbar-item" href="../..">SmallRye documentation</a>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
@@ -25,9 +25,9 @@
 
           <!-- TODO: This is the navigation. Do we want it here? -->
           <div class="navbar-dropdown">
-            <a class="navbar-item" href="../../../index/index/index.html">Index</a>
+            <a class="navbar-item" href="../../index/index/index.html">Index</a>
             <a class="navbar-item" href="../index.html">SmallRye Config</a>
-            <a class="navbar-item" href="../../../smallrye-metrics/2.4.0/index.html">SmallRye Metrics</a>
+            <a class="navbar-item" href="../../smallrye-metrics/2.4.0/index.html">SmallRye Metrics</a>
           </div>
 
         </div>
@@ -37,7 +37,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="smallrye-config" data-version="1.7.1">
+<div class="nav-container" data-component="smallrye-config" data-version="master">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -54,10 +54,16 @@
     <span class="nav-text">Extensions</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="config-sources.html">Config Sources</a>
+    <a class="nav-link" href="../config-sources/config-sources.html">Config Sources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="converters.html">Converters</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../interceptors/interceptors.html">Interceptors</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../cdi/cdi.html">CDI</a>
   </li>
 </ul>
   </li>
@@ -72,14 +78,14 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">SmallRye Config</span>
-    <span class="version">1.7.1</span>
+    <span class="version">master</span>
   </div>
   <ul class="components">
     <li class="component">
       <span class="title">Index</span>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../../index/index/index.html">index</a>
+          <a href="../../index/index/index.html">index</a>
         </li>
       </ul>
     </li>
@@ -87,7 +93,7 @@
       <span class="title">SmallRye Config</span>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../index.html">1.7.1</a>
+          <a href="../index.html">master</a>
         </li>
       </ul>
     </li>
@@ -95,7 +101,7 @@
       <span class="title">SmallRye Metrics</span>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../../smallrye-metrics/2.4.0/index.html">2.4.0</a>
+          <a href="../../smallrye-metrics/2.4.0/index.html">2.4.0</a>
         </li>
       </ul>
     </li>
@@ -108,61 +114,58 @@
 <main>
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="../../../index/index/index.html" class="home-link"></a>
+  <a href="../../index/index/index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-config/edit/master/doc/modules/ROOT/pages/config-sources/zookeeper-config-source.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-config/edit/master/doc/modules/ROOT/pages/converters/json-converter.adoc">Edit this Page</a></div>
   </div>
 <article class="doc">
 <div class="sect1">
-<h2 id="zookeeper-config-source"><a class="anchor" href="#zookeeper-config-source"></a>ZooKeeper Config Source</h2>
+<h2 id="json-converter"><a class="anchor" href="#json-converter"></a>JSON Converter</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Config Source implementation to support Apache Zookeeper.</p>
-</div>
-<div class="paragraph">
-<p>The benefits are that configurations can be shared across applications and a future version will allow applications to
-subscribe to updates to the configuration parameters.</p>
+<p>The JSON Conveter allows you to inject a <code>JsonObject</code> or <code>JsonArray</code> as a <code>ConfigProperty</code>.</p>
 </div>
 <div class="sect2">
 <h3 id="_usage"><a class="anchor" href="#_usage"></a>Usage</h3>
 <div class="paragraph">
-<p>To use the HOCON Config Source, add the following to your Maven <code>pom.xml</code>:</p>
+<p>To use the Config Source Injection, add the following to your Maven <code>pom.xml</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
     &lt;groupId&gt;io.smallrye.config&lt;/groupId&gt;
-    &lt;artifactId&gt;smallrye-config-source-zookeeper&lt;/artifactId&gt;
+    &lt;artifactId&gt;smallrye-config-converter-json&lt;/artifactId&gt;
     &lt;version&gt;{version}&lt;/version&gt;
+    &lt;scope&gt;runtime&lt;/scope&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>This Config Source will automatically register with your application.</p>
 </div>
+<div class="sect2">
+<h3 id="_example"><a class="anchor" href="#_example"></a>Example</h3>
 <div class="paragraph">
-<p>You also need to bootstrap your application with the location of your Zookeeper server and a unique identifier for your
-application. Add the following to <code>src/main/resources/META-INF/microprofile-config.properties</code> or create equivalent
-Environment Variables.</p>
+<p>Use the types <code>JsonObject</code> or <code>JsonArray</code> to inject the <code>ConfigProperty</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">io.smallrye.configsource.zookeeper.url=localhost:2181
-io.smallrye.configsource.zookeeper.applicationId=com.example.my-application</code></pre>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Inject
+@ConfigProperty(name = "someJsonArray")
+private JsonArray someValue;
+
+@Inject
+@ConfigProperty(name = "someJsonObject")
+private JsonObject someValue;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">someJsonArray=["value1","value2","value3"]
+someJsonObject={"foo": "bar", "count":100}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Any properties that are looked up via the Config API or Injected will be looked up in Zookeeper in addition to the
-default MicroProfile Config locations.</p>
-</div>
-<div class="paragraph">
-<p>The ConfigSource will store the following znodes in the specified Zookeeper server
-<code>/applicationId/propertyName = value</code>.</p>
-</div>
-<div class="paragraph">
-<p>This Config Source has a lower priority than the default Sources and thus <strong>will not</strong> override property files or
-Environment Variables.</p>
+<p>The value of the configuration properties must be valid JSON, or a <code>JsonParsingException</code> is thrown.</p>
 </div>
 </div>
 </div>
@@ -174,7 +177,7 @@ Environment Variables.</p>
   <p>This page was built using the Antora default UI.</p>
   <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
 </footer>
-<script src="../../../_/js/site.js"></script>
-<script async src="../../../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
   </body>
 </html>

@@ -9,6 +9,9 @@ content:
   - url: https://github.com/smallrye/smallrye-config.git
     branches: master
     start_path: doc
+  - url: https://github.com/smallrye/smallrye-jwt.git
+    branches: master
+    start_path: doc
   - url: https://github.com/smallrye/smallrye-metrics.git
     branches: 2.4.x
     start_path: doc

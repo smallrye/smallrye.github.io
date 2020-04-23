@@ -27,6 +27,7 @@
           <div class="navbar-dropdown">
             <a class="navbar-item" href="../../index/index/index.html">Index</a>
             <a class="navbar-item" href="../index.html">SmallRye Config</a>
+            <a class="navbar-item" href="../../smallrye-jwt/index.html">SmallRye JWT</a>
             <a class="navbar-item" href="../../smallrye-metrics/2.4.0/index.html">SmallRye Metrics</a>
           </div>
 
@@ -98,6 +99,14 @@
       </ul>
     </li>
     <li class="component">
+      <span class="title">SmallRye JWT</span>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../smallrye-jwt/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
       <span class="title">SmallRye Metrics</span>
       <ul class="versions">
         <li class="version is-latest">
@@ -159,6 +168,22 @@ the property key and its textual content is the property value).</p>
 <div class="paragraph">
 <p>This Config Source can be used to read configuration from
 <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap">Kubernetes ConfigMap</a>.</p>
+</div>
+<div class="paragraph">
+<p>The same mapping rules as defined for environment variables are applied, so the FileSystemConfigSource will search for a given property name (e.g. com.ACME.size):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Exact match (i.e. com.ACME.size)</p>
+</li>
+<li>
+<p>Replace each character that is neither alphanumeric nor _ with _ (i.e. com_ACME_size)</p>
+</li>
+<li>
+<p>Replace each character that is neither alphanumeric nor _ with _; then convert the name to upper case (i.e. COM_ACME_SIZE)</p>
+</li>
+</ul>
 </div>
 <div class="sect2">
 <h3 id="_usage"><a class="anchor" href="#_usage"></a>Usage</h3>

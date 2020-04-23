@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Generate JWT Tokens :: SmallRye documentation</title>
+    <meta name="generator" content="Antora 2.3.0-beta.1">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="..">SmallRye documentation</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Projects</a>
+
+          <!-- TODO: This is the navigation. Do we want it here? -->
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="../index/index/index.html">Index</a>
+            <a class="navbar-item" href="../smallrye-config/index.html">SmallRye Config</a>
+            <a class="navbar-item" href="index.html">SmallRye JWT</a>
+            <a class="navbar-item" href="../smallrye-metrics/2.4.0/index.html">SmallRye Metrics</a>
+          </div>
+
+        </div>
+        <a class="navbar-item" href="https://smallrye.io/" alt=>SmallRye.io main website</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="smallrye-jwt" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">SmallRye JWT</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html">Index</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="configuration.html">Configuration</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="generate-jwt.html">Generate JWT Tokens</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<!-- This is the default navigation panel in the bottom left corner. We aren't using it, but let's keep it commented out
+    should we change our minds about it -->
+<!--
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">SmallRye JWT</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <span class="title">Index</span>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../index/index/index.html">index</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <span class="title">SmallRye Config</span>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../smallrye-config/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <span class="title">SmallRye JWT</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <span class="title">SmallRye Metrics</span>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../smallrye-metrics/2.4.0/index.html">2.4.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+-->
+    </div>
+  </aside>
+</div>
+<main>
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index/index/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">SmallRye JWT</a></li>
+    <li><a href="generate-jwt.html">Generate JWT Tokens</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-jwt/edit/master/doc/modules/ROOT/pages/generate-jwt.adoc">Edit this Page</a></div>
+  </div>
+<article class="doc">
+<h1 class="page">Generate JWT Tokens</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>JWT claims can be signed or encrypted or signed first and the nested JWT token encrypted. Signing the claims is used
+most often to secure the claims. What is known today as a JWT token is typically produced by signing the claims in a
+JSON format using the steps described in the <a href="https://tools.ietf.org/html/rfc7515">JSON Web Signature</a> specification.
+However, when the claims are sensitive, their confidentiality can be guaranteed by following the steps described in the
+<a href="https://tools.ietf.org/html/rfc7516">JSON Web Encryption</a> specification to produce a JWT token with the encrypted claims.
+Finally both the confidentiality and integrity of the claims can be further enforced by signing them first and then
+encrypting the nested JWT token.</p>
+</div>
+<div class="paragraph">
+<p>SmallRye JWT provides an API for securing the JWT claims using all of these options.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_jwtclaimsbuilder_and_set_the_claims"><a class="anchor" href="#_create_jwtclaimsbuilder_and_set_the_claims"></a>Create JwtClaimsBuilder and set the claims</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The first step is to initialize a <code>JwtClaimsBuilder</code> using one of the options below and add some claims to it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">import java.util.Collections;
+import io.smallrye.jwt.build.Jwt;
+import io.smallrye.jwt.build.JwtClaimsBuilder;
+...
+// Create an empty builder and add some claims
+JwtClaimsBuilder builder1 = Jwt.claims();
+builder1.claim("customClaim", "custom-value").issuer("https://issuer.org");
+
+// Builder created from the existing claims
+JwtClaimsBuilder builder2 = Jwt.claims("/tokenClaims.json");
+
+// Builder created from a map of claims
+JwtClaimsBuilder builder3 = Jwt.claims(Collections.singletonMap("customClaim", "custom-value"));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The API is fluent so the builder initialization can be done as part of the fluent API sequence. The builder will also
+set <code>iat (issued at) to the current time, `exp</code>(expires at) to 5 minutes away from the current time and <code>jti</code>
+(unique token identifier) claims if they have not already been set, so one can skip setting them when possible.</p>
+</div>
+<div class="paragraph">
+<p>The next step is to decide how to secure the claims.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_sign_the_claims"><a class="anchor" href="#_sign_the_claims"></a>Sign the claims</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The claims can be signed immediately or after the <code>JSON Web Signature</code> headers have been set:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">import io.smallrye.jwt.build.Jwt;
+...
+
+// Sign the claims using the private key loaded from the location set with a 'smallrye.jwt.sign.key-location' property.
+// No 'jws()' transition is necessary.
+String jwt1 = Jwt.claims("/tokenClaims.json").sign();
+
+// Set the headers and sign the claims with an RSA private key loaded in the code (the implementation of this method is omitted). Note a 'jws()' transition to a 'JwtSignatureBuilder'.
+String jwt2 = Jwt.claims("/tokenClaims.json").jws().signatureKeyId("kid1").header("custom-header", "custom-value").sign(getPrivateKey());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note the <code>alg</code> (algorithm) header is set to <code>RS256</code> by default.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_encrypt_the_claims"><a class="anchor" href="#_encrypt_the_claims"></a>Encrypt the claims</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The claims can be encrypted immediately or after the <code>JSON Web Encryption</code> headers have been set the same way as they
+can be signed. The only minor difference is that encrypting the claims always requires a <code>jwe() JwtEncryptionBuilder</code>
+transition:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">import io.smallrye.jwt.build.Jwt;
+...
+
+// Encrypt the claims using the public key loaded from the location set with a 'smallrye.jwt.encrypt.key-location' property.
+String jwt1 = Jwt.claims("/tokenClaims.json").jwe().encrypt();
+
+// Set the headers and encrypt the claims with an RSA public key loaded in the code (the implementation of this method is omitted).
+String jwt2 = Jwt.claims("/tokenClaims.json").jwe().header("custom-header", "custom-value").encrypt(getPublicKey());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note the <code>alg</code> (key management algorithm) header is set to <code>RSA-OAEP-256</code> (it will be changed to <code>RSA-OAEP</code> in a future
+version of smallrye-jwt) and the <code>enc</code> (content encryption header) is set to <code>A256GCM</code> by default.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_sign_the_claims_and_encrypt_the_nested_jwt_token"><a class="anchor" href="#_sign_the_claims_and_encrypt_the_nested_jwt_token"></a>Sign the claims and encrypt the nested JWT token</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The claims can be signed and then the nested JWT token encrypted by combining the sign and encrypt steps.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">import io.smallrye.jwt.build.Jwt;
+...
+
+// Sign the claims and encrypt the nested token using the private and public keys loaded from the locations set with the 'smallrye.jwt.sign.key-location' and 'smallrye.jwt.encrypt.key-location' properties respectively.
+String jwt = Jwt.claims("/tokenClaims.json").innerSign().encrypt();</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration"><a class="anchor" href="#_configuration"></a>Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Smallrye JWT supports the following properties which can be used to customize the way claims are signed and encrypted:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property Name</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.encrypt.key-location</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Config property allows the location of a key to be specified which will be used to encrypt the claims or inner JWT.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.sign.key-location</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Config property allows the location of a private key to be specified which will be used to sign the claims of a JWT.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</article>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

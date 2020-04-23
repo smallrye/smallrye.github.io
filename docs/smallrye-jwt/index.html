@@ -3,15 +3,15 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>SmallRye Metrics Documentation :: SmallRye documentation</title>
+    <title>SmallRye JWT Documentation :: SmallRye documentation</title>
     <meta name="generator" content="Antora 2.3.0-beta.1">
-    <link rel="stylesheet" href="../../_/css/site.css">
+    <link rel="stylesheet" href="../_/css/site.css">
   </head>
   <body class="article">
 <header class="header">
   <nav class="navbar">
     <div class="navbar-brand">
-      <a class="navbar-item" href="../..">SmallRye documentation</a>
+      <a class="navbar-item" href="..">SmallRye documentation</a>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
@@ -25,10 +25,10 @@
 
           <!-- TODO: This is the navigation. Do we want it here? -->
           <div class="navbar-dropdown">
-            <a class="navbar-item" href="../../index/index/index.html">Index</a>
-            <a class="navbar-item" href="../../smallrye-config/index.html">SmallRye Config</a>
-            <a class="navbar-item" href="../../smallrye-jwt/index.html">SmallRye JWT</a>
-            <a class="navbar-item" href="index.html">SmallRye Metrics</a>
+            <a class="navbar-item" href="../index/index/index.html">Index</a>
+            <a class="navbar-item" href="../smallrye-config/index.html">SmallRye Config</a>
+            <a class="navbar-item" href="index.html">SmallRye JWT</a>
+            <a class="navbar-item" href="../smallrye-metrics/2.4.0/index.html">SmallRye Metrics</a>
           </div>
 
         </div>
@@ -38,12 +38,12 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="smallrye-metrics" data-version="2.4.0">
+<div class="nav-container" data-component="smallrye-jwt" data-version="master">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="index.html">SmallRye Metrics</a></h3>
+    <h3 class="title"><a href="index.html">SmallRye JWT</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
@@ -51,31 +51,10 @@
     <a class="nav-link" href="index.html">Index</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
-    <span class="nav-text">Features on top of the specification</span>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="extended-metadata.html">Extended metadata</a>
-  </li>
-</ul>
+    <a class="nav-link" href="configuration.html">Configuration</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
-    <span class="nav-text">Integrating SmallRye Metrics into runtimes</span>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cdi-extension.html">CDI Extension</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="base-and-vendor-metrics.html">Base and vendor metrics</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="metric-registry-lifecycle.html">Metric registry lifecycle</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="jaxrs-metrics.html">JAX-RS metrics</a>
-  </li>
-</ul>
+    <a class="nav-link" href="generate-jwt.html">Generate JWT Tokens</a>
   </li>
 </ul>
   </li>
@@ -87,15 +66,15 @@
 <!--
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
-    <span class="title">SmallRye Metrics</span>
-    <span class="version">2.4.0</span>
+    <span class="title">SmallRye JWT</span>
+    <span class="version">master</span>
   </div>
   <ul class="components">
     <li class="component">
       <span class="title">Index</span>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../index/index/index.html">index</a>
+          <a href="../index/index/index.html">index</a>
         </li>
       </ul>
     </li>
@@ -103,23 +82,23 @@
       <span class="title">SmallRye Config</span>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../smallrye-config/index.html">master</a>
-        </li>
-      </ul>
-    </li>
-    <li class="component">
-      <span class="title">SmallRye JWT</span>
-      <ul class="versions">
-        <li class="version is-latest">
-          <a href="../../smallrye-jwt/index.html">master</a>
+          <a href="../smallrye-config/index.html">master</a>
         </li>
       </ul>
     </li>
     <li class="component is-current">
-      <span class="title">SmallRye Metrics</span>
+      <span class="title">SmallRye JWT</span>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="index.html">2.4.0</a>
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <span class="title">SmallRye Metrics</span>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../smallrye-metrics/2.4.0/index.html">2.4.0</a>
         </li>
       </ul>
     </li>
@@ -132,24 +111,34 @@
 <main>
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="../../index/index/index.html" class="home-link"></a>
+  <a href="../index/index/index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="index.html">SmallRye Metrics</a></li>
+    <li><a href="index.html">SmallRye JWT</a></li>
     <li><a href="index.html">Index</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-metrics/edit/2.4.x/doc/modules/ROOT/pages/index.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-jwt/edit/master/doc/modules/ROOT/pages/index.adoc">Edit this Page</a></div>
   </div>
 <article class="doc">
-<h1 class="page">SmallRye Metrics Documentation</h1>
+<h1 class="page">SmallRye JWT Documentation</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>SmallRye Metrics 2.4 is an implementation of the MicroProfile Metrics 2.3 specification.</p>
+<p>SmallRye JWT is an implementation of <a href="https://github.com/eclipse/microprofile-jwt-auth/">Eclipse MicroProfile JWT RBAC</a>.
+Currently it is focused on supporting the MP-JWT 1.1 spec, and primarily deals with the parsing of the JWT string into
+a JsonWebToken implementation.</p>
 </div>
 <div class="paragraph">
-<p>Runtimes that currently use it as their metrics implementation include:</p>
+<p>In the future, when MP-JWT 2.0 can build on the JSR-375 security APIs, there should be more support for defining the CDI extension and security layer integration.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_runtimes"><a class="anchor" href="#_runtimes"></a>Runtimes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Runtimes that currently use it as their JWT RBAC implementation include:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -167,18 +156,24 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="more-resources"><a class="anchor" href="#more-resources"></a>More Resources</h2>
+<h2 id="_references"><a class="anchor" href="#_references"></a>References</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://github.com/smallrye/smallrye-metrics/">SmallRye Metrics GitHub project repository</a></p>
+<p><a href="https://github.com/eclipse/microprofile-jwt-auth/">MP JWT</a></p>
 </li>
 <li>
-<p><a href="https://github.com/eclipse/microprofile-metrics/">Eclipse MicroProfile Metrics repository</a></p>
+<p><a href="https://tools.ietf.org/html/rfc7519">JSON Web Token</a></p>
 </li>
 <li>
-<p><a href="https://download.eclipse.org/microprofile/microprofile-metrics-2.3/microprofile-metrics-spec-2.3.html">MicroProfile Metrics 2.3 specification text</a></p>
+<p><a href="https://tools.ietf.org/html/rfc7515">JSON Web Signature</a></p>
+</li>
+<li>
+<p><a href="https://tools.ietf.org/html/rfc7516">JSON Web Encryption</a></p>
+</li>
+<li>
+<p><a href="https://tools.ietf.org/html/rfc7518">JSON Web Algorithms</a></p>
 </li>
 </ul>
 </div>
@@ -191,7 +186,7 @@
   <p>This page was built using the Antora default UI.</p>
   <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
 </footer>
-<script src="../../_/js/site.js"></script>
-<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
   </body>
 </html>

@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Untitled :: SmallRye documentation</title>
     <meta name="generator" content="Antora 2.3.0-beta.1">
-    <link rel="stylesheet" href="../../_/css/site.css">
+    <link rel="stylesheet" href="../_/css/site.css">
   </head>
   <body class="article">
 <header class="header">
   <nav class="navbar">
     <div class="navbar-brand">
-      <a class="navbar-item" href="../..">SmallRye documentation</a>
+      <a class="navbar-item" href="..">SmallRye documentation</a>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
@@ -25,10 +25,10 @@
 
           <!-- TODO: This is the navigation. Do we want it here? -->
           <div class="navbar-dropdown">
-            <a class="navbar-item" href="../../index/index/index.html">Index</a>
-            <a class="navbar-item" href="../index.html">SmallRye Config</a>
-            <a class="navbar-item" href="../../smallrye-jwt/index.html">SmallRye JWT</a>
-            <a class="navbar-item" href="../../smallrye-metrics/2.4.0/index.html">SmallRye Metrics</a>
+            <a class="navbar-item" href="../index/index/index.html">Index</a>
+            <a class="navbar-item" href="../smallrye-config/index.html">SmallRye Config</a>
+            <a class="navbar-item" href="index.html">SmallRye JWT</a>
+            <a class="navbar-item" href="../smallrye-metrics/2.4.0/index.html">SmallRye Metrics</a>
           </div>
 
         </div>
@@ -38,35 +38,23 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="smallrye-config" data-version="master">
+<div class="nav-container" data-component="smallrye-jwt" data-version="master">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="../index.html">SmallRye Config</a></h3>
+    <h3 class="title"><a href="index.html">SmallRye JWT</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../index.html">Index</a>
+    <a class="nav-link" href="index.html">Index</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
-    <span class="nav-text">Extensions</span>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="config-sources.html">Config Sources</a>
+    <a class="nav-link" href="configuration.html">Configuration</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../converters/converters.html">Converters</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../interceptors/interceptors.html">Interceptors</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../cdi/cdi.html">CDI</a>
-  </li>
-</ul>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="generate-jwt.html">Generate JWT Tokens</a>
   </li>
 </ul>
   </li>
@@ -78,7 +66,7 @@
 <!--
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
-    <span class="title">SmallRye Config</span>
+    <span class="title">SmallRye JWT</span>
     <span class="version">master</span>
   </div>
   <ul class="components">
@@ -86,23 +74,23 @@
       <span class="title">Index</span>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../index/index/index.html">index</a>
-        </li>
-      </ul>
-    </li>
-    <li class="component is-current">
-      <span class="title">SmallRye Config</span>
-      <ul class="versions">
-        <li class="version is-current is-latest">
-          <a href="../index.html">master</a>
+          <a href="../index/index/index.html">index</a>
         </li>
       </ul>
     </li>
     <li class="component">
-      <span class="title">SmallRye JWT</span>
+      <span class="title">SmallRye Config</span>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../smallrye-jwt/index.html">master</a>
+          <a href="../smallrye-config/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <span class="title">SmallRye JWT</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
         </li>
       </ul>
     </li>
@@ -110,7 +98,7 @@
       <span class="title">SmallRye Metrics</span>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../../smallrye-metrics/2.4.0/index.html">2.4.0</a>
+          <a href="../smallrye-metrics/2.4.0/index.html">2.4.0</a>
         </li>
       </ul>
     </li>
@@ -123,22 +111,13 @@
 <main>
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="../../index/index/index.html" class="home-link"></a>
+  <a href="../index/index/index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-config/edit/master/doc/modules/ROOT/pages/config-sources/properties-config-source.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-jwt/edit/master/doc/modules/ROOT/pages/attributes.adoc">Edit this Page</a></div>
   </div>
 <article class="doc">
-<div class="sect1">
-<h2 id="properties-config-source"><a class="anchor" href="#properties-config-source"></a>Properties Config Source</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Creates a ConfigSource from Java <code>Properties</code> or <code>Map&lt;String, String&gt;</code> objects or a properties file (referenced by
-its URL). Check
-<a href="https://github.com/smallrye/smallrye-config/blob/master/implementation/src/main/java/io/smallrye/config/PropertiesConfigSource.java">PropertiesConfigSource.java</a>.</p>
-</div>
-</div>
-</div>
+
 </article>
 </main>
 </div>
@@ -146,7 +125,7 @@ its URL). Check
   <p>This page was built using the Antora default UI.</p>
   <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
 </footer>
-<script src="../../_/js/site.js"></script>
-<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
   </body>
 </html>

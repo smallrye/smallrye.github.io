@@ -27,6 +27,7 @@
           <div class="navbar-dropdown">
             <a class="navbar-item" href="../../index/index/index.html">Index</a>
             <a class="navbar-item" href="../index.html">SmallRye Config</a>
+            <a class="navbar-item" href="../../smallrye-jwt/index.html">SmallRye JWT</a>
             <a class="navbar-item" href="../../smallrye-metrics/2.4.0/index.html">SmallRye Metrics</a>
           </div>
 
@@ -98,6 +99,14 @@
       </ul>
     </li>
     <li class="component">
+      <span class="title">SmallRye JWT</span>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../smallrye-jwt/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
       <span class="title">SmallRye Metrics</span>
       <ul class="versions">
         <li class="version is-latest">
@@ -129,7 +138,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>SmallRye Config provides an interceptor chain that allows you to hook into the Configuration Value resolution. This is
+<p>SmallRye Config provides an interceptor chain that hooks into the Configuration Value resolution. This is
 useful to implement features like Property Substitution, Configuration Profiles, or just Logging to find out where
 the Config was loaded from.</p>
 </div>
@@ -139,14 +148,14 @@ the Config was loaded from.</p>
 <h2 id="_usage"><a class="anchor" href="#_usage"></a>Usage</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You can create your interceptor by implementing the
+<p>An interceptor can be created by implementing the
 <a href="https://github.com/smallrye/smallrye-config/blob/master/implementation/src/main/java/io/smallrye/config/ConfigSourceInterceptor.java">ConfigSourceInterceptor</a>
 interface.</p>
 </div>
 <div class="paragraph">
 <p>The <code>ConfigSourceInterceptor</code> has a single method <code>ConfigValue getValue(ConfigSourceInterceptorContext context, String name)</code>
-to intercept the resolution of a configuration key. You can use the <code>ConfigSourceInterceptorContext</code> to proceed with
-the interceptor chain. The chain can be short-circuited by returning your instance of <code>ConfigValue</code>.</p>
+to intercept the resolution of a configuration key. The <code>ConfigSourceInterceptorContext</code> is used to proceed with
+the interceptor chain. The chain can be short-circuited by returning an instance of <code>ConfigValue</code>.</p>
 </div>
 <div class="paragraph">
 <p>The <code>ConfigValue</code> objects hold information about the key name, value, config source origin and ordinal.</p>
@@ -157,11 +166,18 @@ the interceptor chain. The chain can be short-circuited by returning your instan
 <div class="sect2">
 <h3 id="_registration"><a class="anchor" href="#_registration"></a>Registration</h3>
 <div class="paragraph">
-<p>You can register an interceptor in the interceptor chain by using the <code>ServiceLoader</code> mechanism and provide the
+<p>Registration of an interceptor in the interceptor chain is done via the <code>ServiceLoader</code> mechanism and provide the
 implementation classes in a <code>META-INF/services/io.smallrye.config.ConfigSourceInterceptor</code> file.</p>
 </div>
 <div class="paragraph">
-<p>Alternatively, you can register interceptors via the Programmatic API in <code>SmallRyeConfigBuilder#withInterceptors</code>.</p>
+<p>Registration can also be done with a <code>ConfigSourceInterceptorFactory</code>, via the`ServiceLoader` mechanism
+and provide the implementation class in a <code>META-INF/services/io.smallrye.config.ConfigSourceInterceptorFactory</code> file.
+The <code>ConfigSourceInterceptorFactory</code> may initialize the interceptor with access to the current chain
+(so it can be used to configure the interceptor and retrieve configuration values) and set the priority.</p>
+</div>
+<div class="paragraph">
+<p>Alternatively, interceptors may be registered via the Programmatic API in <code>SmallRyeConfigBuilder#withInterceptors</code> or
+<code>SmallRyeConfigBuilder.withInterceptorFactories</code>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -185,7 +201,21 @@ interceptors are registered with the same priority, then their execution order m
 <li>
 <p><a href="#expression-interceptor">ExpressionConfigSourceInterceptor</a></p>
 </li>
+<li>
+<p><a href="#profile-interceptor">ProfileConfigSourceInterceptor</a></p>
+</li>
+<li>
+<p><a href="#relocate-interceptor">RelocateConfigSourceInterceptor</a></p>
+</li>
+<li>
+<p><a href="#fallback-interceptor">FallbackConfigSourceInterceptor</a></p>
+</li>
 </ul>
+</div>
+<div class="paragraph">
+<p>None of the interceptors is registered by default. Registration needs to happen via the ServiceLoader
+mechanism, via the Programmatic API or by calling <code>SmallRyeConfigBuilder.addDefaultInterceptors</code>, which adds the
+<code>ExpressionConfigSourceInterceptor</code> and the <code>ProfileConfigSourceInterceptor</code>.</p>
 </div>
 <div class="sect2">
 <h3 id="expression-interceptor"><a class="anchor" href="#expression-interceptor"></a>ExpressionConfigSourceInterceptor</h3>
@@ -194,7 +224,7 @@ interceptors are registered with the same priority, then their execution order m
 a mix of plain strings and expression segments, which are wrapped by the sequence <code>${ &#8230;&#8203; }</code>.</p>
 </div>
 <div class="paragraph">
-<p>For instance, if you have the following configuration:</p>
+<p>For instance, the following configuration properties file:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -224,9 +254,91 @@ expression=${my.prop}</code></pre>
 <div class="paragraph">
 <p>If an expression cannot be expanded and no default is supplied a <code>NoSuchElementException</code> is thrown.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="profile-interceptor"><a class="anchor" href="#profile-interceptor"></a>ProfileConfigSourceInterceptor</h3>
 <div class="paragraph">
-<p>The <code>ExpressionConfigSourceInterceptor</code> is not registered by default. You need to register it via the ServiceLoader
-mechanism with your application.</p>
+<p>The <code>ProfileConfigSourceInterceptor</code> allows multiple configurations with the same name and selects them via
+a profile property.</p>
+</div>
+<div class="paragraph">
+<p>To be able to set properties with the same name, each property needs to be prefixed with <code>%</code> followed by the profile
+name and a dot:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">my.prop=1234
+%dev.my.prop=5678</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Lookup is always done using the <code>my.prop</code> property name. To use the profile <code>dev</code>, the configuration
+<code>smallrye.config.profile=dev</code> has to be set into any valid ConfigSource.</p>
+</div>
+<div class="paragraph">
+<p>When looking up the property <code>my.prop</code> with the <code>dev</code> profile active the value is <code>5678</code>.</p>
+</div>
+<div class="paragraph">
+<p>Only one profile can be active at any given time.</p>
+</div>
+<div class="sect3">
+<h4 id="_config_priority_over_profiles"><a class="anchor" href="#_config_priority_over_profiles"></a>Config Priority over Profiles</h4>
+<div class="paragraph">
+<p>A ConfigSource with the highest priority, that defines <code>my.prop</code> will take priority over another low priority
+ConfigSource that defines <code>%dev.my.prop</code>. This allows overriding profiles properties regardless of the active
+profile.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="relocate-interceptor"><a class="anchor" href="#relocate-interceptor"></a>RelocateConfigSourceInterceptor</h3>
+<div class="paragraph">
+<p>The <code>RelocateConfigSourceInterceptor</code> allows relocating a configuration name to another name, by providing a
+transformation function or just a simple key value map.</p>
+</div>
+<div class="paragraph">
+<p>Consider when a configuration key is renamed, lookup needs to happen on the new name, but also on the old name if the
+ConfigSources are not updated yet. The relocation function gives priority to the new resolved configuration name or
+resolves to the old name if no value is found under the new relocation name.</p>
+</div>
+<div class="paragraph">
+<p>The following <code>RelocateConfigSourceInterceptor</code> can relocate configuration names in the <code>smallrye.config</code>
+namespace to the <code>microprofile.config</code> namespace:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">new RelocateConfigSourceInterceptor(
+    name -&gt; name.startsWith("smallrye.config") ?
+    name.replaceAll("smallrye\\.config", "microprofile.config") :
+    name));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Relocation can also be done with Expression expansion.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="fallback-interceptor"><a class="anchor" href="#fallback-interceptor"></a>FallbackConfigSourceInterceptor</h3>
+<div class="paragraph">
+<p>The <code>FallbackConfigSourceInterceptor</code> allows to fallback to another configuration name, by providing a transformation
+function or just a simple key value map.</p>
+</div>
+<div class="paragraph">
+<p>Consider when a configuration name does not exist, but there might be another configuration name that the config can
+fallback to provide the same expected behavior. The fallback function is only applied if the original resolved
+configuration name is not found and resolved to the fallback name.</p>
+</div>
+<div class="paragraph">
+<p>The following <code>FallbackConfigSourceInterceptor</code> can fallback configuration names in the <code>microprofile.config</code>
+namespace to the <code>smallrye.config</code> namespace:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">new FallbackConfigSourceInterceptor(
+    name -&gt; name.startsWith("microprofile.config") ?
+    name.replaceAll("microprofile\\.config", "smallrye.config") :
+    name));</code></pre>
+</div>
 </div>
 </div>
 </div>

@@ -90,6 +90,11 @@
 |https://github.com/smallrye/smallrye-reactive-streams-operators[Reactive Streams Operators]
 |1.0.1
 |https://repo1.maven.org/maven2/io/smallrye/reactive/smallrye-reactive-streams-operators/1.0.10/smallrye-reactive-streams-operators-1.0.10.jar[1.0.10]
+
+|https://github.com/smallrye/smallrye-graphql[GraphQL]
+|1.0.2
+|https://repo1.maven.org/maven2/io/smallrye/smallrye-graphql/1.0.3/smallrye-graphql-1.0.3.jar[1.0.3]
+
 |===
 
 [%hardbreaks]

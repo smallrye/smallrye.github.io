@@ -1,13 +1,7 @@
-= Projects Overview
 :page-layout: base
-
-[cols=4,options="header"]
-.Eclipse MicroProfile Platform
+== Eclipse MicroProfile Platform
 |===
-|Spec Name
-|Spec Version
-|MP 2.2
-|MP 3.2
+|Spec Name |Spec Version |MP 2.2 |MP 3.2
 
 |http://cdi-spec.org/[CDI]
 |2.0
@@ -72,12 +66,10 @@
 
 [%hardbreaks]
 
-[cols=3,options="header"]
-.Eclipse MicroProfile Standalone releases
+== Eclipse MicroProfile Standalone releases
+
 |===
-|Spec Name
-|Spec Version
-|Implementation Version
+|Spec Name |Spec Version |Impl Version
 
 |https://github.com/smallrye/smallrye-context-propagation[Context Propagation]
 |1.0
@@ -97,4 +89,6 @@
 
 |===
 
-[%hardbreaks]
+++++
+<br/>
+++++

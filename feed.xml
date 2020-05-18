@@ -1,4 +1,313 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2020-05-12T13:41:52+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 4.1</title><link href="https://www.smallrye.io/blog/fault-tolerance-4-1/" rel="alternate" type="text/html" title="Fault Tolerance 4.1" /><published>2020-02-17T12:00:00+00:00</published><updated>2020-02-17T12:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-4-1</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-4-1/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2020-05-18T16:22:41+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Health Groups - experimental MicroProfile Health extension in SmallRye</title><link href="https://www.smallrye.io/blog/health-groups/" rel="alternate" type="text/html" title="Health Groups - experimental MicroProfile Health extension in SmallRye" /><published>2020-05-07T00:00:00+00:00</published><updated>2020-05-07T00:00:00+00:00</updated><id>https://www.smallrye.io/blog/health-groups</id><content type="html" xml:base="https://www.smallrye.io/blog/health-groups/">&lt;div id=&quot;preamble&quot;&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;If you are reading this blog, you have probably already heard about
+&lt;a href=&quot;https://github.com/eclipse/microprofile-health&quot;&gt;Eclipse MicroProfile Health&lt;/a&gt;
+technology. In this article, we will introduce a new experimental extension to
+MicroProfile Health 2.2 called Health groups.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;All of the source code that we will present in this article is available at this
+GitHub repository &lt;a href=&quot;https://github.com/xstefank/health-groups&quot; class=&quot;bare&quot;&gt;https://github.com/xstefank/health-groups&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;microprofile_2_2_health_checks&quot;&gt;MicroProfile 2.2 health checks&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;As you know, to define a health check procedure in MicroProfile Health you need
+something like this:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;java&quot; class=&quot;language-java hljs&quot;&gt;package io.xstefank;
+
+import org.eclipse.microprofile.health.HealthCheck;
+import org.eclipse.microprofile.health.HealthCheckResponse;
+import org.eclipse.microprofile.health.Readiness;
+
+import javax.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped // 1. CDI scope
+@Readiness         // 2. Qualifier (Readiness, Liveness, Health)
+public class ReadinessHealthCheck implements HealthCheck {   // 3. implements HealthCheck interface
+
+    @Override
+    public HealthCheckResponse call() {
+        return HealthCheckResponse.up(ReadinessHealthCheck.class.getSimpleName());
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;So just to recap, to define a health check your class:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;needs to be a CDI bean&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;needs to have one of the health qualifiers (Readiness, Liveness, or deprecated Health)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;must implement the HealthCheck interface&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This is everything that you can use in MicroProfile 2.2. But what if you have a
+use case that doesn&amp;#8217;t fall into one of Readiness or Liveness categories? The answer
+is custom health groups.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;health_groups&quot;&gt;Health Groups&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;SmallRye Health 2.2.0 (already included in Quarkus 1.4.0) comes with a new addition to this API
+called health groups. A health group is basically a custom group of health check
+procedures that the user defines based on individual needs. As you probably noticed,
+Readiness and Liveness health checks already represent two predefined health groups.
+With the health groups feature you can define as many additional health check groups
+as you need.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;defining_a_health_group&quot;&gt;Defining a health Group&lt;/h3&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;To define a health group you need only to declare at least one health check
+procedure that belongs to the health group:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;java&quot; class=&quot;language-java hljs&quot;&gt;package io.xstefank;
+
+import io.smallrye.health.HealthGroup;
+import org.eclipse.microprofile.health.HealthCheck;
+import org.eclipse.microprofile.health.HealthCheckResponse;
+
+import javax.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
+@HealthGroup(&quot;custom-group-1&quot;)
+public class CustomGroup1Check implements HealthCheck {
+
+    @Override
+    public HealthCheckResponse call() {
+        return HealthCheckResponse.up(CustomGroup1HC.class.getSimpleName());
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;So the only difference now is the change of the qualifier for which we now use
+&lt;code&gt;io.smallrye.health.HealthGroup&lt;/code&gt;. This qualifier takes a string argument
+representing the name of the health group. This is all that needs to be done
+to define a new custom health group and a health check procedure that belongs to it.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;accessing_custom_health_groups&quot;&gt;Accessing custom health groups&lt;/h3&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Accessing the custom health groups is done a similar manner to the original
+MicroProfile Health 2.2 health invocations. The URL to access a custom group is
+&lt;code&gt;HOST:PORT/health/group/{group-name}&lt;/code&gt;. This will return all health check procedures
+belonging to the groups &lt;code&gt;{group-name}&lt;/code&gt;. You can also find all health check
+procedures that belong to any of the custom defined health group by accessing
+&lt;code&gt;HOST:PORT/health/group&lt;/code&gt;. Here is a summary of endpoints exposed in Quarkus
+1.4.0:&lt;/p&gt;
+&lt;/div&gt;
+&lt;table class=&quot;tableblock frame-all grid-all stretch&quot;&gt;
+&lt;colgroup&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th class=&quot;tableblock halign-left valign-top&quot;&gt;Path&lt;/th&gt;
+&lt;th class=&quot;tableblock halign-left valign-top&quot;&gt;Health checks&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;/health&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;@Readiness, @Liveness, @Health&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;/health/ready&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;@Readiness&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;/health/live&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;@Liveness&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;/health/group&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;all @HealthGroup(*)&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;/health/groups/group-name&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;@HealthGroup(&quot;group-name&quot;)&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;combining_different_health_groups&quot;&gt;Combining different health groups&lt;/h3&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;You are allowed to use more than one qualifier on any health check procedure that
+you define. For instance:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;java&quot; class=&quot;language-java hljs&quot;&gt;package io.xstefank;
+
+import io.smallrye.health.HealthGroup;
+import org.eclipse.microprofile.health.HealthCheck;
+import org.eclipse.microprofile.health.HealthCheckResponse;
+import org.eclipse.microprofile.health.Readiness;
+
+import javax.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
+@HealthGroup(&quot;custom-group-1&quot;)
+@HealthGroup(&quot;custom-group-2&quot;)
+@Readiness
+public class CustomGroup2ReadinessCheck implements HealthCheck {
+
+    @Override
+    public HealthCheckResponse call() {
+        return HealthCheckResponse.up(CustomGroup2ReadinessCheck.class.getSimpleName());
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This procedure will now be available in &lt;code&gt;custom-group-1&lt;/code&gt;, &lt;code&gt;custom-group-2&lt;/code&gt; and the
+&lt;code&gt;readiness&lt;/code&gt; groups.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;code&gt;/health/group&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;json&quot; class=&quot;language-json hljs&quot;&gt;{
+    &quot;checks&quot;: [
+        {
+            &quot;name&quot;: &quot;CustomGroup1Check&quot;,
+            &quot;status&quot;: &quot;UP&quot;
+        },
+        {
+            &quot;name&quot;: &quot;CustomGroup2ReadinessCheck&quot;,
+            &quot;status&quot;: &quot;UP&quot;
+        }
+    ],
+    &quot;status&quot;: &quot;UP&quot;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;code&gt;/health/group/custom-group-1&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;json&quot; class=&quot;language-json hljs&quot;&gt;{
+    &quot;checks&quot;: [
+        {
+            &quot;name&quot;: &quot;CustomGroup1Check&quot;,
+            &quot;status&quot;: &quot;UP&quot;
+        },
+        {
+            &quot;name&quot;: &quot;CustomGroup2ReadinessCheck&quot;,
+            &quot;status&quot;: &quot;UP&quot;
+        }
+    ],
+    &quot;status&quot;: &quot;UP&quot;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;code&gt;/health/group/custom-group-2&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;json&quot; class=&quot;language-json hljs&quot;&gt;{
+    &quot;checks&quot;: [
+        {
+            &quot;name&quot;: &quot;CustomGroup2ReadinessCheck&quot;,
+            &quot;status&quot;: &quot;UP&quot;
+        }
+    ],
+    &quot;status&quot;: &quot;UP&quot;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;code&gt;/health/ready&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;json&quot; class=&quot;language-json hljs&quot;&gt;{
+    &quot;checks&quot;: [
+        {
+            &quot;name&quot;: &quot;CustomGroup2ReadinessCheck&quot;,
+            &quot;status&quot;: &quot;UP&quot;
+        },
+        {
+            &quot;name&quot;: &quot;ReadinessHealthCheck&quot;,
+            &quot;status&quot;: &quot;UP&quot;
+        }
+    ],
+    &quot;status&quot;: &quot;UP&quot;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Where this can come particularly handy is if you want to reuse predefined
+readiness and liveness procedures for custom views or simplified processing. For
+example, if you have several liveness procedures one of which is not essential
+and takes a long time you may want to define a health group that will be excluding
+the expensive liveness health check computation.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;We introduced the new experimental feature extending the MicroProfile Health 2.2
+API called the Health Groups. This feature is available for use in the SmallRye
+Health 2.2.0 (Quarkus 1.4.0) and later releases. In Quarkus, the health Groups are
+already included in the &lt;code&gt;smallrye-health&lt;/code&gt; extension. If you wish to use in a
+different container you need to add following dependencies:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;xml&quot; class=&quot;language-xml hljs&quot;&gt;&amp;lt;dependency&amp;gt;
+  &amp;lt;groupId&amp;gt;io.smallrye&amp;lt;/groupId&amp;gt;
+  &amp;lt;artifactId&amp;gt;smallrye-health&amp;lt;/artifactId&amp;gt;
+  &amp;lt;version&amp;gt;${version.io.smallrye.health}&amp;lt;/version&amp;gt;
+&amp;lt;/dependency&amp;gt;
+&amp;lt;dependency&amp;gt;
+  &amp;lt;groupId&amp;gt;io.smallrye&amp;lt;/groupId&amp;gt;
+  &amp;lt;artifactId&amp;gt;smallrye-health-extension-api&amp;lt;/artifactId&amp;gt;
+  &amp;lt;version&amp;gt;${version.io.smallrye.health}&amp;lt;/version&amp;gt;
+&amp;lt;/dependency&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;As we want to test features that
+we will eventually try to specify in MicroProfile, you can expect that if this
+feature will be used in Quarkus you will eventually see it in the MicroProfile
+Health specification. So if you are interested, please feel free to try it out,
+test it, and report any issues or enhancements in
+&lt;a href=&quot;https://github.com/smallrye/smallrye-health/issues&quot;&gt;our issue tracker&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</content><author><name></name></author></entry><entry><title type="html">Fault Tolerance 4.1</title><link href="https://www.smallrye.io/blog/fault-tolerance-4-1/" rel="alternate" type="text/html" title="Fault Tolerance 4.1" /><published>2020-02-17T12:00:00+00:00</published><updated>2020-02-17T12:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-4-1</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-4-1/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;MicroProfile Fault Tolerance 2.1 was released just 2 weeks ago, and it didn&amp;#8217;t take us long to fully implement.
 Today, we announce availability of SmallRye Fault Tolerance 4.1, a compliant implementation of MicroProfile Fault Tolerance 2.1.
 Here&amp;#8217;s a list of the important changes in the specification:&lt;/p&gt;

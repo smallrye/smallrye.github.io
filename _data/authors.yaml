@@ -19,11 +19,11 @@ lthon:
   job_title: ""
   twitter: "_Ladicek"
   bio: 'Ladislav is a Senior Software Engineer at Red Hat, where he leads the Thorntail project and contributes to MicroProfile. Previously, he led the Red Hat OpenShift Application Runtimes QE team, and before that spent a few years in the JBoss Enterprise Application Platform QE team. He has been working as a developer for more than a decade, and besides programming, he likes good books and craft beer.'
-  xstefank:
-    name: "Martin Stefanko"
-    email: "xstefank122@gmail.com"
-    emailhash: "90d476babcdae7b684459d5476aca309"
-    job_title: ""
-    twitter: "xstefank"
-    bio: "Martin Stefanko (@xstefank) is a Senior Software Engineer at Red Hat. He works on the Red Hat middleware portfolio - MicroProfile, SmallRye, WildFly, Quarkus and individual projects that are included in these runtimes."
+xstefank:
+  name: "Martin Stefanko"
+  email: "xstefank122@gmail.com"
+  emailhash: "90d476babcdae7b684459d5476aca309"
+  job_title: ""
+  twitter: "xstefank"
+  bio: "Martin Stefanko (@xstefank) is a Senior Software Engineer at Red Hat. He works on the Red Hat middleware portfolio - MicroProfile, SmallRye, WildFly, Quarkus and individual projects that are included in these runtimes."
 

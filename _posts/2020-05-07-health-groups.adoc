@@ -1,4 +1,10 @@
 = Health Groups - experimental MicroProfile Health extension in SmallRye
+:page-layout: post
+:page-title: Health Groups
+:page-synopsis: An experimental MicroProfile Health extension in SmallRye
+:page-tags: [microprofile]
+:page-date: 2020-05-07 13:00:00.000 +0100
+:page-author: xstefank
 
 If you are reading this blog, you have probably already heard about
 https://github.com/eclipse/microprofile-health[Eclipse MicroProfile Health]

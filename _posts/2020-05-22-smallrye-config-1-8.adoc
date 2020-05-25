@@ -1,0 +1,155 @@
+= SmallRye Config 1.8 Released
+:page-layout: post
+:page-title: SmallRye Config 1.8 Released
+:page-synopsis: SmallRye Config 1.8 Released
+:page-tags: [microprofile,smallrye,config]
+:page-date: 2020-05-22 13:00:00.000 +0100
+:page-author: radcortez
+
+SmallRye Config version 1.8 was released a few days ago.
+
+The latest version of SmallRye Config introduced a few experimental changes to enhance the API and to make SmallRye
+Config more extensible. One of the experimental changes is the new interceptor model, to intercept the lookup of a
+configuration value.
+
+== The ConfigSourceInterceptor
+
+The `ConfigSourceInterceptor` allows to intercept the resolution of a configuration name before the `Config` resolves
+the configuration value and before any conversion taking place. This is useful to implement features like
+property expansion or configuration profiles.
+
+Implementations of `ConfigSourceInterceptor` are loaded via the `java.util.ServiceLoader` mechanism and can be
+registered by providing a resource named `META-INF/services/io.smallrye.config.ConfigSourceInterceptor`, which
+contains the fully qualified `ConfigSourceInterceptor` implementation class name as its content.
+
+A single method must be implemented, `ConfigValue getValue(ConfigSourceInterceptorContext context, String name)`. The
+`ConfigSourceInterceptorContext` is used to proceed with the interceptor chain. The chain can be short-circuited by
+returning an instance of `ConfigValue`.
+
+[source,java]
+----
+public interface ConfigSourceInterceptor extends Serializable {
+    ConfigValue getValue(ConfigSourceInterceptorContext context, String name);
+}
+----
+
+The `ConfigValue` objects hold information about the key name, value, config source origin, and ordinal.
+
+Additionally, the `ConfigSourceInterceptor` may also intercept resolution of configuration names or configuration
+values with the methods `Iterator<String> iterateNames(ConfigSourceInterceptorContext context)` and
+`Iterator<ConfigValue> iterateValues(ConfigSourceInterceptorContext context)`.
+
+The Interceptor chain applies before any conversion takes place.
+
+== Implementation
+
+With the Interceptor API, it becomes trivial to implement a logging mechanism and to find out which `ConfigSource`
+loaded the resolved config:
+
+[source,java]
+----
+public class LoggingConfigSourceInterceptor implements ConfigSourceInterceptor {
+    private static final Logger LOG = Logger.getLogger("io.smallrye.config");
+
+    @Override
+    public ConfigValue getValue(final ConfigSourceInterceptorContext context, final String name) {
+        final ConfigValue configValue = context.proceed(name);
+        final String key = configValue.getName();
+        final String value = configValue.getValue();
+        final String configSource = configValue.getConfigSourceName();
+
+        LOG.infov("The key {0} was loaded from {1} with the value {2}", key, configSource, value);
+
+        return configValue;
+    }
+}
+----
+
+SmallRye Config does ship with its own logging interceptor, so you don't need to implement one.
+
+== Built-In Interceptors
+
+SmallRye Config provides the following built-in interceptors to expand its feature set:
+
+* `RelocateConfigSourceInterceptor`
+* `ProfileConfigSourceInterceptor`
+* `ExpressionConfigSourceInterceptor`
+* `FallbackConfigSourceInterceptor`
+* `LoggingConfigSourceInterceptor`
+* `SecretKeyConfigSourceInterceptor`
+
+Not every interceptor is registered by default. Only the `ProfileConfigSourceInterceptor`,
+`ExpressionConfigSourceInterceptor` and `SecretKeyConfigSourceInterceptor` are added on new instances of `Config`.
+Other interceptors require manual registration via the `ServiceLoader` mechanism.
+
+To learn more about all the built-in interceptors, please refer to the
+https://smallrye.io/docs/smallrye-config/interceptors/interceptors.html#_built_in_interceptors[documentation page].
+
+=== Expression Expansion
+
+The `ExpressionConfigSourceInterceptor` provides expression expansion on configuration values. An expression string is
+a mix of plain strings and expression segments, which are wrapped into `${ ... }`.
+
+For instance, consider the following configuration properties file:
+
+[source,properties]
+----
+my.prop=1234
+expression=${my.prop}
+----
+
+Then the `expression` configuration will be resolved and expanded to the value `1234`.
+
+Additionally, the expression expansion engine supports the following segments:
+
+* `${expression:value}` - Provides a default value after the `:` if the expansion doesn't find a value.
+* `${my.prop${compose}}` - Composed expressions. Inner expressions are resolved first.
+* `${my.prop}${my.prop}` - Multiple expressions.
+
+=== Configuration Profiles
+
+The `ProfileConfigSourceInterceptor` allows multiple configurations with the same name and selects them via
+a profile property.
+
+To be able to set properties with the same name, each property needs to be prefixed with `%` followed by the profile
+name and a dot:
+
+[source,properties]
+----
+my.prop=1234
+%dev.my.prop=5678
+----
+
+Lookup is always performed with the `my.prop` property name. To use the profile `dev`, the configuration
+`smallrye.config.profile=dev` has to be set in any valid `ConfigSource`.
+
+When looking up the property `my.prop` with the `dev` profile active, the value is `5678`.
+
+Only one profile can be active at any given time.
+
+== API Enhancements
+
+Aside from interceptors, a few additional API enhancements shipped with the latest version of SmallRye Config:
+
+* `ConfigValue` - The ConfigValue is a metadata object that holds additional information after the lookup of a
+configuration.
+* `ConfigValueConfigSource` - Extends the original `ConfigSource` to expose methods that return a `ConfigValue`.
+* `SmallRyeConfigBuilder#withSecretKeys` - Hide configuration properties that contain passwords or other kinds of
+secrets to prevent accidental exposure of such values.
+
+== Summary
+
+All the new features detailed here are experimental. The team is happy with them, and they had careful consideration
+when designed. We cannot guarantee that they won't suffer any changes in the next few releases, especially considering
+that the SmallRye team is also pushing to have these added to the MicroProfile Config specification, which may require
+some changes.
+
+This shouldn't discourage developers to use these new features. We believe these add a lot of utility and improve the
+developer experience regarding configuration of applications.
+
+Please, feel free to drop us any feedback in the mailto:smallrye@googlegroups.com[SmallRye Mailing List].
+
+== Additional Resources
+
+* https://github.com/smallrye/smallrye-config/releases/tag/1.8.0[Release Notes]
+* https://smallrye.io/docs/smallrye-config/index.html[Documentation]

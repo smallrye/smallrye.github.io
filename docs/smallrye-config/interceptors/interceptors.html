@@ -231,9 +231,10 @@ then their execution order may be non-deterministic.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>None of the interceptors is registered by default. Registration needs to happen via the ServiceLoader
-mechanism, via the Programmatic API or by calling <code>SmallRyeConfigBuilder#addDefaultInterceptors</code>, which adds the
-<code>ExpressionConfigSourceInterceptor</code>, the <code>ProfileConfigSourceInterceptor</code> and the <code>SecretKeysConfigSourceInterceptor</code>.</p>
+<p>The <code>ExpressionConfigSourceInterceptor</code>, the <code>ProfileConfigSourceInterceptor</code> and the
+<code>SecretKeysConfigSourceInterceptor</code> are registered by default with each new instance of <code>Config</code>. Other interceptors
+require registration via the ServiceLoader mechanism or via the Programmatic API
+<code>io.smallrye.config.SmallRyeConfigBuilder#withInterceptors</code>.</p>
 </div>
 <div class="sect2">
 <h3 id="relocate-interceptor"><a class="anchor" href="#relocate-interceptor"></a>RelocateConfigSourceInterceptor</h3>

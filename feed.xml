@@ -1,4 +1,99 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2020-05-27T19:23:06+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">SmallRye Config 1.8 Released</title><link href="https://www.smallrye.io/blog/smallrye-config-1-8/" rel="alternate" type="text/html" title="SmallRye Config 1.8 Released" /><published>2020-05-22T12:00:00+00:00</published><updated>2020-05-22T12:00:00+00:00</updated><id>https://www.smallrye.io/blog/smallrye-config-1-8</id><content type="html" xml:base="https://www.smallrye.io/blog/smallrye-config-1-8/">&lt;div id=&quot;preamble&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2020-06-01T15:45:38+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 4.2 &amp;amp; 4.3</title><link href="https://www.smallrye.io/blog/fault-tolerance-4-2-and-4-3/" rel="alternate" type="text/html" title="Fault Tolerance 4.2 &amp;amp; 4.3" /><published>2020-05-29T11:00:00+00:00</published><updated>2020-05-29T11:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-4-2-and-4-3</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-4-2-and-4-3/">&lt;div id=&quot;preamble&quot;&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce two new releases of SmallRye Fault Tolerance: 4.2.1 and 4.3.0.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;4_2_1&quot;&gt;4.2.1&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This release includes bugfixes and component updates and is safe to use for everyone who uses Fault Tolerance 4.1.0, 4.1.1 and 4.2.0.
+The 4.2.0 release happened a few weeks ago and didn&amp;#8217;t contain anything but bugfixes.
+With 4.2.1, we now use MicroProfile Fault Tolerance 2.1.1, which includes some TCK fixes.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;There is one small feature in the 4.2.1 release, which is interesting for integrators.
+If you integrate SmallRye Fault Tolerance and provide your own &lt;code&gt;ExecutorFactory&lt;/code&gt;, you can now inherit from the &lt;code&gt;DefaultExecutorFactory&lt;/code&gt; class and override the &lt;code&gt;threadFactory&lt;/code&gt; method.
+This allows customizing the most important property: how do the thread pools create their threads.
+All the other thread pool settings will stay at the SmallRye Fault Tolerance defaults.
+Of course, you can still provide a your own &lt;code&gt;ExecutorFactory&lt;/code&gt; and customize everything.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;4_3_0&quot;&gt;4.3.0&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This release builds on 4.2.1 and adds one new feature: you can now observe when circuit breakers change their state.
+Let&amp;#8217;s first take a look at the code.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Let&amp;#8217;s say we have a method &lt;code&gt;doWork&lt;/code&gt; which is guarded by a circuit breaker, presumably because it reaches out to some external service:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;java&quot; class=&quot;language-java hljs&quot;&gt;@ApplicationScoped
+public class MyService {
+    @CircuitBreaker(...)
+    public void doWork() {
+        ...
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Now, there are metrics for how often the circuit breaker trips etc., but you might want to observe when the circuit breaker state changes directly.
+With SmallRye Fault Tolerance 4.3.0, that is now possible: circuit breaker state changes are emitted as CDI events.
+With an event observer, it&amp;#8217;s easy to react to circuit breaker state changing:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;java&quot; class=&quot;language-java hljs&quot;&gt;@ApplicationScoped
+public class MyServiceObserver {
+    public void onStateChange(@Observes CircuitBreakerStateChanged event) {
+        if (MyService.class.equals(event.clazz) &amp;amp;&amp;amp; &quot;doWork&quot;.equals(event.method.getName())) {
+            System.out.println(&quot;!!! circuit breaker is now &quot; + event.targetState);
+        }
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Note that in this example, we make one simplifying assumption: that the &lt;code&gt;MyService&lt;/code&gt; class only has &lt;em&gt;one&lt;/em&gt; method called &lt;code&gt;doWork&lt;/code&gt;.
+If it had multiple &lt;code&gt;doWork&lt;/code&gt; methods, each having different signature and each having its own circuit breaker, we would have to distinguish between them in the observer.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The &lt;code&gt;CircuitBreakerStateChanged&lt;/code&gt; event type includes:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;the bean &lt;code&gt;clazz&lt;/code&gt;, as &lt;code&gt;java.lang.Class&lt;/code&gt;;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;the guarded &lt;code&gt;method&lt;/code&gt;, as &lt;code&gt;java.lang.reflect.Method&lt;/code&gt;;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;the &lt;code&gt;targetState&lt;/code&gt; of the circuit breaker, as a simple enum &lt;code&gt;CircuitBreakerState&lt;/code&gt; with 3 values: &lt;code&gt;CLOSED&lt;/code&gt;, &lt;code&gt;OPEN&lt;/code&gt; and &lt;code&gt;HALF_OPEN&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;experimental_api&quot;&gt;Experimental API&lt;/h3&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The &lt;code&gt;CircuitBreakerStateChanged&lt;/code&gt; and &lt;code&gt;CircuitBreakerState&lt;/code&gt; classes are meant for direct consumption by end users.
+They are considered an experimental API, because we&amp;#8217;re trying to find out how to best provide this feature.
+This also means that breaking changes are very much possible, when we learn how to improve the API.
+Your feedback is very important here!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;If you use a runtime such as Thorntail or Quarkus, they should provide you the correct dependency automatically, after they update to SmallRye Fault Tolerance 4.3.0. If you use SmallRye Fault Tolerance directly, you should note that these classes are located in a new artifact: &lt;code&gt;smallrye-fault-tolerance-api&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">SmallRye Config 1.8 Released</title><link href="https://www.smallrye.io/blog/smallrye-config-1-8/" rel="alternate" type="text/html" title="SmallRye Config 1.8 Released" /><published>2020-05-22T12:00:00+00:00</published><updated>2020-05-22T12:00:00+00:00</updated><id>https://www.smallrye.io/blog/smallrye-config-1-8</id><content type="html" xml:base="https://www.smallrye.io/blog/smallrye-config-1-8/">&lt;div id=&quot;preamble&quot;&gt;
 &lt;div class=&quot;sectionbody&quot;&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;SmallRye Config version 1.8 was released a few days ago.&lt;/p&gt;

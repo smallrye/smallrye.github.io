@@ -1,0 +1,74 @@
+:page-layout: post
+:page-title: Fault Tolerance 4.2 & 4.3
+:page-synopsis: SmallRye Fault Tolerance 4.2 and 4.3 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2020-05-29 12:00:00.000 +0100
+:page-author: lthon
+
+= Fault Tolerance 4.2 & 4.3
+
+Today, we announce two new releases of SmallRye Fault Tolerance: 4.2.1 and 4.3.0.
+
+== 4.2.1
+
+This release includes bugfixes and component updates and is safe to use for everyone who uses Fault Tolerance 4.1.0, 4.1.1 and 4.2.0.
+The 4.2.0 release happened a few weeks ago and didn't contain anything but bugfixes.
+With 4.2.1, we now use MicroProfile Fault Tolerance 2.1.1, which includes some TCK fixes.
+
+There is one small feature in the 4.2.1 release, which is interesting for integrators.
+If you integrate SmallRye Fault Tolerance and provide your own `ExecutorFactory`, you can now inherit from the `DefaultExecutorFactory` class and override the `threadFactory` method.
+This allows customizing the most important property: how do the thread pools create their threads.
+All the other thread pool settings will stay at the SmallRye Fault Tolerance defaults.
+Of course, you can still provide a your own `ExecutorFactory` and customize everything.
+
+== 4.3.0
+
+This release builds on 4.2.1 and adds one new feature: you can now observe when circuit breakers change their state.
+Let's first take a look at the code.
+
+Let's say we have a method `doWork` which is guarded by a circuit breaker, presumably because it reaches out to some external service:
+
+[source,java]
+----
+@ApplicationScoped
+public class MyService {
+    @CircuitBreaker(...)
+    public void doWork() {
+        ...
+    }
+}
+----
+
+Now, there are metrics for how often the circuit breaker trips etc., but you might want to observe when the circuit breaker state changes directly.
+With SmallRye Fault Tolerance 4.3.0, that is now possible: circuit breaker state changes are emitted as CDI events.
+With an event observer, it's easy to react to circuit breaker state changing:
+
+[source,java]
+----
+@ApplicationScoped
+public class MyServiceObserver {
+    public void onStateChange(@Observes CircuitBreakerStateChanged event) {
+        if (MyService.class.equals(event.clazz) && "doWork".equals(event.method.getName())) {
+            System.out.println("!!! circuit breaker is now " + event.targetState);
+        }
+    }
+}
+----
+
+Note that in this example, we make one simplifying assumption: that the `MyService` class only has _one_ method called `doWork`.
+If it had multiple `doWork` methods, each having different signature and each having its own circuit breaker, we would have to distinguish between them in the observer.
+
+The `CircuitBreakerStateChanged` event type includes:
+
+- the bean `clazz`, as `java.lang.Class`;
+- the guarded `method`, as `java.lang.reflect.Method`;
+- the `targetState` of the circuit breaker, as a simple enum `CircuitBreakerState` with 3 values: `CLOSED`, `OPEN` and `HALF_OPEN`.
+
+=== Experimental API
+
+The `CircuitBreakerStateChanged` and `CircuitBreakerState` classes are meant for direct consumption by end users.
+They are considered an experimental API, because we're trying to find out how to best provide this feature.
+This also means that breaking changes are very much possible, when we learn how to improve the API.
+Your feedback is very important here!
+
+If you use a runtime such as Thorntail or Quarkus, they should provide you the correct dependency automatically, after they update to SmallRye Fault Tolerance 4.3.0. If you use SmallRye Fault Tolerance directly, you should note that these classes are located in a new artifact: `smallrye-fault-tolerance-api`.

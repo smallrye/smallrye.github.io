@@ -211,6 +211,11 @@ precedence:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Set this property to a specific key format such as <code>PEM_KEY</code>, <code>PEM_CERTIFICATE</code>, <code>JWK</code> or <code>JWK_BASE64URL</code> to optimize the way the verification key is loaded.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.verify.relax-key-validation</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Relax the validattion of the verification keys, setting this property to <code>true</code> will allow public RSA keys with the length less than 2048 bit.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.token.header</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>Authorization</code></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Set this property if another header such as <code>Cookie</code> is used to pass the token.</p></td>

@@ -54,22 +54,16 @@
     <a class="nav-link" href="../config/config.html">Config</a>
   </li>
   <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="config-sources.html">Config Sources</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../converters/converters.html">Converters</a>
+  </li>
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../interceptors/interceptors.html">Interceptors</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
-    <span class="nav-text">Extensions</span>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="config-sources.html">Config Sources</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../converters/converters.html">Converters</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../cdi/cdi.html">CDI</a>
-  </li>
-</ul>
   </li>
 </ul>
   </li>
@@ -193,19 +187,22 @@ the property key and its textual content is the property value).</p>
 <div class="paragraph">
 <p>To use the FileSystem Config Source, add the following to your Maven <code>pom.xml</code>:</p>
 </div>
+<div class="paragraph">
+<p><a href="https://xxx">[source</a></p>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+<pre>&lt;dependency&gt;
     &lt;groupId&gt;io.smallrye.config&lt;/groupId&gt;
     &lt;artifactId&gt;smallrye-config-source-file-system&lt;/artifactId&gt;
     &lt;version&gt;{version}&lt;/version&gt;
-&lt;/dependency&gt;</code></pre>
+&lt;/dependency&gt;
+----]
+
+This Config Source is not automatically registered. This means that you also need to provide your own
+`ConfigSourceProvider` implementation and registration via `ServiceLoader` to use this Config Source like documented in
+MicroProfile Config `ConfigSource` specification.</pre>
 </div>
-</div>
-<div class="paragraph">
-<p>This Config Source is not automatically registered. This means that you also need to provide your own
-<code>ConfigSourceProvider</code> implementation and registration via <code>ServiceLoader</code> to use this Config Source like documented in
-MicroProfile Config <code>ConfigSource</code> specification.</p>
 </div>
 </div>
 </div>

@@ -53,23 +53,17 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../config/config.html">Config</a>
   </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="config-sources.html">Config Sources</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../converters/converters.html">Converters</a>
+  </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../interceptors/interceptors.html">Interceptors</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
-    <span class="nav-text">Extensions</span>
-<ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="config-sources.html">Config Sources</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../converters/converters.html">Converters</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../cdi/cdi.html">CDI</a>
-  </li>
-</ul>
   </li>
 </ul>
   </li>
@@ -130,7 +124,6 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">SmallRye Config</a></li>
-    <li>Extensions</li>
     <li><a href="config-sources.html">Config Sources</a></li>
   </ul>
 </nav>
@@ -139,6 +132,40 @@
 <article class="doc">
 <h1 class="page">Config Sources</h1>
 <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>SmallRye Config provides a few enhancements and extensions to MicroProfile Config <code>ConfigSource</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_config_source_factory"><a class="anchor" href="#_config_source_factory"></a>Config Source Factory</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Another way to create a <code>ConfigSource</code> is via the <code>ConfigSourceFactory</code>. The difference between the SmallRye Factory
+and the standard way to create a <code>ConfigSource</code> as specified in MicroProfile Config, is the Factory ability to provide
+a context with access to the available configuration.</p>
+</div>
+<div class="paragraph">
+<p>By implementing <a href="https://github.com/smallrye/smallrye-config/blob/master/implementation/src/main/java/io/smallrye/config/ConfigSourceFactoryjava">ConfigSourceFactory</a>, the ConfigSource is made available via the
+<code>ConfigSource getSource(ConfigSourceContext context)</code> method. The <code>ConfigSourceFactory</code> can be also assigned a priority,
+like any other <code>ConfigSource</code> by overriding the method <code>OptionalInt getPriority()</code>.</p>
+</div>
+<div class="paragraph">
+<p>When the Factory is initializing, a <code>ConfigSourceContext</code> is provided, that allows to call a single method
+<code>ConfigValue getValue(String name)</code>. This method lookups configurations names in all <code>ConfigSources</code> that are already
+initialized by the <code>Config</code>. These are the <code>ConfigSources</code> with higher priority than the Factory. With the
+<code>ConfigSourceFactory</code> it is possible to bootstrap a <code>ConfigSource</code> that configures itself with other <code>ConfigSources</code>.</p>
+</div>
+<div class="paragraph">
+<p>Registration of a <code>ConfigSourceFactory</code> is done via the <code>ServiceLoader</code> mechanism by providing the
+implementation classes in a <code>META-INF/services/io.smallrye.config.ConfigSourceFactory</code> file. Alternatively, factories
+may be registered via the Programmatic API in <code>SmallRyeConfigBuilder#withSources</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_available_config_sources"><a class="anchor" href="#_available_config_sources"></a>Available Config Sources</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>In addition to the default Config Sources specified by MicroProfile Config (Environment Variables, System Properties
@@ -156,13 +183,13 @@ and <code>microprofile-config.properties</code> file), SmallRye Config provides 
 <p><a href="#filesystem-config-source">FileSystem Config Source</a></p>
 </li>
 <li>
-<p><a href="#hocon-config-source">HOCON Config Source</a></p>
+<p><a href="#hocon-config-source">[hocon-config-source]</a></p>
 </li>
 <li>
-<p><a href="#yaml-config-source">YAML Config Source</a></p>
+<p><a href="#yaml-config-source">[yaml-config-source]</a></p>
 </li>
 <li>
-<p><a href="#zookeeper-config-source">ZooKeeper Config Source</a></p>
+<p><a href="#zookeeper-config-source">[zookeeper-config-source]</a></p>
 </li>
 </ul>
 </div>
@@ -260,144 +287,126 @@ the property key and its textual content is the property value).</p>
 <div class="paragraph">
 <p>To use the FileSystem Config Source, add the following to your Maven <code>pom.xml</code>:</p>
 </div>
+<div class="paragraph">
+<p><a href="https://xxx">[source</a></p>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+<pre>&lt;dependency&gt;
     &lt;groupId&gt;io.smallrye.config&lt;/groupId&gt;
     &lt;artifactId&gt;smallrye-config-source-file-system&lt;/artifactId&gt;
-    &lt;version&gt;1.8.1-SNAPSHOT&lt;/version&gt;
-&lt;/dependency&gt;</code></pre>
+    &lt;version&gt;{version}&lt;/version&gt;
+&lt;/dependency&gt;
+----]
+
+This Config Source is not automatically registered. This means that you also need to provide your own
+`ConfigSourceProvider` implementation and registration via `ServiceLoader` to use this Config Source like documented in
+MicroProfile Config `ConfigSource` specification.
+
+[[hocon-config-source]]
+== HOCON Config Source
+
+ConfigSource implementation to support https://github.com/lightbend/config/blob/master/HOCON.md[HOCON] file format.
+
+This Configuration Source will be looking for the following files in this order of priority:
+
+. `META-INF/microprofile-config.conf`
+. `WEB-INF/classes/META-INF/microprofile-config.conf`
+
+These configuration files have a lower priority than the default sources.
+
+=== Usage
+
+To use the HOCON Config Source, add the following to your Maven `pom.xml`:
+
+[source,xml,subs="verbatim,attributes"]</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This Config Source is not automatically registered. This means that you also need to provide your own
-<code>ConfigSourceProvider</code> implementation and registration via <code>ServiceLoader</code> to use this Config Source like documented in
-MicroProfile Config <code>ConfigSource</code> specification.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="hocon-config-source"><a class="anchor" href="#hocon-config-source"></a>HOCON Config Source</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>ConfigSource implementation to support <a href="https://github.com/lightbend/config/blob/master/HOCON.md">HOCON</a> file format.</p>
-</div>
-<div class="paragraph">
-<p>This Configuration Source will be looking for the following files in this order of priority:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><code>META-INF/microprofile-config.conf</code></p>
-</li>
-<li>
-<p><code>WEB-INF/classes/META-INF/microprofile-config.conf</code></p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>These configuration files have a lower priority than the default sources.</p>
-</div>
-<div class="sect2">
-<h3 id="_usage_3"><a class="anchor" href="#_usage_3"></a>Usage</h3>
-<div class="paragraph">
-<p>To use the HOCON Config Source, add the following to your Maven <code>pom.xml</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+<p>&lt;dependency&gt;
     &lt;groupId&gt;io.smallrye.config&lt;/groupId&gt;
     &lt;artifactId&gt;smallrye-config-source-hocon&lt;/artifactId&gt;
     &lt;version&gt;1.8.1-SNAPSHOT&lt;/version&gt;
-&lt;/dependency&gt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This Config Source will automatically register with your application.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="yaml-config-source"><a class="anchor" href="#yaml-config-source"></a>YAML Config Source</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>This Config Source allows you to use a <code>yaml</code> file to describe your configuration. By default, the YAML Config Source
-loads the configuration from the file <code>microprofile-config.yaml</code>.</p>
-</div>
-<div class="paragraph">
-<p>This Config Source has a higher priority than the default <code>microprofile-config.properties</code>.</p>
-</div>
-<div class="sect2">
-<h3 id="_usage_4"><a class="anchor" href="#_usage_4"></a>Usage</h3>
-<div class="paragraph">
-<p>To use the YAML Config Source, add the following to your Maven <code>pom.xml</code>:</p>
+&lt;/dependency&gt;</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+<pre>This Config Source will automatically register with your application.
+
+[[yaml-config-source]]
+== YAML Config Source
+
+This Config Source allows you to use a `yaml` file to describe your configuration. By default, the YAML Config Source
+loads the configuration from the file `microprofile-config.yaml`.
+
+This Config Source has a higher priority than the default `microprofile-config.properties`.
+
+=== Usage
+
+To use the YAML Config Source, add the following to your Maven `pom.xml`:
+
+[source,xml,subs="verbatim,attributes"]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>&lt;dependency&gt;
     &lt;groupId&gt;io.smallrye.config&lt;/groupId&gt;
     &lt;artifactId&gt;smallrye-config-source-yaml&lt;/artifactId&gt;
     &lt;version&gt;1.8.1-SNAPSHOT&lt;/version&gt;
-&lt;/dependency&gt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This Config Source will automatically register with your application.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="zookeeper-config-source"><a class="anchor" href="#zookeeper-config-source"></a>ZooKeeper Config Source</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Config Source implementation to support Apache Zookeeper.</p>
-</div>
-<div class="paragraph">
-<p>The benefits are that configurations can be shared across applications and a future version will allow applications to
-subscribe to updates to the configuration parameters.</p>
-</div>
-<div class="sect2">
-<h3 id="_usage_5"><a class="anchor" href="#_usage_5"></a>Usage</h3>
-<div class="paragraph">
-<p>To use the HOCON Config Source, add the following to your Maven <code>pom.xml</code>:</p>
+&lt;/dependency&gt;</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+<pre>This Config Source will automatically register with your application.
+
+[[zookeeper-config-source]]
+== ZooKeeper Config Source
+
+Config Source implementation to support Apache Zookeeper.
+
+The benefits are that configurations can be shared across applications and a future version will allow applications to
+subscribe to updates to the configuration parameters.
+
+=== Usage
+
+To use the HOCON Config Source, add the following to your Maven `pom.xml`:
+
+[source,xml,subs="verbatim,attributes"]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>&lt;dependency&gt;
     &lt;groupId&gt;io.smallrye.config&lt;/groupId&gt;
     &lt;artifactId&gt;smallrye-config-source-zookeeper&lt;/artifactId&gt;
     &lt;version&gt;1.8.1-SNAPSHOT&lt;/version&gt;
-&lt;/dependency&gt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This Config Source will automatically register with your application.</p>
-</div>
-<div class="paragraph">
-<p>You also need to bootstrap your application with the location of your Zookeeper server and a unique identifier for your
-application. Add the following to <code>src/main/resources/META-INF/microprofile-config.properties</code> or create equivalent
-Environment Variables.</p>
+&lt;/dependency&gt;</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">io.smallrye.configsource.zookeeper.url=localhost:2181
-io.smallrye.configsource.zookeeper.applicationId=com.example.my-application</code></pre>
+<pre>This Config Source will automatically register with your application.
+
+You also need to bootstrap your application with the location of your Zookeeper server and a unique identifier for your
+application. Add the following to `src/main/resources/META-INF/microprofile-config.properties` or create equivalent
+Environment Variables.
+
+[source,properties]</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Any properties that are looked up via the Config API or Injected will be looked up in Zookeeper in addition to the
-default MicroProfile Config locations.</p>
+<p>io.smallrye.configsource.zookeeper.url=localhost:2181
+io.smallrye.configsource.zookeeper.applicationId=com.example.my-application</p>
 </div>
-<div class="paragraph">
-<p>The ConfigSource will store the following znodes in the specified Zookeeper server
-<code>/applicationId/propertyName = value</code>.</p>
+<div class="listingblock">
+<div class="content">
+<pre>Any properties that are looked up via the Config API or Injected will be looked up in Zookeeper in addition to the
+default MicroProfile Config locations.
+
+The ConfigSource will store the following znodes in the specified Zookeeper server
+`/applicationId/propertyName = value`.
+
+This Config Source has a lower priority than the default Sources and thus *will not* override property files or
+Environment Variables.</pre>
 </div>
-<div class="paragraph">
-<p>This Config Source has a lower priority than the default Sources and thus <strong>will not</strong> override property files or
-Environment Variables.</p>
 </div>
 </div>
 </div>

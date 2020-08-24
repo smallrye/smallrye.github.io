@@ -1,6 +1,51 @@
-.default {
-  background-image: url($baseurl + '/assets/images/bg-home.jpg');
+.default { 
+  background-image: url($baseurl + '/assets/images/bg-home-1200.jpg'); // default
   background-repeat: no-repeat;
-  background-attachment: fixed;
   background-size: 100%;
+
+  @media only screen and (max-width: 320px) {
+    background-image: url($baseurl + '/assets/images/bg-home-320.jpg');
+  }
+  @media only screen and (min-width: 321px) and (max-width: 480px) {
+    background-image: url($baseurl + '/assets/images/bg-home-480.jpg');
+  }
+  @media only screen and (min-width: 481px) and (max-width: 768px) {
+    background-image: url($baseurl + '/assets/images/bg-home-768.jpg');
+  }
+  @media only screen and (min-width: 769px) and (max-width: 1024px) {
+    background-image: url($baseurl + '/assets/images/bg-home-1024.jpg');
+  }
+  @media only screen and (min-width: 1025px) and (max-width: 1200px) {
+    background-image: url($baseurl + '/assets/images/bg-home-1200.jpg');
+  }
+  @media only screen and (min-width: 1201px) and (max-width: 1280px) {
+    background-image: url($baseurl + '/assets/images/bg-home-1280.jpg');
+  }
+  @media only screen and (min-width: 1280px) and (max-width: 1400x) {
+    background-image: url($baseurl + '/assets/images/bg-home-1400.jpg');
+  }
+  @media only screen and (min-width: 1401px) and (max-width: 1440px) {
+    background-image: url($baseurl + '/assets/images/bg-home-1440.jpg');
+  }
+  @media only screen and (min-width: 1441px) and (max-width: 1600px) {
+    background-image: url($baseurl + '/assets/images/bg-home-1600.jpg');
+  }
+  @media only screen and (min-width: 1601px) and (max-width: 1680px) {
+    background-image: url($baseurl + '/assets/images/bg-home-1680.jpg');
+  }
+  @media only screen and (min-width: 1681px) and (max-width: 1920px) {
+    background-image: url($baseurl + '/assets/images/bg-home-1920.jpg');
+  }
+  @media only screen and (min-width: 1920px) and (max-width: 2344px) {
+    background-image: url($baseurl + '/assets/images/bg-home-2344.jpg');
+  }
+  @media only screen and (min-width: 2245px) and (max-width: 3516px) {
+    background-image: url($baseurl + '/assets/images/bg-home-3516.jpg');
+  }
+  @media only screen and (min-width: 3517px) and (max-width: 4688px) {
+    background-image: url($baseurl + '/assets/images/bg-home-4688.jpg');
+  }
+  @media only screen and (min-width: 4689px) {
+    background-image: url($baseurl + '/assets/images/bg-home-5860.jpg');
+  }
 }

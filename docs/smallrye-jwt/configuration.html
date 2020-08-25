@@ -213,7 +213,7 @@ precedence:</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.verify.relax-key-validation</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Relax the validattion of the verification keys, setting this property to <code>true</code> will allow public RSA keys with the length less than 2048 bit.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Relax the validation of the verification keys, setting this property to <code>true</code> will allow public RSA keys with the length less than 2048 bit.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.token.header</code></p></td>
@@ -300,8 +300,141 @@ precedence:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Comma separated list of the claims that a token must contain.</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.decrypt.key-location</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Config property allows for an external or internal location of Private Decryption Key to be specified.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.decrypt.algorithm</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>RSA_OAEP</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Decryption algorithm.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.token.decryption.kid</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Decryption Key identifier. If it is set then the decryption JWK key as well every JWT token must have a matching <code>kid</code> header.</p></td>
+</tr>
 </tbody>
 </table>
+</div>
+</div>
+<h1 id="_create_jsonwebtoken_with_jwtparser" class="sect0"><a class="anchor" href="#_create_jsonwebtoken_with_jwtparser"></a>Create JsonWebToken with JWTParser</h1>
+<div class="openblock partintro">
+<div class="content">
+<div class="paragraph">
+<p>If the JWT token can not be injected, for example, if it is embedded in the service request payload or the service endpoint acquires it out of band, then one can use <code>JWTParser</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code>import org.eclipse.microprofile.jwt.JsonWebToken;
+import io.smallrye.jwt.auth.principal.JWTParser;
+...
+@Inject JWTParser parser;
+
+String token = getTokenFromOidcServer();
+
+// Parse and verify the token
+JsonWebToken jwt = parser.parse(token);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also use it to customize the way the token is verified or decrypted. For example, one can supply a local <code>SecretKey</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code>import javax.crypto.SecretKey;
+import javax.ws.rs.GET;
+import javax.ws.rs.core.NewCookie;
+import javax.ws.rs.core.Response;
+import org.eclipse.microprofile.jwt.JsonWebToken;
+import io.smallrye.jwt.auth.principal.JWTParser;
+import io.smallrye.jwt.build.Jwt;
+
+@Path("/secured")
+public class SecuredResource {
+ @Inject JWTParser parser;
+ private SecretKey key = createSecretKey();
+
+ @GET
+ @Produces("text/plain")
+ public Response getUserName(@CookieParam("jwt") String jwtCookie) {
+    Response response = null;
+    if (jwtCookie == null) {
+        String newJwtCookie = Jwt.upn("Alice").sign(key);
+        // or newJwtCookie = Jwt.upn("alice").encrypt(key);
+        return Response.ok("Alice").cookie(new NewCookie("jwt", newJwtCookie)).build();
+    else {
+        // All mp.jwt and smallrye.jwt properties are still effective, only the verification key is customized.
+        JsonWebToken jwt = parser.verify(jwtCookie, key);
+        // or jwt = parser.decrypt(jwtCookie, key);
+        return Response.ok(jwt.getName()).build();
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<h1 id="_token_decryption" class="sect0"><a class="anchor" href="#_token_decryption"></a>Token Decryption</h1>
+<div class="openblock partintro">
+<div class="content">
+<div class="paragraph">
+<p>If your application needs to accept the tokens with the encrypted claims or with the encrypted inner signed claims then all you have to do is to set
+<code>smallrye.jwt.decrypt.key-location</code> pointing to the decryption key.</p>
+</div>
+<div class="paragraph">
+<p>If this is the only key property which is set then the incoming token is expected to contain the encrypted claims only.
+If either <code>mp.jwt.verify.publickey</code> or <code>mp.jwt.verify.publickey.location</code> verification properties are also set then the incoming token is expected to contain
+the encrypted inner-signed token.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="#generate-jwt-tokens">Generate JWT tokens</a> and learn how to generate the encrypted or inner-signed and then encrypted tokens fast.</p>
+</div>
+</div>
+</div>
+<h1 id="_custom_factories" class="sect0"><a class="anchor" href="#_custom_factories"></a>Custom Factories</h1>
+<div class="openblock partintro">
+<div class="content">
+<div class="paragraph">
+<p><code>io.smallrye.jwt.auth.principal.DefaultJWTCallerPrincipalFactory</code> is used by default to parse and verify JWT tokens and convert them to <code>JsonWebToken</code> principals.
+It uses <code>MP JWT</code> and <code>smallrye-jwt</code> properties listed in the <code>Configuration</code> section to verify and customize JWT tokens.</p>
+</div>
+<div class="paragraph">
+<p>If you need to provide your own factory, for example, to avoid verifying the tokens again which have already been verified by the firewall, then you can either use a <code>ServiceLoader</code> mechanism by providing a <code>META-INF/services/io.smallrye.jwt.auth.principal.JWTCallerPrincipalFactory</code> resource or simply have an <code>Alternative</code> CDI bean implementation like this one:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+import javax.annotation.Priority;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Alternative;
+import org.jose4j.jwt.JwtClaims;
+import org.jose4j.jwt.consumer.InvalidJwtException;
+import io.smallrye.jwt.auth.principal.DefaultJWTCallerPrincipal;
+import io.smallrye.jwt.auth.principal.JWTAuthContextInfo;
+import io.smallrye.jwt.auth.principal.JWTCallerPrincipal;
+import io.smallrye.jwt.auth.principal.JWTCallerPrincipalFactory;
+import io.smallrye.jwt.auth.principal.ParseException;
+
+@ApplicationScoped
+@Alternative
+@Priority(1)
+public class TestJWTCallerPrincipalFactory extends JWTCallerPrincipalFactory {
+
+    @Override
+    public JWTCallerPrincipal parse(String token, JWTAuthContextInfo authContextInfo) throws ParseException {
+        try {
+            // Token has already been verified, parse the token claims only
+            String json = new String(Base64.getUrlDecoder().decode(token.split("\\.")[1]), StandardCharsets.UTF_8);
+            return new DefaultJWTCallerPrincipal(JwtClaims.parse(json));
+        } catch (InvalidJwtException ex) {
+            throw new ParseException(ex.getMessage());
+        }
+    }
+}</code></pre>
+</div>
+</div>
 </div>
 </div>
 </article>

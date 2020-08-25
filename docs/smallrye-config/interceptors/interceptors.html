@@ -63,6 +63,9 @@
     <a class="nav-link" href="interceptors.html">Interceptors</a>
   </li>
   <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../mapping/mapping.html">Mapping</a>
+  </li>
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../cdi/cdi.html">CDI</a>
   </li>
 </ul>
@@ -208,10 +211,10 @@ then their execution order may be non-deterministic.</p>
 <p><a href="#relocate-interceptor">RelocateConfigSourceInterceptor</a></p>
 </li>
 <li>
-<p><a href="#profile-interceptor">ProfileConfigSourceInterceptor</a></p>
+<p><a href="#expression-interceptor">ExpressionConfigSourceInterceptor</a></p>
 </li>
 <li>
-<p><a href="#expression-interceptor">ExpressionConfigSourceInterceptor</a></p>
+<p><a href="#profile-interceptor">ProfileConfigSourceInterceptor</a></p>
 </li>
 <li>
 <p><a href="#fallback-interceptor">FallbackConfigSourceInterceptor</a></p>
@@ -255,33 +258,6 @@ namespace to the <code>microprofile.config</code> namespace:</p>
 </div>
 <div class="paragraph">
 <p>Relocation can also be done with Expression expansion.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="profile-interceptor"><a class="anchor" href="#profile-interceptor"></a>ProfileConfigSourceInterceptor</h3>
-<div class="paragraph">
-<p>The <code>ProfileConfigSourceInterceptor</code> allows multiple configurations with the same name and selects them via
-a profile property.</p>
-</div>
-<div class="paragraph">
-<p>To be able to set properties with the same name, each property needs to be prefixed with <code>%</code> followed by the profile
-name and a dot:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">my.prop=1234
-%dev.my.prop=5678</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Lookup is always done using the <code>my.prop</code> property name. To use the profile <code>dev</code>, the configuration
-<code>smallrye.config.profile=dev</code> has to be set into any valid ConfigSource.</p>
-</div>
-<div class="paragraph">
-<p>When looking up the property <code>my.prop</code> with the <code>dev</code> profile active the value is <code>5678</code>.</p>
-</div>
-<div class="paragraph">
-<p>Only one profile can be active at any given time.</p>
 </div>
 </div>
 <div class="sect2">
@@ -332,6 +308,33 @@ expression=${my.prop}</code></pre>
 ConfigSource that defines <code>%dev.my.prop</code>. This allows overriding profiles properties regardless of the active
 profile.</p>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="profile-interceptor"><a class="anchor" href="#profile-interceptor"></a>ProfileConfigSourceInterceptor</h3>
+<div class="paragraph">
+<p>The <code>ProfileConfigSourceInterceptor</code> allows multiple configurations with the same name and selects them via
+a profile property.</p>
+</div>
+<div class="paragraph">
+<p>To be able to set properties with the same name, each property needs to be prefixed with <code>%</code> followed by the profile
+name and a dot:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">my.prop=1234
+%dev.my.prop=5678</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Lookup is always done using the <code>my.prop</code> property name. To use the profile <code>dev</code>, the configuration
+<code>smallrye.config.profile=dev</code> has to be set into any valid ConfigSource.</p>
+</div>
+<div class="paragraph">
+<p>When looking up the property <code>my.prop</code> with the <code>dev</code> profile active the value is <code>5678</code>.</p>
+</div>
+<div class="paragraph">
+<p>Only one profile can be active at any given time.</p>
 </div>
 </div>
 <div class="sect2">

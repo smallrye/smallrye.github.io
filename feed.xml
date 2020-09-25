@@ -1,4 +1,274 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2020-08-25T05:58:42+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 4.2 &amp;amp; 4.3</title><link href="https://www.smallrye.io/blog/fault-tolerance-4-2-and-4-3/" rel="alternate" type="text/html" title="Fault Tolerance 4.2 &amp;amp; 4.3" /><published>2020-05-29T11:00:00+00:00</published><updated>2020-05-29T11:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-4-2-and-4-3</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-4-2-and-4-3/">&lt;div id=&quot;preamble&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2020-09-25T14:12:42+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">SmallRye Config 1.9 Released</title><link href="https://www.smallrye.io/blog/smallrye-config-1-9/" rel="alternate" type="text/html" title="SmallRye Config 1.9 Released" /><published>2020-09-24T12:00:00+00:00</published><updated>2020-09-24T12:00:00+00:00</updated><id>https://www.smallrye.io/blog/smallrye-config-1-9</id><content type="html" xml:base="https://www.smallrye.io/blog/smallrye-config-1-9/">&lt;div id=&quot;preamble&quot;&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;In SmallRye Config 1.9 we continue our innovation and experimentation model, by bringing additional features and
+enhancements to the API. This release introduces the following big changes:&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;config_mappings&quot;&gt;Config Mappings&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;A Config Mapping provides a way to group multiple configuration properties into a single cohesive API. A Config Mapping
+requires a simple interface with minimal metadata configuration.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;java&quot; class=&quot;language-java hljs&quot;&gt;@ConfigMapping(prefix = &quot;server&quot;)
+interface Server {
+    String host();
+
+    int port();
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The &lt;code&gt;Server&lt;/code&gt; interface retrieves and maps configuration properties with the name &lt;code&gt;server.host&lt;/code&gt; into the
+&lt;code&gt;Server.host()&lt;/code&gt; and &lt;code&gt;server.port&lt;/code&gt; into &lt;code&gt;Server.port()&lt;/code&gt; method. The configuration property name to lookup
+builds from the &lt;code&gt;@ConfigMapping&lt;/code&gt; annotation prefix and the method name with &lt;code&gt;.&lt;/code&gt; (dot) as the separator. The
+&lt;code&gt;@ConfigMapping&lt;/code&gt; annotation is used to auto-discover and register these mapping interfaces in a CDI aware environment.
+In non-CDI environments, register the Config Mapping via &lt;code&gt;SmallRyeConfigBuilder#withMapping&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;To retrieve such Config Mapping, a simple &lt;code&gt;@Inject&lt;/code&gt; in any CDI aware bean is enough:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;java&quot; class=&quot;language-java hljs&quot;&gt;@Inject
+Server server;
+
+void businessMethod() {
+    String host = server.host();
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;To retrieve the Config Mapping in non-CDI environments use the API
+&lt;code&gt;io.smallrye.config.SmallRyeConfig#getConfigMapping&lt;/code&gt;:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;java&quot; class=&quot;language-java hljs&quot;&gt;SmallRyeConfig config = (SmallRyeConfig) ConfigProvider.getConfig();
+Server server = config.getConfigMapping(Server.class);&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Additionally, Config Mappings also support:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Automatic conversion of the configuration type.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Nested Config Mapping groups.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Validate if configuration properties exist at the startup.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Map&lt;/code&gt;, &lt;code&gt;Optional&lt;/code&gt;, and primitive types.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;@WithName&lt;/code&gt; to override the property name.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;@WithConverter&lt;/code&gt; to override the converter to use.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;@WithDefault&lt;/code&gt; to set the default value if none is found in the config sources.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Combining all of these features, we can write a Config Mapping that looks like this:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;java&quot; class=&quot;language-java hljs&quot;&gt;@ConfigMapping(prefix = &quot;server&quot;)
+public interface Server {
+    String host();
+
+    int port();
+
+    @WithConverter(DurationConverter.class)
+    Duration timeout();
+
+    @WithName(&quot;io-threads&quot;)
+    int threads();
+
+    Map&amp;lt;String, String&amp;gt; form();
+
+    Optional&amp;lt;Ssl&amp;gt; ssl();
+
+    Optional&amp;lt;Proxy&amp;gt; proxy();
+
+    Log log();
+
+    interface Ssl {
+        int port();
+
+        String certificate();
+
+        @WithDefault(&quot;TLSv1.3,TLSv1.2&quot;)
+        List&amp;lt;String&amp;gt; protocols();
+    }
+
+    interface Proxy {
+        boolean enable();
+    }
+
+    interface Log {
+        @WithDefault(&quot;false&quot;)
+        boolean enabled();
+
+        @WithDefault(&quot;.log&quot;)
+        String suffix();
+
+        @WithDefault(&quot;true&quot;)
+        boolean rotate();
+
+        @WithDefault(&quot;COMMON&quot;)
+        Pattern pattern();
+
+        enum Pattern {
+            COMMON,
+            SHORT,
+            COMBINED,
+            LONG;
+        }
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;For additional information, check out our documentation about
+&lt;a href=&quot;https://smallrye.io/docs/smallrye-config/mapping/mapping.html&quot;&gt;Config Mappings&lt;/a&gt; and the example in the
+&lt;a href=&quot;https://github.com/smallrye/smallrye-config/tree/master/examples/mapping&quot; class=&quot;bare&quot;&gt;https://github.com/smallrye/smallrye-config/tree/master/examples/mapping&lt;/a&gt; SmallRye Config Github repo.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;In MicroProfile Config 2.0, an initial version for this feature will be available. It doesn&amp;#8217;t support all the features
+implemented in SmallRye Config, but the plan is to keep evolving and add more functionality based on the feedback of
+the community. You can read more about it
+&lt;a href=&quot;https://github.com/eclipse/microprofile-config/blob/master/spec/src/main/asciidoc/configexamples.asciidoc&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;configurable_config_sources&quot;&gt;Configurable Config Sources&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;A highly requested feature is the ability to configure custom Config Sources, meaning it should be possible to
+retrieve configuration values from other sources before building our own. Take for instance a Database based Config
+Source. Such a source requires additional configurations like URL, username, and password to connect to the database.
+Where do we set these configurations?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The new &lt;code&gt;ConfigSourceFactory&lt;/code&gt; API provides a context with access to the currently available configuration. With a
+&lt;code&gt;ConfigSourceFactory&lt;/code&gt;, it is possible to bootstrap a &lt;code&gt;ConfigSource&lt;/code&gt; that configures itself with other sources.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The &lt;code&gt;ConfigSourceFactory&lt;/code&gt; requires the implementation of a single method
+&lt;code&gt;ConfigSource getConfigSource(ConfigSourceContext context)&lt;/code&gt;:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;java&quot; class=&quot;language-java hljs&quot;&gt;@Override
+public class ConfigMapConfigSourceFactory implements ConfigSourceFactory {
+    @Override
+    public ConfigSource getConfigSource(final ConfigSourceContext context) {
+        final ConfigValue value = context.getValue(&quot;config.map.dir.source&quot;);
+        if (value == null || value.getValue() == null) {
+            throw new IllegalArgumentException(&quot;CONFIG_MAP_DIR_SOURCE not defined&quot;);
+        }
+
+        return new FileSystemConfigSource(value.getValue());
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The provided &lt;code&gt;ConfigSourceContext&lt;/code&gt; may call a single method &lt;code&gt;ConfigValue getValue(String name)&lt;/code&gt;. This method lookups
+configuration names in all sources already initialized by the &lt;code&gt;Config&lt;/code&gt; even if they have a lower priority than the one
+defined in the &lt;code&gt;ConfigSourceFactory&lt;/code&gt;. A`ConfigSource` produced by a &lt;code&gt;ConfigSourceFactory&lt;/code&gt; is not taken into account to
+configure other sources produced by lower priority &lt;code&gt;ConfigSourceFactory&lt;/code&gt;. To register a &lt;code&gt;ConfigSourceFactory&lt;/code&gt; use the
+standard Java &lt;code&gt;ServiceLoader&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;For additional information, check out our documentation about
+&lt;a href=&quot;https://smallrye.io/docs/smallrye-config/config-sources/config-sources.html#_config_source_factory&quot;&gt;Config Mappings&lt;/a&gt; and
+the example in the
+&lt;a href=&quot;https://github.com/smallrye/smallrye-config/tree/master/examples/configmap&quot; class=&quot;bare&quot;&gt;https://github.com/smallrye/smallrye-config/tree/master/examples/configmap&lt;/a&gt; SmallRye Config Github repo.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;default_values&quot;&gt;Default Values&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Right now, the only way to set a default value for a configuration to use the
+&lt;code&gt;org.eclipse.microprofile.config.inject.ConfigProperty#defaultValue&lt;/code&gt;. This has a few limitations. It doesn&amp;#8217;t work in the
+programmatic lookup or if we are using the annotation and have to inject the same property in multiple places,
+we need to duplicate the default value in each injection point. Adding the configuration values into
+&lt;code&gt;microprofile-config.properties&lt;/code&gt; to act as a default is not optimal either, since they may override lower priority
+custom sources.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;SmallRye Config adds a simple API to set such default values, with
+&lt;code&gt;SmallRyeConfigBuilder#withDefaultValue(String name, String value)&lt;/code&gt; or
+&lt;code&gt;SmallRyeConfigBuilder#withDefaultValue(Map&amp;lt;String, String&amp;gt; defaultValues)&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Default values for any configuration name can then be supplied with these APIs. SmallRye Config will only fallback to
+these default if no value is found in the available sources.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The Default values API also supports name patterns. For instance a &lt;code&gt;withDefaultValue(&quot;smallrye.*&quot;, &quot;1234&quot;)&lt;/code&gt; provides
+default values for any configuration name with the prefix &lt;code&gt;smallrye&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;All the new features detailed here are experimental. The team is happy with them, and they had careful consideration
+when designed. We cannot guarantee that they won&amp;#8217;t suffer any changes in the next few releases, especially considering
+that the SmallRye team is also pushing to have these added to the MicroProfile Config specification, which may require
+some changes.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This shouldn&amp;#8217;t discourage developers to use these new features. We believe these add a lot of utility and improve the
+developer experience when setting configurations in applications.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;A handful of other small improvements and bugs fixes are also included in this release. Check them out in the
+&lt;a href=&quot;https://github.com/smallrye/smallrye-config/releases/tag/1.9.0&quot;&gt;Release Notes&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Please, feel free to drop us any feedback to the &lt;a href=&quot;mailto:smallrye@googlegroups.com&quot;&gt;SmallRye Mailing List&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;additional_resources&quot;&gt;Additional Resources&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/smallrye/smallrye-config/&quot;&gt;GitHub Repository&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/smallrye/smallrye-config/releases/tag/1.9.0&quot;&gt;Release Notes&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://smallrye.io/docs/smallrye-config/index.html&quot;&gt;Documentation&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</content><author><name>Roberto Cortez</name><email>radcortez@yahoo.com</email></author><category term="microprofile" /><category term="smallrye" /><category term="config" /></entry><entry><title type="html">Fault Tolerance 4.2 &amp;amp; 4.3</title><link href="https://www.smallrye.io/blog/fault-tolerance-4-2-and-4-3/" rel="alternate" type="text/html" title="Fault Tolerance 4.2 &amp;amp; 4.3" /><published>2020-05-29T11:00:00+00:00</published><updated>2020-05-29T11:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-4-2-and-4-3</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-4-2-and-4-3/">&lt;div id=&quot;preamble&quot;&gt;
 &lt;div class=&quot;sectionbody&quot;&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce two new releases of SmallRye Fault Tolerance: 4.2.1 and 4.3.0.&lt;/p&gt;
@@ -1076,22 +1346,4 @@ remaining specifications to reach full MicroProfile 1.4 compliance.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Why not join the community and help us out!&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ken Finnigan</name><email>ken@kenfinnigan.me</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Welcome to SmallRye</title><link href="https://www.smallrye.io/blog/welcome/" rel="alternate" type="text/html" title="Welcome to SmallRye" /><published>2018-06-28T19:00:00+00:00</published><updated>2018-06-28T19:00:00+00:00</updated><id>https://www.smallrye.io/blog/welcome</id><content type="html" xml:base="https://www.smallrye.io/blog/welcome/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;SmallRye welcomes you to our new community for developing shared
-implementations of Eclipse MicroProfile specifications!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Right now we&amp;#8217;re still in the process of seeding the initial versions of
-the repositories for each Eclipse MicroProfile specification implementation.
-As they&amp;#8217;re released we will be updating the overview page and creating
-a page specific to each implementation on the website.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Currently we have released the following implementations:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;&lt;strong&gt;Config&lt;/strong&gt;, &lt;strong&gt;REST Client&lt;/strong&gt;, &lt;strong&gt;Open API&lt;/strong&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The plan is to have the remainder migrated and released within the next couple of weeks.&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ken Finnigan</name><email>ken@kenfinnigan.me</email></author><category term="announcement" /></entry></feed>
+&lt;/div&gt;</content><author><name>Ken Finnigan</name><email>ken@kenfinnigan.me</email></author><category term="announcement" /><category term="microprofile" /></entry></feed>

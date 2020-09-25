@@ -1,0 +1,211 @@
+= SmallRye Config 1.9 Released
+:page-layout: post
+:page-title: SmallRye Config 1.9 Released
+:page-synopsis: SmallRye Config 1.8 Released
+:page-tags: [microprofile,smallrye,config]
+:page-date: 2020-09-24 13:00:00.000 +0100
+:page-author: radcortez
+
+In SmallRye Config 1.9 we continue our innovation and experimentation model, by bringing additional features and
+enhancements to the API. This release introduces the following big changes:
+
+== Config Mappings
+
+A Config Mapping provides a way to group multiple configuration properties into a single cohesive API. A Config Mapping
+requires a simple interface with minimal metadata configuration.
+
+[source,java]
+----
+@ConfigMapping(prefix = "server")
+interface Server {
+    String host();
+
+    int port();
+}
+----
+
+The `Server` interface retrieves and maps configuration properties with the name `server.host` into the
+`Server.host()` and `server.port` into `Server.port()` method. The configuration property name to lookup
+builds from the `@ConfigMapping` annotation prefix and the method name with `.` (dot) as the separator. The
+`@ConfigMapping` annotation is used to auto-discover and register these mapping interfaces in a CDI aware environment.
+In non-CDI environments, register the Config Mapping via `SmallRyeConfigBuilder#withMapping`.
+
+To retrieve such Config Mapping, a simple `@Inject` in any CDI aware bean is enough:
+
+[source,java]
+----
+@Inject
+Server server;
+
+void businessMethod() {
+    String host = server.host();
+}
+----
+
+To retrieve the Config Mapping in non-CDI environments use the API
+`io.smallrye.config.SmallRyeConfig#getConfigMapping`:
+
+[source,java]
+----
+SmallRyeConfig config = (SmallRyeConfig) ConfigProvider.getConfig();
+Server server = config.getConfigMapping(Server.class);
+----
+
+Additionally, Config Mappings also support:
+
+- Automatic conversion of the configuration type.
+- Nested Config Mapping groups.
+- Validate if configuration properties exist at the startup.
+- `Map`, `Optional`, and primitive types.
+- `@WithName` to override the property name.
+- `@WithConverter` to override the converter to use.
+- `@WithDefault` to set the default value if none is found in the config sources.
+
+Combining all of these features, we can write a Config Mapping that looks like this:
+
+[source,java]
+----
+@ConfigMapping(prefix = "server")
+public interface Server {
+    String host();
+
+    int port();
+
+    @WithConverter(DurationConverter.class)
+    Duration timeout();
+
+    @WithName("io-threads")
+    int threads();
+
+    Map<String, String> form();
+
+    Optional<Ssl> ssl();
+
+    Optional<Proxy> proxy();
+
+    Log log();
+
+    interface Ssl {
+        int port();
+
+        String certificate();
+
+        @WithDefault("TLSv1.3,TLSv1.2")
+        List<String> protocols();
+    }
+
+    interface Proxy {
+        boolean enable();
+    }
+
+    interface Log {
+        @WithDefault("false")
+        boolean enabled();
+
+        @WithDefault(".log")
+        String suffix();
+
+        @WithDefault("true")
+        boolean rotate();
+
+        @WithDefault("COMMON")
+        Pattern pattern();
+
+        enum Pattern {
+            COMMON,
+            SHORT,
+            COMBINED,
+            LONG;
+        }
+    }
+}
+----
+
+For additional information, check out our documentation about
+https://smallrye.io/docs/smallrye-config/mapping/mapping.html[Config Mappings] and the example in the
+https://github.com/smallrye/smallrye-config/tree/master/examples/mapping SmallRye Config Github repo.
+
+In MicroProfile Config 2.0, an initial version for this feature will be available. It doesn't support all the features
+implemented in SmallRye Config, but the plan is to keep evolving and add more functionality based on the feedback of
+the community. You can read more about it
+https://github.com/eclipse/microprofile-config/blob/master/spec/src/main/asciidoc/configexamples.asciidoc[here].
+
+== Configurable Config Sources
+
+A highly requested feature is the ability to configure custom Config Sources, meaning it should be possible to
+retrieve configuration values from other sources before building our own. Take for instance a Database based Config
+Source. Such a source requires additional configurations like URL, username, and password to connect to the database.
+Where do we set these configurations?
+
+The new `ConfigSourceFactory` API provides a context with access to the currently available configuration. With a
+`ConfigSourceFactory`, it is possible to bootstrap a `ConfigSource` that configures itself with other sources.
+
+The `ConfigSourceFactory` requires the implementation of a single method
+`ConfigSource getConfigSource(ConfigSourceContext context)`:
+
+[source,java]
+----
+@Override
+public class ConfigMapConfigSourceFactory implements ConfigSourceFactory {
+    @Override
+    public ConfigSource getConfigSource(final ConfigSourceContext context) {
+        final ConfigValue value = context.getValue("config.map.dir.source");
+        if (value == null || value.getValue() == null) {
+            throw new IllegalArgumentException("CONFIG_MAP_DIR_SOURCE not defined");
+        }
+
+        return new FileSystemConfigSource(value.getValue());
+    }
+}
+----
+
+The provided `ConfigSourceContext` may call a single method `ConfigValue getValue(String name)`. This method lookups
+configuration names in all sources already initialized by the `Config` even if they have a lower priority than the one
+defined in the `ConfigSourceFactory`. A`ConfigSource` produced by a `ConfigSourceFactory` is not taken into account to
+configure other sources produced by lower priority `ConfigSourceFactory`. To register a `ConfigSourceFactory` use the
+standard Java `ServiceLoader`.
+
+For additional information, check out our documentation about
+https://smallrye.io/docs/smallrye-config/config-sources/config-sources.html#_config_source_factory[Config Mappings] and
+the example in the
+https://github.com/smallrye/smallrye-config/tree/master/examples/configmap SmallRye Config Github repo.
+
+== Default Values
+
+Right now, the only way to set a default value for a configuration to use the
+`org.eclipse.microprofile.config.inject.ConfigProperty#defaultValue`. This has a few limitations. It doesn't work in the
+programmatic lookup or if we are using the annotation and have to inject the same property in multiple places,
+we need to duplicate the default value in each injection point. Adding the configuration values into
+`microprofile-config.properties` to act as a default is not optimal either, since they may override lower priority
+custom sources.
+
+SmallRye Config adds a simple API to set such default values, with
+`SmallRyeConfigBuilder#withDefaultValue(String name, String value)` or
+`SmallRyeConfigBuilder#withDefaultValue(Map<String, String> defaultValues)`.
+
+Default values for any configuration name can then be supplied with these APIs. SmallRye Config will only fallback to
+these default if no value is found in the available sources.
+
+The Default values API also supports name patterns. For instance a `withDefaultValue("smallrye.*", "1234")` provides
+default values for any configuration name with the prefix `smallrye`.
+
+== Summary
+
+All the new features detailed here are experimental. The team is happy with them, and they had careful consideration
+when designed. We cannot guarantee that they won't suffer any changes in the next few releases, especially considering
+that the SmallRye team is also pushing to have these added to the MicroProfile Config specification, which may require
+some changes.
+
+This shouldn't discourage developers to use these new features. We believe these add a lot of utility and improve the
+developer experience when setting configurations in applications.
+
+A handful of other small improvements and bugs fixes are also included in this release. Check them out in the
+https://github.com/smallrye/smallrye-config/releases/tag/1.9.0[Release Notes]
+
+Please, feel free to drop us any feedback to the mailto:smallrye@googlegroups.com[SmallRye Mailing List].
+
+== Additional Resources
+
+* https://github.com/smallrye/smallrye-config/[GitHub Repository]
+* https://github.com/smallrye/smallrye-config/releases/tag/1.9.0[Release Notes]
+* https://smallrye.io/docs/smallrye-config/index.html[Documentation]

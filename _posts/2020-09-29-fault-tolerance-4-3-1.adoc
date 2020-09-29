@@ -1,0 +1,19 @@
+:page-layout: post
+:page-title: Fault Tolerance 4.3.1
+:page-synopsis: SmallRye Fault Tolerance 4.3.1 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2020-09-29 14:00:00.000 +0100
+:page-author: lthon
+
+= Fault Tolerance 4.3.1
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/4.3.1[release] of SmallRye Fault Tolerance 4.3.1.
+This is a small release with a couple of bug fixes and one API deprecation.
+It is a safe upgrade for everyone using SmallRye Fault Tolerance 4.3.0.
+
+In the previous release, we introduced an experimental API for observing circuit breaker state changes.
+The `CircuitBreakerStateChanged` event type is now deprecated and will be removed in a subsequent release.
+At the same time, we will introduce a new API for accessing circuit breaker maintenance features: observing its current state and resetting to the initial state.
+If you want to know more, feel free to watch https://github.com/smallrye/smallrye-fault-tolerance/issues/280[issue #280].
+
+Also, to slightly improve quality of life, starting with this release, SmallRye Fault Tolerance will log its version number during boot.

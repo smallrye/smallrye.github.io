@@ -1,4 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2020-09-25T14:12:42+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">SmallRye Config 1.9 Released</title><link href="https://www.smallrye.io/blog/smallrye-config-1-9/" rel="alternate" type="text/html" title="SmallRye Config 1.9 Released" /><published>2020-09-24T12:00:00+00:00</published><updated>2020-09-24T12:00:00+00:00</updated><id>https://www.smallrye.io/blog/smallrye-config-1-9</id><content type="html" xml:base="https://www.smallrye.io/blog/smallrye-config-1-9/">&lt;div id=&quot;preamble&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2020-10-01T13:28:02+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 4.3.1</title><link href="https://www.smallrye.io/blog/fault-tolerance-4-3-1/" rel="alternate" type="text/html" title="Fault Tolerance 4.3.1" /><published>2020-09-29T13:00:00+00:00</published><updated>2020-09-29T13:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-4-3-1</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-4-3-1/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/4.3.1&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 4.3.1.
+This is a small release with a couple of bug fixes and one API deprecation.
+It is a safe upgrade for everyone using SmallRye Fault Tolerance 4.3.0.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;In the previous release, we introduced an experimental API for observing circuit breaker state changes.
+The &lt;code&gt;CircuitBreakerStateChanged&lt;/code&gt; event type is now deprecated and will be removed in a subsequent release.
+At the same time, we will introduce a new API for accessing circuit breaker maintenance features: observing its current state and resetting to the initial state.
+If you want to know more, feel free to watch &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues/280&quot;&gt;issue #280&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Also, to slightly improve quality of life, starting with this release, SmallRye Fault Tolerance will log its version number during boot.&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">SmallRye Config 1.9 Released</title><link href="https://www.smallrye.io/blog/smallrye-config-1-9/" rel="alternate" type="text/html" title="SmallRye Config 1.9 Released" /><published>2020-09-24T12:00:00+00:00</published><updated>2020-09-24T12:00:00+00:00</updated><id>https://www.smallrye.io/blog/smallrye-config-1-9</id><content type="html" xml:base="https://www.smallrye.io/blog/smallrye-config-1-9/">&lt;div id=&quot;preamble&quot;&gt;
 &lt;div class=&quot;sectionbody&quot;&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;In SmallRye Config 1.9 we continue our innovation and experimentation model, by bringing additional features and
@@ -1302,48 +1315,4 @@ with &lt;a href=&quot;https://microprofile.io/&quot;&gt;Eclipse MicroProfile&lt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Thanks to everyone from the community that enabled us to implement the specification so fast!&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ken Finnigan</name><email>ken@kenfinnigan.me</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">SmallRye adds MicroProfile 1.3 support</title><link href="https://www.smallrye.io/blog/microprofile-1-3/" rel="alternate" type="text/html" title="SmallRye adds MicroProfile 1.3 support" /><published>2018-09-07T19:00:00+00:00</published><updated>2018-09-07T19:00:00+00:00</updated><id>https://www.smallrye.io/blog/microprofile-1-3</id><content type="html" xml:base="https://www.smallrye.io/blog/microprofile-1-3/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;SmallRye now has all implementations passing the TCKs for MicroProfile 1.3 specifications!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The full list of completed implementations:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;ulist&quot;&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Config 1.3&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Fault Tolerance 1.0&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Health 1.0&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;JWT 1.1&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Metrics 1.1&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;OpenAPI 1.0.1&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;OpenTracing 1.1&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;REST Client 1.0&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Check out the &lt;a href=&quot;/projects&quot;&gt;Projects page&lt;/a&gt; for all the details!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;One important to note is that some of these implementations are already compliant
-MicroProfile 1.4! The team is in the process of implementing updates to the
-remaining specifications to reach full MicroProfile 1.4 compliance.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Why not join the community and help us out!&lt;/p&gt;
 &lt;/div&gt;</content><author><name>Ken Finnigan</name><email>ken@kenfinnigan.me</email></author><category term="announcement" /><category term="microprofile" /></entry></feed>

@@ -159,16 +159,16 @@ interface Server {
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>Server</code> interface is able to map configurations with the name <code>server.host</code> into the <code>Server.host()</code> method and the
-configuration with the name <code>server.port</code> into <code>Server.port()</code> method. The configuration property name to lookup
-is built from the prefix, and the method name with <code>,</code> (dot) as the separator.</p>
+<p>The <code>Server</code> interface is able to map configurations with the name <code>server.host</code> into the <code>Server.host()</code> method and
+<code>server.port</code> into <code>Server.port()</code> method. The configuration property name to lookup is built from the prefix, and the
+method name with <code>.</code> (dot) as the separator.</p>
 </div>
 <div class="sect2">
 <h3 id="_registration"><a class="anchor" href="#_registration"></a>Registration</h3>
 <div class="paragraph">
-<p>Registration of Config Mapping aware interface happens automatically in CDI aware environment with the <code>@ConfigMapping</code>
-annotation. In non-CDI environments, the Config Mapping may be registed via <code>SmallRyeConfigBuilder#withMapping</code>. In this
-case, the <code>@ConfigMapping</code> is completely optional.</p>
+<p>Registration of Config Mapping aware interface happens automatically in CDI aware environments with the <code>@ConfigMapping</code>
+annotation. In non-CDI environments, the Config Mapping may be registered via <code>SmallRyeConfigBuilder#withMapping</code>. In
+this case, the <code>@ConfigMapping</code> is completely optional.</p>
 </div>
 </div>
 <div class="sect2">

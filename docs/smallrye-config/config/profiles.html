@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Converters :: SmallRye documentation</title>
+    <title>Untitled :: SmallRye documentation</title>
     <meta name="generator" content="Antora 2.3.0-beta.1">
     <link rel="stylesheet" href="../../_/css/site.css">
   </head>
@@ -51,13 +51,13 @@
     <a class="nav-link" href="../index.html">Index</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../config/config.html">Config</a>
+    <a class="nav-link" href="config.html">Config</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../config-sources/config-sources.html">Config Sources</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
-    <a class="nav-link" href="converters.html">Converters</a>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../converters/converters.html">Converters</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../interceptors/interceptors.html">Interceptors</a>
@@ -125,75 +125,106 @@
 <button class="nav-toggle"></button>
   <a href="../../index/index/index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
-  <ul>
-    <li><a href="../index.html">SmallRye Config</a></li>
-    <li><a href="converters.html">Converters</a></li>
-  </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-config/edit/master/doc/modules/ROOT/pages/converters/converters.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-config/edit/master/doc/modules/ROOT/pages/config/profiles.adoc">Edit this Page</a></div>
   </div>
 <article class="doc">
-<h1 class="page">Converters</h1>
-<div id="preamble">
+<div class="sect1">
+<h2 id="profiles"><a class="anchor" href="#profiles"></a>Profiles</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>SmallRye Config provides a set of additional Converters.</p>
+<p>SmallRye Config supports multiple configurations with the same name and selects them via a profile property.</p>
+</div>
+<div class="paragraph">
+<p>To be able to set properties with the same name, each property needs to be prefixed with a percentage sign <code>%</code> followed
+by the profile name and a dot <code>.</code> in the syntax <code>%{profile-name}.config.name</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties"># Regular property
+my.prop=1234
+# Profile property
+%dev.my.prop=5678</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To use the profile <code>dev</code>, the configuration <code>smallrye.config.profile=dev</code> has to be set into any valid ConfigSource.</p>
+</div>
+<div class="paragraph">
+<p>Any lookup to the <code>my.prop</code> configuration name will first search by the active profile name <code>%dev.my.prop</code> and then
+fallback to <code>my.prop</code> if no value is present.</p>
+</div>
+<div class="paragraph">
+<p>When looking up the property <code>my.prop</code> with the <code>dev</code> profile active the value is <code>5678</code>.</p>
+</div>
+<div class="sect2">
+<h3 id="_ordinals"><a class="anchor" href="#_ordinals"></a>Ordinals</h3>
+<div class="paragraph">
+<p>Profile lookups are only valid if the <code>ConfigSource</code> has a higher ordinal than a lookup to the regular configuration
+name. Consider:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties"># Source main.properties
+config_ordinal=1000
+# Regular property
+my.prop=1234</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties"># Source profile.properties
+config_ordinal=100
+# Regular property
+%dev.my.prop=5678</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Even with the profile <code>dev</code> active, the lookup value for <code>my.prop</code> is <code>1234</code>. This prevents lower ordinal sources to
+set a profile property value that cannot be overridden unless the profile property is also overridden.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_multiple_profiles"><a class="anchor" href="#_multiple_profiles"></a>Multiple Profiles</h3>
+<div class="paragraph">
+<p>Multiple Profiles may be active at the same time. The configuration <code>smallrye.config.profile</code> accepts a comma-separated
+list of profile names: <code>smallrye.config.profile=common,dev</code>. Both <code>common</code> and <code>dev</code> are separate profiles.</p>
+</div>
+<div class="paragraph">
+<p>When multiple profiles are active, the rules for profile configuration are exactly the same. If two profiles define the
+same configuration, then the last listed profile has priority. Consider:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">smallrye.config.profile=common,dev
+
+my.prop=1234
+%common.my.prop=0
+%dev.my.prop=5678
+
+%common.commom.prop=common
+%dev.dev.prop=dev
+%test.test.prop=test</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="#json-converter">JSON Converter</a></p>
+<p><code>common.prop</code> value is <code>common</code></p>
+</li>
+<li>
+<p><code>dev.prop</code> value is <code>dev</code></p>
+</li>
+<li>
+<p><code>my.prop</code> value is <code>0</code></p>
+</li>
+<li>
+<p><code>test.prop</code> does not have a value</p>
 </li>
 </ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="json-converter"><a class="anchor" href="#json-converter"></a>JSON Converter</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The JSON Conveter allows you to inject a <code>JsonObject</code> or <code>JsonArray</code> as a <code>ConfigProperty</code>.</p>
-</div>
-<div class="sect2">
-<h3 id="_usage"><a class="anchor" href="#_usage"></a>Usage</h3>
-<div class="paragraph">
-<p>To use the Config Source Injection, add the following to your Maven <code>pom.xml</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
-    &lt;groupId&gt;io.smallrye.config&lt;/groupId&gt;
-    &lt;artifactId&gt;smallrye-config-converter-json&lt;/artifactId&gt;
-    &lt;version&gt;1.9.3-SNAPSHOT&lt;/version&gt;
-    &lt;scope&gt;runtime&lt;/scope&gt;
-&lt;/dependency&gt;</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_example"><a class="anchor" href="#_example"></a>Example</h3>
-<div class="paragraph">
-<p>Use the types <code>JsonObject</code> or <code>JsonArray</code> to inject the <code>ConfigProperty</code>.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Inject
-@ConfigProperty(name = "someJsonArray")
-private JsonArray someValue;
-
-@Inject
-@ConfigProperty(name = "someJsonObject")
-private JsonObject someValue;</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">someJsonArray=["value1","value2","value3"]
-someJsonObject={"foo": "bar", "count":100}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The value of the configuration properties must be valid JSON, or a <code>JsonParsingException</code> is thrown.</p>
 </div>
 </div>
 </div>

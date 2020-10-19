@@ -313,28 +313,7 @@ profile.</p>
 <div class="sect2">
 <h3 id="profile-interceptor"><a class="anchor" href="#profile-interceptor"></a>ProfileConfigSourceInterceptor</h3>
 <div class="paragraph">
-<p>The <code>ProfileConfigSourceInterceptor</code> allows multiple configurations with the same name and selects them via
-a profile property.</p>
-</div>
-<div class="paragraph">
-<p>To be able to set properties with the same name, each property needs to be prefixed with <code>%</code> followed by the profile
-name and a dot:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">my.prop=1234
-%dev.my.prop=5678</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Lookup is always done using the <code>my.prop</code> property name. To use the profile <code>dev</code>, the configuration
-<code>smallrye.config.profile=dev</code> has to be set into any valid ConfigSource.</p>
-</div>
-<div class="paragraph">
-<p>When looking up the property <code>my.prop</code> with the <code>dev</code> profile active the value is <code>5678</code>.</p>
-</div>
-<div class="paragraph">
-<p>Only one profile can be active at any given time.</p>
+<p>The <code>ProfileConfigSourceInterceptor</code> supports the <a href="../config/profiles.html" class="page">Profiles</a> feature.</p>
 </div>
 </div>
 <div class="sect2">

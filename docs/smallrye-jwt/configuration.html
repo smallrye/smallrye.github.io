@@ -181,10 +181,10 @@ precedence:</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_smallrye_jwt_properties"><a class="anchor" href="#_smallrye_jwt_properties"></a>Smallrye JWT properties</h2>
+<h2 id="_smallrye_jwt_properties"><a class="anchor" href="#_smallrye_jwt_properties"></a>SmallRye JWT properties</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Smallrye JWT supports many properties which can be used to customize the token processing:</p>
+<p>SmallRye JWT supports many properties which can be used to customize the token processing:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -258,7 +258,7 @@ precedence:</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.require.named-principal</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>false</code></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">If an application relies on <code>java.security.Principal</code> returning a name then a token must have a <code>upn</code> or <code>preferred_username</code> or <code>sub</code> claim set. Setting this property will result in Smallrye JWT throwing an exception if none of these claims is available for the application code to reliably deal with a non-null <code>Principal</code> name.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If an application relies on <code>java.security.Principal</code> returning a name then a token must have a <code>upn</code> or <code>preferred_username</code> or <code>sub</code> claim set. Setting this property will result in SmallRye JWT throwing an exception if none of these claims is available for the application code to reliably deal with a non-null <code>Principal</code> name.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.path.sub</code></p></td>

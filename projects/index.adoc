@@ -1,93 +1,33 @@
 :page-layout: base
+:github: https://github.com
+:smallrye: {github}/smallrye/smallrye
+:microprofile: {github}/eclipse/microprofile
+
 == Eclipse MicroProfile Platform
-|===
-|Spec Name |Spec Version |MP 2.2 |MP 3.2
 
-|http://cdi-spec.org/[CDI]
-|2.0
-|&#10003;
-|&#10003;
+link:{smallrye}-config[SmallRye Config]:: An implementation of link:{microprofile}-config[MicroProfile Config]
+link:{smallrye}-jwt[SmallRye JWT]:: An implementation of link:{microprofile}-jwt-auth[MicroProfile JWT RBAC]
+link:{smallrye}-health[SmallRye Health]:: An implementation of link:{microprofile}-health[MicroProfile Health]
+link:{smallrye}-fault-tolerance[SmallRye Fault Tolerance]:: An implementation of link:{microprofile}-fault-tolerance[MicroProfile Fault Tolerance]
+link:{smallrye}-metrics[SmallRye Metrics]:: An implementation of link:{microprofile}-metrics[MicroProfile Metrics]
+link:{smallrye}-open-api[SmallRye OpenAPI]:: An implementation of link:{microprofile}-open-api[MicroProfile OpenAPI]
+link:{smallrye}-opentracing[SmallRye OpenTracing]:: An implementation of link:{microprofile}-opentracing[MicroProfile OpenTracing]
+link:https://github.com/resteasy/Resteasy[RESTEasy REST Client]:: An implementation of link:{microprofile}-rest-client[MicroProfile REST Client]
 
-|https://github.com/jax-rs[JAX-RS]
-|2.1
-|&#10003;
-|&#10003;
+== Eclipse MicroProfile Standalone
 
-|https://javaee.github.io/jsonp/[JSON-P]
-|1.1
-|&#10003;
-|&#10003;
+link:{smallrye}-context-propagation[SmallRye Context Propagation]:: An implementation of link:{microprofile}-context-propagation[MicroProfile Context Propagation]
+link:https://smallrye.io/smallrye-mutiny[SmallRye Mutiny]:: Intuitive Event-Driven Reactive Programming Library for Java and an implementation of link:{microprofile}-reactive-streams-operators[MicroProfile Reactive Streams Operators]
+link:{smallrye}-reactive-messaging[SmallRye Reactive Messaging]:: An implementation of link:{microprofile}-reactive-messaging[MicroProfile Reactive Messaging]
+link:{smallrye}-graphql[SmallRye GraphQL]:: An implementation of link:{microprofile}-graphql[MicroProfile GraphQL]
 
-|http://json-b.net/[JSON-B]
-|1.0
-|&#10003;
-|&#10003;
+== SmallRye Standalone
 
-|https://github.com/smallrye/smallrye-config[Config]
-|1.3
-|https://repo1.maven.org/maven2/io/smallrye/smallrye-config/1.3.5/smallrye-config-1.3.5.jar[1.3.5]
-|https://repo1.maven.org/maven2/io/smallrye/smallrye-config/1.4.1/smallrye-config-1.4.1.jar[1.4.1]
-
-|https://github.com/smallrye/smallrye-fault-tolerance[Fault Tolerance]
-|2.0.2
-|https://repo1.maven.org/maven2/io/smallrye/smallrye-fault-tolerance/2.0.0/smallrye-fault-tolerance-2.0.0.jar[2.0.0]
-|https://repo1.maven.org/maven2/io/smallrye/smallrye-fault-tolerance/2.1.2/smallrye-fault-tolerance-2.1.2.jar[2.1.2]
-
-|https://github.com/smallrye/smallrye-health[Health]
-|1.0 / 2.1
-|https://repo1.maven.org/maven2/io/smallrye/smallrye-health/1.0.2/smallrye-health-1.0.2.jar[1.0.2]
-|https://repo1.maven.org/maven2/io/smallrye/smallrye-health/2.1.0/smallrye-health-2.1.0.jar[2.1.0]
-
-|https://github.com/smallrye/smallrye-jwt[JWT]
-|1.1.1
-|https://repo1.maven.org/maven2/io/smallrye/smallrye-jwt/1.1.1/smallrye-jwt-1.1.1.jar[1.1.1]
-|https://repo1.maven.org/maven2/io/smallrye/smallrye-jwt/2.0.10/smallrye-jwt-2.0.10.jar[2.0.10]
-
-|https://github.com/smallrye/smallrye-metrics[Metrics]
-|1.1 / 2.2
-|https://repo1.maven.org/maven2/io/smallrye/smallrye-metrics/1.1.3/smallrye-metrics-1.1.3.jar[1.1.3]
-|https://repo1.maven.org/maven2/io/smallrye/smallrye-metrics/2.3.0/smallrye-metrics-2.3.0.jar[2.3.0]
-
-|https://github.com/smallrye/smallrye-open-api[OpenAPI]
-|1.1.2
-|https://repo1.maven.org/maven2/io/smallrye/smallrye-open-api/1.1.1/smallrye-open-api-1.1.1.jar[1.1.1]
-|https://repo1.maven.org/maven2/io/smallrye/smallrye-open-api/1.1.19/smallrye-open-api-1.1.19.jar[1.1.19]
-
-|https://github.com/smallrye/smallrye-opentracing[OpenTracing]
-|1.3.1
-|https://repo1.maven.org/maven2/io/smallrye/smallrye-opentracing/1.3.0/smallrye-opentracing-1.3.0.jar[1.3.0]
-|https://repo1.maven.org/maven2/io/smallrye/smallrye-opentracing/1.3.2/smallrye-opentracing-1.3.2.jar[1.3.2]
-
-|https://github.com/resteasy/Resteasy/tree/master/resteasy-client-microprofile[REST Client]
-|1.2.1 / 1.3.4
-|https://repo1.maven.org/maven2/io/smallrye/smallrye-rest-client/1.2.1/smallrye-rest-client-1.2.1.jar[1.2.1 (SmallRye)]
-|https://repo1.maven.org/maven2/org/jboss/resteasy/resteasy-client-microprofile/4.4.0.Final/resteasy-client-microprofile-4.4.0.Final.jar[4.4.0.Final (RESTEasy)]
-|===
-
-[%hardbreaks]
-
-== Eclipse MicroProfile Standalone releases
-
-|===
-|Spec Name |Spec Version |Impl Version
-
-|https://github.com/smallrye/smallrye-context-propagation[Context Propagation]
-|1.0
-|https://repo1.maven.org/maven2/io/smallrye/smallrye-context-propagation/1.0.12/smallrye-context-propagation-1.0.12.jar[1.0.12]
-
-|https://github.com/smallrye/smallrye-reactive-messaging[Reactive Messaging]
-|1.1
-|https://repo1.maven.org/maven2/io/smallrye/reactive/smallrye-reactive-messaging-provider/1.1.0/smallrye-reactive-messaging-provider-1.1.0.jar[1.1.0]
-
-|https://github.com/smallrye/smallrye-reactive-streams-operators[Reactive Streams Operators]
-|1.0.1
-|https://repo1.maven.org/maven2/io/smallrye/reactive/smallrye-reactive-streams-operators/1.0.10/smallrye-reactive-streams-operators-1.0.10.jar[1.0.10]
-
-|https://github.com/smallrye/smallrye-graphql[GraphQL]
-|1.0.2
-|https://repo1.maven.org/maven2/io/smallrye/smallrye-graphql/1.0.3/smallrye-graphql-1.0.3.jar[1.0.3]
-
-|===
+link:{smallrye}-common[SmallRye Common]:: Common utilities for SmallRye projects and maybe more
+link:{smallrye}-reactive-utils[SmallRye Reactive Utils]:: Helps the development of Reactive Applications
+link:{smallrye}-opentelemetry[SmallRye Open Telemetry]:: Integration of https://opentelemetry.io[OpenTelemetry] in MicroProfile and SmallRye
+link:{smallrye}-async-api[SmallRye Async API]:: Implementation of the https://www.asyncapi.com[AsyncAPI] with MicroProfile
+link:{smallrye}-converters[SmallRye Converters]:: Provides an API to convert a `String` type to something else
 
 ++++
 <br/>

@@ -5,4 +5,5 @@ Welcome to the SmallRye documentation site. Pick the project you're interested i
 * xref:smallrye-config:ROOT:index.adoc[SmallRye Config]
 * xref:smallrye-jwt:ROOT:index.adoc[SmallRye JWT]
 * xref:smallrye-metrics:ROOT:index.adoc[SmallRye Metrics]
+* xref:smallrye-fault-tolerance:ROOT:index.adoc[SmallRye Fault Tolerance]
 // * xref:smallrye-reactive-messaging:ROOT:index.adoc[SmallRye Reactive Messaging]

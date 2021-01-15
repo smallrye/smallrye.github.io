@@ -15,6 +15,11 @@ content:
   - url: https://github.com/smallrye/smallrye-metrics.git
     branches: 2.4.x
     start_path: doc
+  - url: https://github.com/smallrye/smallrye-fault-tolerance.git
+    branches: ~
+    tags:
+    - '5.?.?'
+    start_path: doc
 # uncomment after the docs are merged    
 #  - url: https://github.com/smallrye/smallrye-reactive-messaging.git
 #    branches: master

@@ -1,0 +1,64 @@
+name: SmallRye Website - On Demand
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: set up ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6
+
+      - name: generate website
+        env:
+          JEKYLL_ENV: production
+        run: |
+          mkdir website
+          bundle install
+          bundle exec jekyll build --destination website
+
+      - name: generate docs
+        run: |
+          cd docs
+          npm i @antora/cli@2.3 @antora/site-generator-default@2.3
+          ./node_modules/@antora/cli/bin/antora antora generate antora-playbook.yml
+          cd ..
+          cp -r docs/build/site website/docs
+
+      - name: attach website
+        uses: actions/upload-artifact@v2
+        with:
+          name: website
+          path: website
+
+  deploy:
+    needs: [build]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          ref: master
+          token: ${{secrets.RELEASE_TOKEN}}
+
+      - name: extract website
+        uses: actions/download-artifact@v2
+        with:
+          name: website
+
+      - name: push website
+        run: |
+          git config --global user.name "SmallRye CI"
+          git config --global user.email "smallrye@googlegroups.com"
+          git status
+          git diff
+          git add -A .
+          git commit -m "CI: Build and deploy website updates"
+          git push --force

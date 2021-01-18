@@ -13,7 +13,7 @@ content:
     branches: master
     start_path: doc
   - url: https://github.com/smallrye/smallrye-metrics.git
-    branches: 2.4.x
+    branches: [2.4.x, master]
     start_path: doc
   - url: https://github.com/smallrye/smallrye-fault-tolerance.git
     branches: ~

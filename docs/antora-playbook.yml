@@ -18,7 +18,8 @@ content:
   - url: https://github.com/smallrye/smallrye-fault-tolerance.git
     branches: ~
     tags:
-    - '5.?.?'
+    - '5*'
+    - '!*-RC*'
     start_path: doc
 # uncomment after the docs are merged    
 #  - url: https://github.com/smallrye/smallrye-reactive-messaging.git

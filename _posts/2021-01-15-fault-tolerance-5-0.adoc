@@ -1,0 +1,168 @@
+:page-layout: post
+:page-title: Fault Tolerance 5.0
+:page-synopsis:  SmallRye Fault Tolerance 5.0 released, implementing MicroProfile Fault Tolerance 3.0 and bringing a lot of other improvements.
+:page-tags: [announcement, microprofile]
+:page-date: 2021-01-18 09:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+:uri-smallrye-ft-docs: https://smallrye.io/docs/smallrye-fault-tolerance/5.0.0
+
+= Fault Tolerance 5.0
+
+Roughly a year ago, we link:/blog/fault-tolerance-4-0/[announced] the release of {smallrye-ft} 4.0, the new implementation of Eclipse {microprofile-ft}.
+Today, we bring you version 5.0, an evolution of the 4.x stream that fully implements {microprofile-ft} 3.0 and brings a lot of improvements and even new features.
+These new features are not present in the {microprofile-ft} specification, but were requested by users, especially in the Quarkus community.
+In addition, the API for integrators has been simplified significantly, and the first version of {uri-smallrye-ft-docs}/index.html[documentation] is also ready.
+Let's take a look.
+
+== {microprofile-ft} 3.0
+
+From user's perspective, {microprofile-ft} 3.0 is a relatively small release, including just two important changes: metrics overhaul, and lifecycle specification for circuit breakers and bulkheads.
+It is a major release because the metrics changes are very much backwards incompatible, so pay attention to that.
+
+=== Metrics overhaul
+
+The fault tolerance metrics now take advantage of tags.
+Most importantly, the full method name used to be a part of the metric name, but it's now a metric tag.
+For example, suppose we have a method guarded with the `@Timeout` strategy:
+
+[source,java]
+----
+@Singleton
+public class MyService {
+    @Timeout
+    public String hello() {
+        ...
+    }
+}
+----
+
+Previously, if you wanted to know how many times this method timed out, you'd have to look at the metric called `ft.com.example.MyService.hello.timeout.callsTimedOut.total`.
+With {microprofile-ft} 3.0, you need to look at `ft.timeout.calls.total{method="com.example.MyService.hello", timedOut="true"}` instead.
+
+You can find all the new metric names and possible tags in the https://download.eclipse.org/microprofile/microprofile-fault-tolerance-3.0/microprofile-fault-tolerance-spec-3.0.html#_integration_with_microprofile_metrics[{microprofile-ft} 3.0 specification].
+
+Also, fault tolerance metrics moved from the `application` scope to `base`.
+
+=== Lifecycle specification for circuit breakers and bulkheads
+
+Previously, {microprofile-ft} didn't specify lifecycle for stateful fault tolerance strategies, that is, circuit breakers and bulkheads.
+This becomes important when you have `@RequestScoped` beans, such as:
+
+[source,java]
+----
+@RequestScoped
+public class MyService {
+    @CircuitBreaker
+    public String hello() {
+        ...
+    }
+}
+----
+
+You get a new instance of the bean for each request, and the {microprofile-ft} specification didn't say whether all such instances share the same circuit breaker for the `hello` method, or if each instance has its own.
+The specification now mandates that all instances share the same circuit breaker.
+Bulkheads behave identically.
+
+This behavior was actually implemented by {smallrye-ft} since the beginning, so no behavioral change for you.
+
+== {smallrye-ft} improvements
+
+The {smallrye-ft} 5.0 release brings a lof of additional improvements, both internal and user-facing.
+Changes that concern {smallrye-ft} integrators are described in more detail in a subsequent section.
+
+=== Circuit breaker maintenance
+
+We have previously link:/blog/fault-tolerance-4-2-and-4-3/[introduced] a way to observe circuit breaker state changes, using the `CircuitBreakerStateChanged` CDI event.
+This was subsequently link:/blog/fault-tolerance-4-3-1/[deprecated], because we found a better way.
+
+In this release, the `CircuitBreakerStateChanged` CDI event is removed, and a new API for circuit breaker maintenance is introduced.
+
+Circuit breakers can now be given a name using the `@CircuitBreakerName` annotation.
+Afterwards, you can `@Inject` a `CircuitBreakerMaintenance` and use its `currentState` method to obtain current status of the circuit breaker.
+
+In addition, `CircuitBreakerMaintenance` also allows you to reset any given named circuit breaker (`reset`), or all circuit breakers (`resetAll`), to the initial state.
+
+Read the {uri-smallrye-ft-docs}/usage/extra.html#_circuit_breaker_maintenance[documentation] for more information and examples.
+
+=== `@Blocking` and `@NonBlocking`
+
+In addition to the {microprofile-ft} `@Asynchronous` annotation, we also introduce support for the `@Blocking` and `@NonBlocking` annotations from SmallRye Common.
+
+`@Blocking` means that the annotated method blocks and hence its execution must be offloaded to another thread.
+This is basically equivalent to `@Asynchronous`.
+
+On the other hand, `@NonBlocking` means that the annotated method doesn't block and hence execution _doesn't_ have to be moved to another thread, yet all asynchronous fault tolerance behaviors are still supported.
+
+Note that these annotations are only taken into account if the annotated method also applies some other fault tolerance strategy, such as `@Fallback` or `@Retry`, _and_ if the method returns `CompletionStage` (or some of the additional asynchronous types as described below).
+If there's no fault tolerance annotation, or if the method doesn't return `CompletionStage`, {smallrye-ft} will ignore the `@Blocking` and `@NonBlocking` annotations completely.
+
+Read the {uri-smallrye-ft-docs}/usage/extra.html#blocking-nonblocking[documentation] for more information and examples.
+
+=== Additional asynchronous types
+
+In addition to `CompletionStage`, {smallrye-ft} now supports additional asynchronous types from libraries such as RxJava, Mutiny or Reactor.
+Note that only single-valued types, such as `Single` or `Uni`, are supported; stream-like types are not, because their semantics can't be easily expressed in terms of `CompletionStage`.
+
+This support is based on the https://github.com/smallrye/smallrye-reactive-utils/tree/master/reactive-converters[SmallRye Reactive Converters] project, so you have to make sure that the corresponding converter library is present.
+Integrators may include some converters by default if they choose so.
+
+Read the {uri-smallrye-ft-docs}/usage/extra.html#_additional_asynchronous_types[documentation] for more information and examples.
+
+=== Other improvements
+
+Exception handling in half-open circuit breakers was fixed.
+Previously, half-open circuit breakers would treat all exceptions as failures, which is wrong.
+Even in the half-open state, circuit breakers have to consider the `failOn` and `skipOn` configuration.
+This bug was not caught, because the {microprofile-ft} TCK doesn't have a test.
+That is something we are also going to fix.
+
+Circuit breakers were also improved to reject excess attempts in the half-open state.
+Previously, half-open circuit breakers would allow all invocations to go through, which kinda defeats the purpose of the half-open state.
+This was improved to only allow the first `successThreshold` invocations (also called "probe invocations"); the excess ones are outright rejected.
+It is only after moving to the closed state when all invocations are allowed.
+
+All `CompletionStage` fault tolerance strategies were examined and improved to avoid premature thread offload.
+This was required for the `@NonBlocking` support described above, but it's also an important optimization.
+
+Thread pool usage was radically improved.
+Previously, {smallrye-ft} would use 1 thread pool for executing `@Asynchronous` methods, 1 thread pool for watching for timeouts, and 1 thread pool for each thread pool style bulkhead.
+Now, {smallrye-ft} uses a single thread pool for everything.
+Thread pool style bulkheads were also significantly optimized.
+
+The metrics subsystem was completely rewritten.
+
+Trace logging has been added for all core implementations of fault tolerance strategies.
+We also started using https://jboss-logging.github.io/jboss-logging-tools/[JBoss Logging Tools] to generate logger implementations.
+
+== Integration changes
+
+How {smallrye-ft} can be integrated into a runtime has changed in two important ways: the thread pool integration is now based on CDI, and some additional dependencies are required.
+
+Previously, the thread pool integration was based on `ServiceLoader`.
+Integrators had to provide implementation of the `ExecutorFactory` interface, which allowed customizing how all the different thread pools are created.
+With the 5.0 release, {smallrye-ft} no longer insists on creating its own thread pools.
+Instead, it works with a single thread pool and expects integrator to provide it via CDI.
+
+To do that, integrators should provide a CDI bean implementing the `AsyncExecutorProvider` interface.
+This implementation should be `@Singleton`, must be marked as alternative and selected globally for the application.
+The interface has one method that returns the thread pool which the integrator desires to use for fault tolerance.
+
+If the integrator doesn't want to manage their own thread pool for fault tolerance, they can subclass `DefaultAsyncExecutorProvider`.
+This at least allows customizing the `ThreadFactory`.
+
+As described above, the SmallRye Reactive Converters project is used to add support for additional asynchronous types.
+This means that {smallrye-ft} requires the `io.smallrye.reactive:smallrye-reactive-converter-api` artifact to be present.
+Presence of Reactive Converter API implementations is optional, but the API itself is mandatory.
+
+Read the {uri-smallrye-ft-docs}/integration/intro.html[integration documentation] for more information.
+
+== Summary
+
+Looking back at the link:/blog/fault-tolerance-4-0/[4.0 announcement], we have since implemented almost all the planned improvements in {smallrye-ft} internals.
+On the other hand, the user-facing improvements we planned had to be postponed -- but we implemented other user-facing improvements instead.
+We still intend to work on `@FailFast` or `@AdaptiveBulkhead`, but feature requests or bug reports by actual users will always have priority.
+
+With that in mind, please don't hesitate to get in touch.
+You can use the https://github.com/smallrye/smallrye-fault-tolerance/issues[{smallrye-ft} issue tracker], the https://gitter.im/smallrye-io/community[SmallRye Gitter], the https://gitter.im/smallrye-io/fault-tolerance[{smallrye-ft} Gitter], or the mailto:smallrye@googlegroups.com[SmallRye mailing list].

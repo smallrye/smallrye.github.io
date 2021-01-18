@@ -5,3 +5,5 @@ _site
 .DS_Store
 .idea
 docs/build
+node_modules
+package-lock.json

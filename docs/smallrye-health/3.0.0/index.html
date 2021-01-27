@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>SmallRye Metrics Documentation :: SmallRye documentation</title>
+    <title>SmallRye Health Documentation :: SmallRye documentation</title>
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -27,9 +27,9 @@
             <a class="navbar-item" href="../../index/index/index.html">Index</a>
             <a class="navbar-item" href="../../smallrye-config/index.html">SmallRye Config</a>
             <a class="navbar-item" href="../../smallrye-fault-tolerance/5.0.0/index.html">SmallRye Fault Tolerance</a>
-            <a class="navbar-item" href="../../smallrye-health/3.0.0/index.html">SmallRye Health</a>
+            <a class="navbar-item" href="index.html">SmallRye Health</a>
             <a class="navbar-item" href="../../smallrye-jwt/index.html">SmallRye JWT</a>
-            <a class="navbar-item" href="index.html">SmallRye Metrics</a>
+            <a class="navbar-item" href="../../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
           </div>
         </div>
         <a class="navbar-item" href="https://smallrye.io/">SmallRye.io main website</a>
@@ -38,12 +38,12 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="smallrye-metrics" data-version="3.0.0">
+<div class="nav-container" data-component="smallrye-health" data-version="3.0.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="index.html">SmallRye Metrics</a></h3>
+    <h3 class="title"><a href="index.html">SmallRye Health</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
@@ -55,25 +55,16 @@
     <span class="nav-text">Features on top of the specification</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="extended-metadata.html">Extended metadata</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
-    <span class="nav-text">Integrating SmallRye Metrics into runtimes</span>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cdi-extension.html">CDI Extension</a>
+    <a class="nav-link" href="async-checks.html">Asynchronous health checks</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="base-and-vendor-metrics.html">Base and vendor metrics</a>
+    <a class="nav-link" href="health-groups.html">Health Groups</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="metric-registry-lifecycle.html">Metric registry lifecycle</a>
+    <a class="nav-link" href="health-registry.html">Health Registry</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="jaxrs-metrics.html">JAX-RS metrics</a>
+    <a class="nav-link" href="wellness.html">Wellness</a>
   </li>
 </ul>
   </li>
@@ -91,32 +82,25 @@
   <a href="../../index/index/index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="index.html">SmallRye Metrics</a></li>
+    <li><a href="index.html">SmallRye Health</a></li>
     <li><a href="index.html">Index</a></li>
   </ul>
 </nav>
-<div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">3.0.0</button>
-  <div class="version-menu">
-    <a class="version is-current" href="index.html">3.0.0</a>
-    <a class="version" href="../2.4.0/index.html">2.4.0</a>
-  </div>
-</div>
-  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-metrics/edit/master/doc/modules/ROOT/pages/index.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-health/edit/3.0.x/doc/modules/ROOT/pages/index.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">SmallRye Metrics Documentation</h1>
+<h1 class="page">SmallRye Health Documentation</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>SmallRye Metrics 3.0 is an implementation of the MicroProfile Metrics 3.0 specification.</p>
+<p>SmallRye Health 3.0 is an implementation of the MicroProfile Health 3.0 specification.</p>
 </div>
 <div class="paragraph">
-<p>Runtimes that currently use it as their metrics implementation include:</p>
+<p>Runtimes that currently use it as their health monitoring implementation include:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -139,13 +123,13 @@
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://github.com/smallrye/smallrye-metrics/">SmallRye Metrics GitHub project repository</a></p>
+<p><a href="https://github.com/smallrye/smallrye-health/">SmallRye Health GitHub project repository</a></p>
 </li>
 <li>
-<p><a href="https://github.com/eclipse/microprofile-metrics/">Eclipse MicroProfile Metrics repository</a></p>
+<p><a href="https://github.com/eclipse/microprofile-health/">Eclipse MicroProfile Health repository</a></p>
 </li>
 <li>
-<p><a href="https://download.eclipse.org/microprofile/microprofile-metrics-3.0/microprofile-metrics-spec-3.0.html">MicroProfile Metrics 3.0 specification text</a></p>
+<p><a href="https://download.eclipse.org/microprofile/microprofile-health-3.0/microprofile-health-spec-3.0.html">MicroProfile 3.0 specification text</a></p>
 </li>
 </ul>
 </div>

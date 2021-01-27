@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Asynchronous health checks :: SmallRye documentation</title>
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">SmallRye documentation</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Projects</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="../../index/index/index.html">Index</a>
+            <a class="navbar-item" href="../../smallrye-config/index.html">SmallRye Config</a>
+            <a class="navbar-item" href="../../smallrye-fault-tolerance/5.0.0/index.html">SmallRye Fault Tolerance</a>
+            <a class="navbar-item" href="index.html">SmallRye Health</a>
+            <a class="navbar-item" href="../../smallrye-jwt/index.html">SmallRye JWT</a>
+            <a class="navbar-item" href="../../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
+          </div>
+        </div>
+        <a class="navbar-item" href="https://smallrye.io/">SmallRye.io main website</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="smallrye-health" data-version="3.0.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">SmallRye Health</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html">Index</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Features on top of the specification</span>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="async-checks.html">Asynchronous health checks</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="health-groups.html">Health Groups</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="health-registry.html">Health Registry</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="wellness.html">Wellness</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index/index/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">SmallRye Health</a></li>
+    <li>Features on top of the specification</li>
+    <li><a href="async-checks.html">Asynchronous health checks</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-health/edit/3.0.x/doc/modules/ROOT/pages/async-checks.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Asynchronous health checks</h1>
+<div class="sect1">
+<h2 id="_defining_asynchronous_checks"><a class="anchor" href="#_defining_asynchronous_checks"></a>Defining asynchronous checks</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>SmallRye Health provides a way to define asynchronous checks that can be consumed
+in the reactive applications in a non-blocking manner. These checks are defined in
+a very similar way to the usual health checks only they implement a different interface:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Liveness <i class="conum" data-value="1"></i><b>(1)</b>
+@ApplicationScoped <i class="conum" data-value="2"></i><b>(2)</b>
+public class LivenessAsync implements AsyncHealthCheck { <i class="conum" data-value="3"></i><b>(3)</b>
+
+    @Override
+    public Uni&lt;HealthCheckResponse&gt; call() { <i class="conum" data-value="4"></i><b>(4)</b>
+        return Uni.createFrom().item(HealthCheckResponse.up("liveness-async"))
+                .onItem().delayIt().by(Duration.ofMillis(10));
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The MicroProfile Health CDI qualifier is still required</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The check still needs to be a CDI bean</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The asynchronous checks must implement the <code>AsyncHealthCheck</code> interface</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The return type of the health check <code>call()</code> method is <code>Uni&lt;HealthCheckResponse&gt;</code></td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The <code>Uni</code> is one of the main types included in the <a href="https://smallrye.io/smallrye-mutiny/">Mutiny project</a>
+on top of which asynchronous checks are built. Mutiny provides several ways to transform the
+most common reactive types to <code>Uni</code>, so if you are used to work with different reacitve
+library it should be an issue.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_consuming_health_checks_asynchronously"><a class="anchor" href="#_consuming_health_checks_asynchronously"></a>Consuming health checks asynchronously</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>SmallRyeHealthReporter</code> class was extended to provide variants of get health methods
+that end with <code>*Async()</code> (e.g. <code>getLivenessAsync()</code>) that return an <code>Uni&lt;SmallRyeHealth&gt;</code> so it can
+also be included in any reactive pipeline. Example uses of this API is demonstrated for instance in
+the <code>AsyncHealthTest</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_references"><a class="anchor" href="#_references"></a>References</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/smallrye/smallrye-health/blob/master/api/src/main/java/io/smallrye/health/api/AsyncHealthCheck.java"><code>AsyncHealthCheck</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/smallrye/smallrye-health/blob/master/implementation/src/main/java/io/smallrye/health/SmallRyeHealthReporter.java"><code>SmallRyeHealthReporter</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/smallrye/smallrye-health/blob/master/testsuite/experimental/src/test/java/io/smallrye/health/test/AsyncHealthTest.java"><code>AsyncHealthTest</code></a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the SmallRye Antora UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

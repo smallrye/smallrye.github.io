@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Health Groups :: SmallRye documentation</title>
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">SmallRye documentation</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Projects</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="../../index/index/index.html">Index</a>
+            <a class="navbar-item" href="../../smallrye-config/index.html">SmallRye Config</a>
+            <a class="navbar-item" href="../../smallrye-fault-tolerance/5.0.0/index.html">SmallRye Fault Tolerance</a>
+            <a class="navbar-item" href="index.html">SmallRye Health</a>
+            <a class="navbar-item" href="../../smallrye-jwt/index.html">SmallRye JWT</a>
+            <a class="navbar-item" href="../../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
+          </div>
+        </div>
+        <a class="navbar-item" href="https://smallrye.io/">SmallRye.io main website</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="smallrye-health" data-version="3.0.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">SmallRye Health</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html">Index</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Features on top of the specification</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="async-checks.html">Asynchronous health checks</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="health-groups.html">Health Groups</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="health-registry.html">Health Registry</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="wellness.html">Wellness</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index/index/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">SmallRye Health</a></li>
+    <li>Features on top of the specification</li>
+    <li><a href="health-groups.html">Health Groups</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-health/edit/3.0.x/doc/modules/ROOT/pages/health-groups.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Health Groups</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>A health group is simply a user defined group of health checks. Namely, liveness and readiness
+(and experimental wellness) are predefined health groups. With this feature users are allowed to
+define any number of custom health groups and the individual checks that will belong to them.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_including_a_check_in_a_health_group"><a class="anchor" href="#_including_a_check_in_a_health_group"></a>Including a check in a health group</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To include a health check in a custom health group you can use the <code>HealthGroup</code> annotations:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@HealthGroup("group1") <i class="conum" data-value="1"></i><b>(1)</b>
+@HealthGroup("group2") <i class="conum" data-value="2"></i><b>(2)</b>
+@ApplicationScoped
+public class SuccessfulCustom implements HealthCheck {
+    @Override
+    public HealthCheckResponse call() {
+        return HealthCheckResponse.up("successful-check");
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The check will belong to the health group <em>"group1"</em></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The check will also belong to the health group <em>"group2"</em></td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>A health check can be included in any number of health groups including the liveness and readiness:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@HealthGroup("custom1")
+@HealthGroup("different-group")
+@Liveness
+@ApplicationScoped
+public class GroupsCheck implements HealthCheck { ...</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_accessing_the_health_groups"><a class="anchor" href="#_accessing_the_health_groups"></a>Accessing the health groups</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The custom health groups are exposed under the <code>/health/group</code> resource tree:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Path</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/health/group</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All health checks in all groups</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/health/group/{group-name}</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All health checks in the group called {group-name}</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Please note that is totally valid to define custom health group as a liveness and/or readiness
+probe if required. Both liveness and readiness are shorcuts for predefined health groups.</p>
+</div>
+<div class="paragraph">
+<p>In the previous example, the <code>GroupsCheck</code> will be invoked when accessing:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>/health/group</code></p>
+</li>
+<li>
+<p><code>/health/group/custom1</code></p>
+</li>
+<li>
+<p><code>/health/group/different-group</code></p>
+</li>
+<li>
+<p><code>/health/live</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>However, it won&#8217;t be invoked for instance when accessing:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>/health/group/foobar</code></p>
+</li>
+<li>
+<p><code>/health/ready</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_references"><a class="anchor" href="#_references"></a>References</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/smallrye/smallrye-health/blob/master/api/src/main/java/io/smallrye/health/api/HealthGroup.java"><code>HealthGroup</code></a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the SmallRye Antora UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

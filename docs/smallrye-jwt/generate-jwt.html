@@ -266,14 +266,24 @@ Jwt.signAndEncrypt("/claims.json");</code></pre>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.encrypt.key-location</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.encrypt.key.location</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Location of a key which will be used to encrypt the claims or inner JWT when a no-argument encrypt() method is called.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.sign.key-location</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.encrypt.key-location</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Location of a key which will be used to encrypt the claims or inner JWT when a no-argument encrypt() method is called. This property is deprecated and will be removed in the next major release.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.sign.key.location</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Location of a key which will be used to sign the claims when either a no-argument sign() or innerSign() method is called.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.sign.key-location</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Location of a key which will be used to sign the claims when either a no-argument sign() or innerSign() method is called. This property is deprecated and will be removed in the next major release.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.new-token.lifespan</code></p></td>

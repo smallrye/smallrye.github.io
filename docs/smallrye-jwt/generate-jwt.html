@@ -271,19 +271,9 @@ Jwt.signAndEncrypt("/claims.json");</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Location of a key which will be used to encrypt the claims or inner JWT when a no-argument encrypt() method is called.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.encrypt.key-location</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Location of a key which will be used to encrypt the claims or inner JWT when a no-argument encrypt() method is called. This property is deprecated and will be removed in the next major release.</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.sign.key.location</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Location of a key which will be used to sign the claims when either a no-argument sign() or innerSign() method is called.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.sign.key-location</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Location of a key which will be used to sign the claims when either a no-argument sign() or innerSign() method is called. This property is deprecated and will be removed in the next major release.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.new-token.lifespan</code></p></td>
@@ -299,6 +289,11 @@ Jwt.signAndEncrypt("/claims.json");</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.new-token.audience</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Token audience which can be used to set an <code>aud</code> (audience) claim value if this claim has not already been set.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.new-token.override-matching-claims</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Override the existing <code>iss</code> or <code>aud</code> claim values if <code>smallrye.jwt.new-token.issuer</code> or <code>smallrye.jwt.new-token.audience</code> properties are set.</p></td>
 </tr>
 </tbody>
 </table>

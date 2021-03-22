@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: SmallRye documentation</title>
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">SmallRye documentation</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Projects</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="../../../index/index/index.html">Index</a>
+            <a class="navbar-item" href="../index.html">SmallRye Config</a>
+            <a class="navbar-item" href="../../../smallrye-fault-tolerance/5.0.0/index.html">SmallRye Fault Tolerance</a>
+            <a class="navbar-item" href="../../../smallrye-health/3.0.0/index.html">SmallRye Health</a>
+            <a class="navbar-item" href="../../../smallrye-jwt/index.html">SmallRye JWT</a>
+            <a class="navbar-item" href="../../../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
+          </div>
+        </div>
+        <a class="navbar-item" href="https://smallrye.io/">SmallRye.io main website</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="smallrye-config" data-version="main">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">SmallRye Config</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Index</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="config.html">Config</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../config-sources/config-sources.html">Config Sources</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../converters/converters.html">Converters</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../interceptors/interceptors.html">Interceptors</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../mapping/mapping.html">Mapping</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../cdi/cdi.html">CDI</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../../index/index/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-config/edit/main/doc/modules/ROOT/pages/config/locations.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<div class="sect1">
+<h2 id="locations"><a class="anchor" href="#locations"></a>Locations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Additionally, to the default config locations specified by the MicroProfile Config specification, SmallRye Config
+provides a way to scan additional locations for configuration properties files.</p>
+</div>
+<div class="paragraph">
+<p>The <code>smallrye.config.locations</code> configuration property accepts multiple locations separated by a comma <code>,</code> and each must
+represent a valid <code>URI</code>. The supported <code>URI</code> schemes are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>file or directory</p>
+</li>
+<li>
+<p>classpath resource</p>
+</li>
+<li>
+<p>jar resource</p>
+</li>
+<li>
+<p>http resource</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Each <code>URI</code> scheme loads all discovered resources in a <code>ConfigSource</code>. All sources are loaded with the default ordinal
+<code>100</code>. The ordinal may be overridden directly in the resource by setting the <code>config_ordinal</code> property. Sources are
+sorted first by their ordinal, then by location order, and finally by loading order.</p>
+</div>
+<div class="paragraph">
+<p>If a profile is active, and the <code>URI</code> represents a single resource (for instance a file), then resources that match the
+active profile are also loaded. The profile resource name must follow the pattern: <code>{location}-{profile}</code>. A profile
+resource is only loaded if the unprofiled resource is also available in the same location. This is to keep a consistent
+loading order and pair all the resources together.</p>
+</div>
+<div class="paragraph">
+<p>Profile resources are not taken into account if the location is a directory since there is no reliable way to discover
+which file is the main resource. Properties that use the profile prefix syntax <code>%profile.</code> will work as expected.</p>
+</div>
+<div class="sect2">
+<h3 id="_examples"><a class="anchor" href="#_examples"></a>Examples</h3>
+<div class="sect3">
+<h4 id="_all_properties_files_from_a_directory"><a class="anchor" href="#_all_properties_files_from_a_directory"></a>All properties files from a directory:</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties"># loads all files from a relative path
+smallrye.config.locations=./src/main/resources/
+
+# loads all files from an absolute path
+smallrye.config.locations=/user/local/config</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For relative paths, the JVM <code>user.dir</code> property defines the current directory.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_a_specific_file"><a class="anchor" href="#_a_specific_file"></a>A specific file :</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">smallrye.config.locations=./src/main/resources/additional.properties</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If a profile <code>dev</code> is active, and an <code>additional-dev.properties</code> file exists, this will also be loaded.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_all_additional_properties_files_from_the_classpath"><a class="anchor" href="#_all_additional_properties_files_from_the_classpath"></a>All <code>additional.properties</code> files from the classpath:</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">smallrye.config.locations=additional.properties</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If a profile <code>prod</code> is active, and an <code>additional-prod.properties</code> resources exists next to the <code>additional.properties</code>
+resource, this will also be loaded.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_the_resources_properties_file_from_a_specific_jar"><a class="anchor" href="#_the_resources_properties_file_from_a_specific_jar"></a>The <code>resources.properties</code> file from a specific jar:</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">smallrye.config.locations=jar:file:///user/local/app/lib/resources-.jar!/resources.properties</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If a profile <code>test</code> is active, and an <code>additional-test.properties</code> respource exists, this will also be loaded.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_the_config_properties_file_from_a_web_server"><a class="anchor" href="#_the_config_properties_file_from_a_web_server"></a>The <code>config.properties</code> file from a web server:</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">smallrye.config.locations=http://localhost:8080/config/config.</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the SmallRye Antora UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

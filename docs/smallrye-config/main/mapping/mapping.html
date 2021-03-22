@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Config Mappings :: SmallRye documentation</title>
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">SmallRye documentation</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Projects</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="../../../index/index/index.html">Index</a>
+            <a class="navbar-item" href="../index.html">SmallRye Config</a>
+            <a class="navbar-item" href="../../../smallrye-fault-tolerance/5.0.0/index.html">SmallRye Fault Tolerance</a>
+            <a class="navbar-item" href="../../../smallrye-health/3.0.0/index.html">SmallRye Health</a>
+            <a class="navbar-item" href="../../../smallrye-jwt/index.html">SmallRye JWT</a>
+            <a class="navbar-item" href="../../../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
+          </div>
+        </div>
+        <a class="navbar-item" href="https://smallrye.io/">SmallRye.io main website</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="smallrye-config" data-version="main">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">SmallRye Config</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Index</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../config/config.html">Config</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../config-sources/config-sources.html">Config Sources</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../converters/converters.html">Converters</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../interceptors/interceptors.html">Interceptors</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="mapping.html">Mapping</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../cdi/cdi.html">CDI</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../../index/index/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">SmallRye Config</a></li>
+    <li><a href="mapping.html">Mapping</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-config/edit/main/doc/modules/ROOT/pages/mapping/mapping.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Config Mappings</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>With SmallRye Config Mappings, it is possible to group multiple configuration properties in a single interface that
+share the same prefix.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_usage"><a class="anchor" href="#_usage"></a>Usage</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Config Mapping requires an interface with minimal metadata configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@ConfigMapping(prefix = "server")
+interface Server {
+    String host();
+
+    int port();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>Server</code> interface is able to map configurations with the name <code>server.host</code> into the <code>Server.host()</code> method and
+<code>server.port</code> into <code>Server.port()</code> method. The configuration property name to lookup is built from the prefix, and the
+method name with <code>.</code> (dot) as the separator.</p>
+</div>
+<div class="sect2">
+<h3 id="_registration"><a class="anchor" href="#_registration"></a>Registration</h3>
+<div class="paragraph">
+<p>Registration of Config Mapping aware interface happens automatically in CDI aware environments with the <code>@ConfigMapping</code>
+annotation. In non-CDI environments, the Config Mapping may be registered via <code>SmallRyeConfigBuilder#withMapping</code>. In
+this case, the <code>@ConfigMapping</code> is completely optional.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_retrieval"><a class="anchor" href="#_retrieval"></a>Retrieval</h3>
+<div class="paragraph">
+<p>To retrieve the Config Mapping instance in CDI environments, a simple <code>@Inject</code> of the Config Mapping interface is
+enough:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Inject
+Server server;
+
+static void businessMethod() {
+    String host = server.host();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In non-CDI environments, to retrieve the Config Mapping instance, the API
+<code>io.smallrye.config.SmallRyeConfig#getConfigMapping</code> may be used:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Server server = config.getConfigMapping(Server.class);</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_features"><a class="anchor" href="#_features"></a>Features</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The SmallRye Config Mapping supports the following set of features:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Automatic conversion of the configuration type.</p>
+</li>
+<li>
+<p>Nested Config Mapping groups.</p>
+</li>
+<li>
+<p>Validate if configuration properties exist in the startup.</p>
+</li>
+<li>
+<p>Support for <code>Map</code>, <code>Optional</code> and primitive types.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Additionally, the annotations <code>@WithName</code>, <code>@WithDefault</code>, <code>@WithConverter</code> may be used to override the default
+behaviours of Config Mapping interfaves.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_examples"><a class="anchor" href="#_examples"></a>Examples</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_simple_config_mapping"><a class="anchor" href="#_simple_config_mapping"></a>Simple Config Mapping</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">interface Server {
+    String host();
+
+    int port();
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_nested_config_mapping"><a class="anchor" href="#_nested_config_mapping"></a>Nested Config Mapping</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">interface ServerSub {
+    @WithParentName
+    ServerSubHostAndPort subHostAndPort();
+
+    @WithParentName
+    ServerSubName subName();
+}
+
+interface ServerSubHostAndPort {
+    String host();
+
+    int port();
+}
+
+interface ServerSubName {
+    String name();
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_types_config_mapping"><a class="anchor" href="#_types_config_mapping"></a>Types Config Mapping</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public interface SomeTypes {
+    @WithName("int")
+    int intPrimitive();
+
+    @WithName("int")
+    Integer intWrapper();
+
+    @WithName("long")
+    long longPrimitive();
+
+    @WithName("long")
+    Long longWrapper();
+
+    @WithName("float")
+    float floatPrimitive();
+
+    @WithName("float")
+    Float floatWrapper();
+
+    @WithName("double")
+    double doublePrimitive();
+
+    @WithName("double")
+    Double doubleWrapper();
+
+    @WithName("char")
+    char charPrimitive();
+
+    @WithName("char")
+    Character charWrapper();
+
+    @WithName("boolean")
+    boolean booleanPrimitive();
+
+    @WithName("boolean")
+    Boolean booleanWrapper();
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_optional_config_mapping"><a class="anchor" href="#_optional_config_mapping"></a>Optional Config Mapping</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public interface Optionals {
+    Optional&lt;Server&gt; server();
+
+    Optional&lt;String&gt; optional();
+
+    @WithName("optional.int")
+    OptionalInt optionalInt();
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_collections_config_mapping"><a class="anchor" href="#_collections_config_mapping"></a>Collections Config Mapping</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public interface CollectionTypes {
+    @WithName("strings")
+    List&lt;String&gt; listStrings();
+
+    @WithName("ints")
+    List&lt;Integer&gt; listInts();
+}
+
+public interface Maps {
+    @WithParentName
+    Map&lt;String, Server&gt; server();
+
+    Map&lt;String, String&gt; anotherServer();
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_defaults_config_mapping"><a class="anchor" href="#_defaults_config_mapping"></a>Defaults Config Mapping</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public interface Defaults {
+    @WithDefault("foo")
+    String foo();
+
+    @WithDefault("bar")
+    String bar();
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_converter_config_mapping"><a class="anchor" href="#_converter_config_mapping"></a>Converter Config Mapping</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public interface Converters {
+    @WithConverter(FooBarConverter.class)
+    String foo();
+}
+
+public static class FooBarConverter implements Converter&lt;String&gt; {
+    @Override
+    public String convert(final String value) {
+        return "bar";
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the SmallRye Antora UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

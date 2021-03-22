@@ -25,7 +25,7 @@
           <a class="navbar-link" href="#">Projects</a>
           <div class="navbar-dropdown">
             <a class="navbar-item" href="../index/index/index.html">Index</a>
-            <a class="navbar-item" href="../smallrye-config/index.html">SmallRye Config</a>
+            <a class="navbar-item" href="../smallrye-config/main/index.html">SmallRye Config</a>
             <a class="navbar-item" href="../smallrye-fault-tolerance/5.0.0/index.html">SmallRye Fault Tolerance</a>
             <a class="navbar-item" href="../smallrye-health/3.0.0/index.html">SmallRye Health</a>
             <a class="navbar-item" href="index.html">SmallRye JWT</a>
@@ -74,7 +74,7 @@
     <li><a href="generate-jwt.html">Generate JWT Tokens</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-jwt/edit/master/doc/modules/ROOT/pages/generate-jwt.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-jwt/edit/main/doc/modules/ROOT/pages/generate-jwt.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -168,7 +168,7 @@ property values and <code>jti</code> (unique token identifier) claim if they hav
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">import io.smallrye.jwt.build.Jwt;
 ...
 
-// Sign the claims using the private key loaded from the location set with a 'smallrye.jwt.sign.key-location' property.
+// Sign the claims using the private key loaded from the location set with a 'smallrye.jwt.sign.key.location' property.
 // No 'jws()' transition is necessary.
 String jwt1 = Jwt.claims("/tokenClaims.json").sign();
 
@@ -194,7 +194,7 @@ transition:</p>
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">import io.smallrye.jwt.build.Jwt;
 ...
 
-// Encrypt the claims using the public key loaded from the location set with a 'smallrye.jwt.encrypt.key-location' property.
+// Encrypt the claims using the public key loaded from the location set with a 'smallrye.jwt.encrypt.key.location' property.
 String jwt1 = Jwt.claims("/tokenClaims.json").jwe().encrypt();
 
 // Set the headers and encrypt the claims with an RSA public key loaded in the code (the implementation of this method is omitted).
@@ -218,14 +218,14 @@ version of smallrye-jwt) and the <code>enc</code> (content encryption header) is
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">import io.smallrye.jwt.build.Jwt;
 ...
 
-// Sign the claims and encrypt the nested token using the private and public keys loaded from the locations set with the 'smallrye.jwt.sign.key-location' and 'smallrye.jwt.encrypt.key-location' properties respectively.
+// Sign the claims and encrypt the nested token using the private and public keys loaded from the locations set with the 'smallrye.jwt.sign.key.location' and 'smallrye.jwt.encrypt.key.location' properties respectively.
 String jwt = Jwt.claims("/tokenClaims.json").innerSign().encrypt();</code></pre>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_fast_jwt_generation"><a class="anchor" href="#_fast_jwt_generation"></a>Fast JWT Generation</h3>
 <div class="paragraph">
-<p>If <code>smallrye.jwt.sign.key-location</code> or/and <code>smallrye.jwt.encrypt.key-location</code> properties are set then one can secure the existing claims (resources, maps, JsonObjects) with a single call:</p>
+<p>If <code>smallrye.jwt.sign.key.location</code> or/and <code>smallrye.jwt.encrypt.key.location</code> properties are set then one can secure the existing claims (resources, maps, JsonObjects) with a single call:</p>
 </div>
 <div class="listingblock">
 <div class="content">

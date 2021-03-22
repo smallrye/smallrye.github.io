@@ -136,7 +136,7 @@ SmallRye Fault Tolerance creates several thread pools (``ExecutorService``s).
 One for asynchronous invocations, one for watching timeouts, and then one for each threadpool-style bulkhead.
 You might want to customize how these thread pools are created.
 For example, if you integrate SmallRye Fault Tolerance into a Java EE application server, you probably want these thread pools to be managed.
-We provide an SPI that you can implement for this exact purpose: https://github.com/smallrye/smallrye-fault-tolerance/blob/master/implementation/fault-tolerance/src/main/java/io/smallrye/faulttolerance/ExecutorFactory.java[`ExecutorFactory`].
+We provide an SPI that you can implement for this exact purpose: https://github.com/smallrye/smallrye-fault-tolerance/blob/main/implementation/fault-tolerance/src/main/java/io/smallrye/faulttolerance/ExecutorFactory.java[`ExecutorFactory`].
 
 Size of these thread pools can be configured using the following configuration properties:
 

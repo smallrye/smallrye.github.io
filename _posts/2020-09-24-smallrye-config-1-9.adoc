@@ -123,12 +123,12 @@ public interface Server {
 
 For additional information, check out our documentation about
 https://smallrye.io/docs/smallrye-config/mapping/mapping.html[Config Mappings] and the example in the
-https://github.com/smallrye/smallrye-config/tree/master/examples/mapping SmallRye Config Github repo.
+https://github.com/smallrye/smallrye-config/tree/main/examples/mapping SmallRye Config Github repo.
 
 In MicroProfile Config 2.0, an initial version for this feature will be available. It doesn't support all the features
 implemented in SmallRye Config, but the plan is to keep evolving and add more functionality based on the feedback of
 the community. You can read more about it
-https://github.com/eclipse/microprofile-config/blob/master/spec/src/main/asciidoc/configexamples.asciidoc[here].
+https://github.com/eclipse/microprofile-config/blob/main/spec/src/main/asciidoc/configexamples.asciidoc[here].
 
 == Configurable Config Sources
 
@@ -168,7 +168,7 @@ standard Java `ServiceLoader`.
 For additional information, check out our documentation about
 https://smallrye.io/docs/smallrye-config/config-sources/config-sources.html#_config_source_factory[Config Mappings] and
 the example in the
-https://github.com/smallrye/smallrye-config/tree/master/examples/configmap SmallRye Config Github repo.
+https://github.com/smallrye/smallrye-config/tree/main/examples/configmap SmallRye Config Github repo.
 
 == Default Values
 

@@ -105,7 +105,7 @@ Read the {uri-smallrye-ft-docs}/usage/extra.html#blocking-nonblocking[documentat
 In addition to `CompletionStage`, {smallrye-ft} now supports additional asynchronous types from libraries such as RxJava, Mutiny or Reactor.
 Note that only single-valued types, such as `Single` or `Uni`, are supported; stream-like types are not, because their semantics can't be easily expressed in terms of `CompletionStage`.
 
-This support is based on the https://github.com/smallrye/smallrye-reactive-utils/tree/master/reactive-converters[SmallRye Reactive Converters] project, so you have to make sure that the corresponding converter library is present.
+This support is based on the https://github.com/smallrye/smallrye-reactive-utils/tree/main/reactive-converters[SmallRye Reactive Converters] project, so you have to make sure that the corresponding converter library is present.
 Integrators may include some converters by default if they choose so.
 
 Read the {uri-smallrye-ft-docs}/usage/extra.html#_additional_asynchronous_types[documentation] for more information and examples.

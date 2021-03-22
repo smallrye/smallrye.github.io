@@ -53,8 +53,7 @@ There is a caveat in using Antora together with GitHub Pages, because GitHub Pag
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://github.com/smallrye/smallrye.github.io/blob/master/CONTRIBUTING.md) for details on our code of conduct,
-and the process for submitting pull requests to us.
+Please refer to our Wiki for the [Contribution Guidelines](https://github.com/smallrye/smallrye/).
 
 ## License
 

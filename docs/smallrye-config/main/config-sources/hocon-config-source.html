@@ -27,7 +27,7 @@
             <a class="navbar-item" href="../../../index/index/index.html">Index</a>
             <a class="navbar-item" href="../index.html">SmallRye Config</a>
             <a class="navbar-item" href="../../../smallrye-fault-tolerance/5.0.0/index.html">SmallRye Fault Tolerance</a>
-            <a class="navbar-item" href="../../../smallrye-health/3.0.0/index.html">SmallRye Health</a>
+            <a class="navbar-item" href="../../../smallrye-health/3.0.1/index.html">SmallRye Health</a>
             <a class="navbar-item" href="../../../smallrye-jwt/index.html">SmallRye JWT</a>
             <a class="navbar-item" href="../../../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
           </div>
@@ -96,20 +96,8 @@
 <p>ConfigSource implementation to support <a href="https://github.com/lightbend/config/blob/main/HOCON.md">HOCON</a> file format.</p>
 </div>
 <div class="paragraph">
-<p>This Configuration Source will be looking for the following files in this order of priority:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><code>META-INF/microprofile-config.conf</code></p>
-</li>
-<li>
-<p><code>WEB-INF/classes/META-INF/microprofile-config.conf</code></p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>These configuration files have a lower priority than the default sources.</p>
+<p>This Configuration Source will be looking for the following file <code>META-INF/microprofile-config.conf</code> and will be loaded
+with a lower ordinal than the default sources. The loading ordinal is <code>50</code>.</p>
 </div>
 <div class="sect2">
 <h3 id="_usage"><a class="anchor" href="#_usage"></a>Usage</h3>

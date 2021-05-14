@@ -27,7 +27,7 @@
             <a class="navbar-item" href="../index/index/index.html">Index</a>
             <a class="navbar-item" href="../smallrye-config/main/index.html">SmallRye Config</a>
             <a class="navbar-item" href="../smallrye-fault-tolerance/5.0.0/index.html">SmallRye Fault Tolerance</a>
-            <a class="navbar-item" href="../smallrye-health/3.0.0/index.html">SmallRye Health</a>
+            <a class="navbar-item" href="../smallrye-health/3.0.1/index.html">SmallRye Health</a>
             <a class="navbar-item" href="index.html">SmallRye JWT</a>
             <a class="navbar-item" href="../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
           </div>
@@ -110,9 +110,24 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">Config property allows for an external or internal location of Public Key to be specified.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mp.jwt.verify.publickey.algorithm</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>RS256</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Signature algorithm. Set it to <code>ES256</code> to support the Elliptic Curve signature algorithm.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mp.jwt.decrypt.key.location</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Config property allows for an external or internal location of Private Decryption Key to be specified.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>mp.jwt.verify.issuer</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Expected value of the JWT <code>iss</code> (issuer) claim.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mp.jwt.verify.audiences</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>none</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Comma separated list of the audiences that a token <code>aud</code> claim may contain.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>mp.jwt.token.header</code></p></td>
@@ -123,11 +138,6 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>mp.jwt.token.cookie</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>Bearer</code></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name of the cookie containing a token. This property will be effective only if  <code>mp.jwt.token.header</code> is set to <code>Cookie</code>.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mp.jwt.verify.audiences</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>none</code></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Comma separated list of the audiences that a token <code>aud</code> claim may contain.</p></td>
 </tr>
 </tbody>
 </table>
@@ -183,7 +193,7 @@ precedence:</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.verify.algorithm</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>RS256</code></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Signature algorithm. Set it to <code>ES256</code> to support the Elliptic Curve signature algorithm.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Signature algorithm. Set it to <code>ES256</code> to support the Elliptic Curve signature algorithm. This property is deprecated, use <code>mp.jwt.verify.publickey.algorithm</code>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.verify.key-format</code></p></td>
@@ -203,12 +213,12 @@ precedence:</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.token.header</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>Authorization</code></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Set this property if another header such as <code>Cookie</code> is used to pass the token.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set this property if another header such as <code>Cookie</code> is used to pass the token. This property is deprecated, use <code>mp.jwt.token.header</code>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.token.cookie</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the cookie containing a token. This property will be effective only if  <code>smallrye.jwt.token.header</code> is set to <code>Cookie</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the cookie containing a token. This property will be effective only if  <code>smallrye.jwt.token.header</code> is set to <code>Cookie</code>. This property is deprecated, use <code>mp.jwt.token.cookie</code>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.always-check-authorization</code></p></td>
@@ -288,7 +298,7 @@ precedence:</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.decrypt.key.location</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Config property allows for an external or internal location of Private Decryption Key to be specified.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Config property allows for an external or internal location of Private Decryption Key to be specified. This property is deprecated, use <code>mp.jwt.decrypt.key.location</code>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.decrypt.algorithm</code></p></td>

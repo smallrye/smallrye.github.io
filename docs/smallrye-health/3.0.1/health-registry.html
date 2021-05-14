@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Health Registry :: SmallRye documentation</title>
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">SmallRye documentation</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Projects</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="../../index/index/index.html">Index</a>
+            <a class="navbar-item" href="../../smallrye-config/main/index.html">SmallRye Config</a>
+            <a class="navbar-item" href="../../smallrye-fault-tolerance/5.0.0/index.html">SmallRye Fault Tolerance</a>
+            <a class="navbar-item" href="index.html">SmallRye Health</a>
+            <a class="navbar-item" href="../../smallrye-jwt/index.html">SmallRye JWT</a>
+            <a class="navbar-item" href="../../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
+          </div>
+        </div>
+        <a class="navbar-item" href="https://smallrye.io/">SmallRye.io main website</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="smallrye-health" data-version="3.0.1">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">SmallRye Health</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html">Index</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Features on top of the specification</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="async-checks.html">Asynchronous health checks</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="health-groups.html">Health Groups</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="health-registry.html">Health Registry</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="wellness.html">Wellness</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index/index/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">SmallRye Health</a></li>
+    <li>Features on top of the specification</li>
+    <li><a href="health-registry.html">Health Registry</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-health/edit/3.0.x/doc/modules/ROOT/pages/health-registry.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Health Registry</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>A health registry provides a way to register the health checks programatically. It also allows
+to remove the programatically registered health checks when they are no longer needed. This presents
+an option to dynamically register and unregister health checks based on the user defined criteria.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_health_registry_usage"><a class="anchor" href="#_health_registry_usage"></a>Health Registry usage</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>HealthRegistry</code> can be injected as a CDI bean with <code>@Liveness</code> or <code>@Readiness</code> qualifiers:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Inject
+@Liveness
+HealthRegistry livenessHealthRegistry;
+
+@Inject
+@Readiness
+HealthRegistry readinessHealthRegistry;</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Health group registry have not been requested as of yet but if some applications would find
+it useful please raise a new issue in the <a href="https://github.com/smallrye/smallrye-health/issues">SmallRye Health issue tracker</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can then register your health check by simple calling the <code>register</code> methods:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public void register() {
+    livenessHealthRegistry.register(new TestLiveness()); <i class="conum" data-value="1"></i><b>(1)</b>
+}
+
+public void registerReady() {
+    readinessHealthRegistry.register("dynamic-readiness", new TestReadiness()); <i class="conum" data-value="2"></i><b>(2)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>If no user defined name is provided during registration the health check is registered as
+<code>TestLiveness.class.getName()</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The user provided name <code>dynamic-readiness</code> will be used as the check identificator</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To unregister the registered health check you can call the <code>remove</code> methods:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public void remove() {
+    livenessHealthRegistry.remove(TestLiveness.class.getName());
+}
+
+public void removeReady() {
+    readinessHealthRegistry.remove("dynamic-readiness");
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_resources"><a class="anchor" href="#_resources"></a>Resources</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/smallrye/smallrye-health/blob/3.0.x/api/src/main/java/io/smallrye/health/api/HealthRegistry.java"><code>HealthRegistry</code></a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the SmallRye Antora UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

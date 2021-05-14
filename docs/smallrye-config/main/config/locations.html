@@ -27,7 +27,7 @@
             <a class="navbar-item" href="../../../index/index/index.html">Index</a>
             <a class="navbar-item" href="../index.html">SmallRye Config</a>
             <a class="navbar-item" href="../../../smallrye-fault-tolerance/5.0.0/index.html">SmallRye Fault Tolerance</a>
-            <a class="navbar-item" href="../../../smallrye-health/3.0.0/index.html">SmallRye Health</a>
+            <a class="navbar-item" href="../../../smallrye-health/3.0.1/index.html">SmallRye Health</a>
             <a class="navbar-item" href="../../../smallrye-jwt/index.html">SmallRye JWT</a>
             <a class="navbar-item" href="../../../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
           </div>
@@ -117,9 +117,11 @@ represent a valid <code>URI</code>. The supported <code>URI</code> schemes are:<
 </ul>
 </div>
 <div class="paragraph">
-<p>Each <code>URI</code> scheme loads all discovered resources in a <code>ConfigSource</code>. All sources are loaded with the default ordinal
-<code>100</code>. The ordinal may be overridden directly in the resource by setting the <code>config_ordinal</code> property. Sources are
-sorted first by their ordinal, then by location order, and finally by loading order.</p>
+<p>Each <code>URI</code> scheme loads all discovered resources in a <code>ConfigSource</code>. All loaded sources use the same ordinal of the
+source that found the <code>smallrye.config.locations</code> configuration property. For instance, if <code>smallrye.config.locations</code>
+is set as a system property, then all loaded sources have their ordinals set to <code>400</code> (system properties use <code>400</code> as
+their ordinal). The ordinal may be overridden directly in the resource by setting the <code>config_ordinal</code> property. Sources
+are sorted first by their ordinal, then by location order, and finally by loading order.</p>
 </div>
 <div class="paragraph">
 <p>If a profile is active, and the <code>URI</code> represents a single resource (for instance a file), then resources that match the

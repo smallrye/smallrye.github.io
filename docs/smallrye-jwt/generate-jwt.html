@@ -27,7 +27,7 @@
             <a class="navbar-item" href="../index/index/index.html">Index</a>
             <a class="navbar-item" href="../smallrye-config/main/index.html">SmallRye Config</a>
             <a class="navbar-item" href="../smallrye-fault-tolerance/5.0.0/index.html">SmallRye Fault Tolerance</a>
-            <a class="navbar-item" href="../smallrye-health/3.0.0/index.html">SmallRye Health</a>
+            <a class="navbar-item" href="../smallrye-health/3.0.1/index.html">SmallRye Health</a>
             <a class="navbar-item" href="index.html">SmallRye JWT</a>
             <a class="navbar-item" href="../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
           </div>
@@ -149,7 +149,7 @@ JwtClaimsBuilder builder5 = Jwt.claims(token);</code></pre>
 </div>
 <div class="paragraph">
 <p>The API is fluent so the builder initialization can be done as part of the fluent API sequence. The builder will also
-set <code>iat (issued at) claim to the current time, `exp</code>(expires at) claim to a sum of the <code>iat</code> claim and <code>smallrye.jwt.new-token.lifespan</code>
+set <code>iat</code> (issued at) claim to the current time, <code>exp</code> (expires at) claim to a sum of the <code>iat</code> claim and <code>smallrye.jwt.new-token.lifespan</code>
 property values and <code>jti</code> (unique token identifier) claim if they have not already been set, so one can skip setting them when possible.</p>
 </div>
 <div class="paragraph">
@@ -202,8 +202,7 @@ String jwt2 = Jwt.claims("/tokenClaims.json").jwe().header("custom-header", "cus
 </div>
 </div>
 <div class="paragraph">
-<p>Note the <code>alg</code> (key management algorithm) header is set to <code>RSA-OAEP-256</code> (it will be changed to <code>RSA-OAEP</code> in a future
-version of smallrye-jwt) and the <code>enc</code> (content encryption header) is set to <code>A256GCM</code> by default.</p>
+<p>Note the <code>alg</code> (key management algorithm) header is set to <code>RSA-OAEP</code> and the <code>enc</code> (content encryption header) is set to <code>A256GCM</code> by default.</p>
 </div>
 </div>
 </div>

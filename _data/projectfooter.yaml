@@ -18,7 +18,7 @@ links:
   - title: Get Help
     subfolderitems:
       - page: Chatroom
-        url: https://gitter.im/smallrye-io/community
+        url: https://quarkusio.zulipchat.com
       - page: Google&nbsp;Groups
         url: https://groups.google.com/d/forum/smallrye
 

@@ -165,4 +165,4 @@ On the other hand, the user-facing improvements we planned had to be postponed -
 We still intend to work on `@FailFast` or `@AdaptiveBulkhead`, but feature requests or bug reports by actual users will always have priority.
 
 With that in mind, please don't hesitate to get in touch.
-You can use the https://github.com/smallrye/smallrye-fault-tolerance/issues[{smallrye-ft} issue tracker], the https://gitter.im/smallrye-io/community[SmallRye Gitter], the https://gitter.im/smallrye-io/fault-tolerance[{smallrye-ft} Gitter], or the mailto:smallrye@googlegroups.com[SmallRye mailing list].
+You can use the https://github.com/smallrye/smallrye-fault-tolerance/issues[{smallrye-ft} issue tracker], the https://quarkusio.zulipchat.com[Zulip Chat], the https://gitter.im/smallrye-io/fault-tolerance[{smallrye-ft} Gitter], or the mailto:smallrye@googlegroups.com[SmallRye mailing list].

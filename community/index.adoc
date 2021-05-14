@@ -9,9 +9,9 @@ Mailing list::
 You can ask questions on our mailing list.
 Join the Google group via email smallrye+subscribe@googlegroups.com or by visiting the Google Groups page https://groups.google.com/d/forum/smallrye.
 
-Live chat on Gitter::
+Live chat on Zulip::
 
-If you prefer live chat with the developers, we have a https://gitter.im/smallrye-io/community[Gitter] room.
+If you prefer live chat with the developers, we have a https://quarkusio.zulipchat.com[Zulip] chat.
 
 == Code and issue tracker
 

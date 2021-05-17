@@ -1,0 +1,62 @@
+:page-layout: post
+:page-title: Fault Tolerance 5.1
+:page-synopsis: SmallRye Fault Tolerance 5.1 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2021-05-18 09:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+
+= Fault Tolerance 5.1
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/5.1.0[release] of {smallrye-ft} 5.1.0.
+This release includes some important bug fixes and one new feature.
+It is a safe upgrade for everyone using {smallrye-ft} 5.0.0.
+
+== Java 16 support
+
+{smallrye-ft} includes a small utility class that helps calling `default` methods when they are declared as fallback methods with `@Fallback`.
+This class uses reflection to crack open some internal JDK classes on Java 8.
+Naturally, since Java 9, the JDK started complaining, and since Java 16, this became an error.
+
+For that reason, we have a variant of that utility class that uses Java 9 public API, and the main {smallrye-ft} JAR has, for a long time, been a multi-release JAR.
+Unfortunately, we introduced a bug in {smallrye-ft} 4.3.1.
+This bug causes the main {smallrye-ft} JAR to omit the `META-INF/versions/9` directory, and so the Java 8 variant of the class is the only one present.
+
+In the 5.1.0 release, we fixed that bug and made sure the {smallrye-ft} release process is executed with Java 11.
+Hence, {smallrye-ft} should once again work as intended on all Java versions, particularly on Java 16.
+
+Note that even though we run the release process with Java 11, we still produce Java 8 bytecode.
+Java 8 is still supported with {smallrye-ft} 5.1.0, even though we may drop this support in future versions.
+
+== Vert.x integration
+
+In certain situations, {smallrye-ft} runs `@NonBlocking` methods on a different thread than the original call was made on.
+This includes:
+
+* `@Retry` methods, where a non-zero retry delay is configured (the delay must not block);
+* `@Bulkhead` methods, where a non-zero bulkhead queue is configured (if the invocation is queued).
+
+By default, we run such guarded methods on a thread pool provided by the integrator.
+In this release, we provide an integration API for event loops, as well as an implementation of this API for Vert.x.
+
+With this integration enabled, invocations of `@NonBlocking` methods made on an event loop thread are always executed on the same event loop thread.
+
+For more information, see link:https://smallrye.io/docs/smallrye-fault-tolerance/5.1.0/usage/extra.html#blocking-nonblocking[user documentation] and link:https://smallrye.io/docs/smallrye-fault-tolerance/5.1.0/integration/event-loop.html[integration documentation].
+
+== Others
+
+We have also significantly expanded our CI coverage.
+We now run tests with:
+
+* all Java LTS releases we care about (at this moment, Java 8 and 11);
+* the latest Java release (at this moment, Java 16);
+* the upcoming Java release (at this moment, Java 17-ea).
+
+All of this on Linux, Windows and macOS, thanks to GitHub Actions.
+
+(In fact, we currently don't run tests with Java 17-ea, because of link:https://github.com/smallrye/smallrye-fault-tolerance/issues/412[a bug] in JBoss Class File Writer. That should be resolved shortly, and we are not aware of any other issue with Java 17-ea.)
+
+With this CI coverage expansion, we found and fixed a particularly nasty concurrency issue in handling ``@Timeout``s on `Future`-returning methods when `@Retry` is present.
+``@Bulkhead``s on `Future`-returning methods, in presence of `@Retry`, were fixed as well.
+
+Upgrade to 5.1.0 is therefore very much recommended!

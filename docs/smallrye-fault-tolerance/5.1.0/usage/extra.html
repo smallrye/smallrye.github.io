@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Extra Features :: SmallRye documentation</title>
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">SmallRye documentation</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Projects</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="../../../index/index/index.html">Index</a>
+            <a class="navbar-item" href="../../../smallrye-config/main/index.html">SmallRye Config</a>
+            <a class="navbar-item" href="../index.html">SmallRye Fault Tolerance</a>
+            <a class="navbar-item" href="../../../smallrye-health/3.0.1/index.html">SmallRye Health</a>
+            <a class="navbar-item" href="../../../smallrye-jwt/index.html">SmallRye JWT</a>
+            <a class="navbar-item" href="../../../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
+          </div>
+        </div>
+        <a class="navbar-item" href="https://smallrye.io/">SmallRye.io main website</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="smallrye-fault-tolerance" data-version="5.1.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">SmallRye Fault Tolerance</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Index</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Usage</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="basic.html">Basic Usage</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="extra.html">Extra Features</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Integration</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../integration/intro.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../integration/thread-pool.html">Thread Pool</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../integration/context-propagation.html">Context Propagation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../integration/opentracing.html">OpenTracing</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Internals</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../internals/project-structure.html">Project Structure</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../internals/instructions.html">Instructions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../internals/core.html">Fault Tolerance Core</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../internals/logging.html">Logging</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../../index/index/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">SmallRye Fault Tolerance</a></li>
+    <li>Usage</li>
+    <li><a href="extra.html">Extra Features</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">5.1.0</button>
+  <div class="version-menu">
+    <a class="version is-current" href="extra.html">5.1.0</a>
+    <a class="version" href="../../5.0.0/usage/extra.html">5.0.0</a>
+  </div>
+</div>
+  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-fault-tolerance/blob/5.1.0/doc/modules/ROOT/pages/usage/extra.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Extra Features</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>SmallRye Fault Tolerance provides several features that are not present in the MicroProfile Fault Tolerance specification.
+Note that these features may have experimental status, marked by the <code>@Experimental</code> annotation.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_circuit_breaker_maintenance"><a class="anchor" href="#_circuit_breaker_maintenance"></a>Circuit Breaker Maintenance</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>It is sometimes useful to see the circuit breaker status from within the application, or reset it to the initial state.
+This is possible in two steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Give the circuit breaker a name by annotating the guarded method with <code>@CircuitBreakerName</code>:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Singleton
+public class MyService {
+    @CircuitBreaker
+    @CircuitBreakerName("hello-cb") <i class="conum" data-value="1"></i><b>(1)</b>
+    public String hello() {
+        ...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The circuit breaker guarding the <code>MyService.hello</code> method is given a name <code>hello-cb</code>.</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Inject <code>CircuitBreakerMaintenance</code> and call its methods:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Singleton
+public class Example {
+    @Inject
+    CircuitBreakerMaintenance maintenance;
+
+    public void test() {
+        System.out.println("Circuit breaker state: "
+            + maintenance.currentState("hello-cb")); <i class="conum" data-value="1"></i><b>(1)</b>
+        maintenance.resetAll(); <i class="conum" data-value="2"></i><b>(2)</b>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Obtains current circuit breaker state.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Resets all circuit breakers to the initial state.</td>
+</tr>
+</table>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The <code>CircuitBreakerMaintenance</code> interface provides 3 methods:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>currentState(name)</code>: returns current state of given circuit breaker.
+The return type <code>CircuitBreakerState</code> is an <code>enum</code> with 3 values: <code>CLOSED</code>, <code>OPEN</code>, <code>HALF_OPEN</code>.</p>
+</li>
+<li>
+<p><code>reset(name)</code>: resets given circuit breaker to the initial state.</p>
+</li>
+<li>
+<p><code>resetAll()</code>: resets all circuit breakers in the application to the initial state.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="blocking-nonblocking"><a class="anchor" href="#blocking-nonblocking"></a>@Blocking and @NonBlocking</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In addition to the MicroProfile Fault Tolerance <code>@Asynchronous</code> annotation, which can be placed on methods returning <code>Future</code> or <code>CompletionStage</code>, SmallRye Fault Tolerance also supports 2 more annotations for asynchronous processing:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>@io.smallrye.common.annotation.Blocking</code></p>
+</li>
+<li>
+<p><code>@io.smallrye.common.annotation.NonBlocking</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These annotations can have multiple meanings, depending on context.
+SmallRye Fault Tolerance only pays attention to these annotations if:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>they are placed on methods that return <code>CompletionStage</code> (the <code>Future</code> type can&#8217;t really be used for non-blocking processing);</p>
+</li>
+<li>
+<p>they are placed on methods that apply some fault tolerance strategy (such as <code>@Fallback</code>, defined either on a method or a class).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Under these circumstances, SmallRye Fault Tolerance assigns these annotations the following meaning:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>@Blocking</code> means that execution of the operation will be offloaded to another thread.
+In other words, it is an equivalent of <code>@Asynchronous</code>.
+Use this annotation if the method has blocking logic, but you don&#8217;t want to block the caller thread.</p>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Singleton
+public class MyService {
+    @Retry <i class="conum" data-value="1"></i><b>(1)</b>
+    @Blocking <i class="conum" data-value="2"></i><b>(2)</b>
+    CompletionStage&lt;String&gt; hello() {
+        ...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>A fault tolerance annotation.
+If this wouldn&#8217;t be present, the <code>@Blocking</code> annotation would be meaningless.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Using the <code>@Blocking</code> annotation, because the method blocks and it is necessary to offload its execution to another thread.
+With this annotation present, the <code>@Asynchronous</code> annotation is not necessary, and so it is omitted here.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The thread pool that is used for offloading method calls is the one provided by the runtime that integrates SmallRye Fault Tolerance.</p>
+</div>
+</li>
+<li>
+<p><code>@NonBlocking</code> means that the execution of the operation will <em>not</em> be offloaded to another thread (even if the method is annotated <code>@Asynchronous</code>).
+Use this annotation if the method <em>doesn&#8217;t</em> have blocking logic and you want the execution to stay on the caller thread.</p>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Singleton
+public class MyService {
+    @Retry <i class="conum" data-value="1"></i><b>(1)</b>
+    @NonBlocking <i class="conum" data-value="2"></i><b>(2)</b>
+    CompletionStage&lt;String&gt; hello() {
+        ...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>A fault tolerance annotation.
+If this wouldn&#8217;t be present, the <code>@NonBlocking</code> annotation would be meaningless.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Using the <code>@NonBlocking</code> annotation, because the method doesn&#8217;t block and offloading execution to another thread is not necessary.
+With this annotation present, the <code>@Asynchronous</code> annotation is not necessary, and so it is omitted here.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If the guarded method uses <code>@Retry</code> and some delay between retries is configured, only the initial execution is guaranteed to occur on the original thread.
+Subsequent attempts may be offloaded to an extra thread, so that the original thread is not blocked on the delay.</p>
+</div>
+<div class="paragraph">
+<p>If the guarded method uses <code>@Bulkhead</code>, the execution is <em>not</em> guaranteed to occur on the original thread.
+If the execution has to wait in the bulkhead queue, it may later end up on a different thread.</p>
+</div>
+<div class="paragraph">
+<p>If the original thread is an event loop thread and event loop integration is enabled, then the event loop is always used to execute the guarded method.
+In such case, all retry attempts and queued bulkhead executions are guaranteed to happen on the original thread.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_rationale"><a class="anchor" href="#_rationale"></a>Rationale</h3>
+<div class="paragraph">
+<p>We believe that the <code>@Asynchronous</code> annotation is misnamed, because its meaning is "offload execution to another thread".
+This isn&#8217;t always appropriate in modern asynchronous programming, where methods are often non-blocking and thread offload is not required.
+We believe that declaring whether the method blocks or not is a better aproach.</p>
+</div>
+<div class="paragraph">
+<p>At the same time, we designed these annotations to be used by a variety of frameworks, so SmallRye Fault Tolerance can&#8217;t eagerly intercept all methods using them.
+We also want to stay compatible with the MicroProfile Fault Tolerance specification as much as possible.
+For these reasons, SmallRye Fault Tolerance only considers these annotations for methods that use some fault tolerance strategy.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_recommendation"><a class="anchor" href="#_recommendation"></a>Recommendation</h3>
+<div class="paragraph">
+<p>For methods that use fault tolerance and return <code>CompletionStage</code>, we recommend to declare their <code>@Blocking</code> or <code>@NonBlocking</code> nature.
+In such case, the <code>@Asynchronous</code> annotation becomes optional.</p>
+</div>
+<div class="paragraph">
+<p>We also recommend to avoid <code>@Asynchronous</code> methods that return <code>Future</code>, because the only way to obtain the future value is blocking.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_additional_asynchronous_types"><a class="anchor" href="#_additional_asynchronous_types"></a>Additional Asynchronous Types</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>MicroProfile Fault Tolerance supports asynchronous fault tolerance for methods that return <code>CompletionStage</code>.
+(The <code>Future</code> type is not truly asynchronous, so we won&#8217;t take it into account here.)
+SmallRye Fault Tolerance adds support for additional asynchronous types:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Mutiny: <code>Uni</code></p>
+</li>
+<li>
+<p>RxJava: <code>Single</code>, <code>Maybe</code>, <code>Completable</code></p>
+</li>
+<li>
+<p>Reactor: <code>Mono</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These types are treated just like <code>CompletionStage</code>, so everything that works for <code>CompletionStage</code> works for these types as well.
+Stream-like types (<code>Multi</code>, <code>Observable</code>, <code>Flowable</code>, <code>Flux</code>) are not supported, because their semantics can&#8217;t be easily expressed in terms of <code>CompletionStage</code>.</p>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Singleton
+public class MyService {
+    @Retry
+    @NonBlocking <i class="conum" data-value="1"></i><b>(1)</b>
+    Uni&lt;String&gt; hello() { <i class="conum" data-value="2"></i><b>(2)</b>
+        ...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Using the <code>@NonBlocking</code> annotation described in <a href="#blocking-nonblocking">@Blocking and @NonBlocking</a>, because the method doesn&#8217;t block and offloading execution to another thread is not necessary.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Returning the <code>Uni</code> type from Mutiny.
+This shows that whatever works for <code>CompletionStage</code> also works for the other async types.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The implementation is based on the <a href="https://github.com/smallrye/smallrye-reactive-utils/tree/main/reactive-converters">SmallRye Reactive Converters</a> project.
+This means that to be able to use any particular asynchronous type, the corresponding converter library must be present.
+It is possible that the runtime you use already provides the correct integration.
+Otherwise, add a dependency to your application:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://smallrye.io/smallrye-mutiny/">Mutiny</a>: <code>io.smallrye.reactive:smallrye-reactive-converter-mutiny</code></p>
+</li>
+<li>
+<p><a href="https://github.com/ReactiveX/RxJava/tree/1.x">RxJava 1</a>: <code>io.smallrye.reactive:smallrye-reactive-converter-rxjava1</code></p>
+</li>
+<li>
+<p><a href="https://github.com/ReactiveX/RxJava/tree/2.x">RxJava 2</a>: <code>io.smallrye.reactive:smallrye-reactive-converter-rxjava2</code></p>
+</li>
+<li>
+<p><a href="https://github.com/ReactiveX/RxJava/tree/3.x">RxJava 3</a>: <code>io.smallrye.reactive:smallrye-reactive-converter-rxjava3</code></p>
+</li>
+<li>
+<p><a href="https://projectreactor.io/">Reactor</a>: <code>io.smallrye.reactive:smallrye-reactive-converter-reactor</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the SmallRye Antora UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

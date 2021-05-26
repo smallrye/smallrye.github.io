@@ -1,0 +1,175 @@
+= MicroProfile Health 3.1 Compatible Certification Request
+:page-layout: community
+
+== Specification details
+
+Repository - https://github.com/eclipse/microprofile-health
+
+=== MicroProfile Health 3.1
+
+* Tag - https://github.com/eclipse/microprofile-health/releases/tag/3.1
+* Commit - https://github.com/eclipse/microprofile-health/commit/0826eb1851e5ea5f890c0e6b15696ede974e520f
+* Download - https://download.eclipse.org/microprofile/staging/microprofile-health-3.1/
+
+=== MicroProfile Health 3.1-RC2 (used for the CCR)
+
+* Tag - https://github.com/eclipse/microprofile-health/releases/tag/3.1-RC2
+* Commit - https://github.com/eclipse/microprofile-health/commit/93703c1cb771f70940fdda3bdf02b85e4193a995
+* Download - https://download.eclipse.org/microprofile/microprofile-health-3.1-RC2/
+
+The only https://github.com/eclipse/microprofile-health/compare/3.1-RC2..3.1[difference] between versions 3.1 and 3.1-RC2 is the addition of release notes for 3.1 release to the specification document. The API and TCK binaries are the same.
+
+== Implementation details
+
+* Implementation name - https://github.com/smallrye/smallrye-health[SmallRye Health]
+* Version - 3.1.0-RC2
+* Download binary - https://repo1.maven.org/maven2/io/smallrye/smallrye-health/3.1.0-RC2/
+* Download Source Code - https://github.com/smallrye/smallrye-health
+* VCS revision tag - https://github.com/smallrye/smallrye-health/releases/tag/3.1.0-RC2
+* VCS revision commit - https://github.com/smallrye/smallrye-health/commit/e9b0e7febaf504ec5b24abdcc96c9ed923592f04
+
+== Compatibility Certification Request JDK 11
+
+=== Environment details
+
+* Output of `uname -a`
+
+```
+Linux XYZ 5.11.21-300.fc34.x86_64 #1 SMP Fri May 14 17:43:38 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
+```
+
+* Output of `java -version`
+
+```
+openjdk version "11.0.11" 2021-04-20
+OpenJDK Runtime Environment AdoptOpenJDK-11.0.11+9 (build 11.0.11+9)
+OpenJDK 64-Bit Server VM AdoptOpenJDK-11.0.11+9 (build 11.0.11+9, mixed mode)
+```
+
+* Output of `mvn -version`
+
+```
+Apache Maven 3.8.1 (05c21c65bdfed0f71a2f2ada8b84da59348c4c5d)
+Maven home: /opt/maven/apache-maven-3.8.1
+Java version: 11.0.11, vendor: AdoptOpenJDK, runtime: /opt/java/hotspot/jdk-11.0.11+9
+Default locale: en_US, platform encoding: UTF-8
+OS name: "linux", version: "5.11.21-300.fc34.x86_64", arch: "amd64", family: "unix"
+```
+
+=== CCR execution JDK 11
+
+* Command - `mvn -B javadoc:javadoc formatter:validate verify --file pom.xml`
+* Results surefire-reports zip - link:health-3.1-jdk-11-ccr-results.zip[]
+* *Results*
+
+```
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 28, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 58.286 s - in TestSuite
+
+<testcase name="testPayloadJsonVerifiesWithTheSpecificationSchema" classname="org.eclipse.microprofile.health.tck.JsonSchemaValidationTest" time="0.62"/>
+<testcase name="testFailureResponsePayload" classname="org.eclipse.microprofile.health.tck.MultipleReadinessFailedTest" time="0.049"/>
+<testcase name="testSuccessfulLivenessResponsePayload" classname="org.eclipse.microprofile.health.tck.MultipleReadinessFailedTest" time="0.004"/>
+<testcase name="testFailureResponsePayload" classname="org.eclipse.microprofile.health.tck.SingleLivenessFailedTest" time="0.053"/>
+<testcase name="testSuccessResponsePayload" classname="org.eclipse.microprofile.health.tck.SingleLivenessSuccessfulTest" time="0.044"/>
+<testcase name="testSuccessResponsePayload" classname="org.eclipse.microprofile.health.tck.SingleReadinessSuccessfulTest" time="0.043"/>
+<testcase name="testFailingHealthResponsePayload" classname="org.eclipse.microprofile.health.tck.MultipleStartupFailedTest" time="0.046"/>
+<testcase name="testFailingStartupResponsePayload" classname="org.eclipse.microprofile.health.tck.MultipleStartupFailedTest" time="0.005"/>
+<testcase name="testSuccessfulLivenessResponsePayload" classname="org.eclipse.microprofile.health.tck.MultipleStartupFailedTest" time="0.004"/>
+<testcase name="testSuccessfulReadinessResponsePayload" classname="org.eclipse.microprofile.health.tck.MultipleStartupFailedTest" time="0.004"/>
+<testcase name="testSuccessfulDelegateInvocation" classname="org.eclipse.microprofile.health.tck.DelegateHealthSuccessfulTest" time="0.063"/>
+<testcase name="testSuccessResponsePayload" classname="org.eclipse.microprofile.health.tck.SingleStartupSuccessfulTest" time="0.044"/>
+<testcase name="testFailureResponsePayload" classname="org.eclipse.microprofile.health.tck.MultipleProceduresFailedTest" time="0.052"/>
+<testcase name="testFailureResponsePayload" classname="org.eclipse.microprofile.health.tck.SingleReadinessFailedTest" time="0.044"/>
+<testcase name="testFailureLivenessResponsePayload" classname="org.eclipse.microprofile.health.tck.MultipleLivenessFailedTest" time="0.047"/>
+<testcase name="testSuccessfulReadinessResponsePayload" classname="org.eclipse.microprofile.health.tck.MultipleLivenessFailedTest" time="0.006"/>
+<testcase name="testSuccessResponsePayload" classname="org.eclipse.microprofile.health.tck.DelayedCheckTest" time="6.089"/>
+<testcase name="testSuccessResponsePayload" classname="org.eclipse.microprofile.health.tck.NoProcedureSuccessfulTest" time="0.037"/>
+<testcase name="testValidateConcreteHealthCheckResponse" classname="org.eclipse.microprofile.health.tck.HealthCheckResponseValidationTest" time="0.057"/>
+<testcase name="testSuccessfulLivenessResponsePayload" classname="org.eclipse.microprofile.health.tck.OnlySuccessfulProcedureTest" time="0.044"/>
+<testcase name="testSuccessfulReadinessResponsePayload" classname="org.eclipse.microprofile.health.tck.OnlySuccessfulProcedureTest" time="0.003"/>
+<testcase name="testEmptyReadinessWithConfig" classname="org.eclipse.microprofile.health.tck.ConfigTest" time="0.036"/>
+<testcase name="testSuccessResponsePayload" classname="org.eclipse.microprofile.health.tck.HealthCheckResponseAttributesTest" time="0.053"/>
+<testcase name="testFailedResponsePayload" classname="org.eclipse.microprofile.health.tck.SingleStartupFailedTest" time="0.05"/>
+<testcase name="testFailureReadinessResponsePayload" classname="org.eclipse.microprofile.health.tck.CDIProducedProceduresTest" time="0.042"/>
+<testcase name="testSuccessStartupResponsePayload" classname="org.eclipse.microprofile.health.tck.CDIProducedProceduresTest" time="0.003"/>
+<testcase name="testSuccessfulLivenessResponsePayload" classname="org.eclipse.microprofile.health.tck.CDIProducedProceduresTest" time="0.004"/>
+<testcase name="testFailureResponsePayload" classname="org.eclipse.microprofile.health.tck.EnforceQualifierTest" time="0.036"/>
+```
+
+== Compatibility Certification Request JDK 8
+
+=== Environment details
+
+* Output of `uname -a`
+
+```
+Linux XYZ 5.11.21-300.fc34.x86_64 #1 SMP Fri May 14 17:43:38 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
+```
+
+* Output of `java -version`
+
+```
+openjdk version "1.8.0_265"
+OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_265-b01)
+OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.265-b01, mixed mode)
+```
+
+* Output of `mvn -version`
+
+```
+Apache Maven 3.8.1 (05c21c65bdfed0f71a2f2ada8b84da59348c4c5d)
+Maven home: /opt/maven/apache-maven-3.8.1
+Java version: 1.8.0_265, vendor: AdoptOpenJDK, runtime: /opt/java/hotspot/jdk8u265-b01/jre
+Default locale: en_US, platform encoding: UTF-8
+OS name: "linux", version: "5.11.21-300.fc34.x86_64", arch: "amd64", family: "unix"
+```
+
+=== CCR execution JDK 8
+
+* Command - `mvn -B javadoc:javadoc formatter:validate verify --file pom.xml`
+* Results surefire-reports zip - link:health-3.1-jdk-8-ccr-results.zip[]
+* *Results*
+
+```
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 28, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 61.857 s - in TestSuite
+
+<testcase name="testPayloadJsonVerifiesWithTheSpecificationSchema" classname="org.eclipse.microprofile.health.tck.JsonSchemaValidationTest" time="0.757"/>
+<testcase name="testFailureResponsePayload" classname="org.eclipse.microprofile.health.tck.MultipleReadinessFailedTest" time="0.056"/>
+<testcase name="testSuccessfulLivenessResponsePayload" classname="org.eclipse.microprofile.health.tck.MultipleReadinessFailedTest" time="0.005"/>
+<testcase name="testFailureResponsePayload" classname="org.eclipse.microprofile.health.tck.SingleLivenessFailedTest" time="0.076"/>
+<testcase name="testSuccessResponsePayload" classname="org.eclipse.microprofile.health.tck.SingleLivenessSuccessfulTest" time="0.065"/>
+<testcase name="testSuccessResponsePayload" classname="org.eclipse.microprofile.health.tck.SingleReadinessSuccessfulTest" time="0.049"/>
+<testcase name="testFailingHealthResponsePayload" classname="org.eclipse.microprofile.health.tck.MultipleStartupFailedTest" time="0.052"/>
+<testcase name="testFailingStartupResponsePayload" classname="org.eclipse.microprofile.health.tck.MultipleStartupFailedTest" time="0.004"/>
+<testcase name="testSuccessfulLivenessResponsePayload" classname="org.eclipse.microprofile.health.tck.MultipleStartupFailedTest" time="0.004"/>
+<testcase name="testSuccessfulReadinessResponsePayload" classname="org.eclipse.microprofile.health.tck.MultipleStartupFailedTest" time="0.003"/>
+<testcase name="testSuccessfulDelegateInvocation" classname="org.eclipse.microprofile.health.tck.DelegateHealthSuccessfulTest" time="0.049"/>
+<testcase name="testSuccessResponsePayload" classname="org.eclipse.microprofile.health.tck.SingleStartupSuccessfulTest" time="0.068"/>
+<testcase name="testFailureResponsePayload" classname="org.eclipse.microprofile.health.tck.MultipleProceduresFailedTest" time="0.058"/>
+<testcase name="testFailureResponsePayload" classname="org.eclipse.microprofile.health.tck.SingleReadinessFailedTest" time="0.059"/>
+<testcase name="testFailureLivenessResponsePayload" classname="org.eclipse.microprofile.health.tck.MultipleLivenessFailedTest" time="0.05"/>
+<testcase name="testSuccessfulReadinessResponsePayload" classname="org.eclipse.microprofile.health.tck.MultipleLivenessFailedTest" time="0.005"/>
+<testcase name="testSuccessResponsePayload" classname="org.eclipse.microprofile.health.tck.DelayedCheckTest" time="6.078"/>
+<testcase name="testSuccessResponsePayload" classname="org.eclipse.microprofile.health.tck.NoProcedureSuccessfulTest" time="0.038"/>
+<testcase name="testValidateConcreteHealthCheckResponse" classname="org.eclipse.microprofile.health.tck.HealthCheckResponseValidationTest" time="0.069"/>
+<testcase name="testSuccessfulLivenessResponsePayload" classname="org.eclipse.microprofile.health.tck.OnlySuccessfulProcedureTest" time="0.045"/>
+<testcase name="testSuccessfulReadinessResponsePayload" classname="org.eclipse.microprofile.health.tck.OnlySuccessfulProcedureTest" time="0.003"/>
+<testcase name="testEmptyReadinessWithConfig" classname="org.eclipse.microprofile.health.tck.ConfigTest" time="0.045"/>
+<testcase name="testSuccessResponsePayload" classname="org.eclipse.microprofile.health.tck.HealthCheckResponseAttributesTest" time="0.053"/>
+<testcase name="testFailedResponsePayload" classname="org.eclipse.microprofile.health.tck.SingleStartupFailedTest" time="0.052"/>
+<testcase name="testFailureReadinessResponsePayload" classname="org.eclipse.microprofile.health.tck.CDIProducedProceduresTest" time="0.046"/>
+<testcase name="testSuccessStartupResponsePayload" classname="org.eclipse.microprofile.health.tck.CDIProducedProceduresTest" time="0.004"/>
+<testcase name="testSuccessfulLivenessResponsePayload" classname="org.eclipse.microprofile.health.tck.CDIProducedProceduresTest" time="0.005"/>
+<testcase name="testFailureResponsePayload" classname="org.eclipse.microprofile.health.tck.EnforceQualifierTest" time="0.047"/>
+```
+
+=== Replicating the TCK execution
+
+1. `git clone https://github.com/smallrye/smallrye-health.git -b 3.1.0-RC2 && cd smallrye-health`
+2. `mvn -B javadoc:javadoc formatter:validate verify --file pom.xml`
+

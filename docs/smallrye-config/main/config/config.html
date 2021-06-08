@@ -102,6 +102,9 @@
 <p><a href="#indexed-properties">Indexed Properties</a></p>
 </li>
 <li>
+<p><a href="#map-support">Map Support</a></p>
+</li>
+<li>
 <p><a href="#profiles">Profiles</a></p>
 </li>
 <li>
@@ -124,7 +127,7 @@ for simple cases, but it becomes cumbersome and limited for more advanced cases.
 <div class="paragraph">
 <p>Indexed Properties provide a way to use indexes in config property names to map specific elements in a <code>Collection</code>
 type. Since the indexed element is part of the property name and not contained in the value, this can also be used to
-map complex object types as `Collectionª elements. Consider:</p>
+map complex object types as <code>Collection</code> elements. Consider:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -150,6 +153,107 @@ indexed and unindexed format, the unindexed value takes priority.</p>
 <p>The indexed property is sorted by their index before being added to the target <code>Collection</code>. Any gaps contained in the
 indexes do not resolve to the target <code>Collection</code>, which means that the <code>Collection</code> result will store all values in a
 continued fashion and without gaps.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="map-support"><a class="anchor" href="#map-support"></a>Map Support</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>SmallRye Config allows injecting multiple configuration parameters as a <code>Map</code> using the standard annotations (<code>@ConfigProperty</code> and <code>@ConfigProperties</code>) which can
+be very helpful especially with a dynamic configuration.</p>
+</div>
+<div class="paragraph">
+<p>For example, let&#8217;s say that I want to keep in my configuration the custom reason phrases to return to the end user according to the http status code.
+In that particular use case, the configuration could then be something like the following properties file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">server.reasons.200=My custom reason phrase for OK
+server.reasons.201=My custom reason phrase for Created
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The previous configuration could be injected directly into your bean using the standard annotations as next:</p>
+</div>
+<div class="paragraph">
+<p>With <code>@ConfigProperty</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@ApplicationScoped
+public class ConfigBean {
+
+    @Inject
+    @ConfigProperty(name = "server.reasons", defaultValue = "200=OK;201=Created") <i class="conum" data-value="1"></i><b>(1)</b>
+    Map&lt;Integer, String&gt; reasons; <i class="conum" data-value="2"></i><b>(2)</b>
+
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Provide the name of the parent configuration property from the annotation <code>@ConfigProperty</code>. Provide also the default values to use in case no direct sub properties could be found, using the syntax <code>&lt;key1&gt;=&lt;value1&gt;;&lt;key2&gt;=&lt;value2&gt;&#8230;&#8203;</code>, so here the default values are "OK" for 200 and "Created" for 201.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Provide the expected type of <code>Map</code>, here the keys will automatically be converted into Integers, and the values into Strings.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>With <code>@ConfigProperties</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@ConfigProperties(prefix = "server") <i class="conum" data-value="1"></i><b>(1)</b>
+public class Config {
+
+    Map&lt;Integer, String&gt; reasons; <i class="conum" data-value="2"></i><b>(2)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Provide the prefix of the name of the parent configuration property from the annotation <code>@ConfigProperties</code>, here the prefix is <code>server</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Provide the suffix of the name of the parent configuration, and the expected type of <code>Map</code>, here the keys will automatically be converted into Integers, and the values into Strings.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Only the direct sub properties will be converted into a <code>Map</code> and injected into the target bean, the rest will be ignored. In other words, in the previous example, a property whose name is <code>reasons.200.a</code> would be ignored as not considered as a direct sub property.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The property will be considered as missing if no direct sub properties could be found.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>It is also possible to do the exact same thing programmatically by calling the non-standard method <code>SmallRyeConfig#getValues("server.reasons", Integer.class, String.class)</code> if the property is mandatory otherwise by calling the method <code>SmallRyeConfig#getOptionalValues("server.reasons", Integer.class, String.class)</code>.</p>
 </div>
 </div>
 </div>

@@ -22,7 +22,7 @@ content:
     - '!*-RC*'
     start_path: doc
   - url: https://github.com/smallrye/smallrye-health.git
-    branches: 3.0.x
+    branches: 3.1.x
     start_path: doc
 # uncomment after the docs are merged    
 #  - url: https://github.com/smallrye/smallrye-reactive-messaging.git

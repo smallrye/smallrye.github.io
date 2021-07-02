@@ -1,4 +1,164 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2021-06-25T11:21:28+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 5.1</title><link href="https://www.smallrye.io/blog/fault-tolerance-5-1/" rel="alternate" type="text/html" title="Fault Tolerance 5.1" /><published>2021-05-18T08:00:00+00:00</published><updated>2021-05-18T08:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-5-1</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-5-1/">&lt;div id=&quot;preamble&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2021-07-02T16:13:34+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 5.2</title><link href="https://www.smallrye.io/blog/fault-tolerance-5-2/" rel="alternate" type="text/html" title="Fault Tolerance 5.2" /><published>2021-07-02T14:00:00+00:00</published><updated>2021-07-02T14:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-5-2</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-5-2/">&lt;div id=&quot;preamble&quot;&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/5.2.0&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 5.2.0.
+This release includes several new features and fixes.
+It is a safe upgrade for everyone using SmallRye Fault Tolerance 5.1.0.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;backoff_strategies_for_retry&quot;&gt;Backoff strategies for &lt;code&gt;@Retry&lt;/code&gt;&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The &lt;code&gt;@Retry&lt;/code&gt; annotation in MicroProfile Fault Tolerance supports a single backoff strategy: constant.
+That is, the delay between all retry attempts is identical (with the exception of a random jitter).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;SmallRye Fault Tolerance now offers 3 annotations to specify a different backoff strategy:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;@ExponentialBackoff&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;@FibonacciBackoff&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;@CustomBackoff&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;One of these annotations may be present on a program element annotated &lt;code&gt;@Retry&lt;/code&gt;, and it modifies the retry behavior.
+For example:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;java&quot; class=&quot;language-java hljs&quot;&gt;package com.example;
+
+@ApplicationScoped
+public class MyService {
+    @Retry
+    @ExponentialBackoff
+    public void hello() {
+        ...
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;With &lt;code&gt;@ExponentialBackoff&lt;/code&gt;, the delays between retry attempts will grow exponentially.
+With &lt;code&gt;@FibonacciBackoff&lt;/code&gt;, the delays will grow per the Fibonacci sequence.
+With &lt;code&gt;@CustomBackoff&lt;/code&gt;, it is possible to implement completely custom backoff strategy.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;See &lt;a href=&quot;https://smallrye.io/docs/smallrye-fault-tolerance/5.2.0/usage/extra.html#_backoff_strategies_for_retry&quot;&gt;the documentation&lt;/a&gt; for more information.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;blocking_and_nonblocking_on_classes&quot;&gt;&lt;code&gt;@Blocking&lt;/code&gt; and &lt;code&gt;@NonBlocking&lt;/code&gt; on classes&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Previously, we only documented (and tested) the &lt;code&gt;@Blocking&lt;/code&gt; and &lt;code&gt;@NonBlocking&lt;/code&gt; annotations on methods.
+However, these annotations can be placed on classes as well, so in this release, we documented that and tightened some validation.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Previously, if you addded both of these annotations to the same method, SmallRye Fault Tolerance wouldn&amp;#8217;t complain, even though this is clearly a mistake.
+This situation is now detected and application deployment ends with an error.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;However, if one of these annotations is placed on a class and the other on a method, that is a perfectly valid situation.
+In such case, the annotation on method has priority over the one on class.
+For example:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;java&quot; class=&quot;language-java hljs&quot;&gt;package com.example;
+
+@ApplicationScoped
+@NonBlocking
+public class MyService {
+    @Retry
+    @Blocking
+    public void hello() {
+        ...
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Here, the &lt;code&gt;hello&lt;/code&gt; method is treated as &lt;code&gt;@Blocking&lt;/code&gt;, but other methods would inherit the &lt;code&gt;@NonBlocking&lt;/code&gt; annotation from the class.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;See &lt;a href=&quot;https://smallrye.io/docs/smallrye-fault-tolerance/5.2.0/usage/extra.html#blocking-nonblocking&quot;&gt;the documentation&lt;/a&gt; for more information.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;non_compatible_mode_for_determining_asynchrony&quot;&gt;Non-compatible mode for determining asynchrony&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;In addition to the &lt;code&gt;@Asynchronous&lt;/code&gt;, &lt;code&gt;@Blocking&lt;/code&gt; and &lt;code&gt;@NonBlocking&lt;/code&gt; annotations, SmallRye Fault Tolerance now offers a mode where method asynchrony is determined solely from the its return type.
+This mode is &lt;strong&gt;not compatible&lt;/strong&gt; with the MicroProfile Fault Tolerance specification and doesn&amp;#8217;t pass 2 tests in the TCK.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;For that reason, this mode is disabled by default.
+To enable it, set the configuration property &lt;code&gt;smallrye.faulttolerance.mp-compatibility&lt;/code&gt; to &lt;code&gt;false&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;When the non-compatible mode is enabled, methods that have some fault tolerance strategy and return &lt;code&gt;CompletionStage&lt;/code&gt; will &lt;em&gt;not&lt;/em&gt; be offloaded to a thread pool, yet will have asynchronous fault tolerance applied automatically.
+In other words, they will be treated as if they were annotated &lt;code&gt;@NonBlocking&lt;/code&gt;.
+For example:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;java&quot; class=&quot;language-java hljs&quot;&gt;@ApplicationScoped
+public class MyService {
+    @Retry
+    CompletionStage&amp;lt;String&amp;gt; hello() {
+        ...
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The &lt;code&gt;hello&lt;/code&gt; method here will be executed on the original thread (as if it was annotated &lt;code&gt;@NonBlocking&lt;/code&gt;) and will have asynchronous fault tolerance applied.
+That is, if the returned &lt;code&gt;CompletionStage&lt;/code&gt; completes with an exception, it will be retried.
+(Per the MicroProfile Fault Tolerance specification, retry shouldn&amp;#8217;t happen in such case.
+The compatible mode conforms to the specification, but we find that behavior less and less appropriate.)&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Quarkus will enable this mode by default in the 2.1.0.Final release.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;See &lt;a href=&quot;https://smallrye.io/docs/smallrye-fault-tolerance/5.2.0/usage/extra.html#_non_compatible_mode&quot;&gt;the documentation&lt;/a&gt; for more information.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;others&quot;&gt;Others&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Together with the new features described above, we have also performed a major internal refactoring.
+The configuration system, the single last remnant of SmallRye Fault Tolerance 2.x, has been rewritten from scratch.
+Instead of storing configuration values into a &lt;code&gt;Map&amp;lt;String, Object&amp;gt;&lt;/code&gt;, the new system is based on configuration interfaces.
+Implementations of these interfaces are automatically generated during SmallRye Fault Tolerance build, using an annotation processor.
+See &lt;a href=&quot;https://smallrye.io/docs/smallrye-fault-tolerance/5.2.0/internals/config.html&quot;&gt;the documentation&lt;/a&gt; for more details if you&amp;#8217;re interested.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Furthermore, we have fixed a small bug in &lt;code&gt;@Fallback&lt;/code&gt; validation.
+If you had a method guarded with &lt;code&gt;@Fallback&lt;/code&gt; that returned a raw type (such as &lt;code&gt;List&lt;/code&gt;), and its fallback method retured a parameterized type (such as &lt;code&gt;List&amp;lt;String&amp;gt;&lt;/code&gt;), the validation code would enter an infinite regress.
+This case is now handled properly.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Upgrade to 5.2.0 is very much recommended.
+As described above, there are certain new things, so if you encounter any bugs, please let us know in the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;issue tracker&lt;/a&gt;!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Fault Tolerance 5.1</title><link href="https://www.smallrye.io/blog/fault-tolerance-5-1/" rel="alternate" type="text/html" title="Fault Tolerance 5.1" /><published>2021-05-18T08:00:00+00:00</published><updated>2021-05-18T08:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-5-1</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-5-1/">&lt;div id=&quot;preamble&quot;&gt;
 &lt;div class=&quot;sectionbody&quot;&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/5.1.0&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 5.1.0.
@@ -1499,65 +1659,4 @@ We want to add comprehensive debug and trace logging that is always present, so 
 As we said above, this is just a beginning!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">SmallRye Innovation for Eclipse MicroProfile</title><link href="https://www.smallrye.io/blog/innovation/" rel="alternate" type="text/html" title="SmallRye Innovation for Eclipse MicroProfile" /><published>2019-11-27T19:00:00+00:00</published><updated>2019-11-27T19:00:00+00:00</updated><id>https://www.smallrye.io/blog/innovation</id><content type="html" xml:base="https://www.smallrye.io/blog/innovation/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;https://smallrye.io&quot;&gt;SmallRye&lt;/a&gt; implements &lt;a href=&quot;https://microprofile.io/&quot;&gt;Eclipse MicroProfile&lt;/a&gt; specifications for use within any runtime.
-Currently, SmallRye is included in &lt;a href=&quot;https://quarkus.io/&quot;&gt;Quarkus&lt;/a&gt;,
-&lt;a href=&quot;https://thorntail.io&quot;&gt;Thorntail&lt;/a&gt;, &lt;a href=&quot;https://wildfly.org&quot;&gt;WildFly&lt;/a&gt;,
-and the reactive implementations are part of &lt;a href=&quot;https://openliberty.io/&quot;&gt;Open Liberty&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;That&amp;#8217;s great, but that&amp;#8217;s only implementing what&amp;#8217;s been defined by a specification.
-Does &lt;a href=&quot;https://smallrye.io&quot;&gt;SmallRye&lt;/a&gt; only implement the specifications &quot;&lt;em&gt;as is&lt;/em&gt;&quot;?
-How do new ideas get added to &lt;a href=&quot;https://microprofile.io/&quot;&gt;MicroProfile&lt;/a&gt;,
-either as new specifications or changes to an existing specification?&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Questions like these,
-and others like them,
-are what I hear often from those not familiar with exactly how &lt;a href=&quot;https://microprofile.io/&quot;&gt;MicroProfile&lt;/a&gt; operates.
-Unlike how the JCP typically operated in the past when defining Java EE specifications,
-&lt;a href=&quot;https://microprofile.io/&quot;&gt;MicroProfile&lt;/a&gt; takes a very different approach.
-Bean Validation took a similar approach as &lt;a href=&quot;https://microprofile.io/&quot;&gt;MicroProfile&lt;/a&gt;.
-In &lt;a href=&quot;https://microprofile.io/&quot;&gt;MicroProfile&lt;/a&gt; we define specifications based on existing implementations and usage within projects,
-as it offers a greater indication that what&amp;#8217;s being proposed is useful to developers.
-It&amp;#8217;s much harder to create an API from ideas and have it be useful
-than to define a specification based on an already working implementation.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;How does this relate to how &lt;a href=&quot;https://smallrye.io&quot;&gt;SmallRye&lt;/a&gt; develops implementations?
-Since its creation &lt;a href=&quot;https://smallrye.io&quot;&gt;SmallRye&lt;/a&gt; was purposefully focused on implementing the &lt;a href=&quot;https://microprofile.io/&quot;&gt;MicroProfile&lt;/a&gt; specifications,
-while seeking to improve the specifications and TCKs when issues were found.
-Having reached a point where the implementations are stable and easily kept in line with modifications to existing specifications,
-it frees those working on the project to shift our focus to innovation!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;What type of innovation are we talking about?
-In theory, it could be absolutely anything.
-In practice, we&amp;#8217;re not proposing a complete free for all, as that leads to churn without results.
-We have a few initiatives that are underway where we are beginning to innovate with &lt;a href=&quot;https://microprofile.io/&quot;&gt;MicroProfile&lt;/a&gt;.
-We&amp;#8217;ve begun work on an entirely new implementation for Fault Tolerance, see &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues/102&quot;&gt;here&lt;/a&gt;,
-which aims to be reactive friendly while still enabling the same functionality for imperative programming.
-In &lt;a href=&quot;https://github.com/smallrye/smallrye-config&quot;&gt;SmallRye Config&lt;/a&gt; we will be investigating how to implement support for
-using a pre captured configuration during the creation of later &lt;code&gt;ConfigSource&lt;/code&gt;s and &lt;code&gt;ConfigSourceProvider&lt;/code&gt;s,
-allowing configuration to be used to create latter stage configuration instances.
-There are also other innovations underway within the reactive sphere of &lt;a href=&quot;https://smallrye.io&quot;&gt;SmallRye&lt;/a&gt; that we intend to announce soon.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;In addition to innovation within &lt;a href=&quot;https://smallrye.io&quot;&gt;SmallRye&lt;/a&gt; projects,
-we&amp;#8217;re in the process of accepting the donation from the &lt;a href=&quot;https://github.com/microprofile-extensions&quot;&gt;MicroProfile Extensions&lt;/a&gt; project.
-The &lt;a href=&quot;https://github.com/microprofile-extensions&quot;&gt;MicroProfile Extensions&lt;/a&gt; project includes many new &lt;code&gt;ConfigSource&lt;/code&gt; and &lt;code&gt;Converter&lt;/code&gt; types
-that will be added to &lt;a href=&quot;https://smallrye.io&quot;&gt;SmallRye&lt;/a&gt;.
-A big thanks to &lt;a href=&quot;https://github.com/phillip-kruger&quot;&gt;Phillip&lt;/a&gt; and &lt;a href=&quot;https://github.com/derekm&quot;&gt;Derek&lt;/a&gt; for agreeing to this and pushing it forward.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;All this innovation in &lt;a href=&quot;https://smallrye.io&quot;&gt;SmallRye&lt;/a&gt; is great,
-but what does that mean for &lt;a href=&quot;https://microprofile.io/&quot;&gt;MicroProfile&lt;/a&gt; specifications?
-Do they have these new innovations as well?
-In the short term, no they wouldn&amp;#8217;t.
-The medium to longer-term goal for any innovation created in &lt;a href=&quot;https://smallrye.io&quot;&gt;SmallRye&lt;/a&gt; is for it to be proposed to existing
-or new &lt;a href=&quot;https://microprofile.io/&quot;&gt;MicroProfile&lt;/a&gt; specifications.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;If you&amp;#8217;d like to contribute to &lt;a href=&quot;https://smallrye.io&quot;&gt;SmallRye&lt;/a&gt; and help us deliver innovation to &lt;a href=&quot;https://microprofile.io/&quot;&gt;MicroProfile&lt;/a&gt;,
-come by our &lt;a href=&quot;https://groups.google.com/d/forum/smallrye&quot;&gt;forum&lt;/a&gt; and take a look at the issues in any of the projects on &lt;a href=&quot;https://github.com/smallrye&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ken Finnigan</name><email>ken@kenfinnigan.me</email></author><category term="announcement" /><category term="microprofile" /></entry></feed>
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry></feed>

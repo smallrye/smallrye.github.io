@@ -1,0 +1,126 @@
+:page-layout: post
+:page-title: Fault Tolerance 5.2
+:page-synopsis: SmallRye Fault Tolerance 5.2 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2021-07-02 15:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 5.2
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/5.2.0[release] of {smallrye-ft} 5.2.0.
+This release includes several new features and fixes.
+It is a safe upgrade for everyone using {smallrye-ft} 5.1.0.
+
+== Backoff strategies for `@Retry`
+
+The `@Retry` annotation in {microprofile-ft} supports a single backoff strategy: constant.
+That is, the delay between all retry attempts is identical (with the exception of a random jitter).
+
+{smallrye-ft} now offers 3 annotations to specify a different backoff strategy:
+
+* `@ExponentialBackoff`
+* `@FibonacciBackoff`
+* `@CustomBackoff`
+
+One of these annotations may be present on a program element annotated `@Retry`, and it modifies the retry behavior.
+For example:
+
+[source,java]
+----
+package com.example;
+
+@ApplicationScoped
+public class MyService {
+    @Retry
+    @ExponentialBackoff
+    public void hello() {
+        ...
+    }
+}
+----
+
+With `@ExponentialBackoff`, the delays between retry attempts will grow exponentially.
+With `@FibonacciBackoff`, the delays will grow per the Fibonacci sequence.
+With `@CustomBackoff`, it is possible to implement completely custom backoff strategy.
+
+See https://smallrye.io/docs/smallrye-fault-tolerance/5.2.0/usage/extra.html#_backoff_strategies_for_retry[the documentation] for more information.
+
+== `@Blocking` and `@NonBlocking` on classes
+
+Previously, we only documented (and tested) the `@Blocking` and `@NonBlocking` annotations on methods.
+However, these annotations can be placed on classes as well, so in this release, we documented that and tightened some validation.
+
+Previously, if you addded both of these annotations to the same method, {smallrye-ft} wouldn't complain, even though this is clearly a mistake.
+This situation is now detected and application deployment ends with an error.
+
+However, if one of these annotations is placed on a class and the other on a method, that is a perfectly valid situation.
+In such case, the annotation on method has priority over the one on class.
+For example:
+
+[source,java]
+----
+package com.example;
+
+@ApplicationScoped
+@NonBlocking
+public class MyService {
+    @Retry
+    @Blocking
+    public void hello() {
+        ...
+    }
+}
+----
+
+Here, the `hello` method is treated as `@Blocking`, but other methods would inherit the `@NonBlocking` annotation from the class.
+
+See https://smallrye.io/docs/smallrye-fault-tolerance/5.2.0/usage/extra.html#blocking-nonblocking[the documentation] for more information.
+
+== Non-compatible mode for determining asynchrony
+
+In addition to the `@Asynchronous`, `@Blocking` and `@NonBlocking` annotations, {smallrye-ft} now offers a mode where method asynchrony is determined solely from the its return type.
+This mode is *not compatible* with the {microprofile-ft} specification and doesn't pass 2 tests in the TCK.
+
+For that reason, this mode is disabled by default.
+To enable it, set the configuration property `smallrye.faulttolerance.mp-compatibility` to `false`.
+
+When the non-compatible mode is enabled, methods that have some fault tolerance strategy and return `CompletionStage` will _not_ be offloaded to a thread pool, yet will have asynchronous fault tolerance applied automatically.
+In other words, they will be treated as if they were annotated `@NonBlocking`.
+For example:
+
+[source,java]
+----
+@ApplicationScoped
+public class MyService {
+    @Retry
+    CompletionStage<String> hello() {
+        ...
+    }
+}
+----
+
+The `hello` method here will be executed on the original thread (as if it was annotated `@NonBlocking`) and will have asynchronous fault tolerance applied.
+That is, if the returned `CompletionStage` completes with an exception, it will be retried.
+(Per the {microprofile-ft} specification, retry shouldn't happen in such case.
+The compatible mode conforms to the specification, but we find that behavior less and less appropriate.)
+
+Quarkus will enable this mode by default in the 2.1.0.Final release.
+
+See https://smallrye.io/docs/smallrye-fault-tolerance/5.2.0/usage/extra.html#_non_compatible_mode[the documentation] for more information.
+
+== Others
+
+Together with the new features described above, we have also performed a major internal refactoring.
+The configuration system, the single last remnant of {smallrye-ft} 2.x, has been rewritten from scratch.
+Instead of storing configuration values into a `Map<String, Object>`, the new system is based on configuration interfaces.
+Implementations of these interfaces are automatically generated during {smallrye-ft} build, using an annotation processor.
+See https://smallrye.io/docs/smallrye-fault-tolerance/5.2.0/internals/config.html[the documentation] for more details if you're interested.
+
+Furthermore, we have fixed a small bug in `@Fallback` validation.
+If you had a method guarded with `@Fallback` that returned a raw type (such as `List`), and its fallback method retured a parameterized type (such as `List<String>`), the validation code would enter an infinite regress.
+This case is now handled properly.
+
+Upgrade to 5.2.0 is very much recommended.
+As described above, there are certain new things, so if you encounter any bugs, please let us know in the https://github.com/smallrye/smallrye-fault-tolerance/issues[issue tracker]!

@@ -1,0 +1,26 @@
+:page-layout: post
+:page-title: Fault Tolerance 5.2.1
+:page-synopsis: SmallRye Fault Tolerance 5.2.1 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2021-07-16 14:00:00.000 +0100
+:page-author: lthon
+
+= Fault Tolerance 5.2.1
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/5.2.1[release] of SmallRye Fault Tolerance 5.2.1.
+This is a small release with one bug fix.
+It is a safe upgrade for everyone using SmallRye Fault Tolerance 5.2.0.
+
+In link:/blog/fault-tolerance-5-0/[SmallRye Fault Tolerance 5.0], we introduced support for the `@Blocking` and `@NonBlocking` annotations.
+From SmallRye Fault Tolerance perspective, these annotations make sense for methods that return an async type, such as `CompletionStage` or `Uni`.
+Naturally, we added validation, so that if the annotation was present on a method with some other return type, deployment would fail.
+
+This is actually problematic, because these annotations are generic.
+They are used by other frameworks and libraries (such as SmallRye Reactive Messaging or RESTEasy Reactive).
+In such case, SmallRye Fault Tolerance should just ignore them.
+However, if the annotation was present on a method that also applied some fault tolerance annotation, SmallRye Fault Tolerance would run the validation and fail the deployment.
+
+In this release, the validation is simply removed.
+SmallRye Fault Tolerance can't know if the annotation is meant for some other framework or not.
+
+Additionally, we fixed some typos in the documentation.

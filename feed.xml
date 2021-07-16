@@ -1,4 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2021-07-13T17:48:39+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 5.2</title><link href="https://www.smallrye.io/blog/fault-tolerance-5-2/" rel="alternate" type="text/html" title="Fault Tolerance 5.2" /><published>2021-07-02T14:00:00+00:00</published><updated>2021-07-02T14:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-5-2</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-5-2/">&lt;div id=&quot;preamble&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2021-07-16T15:11:43+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 5.2.1</title><link href="https://www.smallrye.io/blog/fault-tolerance-5-2-1/" rel="alternate" type="text/html" title="Fault Tolerance 5.2.1" /><published>2021-07-16T13:00:00+00:00</published><updated>2021-07-16T13:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-5-2-1</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-5-2-1/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/5.2.1&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 5.2.1.
+This is a small release with one bug fix.
+It is a safe upgrade for everyone using SmallRye Fault Tolerance 5.2.0.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;In &lt;a href=&quot;/blog/fault-tolerance-5-0/&quot;&gt;SmallRye Fault Tolerance 5.0&lt;/a&gt;, we introduced support for the &lt;code&gt;@Blocking&lt;/code&gt; and &lt;code&gt;@NonBlocking&lt;/code&gt; annotations.
+From SmallRye Fault Tolerance perspective, these annotations make sense for methods that return an async type, such as &lt;code&gt;CompletionStage&lt;/code&gt; or &lt;code&gt;Uni&lt;/code&gt;.
+Naturally, we added validation, so that if the annotation was present on a method with some other return type, deployment would fail.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This is actually problematic, because these annotations are generic.
+They are used by other frameworks and libraries (such as SmallRye Reactive Messaging or RESTEasy Reactive).
+In such case, SmallRye Fault Tolerance should just ignore them.
+However, if the annotation was present on a method that also applied some fault tolerance annotation, SmallRye Fault Tolerance would run the validation and fail the deployment.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;In this release, the validation is simply removed.
+SmallRye Fault Tolerance can&amp;#8217;t know if the annotation is meant for some other framework or not.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Additionally, we fixed some typos in the documentation.&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Fault Tolerance 5.2</title><link href="https://www.smallrye.io/blog/fault-tolerance-5-2/" rel="alternate" type="text/html" title="Fault Tolerance 5.2" /><published>2021-07-02T14:00:00+00:00</published><updated>2021-07-02T14:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-5-2</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-5-2/">&lt;div id=&quot;preamble&quot;&gt;
 &lt;div class=&quot;sectionbody&quot;&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/5.2.0&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 5.2.0.
@@ -1430,233 +1452,4 @@ The specification previously did not require that.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Enjoy the new SmallRye Fault Tolerance, it is &lt;a href=&quot;https://github.com/quarkusio/quarkus/pull/7204&quot;&gt;coming&lt;/a&gt; in the next Quarkus release!&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Fault Tolerance 4.0</title><link href="https://www.smallrye.io/blog/fault-tolerance-4-0/" rel="alternate" type="text/html" title="Fault Tolerance 4.0" /><published>2020-01-22T08:00:00+00:00</published><updated>2020-01-22T08:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-4-0</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-4-0/">&lt;div id=&quot;preamble&quot;&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance&quot;&gt;SmallRye Fault Tolerance&lt;/a&gt; is our implementation of &lt;a href=&quot;https://github.com/eclipse/microprofile-fault-tolerance&quot;&gt;Eclipse MicroProfile Fault Tolerance&lt;/a&gt;.
-It was originally based on &lt;a href=&quot;https://github.com/Netflix/Hystrix&quot;&gt;Hystrix&lt;/a&gt;, the Netflix library for latency and fault tolerance in distributed systems.
-Lately, we realized that Hystrix is not the best fit for implementing MicroProfile Fault Tolerance, because Hystrix meshes all fault tolerance concerns into one, while MicroProfile Fault Tolerance describes mostly a layered architecture.
-The MicroProfile Fault Tolerance specification also requires certain features that Hystrix intentionally doesn&amp;#8217;t provide; most importantly, the ability to interrupt threads that Hystrix itself didn&amp;#8217;t create.
-Last but not least, Hystrix is in maintenance mode, and hasn&amp;#8217;t been actively developed for more than a year.
-When we tried to update to latest Hystrix version, we even faced breaking changes.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;We have been talking on and off about removing Hystrix and using our own implementation of core fault tolerance strategies, one that would be better suited as a base for implementing MicroProfile Fault Tolerance, but only a few months ago did we finally start working on it.
-Thanks to heroic work of &lt;a href=&quot;https://github.com/michalszynkiewicz&quot;&gt;Michał Szynkiewicz&lt;/a&gt;, the new implementation didn&amp;#8217;t take long to pass the entire MicroProfile Fault Tolerance TCK.
-We have already released a first version of this new implementation, called 4.0.0.
-Of course, that&amp;#8217;s not the end; in fact, it&amp;#8217;s just a beginning.
-We should now have a better foundation to experiment with, and already have several ideas that we would like to explore and eventually propose to MicroProfile Fault Tolerance.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;In this article, we&amp;#8217;ll take a brief look at how the new implementation works inside, what do you need to know as an integrator, and what are our plans for the future.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;under_the_hood&quot;&gt;Under the hood&lt;/h2&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;First, let&amp;#8217;s take a brief look at the core.
-It is based on the idea of &lt;code&gt;FaultToleranceStrategy&lt;/code&gt;, which is an interface that looks like this:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;listingblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;java&quot; class=&quot;language-java hljs&quot;&gt;interface FaultToleranceStrategy&amp;lt;V&amp;gt; {
-    V apply(InvocationContext&amp;lt;V&amp;gt; ctx) throws Exception;
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The &lt;code&gt;InvocationContext&lt;/code&gt; is a &lt;code&gt;Callable&lt;/code&gt; that represents the method invocation guarded by this fault tolerance strategy.
-The fault tolerance strategy does its work around &lt;code&gt;ctx.call()&lt;/code&gt;.
-It can catch exceptions, invoke &lt;code&gt;ctx.call()&lt;/code&gt; multiple times, invoke something else, etc.
-As an example, let&amp;#8217;s consider this strategy, applicable to methods that return a &lt;code&gt;String&lt;/code&gt;:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;listingblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;java&quot; class=&quot;language-java hljs&quot;&gt;public class MyStringFallback implements FaultToleranceStrategy&amp;lt;String&amp;gt; {
-    @Override
-    public String apply(InvocationContext&amp;lt;String&amp;gt; ctx) {
-        try {
-            return ctx.call();
-        } catch (Exception ignored) {
-            return &quot;my string value&quot;;
-        }
-    }
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;This is a very simple fallback mechanism, which returns a pre-defined value in case of an exception.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;In the SmallRye Fault Tolerance codebase, you can find implementations of all the strategies required by MicroProfile Fault Tolerance: retry, fallback, timeout, circuit breaker or bulkhead.
-Asynchronous invocation, delegated to a thread pool, is of course also supported.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;When multiple fault tolerance strategies are supposed to be used to guard one method, they form a chain.
-Continuing with our simple example, adding the ability to chain with another strategy would look like this:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;listingblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;java&quot; class=&quot;language-java hljs&quot;&gt;public class MyStringFallback implements FaultToleranceStrategy&amp;lt;String&amp;gt; {
-    private final FaultToleranceStrategy&amp;lt;String&amp;gt; delegate;
-
-    public MyStringFallback(FaultToleranceStrategy&amp;lt;String&amp;gt; delegate) {
-        this.delegate = delegate;
-    }
-
-    @Override
-    public String apply(InvocationContext&amp;lt;String&amp;gt; ctx) {
-        try {
-            return delegate.apply(ctx);
-        } catch (Exception ignored) {
-            return &quot;my string value&quot;;
-        }
-    }
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;We see that one strategy delegates to another, passing the &lt;code&gt;InvocationContext&lt;/code&gt; along.
-In fact, all the implementations in SmallRye Fault Tolerance are written like this: they expect to be used in a chain, so they take another &lt;code&gt;FaultToleranceStrategy&lt;/code&gt; to which they delegate.
-But if all strategies have this form, when is &lt;code&gt;ctx.call()&lt;/code&gt; actually invoked?
-Good question!
-The ultimate &lt;code&gt;ctx.call()&lt;/code&gt; invocation is done by a special fault tolerance strategy which is called, well, &lt;code&gt;Invocation&lt;/code&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;As an example which uses real MicroProfile Fault Tolerance annotations, let&amp;#8217;s consider this method:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;listingblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;java&quot; class=&quot;language-java hljs&quot;&gt;@Retry(...)
-@Timeout(...)
-@Fallback(...)
-public void doSomething() {
-    ...
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The chain of fault tolerance strategies will look roughly like this:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;listingblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code class=&quot;language-none hljs&quot;&gt;Fallback(
-    Retry(
-        Timeout(
-            Invocation(
-                // ctx.call() will happen here
-                // that will, in turn, invoke doSomething()
-            )
-        )
-    )
-)&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The order in which the strategies are chained (or, in fact, nested) is specified by MicroProfile Fault Tolerance.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;In asynchronous invocations, especially those using &lt;code&gt;CompletionStage&lt;/code&gt;, it is a bit more complex, but the core idea is the same and the intuition you gained here should still apply.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Please note that everything explained here is an implementation detail.
-API stability for these interfaces and classes is &lt;em&gt;not&lt;/em&gt; guaranteed; we only mention them here to give you better understanding of the new implementation.
-You will also want to understand this if you decide to contribute (pull requests are always welcome!).&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;integration_concerns&quot;&gt;Integration concerns&lt;/h2&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;If you integrate SmallRye Fault Tolerance to provide an implementation of MicroProfile Fault Tolerance, you should be aware of a few things.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;SmallRye Fault Tolerance creates several thread pools (&lt;code&gt;ExecutorService&lt;/code&gt;s).
-One for asynchronous invocations, one for watching timeouts, and then one for each threadpool-style bulkhead.
-You might want to customize how these thread pools are created.
-For example, if you integrate SmallRye Fault Tolerance into a Java EE application server, you probably want these thread pools to be managed.
-We provide an SPI that you can implement for this exact purpose: &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/blob/main/implementation/fault-tolerance/src/main/java/io/smallrye/faulttolerance/ExecutorFactory.java&quot;&gt;&lt;code&gt;ExecutorFactory&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Size of these thread pools can be configured using the following configuration properties:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;dlist&quot;&gt;
-&lt;dl&gt;
-&lt;dt class=&quot;hdlist1&quot;&gt;&lt;code&gt;io.smallrye.faulttolerance.globalThreadPoolSize&lt;/code&gt;&lt;/dt&gt;
-&lt;dd&gt;
-&lt;p&gt;Size of the thread pool for asynchronous invocations.
-Does not include bulkhead thread pools.
-Defaults to 100.&lt;/p&gt;
-&lt;/dd&gt;
-&lt;dt class=&quot;hdlist1&quot;&gt;&lt;code&gt;io.smallrye.faulttolerance.timeoutExecutorThreads&lt;/code&gt;&lt;/dt&gt;
-&lt;dd&gt;
-&lt;p&gt;Size of the thread pool for watching timeouts.
-Defaults to 5.&lt;/p&gt;
-&lt;/dd&gt;
-&lt;/dl&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Optional integration with &lt;a href=&quot;https://github.com/eclipse/microprofile-context-propagation&quot;&gt;MicroProfile Context Propagation&lt;/a&gt; is present, in a separate artifact.
-Optional integration with &lt;a href=&quot;https://github.com/eclipse/microprofile-opentracing&quot;&gt;MicroProfile OpenTracing&lt;/a&gt; is also present, but it&amp;#8217;s currently built on top of the Context Propagation integration.
-We&amp;#8217;re looking to potentially remove that dependency, so that OpenTracing integration is also possible if you&amp;#8217;re not yet ready to incorporate Context Propagation.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;future_outlook&quot;&gt;Future outlook&lt;/h2&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;As we mentioned above, this is not an end.
-Here&amp;#8217;s a short list of what we want to look at.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;First of all, the 4.0 version implements MicroProfile Fault Tolerance 2.0.
-We will of course continue implementing subsequent specification versions, starting with 2.1, which should be released soon.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Currently, MicroProfile Fault Tolerance specifies that &lt;code&gt;@Asynchronous&lt;/code&gt; invocation always means delegating to a thread pool.
-We&amp;#8217;d like to investigate what would it take to support asynchronous invocation on an event loop, such as one provided by Vert.x.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;We&amp;#8217;d like to add a &lt;a href=&quot;https://github.com/eclipse/microprofile-fault-tolerance/issues/475&quot;&gt;fail-fast strategy&lt;/a&gt;, tentatively called &lt;code&gt;@FailFast&lt;/code&gt;.
-This is useful to prevent expensive calls when you know it doesn&amp;#8217;t make sense to do them.
-One instance of this idea is the circuit breaker, which decides automatically based on rate of errors.
-Here, the decision would be entirely yours.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;We&amp;#8217;d also like to add &lt;a href=&quot;https://github.com/eclipse/microprofile-fault-tolerance/issues/474&quot;&gt;adaptive concurrency limiters&lt;/a&gt;, tentatively called &lt;code&gt;@AdaptiveBulkhead&lt;/code&gt;.
-Bulkheads, as they exist in MicroProfile Fault Tolerance now, are defined statically.
-That is, you need to know upfront what is the maximum concurrency level.
-This is no longer enough in the cloud world, where services are scaled up and down dynamically.
-It is possible to determine the concurrency limits dynamically, by observing the invocation latencies and error rates.
-Netflix has been doing that in their &lt;a href=&quot;https://github.com/Netflix/concurrency-limits&quot;&gt;concurrency limits&lt;/a&gt; project, and we can certainly take a lot of inspiration from them.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Some of the items above are about providing a new API.
-The idea is that we would prototype that API in SmallRye and if it proves worthy, we&amp;#8217;d work to specify it in MicroProfile.
-For that reason, we would probably mark these prototypes as experimental API, and if they get specified in MicroProfile, we&amp;#8217;d rapidly deprecate and remove them.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;There are also some implementation aspects that we&amp;#8217;d like to finetune.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The metrics collection and configuration handling code mostly comes from the old implementation, and is due for serious refactoring.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;As mentioned above, each threadpool-style bulkhead currently gets a fresh thread pool.
-This is quite inefficient, and can be significantly improved.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The current implementation includes a special strategy called &lt;code&gt;Tracer&lt;/code&gt;, which can be put in between any two other strategies to print useful information about when and on which thread is the subsequent strategy invoked.
-This proved very useful in debugging, but using it requires manual changes and rebuild of the entire codebase.
-We want to add comprehensive debug and trace logging that is always present, so that you can easily enable it.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;And there&amp;#8217;s a lot more, for sure.
-As we said above, this is just a beginning!&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
 &lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry></feed>

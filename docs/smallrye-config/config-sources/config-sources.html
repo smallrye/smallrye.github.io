@@ -26,8 +26,8 @@
           <div class="navbar-dropdown">
             <a class="navbar-item" href="../../index/index/index.html">Index</a>
             <a class="navbar-item" href="../index.html">SmallRye Config</a>
-            <a class="navbar-item" href="../../smallrye-fault-tolerance/5.0.0/index.html">SmallRye Fault Tolerance</a>
-            <a class="navbar-item" href="../../smallrye-health/3.0.0/index.html">SmallRye Health</a>
+            <a class="navbar-item" href="../../smallrye-fault-tolerance/5.2.1/index.html">SmallRye Fault Tolerance</a>
+            <a class="navbar-item" href="../../smallrye-health/3.0.1/index.html">SmallRye Health</a>
             <a class="navbar-item" href="../../smallrye-jwt/index.html">SmallRye JWT</a>
             <a class="navbar-item" href="../../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
           </div>
@@ -86,7 +86,7 @@
     <li><a href="config-sources.html">Config Sources</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-config/edit/master/doc/modules/ROOT/pages/config-sources/config-sources.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-config/edit/main/doc/modules/ROOT/pages/config-sources/config-sources.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -111,7 +111,7 @@ a context with access to the available configuration. With the <code>ConfigSourc
 <code>ConfigSource</code> that configures itself with previously initialized <code>ConfigSources</code>.</p>
 </div>
 <div class="paragraph">
-<p>By implementing <a href="https://github.com/smallrye/smallrye-config/blob/master/implementation/src/main/java/io/smallrye/config/ConfigSourceFactory.java">ConfigSourceFactory</a>,
+<p>By implementing <a href="https://github.com/smallrye/smallrye-config/blob/main/implementation/src/main/java/io/smallrye/config/ConfigSourceFactory.java">ConfigSourceFactory</a>,
 a list of <code>ConfigSources</code> may be provided via the <code>Iterable&lt;ConfigSource&gt; getConfigSources(ConfigSourceContext context)</code>
 method. The <code>ConfigSourceFactory</code> may also assign a priority by overriding the default method
 <code>OptionalInt getPriority()</code>. This is only used to sort multiple factories during initialization. Once all the factories
@@ -169,7 +169,7 @@ and <code>microprofile-config.properties</code> file), SmallRye Config provides 
 <div class="paragraph">
 <p>Creates a ConfigSource from Java <code>Properties</code> or <code>Map&lt;String, String&gt;</code> objects or a properties file (referenced by
 its URL). Check
-<a href="https://github.com/smallrye/smallrye-config/blob/master/implementation/src/main/java/io/smallrye/config/PropertiesConfigSource.java">PropertiesConfigSource.java</a>.</p>
+<a href="https://github.com/smallrye/smallrye-config/blob/main/implementation/src/main/java/io/smallrye/config/PropertiesConfigSource.java">PropertiesConfigSource.java</a>.</p>
 </div>
 </div>
 </div>
@@ -232,7 +232,8 @@ the property key and its textual content is the property value).</p>
 </div>
 <div class="paragraph">
 <p>This Config Source can be used to read configuration from
-<a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap">Kubernetes ConfigMap</a>.</p>
+<a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap">Kubernetes ConfigMap</a>. Check the
+<a href="https://github.com/smallrye/smallrye-config/blob/main/examples/configmap/README.adoc">Kubernetes ConfigMap ConfigSource Example</a>.</p>
 </div>
 <div class="paragraph">
 <p>The same mapping rules as defined for environment variables are applied, so the FileSystemConfigSource will search for a given property name (e.g. com.ACME.size):</p>
@@ -260,14 +261,14 @@ the property key and its textual content is the property value).</p>
 <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
     &lt;groupId&gt;io.smallrye.config&lt;/groupId&gt;
     &lt;artifactId&gt;smallrye-config-source-file-system&lt;/artifactId&gt;
-    &lt;version&gt;1.10.0&lt;/version&gt;
+    &lt;version&gt;2.4.0&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This Config Source is not automatically registered. This means that you also need to provide your own
-<code>ConfigSourceProvider</code> implementation and registration via <code>ServiceLoader</code> to use this Config Source like documented in
-MicroProfile Config <code>ConfigSource</code> specification.</p>
+<p>This Config Source register itself with the application if the dependency is present. Use the configuration property
+<code>smallrye.config.source.file.locations</code> to set the directory paths to lookup additional configurations.
+It accepts multiple locations separated by a comma and each must represent a valid URI to a directory.</p>
 </div>
 </div>
 </div>
@@ -276,23 +277,11 @@ MicroProfile Config <code>ConfigSource</code> specification.</p>
 <h2 id="hocon-config-source"><a class="anchor" href="#hocon-config-source"></a>HOCON Config Source</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>ConfigSource implementation to support <a href="https://github.com/lightbend/config/blob/master/HOCON.md">HOCON</a> file format.</p>
+<p>ConfigSource implementation to support <a href="https://github.com/lightbend/config/blob/main/HOCON.md">HOCON</a> file format.</p>
 </div>
 <div class="paragraph">
-<p>This Configuration Source will be looking for the following files in this order of priority:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><code>META-INF/microprofile-config.conf</code></p>
-</li>
-<li>
-<p><code>WEB-INF/classes/META-INF/microprofile-config.conf</code></p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>These configuration files have a lower priority than the default sources.</p>
+<p>This Configuration Source will be looking for the following file <code>META-INF/microprofile-config.conf</code> and will be loaded
+with a lower ordinal than the default sources. The loading ordinal is <code>50</code>.</p>
 </div>
 <div class="sect2">
 <h3 id="_usage_3"><a class="anchor" href="#_usage_3"></a>Usage</h3>
@@ -304,7 +293,7 @@ MicroProfile Config <code>ConfigSource</code> specification.</p>
 <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
     &lt;groupId&gt;io.smallrye.config&lt;/groupId&gt;
     &lt;artifactId&gt;smallrye-config-source-hocon&lt;/artifactId&gt;
-    &lt;version&gt;1.10.0&lt;/version&gt;
+    &lt;version&gt;2.4.0&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
 </div>
@@ -334,7 +323,7 @@ loads the configuration from the file <code>microprofile-config.yaml</code>.</p>
 <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
     &lt;groupId&gt;io.smallrye.config&lt;/groupId&gt;
     &lt;artifactId&gt;smallrye-config-source-yaml&lt;/artifactId&gt;
-    &lt;version&gt;1.10.0&lt;/version&gt;
+    &lt;version&gt;2.4.0&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
 </div>
@@ -364,7 +353,7 @@ subscribe to updates to the configuration parameters.</p>
 <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
     &lt;groupId&gt;io.smallrye.config&lt;/groupId&gt;
     &lt;artifactId&gt;smallrye-config-source-zookeeper&lt;/artifactId&gt;
-    &lt;version&gt;1.10.0&lt;/version&gt;
+    &lt;version&gt;2.4.0&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
 </div>

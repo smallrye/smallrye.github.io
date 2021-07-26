@@ -26,8 +26,8 @@
           <div class="navbar-dropdown">
             <a class="navbar-item" href="../../index/index/index.html">Index</a>
             <a class="navbar-item" href="../index.html">SmallRye Config</a>
-            <a class="navbar-item" href="../../smallrye-fault-tolerance/5.0.0/index.html">SmallRye Fault Tolerance</a>
-            <a class="navbar-item" href="../../smallrye-health/3.0.0/index.html">SmallRye Health</a>
+            <a class="navbar-item" href="../../smallrye-fault-tolerance/5.2.1/index.html">SmallRye Fault Tolerance</a>
+            <a class="navbar-item" href="../../smallrye-health/3.0.1/index.html">SmallRye Health</a>
             <a class="navbar-item" href="../../smallrye-jwt/index.html">SmallRye JWT</a>
             <a class="navbar-item" href="../../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
           </div>
@@ -86,7 +86,7 @@
     <li><a href="config.html">Config</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-config/edit/master/doc/modules/ROOT/pages/config/config.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-config/edit/main/doc/modules/ROOT/pages/config/config.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -100,6 +100,9 @@
 <ul>
 <li>
 <p><a href="#indexed-properties">Indexed Properties</a></p>
+</li>
+<li>
+<p><a href="#map-support">Map Support</a></p>
 </li>
 <li>
 <p><a href="#profiles">Profiles</a></p>
@@ -124,7 +127,7 @@ for simple cases, but it becomes cumbersome and limited for more advanced cases.
 <div class="paragraph">
 <p>Indexed Properties provide a way to use indexes in config property names to map specific elements in a <code>Collection</code>
 type. Since the indexed element is part of the property name and not contained in the value, this can also be used to
-map complex object types as `Collectionª elements. Consider:</p>
+map complex object types as <code>Collection</code> elements. Consider:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -150,6 +153,107 @@ indexed and unindexed format, the unindexed value takes priority.</p>
 <p>The indexed property is sorted by their index before being added to the target <code>Collection</code>. Any gaps contained in the
 indexes do not resolve to the target <code>Collection</code>, which means that the <code>Collection</code> result will store all values in a
 continued fashion and without gaps.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="map-support"><a class="anchor" href="#map-support"></a>Map Support</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>SmallRye Config allows injecting multiple configuration parameters as a <code>Map</code> using the standard annotations (<code>@ConfigProperty</code> and <code>@ConfigProperties</code>) which can
+be very helpful especially with a dynamic configuration.</p>
+</div>
+<div class="paragraph">
+<p>For example, let&#8217;s say that I want to keep in my configuration the custom reason phrases to return to the end user according to the http status code.
+In that particular use case, the configuration could then be something like the following properties file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">server.reasons.200=My custom reason phrase for OK
+server.reasons.201=My custom reason phrase for Created
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The previous configuration could be injected directly into your bean using the standard annotations as next:</p>
+</div>
+<div class="paragraph">
+<p>With <code>@ConfigProperty</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@ApplicationScoped
+public class ConfigBean {
+
+    @Inject
+    @ConfigProperty(name = "server.reasons", defaultValue = "200=OK;201=Created") <i class="conum" data-value="1"></i><b>(1)</b>
+    Map&lt;Integer, String&gt; reasons; <i class="conum" data-value="2"></i><b>(2)</b>
+
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Provide the name of the parent configuration property from the annotation <code>@ConfigProperty</code>. Provide also the default values to use in case no direct sub properties could be found, using the syntax <code>&lt;key1&gt;=&lt;value1&gt;;&lt;key2&gt;=&lt;value2&gt;&#8230;&#8203;</code>, so here the default values are "OK" for 200 and "Created" for 201.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Provide the expected type of <code>Map</code>, here the keys will automatically be converted into Integers, and the values into Strings.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>With <code>@ConfigProperties</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@ConfigProperties(prefix = "server") <i class="conum" data-value="1"></i><b>(1)</b>
+public class Config {
+
+    Map&lt;Integer, String&gt; reasons; <i class="conum" data-value="2"></i><b>(2)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Provide the prefix of the name of the parent configuration property from the annotation <code>@ConfigProperties</code>, here the prefix is <code>server</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Provide the suffix of the name of the parent configuration, and the expected type of <code>Map</code>, here the keys will automatically be converted into Integers, and the values into Strings.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Only the direct sub properties will be converted into a <code>Map</code> and injected into the target bean, the rest will be ignored. In other words, in the previous example, a property whose name is <code>reasons.200.a</code> would be ignored as not considered as a direct sub property.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The property will be considered as missing if no direct sub properties could be found.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>It is also possible to do the exact same thing programmatically by calling the non-standard method <code>SmallRyeConfig#getValues("server.reasons", Integer.class, String.class)</code> if the property is mandatory otherwise by calling the method <code>SmallRyeConfig#getOptionalValues("server.reasons", Integer.class, String.class)</code>.</p>
 </div>
 </div>
 </div>
@@ -243,7 +347,7 @@ my.prop=1234
 <p><code>dev.prop</code> value is <code>dev</code></p>
 </li>
 <li>
-<p><code>my.prop</code> value is <code>0</code></p>
+<p><code>my.prop</code> value is <code>5678</code></p>
 </li>
 <li>
 <p><code>test.prop</code> does not have a value</p>
@@ -305,7 +409,7 @@ my.prop=1234
 provides a way to scan additional locations for configuration properties files.</p>
 </div>
 <div class="paragraph">
-<p>The <code>smallrye.config.locations</code> configuration property accepts multiple locations separated by a comma and each must
+<p>The <code>smallrye.config.locations</code> configuration property accepts multiple locations separated by a comma <code>,</code> and each must
 represent a valid <code>URI</code>. The supported <code>URI</code> schemes are:</p>
 </div>
 <div class="ulist">
@@ -325,40 +429,79 @@ represent a valid <code>URI</code>. The supported <code>URI</code> schemes are:<
 </ul>
 </div>
 <div class="paragraph">
-<p>Each <code>URI</code> scheme loads any discovered properties file in a <code>ConfigSource</code>. Discovered sources are then sorted with the
-<code>config_ordinal</code> property if present. If all sources have the same ordinal, they are sorted by the order in which they
-were found.</p>
+<p>Each <code>URI</code> scheme loads all discovered resources in a <code>ConfigSource</code>. All loaded sources use the same ordinal of the
+source that found the <code>smallrye.config.locations</code> configuration property. For instance, if <code>smallrye.config.locations</code>
+is set as a system property, then all loaded sources have their ordinals set to <code>400</code> (system properties use <code>400</code> as
+their ordinal). The ordinal may be overridden directly in the resource by setting the <code>config_ordinal</code> property. Sources
+are sorted first by their ordinal, then by location order, and finally by loading order.</p>
 </div>
 <div class="paragraph">
-<p>If a profile is active, the profile resource is only loaded if t he unprofiled resource is available in the same
-location. This is to keep a consistent loading order and match with the unprofiled resource. Profiles are not
-taken into account if the location is a directory.</p>
+<p>If a profile is active, and the <code>URI</code> represents a single resource (for instance a file), then resources that match the
+active profile are also loaded. The profile resource name must follow the pattern: <code>{location}-{profile}</code>. A profile
+resource is only loaded if the unprofiled resource is also available in the same location. This is to keep a consistent
+loading order and pair all the resources together.</p>
+</div>
+<div class="paragraph">
+<p>Profile resources are not taken into account if the location is a directory since there is no reliable way to discover
+which file is the main resource. Properties that use the profile prefix syntax <code>%profile.</code> will work as expected.</p>
 </div>
 <div class="sect2">
 <h3 id="_examples"><a class="anchor" href="#_examples"></a>Examples</h3>
 <div class="sect3">
 <h4 id="_all_properties_files_from_a_directory"><a class="anchor" href="#_all_properties_files_from_a_directory"></a>All properties files from a directory:</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties"># loads all files from a relative path
+smallrye.config.locations=./src/main/resources/
+
+# loads all files from an absolute path
+smallrye.config.locations=/user/local/config</code></pre>
+</div>
+</div>
 <div class="paragraph">
-<p><code>smallrye.config.locations=./src/main/resources/</code>
-<code>smallrye.config.locations=/user/local/config</code></p>
+<p>For relative paths, the JVM <code>user.dir</code> property defines the current directory.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_a_specific_file"><a class="anchor" href="#_a_specific_file"></a>A specific file :</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">smallrye.config.locations=./src/main/resources/additional.properties</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If a profile <code>dev</code> is active, and an <code>additional-dev.properties</code> file exists, this will also be loaded.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_all_additional_properties_files_from_the_classpath"><a class="anchor" href="#_all_additional_properties_files_from_the_classpath"></a>All <code>additional.properties</code> files from the classpath:</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">smallrye.config.locations=additional.properties</code></pre>
+</div>
+</div>
 <div class="paragraph">
-<p><code>smallrye.config.locations=additional.properties</code></p>
+<p>If a profile <code>prod</code> is active, and an <code>additional-prod.properties</code> resources exists next to the <code>additional.properties</code>
+resource, this will also be loaded.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_the_resources_properties_file_from_a_specific_jar"><a class="anchor" href="#_the_resources_properties_file_from_a_specific_jar"></a>The <code>resources.properties</code> file from a specific jar:</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">smallrye.config.locations=jar:file:///user/local/app/lib/resources-.jar!/resources.properties</code></pre>
+</div>
+</div>
 <div class="paragraph">
-<p><code>smallrye.config.locations=jar:file:///user/local/app/lib/resources-.jar!/resources.properties</code></p>
+<p>If a profile <code>test</code> is active, and an <code>additional-test.properties</code> respource exists, this will also be loaded.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_the_config_properties_file_from_a_web_server"><a class="anchor" href="#_the_config_properties_file_from_a_web_server"></a>The <code>config.properties</code> file from a web server:</h4>
-<div class="paragraph">
-<p>`smallrye.config.locations=http://localhost:8080/config/config.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">smallrye.config.locations=http://localhost:8080/config/config.</code></pre>
+</div>
 </div>
 </div>
 </div>

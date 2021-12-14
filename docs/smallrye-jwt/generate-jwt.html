@@ -270,6 +270,11 @@ Jwt.signAndEncrypt("/claims.json");</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Location of a key which will be used to encrypt the claims or inner JWT when a no-argument encrypt() method is called.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.encrypt.key</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Key value which will be used to encrypt the claims or inner JWT when a no-argument encrypt() method is called.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.encrypt.key.id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Encryption key identifier which is checked only when JWK keys are used.</p></td>
@@ -280,9 +285,29 @@ Jwt.signAndEncrypt("/claims.json");</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Location of a key which will be used to sign the claims when either a no-argument sign() or innerSign() method is called.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.sign.key</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Key value which will be used to sign the claims when either a no-argument sign() or innerSign() method is called.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.sign.key.id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Signing key identifier which is checked only when JWK keys are used.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.new-token.signature-algorithm</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RS256</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Signature algorithm. This property will be checked if the JWT signature builder has not already set the signature algorithm.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.new-token.key-encryption-algorithm</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RSA-OAEP</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Key encryption algorithm. This property will be checked if the JWT encryption builder has not already set the key encryption algorithm.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.new-token.content-encryption-algorithm</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>A256GCM</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Content encryption algorithm. This property will be checked if the JWT encryption builder has not already set the content encryption algorithm.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.new-token.lifespan</code></p></td>

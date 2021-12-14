@@ -368,6 +368,12 @@ public class SecuredResource {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>Note that if you need to use <code>JWTParser</code> to verify the tokens with different verification constraints (for example, tokens have been signed by different providers, using different algorithms, etc) then please use a new instance of <code>io.smallrye.jwt.auth.principal.DefaultJWTParser</code> per every request - <code>DefaultJWTParser</code> has several methods for customizing the verification requirements.</p>
+</div>
+<div class="paragraph">
+<p>If the same provider uses different keys to secure the token then using a <code>JsonWebKey Set</code> containing several keys may also work with the injected <code>JWTParser</code>.</p>
+</div>
 </div>
 </div>
 <h1 id="_token_decryption" class="sect0"><a class="anchor" href="#_token_decryption"></a>Token Decryption</h1>

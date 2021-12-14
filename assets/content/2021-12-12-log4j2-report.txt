@@ -1,0 +1,2823 @@
+smallrye-async-api
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] SmallRye: MicroProfile AsyncAPI Parent                             [pom]
+[INFO] SmallRye: MicroProfile AsyncAPI Spec                               [jar]
+[INFO] SmallRye: MicroProfile AsyncAPI Spec TCK                           [jar]
+[INFO] SmallRye: MicroProfile AsyncAPI Implementation                     [jar]
+[INFO] SmallRye: MicroProfile AsyncAPI TCK                                [jar]
+[INFO] Empty Release Project to Avoid Maven Bug                           [pom]
+[INFO] 
+[INFO] ---------------< io.smallrye:smallrye-async-api-parent >----------------
+[INFO] Building SmallRye: MicroProfile AsyncAPI Parent 1.0.0-SNAPSHOT     [1/6]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-async-api-parent ---
+[WARNING] The artifact xml-apis:xml-apis:jar:2.0.2 has been relocated to xml-apis:xml-apis:jar:1.0.b2
+[INFO] 
+[INFO] --------------< io.smallrye:smallrye-async-api-spec-api >---------------
+[INFO] Building SmallRye: MicroProfile AsyncAPI Spec 1.0.0-SNAPSHOT       [2/6]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-async-api-spec-api ---
+[INFO] 
+[INFO] --------------< io.smallrye:smallrye-async-api-spec-tck >---------------
+[INFO] Building SmallRye: MicroProfile AsyncAPI Spec TCK 1.0.0-SNAPSHOT   [3/6]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-async-api-spec-tck ---
+[INFO] 
+[INFO] -------------------< io.smallrye:smallrye-async-api >-------------------
+[INFO] Building SmallRye: MicroProfile AsyncAPI Implementation 1.0.0-SNAPSHOT [4/6]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-async-api ---
+[INFO] 
+[INFO] -----------------< io.smallrye:smallrye-async-api-tck >-----------------
+[INFO] Building SmallRye: MicroProfile AsyncAPI TCK 1.0.0-SNAPSHOT        [5/6]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-async-api-tck ---
+[INFO] 
+[INFO] ---------------< io.smallrye:smallrye-async-api-release >---------------
+[INFO] Building Empty Release Project to Avoid Maven Bug 1.0.0-SNAPSHOT   [6/6]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-async-api-release ---
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for SmallRye: MicroProfile AsyncAPI Parent 1.0.0-SNAPSHOT:
+[INFO] 
+[INFO] SmallRye: MicroProfile AsyncAPI Parent ............. SUCCESS [  0.444 s]
+[INFO] SmallRye: MicroProfile AsyncAPI Spec ............... SUCCESS [  0.078 s]
+[INFO] SmallRye: MicroProfile AsyncAPI Spec TCK ........... SUCCESS [  0.395 s]
+[INFO] SmallRye: MicroProfile AsyncAPI Implementation ..... SUCCESS [  0.481 s]
+[INFO] SmallRye: MicroProfile AsyncAPI TCK ................ SUCCESS [  0.204 s]
+[INFO] Empty Release Project to Avoid Maven Bug ........... SUCCESS [  0.002 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.847 s
+[INFO] Finished at: 2021-12-13T20:59:15Z
+[INFO] ------------------------------------------------------------------------
+smallrye-code-rules
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< io.smallrye:smallrye-code-rules >-------------------
+[INFO] Building SmallRye: Code Rules 2-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-code-rules ---
+[WARNING] The artifact xml-apis:xml-apis:jar:2.0.2 has been relocated to xml-apis:xml-apis:jar:1.0.b2
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.645 s
+[INFO] Finished at: 2021-12-13T20:59:17Z
+[INFO] ------------------------------------------------------------------------
+smallrye-common
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] SmallRye Common: Parent                                            [pom]
+[INFO] SmallRye Common: Annotations                                       [jar]
+[INFO] SmallRye Common: Classloader                                       [jar]
+[INFO] SmallRye Common: Constraints                                       [jar]
+[INFO] SmallRye Common: CPU                                               [jar]
+[INFO] SmallRye Common: Functions                                         [jar]
+[INFO] SmallRye Common: Expressions                                       [jar]
+[INFO] SmallRye Common: IO                                                [jar]
+[INFO] SmallRye Common: Net                                               [jar]
+[INFO] SmallRye Common: OS                                                [jar]
+[INFO] SmallRye Common: Version                                           [jar]
+[INFO] 
+[INFO] -------------< io.smallrye.common:smallrye-common-parent >--------------
+[INFO] Building SmallRye Common: Parent 1.8.1-SNAPSHOT                   [1/11]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-common-parent ---
+[WARNING] The artifact xml-apis:xml-apis:jar:2.0.2 has been relocated to xml-apis:xml-apis:jar:1.0.b2
+[INFO] 
+[INFO] -----------< io.smallrye.common:smallrye-common-annotation >------------
+[INFO] Building SmallRye Common: Annotations 1.8.1-SNAPSHOT              [2/11]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-common-annotation ---
+[INFO] 
+[INFO] -----------< io.smallrye.common:smallrye-common-classloader >-----------
+[INFO] Building SmallRye Common: Classloader 1.8.1-SNAPSHOT              [3/11]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-common-classloader ---
+[INFO] 
+[INFO] -----------< io.smallrye.common:smallrye-common-constraint >------------
+[INFO] Building SmallRye Common: Constraints 1.8.1-SNAPSHOT              [4/11]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-common-constraint ---
+[INFO] 
+[INFO] ---------------< io.smallrye.common:smallrye-common-cpu >---------------
+[INFO] Building SmallRye Common: CPU 1.8.1-SNAPSHOT                      [5/11]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-common-cpu ---
+[INFO] 
+[INFO] ------------< io.smallrye.common:smallrye-common-function >-------------
+[INFO] Building SmallRye Common: Functions 1.8.1-SNAPSHOT                [6/11]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-common-function ---
+[INFO] 
+[INFO] -----------< io.smallrye.common:smallrye-common-expression >------------
+[INFO] Building SmallRye Common: Expressions 1.8.1-SNAPSHOT              [7/11]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-common-expression ---
+[INFO] 
+[INFO] ---------------< io.smallrye.common:smallrye-common-io >----------------
+[INFO] Building SmallRye Common: IO 1.8.1-SNAPSHOT                       [8/11]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-common-io ---
+[INFO] 
+[INFO] ---------------< io.smallrye.common:smallrye-common-net >---------------
+[INFO] Building SmallRye Common: Net 1.8.1-SNAPSHOT                      [9/11]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-common-net ---
+[INFO] 
+[INFO] ---------------< io.smallrye.common:smallrye-common-os >----------------
+[INFO] Building SmallRye Common: OS 1.8.1-SNAPSHOT                      [10/11]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-common-os ---
+[INFO] 
+[INFO] -------------< io.smallrye.common:smallrye-common-version >-------------
+[INFO] Building SmallRye Common: Version 1.8.1-SNAPSHOT                 [11/11]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-common-version ---
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for SmallRye Common: Parent 1.8.1-SNAPSHOT:
+[INFO] 
+[INFO] SmallRye Common: Parent ............................ SUCCESS [  0.451 s]
+[INFO] SmallRye Common: Annotations ....................... SUCCESS [  0.017 s]
+[INFO] SmallRye Common: Classloader ....................... SUCCESS [  0.063 s]
+[INFO] SmallRye Common: Constraints ....................... SUCCESS [  0.042 s]
+[INFO] SmallRye Common: CPU ............................... SUCCESS [  0.003 s]
+[INFO] SmallRye Common: Functions ......................... SUCCESS [  0.008 s]
+[INFO] SmallRye Common: Expressions ....................... SUCCESS [  0.015 s]
+[INFO] SmallRye Common: IO ................................ SUCCESS [  0.019 s]
+[INFO] SmallRye Common: Net ............................... SUCCESS [  0.029 s]
+[INFO] SmallRye Common: OS ................................ SUCCESS [  0.007 s]
+[INFO] SmallRye Common: Version ........................... SUCCESS [  0.047 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.989 s
+[INFO] Finished at: 2021-12-13T20:59:19Z
+[INFO] ------------------------------------------------------------------------
+smallrye-config
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] SmallRye: MicroProfile Config Parent                               [pom]
+[INFO] SmallRye: Common classes                                           [jar]
+[INFO] SmallRye: MicroProfile Config Core Implementation                  [jar]
+[INFO] SmallRye: MicroProfile Config CDI Implementation                   [jar]
+[INFO] SmallRye: MicroProfile Config Validator                            [jar]
+[INFO] SmallRye: HOCON ConfigSource                                       [jar]
+[INFO] SmallRye: FileSystem ConfigSource                                  [jar]
+[INFO] SmallRye: MicroProfile Config Source - Yaml                        [jar]
+[INFO] SmallRye: ZooKeeper ConfigSource                                   [jar]
+[INFO] SmallRye: MicroProfile Config Converter - Json                     [jar]
+[INFO] SmallRye: MicroProfile Config Events                               [jar]
+[INFO] SmallRye: MicroProfile Config Source Injection                     [jar]
+[INFO] SmallRye: MicroProfile Config Test Suite                           [pom]
+[INFO] SmallRye: MicroProfile Config Test Suite - Extra                   [jar]
+[INFO] SmallRye: MicroProfile Config TCK                                  [jar]
+[INFO] SmallRye Config Examples: Interceptors                             [jar]
+[INFO] SmallRye Config Examples: Property Expansion                       [jar]
+[INFO] SmallRye Config Examples: Profiles                                 [jar]
+[INFO] SmallRye Config Examples: ConfigMap                                [jar]
+[INFO] SmallRye Config Examples: Config Mapping                           [jar]
+[INFO] SmallRye Config Examples                                           [pom]
+[INFO] Empty Release Project to Avoid Maven Bug                           [pom]
+[INFO] 
+[INFO] -------------< io.smallrye.config:smallrye-config-parent >--------------
+[INFO] Building SmallRye: MicroProfile Config Parent 2.7.1-SNAPSHOT      [1/22]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-config-parent ---
+[WARNING] The artifact xml-apis:xml-apis:jar:2.0.2 has been relocated to xml-apis:xml-apis:jar:1.0.b2
+[INFO] 
+[INFO] -------------< io.smallrye.config:smallrye-config-common >--------------
+[INFO] Building SmallRye: Common classes 2.7.1-SNAPSHOT                  [2/22]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-config-common ---
+[INFO] 
+[INFO] --------------< io.smallrye.config:smallrye-config-core >---------------
+[INFO] Building SmallRye: MicroProfile Config Core Implementation 2.7.1-SNAPSHOT [3/22]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-config-core ---
+[INFO] 
+[INFO] -----------------< io.smallrye.config:smallrye-config >-----------------
+[INFO] Building SmallRye: MicroProfile Config CDI Implementation 2.7.1-SNAPSHOT [4/22]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-config ---
+[INFO] 
+[INFO] ------------< io.smallrye.config:smallrye-config-validator >------------
+[INFO] Building SmallRye: MicroProfile Config Validator 2.7.1-SNAPSHOT   [5/22]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-config-validator ---
+[INFO] 
+[INFO] ----------< io.smallrye.config:smallrye-config-source-hocon >-----------
+[INFO] Building SmallRye: HOCON ConfigSource 2.7.1-SNAPSHOT              [6/22]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-config-source-hocon ---
+[INFO] 
+[INFO] -------< io.smallrye.config:smallrye-config-source-file-system >--------
+[INFO] Building SmallRye: FileSystem ConfigSource 2.7.1-SNAPSHOT         [7/22]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-config-source-file-system ---
+[INFO] 
+[INFO] -----------< io.smallrye.config:smallrye-config-source-yaml >-----------
+[INFO] Building SmallRye: MicroProfile Config Source - Yaml 2.7.1-SNAPSHOT [8/22]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-config-source-yaml ---
+[INFO] 
+[INFO] --------< io.smallrye.config:smallrye-config-source-zookeeper >---------
+[INFO] Building SmallRye: ZooKeeper ConfigSource 2.7.1-SNAPSHOT          [9/22]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-config-source-zookeeper ---
+[INFO] 
+[INFO] ---------< io.smallrye.config:smallrye-config-converter-json >----------
+[INFO] Building SmallRye: MicroProfile Config Converter - Json 2.7.1-SNAPSHOT [10/22]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-config-converter-json ---
+[INFO] 
+[INFO] -------------< io.smallrye.config:smallrye-config-events >--------------
+[INFO] Building SmallRye: MicroProfile Config Events 2.7.1-SNAPSHOT     [11/22]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-config-events ---
+[INFO] 
+[INFO] --------< io.smallrye.config:smallrye-config-source-injection >---------
+[INFO] Building SmallRye: MicroProfile Config Source Injection 2.7.1-SNAPSHOT [12/22]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-config-source-injection ---
+[INFO] 
+[INFO] ------------< io.smallrye.config:smallrye-config-testsuite >------------
+[INFO] Building SmallRye: MicroProfile Config Test Suite 2.7.1-SNAPSHOT [13/22]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-config-testsuite ---
+[INFO] 
+[INFO] -----------< io.smallrye.config:smallrye-config-test-extra >------------
+[INFO] Building SmallRye: MicroProfile Config Test Suite - Extra 2.7.1-SNAPSHOT [14/22]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-config-test-extra ---
+[INFO] 
+[INFO] ---------------< io.smallrye.config:smallrye-config-tck >---------------
+[INFO] Building SmallRye: MicroProfile Config TCK 2.7.1-SNAPSHOT        [15/22]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-config-tck ---
+[INFO] 
+[INFO] --------------< io.smallrye.config.examples:interceptors >--------------
+[INFO] Building SmallRye Config Examples: Interceptors 2.7.1-SNAPSHOT   [16/22]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ interceptors ---
+[INFO] 
+[INFO] ---------------< io.smallrye.config.examples:expansion >----------------
+[INFO] Building SmallRye Config Examples: Property Expansion 2.7.1-SNAPSHOT [17/22]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ expansion ---
+[INFO] 
+[INFO] ----------------< io.smallrye.config.examples:profiles >----------------
+[INFO] Building SmallRye Config Examples: Profiles 2.7.1-SNAPSHOT       [18/22]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ profiles ---
+[INFO] 
+[INFO] ---------------< io.smallrye.config.examples:configmap >----------------
+[INFO] Building SmallRye Config Examples: ConfigMap 2.7.1-SNAPSHOT      [19/22]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ configmap ---
+[INFO] 
+[INFO] ----------------< io.smallrye.config.examples:mapping >-----------------
+[INFO] Building SmallRye Config Examples: Config Mapping 2.7.1-SNAPSHOT [20/22]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ mapping ---
+[INFO] 
+[INFO] ------------< io.smallrye.config:smallrye-config-examples >-------------
+[INFO] Building SmallRye Config Examples 2.7.1-SNAPSHOT                 [21/22]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-config-examples ---
+[INFO] 
+[INFO] -------------< io.smallrye.config:smallrye-config-release >-------------
+[INFO] Building Empty Release Project to Avoid Maven Bug 2.7.1-SNAPSHOT [22/22]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-config-release ---
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for SmallRye: MicroProfile Config Parent 2.7.1-SNAPSHOT:
+[INFO] 
+[INFO] SmallRye: MicroProfile Config Parent ............... SUCCESS [  0.439 s]
+[INFO] SmallRye: Common classes ........................... SUCCESS [  0.088 s]
+[INFO] SmallRye: MicroProfile Config Core Implementation .. SUCCESS [  0.137 s]
+[INFO] SmallRye: MicroProfile Config CDI Implementation ... SUCCESS [  0.162 s]
+[INFO] SmallRye: MicroProfile Config Validator ............ SUCCESS [  0.040 s]
+[INFO] SmallRye: HOCON ConfigSource ....................... SUCCESS [  0.012 s]
+[INFO] SmallRye: FileSystem ConfigSource .................. SUCCESS [  0.009 s]
+[INFO] SmallRye: MicroProfile Config Source - Yaml ........ SUCCESS [  0.014 s]
+[INFO] SmallRye: ZooKeeper ConfigSource ................... SUCCESS [  0.244 s]
+[INFO] SmallRye: MicroProfile Config Converter - Json ..... SUCCESS [  0.050 s]
+[INFO] SmallRye: MicroProfile Config Events ............... SUCCESS [  0.013 s]
+[INFO] SmallRye: MicroProfile Config Source Injection ..... SUCCESS [  0.012 s]
+[INFO] SmallRye: MicroProfile Config Test Suite ........... SUCCESS [  0.001 s]
+[INFO] SmallRye: MicroProfile Config Test Suite - Extra ... SUCCESS [  0.179 s]
+[INFO] SmallRye: MicroProfile Config TCK .................. SUCCESS [  0.024 s]
+[INFO] SmallRye Config Examples: Interceptors ............. SUCCESS [  0.010 s]
+[INFO] SmallRye Config Examples: Property Expansion ....... SUCCESS [  0.023 s]
+[INFO] SmallRye Config Examples: Profiles ................. SUCCESS [  0.010 s]
+[INFO] SmallRye Config Examples: ConfigMap ................ SUCCESS [  0.007 s]
+[INFO] SmallRye Config Examples: Config Mapping ........... SUCCESS [  0.009 s]
+[INFO] SmallRye Config Examples ........................... SUCCESS [  0.002 s]
+[INFO] Empty Release Project to Avoid Maven Bug ........... SUCCESS [  0.001 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.851 s
+[INFO] Finished at: 2021-12-13T20:59:22Z
+[INFO] ------------------------------------------------------------------------
+smallrye-context-propagation
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] SmallRye Context Propagation                                       [pom]
+[INFO] smallrye-context-propagation-api                                   [jar]
+[INFO] smallrye-context-propagation-storage                               [jar]
+[INFO] smallrye-context-propagation                                       [jar]
+[INFO] smallrye-context-propagation-cdi                                   [jar]
+[INFO] smallrye-context-propagation-jta                                   [jar]
+[INFO] smallrye-context-propagation-application                           [jar]
+[INFO] smallrye-context-propagation-propagators-rxjava1                   [jar]
+[INFO] smallrye-context-propagation-propagators-rxjava2                   [jar]
+[INFO] smallrye-context-propagation-test                                  [jar]
+[INFO] smallrye-context-propagation-tck                                   [jar]
+[INFO] Empty Release Project to Avoid Maven Bug                           [pom]
+[INFO] 
+[INFO] ----------< io.smallrye:smallrye-context-propagation-parent >-----------
+[INFO] Building SmallRye Context Propagation 1.2.3-SNAPSHOT              [1/12]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-context-propagation-parent ---
+[WARNING] The artifact xml-apis:xml-apis:jar:2.0.2 has been relocated to xml-apis:xml-apis:jar:1.0.b2
+[INFO] 
+[INFO] ------------< io.smallrye:smallrye-context-propagation-api >------------
+[INFO] Building smallrye-context-propagation-api 1.2.3-SNAPSHOT          [2/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-context-propagation-api ---
+[INFO] 
+[INFO] ----------< io.smallrye:smallrye-context-propagation-storage >----------
+[INFO] Building smallrye-context-propagation-storage 1.2.3-SNAPSHOT      [3/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-context-propagation-storage ---
+[INFO] 
+[INFO] --------------< io.smallrye:smallrye-context-propagation >--------------
+[INFO] Building smallrye-context-propagation 1.2.3-SNAPSHOT              [4/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-context-propagation ---
+[INFO] 
+[INFO] ------------< io.smallrye:smallrye-context-propagation-cdi >------------
+[INFO] Building smallrye-context-propagation-cdi 1.2.3-SNAPSHOT          [5/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-context-propagation-cdi ---
+[INFO] 
+[INFO] ------------< io.smallrye:smallrye-context-propagation-jta >------------
+[INFO] Building smallrye-context-propagation-jta 1.2.3-SNAPSHOT          [6/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-context-propagation-jta ---
+[INFO] 
+[INFO] --------< io.smallrye:smallrye-context-propagation-application >--------
+[INFO] Building smallrye-context-propagation-application 1.2.3-SNAPSHOT  [7/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-context-propagation-application ---
+[INFO] 
+[INFO] ----< io.smallrye:smallrye-context-propagation-propagators-rxjava1 >----
+[INFO] Building smallrye-context-propagation-propagators-rxjava1 1.2.3-SNAPSHOT [8/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-context-propagation-propagators-rxjava1 ---
+[INFO] 
+[INFO] ----< io.smallrye:smallrye-context-propagation-propagators-rxjava2 >----
+[INFO] Building smallrye-context-propagation-propagators-rxjava2 1.2.3-SNAPSHOT [9/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-context-propagation-propagators-rxjava2 ---
+[INFO] 
+[INFO] -----------< io.smallrye:smallrye-context-propagation-test >------------
+[INFO] Building smallrye-context-propagation-test 1.2.3-SNAPSHOT        [10/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-context-propagation-test ---
+[INFO] 
+[INFO] ------------< io.smallrye:smallrye-context-propagation-tck >------------
+[INFO] Building smallrye-context-propagation-tck 1.2.3-SNAPSHOT         [11/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-context-propagation-tck ---
+[INFO] 
+[INFO] ----------< io.smallrye:smallrye-context-propagation-release >----------
+[INFO] Building Empty Release Project to Avoid Maven Bug 1.2.3-SNAPSHOT [12/12]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-context-propagation-release ---
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for SmallRye Context Propagation 1.2.3-SNAPSHOT:
+[INFO] 
+[INFO] SmallRye Context Propagation ....................... SUCCESS [  0.420 s]
+[INFO] smallrye-context-propagation-api ................... SUCCESS [  0.041 s]
+[INFO] smallrye-context-propagation-storage ............... SUCCESS [  0.003 s]
+[INFO] smallrye-context-propagation ....................... SUCCESS [  0.061 s]
+[INFO] smallrye-context-propagation-cdi ................... SUCCESS [  0.191 s]
+[INFO] smallrye-context-propagation-jta ................... SUCCESS [  0.085 s]
+[INFO] smallrye-context-propagation-application ........... SUCCESS [  0.008 s]
+[INFO] smallrye-context-propagation-propagators-rxjava1 ... SUCCESS [  0.006 s]
+[INFO] smallrye-context-propagation-propagators-rxjava2 ... SUCCESS [  0.006 s]
+[INFO] smallrye-context-propagation-test .................. SUCCESS [  0.713 s]
+[INFO] smallrye-context-propagation-tck ................... SUCCESS [  0.489 s]
+[INFO] Empty Release Project to Avoid Maven Bug ........... SUCCESS [  0.002 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.294 s
+[INFO] Finished at: 2021-12-13T20:59:25Z
+[INFO] ------------------------------------------------------------------------
+smallrye-converters
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] SmallRye: Converters Parent                                        [pom]
+[INFO] SmallRye: Converters API                                           [jar]
+[INFO] SmallRye: Converters Implementation                                [jar]
+[INFO] 
+[INFO] ---------< io.smallrye.converters:smallrye-converters-parent >----------
+[INFO] Building SmallRye: Converters Parent 1.0.1-SNAPSHOT                [1/3]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-converters-parent ---
+[WARNING] The artifact xml-apis:xml-apis:jar:2.0.2 has been relocated to xml-apis:xml-apis:jar:1.0.b2
+[INFO] 
+[INFO] ---------------< io.smallrye.converters:converters-api >----------------
+[INFO] Building SmallRye: Converters API 1.0.1-SNAPSHOT                   [2/3]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ converters-api ---
+[INFO] 
+[INFO] -------------< io.smallrye.converters:smallrye-converters >-------------
+[INFO] Building SmallRye: Converters Implementation 1.0.1-SNAPSHOT        [3/3]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-converters ---
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for SmallRye: Converters Parent 1.0.1-SNAPSHOT:
+[INFO] 
+[INFO] SmallRye: Converters Parent ........................ SUCCESS [  0.427 s]
+[INFO] SmallRye: Converters API ........................... SUCCESS [  0.038 s]
+[INFO] SmallRye: Converters Implementation ................ SUCCESS [  0.054 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.735 s
+[INFO] Finished at: 2021-12-13T20:59:27Z
+[INFO] ------------------------------------------------------------------------
+smallrye-fault-tolerance
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] SmallRye Fault Tolerance: Parent                                   [pom]
+[INFO] SmallRye Fault Tolerance: API                                      [jar]
+[INFO] SmallRye Fault Tolerance: Implementation Parent                    [pom]
+[INFO] SmallRye Fault Tolerance: Core                                     [jar]
+[INFO] SmallRye Fault Tolerance: AutoConfig Parent                        [pom]
+[INFO] SmallRye Fault Tolerance: AutoConfig Core                          [jar]
+[INFO] SmallRye Fault Tolerance: AutoConfig Processor                     [jar]
+[INFO] SmallRye Fault Tolerance: CDI Implementation                       [jar]
+[INFO] SmallRye Fault Tolerance: Context Propagation                      [jar]
+[INFO] SmallRye Fault Tolerance: OpenTracing Integration                  [jar]
+[INFO] SmallRye Fault Tolerance: Vert.x Integration                       [jar]
+[INFO] SmallRye Fault Tolerance: Test Suite Parent                        [pom]
+[INFO] SmallRye Fault Tolerance: Basic Test Suite                         [jar]
+[INFO] SmallRye Fault Tolerance: Integration Test Suite                   [jar]
+[INFO] SmallRye Fault Tolerance: TCK                                      [jar]
+[INFO] Empty Release Project to Avoid Maven Bug                           [pom]
+[INFO] 
+[INFO] ------------< io.smallrye:smallrye-fault-tolerance-parent >-------------
+[INFO] Building SmallRye Fault Tolerance: Parent 5.2.2-SNAPSHOT          [1/16]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-fault-tolerance-parent ---
+[WARNING] The artifact xml-apis:xml-apis:jar:2.0.2 has been relocated to xml-apis:xml-apis:jar:1.0.b2
+[INFO] 
+[INFO] --------------< io.smallrye:smallrye-fault-tolerance-api >--------------
+[INFO] Building SmallRye Fault Tolerance: API 5.2.2-SNAPSHOT             [2/16]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-fault-tolerance-api ---
+[INFO] 
+[INFO] -----< io.smallrye:smallrye-fault-tolerance-implementation-parent >-----
+[INFO] Building SmallRye Fault Tolerance: Implementation Parent 5.2.2-SNAPSHOT [3/16]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-fault-tolerance-implementation-parent ---
+[INFO] 
+[INFO] -------------< io.smallrye:smallrye-fault-tolerance-core >--------------
+[INFO] Building SmallRye Fault Tolerance: Core 5.2.2-SNAPSHOT            [4/16]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-fault-tolerance-core ---
+[INFO] 
+[INFO] -------< io.smallrye:smallrye-fault-tolerance-autoconfig-parent >-------
+[INFO] Building SmallRye Fault Tolerance: AutoConfig Parent 5.2.2-SNAPSHOT [5/16]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-fault-tolerance-autoconfig-parent ---
+[INFO] 
+[INFO] --------< io.smallrye:smallrye-fault-tolerance-autoconfig-core >--------
+[INFO] Building SmallRye Fault Tolerance: AutoConfig Core 5.2.2-SNAPSHOT [6/16]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-fault-tolerance-autoconfig-core ---
+[INFO] 
+[INFO] -----< io.smallrye:smallrye-fault-tolerance-autoconfig-processor >------
+[INFO] Building SmallRye Fault Tolerance: AutoConfig Processor 5.2.2-SNAPSHOT [7/16]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-fault-tolerance-autoconfig-processor ---
+[INFO] 
+[INFO] ----------------< io.smallrye:smallrye-fault-tolerance >----------------
+[INFO] Building SmallRye Fault Tolerance: CDI Implementation 5.2.2-SNAPSHOT [8/16]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-fault-tolerance ---
+[INFO] 
+[INFO] ------< io.smallrye:smallrye-fault-tolerance-context-propagation >------
+[INFO] Building SmallRye Fault Tolerance: Context Propagation 5.2.2-SNAPSHOT [9/16]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-fault-tolerance-context-propagation ---
+[INFO] 
+[INFO] ------< io.smallrye:smallrye-fault-tolerance-tracing-propagation >------
+[INFO] Building SmallRye Fault Tolerance: OpenTracing Integration 5.2.2-SNAPSHOT [10/16]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-fault-tolerance-tracing-propagation ---
+[INFO] 
+[INFO] -------------< io.smallrye:smallrye-fault-tolerance-vertx >-------------
+[INFO] Building SmallRye Fault Tolerance: Vert.x Integration 5.2.2-SNAPSHOT [11/16]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-fault-tolerance-vertx ---
+[INFO] 
+[INFO] -------< io.smallrye:smallrye-fault-tolerance-testsuite-parent >--------
+[INFO] Building SmallRye Fault Tolerance: Test Suite Parent 5.2.2-SNAPSHOT [12/16]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-fault-tolerance-testsuite-parent ---
+[INFO] 
+[INFO] --------< io.smallrye:smallrye-fault-tolerance-testsuite-basic >--------
+[INFO] Building SmallRye Fault Tolerance: Basic Test Suite 5.2.2-SNAPSHOT [13/16]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-fault-tolerance-testsuite-basic ---
+[INFO] 
+[INFO] -----< io.smallrye:smallrye-fault-tolerance-testsuite-integration >-----
+[INFO] Building SmallRye Fault Tolerance: Integration Test Suite 5.2.2-SNAPSHOT [14/16]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-fault-tolerance-testsuite-integration ---
+[INFO] 
+[INFO] --------------< io.smallrye:smallrye-fault-tolerance-tck >--------------
+[INFO] Building SmallRye Fault Tolerance: TCK 5.2.2-SNAPSHOT            [15/16]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-fault-tolerance-tck ---
+[INFO] 
+[INFO] ------------< io.smallrye:smallrye-fault-tolerance-release >------------
+[INFO] Building Empty Release Project to Avoid Maven Bug 5.2.2-SNAPSHOT [16/16]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-fault-tolerance-release ---
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for SmallRye Fault Tolerance: Parent 5.2.2-SNAPSHOT:
+[INFO] 
+[INFO] SmallRye Fault Tolerance: Parent ................... SUCCESS [  0.411 s]
+[INFO] SmallRye Fault Tolerance: API ...................... SUCCESS [  0.052 s]
+[INFO] SmallRye Fault Tolerance: Implementation Parent .... SUCCESS [  0.002 s]
+[INFO] SmallRye Fault Tolerance: Core ..................... SUCCESS [  0.078 s]
+[INFO] SmallRye Fault Tolerance: AutoConfig Parent ........ SUCCESS [  0.002 s]
+[INFO] SmallRye Fault Tolerance: AutoConfig Core .......... SUCCESS [  0.031 s]
+[INFO] SmallRye Fault Tolerance: AutoConfig Processor ..... SUCCESS [  0.022 s]
+[INFO] SmallRye Fault Tolerance: CDI Implementation ....... SUCCESS [  0.180 s]
+[INFO] SmallRye Fault Tolerance: Context Propagation ...... SUCCESS [  0.037 s]
+[INFO] SmallRye Fault Tolerance: OpenTracing Integration .. SUCCESS [  0.031 s]
+[INFO] SmallRye Fault Tolerance: Vert.x Integration ....... SUCCESS [  0.097 s]
+[INFO] SmallRye Fault Tolerance: Test Suite Parent ........ SUCCESS [  0.002 s]
+[INFO] SmallRye Fault Tolerance: Basic Test Suite ......... SUCCESS [  0.189 s]
+[INFO] SmallRye Fault Tolerance: Integration Test Suite ... SUCCESS [  0.244 s]
+[INFO] SmallRye Fault Tolerance: TCK ...................... SUCCESS [  0.249 s]
+[INFO] Empty Release Project to Avoid Maven Bug ........... SUCCESS [  0.002 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.925 s
+[INFO] Finished at: 2021-12-13T20:59:30Z
+[INFO] ------------------------------------------------------------------------
+smallrye-graphql
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] SmallRye: GraphQL Parent                                           [pom]
+[INFO] SmallRye: GraphQL UI                                               [pom]
+[INFO] SmallRye: GraphQL UI :: Graphiql                                   [jar]
+[INFO] SmallRye: GraphQL Common                                           [pom]
+[INFO] SmallRye: GraphQL Common :: Schema Model                           [jar]
+[INFO] SmallRye: GraphQL Server                                           [pom]
+[INFO] SmallRye: GraphQL Server :: API                                    [jar]
+[INFO] SmallRye: GraphQL Common :: Schema Builder                         [jar]
+[INFO] SmallRye: GraphQL Server :: Implementation                         [jar]
+[INFO] SmallRye: GraphQL Server :: CDI                                    [jar]
+[INFO] SmallRye: GraphQL Server :: Servlet                                [jar]
+[INFO] SmallRye: GraphQL Server :: TCK                                    [jar]
+[INFO] SmallRye: GraphQL Server :: Runner                                 [war]
+[INFO] SmallRye: GraphQL Client                                           [pom]
+[INFO] SmallRye: GraphQL Client :: API                                    [jar]
+[INFO] SmallRye: GraphQL Client :: Implementation                         [jar]
+[INFO] SmallRye: GraphQL Client :: TCK                                    [jar]
+[INFO] SmallRye: GraphQL Client :: Implementation :: Vert.x               [jar]
+[INFO] SmallRye: GraphQL Server :: Integration Tests                      [jar]
+[INFO] smallrye-graphql-federation-parent                                 [pom]
+[INFO] smallrye-graphql-federation-api                                    [jar]
+[INFO] smallrye-graphql-federation-runtime                                [jar]
+[INFO] SmallRye: GraphQL Client :: Generator                              [jar]
+[INFO] SmallRye: GraphQL Client :: Generator Test                         [jar]
+[INFO] SmallRye: GraphQL Tools                                            [pom]
+[INFO] SmallRye: GraphQL Tools :: Maven                          [maven-plugin]
+[INFO] SmallRye: GraphQL Tools :: Gradle                                  [pom]
+[INFO] SmallRye: GraphQL Tools :: Maven plugin tests                      [jar]
+[INFO] Power Annotations Parent POM                                       [pom]
+[INFO] Power Annotations Annotations                                      [jar]
+[INFO] Power Annotations Utils Parent POM                                 [pom]
+[INFO] Power Annotations Utils API                                        [jar]
+[INFO] Power Annotations Jandex Common                                    [jar]
+[INFO] Power Annotations Jandex Runtime Scanner                           [jar]
+[INFO] Power Annotations Utils Impl for Jandex                            [jar]
+[INFO] Power Annotations TCK                                              [jar]
+[INFO] Power Annotations Jandex Maven Plugin                     [maven-plugin]
+[INFO] SmallRye GraphQL : Documentation                                   [jar]
+[INFO] Empty Release Project to Avoid Maven Bug                           [pom]
+[INFO] 
+[INFO] ----------------< io.smallrye:smallrye-graphql-parent >-----------------
+[INFO] Building SmallRye: GraphQL Parent 1.4.1-SNAPSHOT                  [1/39]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-parent ---
+[WARNING] The artifact xml-apis:xml-apis:jar:2.0.2 has been relocated to xml-apis:xml-apis:jar:1.0.b2
+[INFO] 
+[INFO] ---------------< io.smallrye:smallrye-graphql-ui-parent >---------------
+[INFO] Building SmallRye: GraphQL UI 1.4.1-SNAPSHOT                      [2/39]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-ui-parent ---
+[INFO] 
+[INFO] --------------< io.smallrye:smallrye-graphql-ui-graphiql >--------------
+[INFO] Building SmallRye: GraphQL UI :: Graphiql 1.4.1-SNAPSHOT          [3/39]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-ui-graphiql ---
+[INFO] 
+[INFO] -------------< io.smallrye:smallrye-graphql-common-parent >-------------
+[INFO] Building SmallRye: GraphQL Common 1.4.1-SNAPSHOT                  [4/39]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-common-parent ---
+[INFO] 
+[INFO] -------------< io.smallrye:smallrye-graphql-schema-model >--------------
+[INFO] Building SmallRye: GraphQL Common :: Schema Model 1.4.1-SNAPSHOT  [5/39]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-schema-model ---
+[INFO] 
+[INFO] -------------< io.smallrye:smallrye-graphql-server-parent >-------------
+[INFO] Building SmallRye: GraphQL Server 1.4.1-SNAPSHOT                  [6/39]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-server-parent ---
+[INFO] 
+[INFO] ------------------< io.smallrye:smallrye-graphql-api >------------------
+[INFO] Building SmallRye: GraphQL Server :: API 1.4.1-SNAPSHOT           [7/39]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-api ---
+[INFO] 
+[INFO] ------------< io.smallrye:smallrye-graphql-schema-builder >-------------
+[INFO] Building SmallRye: GraphQL Common :: Schema Builder 1.4.1-SNAPSHOT [8/39]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-schema-builder ---
+[INFO] 
+[INFO] --------------------< io.smallrye:smallrye-graphql >--------------------
+[INFO] Building SmallRye: GraphQL Server :: Implementation 1.4.1-SNAPSHOT [9/39]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql ---
+[INFO] 
+[INFO] ------------------< io.smallrye:smallrye-graphql-cdi >------------------
+[INFO] Building SmallRye: GraphQL Server :: CDI 1.4.1-SNAPSHOT          [10/39]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-cdi ---
+[INFO] 
+[INFO] ----------------< io.smallrye:smallrye-graphql-servlet >----------------
+[INFO] Building SmallRye: GraphQL Server :: Servlet 1.4.1-SNAPSHOT      [11/39]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-servlet ---
+[INFO] 
+[INFO] ------------------< io.smallrye:smallrye-graphql-tck >------------------
+[INFO] Building SmallRye: GraphQL Server :: TCK 1.4.1-SNAPSHOT          [12/39]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-tck ---
+[INFO] 
+[INFO] ----------------< io.smallrye:smallrye-graphql-runner >-----------------
+[INFO] Building SmallRye: GraphQL Server :: Runner 1.4.1-SNAPSHOT       [13/39]
+[INFO] --------------------------------[ war ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-runner ---
+[INFO] 
+[INFO] -------------< io.smallrye:smallrye-graphql-client-parent >-------------
+[INFO] Building SmallRye: GraphQL Client 1.4.1-SNAPSHOT                 [14/39]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-client-parent ---
+[INFO] 
+[INFO] --------------< io.smallrye:smallrye-graphql-client-api >---------------
+[INFO] Building SmallRye: GraphQL Client :: API 1.4.1-SNAPSHOT          [15/39]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-client-api ---
+[INFO] 
+[INFO] ----------------< io.smallrye:smallrye-graphql-client >-----------------
+[INFO] Building SmallRye: GraphQL Client :: Implementation 1.4.1-SNAPSHOT [16/39]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-client ---
+[INFO] 
+[INFO] --------------< io.smallrye:smallrye-graphql-client-tck >---------------
+[INFO] Building SmallRye: GraphQL Client :: TCK 1.4.1-SNAPSHOT          [17/39]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-client-tck ---
+[INFO] 
+[INFO] ------< io.smallrye:smallrye-graphql-client-implementation-vertx >------
+[INFO] Building SmallRye: GraphQL Client :: Implementation :: Vert.x 1.4.1-SNAPSHOT [18/39]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-client-implementation-vertx ---
+[INFO] 
+[INFO] -----------< io.smallrye:smallrye-graphql-integration-tests >-----------
+[INFO] Building SmallRye: GraphQL Server :: Integration Tests 1.4.1-SNAPSHOT [19/39]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-integration-tests ---
+[INFO] 
+[INFO] -----------< io.smallrye:smallrye-graphql-federation-parent >-----------
+[INFO] Building smallrye-graphql-federation-parent 1.4.1-SNAPSHOT       [20/39]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-federation-parent ---
+[INFO] 
+[INFO] ------------< io.smallrye:smallrye-graphql-federation-api >-------------
+[INFO] Building smallrye-graphql-federation-api 1.4.1-SNAPSHOT          [21/39]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-federation-api ---
+[INFO] 
+[INFO] ----------< io.smallrye:smallrye-graphql-federation-runtime >-----------
+[INFO] Building smallrye-graphql-federation-runtime 1.4.1-SNAPSHOT      [22/39]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-federation-runtime ---
+[INFO] 
+[INFO] -----------< io.smallrye:smallrye-graphql-client-generator >------------
+[INFO] Building SmallRye: GraphQL Client :: Generator 1.4.1-SNAPSHOT    [23/39]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-client-generator ---
+[INFO] 
+[INFO] ---------< io.smallrye:smallrye-graphql-client-generator-test >---------
+[INFO] Building SmallRye: GraphQL Client :: Generator Test 1.4.1-SNAPSHOT [24/39]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-client-generator-test ---
+[INFO] 
+[INFO] -------------< io.smallrye:smallrye-graphql-tools-parent >--------------
+[INFO] Building SmallRye: GraphQL Tools 1.4.1-SNAPSHOT                  [25/39]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-tools-parent ---
+[INFO] 
+[INFO] -------------< io.smallrye:smallrye-graphql-maven-plugin >--------------
+[INFO] Building SmallRye: GraphQL Tools :: Maven 1.4.1-SNAPSHOT         [26/39]
+[INFO] ----------------------------[ maven-plugin ]----------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-maven-plugin ---
+[INFO] 
+[INFO] -------------< io.smallrye:smallrye-graphql-gradle-plugin >-------------
+[INFO] Building SmallRye: GraphQL Tools :: Gradle 1.4.1-SNAPSHOT        [27/39]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-gradle-plugin ---
+[INFO] 
+[INFO] ----------< io.smallrye:smallrye-graphql-maven-plugin-tests >-----------
+[INFO] Building SmallRye: GraphQL Tools :: Maven plugin tests 1.4.1-SNAPSHOT [28/39]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-maven-plugin-tests ---
+[INFO] 
+[INFO] -----------< io.smallrye:smallrye-power-annotations-parent >------------
+[INFO] Building Power Annotations Parent POM 1.4.1-SNAPSHOT             [29/39]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-power-annotations-parent ---
+[INFO] 
+[INFO] -------------------< io.smallrye:power-annotations >--------------------
+[INFO] Building Power Annotations Annotations 1.4.1-SNAPSHOT            [30/39]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ power-annotations ---
+[INFO] 
+[INFO] --------< io.smallrye:smallrye-power-annotations-utils-parent >---------
+[INFO] Building Power Annotations Utils Parent POM 1.4.1-SNAPSHOT       [31/39]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-power-annotations-utils-parent ---
+[INFO] 
+[INFO] ----------< io.smallrye:smallrye-power-annotations-utils-api >----------
+[INFO] Building Power Annotations Utils API 1.4.1-SNAPSHOT              [32/39]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-power-annotations-utils-api ---
+[INFO] 
+[INFO] ------------< io.smallrye:power-annotations-jandex-common >-------------
+[INFO] Building Power Annotations Jandex Common 1.4.1-SNAPSHOT          [33/39]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ power-annotations-jandex-common ---
+[INFO] 
+[INFO] ---------------< io.smallrye:power-annotations-scanner >----------------
+[INFO] Building Power Annotations Jandex Runtime Scanner 1.4.1-SNAPSHOT [34/39]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ power-annotations-scanner ---
+[INFO] 
+[INFO] --------< io.smallrye:smallrye-power-annotations-utils-jandex >---------
+[INFO] Building Power Annotations Utils Impl for Jandex 1.4.1-SNAPSHOT  [35/39]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-power-annotations-utils-jandex ---
+[INFO] 
+[INFO] -----------------< io.smallrye:power-annotations-tck >------------------
+[INFO] Building Power Annotations TCK 1.4.1-SNAPSHOT                    [36/39]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ power-annotations-tck ---
+[INFO] 
+[INFO] ---------------< io.smallrye:power-jandex-maven-plugin >----------------
+[INFO] Building Power Annotations Jandex Maven Plugin 1.4.1-SNAPSHOT    [37/39]
+[INFO] ----------------------------[ maven-plugin ]----------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ power-jandex-maven-plugin ---
+[INFO] 
+[INFO] -------------< io.smallrye:smallrye-graphql-documentation >-------------
+[INFO] Building SmallRye GraphQL : Documentation 1.4.1-SNAPSHOT         [38/39]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-documentation ---
+[INFO] 
+[INFO] ----------------< io.smallrye:smallrye-graphql-release >----------------
+[INFO] Building Empty Release Project to Avoid Maven Bug 1.4.1-SNAPSHOT [39/39]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-graphql-release ---
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for SmallRye: GraphQL Parent 1.4.1-SNAPSHOT:
+[INFO] 
+[INFO] SmallRye: GraphQL Parent ........................... SUCCESS [  0.420 s]
+[INFO] SmallRye: GraphQL UI ............................... SUCCESS [  0.003 s]
+[INFO] SmallRye: GraphQL UI :: Graphiql ................... SUCCESS [  0.015 s]
+[INFO] SmallRye: GraphQL Common ........................... SUCCESS [  0.003 s]
+[INFO] SmallRye: GraphQL Common :: Schema Model ........... SUCCESS [  0.002 s]
+[INFO] SmallRye: GraphQL Server ........................... SUCCESS [  0.003 s]
+[INFO] SmallRye: GraphQL Server :: API .................... SUCCESS [  0.053 s]
+[INFO] SmallRye: GraphQL Common :: Schema Builder ......... SUCCESS [  0.074 s]
+[INFO] SmallRye: GraphQL Server :: Implementation ......... SUCCESS [  0.343 s]
+[INFO] SmallRye: GraphQL Server :: CDI .................... SUCCESS [  0.183 s]
+[INFO] SmallRye: GraphQL Server :: Servlet ................ SUCCESS [  0.024 s]
+[INFO] SmallRye: GraphQL Server :: TCK .................... SUCCESS [  0.754 s]
+[INFO] SmallRye: GraphQL Server :: Runner ................. SUCCESS [  0.122 s]
+[INFO] SmallRye: GraphQL Client ........................... SUCCESS [  0.002 s]
+[INFO] SmallRye: GraphQL Client :: API .................... SUCCESS [  0.012 s]
+[INFO] SmallRye: GraphQL Client :: Implementation ......... SUCCESS [  0.059 s]
+[INFO] SmallRye: GraphQL Client :: TCK .................... SUCCESS [  0.022 s]
+[INFO] SmallRye: GraphQL Client :: Implementation :: Vert.x SUCCESS [  0.108 s]
+[INFO] SmallRye: GraphQL Server :: Integration Tests ...... SUCCESS [  0.500 s]
+[INFO] smallrye-graphql-federation-parent ................. SUCCESS [  0.002 s]
+[INFO] smallrye-graphql-federation-api .................... SUCCESS [  0.006 s]
+[INFO] smallrye-graphql-federation-runtime ................ SUCCESS [  0.015 s]
+[INFO] SmallRye: GraphQL Client :: Generator .............. SUCCESS [  0.009 s]
+[INFO] SmallRye: GraphQL Client :: Generator Test ......... SUCCESS [  0.008 s]
+[INFO] SmallRye: GraphQL Tools ............................ SUCCESS [  0.002 s]
+[INFO] SmallRye: GraphQL Tools :: Maven ................... SUCCESS [  0.102 s]
+[INFO] SmallRye: GraphQL Tools :: Gradle .................. SUCCESS [  0.008 s]
+[INFO] SmallRye: GraphQL Tools :: Maven plugin tests ...... SUCCESS [  0.014 s]
+[INFO] Power Annotations Parent POM ....................... SUCCESS [  0.002 s]
+[INFO] Power Annotations Annotations ...................... SUCCESS [  0.001 s]
+[INFO] Power Annotations Utils Parent POM ................. SUCCESS [  0.002 s]
+[INFO] Power Annotations Utils API ........................ SUCCESS [  0.001 s]
+[INFO] Power Annotations Jandex Common .................... SUCCESS [  0.002 s]
+[INFO] Power Annotations Jandex Runtime Scanner ........... SUCCESS [  0.004 s]
+[INFO] Power Annotations Utils Impl for Jandex ............ SUCCESS [  0.004 s]
+[INFO] Power Annotations TCK .............................. SUCCESS [  0.006 s]
+[INFO] Power Annotations Jandex Maven Plugin .............. SUCCESS [  0.107 s]
+[INFO] SmallRye GraphQL : Documentation ................... SUCCESS [  0.002 s]
+[INFO] Empty Release Project to Avoid Maven Bug ........... SUCCESS [  0.002 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.446 s
+[INFO] Finished at: 2021-12-13T20:59:34Z
+[INFO] ------------------------------------------------------------------------
+smallrye-health
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] SmallRye Health: Parent                                            [pom]
+[INFO] SmallRye Health: API                                               [jar]
+[INFO] SmallRye Health: Implementation                                    [jar]
+[INFO] SmallRye Health: Test Suite Parent                                 [pom]
+[INFO] SmallRye Health: TCK                                               [jar]
+[INFO] SmallRye Health: Experimental Test Suite                           [jar]
+[INFO] SmallRye Health: UI                                                [jar]
+[INFO] SmallRye Health: Provided Health Checks                            [jar]
+[INFO] SmallRye Health: Empty Release Project to Avoid Maven Bug          [pom]
+[INFO] 
+[INFO] -----------------< io.smallrye:smallrye-health-parent >-----------------
+[INFO] Building SmallRye Health: Parent 3.2.0-SNAPSHOT                    [1/9]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-health-parent ---
+[WARNING] The artifact xml-apis:xml-apis:jar:2.0.2 has been relocated to xml-apis:xml-apis:jar:1.0.b2
+[INFO] 
+[INFO] ------------------< io.smallrye:smallrye-health-api >-------------------
+[INFO] Building SmallRye Health: API 3.2.0-SNAPSHOT                       [2/9]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-health-api ---
+[INFO] 
+[INFO] --------------------< io.smallrye:smallrye-health >---------------------
+[INFO] Building SmallRye Health: Implementation 3.2.0-SNAPSHOT            [3/9]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-health ---
+[INFO] 
+[INFO] ------------< io.smallrye:smallrye-health-testsuite-parent >------------
+[INFO] Building SmallRye Health: Test Suite Parent 3.2.0-SNAPSHOT         [4/9]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-health-testsuite-parent ---
+[INFO] 
+[INFO] ------------------< io.smallrye:smallrye-health-tck >-------------------
+[INFO] Building SmallRye Health: TCK 3.2.0-SNAPSHOT                       [5/9]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-health-tck ---
+[INFO] 
+[INFO] -----------< io.smallrye:smallrye-health-experimental-test >------------
+[INFO] Building SmallRye Health: Experimental Test Suite 3.2.0-SNAPSHOT   [6/9]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-health-experimental-test ---
+[INFO] 
+[INFO] -------------------< io.smallrye:smallrye-health-ui >-------------------
+[INFO] Building SmallRye Health: UI 3.2.0-SNAPSHOT                        [7/9]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-health-ui ---
+[INFO] 
+[INFO] ------------< io.smallrye:smallrye-health-provided-checks >-------------
+[INFO] Building SmallRye Health: Provided Health Checks 3.2.0-SNAPSHOT    [8/9]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-health-provided-checks ---
+[INFO] 
+[INFO] ----------------< io.smallrye:smallrye-health-release >-----------------
+[INFO] Building SmallRye Health: Empty Release Project to Avoid Maven Bug 3.2.0-SNAPSHOT [9/9]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-health-release ---
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for SmallRye Health: Parent 3.2.0-SNAPSHOT:
+[INFO] 
+[INFO] SmallRye Health: Parent ............................ SUCCESS [  0.437 s]
+[INFO] SmallRye Health: API ............................... SUCCESS [  0.108 s]
+[INFO] SmallRye Health: Implementation .................... SUCCESS [  0.088 s]
+[INFO] SmallRye Health: Test Suite Parent ................. SUCCESS [  0.002 s]
+[INFO] SmallRye Health: TCK ............................... SUCCESS [  2.087 s]
+[INFO] SmallRye Health: Experimental Test Suite ........... SUCCESS [  1.209 s]
+[INFO] SmallRye Health: UI ................................ SUCCESS [  0.002 s]
+[INFO] SmallRye Health: Provided Health Checks ............ SUCCESS [  0.009 s]
+[INFO] SmallRye Health: Empty Release Project to Avoid Maven Bug SUCCESS [  0.002 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.215 s
+[INFO] Finished at: 2021-12-13T20:59:39Z
+[INFO] ------------------------------------------------------------------------
+smallrye-jwt
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] SmallRye: MicroProfile JWT Parent                                  [pom]
+[INFO] SmallRye: MicroProfile JWT - Implementation Parent                 [pom]
+[INFO] SmallRye: MicroProfile JWT Implementation Common                   [jar]
+[INFO] SmallRye: MicroProfile JWT Build Implementation                    [jar]
+[INFO] SmallRye: MicroProfile JWT Implementation                          [jar]
+[INFO] SmallRye: MicroProfile JWT JAX-RS Implementation                   [jar]
+[INFO] SmallRye: MicroProfile JWT HTTP Mechanism Implementation           [jar]
+[INFO] SmallRye: MicroProfile JWT CDI Extension Implementation            [jar]
+[INFO] SmallRye: MicroProfile JWT - Testsuite Parent                      [pom]
+[INFO] SmallRye: MicroProfile JWT Basic Testsuite                         [jar]
+[INFO] SmallRye: MicroProfile JWT TCK                                     [jar]
+[INFO] Empty Release Project to Avoid Maven Bug                           [pom]
+[INFO] 
+[INFO] ------------------< io.smallrye:smallrye-jwt-parent >-------------------
+[INFO] Building SmallRye: MicroProfile JWT Parent 3.3.3-SNAPSHOT         [1/12]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-jwt-parent ---
+[WARNING] The artifact xml-apis:xml-apis:jar:2.0.2 has been relocated to xml-apis:xml-apis:jar:1.0.b2
+[INFO] 
+[INFO] -----------< io.smallrye:smallrye-jwt-implementation-parent >-----------
+[INFO] Building SmallRye: MicroProfile JWT - Implementation Parent 3.3.3-SNAPSHOT [2/12]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-jwt-implementation-parent ---
+[INFO] 
+[INFO] ------------------< io.smallrye:smallrye-jwt-common >-------------------
+[INFO] Building SmallRye: MicroProfile JWT Implementation Common 3.3.3-SNAPSHOT [3/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-jwt-common ---
+[INFO] 
+[INFO] -------------------< io.smallrye:smallrye-jwt-build >-------------------
+[INFO] Building SmallRye: MicroProfile JWT Build Implementation 3.3.3-SNAPSHOT [4/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-jwt-build ---
+[INFO] 
+[INFO] ----------------------< io.smallrye:smallrye-jwt >----------------------
+[INFO] Building SmallRye: MicroProfile JWT Implementation 3.3.3-SNAPSHOT [5/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-jwt ---
+[INFO] 
+[INFO] -------------------< io.smallrye:smallrye-jwt-jaxrs >-------------------
+[INFO] Building SmallRye: MicroProfile JWT JAX-RS Implementation 3.3.3-SNAPSHOT [6/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-jwt-jaxrs ---
+[INFO] 
+[INFO] --------------< io.smallrye:smallrye-jwt-http-mechanism >---------------
+[INFO] Building SmallRye: MicroProfile JWT HTTP Mechanism Implementation 3.3.3-SNAPSHOT [7/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-jwt-http-mechanism ---
+[INFO] 
+[INFO] ---------------< io.smallrye:smallrye-jwt-cdi-extension >---------------
+[INFO] Building SmallRye: MicroProfile JWT CDI Extension Implementation 3.3.3-SNAPSHOT [8/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-jwt-cdi-extension ---
+[INFO] 
+[INFO] -------------< io.smallrye:smallrye-jwt-testsuite-parent >--------------
+[INFO] Building SmallRye: MicroProfile JWT - Testsuite Parent 3.3.3-SNAPSHOT [9/12]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-jwt-testsuite-parent ---
+[INFO] 
+[INFO] --------------< io.smallrye:smallrye-jwt-testsuite-basic >--------------
+[INFO] Building SmallRye: MicroProfile JWT Basic Testsuite 3.3.3-SNAPSHOT [10/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-jwt-testsuite-basic ---
+[INFO] 
+[INFO] --------------------< io.smallrye:smallrye-jwt-tck >--------------------
+[INFO] Building SmallRye: MicroProfile JWT TCK 3.3.3-SNAPSHOT           [11/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-jwt-tck ---
+[INFO] 
+[INFO] ------------------< io.smallrye:smallrye-jwt-release >------------------
+[INFO] Building Empty Release Project to Avoid Maven Bug 3.3.3-SNAPSHOT [12/12]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-jwt-release ---
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for SmallRye: MicroProfile JWT Parent 3.3.3-SNAPSHOT:
+[INFO] 
+[INFO] SmallRye: MicroProfile JWT Parent .................. SUCCESS [  0.426 s]
+[INFO] SmallRye: MicroProfile JWT - Implementation Parent . SUCCESS [  0.002 s]
+[INFO] SmallRye: MicroProfile JWT Implementation Common ... SUCCESS [  0.074 s]
+[INFO] SmallRye: MicroProfile JWT Build Implementation .... SUCCESS [  0.160 s]
+[INFO] SmallRye: MicroProfile JWT Implementation .......... SUCCESS [  0.185 s]
+[INFO] SmallRye: MicroProfile JWT JAX-RS Implementation ... SUCCESS [  0.013 s]
+[INFO] SmallRye: MicroProfile JWT HTTP Mechanism Implementation SUCCESS [  0.009 s]
+[INFO] SmallRye: MicroProfile JWT CDI Extension Implementation SUCCESS [  0.011 s]
+[INFO] SmallRye: MicroProfile JWT - Testsuite Parent ...... SUCCESS [  0.002 s]
+[INFO] SmallRye: MicroProfile JWT Basic Testsuite ......... SUCCESS [  0.603 s]
+[INFO] SmallRye: MicroProfile JWT TCK ..................... SUCCESS [  1.667 s]
+[INFO] Empty Release Project to Avoid Maven Bug ........... SUCCESS [  0.002 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.435 s
+[INFO] Finished at: 2021-12-13T20:59:44Z
+[INFO] ------------------------------------------------------------------------
+smallrye-maven-plugin
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------< io.smallrye:smallrye-maven-plugin >------------------
+[INFO] Building SmallRye Maven Plugin 1.0.1-SNAPSHOT
+[INFO] ----------------------------[ maven-plugin ]----------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-maven-plugin ---
+[WARNING] The artifact xml-apis:xml-apis:jar:2.0.2 has been relocated to xml-apis:xml-apis:jar:1.0.b2
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.072 s
+[INFO] Finished at: 2021-12-13T20:59:46Z
+[INFO] ------------------------------------------------------------------------
+smallrye-metrics
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] SmallRye: MicroProfile Metrics Parent                              [pom]
+[INFO] SmallRye: MicroProfile Metrics Implementation                      [jar]
+[INFO] SmallRye: MicroProfile Metrics Test Suite Parent                   [pom]
+[INFO] SmallRye: MicroProfile Metrics Test Suite Common                   [jar]
+[INFO] SmallRye: MicroProfile Metrics API TCK                             [jar]
+[INFO] SmallRye: MicroProfile Metrics Test Suite Additional Tests         [jar]
+[INFO] SmallRye: MicroProfile Metrics TCK                                 [jar]
+[INFO] SmallRye: MicroProfile Metrics Optional TCK                        [jar]
+[INFO] SmallRye Metrics external API                                      [jar]
+[INFO] Empty Release Project to Avoid Maven Bug                           [pom]
+[INFO] 
+[INFO] ----------------< io.smallrye:smallrye-metrics-parent >-----------------
+[INFO] Building SmallRye: MicroProfile Metrics Parent 4.0.0-SNAPSHOT     [1/10]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-metrics-parent ---
+[WARNING] The artifact xml-apis:xml-apis:jar:2.0.2 has been relocated to xml-apis:xml-apis:jar:1.0.b2
+[INFO] 
+[INFO] --------------------< io.smallrye:smallrye-metrics >--------------------
+[INFO] Building SmallRye: MicroProfile Metrics Implementation 4.0.0-SNAPSHOT [2/10]
+[INFO] --------------------------------[ jar ]---------------------------------
+[WARNING] The artifact io.smallrye:smallrye-config:jar:1.5.0 has been relocated to io.smallrye.config:smallrye-config:jar:1.5.0
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-metrics ---
+[WARNING] While downloading io.smallrye:smallrye-config:1.5.0
+  This artifact has been relocated to io.smallrye.config:smallrye-config:1.5.0.
+
+
+[INFO] 
+[INFO] -----------< io.smallrye:smallrye-metrics-testsuite-parent >------------
+[INFO] Building SmallRye: MicroProfile Metrics Test Suite Parent 4.0.0-SNAPSHOT [3/10]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-metrics-testsuite-parent ---
+[INFO] 
+[INFO] -----------< io.smallrye:smallrye-metrics-testsuite-common >------------
+[INFO] Building SmallRye: MicroProfile Metrics Test Suite Common 4.0.0-SNAPSHOT [4/10]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-metrics-testsuite-common ---
+[INFO] 
+[INFO] ----------------< io.smallrye:smallrye-metrics-api-tck >----------------
+[INFO] Building SmallRye: MicroProfile Metrics API TCK 4.0.0-SNAPSHOT    [5/10]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-metrics-api-tck ---
+[WARNING] While downloading io.smallrye:smallrye-config:1.5.0
+  This artifact has been relocated to io.smallrye.config:smallrye-config:1.5.0.
+
+
+[INFO] 
+[INFO] ------------< io.smallrye:smallrye-metrics-testsuite-extra >------------
+[INFO] Building SmallRye: MicroProfile Metrics Test Suite Additional Tests 4.0.0-SNAPSHOT [6/10]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-metrics-testsuite-extra ---
+[WARNING] While downloading io.smallrye:smallrye-config:1.5.0
+  This artifact has been relocated to io.smallrye.config:smallrye-config:1.5.0.
+
+
+[INFO] 
+[INFO] ---------------< io.smallrye:smallrye-metrics-rest-tck >----------------
+[INFO] Building SmallRye: MicroProfile Metrics TCK 4.0.0-SNAPSHOT        [7/10]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-metrics-rest-tck ---
+[WARNING] While downloading io.smallrye:smallrye-config:1.5.0
+  This artifact has been relocated to io.smallrye.config:smallrye-config:1.5.0.
+
+
+[INFO] 
+[INFO] ----------------------< io.smallrye:optional-tck >----------------------
+[INFO] Building SmallRye: MicroProfile Metrics Optional TCK 4.0.0-SNAPSHOT [8/10]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ optional-tck ---
+[WARNING] While downloading io.smallrye:smallrye-config:1.5.0
+  This artifact has been relocated to io.smallrye.config:smallrye-config:1.5.0.
+
+
+[INFO] 
+[INFO] ------------------< io.smallrye:smallrye-metrics-api >------------------
+[INFO] Building SmallRye Metrics external API 4.0.0-SNAPSHOT             [9/10]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-metrics-api ---
+[INFO] 
+[INFO] ----------------< io.smallrye:smallrye-metrics-release >----------------
+[INFO] Building Empty Release Project to Avoid Maven Bug 4.0.0-SNAPSHOT [10/10]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-metrics-release ---
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for SmallRye: MicroProfile Metrics Parent 4.0.0-SNAPSHOT:
+[INFO] 
+[INFO] SmallRye: MicroProfile Metrics Parent .............. SUCCESS [  0.437 s]
+[INFO] SmallRye: MicroProfile Metrics Implementation ...... SUCCESS [  0.230 s]
+[INFO] SmallRye: MicroProfile Metrics Test Suite Parent ... SUCCESS [  0.003 s]
+[INFO] SmallRye: MicroProfile Metrics Test Suite Common ... SUCCESS [  0.137 s]
+[INFO] SmallRye: MicroProfile Metrics API TCK ............. SUCCESS [  0.250 s]
+[INFO] SmallRye: MicroProfile Metrics Test Suite Additional Tests SUCCESS [  0.089 s]
+[INFO] SmallRye: MicroProfile Metrics TCK ................. SUCCESS [  1.685 s]
+[INFO] SmallRye: MicroProfile Metrics Optional TCK ........ SUCCESS [  0.299 s]
+[INFO] SmallRye Metrics external API ...................... SUCCESS [  0.007 s]
+[INFO] Empty Release Project to Avoid Maven Bug ........... SUCCESS [  0.001 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.395 s
+[INFO] Finished at: 2021-12-13T20:59:50Z
+[INFO] ------------------------------------------------------------------------
+smallrye-mutiny
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] SmallRye Mutiny - Parent                                           [pom]
+[INFO] SmallRye Mutiny - Testing utilities                                [jar]
+[INFO] SmallRye Mutiny - Reactive Streams TCK with JUnit5                 [jar]
+[INFO] SmallRye Mutiny - Core library                                     [jar]
+[INFO] SmallRye Mutiny - Integration with RxJava                          [jar]
+[INFO] SmallRye Mutiny - Integration with RxJava 3                        [jar]
+[INFO] SmallRye Mutiny - Integration with Reactor                         [jar]
+[INFO] SmallRye Mutiny - Integration with SmallRye Context Propagation    [jar]
+[INFO] SmallRye Mutiny - MicroProfile Reactive Streams Operators implementation [jar]
+[INFO] SmallRye Mutiny - Kotlin Extensions                                [jar]
+[INFO] SmallRye Mutiny - Documentation                                    [jar]
+[INFO] SmallRye Mutiny - BOM                                              [pom]
+[INFO] SmallRye Mutiny - Math operators                                   [jar]
+[INFO] 
+[INFO] ----------------< io.smallrye.reactive:mutiny-project >-----------------
+[INFO] Building SmallRye Mutiny - Parent 999-SNAPSHOT                    [1/13]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ mutiny-project ---
+[WARNING] The artifact xml-apis:xml-apis:jar:2.0.2 has been relocated to xml-apis:xml-apis:jar:1.0.b2
+[INFO] 
+[INFO] ---------------< io.smallrye.reactive:mutiny-test-utils >---------------
+[INFO] Building SmallRye Mutiny - Testing utilities 999-SNAPSHOT         [2/13]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ mutiny-test-utils ---
+[INFO] 
+[INFO] ----------< io.smallrye.reactive:reactive-streams-junit5-tck >----------
+[INFO] Building SmallRye Mutiny - Reactive Streams TCK with JUnit5 999-SNAPSHOT [3/13]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ reactive-streams-junit5-tck ---
+[INFO] 
+[INFO] --------------------< io.smallrye.reactive:mutiny >---------------------
+[INFO] Building SmallRye Mutiny - Core library 999-SNAPSHOT              [4/13]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ mutiny ---
+[INFO] 
+[INFO] -----------------< io.smallrye.reactive:mutiny-rxjava >-----------------
+[INFO] Building SmallRye Mutiny - Integration with RxJava 999-SNAPSHOT   [5/13]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ mutiny-rxjava ---
+[INFO] 
+[INFO] ----------------< io.smallrye.reactive:mutiny-rxjava3 >-----------------
+[INFO] Building SmallRye Mutiny - Integration with RxJava 3 999-SNAPSHOT [6/13]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ mutiny-rxjava3 ---
+[INFO] 
+[INFO] ----------------< io.smallrye.reactive:mutiny-reactor >-----------------
+[INFO] Building SmallRye Mutiny - Integration with Reactor 999-SNAPSHOT  [7/13]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ mutiny-reactor ---
+[INFO] 
+[INFO] ------< io.smallrye.reactive:mutiny-smallrye-context-propagation >------
+[INFO] Building SmallRye Mutiny - Integration with SmallRye Context Propagation 999-SNAPSHOT [8/13]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ mutiny-smallrye-context-propagation ---
+[INFO] 
+[INFO] -------< io.smallrye.reactive:mutiny-reactive-streams-operators >-------
+[INFO] Building SmallRye Mutiny - MicroProfile Reactive Streams Operators implementation 999-SNAPSHOT [9/13]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ mutiny-reactive-streams-operators ---
+[INFO] 
+[INFO] -----------------< io.smallrye.reactive:mutiny-kotlin >-----------------
+[INFO] Building SmallRye Mutiny - Kotlin Extensions 999-SNAPSHOT        [10/13]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ mutiny-kotlin ---
+[INFO] 
+[INFO] -------------< io.smallrye.reactive:mutiny-documentation >--------------
+[INFO] Building SmallRye Mutiny - Documentation 999-SNAPSHOT            [11/13]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ mutiny-documentation ---
+[INFO] 
+[INFO] ------------------< io.smallrye.reactive:mutiny-bom >-------------------
+[INFO] Building SmallRye Mutiny - BOM 999-SNAPSHOT                      [12/13]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ mutiny-bom ---
+[INFO] 
+[INFO] ------------------< io.smallrye.reactive:mutiny-math >------------------
+[INFO] Building SmallRye Mutiny - Math operators 999-SNAPSHOT           [13/13]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ mutiny-math ---
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for SmallRye Mutiny - Parent 999-SNAPSHOT:
+[INFO] 
+[INFO] SmallRye Mutiny - Parent ........................... SUCCESS [  0.434 s]
+[INFO] SmallRye Mutiny - Testing utilities ................ SUCCESS [  0.052 s]
+[INFO] SmallRye Mutiny - Reactive Streams TCK with JUnit5 . SUCCESS [  0.018 s]
+[INFO] SmallRye Mutiny - Core library ..................... SUCCESS [  0.074 s]
+[INFO] SmallRye Mutiny - Integration with RxJava .......... SUCCESS [  0.021 s]
+[INFO] SmallRye Mutiny - Integration with RxJava 3 ........ SUCCESS [  0.011 s]
+[INFO] SmallRye Mutiny - Integration with Reactor ......... SUCCESS [  0.011 s]
+[INFO] SmallRye Mutiny - Integration with SmallRye Context Propagation SUCCESS [  0.180 s]
+[INFO] SmallRye Mutiny - MicroProfile Reactive Streams Operators implementation SUCCESS [  0.202 s]
+[INFO] SmallRye Mutiny - Kotlin Extensions ................ SUCCESS [  0.020 s]
+[INFO] SmallRye Mutiny - Documentation .................... SUCCESS [  0.058 s]
+[INFO] SmallRye Mutiny - BOM .............................. SUCCESS [  0.002 s]
+[INFO] SmallRye Mutiny - Math operators ................... SUCCESS [  0.012 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.341 s
+[INFO] Finished at: 2021-12-13T20:59:52Z
+[INFO] ------------------------------------------------------------------------
+smallrye-mutiny-vertx-bindings
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] SmallRye Reactive Utilities                                        [pom]
+[INFO] SmallRye Mutiny - Client APIs                                      [pom]
+[INFO] SmallRye Mutiny - Runtime Helpers                                  [jar]
+[INFO] SmallRye Mutiny - Code Generator                                   [jar]
+[INFO] SmallRye Mutiny - Vert.x Core                                      [jar]
+[INFO] SmallRye Mutiny - Vert.x JUnit 5 support                           [jar]
+[INFO] SmallRye Mutiny - Vert.x Mail Client                               [jar]
+[INFO] SmallRye Mutiny - Vert.x Bridge Common                             [jar]
+[INFO] SmallRye Mutiny - Vert.x Web Common                                [jar]
+[INFO] SmallRye Mutiny - Vert.x Auth Common                               [jar]
+[INFO] SmallRye Mutiny - Vert.x Auth - JWT                                [jar]
+[INFO] SmallRye Mutiny - Vert.x Auth - htdigest                           [jar]
+[INFO] SmallRye Mutiny - Vert.x Auth - webauthn                           [jar]
+[INFO] SmallRye Mutiny - Vert.x Auth - OAuth2                             [jar]
+[INFO] SmallRye Mutiny - Vert.x Auth - OTP                                [jar]
+[INFO] SmallRye Mutiny - Vert.x Web Client                                [jar]
+[INFO] SmallRye Mutiny - Vert.x Web                                       [jar]
+[INFO] SmallRye Mutiny - Vert.x Mongo Client                              [jar]
+[INFO] SmallRye Mutiny - Vert.x Redis Client                              [jar]
+[INFO] SmallRye Mutiny - Vert.x Cassandra Client                          [jar]
+[INFO] SmallRye Mutiny - Vert.x Consul Client                             [jar]
+[INFO] SmallRye Mutiny - Vert.x Kafka Client                              [jar]
+[INFO] SmallRye Mutiny - Vert.x AMQP Client                               [jar]
+[INFO] SmallRye Mutiny - Vert.x RabbitMQ Client                           [jar]
+[INFO] SmallRye Mutiny - Vert.x SQL Client                                [jar]
+[INFO] SmallRye Mutiny - Vert.x DB2 Client                                [jar]
+[INFO] SmallRye Mutiny - Vert.x PostgreSQL Client                         [jar]
+[INFO] SmallRye Mutiny - Vert.x MS SQL Client                             [jar]
+[INFO] SmallRye Mutiny - Vert.x MySQL Client                              [jar]
+[INFO] SmallRye Mutiny - Vert.x MQTT Client and Server                    [jar]
+[INFO] SmallRye Mutiny - Vert.x Auth - htpasswd                           [jar]
+[INFO] SmallRye Mutiny - Vert.x Auth - MongoDB                            [jar]
+[INFO] SmallRye Mutiny - Vert.x Auth - Shiro                              [jar]
+[INFO] SmallRye Mutiny - Vert.x Auth - properties                         [jar]
+[INFO] SmallRye Mutiny - Vert.x Auth - ldap                               [jar]
+[INFO] SmallRye Mutiny - Vert.x JDBC Client                               [jar]
+[INFO] SmallRye Mutiny - Vert.x Auth - JDBC                               [jar]
+[INFO] SmallRye Mutiny - Vert.x Auth - SQL Client                         [jar]
+[INFO] SmallRye Mutiny - Vert.x Health Check                              [jar]
+[INFO] SmallRye Mutiny - Vert.x JSON Schema                               [jar]
+[INFO] SmallRye Mutiny - Vert.x Web Validation                            [jar]
+[INFO] SmallRye Mutiny - Vert.x Web OpenAPI                               [jar]
+[INFO] SmallRye Mutiny - Vert.x Web API Service                           [jar]
+[INFO] SmallRye Mutiny - Vert.x Web - FreeMarker Template Engine          [jar]
+[INFO] SmallRye Mutiny - Vert.x Web - Handlebars Template Engine          [jar]
+[INFO] SmallRye Mutiny - Vert.x Web - Jade Template Engine                [jar]
+[INFO] SmallRye Mutiny - Vert.x Web - MVEL Template Engine                [jar]
+[INFO] SmallRye Mutiny - Vert.x Web - Pebble Template Engine              [jar]
+[INFO] SmallRye Mutiny - Vert.x Web - Rocker Template Engine              [jar]
+[INFO] SmallRye Mutiny - Vert.x Web - Thymeleaf Template Engine           [jar]
+[INFO] SmallRye Mutiny - Vert.x Web - GraphQL Template Engine             [jar]
+[INFO] SmallRye Mutiny - Vert.x Circuit Breaker                           [jar]
+[INFO] SmallRye Mutiny - Vert.x Stomp                                     [jar]
+[INFO] SmallRye Mutiny - Vert.x Config                                    [jar]
+[INFO] SmallRye Mutiny - Vert.x SQL Templates                             [jar]
+[INFO] SmallRye Mutiny - Vert.x Shell                                     [jar]
+[INFO] SmallRye Mutiny - Vert.x Micrometer Metrics                        [jar]
+[INFO] SmallRye Mutiny - Vert.x TCP Eventbus Bridge                       [jar]
+[INFO] SmallRye Mutiny - Vert.x Service Discovery                         [jar]
+[INFO] SmallRye Mutiny - Vert.x Service Discovery - Consul Backend        [jar]
+[INFO] SmallRye Mutiny - Vert.x Service Discovery - Redis Backend         [jar]
+[INFO] SmallRye Mutiny - Vert.x Service Discovery - Zookeeper Backend     [jar]
+[INFO] SmallRye Mutiny - Vert.x Service Discovery - Consul Bridge         [jar]
+[INFO] SmallRye Mutiny - Vert.x Service Discovery - Docker Bridge         [jar]
+[INFO] SmallRye Mutiny - Vert.x Service Discovery - Docker Links Bridge   [jar]
+[INFO] SmallRye Mutiny - Vert.x Service Discovery - Kubernetes Bridge     [jar]
+[INFO] SmallRye Mutiny - Vert.x Service Discovery - Zookeeper Bridge      [jar]
+[INFO] SmallRye Mutiny - Vert.x Client APIs BOM                           [pom]
+[INFO] 
+[INFO] ----< io.smallrye.reactive:smallrye-mutiny-vertx-bindings-projects >----
+[INFO] Building SmallRye Reactive Utilities 2.17.0-SNAPSHOT              [1/68]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-bindings-projects ---
+[WARNING] The artifact xml-apis:xml-apis:jar:2.0.2 has been relocated to xml-apis:xml-apis:jar:1.0.b2
+[INFO] 
+[INFO] -------------< io.smallrye.reactive:vertx-mutiny-clients >--------------
+[INFO] Building SmallRye Mutiny - Client APIs 2.17.0-SNAPSHOT            [2/68]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ vertx-mutiny-clients ---
+[INFO] 
+[INFO] ---------< io.smallrye.reactive:smallrye-mutiny-vertx-runtime >---------
+[INFO] Building SmallRye Mutiny - Runtime Helpers 2.17.0-SNAPSHOT        [3/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-runtime ---
+[INFO] 
+[INFO] ------------< io.smallrye.reactive:vertx-mutiny-generator >-------------
+[INFO] Building SmallRye Mutiny - Code Generator 2.17.0-SNAPSHOT         [4/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ vertx-mutiny-generator ---
+[INFO] 
+[INFO] ----------< io.smallrye.reactive:smallrye-mutiny-vertx-core >-----------
+[INFO] Building SmallRye Mutiny - Vert.x Core 2.17.0-SNAPSHOT            [5/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-core ---
+[INFO] 
+[INFO] ---------< io.smallrye.reactive:smallrye-mutiny-vertx-junit5 >----------
+[INFO] Building SmallRye Mutiny - Vert.x JUnit 5 support 2.17.0-SNAPSHOT [6/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-junit5 ---
+[INFO] 
+[INFO] -------< io.smallrye.reactive:smallrye-mutiny-vertx-mail-client >-------
+[INFO] Building SmallRye Mutiny - Vert.x Mail Client 2.17.0-SNAPSHOT     [7/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-mail-client ---
+[INFO] 
+[INFO] ------< io.smallrye.reactive:smallrye-mutiny-vertx-bridge-common >------
+[INFO] Building SmallRye Mutiny - Vert.x Bridge Common 2.17.0-SNAPSHOT   [8/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-bridge-common ---
+[INFO] 
+[INFO] -------< io.smallrye.reactive:smallrye-mutiny-vertx-web-common >--------
+[INFO] Building SmallRye Mutiny - Vert.x Web Common 2.17.0-SNAPSHOT      [9/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-web-common ---
+[INFO] 
+[INFO] -------< io.smallrye.reactive:smallrye-mutiny-vertx-auth-common >-------
+[INFO] Building SmallRye Mutiny - Vert.x Auth Common 2.17.0-SNAPSHOT    [10/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-auth-common ---
+[INFO] 
+[INFO] --------< io.smallrye.reactive:smallrye-mutiny-vertx-auth-jwt >---------
+[INFO] Building SmallRye Mutiny - Vert.x Auth - JWT 2.17.0-SNAPSHOT     [11/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-auth-jwt ---
+[INFO] 
+[INFO] ------< io.smallrye.reactive:smallrye-mutiny-vertx-auth-htdigest >------
+[INFO] Building SmallRye Mutiny - Vert.x Auth - htdigest 2.17.0-SNAPSHOT [12/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-auth-htdigest ---
+[INFO] 
+[INFO] ------< io.smallrye.reactive:smallrye-mutiny-vertx-auth-webauthn >------
+[INFO] Building SmallRye Mutiny - Vert.x Auth - webauthn 2.17.0-SNAPSHOT [13/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-auth-webauthn ---
+[INFO] 
+[INFO] -------< io.smallrye.reactive:smallrye-mutiny-vertx-auth-oauth2 >-------
+[INFO] Building SmallRye Mutiny - Vert.x Auth - OAuth2 2.17.0-SNAPSHOT  [14/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-auth-oauth2 ---
+[INFO] 
+[INFO] --------< io.smallrye.reactive:smallrye-mutiny-vertx-auth-otp >---------
+[INFO] Building SmallRye Mutiny - Vert.x Auth - OTP 2.17.0-SNAPSHOT     [15/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-auth-otp ---
+[INFO] 
+[INFO] -------< io.smallrye.reactive:smallrye-mutiny-vertx-web-client >--------
+[INFO] Building SmallRye Mutiny - Vert.x Web Client 2.17.0-SNAPSHOT     [16/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-web-client ---
+[INFO] 
+[INFO] -----------< io.smallrye.reactive:smallrye-mutiny-vertx-web >-----------
+[INFO] Building SmallRye Mutiny - Vert.x Web 2.17.0-SNAPSHOT            [17/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-web ---
+[INFO] 
+[INFO] ------< io.smallrye.reactive:smallrye-mutiny-vertx-mongo-client >-------
+[INFO] Building SmallRye Mutiny - Vert.x Mongo Client 2.17.0-SNAPSHOT   [18/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-mongo-client ---
+[INFO] 
+[INFO] ------< io.smallrye.reactive:smallrye-mutiny-vertx-redis-client >-------
+[INFO] Building SmallRye Mutiny - Vert.x Redis Client 2.17.0-SNAPSHOT   [19/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-redis-client ---
+[INFO] 
+[INFO] ----< io.smallrye.reactive:smallrye-mutiny-vertx-cassandra-client >-----
+[INFO] Building SmallRye Mutiny - Vert.x Cassandra Client 2.17.0-SNAPSHOT [20/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-cassandra-client ---
+[INFO] 
+[INFO] ------< io.smallrye.reactive:smallrye-mutiny-vertx-consul-client >------
+[INFO] Building SmallRye Mutiny - Vert.x Consul Client 2.17.0-SNAPSHOT  [21/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-consul-client ---
+[INFO] 
+[INFO] ------< io.smallrye.reactive:smallrye-mutiny-vertx-kafka-client >-------
+[INFO] Building SmallRye Mutiny - Vert.x Kafka Client 2.17.0-SNAPSHOT   [22/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-kafka-client ---
+[INFO] 
+[INFO] -------< io.smallrye.reactive:smallrye-mutiny-vertx-amqp-client >-------
+[INFO] Building SmallRye Mutiny - Vert.x AMQP Client 2.17.0-SNAPSHOT    [23/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-amqp-client ---
+[INFO] 
+[INFO] -----< io.smallrye.reactive:smallrye-mutiny-vertx-rabbitmq-client >-----
+[INFO] Building SmallRye Mutiny - Vert.x RabbitMQ Client 2.17.0-SNAPSHOT [24/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-rabbitmq-client ---
+[INFO] 
+[INFO] -------< io.smallrye.reactive:smallrye-mutiny-vertx-sql-client >--------
+[INFO] Building SmallRye Mutiny - Vert.x SQL Client 2.17.0-SNAPSHOT     [25/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-sql-client ---
+[INFO] 
+[INFO] -------< io.smallrye.reactive:smallrye-mutiny-vertx-db2-client >--------
+[INFO] Building SmallRye Mutiny - Vert.x DB2 Client 2.17.0-SNAPSHOT     [26/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-db2-client ---
+[INFO] 
+[INFO] --------< io.smallrye.reactive:smallrye-mutiny-vertx-pg-client >--------
+[INFO] Building SmallRye Mutiny - Vert.x PostgreSQL Client 2.17.0-SNAPSHOT [27/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-pg-client ---
+[INFO] 
+[INFO] ------< io.smallrye.reactive:smallrye-mutiny-vertx-mssql-client >-------
+[INFO] Building SmallRye Mutiny - Vert.x MS SQL Client 2.17.0-SNAPSHOT  [28/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-mssql-client ---
+[INFO] 
+[INFO] ------< io.smallrye.reactive:smallrye-mutiny-vertx-mysql-client >-------
+[INFO] Building SmallRye Mutiny - Vert.x MySQL Client 2.17.0-SNAPSHOT   [29/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-mysql-client ---
+[INFO] 
+[INFO] ----------< io.smallrye.reactive:smallrye-mutiny-vertx-mqtt >-----------
+[INFO] Building SmallRye Mutiny - Vert.x MQTT Client and Server 2.17.0-SNAPSHOT [30/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-mqtt ---
+[INFO] 
+[INFO] ------< io.smallrye.reactive:smallrye-mutiny-vertx-auth-htpasswd >------
+[INFO] Building SmallRye Mutiny - Vert.x Auth - htpasswd 2.17.0-SNAPSHOT [31/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-auth-htpasswd ---
+[INFO] 
+[INFO] -------< io.smallrye.reactive:smallrye-mutiny-vertx-auth-mongo >--------
+[INFO] Building SmallRye Mutiny - Vert.x Auth - MongoDB 2.17.0-SNAPSHOT [32/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-auth-mongo ---
+[INFO] 
+[INFO] -------< io.smallrye.reactive:smallrye-mutiny-vertx-auth-shiro >--------
+[INFO] Building SmallRye Mutiny - Vert.x Auth - Shiro 2.17.0-SNAPSHOT   [33/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-auth-shiro ---
+[INFO] 
+[INFO] -----< io.smallrye.reactive:smallrye-mutiny-vertx-auth-properties >-----
+[INFO] Building SmallRye Mutiny - Vert.x Auth - properties 2.17.0-SNAPSHOT [34/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-auth-properties ---
+[INFO] 
+[INFO] --------< io.smallrye.reactive:smallrye-mutiny-vertx-auth-ldap >--------
+[INFO] Building SmallRye Mutiny - Vert.x Auth - ldap 2.17.0-SNAPSHOT    [35/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-auth-ldap ---
+[INFO] 
+[INFO] -------< io.smallrye.reactive:smallrye-mutiny-vertx-jdbc-client >-------
+[INFO] Building SmallRye Mutiny - Vert.x JDBC Client 2.17.0-SNAPSHOT    [36/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-jdbc-client ---
+[INFO] 
+[INFO] --------< io.smallrye.reactive:smallrye-mutiny-vertx-auth-jdbc >--------
+[INFO] Building SmallRye Mutiny - Vert.x Auth - JDBC 2.17.0-SNAPSHOT    [37/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-auth-jdbc ---
+[INFO] 
+[INFO] -----< io.smallrye.reactive:smallrye-mutiny-vertx-auth-sql-client >-----
+[INFO] Building SmallRye Mutiny - Vert.x Auth - SQL Client 2.17.0-SNAPSHOT [38/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-auth-sql-client ---
+[INFO] 
+[INFO] ---------< io.smallrye.reactive:smallrye-mutiny-health-check >----------
+[INFO] Building SmallRye Mutiny - Vert.x Health Check 2.17.0-SNAPSHOT   [39/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-health-check ---
+[INFO] 
+[INFO] -------< io.smallrye.reactive:smallrye-mutiny-vertx-json-schema >-------
+[INFO] Building SmallRye Mutiny - Vert.x JSON Schema 2.17.0-SNAPSHOT    [40/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-json-schema ---
+[INFO] 
+[INFO] -----< io.smallrye.reactive:smallrye-mutiny-vertx-web-validation >------
+[INFO] Building SmallRye Mutiny - Vert.x Web Validation 2.17.0-SNAPSHOT [41/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-web-validation ---
+[INFO] 
+[INFO] -------< io.smallrye.reactive:smallrye-mutiny-vertx-web-openapi >-------
+[INFO] Building SmallRye Mutiny - Vert.x Web OpenAPI 2.17.0-SNAPSHOT    [42/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-web-openapi ---
+[INFO] 
+[INFO] -----< io.smallrye.reactive:smallrye-mutiny-vertx-web-api-service >-----
+[INFO] Building SmallRye Mutiny - Vert.x Web API Service 2.17.0-SNAPSHOT [43/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-web-api-service ---
+[INFO] 
+[INFO] --< io.smallrye.reactive:smallrye-mutiny-vertx-web-templ-freemarker >---
+[INFO] Building SmallRye Mutiny - Vert.x Web - FreeMarker Template Engine 2.17.0-SNAPSHOT [44/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-web-templ-freemarker ---
+[INFO] 
+[INFO] --< io.smallrye.reactive:smallrye-mutiny-vertx-web-templ-handlebars >---
+[INFO] Building SmallRye Mutiny - Vert.x Web - Handlebars Template Engine 2.17.0-SNAPSHOT [45/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-web-templ-handlebars ---
+[INFO] 
+[INFO] -----< io.smallrye.reactive:smallrye-mutiny-vertx-web-templ-jade >------
+[INFO] Building SmallRye Mutiny - Vert.x Web - Jade Template Engine 2.17.0-SNAPSHOT [46/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-web-templ-jade ---
+[INFO] 
+[INFO] -----< io.smallrye.reactive:smallrye-mutiny-vertx-web-templ-mvel >------
+[INFO] Building SmallRye Mutiny - Vert.x Web - MVEL Template Engine 2.17.0-SNAPSHOT [47/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-web-templ-mvel ---
+[INFO] 
+[INFO] ----< io.smallrye.reactive:smallrye-mutiny-vertx-web-templ-pebble >-----
+[INFO] Building SmallRye Mutiny - Vert.x Web - Pebble Template Engine 2.17.0-SNAPSHOT [48/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-web-templ-pebble ---
+[INFO] 
+[INFO] ----< io.smallrye.reactive:smallrye-mutiny-vertx-web-templ-rocker >-----
+[INFO] Building SmallRye Mutiny - Vert.x Web - Rocker Template Engine 2.17.0-SNAPSHOT [49/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-web-templ-rocker ---
+[INFO] 
+[INFO] ---< io.smallrye.reactive:smallrye-mutiny-vertx-web-templ-thymeleaf >---
+[INFO] Building SmallRye Mutiny - Vert.x Web - Thymeleaf Template Engine 2.17.0-SNAPSHOT [50/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-web-templ-thymeleaf ---
+[INFO] 
+[INFO] -------< io.smallrye.reactive:smallrye-mutiny-vertx-web-graphql >-------
+[INFO] Building SmallRye Mutiny - Vert.x Web - GraphQL Template Engine 2.17.0-SNAPSHOT [51/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-web-graphql ---
+[INFO] 
+[INFO] -----< io.smallrye.reactive:smallrye-mutiny-vertx-circuit-breaker >-----
+[INFO] Building SmallRye Mutiny - Vert.x Circuit Breaker 2.17.0-SNAPSHOT [52/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-circuit-breaker ---
+[INFO] 
+[INFO] ----------< io.smallrye.reactive:smallrye-mutiny-vertx-stomp >----------
+[INFO] Building SmallRye Mutiny - Vert.x Stomp 2.17.0-SNAPSHOT          [53/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-stomp ---
+[INFO] 
+[INFO] ---------< io.smallrye.reactive:smallrye-mutiny-vertx-config >----------
+[INFO] Building SmallRye Mutiny - Vert.x Config 2.17.0-SNAPSHOT         [54/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-config ---
+[INFO] 
+[INFO] --< io.smallrye.reactive:smallrye-mutiny-vertx-sql-client-templates >---
+[INFO] Building SmallRye Mutiny - Vert.x SQL Templates 2.17.0-SNAPSHOT  [55/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-sql-client-templates ---
+[INFO] 
+[INFO] ----------< io.smallrye.reactive:smallrye-mutiny-vertx-shell >----------
+[INFO] Building SmallRye Mutiny - Vert.x Shell 2.17.0-SNAPSHOT          [56/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-shell ---
+[INFO] 
+[INFO] ---< io.smallrye.reactive:smallrye-mutiny-vertx-micrometer-metrics >----
+[INFO] Building SmallRye Mutiny - Vert.x Micrometer Metrics 2.17.0-SNAPSHOT [57/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-micrometer-metrics ---
+[INFO] 
+[INFO] ---< io.smallrye.reactive:smallrye-mutiny-vertx-tcp-eventbus-bridge >---
+[INFO] Building SmallRye Mutiny - Vert.x TCP Eventbus Bridge 2.17.0-SNAPSHOT [58/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-tcp-eventbus-bridge ---
+[INFO] 
+[INFO] ----< io.smallrye.reactive:smallrye-mutiny-vertx-service-discovery >----
+[INFO] Building SmallRye Mutiny - Vert.x Service Discovery 2.17.0-SNAPSHOT [59/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-service-discovery ---
+[INFO] 
+[INFO] --< io.smallrye.reactive:smallrye-mutiny-vertx-service-discovery-backend-consul >--
+[INFO] Building SmallRye Mutiny - Vert.x Service Discovery - Consul Backend 2.17.0-SNAPSHOT [60/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-service-discovery-backend-consul ---
+[INFO] 
+[INFO] --< io.smallrye.reactive:smallrye-mutiny-vertx-service-discovery-backend-redis >--
+[INFO] Building SmallRye Mutiny - Vert.x Service Discovery - Redis Backend 2.17.0-SNAPSHOT [61/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-service-discovery-backend-redis ---
+[INFO] 
+[INFO] --< io.smallrye.reactive:smallrye-mutiny-vertx-service-discovery-backend-zookeeper >--
+[INFO] Building SmallRye Mutiny - Vert.x Service Discovery - Zookeeper Backend 2.17.0-SNAPSHOT [62/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-service-discovery-backend-zookeeper ---
+[INFO] 
+[INFO] --< io.smallrye.reactive:smallrye-mutiny-vertx-service-discovery-bridge-consul >--
+[INFO] Building SmallRye Mutiny - Vert.x Service Discovery - Consul Bridge 2.17.0-SNAPSHOT [63/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-service-discovery-bridge-consul ---
+[INFO] 
+[INFO] --< io.smallrye.reactive:smallrye-mutiny-vertx-service-discovery-bridge-docker >--
+[INFO] Building SmallRye Mutiny - Vert.x Service Discovery - Docker Bridge 2.17.0-SNAPSHOT [64/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-service-discovery-bridge-docker ---
+[INFO] 
+[INFO] --< io.smallrye.reactive:smallrye-mutiny-vertx-service-discovery-bridge-docker-links >--
+[INFO] Building SmallRye Mutiny - Vert.x Service Discovery - Docker Links Bridge 2.17.0-SNAPSHOT [65/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-service-discovery-bridge-docker-links ---
+[INFO] 
+[INFO] --< io.smallrye.reactive:smallrye-mutiny-vertx-service-discovery-bridge-kubernetes >--
+[INFO] Building SmallRye Mutiny - Vert.x Service Discovery - Kubernetes Bridge 2.17.0-SNAPSHOT [66/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-service-discovery-bridge-kubernetes ---
+[INFO] 
+[INFO] --< io.smallrye.reactive:smallrye-mutiny-vertx-service-discovery-bridge-zookeeper >--
+[INFO] Building SmallRye Mutiny - Vert.x Service Discovery - Zookeeper Bridge 2.17.0-SNAPSHOT [67/68]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-mutiny-vertx-service-discovery-bridge-zookeeper ---
+[INFO] 
+[INFO] -----------< io.smallrye.reactive:vertx-mutiny-clients-bom >------------
+[INFO] Building SmallRye Mutiny - Vert.x Client APIs BOM 2.17.0-SNAPSHOT [68/68]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ vertx-mutiny-clients-bom ---
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for SmallRye Reactive Utilities 2.17.0-SNAPSHOT:
+[INFO] 
+[INFO] SmallRye Reactive Utilities ........................ SUCCESS [  0.450 s]
+[INFO] SmallRye Mutiny - Client APIs ...................... SUCCESS [  0.003 s]
+[INFO] SmallRye Mutiny - Runtime Helpers .................. SUCCESS [  0.223 s]
+[INFO] SmallRye Mutiny - Code Generator ................... SUCCESS [  0.169 s]
+[INFO] SmallRye Mutiny - Vert.x Core ...................... SUCCESS [  0.153 s]
+[INFO] SmallRye Mutiny - Vert.x JUnit 5 support ........... SUCCESS [  0.040 s]
+[INFO] SmallRye Mutiny - Vert.x Mail Client ............... SUCCESS [  0.061 s]
+[INFO] SmallRye Mutiny - Vert.x Bridge Common ............. SUCCESS [  0.016 s]
+[INFO] SmallRye Mutiny - Vert.x Web Common ................ SUCCESS [  0.020 s]
+[INFO] SmallRye Mutiny - Vert.x Auth Common ............... SUCCESS [  0.016 s]
+[INFO] SmallRye Mutiny - Vert.x Auth - JWT ................ SUCCESS [  0.023 s]
+[INFO] SmallRye Mutiny - Vert.x Auth - htdigest ........... SUCCESS [  0.021 s]
+[INFO] SmallRye Mutiny - Vert.x Auth - webauthn ........... SUCCESS [  0.044 s]
+[INFO] SmallRye Mutiny - Vert.x Auth - OAuth2 ............. SUCCESS [  0.023 s]
+[INFO] SmallRye Mutiny - Vert.x Auth - OTP ................ SUCCESS [  0.024 s]
+[INFO] SmallRye Mutiny - Vert.x Web Client ................ SUCCESS [  0.097 s]
+[INFO] SmallRye Mutiny - Vert.x Web ....................... SUCCESS [  0.065 s]
+[INFO] SmallRye Mutiny - Vert.x Mongo Client .............. SUCCESS [  0.043 s]
+[INFO] SmallRye Mutiny - Vert.x Redis Client .............. SUCCESS [  0.020 s]
+[INFO] SmallRye Mutiny - Vert.x Cassandra Client .......... SUCCESS [  0.138 s]
+[INFO] SmallRye Mutiny - Vert.x Consul Client ............. SUCCESS [  0.100 s]
+[INFO] SmallRye Mutiny - Vert.x Kafka Client .............. SUCCESS [  0.071 s]
+[INFO] SmallRye Mutiny - Vert.x AMQP Client ............... SUCCESS [  0.024 s]
+[INFO] SmallRye Mutiny - Vert.x RabbitMQ Client ........... SUCCESS [  0.063 s]
+[INFO] SmallRye Mutiny - Vert.x SQL Client ................ SUCCESS [  0.017 s]
+[INFO] SmallRye Mutiny - Vert.x DB2 Client ................ SUCCESS [  0.026 s]
+[INFO] SmallRye Mutiny - Vert.x PostgreSQL Client ......... SUCCESS [  0.030 s]
+[INFO] SmallRye Mutiny - Vert.x MS SQL Client ............. SUCCESS [  0.015 s]
+[INFO] SmallRye Mutiny - Vert.x MySQL Client .............. SUCCESS [  0.018 s]
+[INFO] SmallRye Mutiny - Vert.x MQTT Client and Server .... SUCCESS [  0.019 s]
+[INFO] SmallRye Mutiny - Vert.x Auth - htpasswd ........... SUCCESS [  0.025 s]
+[INFO] SmallRye Mutiny - Vert.x Auth - MongoDB ............ SUCCESS [  0.027 s]
+[INFO] SmallRye Mutiny - Vert.x Auth - Shiro .............. SUCCESS [  0.090 s]
+[INFO] SmallRye Mutiny - Vert.x Auth - properties ......... SUCCESS [  0.020 s]
+[INFO] SmallRye Mutiny - Vert.x Auth - ldap ............... SUCCESS [  0.544 s]
+[INFO] SmallRye Mutiny - Vert.x JDBC Client ............... SUCCESS [  0.023 s]
+[INFO] SmallRye Mutiny - Vert.x Auth - JDBC ............... SUCCESS [  0.032 s]
+[INFO] SmallRye Mutiny - Vert.x Auth - SQL Client ......... SUCCESS [  0.039 s]
+[INFO] SmallRye Mutiny - Vert.x Health Check .............. SUCCESS [  0.029 s]
+[INFO] SmallRye Mutiny - Vert.x JSON Schema ............... SUCCESS [  0.015 s]
+[INFO] SmallRye Mutiny - Vert.x Web Validation ............ SUCCESS [  0.034 s]
+[INFO] SmallRye Mutiny - Vert.x Web OpenAPI ............... SUCCESS [  0.049 s]
+[INFO] SmallRye Mutiny - Vert.x Web API Service ........... SUCCESS [  0.030 s]
+[INFO] SmallRye Mutiny - Vert.x Web - FreeMarker Template Engine SUCCESS [  0.032 s]
+[INFO] SmallRye Mutiny - Vert.x Web - Handlebars Template Engine SUCCESS [  0.025 s]
+[INFO] SmallRye Mutiny - Vert.x Web - Jade Template Engine  SUCCESS [  0.068 s]
+[INFO] SmallRye Mutiny - Vert.x Web - MVEL Template Engine  SUCCESS [  0.024 s]
+[INFO] SmallRye Mutiny - Vert.x Web - Pebble Template Engine SUCCESS [  0.026 s]
+[INFO] SmallRye Mutiny - Vert.x Web - Rocker Template Engine SUCCESS [  0.027 s]
+[INFO] SmallRye Mutiny - Vert.x Web - Thymeleaf Template Engine SUCCESS [  0.035 s]
+[INFO] SmallRye Mutiny - Vert.x Web - GraphQL Template Engine SUCCESS [  0.034 s]
+[INFO] SmallRye Mutiny - Vert.x Circuit Breaker ........... SUCCESS [  0.018 s]
+[INFO] SmallRye Mutiny - Vert.x Stomp ..................... SUCCESS [  0.030 s]
+[INFO] SmallRye Mutiny - Vert.x Config .................... SUCCESS [  0.013 s]
+[INFO] SmallRye Mutiny - Vert.x SQL Templates ............. SUCCESS [  0.026 s]
+[INFO] SmallRye Mutiny - Vert.x Shell ..................... SUCCESS [  0.026 s]
+[INFO] SmallRye Mutiny - Vert.x Micrometer Metrics ........ SUCCESS [  0.041 s]
+[INFO] SmallRye Mutiny - Vert.x TCP Eventbus Bridge ....... SUCCESS [  0.014 s]
+[INFO] SmallRye Mutiny - Vert.x Service Discovery ......... SUCCESS [  0.021 s]
+[INFO] SmallRye Mutiny - Vert.x Service Discovery - Consul Backend SUCCESS [  0.029 s]
+[INFO] SmallRye Mutiny - Vert.x Service Discovery - Redis Backend SUCCESS [  0.019 s]
+[INFO] SmallRye Mutiny - Vert.x Service Discovery - Zookeeper Backend SUCCESS [  0.070 s]
+[INFO] SmallRye Mutiny - Vert.x Service Discovery - Consul Bridge SUCCESS [  0.026 s]
+[INFO] SmallRye Mutiny - Vert.x Service Discovery - Docker Bridge SUCCESS [  0.302 s]
+[INFO] SmallRye Mutiny - Vert.x Service Discovery - Docker Links Bridge SUCCESS [  0.017 s]
+[INFO] SmallRye Mutiny - Vert.x Service Discovery - Kubernetes Bridge SUCCESS [  0.017 s]
+[INFO] SmallRye Mutiny - Vert.x Service Discovery - Zookeeper Bridge SUCCESS [  0.032 s]
+[INFO] SmallRye Mutiny - Vert.x Client APIs BOM ........... SUCCESS [  0.002 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.479 s
+[INFO] Finished at: 2021-12-13T20:59:58Z
+[INFO] ------------------------------------------------------------------------
+smallrye-mutiny-zero
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< io.smallrye.reactive:mutiny-zero >------------------
+[INFO] Building SmallRye Mutiny Zero 0.2.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ mutiny-zero ---
+[WARNING] The artifact xml-apis:xml-apis:jar:2.0.2 has been relocated to xml-apis:xml-apis:jar:1.0.b2
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.739 s
+[INFO] Finished at: 2021-12-13T21:00:00Z
+[INFO] ------------------------------------------------------------------------
+smallrye-open-api
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for io.smallrye:smallrye-open-api-maven-plugin:maven-plugin:2.1.17-SNAPSHOT
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-failsafe-plugin is missing. @ line 115, column 21
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] SmallRye: OpenAPI Parent                                           [pom]
+[INFO] SmallRye: OpenAPI Core                                             [jar]
+[INFO] SmallRye: OpenAPI extension - JAX-RS                               [jar]
+[INFO] SmallRye: OpenAPI extension - Spring                               [jar]
+[INFO] SmallRye: OpenAPI extension - Vert.x                               [jar]
+[INFO] SmallRye: OpenAPI Implementation                                   [pom]
+[INFO] SmallRye: MicroProfile OpenAPI Test Suite                          [pom]
+[INFO] SmallRye: MicroProfile OpenAPI TCK                                 [jar]
+[INFO] SmallRye: OpenAPI Extra Test Cases                                 [jar]
+[INFO] SmallRye: OpenAPI UI parent                                        [pom]
+[INFO] SmallRye: OpenAPI UI                                               [jar]
+[INFO] SmallRye: OpenAPI UI as Forms                                      [jar]
+[INFO] SmallRye: OpenAPI Tools                                            [pom]
+[INFO] SmallRye: OpenAPI Tools :: Maven                          [maven-plugin]
+[INFO] Empty Release Project to Avoid Maven Bug                           [pom]
+[INFO] 
+[INFO] ----------------< io.smallrye:smallrye-open-api-parent >----------------
+[INFO] Building SmallRye: OpenAPI Parent 2.1.17-SNAPSHOT                 [1/15]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-open-api-parent ---
+[WARNING] The artifact xml-apis:xml-apis:jar:2.0.2 has been relocated to xml-apis:xml-apis:jar:1.0.b2
+[INFO] 
+[INFO] -----------------< io.smallrye:smallrye-open-api-core >-----------------
+[INFO] Building SmallRye: OpenAPI Core 2.1.17-SNAPSHOT                   [2/15]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-open-api-core ---
+[INFO] 
+[INFO] ----------------< io.smallrye:smallrye-open-api-jaxrs >-----------------
+[INFO] Building SmallRye: OpenAPI extension - JAX-RS 2.1.17-SNAPSHOT     [3/15]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-open-api-jaxrs ---
+[INFO] 
+[INFO] ----------------< io.smallrye:smallrye-open-api-spring >----------------
+[INFO] Building SmallRye: OpenAPI extension - Spring 2.1.17-SNAPSHOT     [4/15]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-open-api-spring ---
+[INFO] 
+[INFO] ----------------< io.smallrye:smallrye-open-api-vertx >-----------------
+[INFO] Building SmallRye: OpenAPI extension - Vert.x 2.1.17-SNAPSHOT     [5/15]
+[INFO] --------------------------------[ jar ]---------------------------------
+[WARNING] The artifact io.quarkus:quarkus-vertx-web:jar:2.5.2.Final has been relocated to io.quarkus:quarkus-reactive-routes:jar:2.5.2.Final: The artifact quarkus-vertx-web is now named quarkus-reactive-routes. Please update your dependency.
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-open-api-vertx ---
+[WARNING] While downloading io.quarkus:quarkus-vertx-web:2.5.2.Final
+  This artifact has been relocated to io.quarkus:quarkus-reactive-routes:2.5.2.Final.
+  The artifact quarkus-vertx-web is now named quarkus-reactive-routes. Please update your dependency.
+
+
+[INFO] 
+[INFO] -------------------< io.smallrye:smallrye-open-api >--------------------
+[INFO] Building SmallRye: OpenAPI Implementation 2.1.17-SNAPSHOT         [6/15]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-open-api ---
+[INFO] 
+[INFO] --------------< io.smallrye:smallrye-open-api-testsuite >---------------
+[INFO] Building SmallRye: MicroProfile OpenAPI Test Suite 2.1.17-SNAPSHOT [7/15]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-open-api-testsuite ---
+[INFO] 
+[INFO] ------------< io.smallrye:smallrye-open-api-testsuite-tck >-------------
+[INFO] Building SmallRye: MicroProfile OpenAPI TCK 2.1.17-SNAPSHOT       [8/15]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-open-api-testsuite-tck ---
+[INFO] 
+[INFO] -----------< io.smallrye:smallrye-open-api-testsuite-extra >------------
+[INFO] Building SmallRye: OpenAPI Extra Test Cases 2.1.17-SNAPSHOT       [9/15]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-open-api-testsuite-extra ---
+[INFO] 
+[INFO] --------------< io.smallrye:smallrye-open-api-ui-parent >---------------
+[INFO] Building SmallRye: OpenAPI UI parent 2.1.17-SNAPSHOT             [10/15]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-open-api-ui-parent ---
+[INFO] 
+[INFO] ------------------< io.smallrye:smallrye-open-api-ui >------------------
+[INFO] Building SmallRye: OpenAPI UI 2.1.17-SNAPSHOT                    [11/15]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-open-api-ui ---
+[INFO] 
+[INFO] ---------------< io.smallrye:smallrye-open-api-ui-forms >---------------
+[INFO] Building SmallRye: OpenAPI UI as Forms 2.1.17-SNAPSHOT           [12/15]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-open-api-ui-forms ---
+[INFO] 
+[INFO] ----------------< io.smallrye:smallrye-open-api-tools >-----------------
+[INFO] Building SmallRye: OpenAPI Tools 2.1.17-SNAPSHOT                 [13/15]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-open-api-tools ---
+[INFO] 
+[INFO] -------------< io.smallrye:smallrye-open-api-maven-plugin >-------------
+[INFO] Building SmallRye: OpenAPI Tools :: Maven 2.1.17-SNAPSHOT        [14/15]
+[INFO] ----------------------------[ maven-plugin ]----------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-open-api-maven-plugin ---
+[INFO] 
+[INFO] ---------------< io.smallrye:smallrye-open-api-release >----------------
+[INFO] Building Empty Release Project to Avoid Maven Bug 2.1.17-SNAPSHOT [15/15]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-open-api-release ---
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for SmallRye: OpenAPI Parent 2.1.17-SNAPSHOT:
+[INFO] 
+[INFO] SmallRye: OpenAPI Parent ........................... SUCCESS [  0.555 s]
+[INFO] SmallRye: OpenAPI Core ............................. SUCCESS [  0.252 s]
+[INFO] SmallRye: OpenAPI extension - JAX-RS ............... SUCCESS [  0.973 s]
+[INFO] SmallRye: OpenAPI extension - Spring ............... SUCCESS [  0.021 s]
+[INFO] SmallRye: OpenAPI extension - Vert.x ............... SUCCESS [  0.736 s]
+[INFO] SmallRye: OpenAPI Implementation ................... SUCCESS [  0.009 s]
+[INFO] SmallRye: MicroProfile OpenAPI Test Suite .......... SUCCESS [  0.004 s]
+[INFO] SmallRye: MicroProfile OpenAPI TCK ................. SUCCESS [  0.242 s]
+[INFO] SmallRye: OpenAPI Extra Test Cases ................. SUCCESS [  0.041 s]
+[INFO] SmallRye: OpenAPI UI parent ........................ SUCCESS [  0.005 s]
+[INFO] SmallRye: OpenAPI UI ............................... SUCCESS [  0.008 s]
+[INFO] SmallRye: OpenAPI UI as Forms ...................... SUCCESS [  0.005 s]
+[INFO] SmallRye: OpenAPI Tools ............................ SUCCESS [  0.005 s]
+[INFO] SmallRye: OpenAPI Tools :: Maven ................... SUCCESS [  0.196 s]
+[INFO] Empty Release Project to Avoid Maven Bug ........... SUCCESS [  0.005 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.364 s
+[INFO] Finished at: 2021-12-13T21:00:04Z
+[INFO] ------------------------------------------------------------------------
+smallrye-opentelemetry
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] SmallRye: OpenTelemetry Parent                                     [pom]
+[INFO] SmallRye: OpenTelemetry API                                        [jar]
+[INFO] SmallRye: OpenTelemetry CDI Implementation                         [jar]
+[INFO] SmallRye: OpenTelemetry REST Implementation                        [jar]
+[INFO] SmallRye: OpenTelemetry TCK                                        [jar]
+[INFO] SmallRye: OpenTelemetry Examples: Jaeger                           [war]
+[INFO] SmallRye: OpenTelemetry Examples                                   [pom]
+[INFO] 
+[INFO] ------< io.smallrye.opentelemetry:smallrye-opentelemetry-parent >-------
+[INFO] Building SmallRye: OpenTelemetry Parent 0.1.0-SNAPSHOT             [1/7]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-opentelemetry-parent ---
+[WARNING] The artifact xml-apis:xml-apis:jar:2.0.2 has been relocated to xml-apis:xml-apis:jar:1.0.b2
+[INFO] 
+[INFO] --------< io.smallrye.opentelemetry:smallrye-opentelemetry-api >--------
+[INFO] Building SmallRye: OpenTelemetry API 0.1.0-SNAPSHOT                [2/7]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-opentelemetry-api ---
+[INFO] 
+[INFO] --< io.smallrye.opentelemetry:smallrye-opentelemetry-implementation-cdi >--
+[INFO] Building SmallRye: OpenTelemetry CDI Implementation 0.1.0-SNAPSHOT [3/7]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-opentelemetry-implementation-cdi ---
+[INFO] 
+[INFO] --< io.smallrye.opentelemetry:smallrye-opentelemetry-implementation-rest >--
+[INFO] Building SmallRye: OpenTelemetry REST Implementation 0.1.0-SNAPSHOT [4/7]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-opentelemetry-implementation-rest ---
+[INFO] 
+[INFO] --------< io.smallrye.opentelemetry:smallrye-opentelemetry-tck >--------
+[INFO] Building SmallRye: OpenTelemetry TCK 0.1.0-SNAPSHOT                [5/7]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-opentelemetry-tck ---
+[INFO] 
+[INFO] --< smallrye-opentelemetry-examples:smallrye-opentelemetry-examples-jaeger >--
+[INFO] Building SmallRye: OpenTelemetry Examples: Jaeger 0.1.0-SNAPSHOT   [6/7]
+[INFO] --------------------------------[ war ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-opentelemetry-examples-jaeger ---
+[INFO] 
+[INFO] --< smallrye-opentelemetry-examples:smallrye-opentelemetry-examples-parent >--
+[INFO] Building SmallRye: OpenTelemetry Examples 0.1.0-SNAPSHOT           [7/7]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-opentelemetry-examples-parent ---
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for SmallRye: OpenTelemetry Parent 0.1.0-SNAPSHOT:
+[INFO] 
+[INFO] SmallRye: OpenTelemetry Parent ..................... SUCCESS [  0.433 s]
+[INFO] SmallRye: OpenTelemetry API ........................ SUCCESS [  0.059 s]
+[INFO] SmallRye: OpenTelemetry CDI Implementation ......... SUCCESS [  0.320 s]
+[INFO] SmallRye: OpenTelemetry REST Implementation ........ SUCCESS [  0.018 s]
+[INFO] SmallRye: OpenTelemetry TCK ........................ SUCCESS [  1.028 s]
+[INFO] SmallRye: OpenTelemetry Examples: Jaeger ........... SUCCESS [  0.330 s]
+[INFO] SmallRye: OpenTelemetry Examples ................... SUCCESS [  0.002 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.471 s
+[INFO] Finished at: 2021-12-13T21:00:08Z
+[INFO] ------------------------------------------------------------------------
+smallrye-opentracing
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] SmallRye: MicroProfile OpenTracing Parent                          [pom]
+[INFO] SmallRye: MicroProfile OpenTracing Implementation                  [jar]
+[INFO] SmallRye: MicroProfile OpenTracing TCK                             [jar]
+[INFO] Empty Release Project to Avoid Maven Bug                           [pom]
+[INFO] 
+[INFO] --------------< io.smallrye:smallrye-opentracing-parent >---------------
+[INFO] Building SmallRye: MicroProfile OpenTracing Parent 2.0.2-SNAPSHOT  [1/4]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-opentracing-parent ---
+[WARNING] The artifact xml-apis:xml-apis:jar:2.0.2 has been relocated to xml-apis:xml-apis:jar:1.0.b2
+[INFO] 
+[INFO] ------------------< io.smallrye:smallrye-opentracing >------------------
+[INFO] Building SmallRye: MicroProfile OpenTracing Implementation 2.0.2-SNAPSHOT [2/4]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-opentracing ---
+[INFO] 
+[INFO] ----------------< io.smallrye:smallrye-opentracing-tck >----------------
+[INFO] Building SmallRye: MicroProfile OpenTracing TCK 2.0.2-SNAPSHOT     [3/4]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-opentracing-tck ---
+[INFO] 
+[INFO] --------------< io.smallrye:smallrye-opentracing-release >--------------
+[INFO] Building Empty Release Project to Avoid Maven Bug 2.0.2-SNAPSHOT   [4/4]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-opentracing-release ---
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for SmallRye: MicroProfile OpenTracing Parent 2.0.2-SNAPSHOT:
+[INFO] 
+[INFO] SmallRye: MicroProfile OpenTracing Parent .......... SUCCESS [  0.455 s]
+[INFO] SmallRye: MicroProfile OpenTracing Implementation .. SUCCESS [  0.149 s]
+[INFO] SmallRye: MicroProfile OpenTracing TCK ............. SUCCESS [  1.063 s]
+[INFO] Empty Release Project to Avoid Maven Bug ........... SUCCESS [  0.003 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.920 s
+[INFO] Finished at: 2021-12-13T21:00:11Z
+[INFO] ------------------------------------------------------------------------
+smallrye-parent
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] SmallRye: Build Parent                                             [pom]
+[INFO] SmallRye: Parent                                                   [pom]
+[INFO] SmallRye: Parent for the Jakarta Namespace                         [pom]
+[INFO] 
+[INFO] -----------------< io.smallrye:smallrye-build-parent >------------------
+[INFO] Building SmallRye: Build Parent 32-SNAPSHOT                        [1/3]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-build-parent ---
+[WARNING] The artifact xml-apis:xml-apis:jar:2.0.2 has been relocated to xml-apis:xml-apis:jar:1.0.b2
+[INFO] 
+[INFO] --------------------< io.smallrye:smallrye-parent >---------------------
+[INFO] Building SmallRye: Parent 32-SNAPSHOT                              [2/3]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-parent ---
+[INFO] 
+[INFO] ----------------< io.smallrye:smallrye-jakarta-parent >-----------------
+[INFO] Building SmallRye: Parent for the Jakarta Namespace 32-SNAPSHOT    [3/3]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-jakarta-parent ---
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for SmallRye: Build Parent 32-SNAPSHOT:
+[INFO] 
+[INFO] SmallRye: Build Parent ............................. SUCCESS [  0.421 s]
+[INFO] SmallRye: Parent ................................... SUCCESS [  0.004 s]
+[INFO] SmallRye: Parent for the Jakarta Namespace ......... SUCCESS [  0.003 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.632 s
+[INFO] Finished at: 2021-12-13T21:00:12Z
+[INFO] ------------------------------------------------------------------------
+smallrye-reactive-converters
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] SmallRye Reactive Converters Parent                                [pom]
+[INFO] SmallRye Reactive Converters                                       [pom]
+[INFO] smallrye-reactive-converter-api                                    [jar]
+[INFO] smallrye-reactive-converter-reactive-streams-operators             [jar]
+[INFO] smallrye-reactive-converter-mutiny                                 [jar]
+[INFO] smallrye-reactive-converter-rxjava1                                [jar]
+[INFO] smallrye-reactive-converter-rxjava2                                [jar]
+[INFO] smallrye-reactive-converter-rxjava3                                [jar]
+[INFO] smallrye-reactive-converter-reactor                                [jar]
+[INFO] 
+[INFO] -----< io.smallrye.reactive:smallrye-reactive-converters-projects >-----
+[INFO] Building SmallRye Reactive Converters Parent 2.7.0-SNAPSHOT        [1/9]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-reactive-converters-projects ---
+[WARNING] The artifact xml-apis:xml-apis:jar:2.0.2 has been relocated to xml-apis:xml-apis:jar:1.0.b2
+[INFO] 
+[INFO] ---------< io.smallrye.reactive:smallrye-reactive-converters >----------
+[INFO] Building SmallRye Reactive Converters 2.7.0-SNAPSHOT               [2/9]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-reactive-converters ---
+[INFO] 
+[INFO] --------< io.smallrye.reactive:smallrye-reactive-converter-api >--------
+[INFO] Building smallrye-reactive-converter-api 2.7.0-SNAPSHOT            [3/9]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-reactive-converter-api ---
+[INFO] 
+[INFO] --< io.smallrye.reactive:smallrye-reactive-converter-reactive-streams-operators >--
+[INFO] Building smallrye-reactive-converter-reactive-streams-operators 2.7.0-SNAPSHOT [4/9]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-reactive-converter-reactive-streams-operators ---
+[INFO] 
+[INFO] ------< io.smallrye.reactive:smallrye-reactive-converter-mutiny >-------
+[INFO] Building smallrye-reactive-converter-mutiny 2.7.0-SNAPSHOT         [5/9]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-reactive-converter-mutiny ---
+[INFO] 
+[INFO] ------< io.smallrye.reactive:smallrye-reactive-converter-rxjava1 >------
+[INFO] Building smallrye-reactive-converter-rxjava1 2.7.0-SNAPSHOT        [6/9]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-reactive-converter-rxjava1 ---
+[INFO] 
+[INFO] ------< io.smallrye.reactive:smallrye-reactive-converter-rxjava2 >------
+[INFO] Building smallrye-reactive-converter-rxjava2 2.7.0-SNAPSHOT        [7/9]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-reactive-converter-rxjava2 ---
+[INFO] 
+[INFO] ------< io.smallrye.reactive:smallrye-reactive-converter-rxjava3 >------
+[INFO] Building smallrye-reactive-converter-rxjava3 2.7.0-SNAPSHOT        [8/9]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-reactive-converter-rxjava3 ---
+[INFO] 
+[INFO] ------< io.smallrye.reactive:smallrye-reactive-converter-reactor >------
+[INFO] Building smallrye-reactive-converter-reactor 2.7.0-SNAPSHOT        [9/9]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-reactive-converter-reactor ---
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for SmallRye Reactive Converters Parent 2.7.0-SNAPSHOT:
+[INFO] 
+[INFO] SmallRye Reactive Converters Parent ................ SUCCESS [  0.412 s]
+[INFO] SmallRye Reactive Converters ....................... SUCCESS [  0.028 s]
+[INFO] smallrye-reactive-converter-api .................... SUCCESS [  0.037 s]
+[INFO] smallrye-reactive-converter-reactive-streams-operators SUCCESS [  0.051 s]
+[INFO] smallrye-reactive-converter-mutiny ................. SUCCESS [  0.010 s]
+[INFO] smallrye-reactive-converter-rxjava1 ................ SUCCESS [  0.012 s]
+[INFO] smallrye-reactive-converter-rxjava2 ................ SUCCESS [  0.006 s]
+[INFO] smallrye-reactive-converter-rxjava3 ................ SUCCESS [  0.008 s]
+[INFO] smallrye-reactive-converter-reactor ................ SUCCESS [  0.009 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.838 s
+[INFO] Finished at: 2021-12-13T21:00:14Z
+[INFO] ------------------------------------------------------------------------
+smallrye-reactive-messaging
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for io.smallrye.reactive:smallrye-reactive-messaging-jackson:jar:3.14.0-SNAPSHOT
+[WARNING] The expression ${parent.version} is deprecated. Please use ${project.parent.version} instead.
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] SmallRye Reactive Messaging                                        [pom]
+[INFO] SmallRye Reactive Messaging : API                                  [jar]
+[INFO] SmallRye Reactive Messaging : Test Common                          [jar]
+[INFO] SmallRye Reactive Messaging : Provider                             [jar]
+[INFO] SmallRye Reactive Messaging : Connector Attribute Processor        [jar]
+[INFO] SmallRye Reactive Messaging : Connector :: In-memory               [jar]
+[INFO] SmallRye Reactive Messaging : Connector :: Kafka User API          [jar]
+[INFO] SmallRye Reactive Messaging : Connector :: Kafka                   [jar]
+[INFO] SmallRye Reactive Messaging : Connector :: MQTT                    [jar]
+[INFO] SmallRye Reactive Messaging : Connector :: Camel                   [jar]
+[INFO] SmallRye Reactive Messaging : Connector :: AMQP                    [jar]
+[INFO] SmallRye Reactive Messaging : Connector :: JMS                     [jar]
+[INFO] SmallRye Reactive Messaging : Connector :: Json-B                  [jar]
+[INFO] SmallRye Reactive Messaging : Connector :: Jackson                 [jar]
+[INFO] SmallRye Reactive Messaging : Health                               [jar]
+[INFO] SmallRye Reactive Messaging : Connector :: RabbitMQ                [jar]
+[INFO] SmallRye Reactive Messaging : Connector :: GCP Pub/Sub             [jar]
+[INFO] SmallRye Reactive Messaging : Quickstart :: General                [jar]
+[INFO] SmallRye Reactive Messaging : Quickstart :: Kafka                  [jar]
+[INFO] SmallRye Reactive Messaging : Quickstart :: Kafka Kotlin           [jar]
+[INFO] SmallRye Reactive Messaging : Quickstart :: MQTT                   [jar]
+[INFO] SmallRye Reactive Messaging : Quickstart :: AMQP                   [jar]
+[INFO] SmallRye Reactive Messaging : TCK                                  [jar]
+[INFO] SmallRye Reactive Messaging : Documentation                        [pom]
+[INFO] 
+[INFO] ----------< io.smallrye.reactive:smallrye-reactive-messaging >----------
+[INFO] Building SmallRye Reactive Messaging 3.14.0-SNAPSHOT              [1/24]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-reactive-messaging ---
+[WARNING] The artifact xml-apis:xml-apis:jar:2.0.2 has been relocated to xml-apis:xml-apis:jar:1.0.b2
+[INFO] 
+[INFO] --------< io.smallrye.reactive:smallrye-reactive-messaging-api >--------
+[INFO] Building SmallRye Reactive Messaging : API 3.14.0-SNAPSHOT        [2/24]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-reactive-messaging-api ---
+[INFO] 
+[INFO] ------------------< io.smallrye.reactive:test-common >------------------
+[INFO] Building SmallRye Reactive Messaging : Test Common 3.14.0-SNAPSHOT [3/24]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ test-common ---
+[INFO] 
+[INFO] -----< io.smallrye.reactive:smallrye-reactive-messaging-provider >------
+[INFO] Building SmallRye Reactive Messaging : Provider 3.14.0-SNAPSHOT   [4/24]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-reactive-messaging-provider ---
+[INFO] 
+[INFO] ----< io.smallrye.reactive:smallrye-connector-attribute-processor >-----
+[INFO] Building SmallRye Reactive Messaging : Connector Attribute Processor 3.14.0-SNAPSHOT [5/24]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-connector-attribute-processor ---
+[INFO] 
+[INFO] -----< io.smallrye.reactive:smallrye-reactive-messaging-in-memory >-----
+[INFO] Building SmallRye Reactive Messaging : Connector :: In-memory 3.14.0-SNAPSHOT [6/24]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-reactive-messaging-in-memory ---
+[INFO] 
+[INFO] -----< io.smallrye.reactive:smallrye-reactive-messaging-kafka-api >-----
+[INFO] Building SmallRye Reactive Messaging : Connector :: Kafka User API 3.14.0-SNAPSHOT [7/24]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-reactive-messaging-kafka-api ---
+[INFO] 
+[INFO] -------< io.smallrye.reactive:smallrye-reactive-messaging-kafka >-------
+[INFO] Building SmallRye Reactive Messaging : Connector :: Kafka 3.14.0-SNAPSHOT [8/24]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-reactive-messaging-kafka ---
+[INFO] io.smallrye.reactive:smallrye-reactive-messaging-kafka:jar:3.14.0-SNAPSHOT
+[INFO] \- io.strimzi:strimzi-test-container:jar:0.25.0:test
+[INFO]    +- org.apache.logging.log4j:log4j-api:jar:2.14.1:test
+[INFO]    \- org.apache.logging.log4j:log4j-core:jar:2.14.1:test
+[INFO]       \- (org.apache.logging.log4j:log4j-api:jar:2.14.1:test - omitted for duplicate)
+[INFO] 
+[INFO] -------< io.smallrye.reactive:smallrye-reactive-messaging-mqtt >--------
+[INFO] Building SmallRye Reactive Messaging : Connector :: MQTT 3.14.0-SNAPSHOT [9/24]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-reactive-messaging-mqtt ---
+[INFO] 
+[INFO] -------< io.smallrye.reactive:smallrye-reactive-messaging-camel >-------
+[INFO] Building SmallRye Reactive Messaging : Connector :: Camel 3.14.0-SNAPSHOT [10/24]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-reactive-messaging-camel ---
+[INFO] 
+[INFO] -------< io.smallrye.reactive:smallrye-reactive-messaging-amqp >--------
+[INFO] Building SmallRye Reactive Messaging : Connector :: AMQP 3.14.0-SNAPSHOT [11/24]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-reactive-messaging-amqp ---
+[INFO] 
+[INFO] --------< io.smallrye.reactive:smallrye-reactive-messaging-jms >--------
+[INFO] Building SmallRye Reactive Messaging : Connector :: JMS 3.14.0-SNAPSHOT [12/24]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-reactive-messaging-jms ---
+[INFO] 
+[INFO] -------< io.smallrye.reactive:smallrye-reactive-messaging-jsonb >-------
+[INFO] Building SmallRye Reactive Messaging : Connector :: Json-B 3.14.0-SNAPSHOT [13/24]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-reactive-messaging-jsonb ---
+[INFO] 
+[INFO] ------< io.smallrye.reactive:smallrye-reactive-messaging-jackson >------
+[INFO] Building SmallRye Reactive Messaging : Connector :: Jackson 3.14.0-SNAPSHOT [14/24]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-reactive-messaging-jackson ---
+[INFO] 
+[INFO] ------< io.smallrye.reactive:smallrye-reactive-messaging-health >-------
+[INFO] Building SmallRye Reactive Messaging : Health 3.14.0-SNAPSHOT    [15/24]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-reactive-messaging-health ---
+[INFO] 
+[INFO] -----< io.smallrye.reactive:smallrye-reactive-messaging-rabbitmq >------
+[INFO] Building SmallRye Reactive Messaging : Connector :: RabbitMQ 3.14.0-SNAPSHOT [16/24]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-reactive-messaging-rabbitmq ---
+[INFO] 
+[INFO] ----< io.smallrye.reactive:smallrye-reactive-messaging-gcp-pubsub >-----
+[INFO] Building SmallRye Reactive Messaging : Connector :: GCP Pub/Sub 3.14.0-SNAPSHOT [17/24]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-reactive-messaging-gcp-pubsub ---
+[INFO] 
+[INFO] ---------< io.smallrye.reactive:reactive-messaging-quickstart >---------
+[INFO] Building SmallRye Reactive Messaging : Quickstart :: General 3.14.0-SNAPSHOT [18/24]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ reactive-messaging-quickstart ---
+[INFO] 
+[INFO] ---------------< io.smallrye.reactive:kafka-quickstart >----------------
+[INFO] Building SmallRye Reactive Messaging : Quickstart :: Kafka 3.14.0-SNAPSHOT [19/24]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ kafka-quickstart ---
+[INFO] 
+[INFO] ------------< io.smallrye.reactive:kafka-quickstart-kotlin >------------
+[INFO] Building SmallRye Reactive Messaging : Quickstart :: Kafka Kotlin 3.14.0-SNAPSHOT [20/24]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ kafka-quickstart-kotlin ---
+[INFO] 
+[INFO] ----------------< io.smallrye.reactive:mqtt-quickstart >----------------
+[INFO] Building SmallRye Reactive Messaging : Quickstart :: MQTT 3.14.0-SNAPSHOT [21/24]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ mqtt-quickstart ---
+[INFO] 
+[INFO] ----------------< io.smallrye.reactive:amqp-quickstart >----------------
+[INFO] Building SmallRye Reactive Messaging : Quickstart :: AMQP 3.14.0-SNAPSHOT [22/24]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ amqp-quickstart ---
+[INFO] 
+[INFO] ----------------------< io.smallrye.reactive:tck >----------------------
+[INFO] Building SmallRye Reactive Messaging : TCK 3.14.0-SNAPSHOT       [23/24]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ tck ---
+[INFO] 
+[INFO] -----------------< io.smallrye.reactive:documentation >-----------------
+[INFO] Building SmallRye Reactive Messaging : Documentation 3.14.0-SNAPSHOT [24/24]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ documentation ---
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for SmallRye Reactive Messaging 3.14.0-SNAPSHOT:
+[INFO] 
+[INFO] SmallRye Reactive Messaging ........................ SUCCESS [  0.788 s]
+[INFO] SmallRye Reactive Messaging : API .................. SUCCESS [  0.062 s]
+[INFO] SmallRye Reactive Messaging : Test Common .......... SUCCESS [  0.027 s]
+[INFO] SmallRye Reactive Messaging : Provider ............. SUCCESS [  0.337 s]
+[INFO] SmallRye Reactive Messaging : Connector Attribute Processor SUCCESS [  0.040 s]
+[INFO] SmallRye Reactive Messaging : Connector :: In-memory SUCCESS [  0.044 s]
+[INFO] SmallRye Reactive Messaging : Connector :: Kafka User API SUCCESS [  0.041 s]
+[INFO] SmallRye Reactive Messaging : Connector :: Kafka ... SUCCESS [  0.250 s]
+[INFO] SmallRye Reactive Messaging : Connector :: MQTT .... SUCCESS [  0.075 s]
+[INFO] SmallRye Reactive Messaging : Connector :: Camel ... SUCCESS [  0.514 s]
+[INFO] SmallRye Reactive Messaging : Connector :: AMQP .... SUCCESS [  0.406 s]
+[INFO] SmallRye Reactive Messaging : Connector :: JMS ..... SUCCESS [  0.312 s]
+[INFO] SmallRye Reactive Messaging : Connector :: Json-B .. SUCCESS [  0.354 s]
+[INFO] SmallRye Reactive Messaging : Connector :: Jackson . SUCCESS [  0.271 s]
+[INFO] SmallRye Reactive Messaging : Health ............... SUCCESS [  0.053 s]
+[INFO] SmallRye Reactive Messaging : Connector :: RabbitMQ  SUCCESS [  0.065 s]
+[INFO] SmallRye Reactive Messaging : Connector :: GCP Pub/Sub SUCCESS [  0.166 s]
+[INFO] SmallRye Reactive Messaging : Quickstart :: General  SUCCESS [  0.125 s]
+[INFO] SmallRye Reactive Messaging : Quickstart :: Kafka .. SUCCESS [  0.046 s]
+[INFO] SmallRye Reactive Messaging : Quickstart :: Kafka Kotlin SUCCESS [  0.047 s]
+[INFO] SmallRye Reactive Messaging : Quickstart :: MQTT ... SUCCESS [  0.071 s]
+[INFO] SmallRye Reactive Messaging : Quickstart :: AMQP ... SUCCESS [  0.083 s]
+[INFO] SmallRye Reactive Messaging : TCK .................. SUCCESS [  0.147 s]
+[INFO] SmallRye Reactive Messaging : Documentation ........ SUCCESS [  0.074 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.822 s
+[INFO] Finished at: 2021-12-13T21:00:20Z
+[INFO] ------------------------------------------------------------------------
+smallrye-safer-annotations
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] SmallRye Safer Annotations Parent                                  [pom]
+[INFO] Smallrye Safer Annotations                                         [jar]
+[INFO] Empty Release Project to Avoid Maven Bug                           [pom]
+[INFO] 
+[INFO] -----------< io.smallrye:smallrye-safer-annotations-parent >------------
+[INFO] Building SmallRye Safer Annotations Parent 1.0.4-SNAPSHOT          [1/3]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-safer-annotations-parent ---
+[WARNING] The artifact xml-apis:xml-apis:jar:2.0.2 has been relocated to xml-apis:xml-apis:jar:1.0.b2
+[INFO] 
+[INFO] ---------------< io.smallrye:smallrye-safer-annotations >---------------
+[INFO] Building Smallrye Safer Annotations 1.0.4-SNAPSHOT                 [2/3]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-safer-annotations ---
+[INFO] 
+[INFO] -----------< io.smallrye:smallrye-safer-annotations-release >-----------
+[INFO] Building Empty Release Project to Avoid Maven Bug 1.0.4-SNAPSHOT   [3/3]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-safer-annotations-release ---
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for SmallRye Safer Annotations Parent 1.0.4-SNAPSHOT:
+[INFO] 
+[INFO] SmallRye Safer Annotations Parent .................. SUCCESS [  0.441 s]
+[INFO] Smallrye Safer Annotations ......................... SUCCESS [  0.020 s]
+[INFO] Empty Release Project to Avoid Maven Bug ........... SUCCESS [  0.002 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.696 s
+[INFO] Finished at: 2021-12-13T21:00:23Z
+[INFO] ------------------------------------------------------------------------
+smallrye-stork
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] SmallRye Service Discovery : Parent                                [pom]
+[INFO] SmallRye Stork : interface for library integration                 [jar]
+[INFO] SmallRye Stork Load Balancer : Test Utilities                      [jar]
+[INFO] SmallRye Stork : MicroProfile Config integration                   [jar]
+[INFO] SmallRye Stork Service Discovery : Static List                     [jar]
+[INFO] SmallRye Stork Service Discovery : Consul List                     [jar]
+[INFO] SmallRye Stork Service Discovery : Kubernetes DNS                  [jar]
+[INFO] SmallRye Stork Service Discovery : Eureka                          [jar]
+[INFO] SmallRye Stork Service Discovery : Composite                       [jar]
+[INFO] SmallRye Stork Load Balancer : Round Robin                         [jar]
+[INFO] SmallRye Stork Load Balancer : Response Time                       [jar]
+[INFO] SmallRye Stork : Doc                                               [jar]
+[INFO] 
+[INFO] --------------< io.smallrye.stork:smallrye-stork-parent >---------------
+[INFO] Building SmallRye Service Discovery : Parent 1.0.0-SNAPSHOT       [1/12]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-stork-parent ---
+[WARNING] The artifact xml-apis:xml-apis:jar:2.0.2 has been relocated to xml-apis:xml-apis:jar:1.0.b2
+[INFO] 
+[INFO] ----------------< io.smallrye.stork:smallrye-stork-api >----------------
+[INFO] Building SmallRye Stork : interface for library integration 1.0.0-SNAPSHOT [2/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-stork-api ---
+[INFO] 
+[INFO] ------------< io.smallrye.stork:smallrye-stork-test-utils >-------------
+[INFO] Building SmallRye Stork Load Balancer : Test Utilities 1.0.0-SNAPSHOT [3/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-stork-test-utils ---
+[INFO] 
+[INFO] --------< io.smallrye.stork:smallrye-stork-microprofile-config >--------
+[INFO] Building SmallRye Stork : MicroProfile Config integration 1.0.0-SNAPSHOT [4/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-stork-microprofile-config ---
+[INFO] 
+[INFO] ---< io.smallrye.stork:smallrye-stork-service-discovery-static-list >---
+[INFO] Building SmallRye Stork Service Discovery : Static List 1.0.0-SNAPSHOT [5/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-stork-service-discovery-static-list ---
+[INFO] 
+[INFO] -----< io.smallrye.stork:smallrye-stork-service-discovery-consul >------
+[INFO] Building SmallRye Stork Service Discovery : Consul List 1.0.0-SNAPSHOT [6/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-stork-service-discovery-consul ---
+[INFO] 
+[INFO] ---< io.smallrye.stork:smallrye-stork-service-discovery-kubernetes >----
+[INFO] Building SmallRye Stork Service Discovery : Kubernetes DNS 1.0.0-SNAPSHOT [7/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-stork-service-discovery-kubernetes ---
+[INFO] 
+[INFO] -----< io.smallrye.stork:smallrye-stork-service-discovery-eureka >------
+[INFO] Building SmallRye Stork Service Discovery : Eureka 1.0.0-SNAPSHOT [8/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-stork-service-discovery-eureka ---
+[INFO] io.smallrye.stork:smallrye-stork-service-discovery-eureka:jar:1.0.0-SNAPSHOT
+[INFO] \- org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:jar:3.0.4:test
+[INFO]    \- org.springframework.cloud:spring-cloud-starter:jar:3.0.4:test
+[INFO]       \- org.springframework.boot:spring-boot-starter:jar:2.4.10:test
+[INFO]          \- org.springframework.boot:spring-boot-starter-logging:jar:2.4.10:test
+[INFO]             \- org.apache.logging.log4j:log4j-to-slf4j:jar:2.13.3:test
+[INFO]                \- org.apache.logging.log4j:log4j-api:jar:2.13.3:test
+[INFO] 
+[INFO] ----< io.smallrye.stork:smallrye-stork-service-discovery-composite >----
+[INFO] Building SmallRye Stork Service Discovery : Composite 1.0.0-SNAPSHOT [9/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-stork-service-discovery-composite ---
+[INFO] 
+[INFO] -----< io.smallrye.stork:smallrye-stork-load-balancer-round-robin >-----
+[INFO] Building SmallRye Stork Load Balancer : Round Robin 1.0.0-SNAPSHOT [10/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-stork-load-balancer-round-robin ---
+[INFO] 
+[INFO] ----< io.smallrye.stork:smallrye-stork-load-balancer-response-time >----
+[INFO] Building SmallRye Stork Load Balancer : Response Time 1.0.0-SNAPSHOT [11/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-stork-load-balancer-response-time ---
+[INFO] 
+[INFO] -------------------< io.smallrye.stork:smallrye-doc >-------------------
+[INFO] Building SmallRye Stork : Doc 1.0.0-SNAPSHOT                     [12/12]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-doc ---
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for SmallRye Service Discovery : Parent 1.0.0-SNAPSHOT:
+[INFO] 
+[INFO] SmallRye Service Discovery : Parent ................ SUCCESS [  0.412 s]
+[INFO] SmallRye Stork : interface for library integration . SUCCESS [  0.319 s]
+[INFO] SmallRye Stork Load Balancer : Test Utilities ...... SUCCESS [  0.014 s]
+[INFO] SmallRye Stork : MicroProfile Config integration ... SUCCESS [  0.103 s]
+[INFO] SmallRye Stork Service Discovery : Static List ..... SUCCESS [  0.010 s]
+[INFO] SmallRye Stork Service Discovery : Consul List ..... SUCCESS [  0.155 s]
+[INFO] SmallRye Stork Service Discovery : Kubernetes DNS .. SUCCESS [  0.329 s]
+[INFO] SmallRye Stork Service Discovery : Eureka .......... SUCCESS [  0.913 s]
+[INFO] SmallRye Stork Service Discovery : Composite ....... SUCCESS [  0.013 s]
+[INFO] SmallRye Stork Load Balancer : Round Robin ......... SUCCESS [  0.010 s]
+[INFO] SmallRye Stork Load Balancer : Response Time ....... SUCCESS [  0.011 s]
+[INFO] SmallRye Stork : Doc ............................... SUCCESS [  0.013 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.627 s
+[INFO] Finished at: 2021-12-13T21:00:26Z
+[INFO] ------------------------------------------------------------------------
+smallrye-testing
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] SmallRye: Testing Parent                                           [pom]
+[INFO] SmallRye: Testing Utilities                                        [jar]
+[INFO] Empty Release Project to Avoid Maven Bug                           [pom]
+[INFO] 
+[INFO] ------------< io.smallrye.testing:smallrye-testing-parent >-------------
+[INFO] Building SmallRye: Testing Parent 0.1.1-SNAPSHOT                   [1/3]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-testing-parent ---
+[WARNING] The artifact xml-apis:xml-apis:jar:2.0.2 has been relocated to xml-apis:xml-apis:jar:1.0.b2
+[INFO] 
+[INFO] -----------< io.smallrye.testing:smallrye-testing-utilities >-----------
+[INFO] Building SmallRye: Testing Utilities 0.1.1-SNAPSHOT                [2/3]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-testing-utilities ---
+[INFO] 
+[INFO] ------------< io.smallrye.testing:smallrye-testing-release >------------
+[INFO] Building Empty Release Project to Avoid Maven Bug 0.1.1-SNAPSHOT   [3/3]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ smallrye-testing-release ---
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for SmallRye: Testing Parent 0.1.1-SNAPSHOT:
+[INFO] 
+[INFO] SmallRye: Testing Parent ........................... SUCCESS [  0.542 s]
+[INFO] SmallRye: Testing Utilities ........................ SUCCESS [  0.105 s]
+[INFO] Empty Release Project to Avoid Maven Bug ........... SUCCESS [  0.003 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.013 s
+[INFO] Finished at: 2021-12-13T21:00:28Z
+[INFO] ------------------------------------------------------------------------

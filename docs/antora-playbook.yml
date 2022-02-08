@@ -19,6 +19,7 @@ content:
     branches: ~
     tags:
     - '5*'
+    - '6*'
     - '!*-RC*'
     start_path: doc
   - url: https://github.com/smallrye/smallrye-health.git

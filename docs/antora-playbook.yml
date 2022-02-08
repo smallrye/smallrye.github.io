@@ -6,9 +6,6 @@ content:
   - url: .. # common module containing just the main index
     start_path: docs
     branches: HEAD
-  - url: https://github.com/smallrye/smallrye-config.git
-    branches: main
-    start_path: doc
   - url: https://github.com/smallrye/smallrye-jwt.git
     branches: main
     start_path: doc

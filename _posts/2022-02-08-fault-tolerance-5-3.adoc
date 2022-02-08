@@ -1,0 +1,128 @@
+:page-layout: post
+:page-title: Fault Tolerance 5.3
+:page-synopsis: SmallRye Fault Tolerance 5.3 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2022-02-08 17:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 5.3
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/5.3.0[release] of {smallrye-ft} 5.3.0.
+This release includes one big new feature, the programmatic API, and several smaller additions and fixes.
+It should be a safe upgrade for everyone using {smallrye-ft} 5.2.1.
+
+== Programmatic API
+
+Since the very beginning, {smallrye-ft} has implemented the {microprofile-ft} declarative, annotation-based API.
+It also has several SmallRye-specific additions to this API, such as retry backoff strategies or circuit breaker maintenance.
+
+With this release, {smallrye-ft} adds an alternative, programmatic API.
+It has https://smallrye.io/docs/smallrye-fault-tolerance/5.3.0/usage/programmatic-api.html[extensive documentation], so we'll just provide a short overview here.
+Let's start with an example:
+
+[source,java]
+----
+public class MyService {
+    private static final FaultTolerance<String> guard = FaultTolerance.<String>create()
+        .withCircuitBreaker().done()
+        .withFallback().handler(() -> "fallback").done()
+        .build();
+
+    public String hello() throws Exception {
+        return guard.call(externalService::hello);
+    }
+}
+----
+
+The important part of this snippet is the `guard` variable.
+It contains a `FaultTolerance` instance, which is basically a configured set of fault tolerance strategies.
+The builder API allows creating the same fault tolerance strategies as the annotation-based API of {microprofile-ft}.
+Order of `with*` method invocations doesn't matter, the fault tolerance strategies are ordered according to the {microprofile-ft} specification.
+
+The `FaultTolerance` interface includes methods to run a `Callable`, `Supplier` or `Runnable` and guard them.
+That's what `guard.call(\...)` does in the body of the `hello` method.
+
+A `FaultTolerance` instance created like this may be used to guard multiple different actions.
+If you only need to guard a single action, the previous example can be shortened to:
+
+[source, java]
+----
+public class MyService {
+    private final Callable<String> guard = FaultTolerance.createCallable(externalService::hello)
+            .withCircuitBreaker().done()
+            .withFallback().handler(() -> "fallback").done()
+            .build();
+
+    public String hello() throws Exception {
+        return guard.call();
+    }
+}
+----
+
+Similarly to the set of `FaultTolerance` methods to guard various types of actions, there's a set of `create*` static methods to create a `Callable`, `Supplier` or `Runnable`. There's also a set of `createAsync*` static methods to guard asynchronous actions using `CompletionStage`.
+
+=== Mutiny support
+
+The `smallrye-fault-tolerance-mutiny` artifact, also described below in the section on additional async types, contains a `MutinyFaultTolerance` interface.
+That interface contains `create*` static methods to guard asynchronous actions that return the Mutiny `Uni` type.
+
+=== Events
+
+The programmatic API has one feature that the declarative API doesn't have: ability to observe certain events.
+For example, when configuring a circuit breaker, it is possible to register a callback for circuit breaker state changes or for a situation when an open circuit breaker prevents an invocation.
+When configuring a timeout, it is possible to register a callback for when the invocation times out, etc. etc.
+For example:
+
+[source,java]
+----
+private static final FaultTolerance<String> guard = FaultTolerance.<String>create()
+    .withTimeout().duration(5, ChronoUnit.SECONDS).onTimeout(() -> ...).done()
+    .build();
+----
+
+== Circuit breaker maintenance
+
+There's one exception to the above claim that the declarative API isn't able to observe events.
+With this release, `CircuitBreakerMaintenance` gains a method to observe circuit breaker state changes.
+No other events are exposed to the declarative API at the moment.
+
+Note that the programmatic API also has a method to obtain `CircuitBreakerMaintenance`: `FaultTolerance.circuitBreakerMaintenance()`.
+This methods returns the same object that you can `@Inject`, because circuit breakers created by the programmatic API and declarative API are stored in the same registry.
+
+== Inspecting exception causes
+
+The `@CircuitBreaker`, `@Fallback` and `@Retry` fault tolerance strategies allow declaring the set of exception types for which the strategy should apply (or be ignored).
+When an exception is thrown, its class is checked for presence in one of these sets, and the strategy behaves accordingly.
+
+This works fine, until wrapper exceptions come to play.
+In certain contexts, the true exceptions are often (or always) wrapped into another exception.
+In such situation, configuring when a fault tolerance strategy should apply or be ignored becomes nearly impossible.
+
+In this release, {smallrye-ft} adds a non-standard feature to solve this problem.
+In the https://smallrye.io/docs/smallrye-fault-tolerance/5.3.0/usage/extra.html#_non_compatible_mode[non-compatible mode], if the class of the thrown exception isn't present in either of the two sets, the cause chain of the exception is inspected automatically.
+
+== Revamped async types support
+
+{smallrye-ft} offers support for more asynchronous types than just {microprofile-ft} mandated `CompletionStage`.
+So far, that support was based on the SmallRye Reactive Converters project, because that offers conversion between `CompletionStage` and other types.
+Asynchronous implementations of fault tolerance strategies in {smallrye-ft} are based on `CompletionStage`, so that seems like a natural fit, but it has one issue.
+In case the other async type is lazy (which is always the case with RxJava, Mutiny or Reactor), resubscription doesn't work.
+
+In this release, the dependency on SmallRye Reactive Converters is dropped.
+Instead, {smallrye-ft} has its own set of support libraries for various reactive types.
+These support libraries convert between types lazily, so resubscription works properly.
+
+Specifically, there's `smallrye-fault-tolerance-mutiny` for Mutiny and `smallrye-fault-tolerance-rxjava3` for RxJava 3. Support for RxJava 1, RxJava 2 and Reactor was dropped, but may easily be added back if there's a need.
+
+== Others
+
+If you use `@Fallback` with a `FallbackHandler` class, you might have found that such fallback handler triggers a validation error when guarding methods that declare a primitive return type (or `void`).
+This has been fixed.
+A `FallbackHandler` that declares a wrapper type (such as `java.lang.Integer`) now correctly matches a corresponding primitive type (such as `int`).
+
+Upgrade to 5.3.0 is very much recommended.
+As described above, there are certain new things, so if you encounter any bugs, please let us know in the https://github.com/smallrye/smallrye-fault-tolerance/issues[issue tracker]!
+We'd be specifically interested in any feedback on the programmatic API.
+This is very new, so you have a unique chance to influence its future!

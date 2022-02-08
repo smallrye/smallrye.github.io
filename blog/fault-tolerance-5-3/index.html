@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Fault Tolerance 5.3</title>
+  <script id="adobe_dtm" src="https://www.redhat.com/dtm.js" type="text/javascript"></script>
+  <script src="/assets/javascript/highlightjs-pack.js" type="text/javascript"></script>
+  <META HTTP-EQUIV="Content-Security-Policy" CONTENT="default-src 'none'; script-src 'self' www.redhat.com assets.adobedtm.com jsonip.com ajax.googleapis.com www.googletagmanager.com www.google-analytics.com use.fontawesome.com; style-src 'self'  fonts.googleapis.com use.fontawesome.com; img-src 'self' *; media-src 'self' ; frame-src www.googletagmanager.com; frame-ancestors 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; font-src 'self' use.fontawesome.com fonts.gstatic.com;">
+  <META HTTP-EQUIV="X-Frame-Options" CONTENT="DENY">
+  <META HTTP-EQUIV="X-XSS-Protection" CONTENT="1; mode=block">
+  <META HTTP-EQUIV="X-Content-Type-Options" CONTENT="nosniff">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+  <link rel="shortcut icon" type="image/png" href="/favicon.ico" >
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+</head>
+
+<body class="post">
+
+  <div class="content">
+    <div class="navigation-wrapper">
+  <div class="width-12-12">
+    <div class="header navigation">
+      <div class="logo-wrapper">
+        <a href="/"><img class="project-logo" title="SmallRye" src="/assets/images/smallrye_project_logo.svg"></a>
+      </div>
+      <div class="nav-container">
+        <nav>
+          <div class="nav-mobile"><a id="nav-toggle" href="#!"><span></span></a></div>
+          <ul class="nav-list">
+            <li>
+              <a href="/projects/" class="">Projects</a>
+            </li>
+            <li>
+              <a href="/community/" class="">Community</a>
+            </li>
+            <li>
+              <a href="/blog/" class="active">Blog</a>
+            </li>
+            <li>
+              <a href="/docs/index.html" class="">Documentation</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="post-page grid-wrapper">
+  <div class="grid__item width-10-12 doc-content">
+    <h1>Fault Tolerance 5.3</h1>
+    <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Today, we announce the <a href="https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/5.3.0">release</a> of SmallRye Fault Tolerance 5.3.0.
+This release includes one big new feature, the programmatic API, and several smaller additions and fixes.
+It should be a safe upgrade for everyone using SmallRye Fault Tolerance 5.2.1.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="programmatic_api">Programmatic API</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Since the very beginning, SmallRye Fault Tolerance has implemented the MicroProfile Fault Tolerance declarative, annotation-based API.
+It also has several SmallRye-specific additions to this API, such as retry backoff strategies or circuit breaker maintenance.</p>
+</div>
+<div class="paragraph">
+<p>With this release, SmallRye Fault Tolerance adds an alternative, programmatic API.
+It has <a href="https://smallrye.io/docs/smallrye-fault-tolerance/5.3.0/usage/programmatic-api.html">extensive documentation</a>, so we&#8217;ll just provide a short overview here.
+Let&#8217;s start with an example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">public class MyService {
+    private static final FaultTolerance&lt;String&gt; guard = FaultTolerance.&lt;String&gt;create()
+        .withCircuitBreaker().done()
+        .withFallback().handler(() -&gt; "fallback").done()
+        .build();
+
+    public String hello() throws Exception {
+        return guard.call(externalService::hello);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The important part of this snippet is the <code>guard</code> variable.
+It contains a <code>FaultTolerance</code> instance, which is basically a configured set of fault tolerance strategies.
+The builder API allows creating the same fault tolerance strategies as the annotation-based API of MicroProfile Fault Tolerance.
+Order of <code>with*</code> method invocations doesn&#8217;t matter, the fault tolerance strategies are ordered according to the MicroProfile Fault Tolerance specification.</p>
+</div>
+<div class="paragraph">
+<p>The <code>FaultTolerance</code> interface includes methods to run a <code>Callable</code>, <code>Supplier</code> or <code>Runnable</code> and guard them.
+That&#8217;s what <code>guard.call(...)</code> does in the body of the <code>hello</code> method.</p>
+</div>
+<div class="paragraph">
+<p>A <code>FaultTolerance</code> instance created like this may be used to guard multiple different actions.
+If you only need to guard a single action, the previous example can be shortened to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">public class MyService {
+    private final Callable&lt;String&gt; guard = FaultTolerance.createCallable(externalService::hello)
+            .withCircuitBreaker().done()
+            .withFallback().handler(() -&gt; "fallback").done()
+            .build();
+
+    public String hello() throws Exception {
+        return guard.call();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Similarly to the set of <code>FaultTolerance</code> methods to guard various types of actions, there&#8217;s a set of <code>create*</code> static methods to create a <code>Callable</code>, <code>Supplier</code> or <code>Runnable</code>. There&#8217;s also a set of <code>createAsync*</code> static methods to guard asynchronous actions using <code>CompletionStage</code>.</p>
+</div>
+<div class="sect2">
+<h3 id="mutiny_support">Mutiny support</h3>
+<div class="paragraph">
+<p>The <code>smallrye-fault-tolerance-mutiny</code> artifact, also described below in the section on additional async types, contains a <code>MutinyFaultTolerance</code> interface.
+That interface contains <code>create*</code> static methods to guard asynchronous actions that return the Mutiny <code>Uni</code> type.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="events">Events</h3>
+<div class="paragraph">
+<p>The programmatic API has one feature that the declarative API doesn&#8217;t have: ability to observe certain events.
+For example, when configuring a circuit breaker, it is possible to register a callback for circuit breaker state changes or for a situation when an open circuit breaker prevents an invocation.
+When configuring a timeout, it is possible to register a callback for when the invocation times out, etc. etc.
+For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">private static final FaultTolerance&lt;String&gt; guard = FaultTolerance.&lt;String&gt;create()
+    .withTimeout().duration(5, ChronoUnit.SECONDS).onTimeout(() -&gt; ...).done()
+    .build();</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="circuit_breaker_maintenance">Circuit breaker maintenance</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There&#8217;s one exception to the above claim that the declarative API isn&#8217;t able to observe events.
+With this release, <code>CircuitBreakerMaintenance</code> gains a method to observe circuit breaker state changes.
+No other events are exposed to the declarative API at the moment.</p>
+</div>
+<div class="paragraph">
+<p>Note that the programmatic API also has a method to obtain <code>CircuitBreakerMaintenance</code>: <code>FaultTolerance.circuitBreakerMaintenance()</code>.
+This methods returns the same object that you can <code>@Inject</code>, because circuit breakers created by the programmatic API and declarative API are stored in the same registry.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="inspecting_exception_causes">Inspecting exception causes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>@CircuitBreaker</code>, <code>@Fallback</code> and <code>@Retry</code> fault tolerance strategies allow declaring the set of exception types for which the strategy should apply (or be ignored).
+When an exception is thrown, its class is checked for presence in one of these sets, and the strategy behaves accordingly.</p>
+</div>
+<div class="paragraph">
+<p>This works fine, until wrapper exceptions come to play.
+In certain contexts, the true exceptions are often (or always) wrapped into another exception.
+In such situation, configuring when a fault tolerance strategy should apply or be ignored becomes nearly impossible.</p>
+</div>
+<div class="paragraph">
+<p>In this release, SmallRye Fault Tolerance adds a non-standard feature to solve this problem.
+In the <a href="https://smallrye.io/docs/smallrye-fault-tolerance/5.3.0/usage/extra.html#_non_compatible_mode">non-compatible mode</a>, if the class of the thrown exception isn&#8217;t present in either of the two sets, the cause chain of the exception is inspected automatically.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="revamped_async_types_support">Revamped async types support</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>SmallRye Fault Tolerance offers support for more asynchronous types than just MicroProfile Fault Tolerance mandated <code>CompletionStage</code>.
+So far, that support was based on the SmallRye Reactive Converters project, because that offers conversion between <code>CompletionStage</code> and other types.
+Asynchronous implementations of fault tolerance strategies in SmallRye Fault Tolerance are based on <code>CompletionStage</code>, so that seems like a natural fit, but it has one issue.
+In case the other async type is lazy (which is always the case with RxJava, Mutiny or Reactor), resubscription doesn&#8217;t work.</p>
+</div>
+<div class="paragraph">
+<p>In this release, the dependency on SmallRye Reactive Converters is dropped.
+Instead, SmallRye Fault Tolerance has its own set of support libraries for various reactive types.
+These support libraries convert between types lazily, so resubscription works properly.</p>
+</div>
+<div class="paragraph">
+<p>Specifically, there&#8217;s <code>smallrye-fault-tolerance-mutiny</code> for Mutiny and <code>smallrye-fault-tolerance-rxjava3</code> for RxJava 3. Support for RxJava 1, RxJava 2 and Reactor was dropped, but may easily be added back if there&#8217;s a need.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="others">Others</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you use <code>@Fallback</code> with a <code>FallbackHandler</code> class, you might have found that such fallback handler triggers a validation error when guarding methods that declare a primitive return type (or <code>void</code>).
+This has been fixed.
+A <code>FallbackHandler</code> that declares a wrapper type (such as <code>java.lang.Integer</code>) now correctly matches a corresponding primitive type (such as <code>int</code>).</p>
+</div>
+<div class="paragraph">
+<p>Upgrade to 5.3.0 is very much recommended.
+As described above, there are certain new things, so if you encounter any bugs, please let us know in the <a href="https://github.com/smallrye/smallrye-fault-tolerance/issues">issue tracker</a>!
+We&#8217;d be specifically interested in any feedback on the programmatic API.
+This is very new, so you have a unique chance to influence its future!</p>
+</div>
+</div>
+</div>
+  </div>
+</div>
+
+  </div>
+
+  <div class="content project-footer">
+  <div class="footer-section">
+    <div class="logo-wrapper">
+      <a href="/"><img src="/assets/images/smallrye_project_logo.svg" class="project-logo" title="SmallRye"></a>
+    </div>
+  </div>
+  <div class="grid-wrapper">
+    <p class="grid__item width-3-12">SmallRye is open source under <a href='https://www.apache.org/licenses/LICENSE-2.0' target='_blank'>Apache Software License 2.0</a>. <br /><br />This website was built with <a href='https://jekyllrb.com/' target='_blank'>Jekyll</a> is hosted on <a href='https://pages.github.com/' target='_blank'>Github Pages</a> and is completely open source. If you want to make it better, <a href='https://github.com/smallrye/smallrye.github.io' target='_blank'>fork the website</a> and show us what you’ve got.</p>
+
+    
+      <div class="width-1-12 project-links">
+        <span>Navigation</span>
+        <ul class="footer-links width-1-12">
+          
+            <li><a href="/">Home</a></li>
+          
+        </ul>
+      </div>
+    
+      <div class="width-1-12 project-links">
+        <span>Contribute</span>
+        <ul class="footer-links width-1-12">
+          
+            <li><a href="https://twitter.com/smallrye_io">Follow us</a></li>
+          
+            <li><a href="https://github.com/smallrye">GitHub</a></li>
+          
+        </ul>
+      </div>
+    
+      <div class="width-1-12 project-links">
+        <span>Get Help</span>
+        <ul class="footer-links width-1-12">
+          
+            <li><a href="https://quarkusio.zulipchat.com">Chatroom</a></li>
+          
+            <li><a href="https://groups.google.com/d/forum/smallrye">Google&nbsp;Groups</a></li>
+          
+        </ul>
+      </div>
+    
+
+    
+      <div class="width-6-12 more-links">
+        <span>External Links</span>
+        <ul class="footer-links">
+          
+            <li><a href="https://microprofile.io/" target="_blank">Eclipse MicroProfile</a></li>
+          
+            <li><a href="https://github.com/eclipse?utf8=✓&q=microprofile" target="_blank">Eclipse MicroProfile on GitHub</a></li>
+          
+        </ul>
+      </div>
+    
+  </div>
+</div>
+  <div class="content redhat-footer">
+  <div class="grid-wrapper">
+    <span class="licence">
+      <i class="fab fa-creative-commons"></i><i class="fab fa-creative-commons-by"></i> <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">CC by 3.0</a>
+      | <a href="https://www.redhat.com/en/about/privacy-policy">Red Hat Privacy Policy</a>
+    </span>
+    <span class="redhat">
+      a Red Hat sponsored project   
+    </span>
+    <span class="redhat-logo">
+      <a href="https://www.redhat.com/" target="_blank"><img src="/assets/images/redhat_reversed.svg"></a>
+    </span>
+  </div>
+</div>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script type="text/javascript" src="/assets/javascript/mobile-nav.js"></script>
+  <script type="text/javascript" src="/assets/javascript/scroll-down.js"></script>
+  <script type="text/javascript" src="/assets/javascript/satellite.js"></script>
+</body>
+
+</html>

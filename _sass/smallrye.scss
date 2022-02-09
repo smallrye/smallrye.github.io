@@ -175,3 +175,9 @@ table {
     padding: 0 2rem;
   }
 }
+
+code, pre {
+  background-color: $black;
+  color: $code-color;
+  overflow: auto;
+}

@@ -1,0 +1,18 @@
+:page-layout: post
+:page-title: Fault Tolerance 5.3.1
+:page-synopsis: SmallRye Fault Tolerance 5.3.1 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2022-02-10 14:00:00.000 +0100
+:page-author: lthon
+
+= Fault Tolerance 5.3.1
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/5.3.1[release] of SmallRye Fault Tolerance 5.3.1.
+This is a small release with one bug fix.
+It is a safe upgrade for everyone using SmallRye Fault Tolerance 5.3.0.
+
+In link:/blog/fault-tolerance-5-3/[SmallRye Fault Tolerance 5.3], we revamped the support for additional async types.
+During that refactoring, we introduced a bug that manifests in environments with complex classloading requirements, such as WildFly.
+In this release, the bug is fixed.
+
+Additionally, the programmatic API documentation was slightly improved.

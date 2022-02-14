@@ -1,0 +1,16 @@
+:page-layout: post
+:page-title: Fault Tolerance 5.3.2
+:page-synopsis: SmallRye Fault Tolerance 5.3.2 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2022-02-14 17:00:00.000 +0100
+:page-author: lthon
+
+= Fault Tolerance 5.3.2
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/5.3.2[release] of SmallRye Fault Tolerance 5.3.2.
+This is a small release with one bug fix.
+It is a safe upgrade for everyone using SmallRye Fault Tolerance 5.3.1.
+
+In link:/blog/fault-tolerance-5-3/[SmallRye Fault Tolerance 5.3], we revamped the support for additional async types.
+During that refactoring, we introduced a bug that manifests in environments with security manager enabled.
+In this release, the bug is fixed.

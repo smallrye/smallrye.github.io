@@ -1,0 +1,112 @@
+:page-layout: post
+:page-title: SmallRye Fault Tolerance 5.4
+:page-synopsis: SmallRye Fault Tolerance 5.4 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2022-03-31 11:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 5.4
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/5.4.0[release] of {smallrye-ft} 5.4.0.
+This release includes several new features and fixes related to the programmatic API.
+It should be a safe upgrade for everyone using {smallrye-ft} 5.3.x.
+
+== Reusable, preconfigured fault tolerance strategies
+
+In {smallrye-ft} 5.3.0, we link:/blog/fault-tolerance-5-3/[introduced] the programmatic API.
+In this release, we augment that with a declarative way of applying programmatically created fault tolerance!
+This allows centralizing fault tolerance configuration, as well as sharing fault tolerance state, all in a nice declarative fashion consistent with {microprofile-ft}.
+
+Let's demonstrate it with an example.
+First, you have to create a bean of type `FaultTolerance` with an `@Identifier` qualifier:
+
+[source,java]
+----
+@ApplicationScoped
+public class PreconfiguredFaultTolerance {
+    @Produces
+    @Identifier("my-fault-tolerance")
+    public static final FaultTolerance<String> FT = FaultTolerance.<String>create()
+            .withRetry().maxRetries(2).done()
+            .withFallback().handler(() -> "fallback").done()
+            .build();
+}
+----
+
+It is customary to create the bean by declaring a `static` producer field, which is what we've done here.
+
+Once we have that, we can apply `my-fault-tolerance` to synchronous methods that return `String`:
+
+[source,java]
+----
+@ApplicationScoped
+public class MyService {
+    @ApplyFaultTolerance("my-fault-tolerance")
+    public String doSomething() {
+        ...
+    }
+}
+----
+
+See the https://smallrye.io/docs/smallrye-fault-tolerance/5.4.0/usage/extra.html#_reusable_preconfigured_fault_tolerance[documentation] for more information.
+
+== Exception decisions in programmatic API
+
+The circuit breaker, fallback, and retry fault tolerance strategies allow configuring what happens on certain exceptions.
+Both the declarative and programmatic API allow configuring a set of exception classes that are considered expected and unexpected.
+
+With this release, the programmatic API also lets you supply a simple exception predicate, which allows expressing more complex exception decisions.
+For example:
+
+[source, java]
+----
+Callable<String> guarded = FaultTolerance.createCallable(this::action)
+        .withFallback().handler(this::fallback).when(e -> e instanceof RuntimeException).done()
+        .build();
+----
+
+Of course, the value of this approach is that the predicate may be more complex than a simple `instanceof` check.
+
+== Support for Kotlin suspending functions
+
+{smallrye-ft} already supports some asynchronous types on top of the `CompletionStage` type mandated by the {microprofile-ft} specification.
+Specifically, there's support for Mutiny and RxJava 3 and more could easily be added if needed.
+
+In this release of {smallrye-ft}, a new module `smallrye-fault-tolerance-kotlin` is added that provides support for Kotlin `suspend` functions.
+They are also considered asynchronous, so fault tolerance applies across suspension points, like you'd expect.
+
+For example:
+
+[source, java]
+----
+@ApplicationScoped
+open class MyService {
+    @Retry(maxRetries = 2)
+    @Fallback(fallbackMethod = "helloFallback")
+    open suspend fun hello(): String {
+        delay(100)
+        throw IllegalArgumentException()
+    }
+
+    private suspend fun helloFallback(): String {
+        delay(100)
+        return "hello"
+    }
+}
+----
+
+== Others
+
+The {smallrye-ft} documentation of the programmatic API recommends to store `FaultTolerance` instances into `static` fields.
+This has some interesting implications.
+Specifically, the entire fault tolerance chain is built in the static initializer, and that includes looking up several beans from the CDI container and possibly even creating a thread.
+That is problematic in Quarkus when compiling to a native image, because static initialization code is executed during native image build.
+
+In this release of {smallrye-ft}, this problem is fixed.
+Almost all of the initialization is deferred to runtime.
+
+All in all, upgrading to 5.4.0 is very much recommended.
+As described above, there are certain new things, so if you encounter any bugs, please let us know in the https://github.com/smallrye/smallrye-fault-tolerance/issues[issue tracker]!
+We're still very much interested in any feedback on the programmatic API.

@@ -1,0 +1,18 @@
+:page-layout: post
+:page-title: Fault Tolerance 5.4.1
+:page-synopsis: SmallRye Fault Tolerance 5.4.1 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2022-06-28 18:00:00.000 +0100
+:page-author: lthon
+
+= Fault Tolerance 5.4.1
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/5.4.1[release] of SmallRye Fault Tolerance 5.4.1.
+This is a small release with a few improvements.
+It is a safe upgrade for everyone using SmallRye Fault Tolerance 5.4.0.
+
+Some trace-level logging messages were promoted to the debug level, and were enhanced with a description of the guarded method.
+
+For the purpose of upcoming Quarkus dev UI for SmallRye Fault Tolerance, the entire _effective_ fault tolerance configuration is now visible from outside.
+
+Some internal build-related improvements were also made.

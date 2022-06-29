@@ -11,6 +11,9 @@ Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/rele
 This is a small release with a few improvements.
 It is a safe upgrade for everyone using SmallRye Fault Tolerance 5.4.0.
 
+Deployment-time discovery of methods annotated with `@ApplyFaultTolerance` was fixed.
+This doesn't change runtime behavior, because guarded methods that were not discovered during deployment are registered lazily at runtime.
+
 Some trace-level logging messages were promoted to the debug level, and were enhanced with a description of the guarded method.
 
 For the purpose of upcoming Quarkus dev UI for SmallRye Fault Tolerance, the entire _effective_ fault tolerance configuration is now visible from outside.

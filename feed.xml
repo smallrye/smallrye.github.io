@@ -1,4 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2022-03-31T15:07:30+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">SmallRye Fault Tolerance 5.4</title><link href="https://www.smallrye.io/blog/fault-tolerance-5-4/" rel="alternate" type="text/html" title="SmallRye Fault Tolerance 5.4" /><published>2022-03-31T10:00:00+00:00</published><updated>2022-03-31T10:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-5-4</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-5-4/">&lt;div id=&quot;preamble&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2022-06-29T09:58:22+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 5.4.1</title><link href="https://www.smallrye.io/blog/fault-tolerance-5-4-1/" rel="alternate" type="text/html" title="Fault Tolerance 5.4.1" /><published>2022-06-28T17:00:00+00:00</published><updated>2022-06-28T17:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-5-4-1</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-5-4-1/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/5.4.1&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 5.4.1.
+This is a small release with a few improvements.
+It is a safe upgrade for everyone using SmallRye Fault Tolerance 5.4.0.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Some trace-level logging messages were promoted to the debug level, and were enhanced with a description of the guarded method.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;For the purpose of upcoming Quarkus dev UI for SmallRye Fault Tolerance, the entire &lt;em&gt;effective&lt;/em&gt; fault tolerance configuration is now visible from outside.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Some internal build-related improvements were also made.&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Fault Tolerance 5.4</title><link href="https://www.smallrye.io/blog/fault-tolerance-5-4/" rel="alternate" type="text/html" title="Fault Tolerance 5.4" /><published>2022-03-31T10:00:00+00:00</published><updated>2022-03-31T10:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-5-4</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-5-4/">&lt;div id=&quot;preamble&quot;&gt;
 &lt;div class=&quot;sectionbody&quot;&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/5.4.0&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 5.4.0.
@@ -945,17 +958,4 @@ We still intend to work on &lt;code&gt;@FailFast&lt;/code&gt; or &lt;code&gt;@Ad
 You can use the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;SmallRye Fault Tolerance issue tracker&lt;/a&gt;, the &lt;a href=&quot;https://quarkusio.zulipchat.com&quot;&gt;Zulip Chat&lt;/a&gt;, the &lt;a href=&quot;https://gitter.im/smallrye-io/fault-tolerance&quot;&gt;SmallRye Fault Tolerance Gitter&lt;/a&gt;, or the &lt;a href=&quot;mailto:smallrye@googlegroups.com&quot;&gt;SmallRye mailing list&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Fault Tolerance 4.3.1</title><link href="https://www.smallrye.io/blog/fault-tolerance-4-3-1/" rel="alternate" type="text/html" title="Fault Tolerance 4.3.1" /><published>2020-09-29T13:00:00+00:00</published><updated>2020-09-29T13:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-4-3-1</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-4-3-1/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/4.3.1&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 4.3.1.
-This is a small release with a couple of bug fixes and one API deprecation.
-It is a safe upgrade for everyone using SmallRye Fault Tolerance 4.3.0.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;In the previous release, we introduced an experimental API for observing circuit breaker state changes.
-The &lt;code&gt;CircuitBreakerStateChanged&lt;/code&gt; event type is now deprecated and will be removed in a subsequent release.
-At the same time, we will introduce a new API for accessing circuit breaker maintenance features: observing its current state and resetting to the initial state.
-If you want to know more, feel free to watch &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues/280&quot;&gt;issue #280&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Also, to slightly improve quality of life, starting with this release, SmallRye Fault Tolerance will log its version number during boot.&lt;/p&gt;
 &lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry></feed>

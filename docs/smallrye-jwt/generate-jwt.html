@@ -25,7 +25,7 @@
           <a class="navbar-link" href="#">Projects</a>
           <div class="navbar-dropdown">
             <a class="navbar-item" href="../index/index/index.html">Index</a>
-            <a class="navbar-item" href="../smallrye-fault-tolerance/5.4.0/index.html">SmallRye Fault Tolerance</a>
+            <a class="navbar-item" href="../smallrye-fault-tolerance/5.4.1/index.html">SmallRye Fault Tolerance</a>
             <a class="navbar-item" href="../smallrye-health/3.0.1/index.html">SmallRye Health</a>
             <a class="navbar-item" href="index.html">SmallRye JWT</a>
             <a class="navbar-item" href="../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
@@ -337,6 +337,36 @@ Jwt.signAndEncrypt("/claims.json");</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.new-token.override-matching-claims</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Override the existing <code>iss</code> or <code>aud</code> claim values if <code>smallrye.jwt.new-token.issuer</code> or <code>smallrye.jwt.new-token.audience</code> properties are set.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.keystore.type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>JKS</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This property can be used to customize a keystore type if either <code>smallrye.jwt.sign.key.location</code> or <code>smallrye.jwt.encrypt.key.location</code> or both of these properties point to a <code>KeyStore</code> file. If it is not set then the file name will be checked to determine the keystore type before defaulting to <code>JKS</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.keystore.provider</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This property can be used to customize a <code>KeyStore</code> provider if <code>smallrye.jwt.sign.key.location</code> or <code>smallrye.jwt.encrypt.key.location</code> point to a <code>KeyStore</code> file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.keystore.password</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keystore password. If <code>smallrye.jwt.sign.key.location</code> or <code>smallrye.jwt.encrypt.key.location</code> point to a <code>KeyStore</code> file then this property has be set.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.keystore.encrypt.key.alias</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This property has to be set to identify a public encryption key which will be extracted from <code>KeyStore</code> from a matching certificate if <code>smallrye.jwt.encrypt.key.location</code> points to a <code>KeyStore</code> file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.keystore.sign.key.alias</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This property has to be set to identify a private signing key if <code>smallrye.jwt.sign.key.location</code> points to a <code>KeyStore</code> file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.keystore.sign.key.password</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This property may be set if a private signing key&#8217;s password in <code>KeyStore</code> is different to <code>smallrye.jwt.keystore.password</code> when <code>smallrye.jwt.sign.key.location</code> points to a <code>KeyStore</code> file.</p></td>
 </tr>
 </tbody>
 </table>

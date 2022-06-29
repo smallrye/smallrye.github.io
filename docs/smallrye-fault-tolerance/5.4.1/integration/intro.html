@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Introduction :: SmallRye documentation</title>
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">SmallRye documentation</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Projects</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="../../../index/index/index.html">Index</a>
+            <a class="navbar-item" href="../index.html">SmallRye Fault Tolerance</a>
+            <a class="navbar-item" href="../../../smallrye-health/3.0.1/index.html">SmallRye Health</a>
+            <a class="navbar-item" href="../../../smallrye-jwt/index.html">SmallRye JWT</a>
+            <a class="navbar-item" href="../../../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
+          </div>
+        </div>
+        <a class="navbar-item" href="https://smallrye.io/">SmallRye.io main website</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="smallrye-fault-tolerance" data-version="5.4.1">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">SmallRye Fault Tolerance</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Index</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Usage</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../usage/basic.html">Basic Usage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../usage/extra.html">Extra Features</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../usage/programmatic-api.html">Programmatic API</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Integration</span>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="intro.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="thread-pool.html">Thread Pool</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="context-propagation.html">Context Propagation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="opentracing.html">OpenTracing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="event-loop.html">Event Loop</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="async-types.html">Additional Asynchronous Types Integration Concerns</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="kotlin.html">Kotlin Integration Concerns</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="programmatic-api.html">Programmatic API Integration Concerns</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Internals</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../internals/project-structure.html">Project Structure</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../internals/instructions.html">Instructions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../internals/core.html">Fault Tolerance Core</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../internals/config.html">Configuration System</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../internals/logging.html">Logging</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../../index/index/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">SmallRye Fault Tolerance</a></li>
+    <li>Integration</li>
+    <li><a href="intro.html">Introduction</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">5.4.1</button>
+  <div class="version-menu">
+    <a class="version is-current" href="intro.html">5.4.1</a>
+    <a class="version" href="../../5.4.0/integration/intro.html">5.4.0</a>
+    <a class="version" href="../../5.3.2/integration/intro.html">5.3.2</a>
+    <a class="version" href="../../5.3.1/integration/intro.html">5.3.1</a>
+    <a class="version" href="../../5.3.0/integration/intro.html">5.3.0</a>
+    <a class="version" href="../../5.2.1/integration/intro.html">5.2.1</a>
+    <a class="version" href="../../5.2.0/integration/intro.html">5.2.0</a>
+    <a class="version" href="../../5.1.0/integration/intro.html">5.1.0</a>
+    <a class="version" href="../../5.0.0/integration/intro.html">5.0.0</a>
+  </div>
+</div>
+  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-fault-tolerance/blob/5.4.1/doc/modules/ROOT/pages/integration/intro.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Introduction</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>SmallRye Fault Tolerance comprises the following main artifacts:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>io.smallrye:smallrye-fault-tolerance-api</code>: public API for the features provided on top of MicroProfile Fault Tolerance, including a programmatic API;</p>
+</li>
+<li>
+<p><code>io.smallrye:smallrye-fault-tolerance-core</code>: core implementations of fault tolerance strategies;</p>
+</li>
+<li>
+<p><code>io.smallrye:smallrye-fault-tolerance</code>: CDI-based implementation of MicroProfile Fault Tolerance with SmallRye Fault Tolerance extensions, including a programmatic API;</p>
+</li>
+<li>
+<p><code>io.smallrye:smallrye-fault-tolerance-autoconfig-core</code>: runtime part of the SmallRye Fault Tolerance configuration system.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>(There&#8217;s also <code>io.smallrye:smallrye-fault-tolerance-autoconfig-processor</code>, but that is only used during SmallRye Fault Tolerance build and isn&#8217;t required at runtime.)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These artifacts must be always present, together with the following dependencies:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Jakarta CDI, Annotations and Interceptors API;</p>
+</li>
+<li>
+<p><code>org.eclipse.microprofile.fault-tolerance:microprofile-fault-tolerance-api</code>;</p>
+</li>
+<li>
+<p><code>org.eclipse.microprofile.config:microprofile-config-api</code> and some implementation;</p>
+</li>
+<li>
+<p><code>org.eclipse.microprofile.metrics:microprofile-metrics-api</code> and some implementation (implementation is only required if fault tolerance metrics are enabled);</p>
+</li>
+<li>
+<p><code>org.jboss.logging:jboss-logging</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Some other artifacts are provided to facilitate additional integrations.
+These are described in the subsequent sections.</p>
+</div>
+<div class="paragraph">
+<p>Most of the integration is performed automatically by the CDI Portable Extension present in SmallRye Fault Tolerance: <code>io.smallrye.faulttolerance.FaultToleranceExtension</code>.
+Make sure the extension is active.
+The remaining integration concerns are described in the following sections:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="thread-pool.html" class="page">providing a thread pool</a> for <code>@Asynchronous</code> methods and other asynchronous tasks;</p>
+</li>
+<li>
+<p><a href="context-propagation.html" class="page">enabling Context Propagation</a> for <code>@Asynchronous</code> methods;</p>
+</li>
+<li>
+<p><a href="opentracing.html" class="page">enabling OpenTracing integration</a> with Context Propagation;</p>
+</li>
+<li>
+<p><a href="event-loop.html" class="page">integrating an event loop</a> for non-blocking method invocations;</p>
+</li>
+<li>
+<p><a href="async-types.html" class="page">integrating additional types</a> for asynchronous invocations;</p>
+</li>
+<li>
+<p><a href="kotlin.html" class="page">integrating Kotlin support</a> for <code>suspend</code> functions;</p>
+</li>
+<li>
+<p><a href="programmatic-api.html" class="page">integrating the programmatic API</a> that SmallRye Fault Tolerance provides.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_standalone_implementation_of_the_programmatic_api"><a class="anchor" href="#_standalone_implementation_of_the_programmatic_api"></a>Standalone Implementation of the Programmatic API</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A completely standalone implementation of the programmatic API exists in the <code>io.smallrye:smallrye-fault-tolerance-standalone</code> artifact.
+This is supposed to be used in a non-CDI environment.
+Runtimes that integrate SmallRye Fault Tolerance typically do so using CDI, and so should ignore this artifact.</p>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the SmallRye Antora UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

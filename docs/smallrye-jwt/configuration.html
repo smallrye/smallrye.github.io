@@ -25,7 +25,7 @@
           <a class="navbar-link" href="#">Projects</a>
           <div class="navbar-dropdown">
             <a class="navbar-item" href="../index/index/index.html">Index</a>
-            <a class="navbar-item" href="../smallrye-fault-tolerance/5.4.0/index.html">SmallRye Fault Tolerance</a>
+            <a class="navbar-item" href="../smallrye-fault-tolerance/5.4.1/index.html">SmallRye Fault Tolerance</a>
             <a class="navbar-item" href="../smallrye-health/3.0.1/index.html">SmallRye Health</a>
             <a class="navbar-item" href="index.html">SmallRye JWT</a>
             <a class="navbar-item" href="../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
@@ -300,6 +300,11 @@ precedence:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Config property allows for an external or internal location of Private Decryption Key to be specified. This property is deprecated, use <code>mp.jwt.decrypt.key.location</code>.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.decrypt.key</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Decryption key supplied as a string.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.decrypt.algorithm</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>RSA_OAEP</code></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Decryption algorithm.</p></td>
@@ -308,6 +313,66 @@ precedence:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.token.decryption.kid</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Decryption Key identifier. If it is set then the decryption JWK key as well every JWT token must have a matching <code>kid</code> header.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.client.tls.certificate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TLS trusted certificate which may need to be configured if the keys have to be fetched over <code>HTTPS</code>. If this property is set then the <code>smallrye.jwt.client.tls.certificate.path</code> property will be ignored.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.client.tls.certificate.path</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Path to TLS trusted certificate which may need to be configured if the keys have to be fetched over <code>HTTPS</code>. This property will be ignored if the <code>smallrye.jwt.client.tls.certificate</code> property is set.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.client.tls.trust-all</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Trust all the hostnames. If the keys have to be fetched over <code>HTTPS</code> and this property is set to <code>true</code> then all the hostnames are trusted by default.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.client.tls.trusted.hosts</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set of trusted hostnames. If the keys have to be fetched over <code>HTTPS</code> and <code>smallrye.jwt.client.tls.trust-all</code> is set to <code>false</code> then then this property can be used to configure the trusted hostnames.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.http.proxy.host</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTTP proxy host.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.http.proxy.port</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>80</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTTP proxy port.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.keystore.type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>JKS</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This property can be used to customize a keystore type if either <code>mp.jwt.verify.publickey.location</code> or mp.jwt.decrypt.key.location` points to a <code>KeyStore</code> file. If it is not set then the file name will be checked to determine the keystore type before defaulting to <code>JKS</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.keystore.provider</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This property can be used to customize a <code>KeyStore</code> provider if <code>mp.jwt.verify.publickey.location</code> or <code>mp.jwt.decrypt.key.location</code> points to a <code>KeyStore</code> file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.keystore.password</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keystore password. If <code>mp.jwt.verify.publickey.location</code> or <code>mp.jwt.decrypt.key.location</code> then this property has be set.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.keystore.verify.key.alias</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This property has to be set to identify a public verification key which will be extracted from <code>KeyStore</code> from a matching certificate if <code>mp.jwt.verify.publickey.location</code> points to a <code>KeyStore</code> file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.keystore.decrypt.key.alias</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This property has to be set to identify a private decryption key if <code>mp.jwt.decrypt.key.location</code> points to a <code>KeyStore</code> file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.keystore.decrypt.key.password</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This property may be set if a private decryption key&#8217;s password in <code>KeyStore</code> is different to <code>smallrye.jwt.keystore.password</code> when <code>mp.jwt.decrypt.key.location</code> points to a <code>KeyStore</code> file.</p></td>
 </tr>
 </tbody>
 </table>

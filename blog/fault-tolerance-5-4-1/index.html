@@ -58,6 +58,10 @@ This is a small release with a few improvements.
 It is a safe upgrade for everyone using SmallRye Fault Tolerance 5.4.0.</p>
 </div>
 <div class="paragraph">
+<p>Deployment-time discovery of methods annotated with <code>@ApplyFaultTolerance</code> was fixed.
+This doesn&#8217;t change runtime behavior, because guarded methods that were not discovered during deployment are registered lazily at runtime.</p>
+</div>
+<div class="paragraph">
 <p>Some trace-level logging messages were promoted to the debug level, and were enhanced with a description of the guarded method.</p>
 </div>
 <div class="paragraph">

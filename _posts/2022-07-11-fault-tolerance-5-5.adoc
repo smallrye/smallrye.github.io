@@ -1,0 +1,42 @@
+:page-layout: post
+:page-title: Fault Tolerance 5.5
+:page-synopsis: SmallRye Fault Tolerance 5.5 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2022-07-11 09:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+:mp-metrics: MicroProfile Metrics
+:mmeter: Micrometer
+
+= Fault Tolerance 5.5
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/5.5.0[release] of {smallrye-ft} 5.5.0.
+This release includes one new feature: support for {mmeter}.
+It is a safe upgrade for everyone using {smallrye-ft} 5.4.x, but note that transitive dependencies have changed a little.
+See below for more information.
+
+== Micrometer
+
+{smallrye-ft} has always supported {mp-metrics}.
+In this version, we add support for {mmeter}.
+
+The set of metrics emitted to Micrometer is the same as the set of metrics emitted to MicroProfile Metrics, using the same metric names and tags.
+Metric types are also mapped as closely as possible.
+More information about that can be found in the https://smallrye.io/docs/smallrye-fault-tolerance/5.5.0/usage/basic.html#_metrics[documentation].
+
+Support for {mmeter} is added mainly for Quarkus, which strives to replace {mp-metrics} with {mmeter}.
+Note that Quarkus does its own integration of {smallrye-ft}.
+The CDI Portable Extension present in {smallrye-ft}, which other integrators use, still assumes usage of {mp-metrics}, and does the integration accordingly.
+That is, if you integrate {smallrye-ft} and are fine with using {mp-metrics}, you don't have to do anything (except managing dependencies correctly, see below).
+
+More information about metrics integration is available in the https://smallrye.io/docs/smallrye-fault-tolerance/5.5.0/integration/metrics.html[documentation].
+
+=== Transitive dependencies
+
+Note that in previous versions, depending on {smallrye-ft} brought in the {mp-metrics} API artifact, `org.eclipse.microprofile.metrics:microprofile-metrics-api`, transitively.
+With the addition of {mmeter} support, this is no longer true.
+Depending on {smallrye-ft} 5.5 no longer brings in any metrics dependency.
+
+Dependency management has always been a responsibility of integrators.
+They now have to make sure the correct metrics API dependency is present, which should typically be rather straightforward.

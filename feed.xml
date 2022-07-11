@@ -1,4 +1,48 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2022-06-29T16:03:02+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 5.4.1</title><link href="https://www.smallrye.io/blog/fault-tolerance-5-4-1/" rel="alternate" type="text/html" title="Fault Tolerance 5.4.1" /><published>2022-06-28T17:00:00+00:00</published><updated>2022-06-28T17:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-5-4-1</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-5-4-1/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2022-07-11T09:15:58+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 5.5</title><link href="https://www.smallrye.io/blog/fault-tolerance-5-5/" rel="alternate" type="text/html" title="Fault Tolerance 5.5" /><published>2022-07-11T08:00:00+00:00</published><updated>2022-07-11T08:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-5-5</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-5-5/">&lt;div id=&quot;preamble&quot;&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/5.5.0&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 5.5.0.
+This release includes one new feature: support for Micrometer.
+It is a safe upgrade for everyone using SmallRye Fault Tolerance 5.4.x, but note that transitive dependencies have changed a little.
+See below for more information.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;micrometer&quot;&gt;Micrometer&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;SmallRye Fault Tolerance has always supported MicroProfile Metrics.
+In this version, we add support for Micrometer.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The set of metrics emitted to Micrometer is the same as the set of metrics emitted to MicroProfile Metrics, using the same metric names and tags.
+Metric types are also mapped as closely as possible.
+More information about that can be found in the &lt;a href=&quot;https://smallrye.io/docs/smallrye-fault-tolerance/5.5.0/usage/basic.html#_metrics&quot;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Support for Micrometer is added mainly for Quarkus, which strives to replace MicroProfile Metrics with Micrometer.
+Note that Quarkus does its own integration of SmallRye Fault Tolerance.
+The CDI Portable Extension present in SmallRye Fault Tolerance, which other integrators use, still assumes usage of MicroProfile Metrics, and does the integration accordingly.
+That is, if you integrate SmallRye Fault Tolerance and are fine with using MicroProfile Metrics, you don&amp;#8217;t have to do anything (except managing dependencies correctly, see below).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;More information about metrics integration is available in the &lt;a href=&quot;https://smallrye.io/docs/smallrye-fault-tolerance/5.5.0/integration/metrics.html&quot;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;transitive_dependencies&quot;&gt;Transitive dependencies&lt;/h3&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Note that in previous versions, depending on SmallRye Fault Tolerance brought in the MicroProfile Metrics API artifact, &lt;code&gt;org.eclipse.microprofile.metrics:microprofile-metrics-api&lt;/code&gt;, transitively.
+With the addition of Micrometer support, this is no longer true.
+Depending on SmallRye Fault Tolerance 5.5 no longer brings in any metrics dependency.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Dependency management has always been a responsibility of integrators.
+They now have to make sure the correct metrics API dependency is present, which should typically be rather straightforward.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Fault Tolerance 5.4.1</title><link href="https://www.smallrye.io/blog/fault-tolerance-5-4-1/" rel="alternate" type="text/html" title="Fault Tolerance 5.4.1" /><published>2022-06-28T17:00:00+00:00</published><updated>2022-06-28T17:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-5-4-1</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-5-4-1/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/5.4.1&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 5.4.1.
 This is a small release with a few improvements.
 It is a safe upgrade for everyone using SmallRye Fault Tolerance 5.4.0.&lt;/p&gt;
@@ -745,221 +789,6 @@ We now run tests with:&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Upgrade to 5.1.0 is therefore very much recommended!&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Fault Tolerance 5.0</title><link href="https://www.smallrye.io/blog/fault-tolerance-5-0/" rel="alternate" type="text/html" title="Fault Tolerance 5.0" /><published>2021-01-18T08:00:00+00:00</published><updated>2021-01-18T08:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-5-0</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-5-0/">&lt;div id=&quot;preamble&quot;&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Roughly a year ago, we &lt;a href=&quot;/blog/fault-tolerance-4-0/&quot;&gt;announced&lt;/a&gt; the release of SmallRye Fault Tolerance 4.0, the new implementation of Eclipse MicroProfile Fault Tolerance.
-Today, we bring you version 5.0, an evolution of the 4.x stream that fully implements MicroProfile Fault Tolerance 3.0 and brings a lot of improvements and even new features.
-These new features are not present in the MicroProfile Fault Tolerance specification, but were requested by users, especially in the Quarkus community.
-In addition, the API for integrators has been simplified significantly, and the first version of &lt;a href=&quot;https://smallrye.io/docs/smallrye-fault-tolerance/5.0.0/index.html&quot;&gt;documentation&lt;/a&gt; is also ready.
-Let&amp;#8217;s take a look.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;microprofile_fault_tolerance_3_0&quot;&gt;MicroProfile Fault Tolerance 3.0&lt;/h2&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;From user&amp;#8217;s perspective, MicroProfile Fault Tolerance 3.0 is a relatively small release, including just two important changes: metrics overhaul, and lifecycle specification for circuit breakers and bulkheads.
-It is a major release because the metrics changes are very much backwards incompatible, so pay attention to that.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect2&quot;&gt;
-&lt;h3 id=&quot;metrics_overhaul&quot;&gt;Metrics overhaul&lt;/h3&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The fault tolerance metrics now take advantage of tags.
-Most importantly, the full method name used to be a part of the metric name, but it&amp;#8217;s now a metric tag.
-For example, suppose we have a method guarded with the &lt;code&gt;@Timeout&lt;/code&gt; strategy:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;listingblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;java&quot; class=&quot;language-java hljs&quot;&gt;@Singleton
-public class MyService {
-    @Timeout
-    public String hello() {
-        ...
-    }
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Previously, if you wanted to know how many times this method timed out, you&amp;#8217;d have to look at the metric called &lt;code&gt;ft.com.example.MyService.hello.timeout.callsTimedOut.total&lt;/code&gt;.
-With MicroProfile Fault Tolerance 3.0, you need to look at &lt;code&gt;ft.timeout.calls.total{method=&quot;com.example.MyService.hello&quot;, timedOut=&quot;true&quot;}&lt;/code&gt; instead.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;You can find all the new metric names and possible tags in the &lt;a href=&quot;https://download.eclipse.org/microprofile/microprofile-fault-tolerance-3.0/microprofile-fault-tolerance-spec-3.0.html#_integration_with_microprofile_metrics&quot;&gt;MicroProfile Fault Tolerance 3.0 specification&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Also, fault tolerance metrics moved from the &lt;code&gt;application&lt;/code&gt; scope to &lt;code&gt;base&lt;/code&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect2&quot;&gt;
-&lt;h3 id=&quot;lifecycle_specification_for_circuit_breakers_and_bulkheads&quot;&gt;Lifecycle specification for circuit breakers and bulkheads&lt;/h3&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Previously, MicroProfile Fault Tolerance didn&amp;#8217;t specify lifecycle for stateful fault tolerance strategies, that is, circuit breakers and bulkheads.
-This becomes important when you have &lt;code&gt;@RequestScoped&lt;/code&gt; beans, such as:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;listingblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;java&quot; class=&quot;language-java hljs&quot;&gt;@RequestScoped
-public class MyService {
-    @CircuitBreaker
-    public String hello() {
-        ...
-    }
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;You get a new instance of the bean for each request, and the MicroProfile Fault Tolerance specification didn&amp;#8217;t say whether all such instances share the same circuit breaker for the &lt;code&gt;hello&lt;/code&gt; method, or if each instance has its own.
-The specification now mandates that all instances share the same circuit breaker.
-Bulkheads behave identically.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;This behavior was actually implemented by SmallRye Fault Tolerance since the beginning, so no behavioral change for you.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;smallrye_fault_tolerance_improvements&quot;&gt;SmallRye Fault Tolerance improvements&lt;/h2&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The SmallRye Fault Tolerance 5.0 release brings a lof of additional improvements, both internal and user-facing.
-Changes that concern SmallRye Fault Tolerance integrators are described in more detail in a subsequent section.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect2&quot;&gt;
-&lt;h3 id=&quot;circuit_breaker_maintenance&quot;&gt;Circuit breaker maintenance&lt;/h3&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;We have previously &lt;a href=&quot;/blog/fault-tolerance-4-2-and-4-3/&quot;&gt;introduced&lt;/a&gt; a way to observe circuit breaker state changes, using the &lt;code&gt;CircuitBreakerStateChanged&lt;/code&gt; CDI event.
-This was subsequently &lt;a href=&quot;/blog/fault-tolerance-4-3-1/&quot;&gt;deprecated&lt;/a&gt;, because we found a better way.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;In this release, the &lt;code&gt;CircuitBreakerStateChanged&lt;/code&gt; CDI event is removed, and a new API for circuit breaker maintenance is introduced.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Circuit breakers can now be given a name using the &lt;code&gt;@CircuitBreakerName&lt;/code&gt; annotation.
-Afterwards, you can &lt;code&gt;@Inject&lt;/code&gt; a &lt;code&gt;CircuitBreakerMaintenance&lt;/code&gt; and use its &lt;code&gt;currentState&lt;/code&gt; method to obtain current status of the circuit breaker.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;In addition, &lt;code&gt;CircuitBreakerMaintenance&lt;/code&gt; also allows you to reset any given named circuit breaker (&lt;code&gt;reset&lt;/code&gt;), or all circuit breakers (&lt;code&gt;resetAll&lt;/code&gt;), to the initial state.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Read the &lt;a href=&quot;https://smallrye.io/docs/smallrye-fault-tolerance/5.0.0/usage/extra.html#_circuit_breaker_maintenance&quot;&gt;documentation&lt;/a&gt; for more information and examples.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect2&quot;&gt;
-&lt;h3 id=&quot;blocking_and_nonblocking&quot;&gt;&lt;code&gt;@Blocking&lt;/code&gt; and &lt;code&gt;@NonBlocking&lt;/code&gt;&lt;/h3&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;In addition to the MicroProfile Fault Tolerance &lt;code&gt;@Asynchronous&lt;/code&gt; annotation, we also introduce support for the &lt;code&gt;@Blocking&lt;/code&gt; and &lt;code&gt;@NonBlocking&lt;/code&gt; annotations from SmallRye Common.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;&lt;code&gt;@Blocking&lt;/code&gt; means that the annotated method blocks and hence its execution must be offloaded to another thread.
-This is basically equivalent to &lt;code&gt;@Asynchronous&lt;/code&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;On the other hand, &lt;code&gt;@NonBlocking&lt;/code&gt; means that the annotated method doesn&amp;#8217;t block and hence execution &lt;em&gt;doesn&amp;#8217;t&lt;/em&gt; have to be moved to another thread, yet all asynchronous fault tolerance behaviors are still supported.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Note that these annotations are only taken into account if the annotated method also applies some other fault tolerance strategy, such as &lt;code&gt;@Fallback&lt;/code&gt; or &lt;code&gt;@Retry&lt;/code&gt;, &lt;em&gt;and&lt;/em&gt; if the method returns &lt;code&gt;CompletionStage&lt;/code&gt; (or some of the additional asynchronous types as described below).
-If there&amp;#8217;s no fault tolerance annotation, or if the method doesn&amp;#8217;t return &lt;code&gt;CompletionStage&lt;/code&gt;, SmallRye Fault Tolerance will ignore the &lt;code&gt;@Blocking&lt;/code&gt; and &lt;code&gt;@NonBlocking&lt;/code&gt; annotations completely.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Read the &lt;a href=&quot;https://smallrye.io/docs/smallrye-fault-tolerance/5.0.0/usage/extra.html#blocking-nonblocking&quot;&gt;documentation&lt;/a&gt; for more information and examples.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect2&quot;&gt;
-&lt;h3 id=&quot;additional_asynchronous_types&quot;&gt;Additional asynchronous types&lt;/h3&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;In addition to &lt;code&gt;CompletionStage&lt;/code&gt;, SmallRye Fault Tolerance now supports additional asynchronous types from libraries such as RxJava, Mutiny or Reactor.
-Note that only single-valued types, such as &lt;code&gt;Single&lt;/code&gt; or &lt;code&gt;Uni&lt;/code&gt;, are supported; stream-like types are not, because their semantics can&amp;#8217;t be easily expressed in terms of &lt;code&gt;CompletionStage&lt;/code&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;This support is based on the &lt;a href=&quot;https://github.com/smallrye/smallrye-reactive-utils/tree/main/reactive-converters&quot;&gt;SmallRye Reactive Converters&lt;/a&gt; project, so you have to make sure that the corresponding converter library is present.
-Integrators may include some converters by default if they choose so.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Read the &lt;a href=&quot;https://smallrye.io/docs/smallrye-fault-tolerance/5.0.0/usage/extra.html#_additional_asynchronous_types&quot;&gt;documentation&lt;/a&gt; for more information and examples.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect2&quot;&gt;
-&lt;h3 id=&quot;other_improvements&quot;&gt;Other improvements&lt;/h3&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Exception handling in half-open circuit breakers was fixed.
-Previously, half-open circuit breakers would treat all exceptions as failures, which is wrong.
-Even in the half-open state, circuit breakers have to consider the &lt;code&gt;failOn&lt;/code&gt; and &lt;code&gt;skipOn&lt;/code&gt; configuration.
-This bug was not caught, because the MicroProfile Fault Tolerance TCK doesn&amp;#8217;t have a test.
-That is something we are also going to fix.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Circuit breakers were also improved to reject excess attempts in the half-open state.
-Previously, half-open circuit breakers would allow all invocations to go through, which kinda defeats the purpose of the half-open state.
-This was improved to only allow the first &lt;code&gt;successThreshold&lt;/code&gt; invocations (also called &quot;probe invocations&quot;); the excess ones are outright rejected.
-It is only after moving to the closed state when all invocations are allowed.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;All &lt;code&gt;CompletionStage&lt;/code&gt; fault tolerance strategies were examined and improved to avoid premature thread offload.
-This was required for the &lt;code&gt;@NonBlocking&lt;/code&gt; support described above, but it&amp;#8217;s also an important optimization.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Thread pool usage was radically improved.
-Previously, SmallRye Fault Tolerance would use 1 thread pool for executing &lt;code&gt;@Asynchronous&lt;/code&gt; methods, 1 thread pool for watching for timeouts, and 1 thread pool for each thread pool style bulkhead.
-Now, SmallRye Fault Tolerance uses a single thread pool for everything.
-Thread pool style bulkheads were also significantly optimized.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The metrics subsystem was completely rewritten.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Trace logging has been added for all core implementations of fault tolerance strategies.
-We also started using &lt;a href=&quot;https://jboss-logging.github.io/jboss-logging-tools/&quot;&gt;JBoss Logging Tools&lt;/a&gt; to generate logger implementations.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;integration_changes&quot;&gt;Integration changes&lt;/h2&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;How SmallRye Fault Tolerance can be integrated into a runtime has changed in two important ways: the thread pool integration is now based on CDI, and some additional dependencies are required.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Previously, the thread pool integration was based on &lt;code&gt;ServiceLoader&lt;/code&gt;.
-Integrators had to provide implementation of the &lt;code&gt;ExecutorFactory&lt;/code&gt; interface, which allowed customizing how all the different thread pools are created.
-With the 5.0 release, SmallRye Fault Tolerance no longer insists on creating its own thread pools.
-Instead, it works with a single thread pool and expects integrator to provide it via CDI.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;To do that, integrators should provide a CDI bean implementing the &lt;code&gt;AsyncExecutorProvider&lt;/code&gt; interface.
-This implementation should be &lt;code&gt;@Singleton&lt;/code&gt;, must be marked as alternative and selected globally for the application.
-The interface has one method that returns the thread pool which the integrator desires to use for fault tolerance.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;If the integrator doesn&amp;#8217;t want to manage their own thread pool for fault tolerance, they can subclass &lt;code&gt;DefaultAsyncExecutorProvider&lt;/code&gt;.
-This at least allows customizing the &lt;code&gt;ThreadFactory&lt;/code&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;As described above, the SmallRye Reactive Converters project is used to add support for additional asynchronous types.
-This means that SmallRye Fault Tolerance requires the &lt;code&gt;io.smallrye.reactive:smallrye-reactive-converter-api&lt;/code&gt; artifact to be present.
-Presence of Reactive Converter API implementations is optional, but the API itself is mandatory.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Read the &lt;a href=&quot;https://smallrye.io/docs/smallrye-fault-tolerance/5.0.0/integration/intro.html&quot;&gt;integration documentation&lt;/a&gt; for more information.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Looking back at the &lt;a href=&quot;/blog/fault-tolerance-4-0/&quot;&gt;4.0 announcement&lt;/a&gt;, we have since implemented almost all the planned improvements in SmallRye Fault Tolerance internals.
-On the other hand, the user-facing improvements we planned had to be postponed&amp;#8201;&amp;#8212;&amp;#8201;but we implemented other user-facing improvements instead.
-We still intend to work on &lt;code&gt;@FailFast&lt;/code&gt; or &lt;code&gt;@AdaptiveBulkhead&lt;/code&gt;, but feature requests or bug reports by actual users will always have priority.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;With that in mind, please don&amp;#8217;t hesitate to get in touch.
-You can use the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;SmallRye Fault Tolerance issue tracker&lt;/a&gt;, the &lt;a href=&quot;https://quarkusio.zulipchat.com&quot;&gt;Zulip Chat&lt;/a&gt;, the &lt;a href=&quot;https://gitter.im/smallrye-io/fault-tolerance&quot;&gt;SmallRye Fault Tolerance Gitter&lt;/a&gt;, or the &lt;a href=&quot;mailto:smallrye@googlegroups.com&quot;&gt;SmallRye mailing list&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry></feed>

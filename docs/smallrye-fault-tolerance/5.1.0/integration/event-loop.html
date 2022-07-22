@@ -12,25 +12,37 @@
 <header class="header">
   <nav class="navbar">
     <div class="navbar-brand">
-      <a class="navbar-item" href="../../..">SmallRye documentation</a>
+      <button class="nav-toggle"></button>
+
+      <a class="navbar-item title" href="../index.html">SmallRye Fault Tolerance</a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <span class="navbar-link">5.1.0</span>
+        <div class="navbar-dropdown navbar-menu">
+            <a class="navbar-item " href="../../5.5.0/index.html">5.5.0</a>
+            <a class="navbar-item " href="../../5.4.1/index.html">5.4.1</a>
+            <a class="navbar-item " href="../../5.4.0/index.html">5.4.0</a>
+            <a class="navbar-item " href="../../5.3.2/index.html">5.3.2</a>
+            <a class="navbar-item " href="../../5.3.1/index.html">5.3.1</a>
+            <a class="navbar-item " href="../../5.3.0/index.html">5.3.0</a>
+            <a class="navbar-item " href="../../5.2.1/index.html">5.2.1</a>
+            <a class="navbar-item " href="../../5.2.0/index.html">5.2.0</a>
+            <a class="navbar-item  is-current" href="../index.html">5.1.0</a>
+            <a class="navbar-item " href="../../5.0.0/index.html">5.0.0</a>
+        </div>
+      </div>
+
+
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
         <span></span>
       </button>
     </div>
+
     <div id="topbar-nav" class="navbar-menu">
       <div class="navbar-end">
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="#">Projects</a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item" href="../../../index/index/index.html">Index</a>
-            <a class="navbar-item" href="../../5.5.0/index.html">SmallRye Fault Tolerance</a>
-            <a class="navbar-item" href="../../../smallrye-health/3.0.1/index.html">SmallRye Health</a>
-            <a class="navbar-item" href="../../../smallrye-jwt/index.html">SmallRye JWT</a>
-            <a class="navbar-item" href="../../../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
-          </div>
-        </div>
+
         <a class="navbar-item" href="https://smallrye.io/">SmallRye.io main website</a>
       </div>
     </div>
@@ -42,57 +54,53 @@
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="../index.html">SmallRye Fault Tolerance</a></h3>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="0">
-<ul class="nav-list">
-  <li class="nav-item" data-depth="1">
+<ul class="nav-list nav-list-level-0">
+  <li class="nav-item nav-item-level-0">
+<ul class="nav-list nav-list-level-1">
+  <li class="nav-item nav-item-level-1">
     <a class="nav-link" href="../index.html">Index</a>
   </li>
-  <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
+  <li class="nav-item nav-item-level-1">
     <span class="nav-text">Usage</span>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
+<ul class="nav-list nav-list-level-2">
+  <li class="nav-item nav-item-level-2">
     <a class="nav-link" href="../usage/basic.html">Basic Usage</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item nav-item-level-2">
     <a class="nav-link" href="../usage/extra.html">Extra Features</a>
   </li>
 </ul>
   </li>
-  <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
+  <li class="nav-item nav-item-level-1">
     <span class="nav-text">Integration</span>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
+<ul class="nav-list nav-list-level-2">
+  <li class="nav-item nav-item-level-2">
     <a class="nav-link" href="intro.html">Introduction</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item nav-item-level-2">
     <a class="nav-link" href="thread-pool.html">Thread Pool</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item nav-item-level-2">
     <a class="nav-link" href="context-propagation.html">Context Propagation</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item nav-item-level-2">
     <a class="nav-link" href="opentracing.html">OpenTracing</a>
   </li>
 </ul>
   </li>
-  <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
+  <li class="nav-item nav-item-level-1">
     <span class="nav-text">Internals</span>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
+<ul class="nav-list nav-list-level-2">
+  <li class="nav-item nav-item-level-2">
     <a class="nav-link" href="../internals/project-structure.html">Project Structure</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item nav-item-level-2">
     <a class="nav-link" href="../internals/instructions.html">Instructions</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item nav-item-level-2">
     <a class="nav-link" href="../internals/core.html">Fault Tolerance Core</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item nav-item-level-2">
     <a class="nav-link" href="../internals/logging.html">Logging</a>
   </li>
 </ul>
@@ -106,37 +114,14 @@
   </aside>
 </div>
 <main class="article">
-<div class="toolbar" role="navigation">
-<button class="nav-toggle"></button>
-  <a href="../../../index/index/index.html" class="home-link"></a>
-<nav class="breadcrumbs" aria-label="breadcrumbs">
-  <ul>
-    <li><a href="../index.html">SmallRye Fault Tolerance</a></li>
-    <li><a href="event-loop.html">Event Loop</a></li>
-  </ul>
-</nav>
-<div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">5.1.0</button>
-  <div class="version-menu">
-    <a class="version" href="../../5.5.0/integration/event-loop.html">5.5.0</a>
-    <a class="version" href="../../5.4.1/integration/event-loop.html">5.4.1</a>
-    <a class="version" href="../../5.4.0/integration/event-loop.html">5.4.0</a>
-    <a class="version" href="../../5.3.2/integration/event-loop.html">5.3.2</a>
-    <a class="version" href="../../5.3.1/integration/event-loop.html">5.3.1</a>
-    <a class="version" href="../../5.3.0/integration/event-loop.html">5.3.0</a>
-    <a class="version" href="../../5.2.1/integration/event-loop.html">5.2.1</a>
-    <a class="version" href="../../5.2.0/integration/event-loop.html">5.2.0</a>
-    <a class="version is-current" href="event-loop.html">5.1.0</a>
-    <a class="version is-missing" href="../../5.0.0/index.html">5.0.0</a>
-  </div>
-</div>
-  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-fault-tolerance/blob/5.1.0/doc/modules/ROOT/pages/integration/event-loop.adoc">Edit this Page</a></div>
-  </div>
   <div class="content">
-<aside class="toc sidebar" data-title="Contents" data-levels="2">
+<aside class="toc sidebar" data-title="Table of contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
+  <a href="https://github.com/smallrye/smallrye-fault-tolerance/blob/5.1.0/doc/modules/ROOT/pages/integration/event-loop.adoc" class="edit-this-page" title="Edit this page">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
 <h1 class="page">Event Loop</h1>
 <div id="preamble">
 <div class="sectionbody">
@@ -212,8 +197,13 @@ That is, the artifact should be treated as opaque, no guarantees about its inter
 </main>
 </div>
 <footer class="footer">
-  <p>This page was built using the SmallRye Antora UI.</p>
-  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+  <p>
+    Sponsored by <a href="https://www.redhat.com"><img style="vertical-align: middle; height: 2.5em;" src="../../../_/img/redhat.svg" alt="Red Hat"></a>
+  </p>
+  <p>
+    Made with <a href="https://github.com/smallrye/smallrye-antora-ui">SmallRye Antora UI</a>, which is licensed under the MPL-2.0 license.
+    Includes portions of <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>, which is licensed under the MIT license.
+  </p>
 </footer>
 <script src="../../../_/js/site.js"></script>
 <script async src="../../../_/js/vendor/highlight.js"></script>

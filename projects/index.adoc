@@ -1,6 +1,7 @@
 :page-layout: base
 :github: https://github.com
-:smallrye: {github}/smallrye/smallrye
+:smallrye-base: {github}/smallrye
+:smallrye: {smallrye-base}/smallrye
 :microprofile: {github}/eclipse/microprofile
 
 == Eclipse MicroProfile Platform
@@ -23,6 +24,7 @@ link:{smallrye}-graphql[SmallRye GraphQL]:: An implementation of link:{microprof
 
 == SmallRye Standalone
 
+link:{smallrye-base}/jandex[Jandex]:: Space efficient Java class file indexer and offline reflection library
 link:{smallrye}-common[SmallRye Common]:: Common utilities for SmallRye projects and maybe more
 link:{smallrye}-reactive-utils[SmallRye Reactive Utils]:: Helps the development of Reactive Applications
 link:{smallrye}-opentelemetry[SmallRye Open Telemetry]:: Integration of https://opentelemetry.io[OpenTelemetry] in MicroProfile and SmallRye

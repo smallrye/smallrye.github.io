@@ -1,0 +1,308 @@
+:page-layout: post
+:page-title: Jandex 3.0.0
+:page-synopsis: Jandex found a new home in SmallRye and version 3.0.0 is available!
+:page-tags: [announcement]
+:page-date: 2022-08-25 20:00:00.000 +0100
+:page-author: lthon
+
+= Jandex 3.0.0
+
+Jandex is a space efficient Java class file indexer and offline reflection library.
+For many years, it lived in the WildFly GitHub organization, as it was originally written for WildFly (actually for JBoss AS 7, WildFly's predecessor).
+Recently, Quarkus accelerated Jandex usage outside of WildFly, prompting for higher pace of bug fixes and new features, and we felt that WildFly is no longer the best home for Jandex.
+With a hint of sadness, we bid farewell to WildFly (you've been the best for long!) and are proud to announce that we settle comfortably in the SmallRye space.
+
+SmallRye started as a set of implementations of MicroProfile specifications that could be shared among various runtimes, but it has long been way more than that.
+Importantly, both WildFly and Quarkus use SmallRye components, so Jandex is certainly no stranger here.
+To highlight that, without further ado, we announce the first release of Jandex in SmallRye, version 3.0.0!
+
+Jandex 3.0.0 contains many bug fixes and features and, given the major version bump, also some breaking changes.
+But fear not -- upgrading is still pretty easy.
+The full list of changes https://github.com/smallrye/jandex/milestone/3?closed=1[can be found] in the Jandex issue tracker (which, by the way, moved to GitHub Issues a while ago).
+Here, we'll highlight all the important ones and describe how to migrate.
+
+Note that the following text is pretty long and detailed.
+If you want a TLDR, feel free to skip to the <<summary,summary>>.
+
+== Move to SmallRye
+
+As mentioned, Jandex is now a SmallRye project.
+As part of that, we've consolidated all the Jandex projects into a single repository: https://github.com/smallrye/jandex/.
+This means that the Jandex Maven plugin is released together with Jandex core, and if you contribute, you no longer have to add test classes to a dedicated `typeannotation-test` project.
+
+This also entails a change in Maven coordinates.
+
+[cols="1,1",options="header"]
+|===
+|Old coordinates
+|New coordinates
+
+|`org.jboss:jandex`
+|`io.smallrye:jandex`
+
+|`org.jboss.jandex:jandex-maven-plugin`
+|`io.smallrye:jandex-maven-plugin`
+|=== 
+
+*Recommendation*: if you use the Maven Enforcer plugin, configure it to ban any dependencies on `org.jboss:jandex`.
+Similar plugin exists for Gradle.
+
+== Move to Java 8
+
+Jandex 2.x is a Java 6 project.
+That has never been a problem, but Java 6 is just too old these days.
+However, Jandex has always been and continues to be conservative.
+Even though the major Jandex consumers we know of require Java 11 now, Jandex only bumps to Java 8.
+
+Nothing changes on the ability to parse new Java bytecode.
+Jandex running on Java 8 can still parse Java 17 bytecode just fine.
+
+*Recommendation*: if you are not on Java 8+ yet, you really should be.
+
+== Uniform annotation access
+
+Accessing annotations has been the original primary use case for Jandex.
+However, it has never been very uniform.
+The `ClassInfo` type has different methods to access annotations than `MethodInfo` or `FieldInfo`.
+The `AnnotationTarget` interface, which all "annotated things" implement, has no annotation-related methods.
+
+With Jandex 3.0.0, this changes.
+The `AnnotationTarget` interface gains a slew of method for accessing annotations.
+There are 2 kinds of them, actually:
+
+* methods that access annotations directly on the target;
+* methods that access annotations on the target and all nested annotation targets.
+
+The 2nd is how Jandex used to always operate, but the 1st is often what you need.
+Now, both options are available.
+
+[cols="2,1,1",options="header"]
+|===
+|Purpose
+|Directly on the target
+|On the target and nested targets
+
+|Has annotation of given type?
+|`hasDeclaredAnnotation(DotName)`
+|`hasAnnotation(DotName)`
+
+|Get single annotation of given type
+|`declaredAnnotation(DotName)`
+|`annotation(DotName)`
+
+|Get all annotations of given type (not repeatable)
+|doesn't make sense, there may only be one
+|`annotations(DotName)`
+
+|Get all annotations of given type, including repeatable
+|`declaredAnnotationsWithRepeatable(DotName, IndexView)`
+|`annotationsWithRepeatable(DotName, IndexView)`
+
+|Get all annotations
+|`declaredAnnotations()`
+|`annotations()`
+|=== 
+
+*BREAKING CHANGE:* there used to be a `ClassInfo.annotations()` method returning a `Map`.
+That method is renamed to `ClassInfo.annotationsMap()`.
+The `ClassInfo.annotations()` method returns a `List` now.
+
+*Recommendation:* if you call the `Map`-returning `annotations()` method on `ClassInfo`, move to `annotationsMap()`.
+Note that callers of this method compiled against Jandex 2.x will continue running correctly, because Jandex 3.0.0 includes a synthetic bridge method for binary compatibility.
+
+The `classAnnotation()`, `classAnnotationsWithRepeatable()` and `classAnnotations()` methods on `ClassInfo` are now deprecated, with the corresponding `declaredAnnotation*` methods being the suggested replacement.
+
+*Recommendation:* if you call any of the `classAnnotation*` methods on `ClassInfo`, move to `declaredAnnotation*`.
+
+*Recommendation:* if you call the existing methods that access annotations both on the target and nested annotation targets, and then filter them out to retain only the annotations declared directly on the target, use the `declaredAnnotation*` methods.
+
+== Uniform method parameter access
+
+Jandex uses the `MethodInfo` class to represent methods and `MethodParameterInfo` to represent method parameters.
+However, `MethodInfo` used to never expose any access to `MethodParameterInfo`.
+You could only access parameters from `MethodInfo` through the `parameterName(int)` and `parameters()` methods, where the `parameterName()` returned the name of given parameter, while `parameters()` returned the list of parameter types.
+The `MethodParameterInfo` class was only used to represent a target of ``AnnotationInstance``s.
+
+This is not very convenient.
+In Jandex 3.0.0, `MethodInfo` has several methods to access parameters:
+
+* `parametersCount()`: returns the number of parameters
+* `parameterTypes()`: returns the list of parameter types
+* `parameterName(int)`: returns the name of given parameter
+* `parameterType(int)`: returns the type of given parameter
+* `parameters()`: returns the list of parameters as `MethodParameterInfo`
+
+*BREAKING CHANGE:* there used to be a `MethodInfo.parameters()` method returning a `List<Type>`.
+That method is renamed to `MethodInfo.parameterTypes()`.
+The `MethodInfo.parameters()` method returns `List<MethodParameterInfo>` now.
+
+*Recommendation:* inspect your code that accesses method parameters.
+It can usually be simplified using the newly introduced methods.
+
+=== Synthetic and mandated parameters
+
+In addition to parameters explicitly declared in the source code, bytecode generators (such as `javac`) sometimes have to emit additional parameters.
+When these parameters are prescribed by the Java Language Specification (JLS), they are called _implicitly declared_ or _mandated_.
+Otherwise, they are an artifact of compiler implementation and called _synthetic_.
+
+Jandex used to pretty much not care.
+Sometimes, you would see these extra parameters, while sometimes, you would not.
+
+In Jandex 3.0.0, the parameter accessing methods mentioned above never return synthetic and mandated parameters.
+(At least in the vast majority of cases.
+Jandex uses the `Signature` bytecode attribute and a few simple heuristics to figure out the list of explicitly declared parameters.
+It seems `javac` emits the `Signature` attribute for all methods that have synthetic/mandated parameters, even if it wouldn't have to, so classes compiled with `javac` should be fine.
+There are rare cases, involving constructors of local/anonymous classes that capture lexically enclosing variables, where Jandex will return synthetic/mandated parameters for classes compiled with ECJ.)
+
+For special occasions where access to the full list of method parameters (based on the method descriptor) is required, there are 2 more methods:
+
+* `descriptorParametersCount()`: returns the number of parameters including synthetic/mandated
+* `descriptorParameterTypes()`: returns the list of parameter types including synthetic/mandated
+
+The parameter types obtained from method descriptor are never annotated and their position in the list _cannot_ be used to obtain a parameter name.
+
+*Recommendation:* in most cases, you don't need these methods.
+Use the `parameter*` methods by default and only resort to `descriptorParameter*` when you need to.
+
+== Proper representation of recursive type parameters
+
+Jandex includes a faithful representation of the Java type system, including generic types.
+Type parameters, and type variables in general, used to be represented by one of the following 2 classes:
+
+* `TypeVariable`
+* `UnresolvedTypeVariable`
+
+A type variable can be unresolved for example when you're indexing an incomplete classpath.
+However, with Jandex 2.x, a type variable may also be unresolved when it occurs in its own definition.
+
+For example, one often defines type parameters like `<T extends Comparable<T>>`.
+This type parameter definition is _recursive_ in `T`.
+Since Jandex types generally do not form cycles, the first occurence of `T` is represented as `TypeVariable`, but the second occurence as `UnresolvedTypeVariable`.
+
+To become more faithful yet still avoid cycles in the object model, Jandex 3.0.0 includes an additional representation of type variables occuring in their own definition:
+
+* `TypeVariableReference`
+
+With Jandex 3.0.0, the second occurence of `T` in the example above is represented as `TypeVariableReference`.
+A reference may be `follow()`-ed to obtain the type variable it points to.
+
+*Recommendation:* if you use the Jandex `Type` hierarchy to represent the Java type system, you will need to adapt your code to handle ``TypeVariableReference``s.
+Typically, processing types is done as a recursive method, in which case you should take care to avoid infinite regress; `follow()`-ing a `TypeVariableReference` and invoking your method on the resulting `TypeVariable` recursively is most likely *not* what you want.
+
+== Changed `Indexer.index()` return type
+
+The `Indexer.index(InputStream)` method, as well as the `indexClass(Class<?>)` method, used to return `ClassInfo` of the just-indexed class.
+This is convenient, but prevents additional post-processing during `Indexer.complete()`.
+
+In Jandex 2.x, there was no such post-processing, but Jandex 3.0.0 adds some.
+Notably, post-processing is required for propagating type annotations across nested classes, as well as resolving unresolved type variables across nested classes and patching the resulting type variable references.
+
+*BREAKING CHANGE:* the `Indexer.index(InputStream)` and `indexClass(Class<?>)` methods now have a return type of `void`.
+You have to build a complete `Index` to be able to obtain a `ClassInfo`.
+
+*Recommendation:* if you create a one-off `Indexer` to index a single class, you can simplify your code using `Index.singleClass()`.
+Note that callers of `Indexer.index()` / `indexClass()` compiled against Jandex 2.x will continue running, because Jandex 3.0.0 includes a synthetic bridge method for binary compatibility.
+That bridge method always returns `null` though.
+If you want to keep compiling against Jandex 2.x and add compatibility with Jandex 3.0.0, you need to ignore the return value of `Indexer.index()` / `indexClass()`, or at least handle `null` result gracefully.
+
+== Class-retained annotations
+
+Jandex 2.x only indexes annotations with `@Retention` of `RUNTIME`.
+With Jandex 3.0.0, annotations with retention of `CLASS` are indexed as well.
+
+*BREAKING CHANGE:* this is technically a breaking change, but shouldn't really affect anyone.
+
+*Recommendation:* you can distinguish class-retained annotations from runtime-retained by calling `AnnotationInstance.runtimeVisible()`.
+
+== Navigation for interfaces and packages
+
+Some methods were added to `Index`, and actually to `IndexView`, to navigate the interface hierarchy and package structure:
+
+* `getKnownDirectSubinterfaces()`: returns all known direct subinterfaces of the specified interface
+* `getAllKnownSubinterfaces()`: returns all known interfaces that extend the given interface, directly and indirectly
+* `getClassesInPackage()`: returns all classes present in given package (but not in subpackages)
+* `getSubpackages()`: returns direct subpackages of given package (but not indirect subpackages)
+
+*BREAKING CHANGE:* this is a breaking change if you implement the `IndexView` interface.
+Such implementations typically delegate to some other `IndexView`, in which case, adaptation should be straightforward.
+Otherwise, consult the javadoc of these methods for more precise description.
+
+Jandex 3.0.0 doesn't break the behavior of `getKnownDirectImplementors()` and `getAllKnownImplementors()`.
+These methods are still inconsistent in that `getKnownDirectImplementors()` returns subinterfaces and classes implementing the interface, while `getAllKnownImplementors()` only returns classes implementing the interface.
+It was tempting to fix this inconsistency, but in the end, we decided it was not worth the potential trouble.
+
+== Added `AnnotationInstance` builder
+
+To make life of Quarkus extension authors that create their own ``AnnotationInstance``s easier, we introduced a builder.
+The previously existing `AnnotationInstance.create()` methods are not going away, they are not even deprecated, they are just more difficult to use.
+
+*Recommendation:* use `AnnotationInstance.builder()` instead of `AnnotationInstance.create()`.
+
+== Maven plugin changes
+
+As mentioned above, the Jandex Maven plugin has been merged into the Jandex codebase.
+Moving forward, you won't have to track which Jandex Maven plugin version corresponds to which Jandex release: they are released together now and always have the same version number.
+
+There are some changes and improvements in the Maven plugin, too.
+
+First of all, one execution of the Jandex Maven plugin now always produces a single index.
+Previously, each file set configured in the Jandex Maven plugin execution produced its own index.
+This is counter-intuitive and usually not what you need.
+
+*BREAKING CHANGE:* this is a breaking change, but shouldn't hopefully affect anyone.
+
+*Recommendation:* use multiple executions of the Jandex Maven plugin if you need to produce multiple Jandex indices during Maven build.
+
+Further, the file set configuration allows configuring a _dependency_ in addition to a directory.
+This is useful if your artifact should carry an index including not only its own classes, but also classes from some of its dependencies.
+
+And lastly, a new goal `jandex-jar` was added to the Maven plugin to allow reindexing an already existing JAR.
+This is useful for example in combination with shading.
+
+*Recommendation:* the Maven plugin is described pretty well in the https://smallrye.io/jandex/[Jandex documentation].
+
+== Other smaller changes
+
+There's a few more changes, but those are smaller and less impactful, so we'll just describe them briefly here.
+
+*BREAKING CHANGE:* the `IndexReader.getDataVersion()` method was removed.
+To the best of our knowledge, noone has actually ever used it, and the return value was wrong (didn't conform to the contract stated in the javadoc).
+The `getIndexVersion()` method remains intact.
+
+A notion of _equivalence_ of Jandex objects was added.
+This is useful when building more advanced layers on top of Jandex that deal with annotation overlays and similar things.
+If you're interested, see the `EquivalenceKey` class.
+
+The method `ClassInfo.isInterface()` was added.
+It can be used to determine whether given `ClassInfo` actually represents an interface.
+
+The `ClassInfo.memberClasses()` was added, which returns a set of ``DotName``s of member classes of given class.
+To inspect those member classes more deeply, you need to look them up in an `Index`.
+
+The class `JandexReflection` was added, containing some utility methods to load classes corresponding to Jandex `ClassInfo` or `Type`.
+The classes are by default loaded from TCCL, but if there's none, the class loader that loaded `JandexReflection` itself is used.
+
+[[summary]]
+== Summary
+
+Jandex 3.0.0 contains many interesting features and improvements.
+This unfortunately required a few breaking changes.
+Here's the recommended migration path:
+
+. Upgrade to Jandex 2.4.3.Final.
+  This release deprecates some of the methods that are changed in Jandex 3.0.0 and offers replacements.
+  Notably, this includes `ClassInfo.annotations()` (use `annotationsMap()` instead) and `MethodInfo.parameters()` (use `parameterTypes()` instead).
+  Make sure you don't use any deprecated Jandex methods.
+. Make sure you don't use ``Indexer.index()``'s or ``indexClass()``'s return value.
+. At this point, if you compile your code against Jandex 2.4.3.Final, it will most likely run just fine against both 2.4.3.Final and 3.0.0.
+  Exceptions include: if you implement `IndexView` (there are new methods) or if you use the Jandex `Type` hierarchy extensively (you'll need to handle `TypeVariableReference`).
+. Upgrade to Jandex 3.0.0.
+  Configure Maven Enforcer plugin to ban `org.jboss:jandex` from getting into your dependency tree.
+  With the exception of situations listed in the previous item, your code should compile and run without an issue.
+. Profit!
+
+With this release, Jandex also has a new https://smallrye.io/jandex/[documentation site].
+It is currently rather incomplete, but that will hopefully improve over time.
+Jandex javadoc was also improved on many places, and remains the go-to reference.
+
+If you experience any troubles, or if you have any exciting ideas for Jandex, please https://github.com/smallrye/jandex/issues[file an issue].

@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Configuration :: SmallRye documentation</title>
+    <link rel="prev" href="index.html">
+    <link rel="next" href="generate-jwt.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../_/css/site.css">
     <script>var uiRootPath = '../_'</script>
@@ -334,7 +336,7 @@ precedence:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Trust all the hostnames. If the keys have to be fetched over <code>HTTPS</code> and this property is set to <code>true</code> then all the hostnames are trusted by default.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.client.tls.trusted.hosts</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.client.tls.hosts</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Set of trusted hostnames. If the keys have to be fetched over <code>HTTPS</code> and <code>smallrye.jwt.client.tls.trust-all</code> is set to <code>false</code> then then this property can be used to configure the trusted hostnames.</p></td>
 </tr>
@@ -506,6 +508,10 @@ public class TestJWTCallerPrincipalFactory extends JWTCallerPrincipalFactory {
 </div>
 </div>
 </div>
+<nav class="pagination">
+  <span class="prev"><a href="index.html">Index</a></span>
+  <span class="next"><a href="generate-jwt.html">Generate JWT Tokens</a></span>
+</nav>
 </article>
   </div>
 </main>

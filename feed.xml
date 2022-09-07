@@ -1,4 +1,70 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2022-08-26T12:20:53+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.0.0</title><link href="https://www.smallrye.io/blog/jandex-3-0-0/" rel="alternate" type="text/html" title="Jandex 3.0.0" /><published>2022-08-25T19:00:00+00:00</published><updated>2022-08-25T19:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-0-0</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-0-0/">&lt;div id=&quot;preamble&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2022-09-07T16:01:01+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 6.0.0</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-0-0/" rel="alternate" type="text/html" title="Fault Tolerance 6.0.0" /><published>2022-09-07T14:00:00+00:00</published><updated>2022-09-07T14:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-0-0</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-0-0/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.0.0&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.0.0.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This release implements MicroProfile Fault Tolerance 4.0 and therefore supports Jakarta EE 9 / MicroProfile 5.0.
+Implementation-wise, the 6.0.0 release corresponds to &lt;a href=&quot;/blog/fault-tolerance-5-5/&quot;&gt;SmallRye Fault Tolerance 5.5.0&lt;/a&gt;.
+Additionally, SmallRye Fault Tolerance 6.0.0 requires Java 11 at minimum; it is no longer compatible with Java 8.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;For the time being, we will produce releases both in the 5.x and 6.x streams.
+There will always be a direct correspondence between a 5.x and a 6.x release:&lt;/p&gt;
+&lt;/div&gt;
+&lt;table class=&quot;tableblock frame-all grid-all stretch&quot;&gt;
+&lt;colgroup&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th class=&quot;tableblock halign-left valign-top&quot;&gt;5.x release&lt;/th&gt;
+&lt;th class=&quot;tableblock halign-left valign-top&quot;&gt;Corresponding 6.x release&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;5.4.0&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;6.0.0-RC2&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;5.4.1&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;6.0.0-RC3&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;5.5.0&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;6.0.0-RC4&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;5.5.0&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;6.0.0&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;5.5.1 (hypothetically)&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;6.0.1 (hypothetically)&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;5.6.0 (hypothetically)&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;6.1.0 (hypothetically)&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;5.6.1 (hypothetically)&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;6.1.1 (hypothetically)&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;5.7.0 (hypothetically)&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;6.2.0 (hypothetically)&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;At some point, we&amp;#8217;ll stop producing releases in the 5.x stream.
+Shortly after that, we&amp;#8217;ll upgrade the basic dependencies (Jakarta CDI etc.) to their Jakarta EE 10 versions.
+Since Jakarta EE 9 is mostly a transition release and runtimes we&amp;#8217;re aware of target Jakarta EE 10 anyway, we likely won&amp;#8217;t bump a major version for that.
+In other words, the upgrade to Jakarta EE 10 base will happen in the 6.x stream and will not require a 7.0 release.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;As usual, if you have any problems or ideas, including objections to the plan stated above, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Jandex 3.0.0</title><link href="https://www.smallrye.io/blog/jandex-3-0-0/" rel="alternate" type="text/html" title="Jandex 3.0.0" /><published>2022-08-25T19:00:00+00:00</published><updated>2022-08-25T19:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-0-0</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-0-0/">&lt;div id=&quot;preamble&quot;&gt;
 &lt;div class=&quot;sectionbody&quot;&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Jandex is a space efficient Java class file indexer and offline reflection library.
@@ -1025,164 +1091,4 @@ SmallRye Fault Tolerance can&amp;#8217;t know if the annotation is meant for som
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Additionally, we fixed some typos in the documentation.&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Fault Tolerance 5.2</title><link href="https://www.smallrye.io/blog/fault-tolerance-5-2/" rel="alternate" type="text/html" title="Fault Tolerance 5.2" /><published>2021-07-02T14:00:00+00:00</published><updated>2021-07-02T14:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-5-2</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-5-2/">&lt;div id=&quot;preamble&quot;&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/5.2.0&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 5.2.0.
-This release includes several new features and fixes.
-It is a safe upgrade for everyone using SmallRye Fault Tolerance 5.1.0.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;backoff_strategies_for_retry&quot;&gt;Backoff strategies for &lt;code&gt;@Retry&lt;/code&gt;&lt;/h2&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The &lt;code&gt;@Retry&lt;/code&gt; annotation in MicroProfile Fault Tolerance supports a single backoff strategy: constant.
-That is, the delay between all retry attempts is identical (with the exception of a random jitter).&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;SmallRye Fault Tolerance now offers 3 annotations to specify a different backoff strategy:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;ulist&quot;&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;@ExponentialBackoff&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;@FibonacciBackoff&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;@CustomBackoff&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;One of these annotations may be present on a program element annotated &lt;code&gt;@Retry&lt;/code&gt;, and it modifies the retry behavior.
-For example:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;listingblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;java&quot; class=&quot;language-java hljs&quot;&gt;package com.example;
-
-@ApplicationScoped
-public class MyService {
-    @Retry
-    @ExponentialBackoff
-    public void hello() {
-        ...
-    }
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;With &lt;code&gt;@ExponentialBackoff&lt;/code&gt;, the delays between retry attempts will grow exponentially.
-With &lt;code&gt;@FibonacciBackoff&lt;/code&gt;, the delays will grow per the Fibonacci sequence.
-With &lt;code&gt;@CustomBackoff&lt;/code&gt;, it is possible to implement completely custom backoff strategy.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;See &lt;a href=&quot;https://smallrye.io/docs/smallrye-fault-tolerance/5.2.0/usage/extra.html#_backoff_strategies_for_retry&quot;&gt;the documentation&lt;/a&gt; for more information.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;blocking_and_nonblocking_on_classes&quot;&gt;&lt;code&gt;@Blocking&lt;/code&gt; and &lt;code&gt;@NonBlocking&lt;/code&gt; on classes&lt;/h2&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Previously, we only documented (and tested) the &lt;code&gt;@Blocking&lt;/code&gt; and &lt;code&gt;@NonBlocking&lt;/code&gt; annotations on methods.
-However, these annotations can be placed on classes as well, so in this release, we documented that and tightened some validation.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Previously, if you addded both of these annotations to the same method, SmallRye Fault Tolerance wouldn&amp;#8217;t complain, even though this is clearly a mistake.
-This situation is now detected and application deployment ends with an error.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;However, if one of these annotations is placed on a class and the other on a method, that is a perfectly valid situation.
-In such case, the annotation on method has priority over the one on class.
-For example:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;listingblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;java&quot; class=&quot;language-java hljs&quot;&gt;package com.example;
-
-@ApplicationScoped
-@NonBlocking
-public class MyService {
-    @Retry
-    @Blocking
-    public void hello() {
-        ...
-    }
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Here, the &lt;code&gt;hello&lt;/code&gt; method is treated as &lt;code&gt;@Blocking&lt;/code&gt;, but other methods would inherit the &lt;code&gt;@NonBlocking&lt;/code&gt; annotation from the class.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;See &lt;a href=&quot;https://smallrye.io/docs/smallrye-fault-tolerance/5.2.0/usage/extra.html#blocking-nonblocking&quot;&gt;the documentation&lt;/a&gt; for more information.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;non_compatible_mode_for_determining_asynchrony&quot;&gt;Non-compatible mode for determining asynchrony&lt;/h2&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;In addition to the &lt;code&gt;@Asynchronous&lt;/code&gt;, &lt;code&gt;@Blocking&lt;/code&gt; and &lt;code&gt;@NonBlocking&lt;/code&gt; annotations, SmallRye Fault Tolerance now offers a mode where method asynchrony is determined solely from the its return type.
-This mode is &lt;strong&gt;not compatible&lt;/strong&gt; with the MicroProfile Fault Tolerance specification and doesn&amp;#8217;t pass 2 tests in the TCK.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;For that reason, this mode is disabled by default.
-To enable it, set the configuration property &lt;code&gt;smallrye.faulttolerance.mp-compatibility&lt;/code&gt; to &lt;code&gt;false&lt;/code&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;When the non-compatible mode is enabled, methods that have some fault tolerance strategy and return &lt;code&gt;CompletionStage&lt;/code&gt; will &lt;em&gt;not&lt;/em&gt; be offloaded to a thread pool, yet will have asynchronous fault tolerance applied automatically.
-In other words, they will be treated as if they were annotated &lt;code&gt;@NonBlocking&lt;/code&gt;.
-For example:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;listingblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;java&quot; class=&quot;language-java hljs&quot;&gt;@ApplicationScoped
-public class MyService {
-    @Retry
-    CompletionStage&amp;lt;String&amp;gt; hello() {
-        ...
-    }
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The &lt;code&gt;hello&lt;/code&gt; method here will be executed on the original thread (as if it was annotated &lt;code&gt;@NonBlocking&lt;/code&gt;) and will have asynchronous fault tolerance applied.
-That is, if the returned &lt;code&gt;CompletionStage&lt;/code&gt; completes with an exception, it will be retried.
-(Per the MicroProfile Fault Tolerance specification, retry shouldn&amp;#8217;t happen in such case.
-The compatible mode conforms to the specification, but we find that behavior less and less appropriate.)&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Quarkus will enable this mode by default in the 2.1.0.Final release.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;See &lt;a href=&quot;https://smallrye.io/docs/smallrye-fault-tolerance/5.2.0/usage/extra.html#_non_compatible_mode&quot;&gt;the documentation&lt;/a&gt; for more information.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;others&quot;&gt;Others&lt;/h2&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Together with the new features described above, we have also performed a major internal refactoring.
-The configuration system, the single last remnant of SmallRye Fault Tolerance 2.x, has been rewritten from scratch.
-Instead of storing configuration values into a &lt;code&gt;Map&amp;lt;String, Object&amp;gt;&lt;/code&gt;, the new system is based on configuration interfaces.
-Implementations of these interfaces are automatically generated during SmallRye Fault Tolerance build, using an annotation processor.
-See &lt;a href=&quot;https://smallrye.io/docs/smallrye-fault-tolerance/5.2.0/internals/config.html&quot;&gt;the documentation&lt;/a&gt; for more details if you&amp;#8217;re interested.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Furthermore, we have fixed a small bug in &lt;code&gt;@Fallback&lt;/code&gt; validation.
-If you had a method guarded with &lt;code&gt;@Fallback&lt;/code&gt; that returned a raw type (such as &lt;code&gt;List&lt;/code&gt;), and its fallback method retured a parameterized type (such as &lt;code&gt;List&amp;lt;String&amp;gt;&lt;/code&gt;), the validation code would enter an infinite regress.
-This case is now handled properly.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Upgrade to 5.2.0 is very much recommended.
-As described above, there are certain new things, so if you encounter any bugs, please let us know in the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;issue tracker&lt;/a&gt;!&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
 &lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry></feed>

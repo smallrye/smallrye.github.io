@@ -269,7 +269,7 @@ It can usually be simplified using the newly introduced methods.</p>
 <div class="paragraph">
 <p>In addition to parameters explicitly declared in the source code, bytecode generators (such as <code>javac</code>) sometimes have to emit additional parameters.
 When these parameters are prescribed by the Java Language Specification (JLS), they are called <em>implicitly declared</em> or <em>mandated</em>.
-Otherwise, they are an artifact of compiler implementation and called <em>synthetic</em>.</p>
+Otherwise, they are an unspecified artifact of compiler implementation and are called <em>synthetic</em>.</p>
 </div>
 <div class="paragraph">
 <p>Jandex used to pretty much not care.
@@ -346,8 +346,12 @@ Since Jandex types generally do not form cycles, the first occurence of <code>T<
 A reference may be <code>follow()</code>-ed to obtain the type variable it points to.</p>
 </div>
 <div class="paragraph">
-<p><strong>Recommendation:</strong> if you use the Jandex <code>Type</code> hierarchy to represent the Java type system, you will need to adapt your code to handle <code>TypeVariableReference</code>s.
-Typically, processing types is done as a recursive method, in which case you should take care to avoid infinite regress; <code>follow()</code>-ing a <code>TypeVariableReference</code> and invoking your method on the resulting <code>TypeVariable</code> recursively is most likely <strong>not</strong> what you want.</p>
+<p><strong>Recommendation:</strong> if your code has special cases for handling <code>UnresolvedTypeVariable</code> or <code>Type.Kind.UNRESOLVED_TYPE_VARIABLE</code>, it is a good sign that it needs to be updated to deal with <code>TypeVariableReference</code> or <code>Type.Kind.TYPE_VARIABLE_REFERENCE</code>.
+And even if not, it is a good idea to test your code with some recursively defined type parameters.</p>
+</div>
+<div class="paragraph">
+<p><strong>Recommendation:</strong> if your code processes types in a recursive manner, you need to take care to avoid infinite regress.
+<code>follow()</code>-ing a <code>TypeVariableReference</code> and processing the resulting <code>TypeVariable</code> recursively is most likely <strong>not</strong> what you want.</p>
 </div>
 </div>
 </div>
@@ -360,7 +364,7 @@ This is convenient, but prevents additional post-processing during <code>Indexer
 </div>
 <div class="paragraph">
 <p>In Jandex 2.x, there was no such post-processing, but Jandex 3.0.0 adds some.
-Notably, post-processing is required for propagating type annotations across nested classes, as well as resolving unresolved type variables across nested classes and patching the resulting type variable references.</p>
+Notably, post-processing is required for propagating type annotations on type variables across nested classes, as well as resolving unresolved type variables across nested classes and patching the resulting type variable references.</p>
 </div>
 <div class="paragraph">
 <p><strong>BREAKING CHANGE:</strong> the <code>Indexer.index(InputStream)</code> and <code>indexClass(Class&lt;?&gt;)</code> methods now have a return type of <code>void</code>.
@@ -484,6 +488,11 @@ The <code>getIndexVersion()</code> method remains intact.</p>
 <p>A notion of <em>equivalence</em> of Jandex objects was added.
 This is useful when building more advanced layers on top of Jandex that deal with annotation overlays and similar things.
 If you&#8217;re interested, see the <code>EquivalenceKey</code> class.</p>
+</div>
+<div class="paragraph">
+<p>The methods on <code>IndexView</code> that accept a class name as a <code>DotName</code> now have more convenient overloads that accept a <code>String</code> and even <code>Class&lt;?&gt;</code>.
+If you search the index for classes that you have on your classpath, using these new methods can simplify your code.
+For example, instead of <code>index.getClassByName(DotName.createSimple(MyClass.class.getName()))</code>, you can call <code>index.getClassByName(MyClass.class)</code>.</p>
 </div>
 <div class="paragraph">
 <p>The method <code>ClassInfo.isInterface()</code> was added.

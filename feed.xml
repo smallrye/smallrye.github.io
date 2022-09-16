@@ -1,4 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2022-09-07T16:01:01+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 6.0.0</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-0-0/" rel="alternate" type="text/html" title="Fault Tolerance 6.0.0" /><published>2022-09-07T14:00:00+00:00</published><updated>2022-09-07T14:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-0-0</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-0-0/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2022-09-16T15:06:30+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.0.1</title><link href="https://www.smallrye.io/blog/jandex-3-0-1/" rel="alternate" type="text/html" title="Jandex 3.0.1" /><published>2022-09-16T12:00:00+00:00</published><updated>2022-09-16T12:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-0-1</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-0-1/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;A few weeks after &lt;a href=&quot;/blog/jandex-3-0-0&quot;&gt;releasing&lt;/a&gt; Jandex 3.0.0, we&amp;#8217;re back with a fresh new bugfix release: 3.0.1.
+It includes a small number of bug fixes and API improvements.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Methods for accessing enum constants were added: &lt;code&gt;ClassInfo.enumConstants()&lt;/code&gt; and &lt;code&gt;FieldInfo.enumConstantOrdinal()&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Shortcut methods for annotation access were added to &lt;code&gt;AnnotationTarget&lt;/code&gt;, so that you no longer have to manually construct an annotation &lt;code&gt;DotName&lt;/code&gt;.
+All annotation-accessing methods now have an overload that takes a &lt;code&gt;String&lt;/code&gt; and also &lt;code&gt;Class&amp;lt;? extends Annotation&amp;gt;&lt;/code&gt;.
+Note that if you use those methods frequently, it is still recommended to create constant &lt;code&gt;DotName&lt;/code&gt;s and use them.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Additionally, &lt;code&gt;DotName.createSimple()&lt;/code&gt; has a variant that takes &lt;code&gt;Class&amp;lt;?&amp;gt;&lt;/code&gt;.
+This shortens the common style of invocation from &lt;code&gt;DotName.createSimple(MyClass.class.getName())&lt;/code&gt; to &lt;code&gt;DotName.createSimple(MyClass.class)&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The &lt;code&gt;TypeVariable.hashCode()&lt;/code&gt; method used to have a serious bitmasking issue ever since the cached &lt;code&gt;hash&lt;/code&gt; field was repurposed to also store one bit of extra information (whether there&amp;#8217;s an implicit &lt;code&gt;Object&lt;/code&gt; bound).
+This bug caused the &lt;code&gt;hashCode()&lt;/code&gt; method to return different values over time.
+That is fixed now.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;A bug in propagating type variable annotations led to an exception when indexing certain classes, including the Guava JAR.
+This is fixed in 3.0.1.
+Thanks Mike Edgar for the report!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The introduction of &lt;code&gt;TypeVariableReference&lt;/code&gt;s in 3.0.0 caused a problem in &lt;code&gt;Type&lt;/code&gt; equality and hash code.
+This is now fixed and all &lt;code&gt;Type&lt;/code&gt;s have proper structural equality and hash code again.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;And finally, the javadoc was improved on many places.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;As usual, if you experience any troubles, or if you have any exciting ideas for Jandex, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry><entry><title type="html">Fault Tolerance 6.0.0</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-0-0/" rel="alternate" type="text/html" title="Fault Tolerance 6.0.0" /><published>2022-09-07T14:00:00+00:00</published><updated>2022-09-07T14:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-0-0</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-0-0/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.0.0&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.0.0.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
@@ -281,7 +316,7 @@ It can usually be simplified using the newly introduced methods.&lt;/p&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;In addition to parameters explicitly declared in the source code, bytecode generators (such as &lt;code&gt;javac&lt;/code&gt;) sometimes have to emit additional parameters.
 When these parameters are prescribed by the Java Language Specification (JLS), they are called &lt;em&gt;implicitly declared&lt;/em&gt; or &lt;em&gt;mandated&lt;/em&gt;.
-Otherwise, they are an artifact of compiler implementation and called &lt;em&gt;synthetic&lt;/em&gt;.&lt;/p&gt;
+Otherwise, they are an unspecified artifact of compiler implementation and are called &lt;em&gt;synthetic&lt;/em&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Jandex used to pretty much not care.
@@ -358,8 +393,12 @@ Since Jandex types generally do not form cycles, the first occurence of &lt;code
 A reference may be &lt;code&gt;follow()&lt;/code&gt;-ed to obtain the type variable it points to.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;&lt;strong&gt;Recommendation:&lt;/strong&gt; if you use the Jandex &lt;code&gt;Type&lt;/code&gt; hierarchy to represent the Java type system, you will need to adapt your code to handle &lt;code&gt;TypeVariableReference&lt;/code&gt;s.
-Typically, processing types is done as a recursive method, in which case you should take care to avoid infinite regress; &lt;code&gt;follow()&lt;/code&gt;-ing a &lt;code&gt;TypeVariableReference&lt;/code&gt; and invoking your method on the resulting &lt;code&gt;TypeVariable&lt;/code&gt; recursively is most likely &lt;strong&gt;not&lt;/strong&gt; what you want.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Recommendation:&lt;/strong&gt; if your code has special cases for handling &lt;code&gt;UnresolvedTypeVariable&lt;/code&gt; or &lt;code&gt;Type.Kind.UNRESOLVED_TYPE_VARIABLE&lt;/code&gt;, it is a good sign that it needs to be updated to deal with &lt;code&gt;TypeVariableReference&lt;/code&gt; or &lt;code&gt;Type.Kind.TYPE_VARIABLE_REFERENCE&lt;/code&gt;.
+And even if not, it is a good idea to test your code with some recursively defined type parameters.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;strong&gt;Recommendation:&lt;/strong&gt; if your code processes types in a recursive manner, you need to take care to avoid infinite regress.
+&lt;code&gt;follow()&lt;/code&gt;-ing a &lt;code&gt;TypeVariableReference&lt;/code&gt; and processing the resulting &lt;code&gt;TypeVariable&lt;/code&gt; recursively is most likely &lt;strong&gt;not&lt;/strong&gt; what you want.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -372,7 +411,7 @@ This is convenient, but prevents additional post-processing during &lt;code&gt;I
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;In Jandex 2.x, there was no such post-processing, but Jandex 3.0.0 adds some.
-Notably, post-processing is required for propagating type annotations across nested classes, as well as resolving unresolved type variables across nested classes and patching the resulting type variable references.&lt;/p&gt;
+Notably, post-processing is required for propagating type annotations on type variables across nested classes, as well as resolving unresolved type variables across nested classes and patching the resulting type variable references.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;&lt;strong&gt;BREAKING CHANGE:&lt;/strong&gt; the &lt;code&gt;Indexer.index(InputStream)&lt;/code&gt; and &lt;code&gt;indexClass(Class&amp;lt;?&amp;gt;)&lt;/code&gt; methods now have a return type of &lt;code&gt;void&lt;/code&gt;.
@@ -496,6 +535,11 @@ The &lt;code&gt;getIndexVersion()&lt;/code&gt; method remains intact.&lt;/p&gt;
 &lt;p&gt;A notion of &lt;em&gt;equivalence&lt;/em&gt; of Jandex objects was added.
 This is useful when building more advanced layers on top of Jandex that deal with annotation overlays and similar things.
 If you&amp;#8217;re interested, see the &lt;code&gt;EquivalenceKey&lt;/code&gt; class.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The methods on &lt;code&gt;IndexView&lt;/code&gt; that accept a class name as a &lt;code&gt;DotName&lt;/code&gt; now have more convenient overloads that accept a &lt;code&gt;String&lt;/code&gt; and even &lt;code&gt;Class&amp;lt;?&amp;gt;&lt;/code&gt;.
+If you search the index for classes that you have on your classpath, using these new methods can simplify your code.
+For example, instead of &lt;code&gt;index.getClassByName(DotName.createSimple(MyClass.class.getName()))&lt;/code&gt;, you can call &lt;code&gt;index.getClassByName(MyClass.class)&lt;/code&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;The method &lt;code&gt;ClassInfo.isInterface()&lt;/code&gt; was added.
@@ -1069,26 +1113,4 @@ compromised. Check if this is the case and upgrade the &lt;code&gt;log4j2&lt;/co
 the &lt;a href=&quot;mailto:smallrye@googlegroups.com&quot;&gt;SmallRye Mailing List&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;</content><author><name>Roberto Cortez</name><email>radcortez@yahoo.com</email></author><category term="log4j2" /><category term="smallrye" /></entry><entry><title type="html">Fault Tolerance 5.2.1</title><link href="https://www.smallrye.io/blog/fault-tolerance-5-2-1/" rel="alternate" type="text/html" title="Fault Tolerance 5.2.1" /><published>2021-07-16T13:00:00+00:00</published><updated>2021-07-16T13:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-5-2-1</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-5-2-1/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/5.2.1&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 5.2.1.
-This is a small release with one bug fix.
-It is a safe upgrade for everyone using SmallRye Fault Tolerance 5.2.0.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;In &lt;a href=&quot;/blog/fault-tolerance-5-0/&quot;&gt;SmallRye Fault Tolerance 5.0&lt;/a&gt;, we introduced support for the &lt;code&gt;@Blocking&lt;/code&gt; and &lt;code&gt;@NonBlocking&lt;/code&gt; annotations.
-From SmallRye Fault Tolerance perspective, these annotations make sense for methods that return an async type, such as &lt;code&gt;CompletionStage&lt;/code&gt; or &lt;code&gt;Uni&lt;/code&gt;.
-Naturally, we added validation, so that if the annotation was present on a method with some other return type, deployment would fail.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;This is actually problematic, because these annotations are generic.
-They are used by other frameworks and libraries (such as SmallRye Reactive Messaging or RESTEasy Reactive).
-In such case, SmallRye Fault Tolerance should just ignore them.
-However, if the annotation was present on a method that also applied some fault tolerance annotation, SmallRye Fault Tolerance would run the validation and fail the deployment.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;In this release, the validation is simply removed.
-SmallRye Fault Tolerance can&amp;#8217;t know if the annotation is meant for some other framework or not.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Additionally, we fixed some typos in the documentation.&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry></feed>
+&lt;/div&gt;</content><author><name>Roberto Cortez</name><email>radcortez@yahoo.com</email></author><category term="log4j2" /><category term="smallrye" /></entry></feed>

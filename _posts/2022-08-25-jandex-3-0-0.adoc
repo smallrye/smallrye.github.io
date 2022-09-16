@@ -143,7 +143,7 @@ It can usually be simplified using the newly introduced methods.
 
 In addition to parameters explicitly declared in the source code, bytecode generators (such as `javac`) sometimes have to emit additional parameters.
 When these parameters are prescribed by the Java Language Specification (JLS), they are called _implicitly declared_ or _mandated_.
-Otherwise, they are an artifact of compiler implementation and called _synthetic_.
+Otherwise, they are an unspecified artifact of compiler implementation and are called _synthetic_.
 
 Jandex used to pretty much not care.
 Sometimes, you would see these extra parameters, while sometimes, you would not.
@@ -186,8 +186,11 @@ To become more faithful yet still avoid cycles in the object model, Jandex 3.0.0
 With Jandex 3.0.0, the second occurence of `T` in the example above is represented as `TypeVariableReference`.
 A reference may be `follow()`-ed to obtain the type variable it points to.
 
-*Recommendation:* if you use the Jandex `Type` hierarchy to represent the Java type system, you will need to adapt your code to handle ``TypeVariableReference``s.
-Typically, processing types is done as a recursive method, in which case you should take care to avoid infinite regress; `follow()`-ing a `TypeVariableReference` and invoking your method on the resulting `TypeVariable` recursively is most likely *not* what you want.
+*Recommendation:* if your code has special cases for handling `UnresolvedTypeVariable` or `Type.Kind.UNRESOLVED_TYPE_VARIABLE`, it is a good sign that it needs to be updated to deal with `TypeVariableReference` or `Type.Kind.TYPE_VARIABLE_REFERENCE`.
+And even if not, it is a good idea to test your code with some recursively defined type parameters.
+
+*Recommendation:* if your code processes types in a recursive manner, you need to take care to avoid infinite regress.
+`follow()`-ing a `TypeVariableReference` and processing the resulting `TypeVariable` recursively is most likely *not* what you want.
 
 == Changed `Indexer.index()` return type
 
@@ -195,7 +198,7 @@ The `Indexer.index(InputStream)` method, as well as the `indexClass(Class<?>)` m
 This is convenient, but prevents additional post-processing during `Indexer.complete()`.
 
 In Jandex 2.x, there was no such post-processing, but Jandex 3.0.0 adds some.
-Notably, post-processing is required for propagating type annotations across nested classes, as well as resolving unresolved type variables across nested classes and patching the resulting type variable references.
+Notably, post-processing is required for propagating type annotations on type variables across nested classes, as well as resolving unresolved type variables across nested classes and patching the resulting type variable references.
 
 *BREAKING CHANGE:* the `Indexer.index(InputStream)` and `indexClass(Class<?>)` methods now have a return type of `void`.
 You have to build a complete `Index` to be able to obtain a `ClassInfo`.
@@ -272,6 +275,10 @@ The `getIndexVersion()` method remains intact.
 A notion of _equivalence_ of Jandex objects was added.
 This is useful when building more advanced layers on top of Jandex that deal with annotation overlays and similar things.
 If you're interested, see the `EquivalenceKey` class.
+
+The methods on `IndexView` that accept a class name as a `DotName` now have more convenient overloads that accept a `String` and even `Class<?>`.
+If you search the index for classes that you have on your classpath, using these new methods can simplify your code.
+For example, instead of `index.getClassByName(DotName.createSimple(MyClass.class.getName()))`, you can call `index.getClassByName(MyClass.class)`.
 
 The method `ClassInfo.isInterface()` was added.
 It can be used to determine whether given `ClassInfo` actually represents an interface.

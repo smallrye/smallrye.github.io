@@ -1,0 +1,35 @@
+:page-layout: post
+:page-title: Jandex 3.0.1
+:page-synopsis: Jandex 3.0.1 released!
+:page-tags: [announcement]
+:page-date: 2022-09-16 13:00:00.000 +0100
+:page-author: lthon
+
+= Jandex 3.0.1
+
+A few weeks after link:/blog/jandex-3-0-0[releasing] Jandex 3.0.0, we're back with a fresh new bugfix release: 3.0.1.
+It includes a small number of bug fixes and API improvements.
+
+Methods for accessing enum constants were added: `ClassInfo.enumConstants()` and `FieldInfo.enumConstantOrdinal()`.
+
+Shortcut methods for annotation access were added to `AnnotationTarget`, so that you no longer have to manually construct an annotation `DotName`.
+All annotation-accessing methods now have an overload that takes a `String` and also `Class<? extends Annotation>`.
+Note that if you use those methods frequently, it is still recommended to create constant ``DotName``s and use them.
+
+Additionally, `DotName.createSimple()` has a variant that takes `Class<?>`.
+This shortens the common style of invocation from `DotName.createSimple(MyClass.class.getName())` to `DotName.createSimple(MyClass.class)`.
+
+The `TypeVariable.hashCode()` method used to have a serious bitmasking issue ever since the cached `hash` field was repurposed to also store one bit of extra information (whether there's an implicit `Object` bound).
+This bug caused the `hashCode()` method to return different values over time.
+That is fixed now.
+
+A bug in propagating type variable annotations led to an exception when indexing certain classes, including the Guava JAR.
+This is fixed in 3.0.1.
+Thanks Mike Edgar for the report!
+
+The introduction of ``TypeVariableReference``s in 3.0.0 caused a problem in `Type` equality and hash code.
+This is now fixed and all ``Type``s have proper structural equality and hash code again.
+
+And finally, the javadoc was improved on many places.
+
+As usual, if you experience any troubles, or if you have any exciting ideas for Jandex, please https://github.com/smallrye/jandex/issues[file an issue].

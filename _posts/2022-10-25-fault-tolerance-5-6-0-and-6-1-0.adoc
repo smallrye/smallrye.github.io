@@ -1,0 +1,157 @@
+:page-layout: post
+:page-title: Fault Tolerance 5.6.0 and 6.1.0
+:page-synopsis: SmallRye Fault Tolerance 5.6.0 and 6.1.0 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2022-10-25 16:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 5.6.0 and 6.1.0
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/5.6.0[release] of {smallrye-ft} 5.6.0.
+This release includes several new features, one important deprecation and one important bug fix.
+
+== Rate limiting
+
+{smallrye-ft} adds a new fault tolerance strategy: `@RateLimit`.
+
+
+Rate limit enforces a maximum number of permitted invocations in a time window of some length.
+For example, with a rate limit, one can make sure that a method may only be called 50 times per minute.
+Invocations that would exceed the limit are rejected with an exception of type `RateLimitException`.
+
+Rate limit is superficially similar to a bulkhead (concurrency limit), but is in fact quite different.
+Bulkhead limits the number of executions happening concurrently at any point in time.
+Rate limit limits the number of executions in a time window of some length, without considering concurrency.
+
+For example:
+
+[source,java]
+----
+@RateLimit(value = 50, window = 1, windowUnit = ChronoUnit.MINUTES)
+public void doSomething() {
+    ...
+}
+----
+
+This makes sure that `doSomething` may only be called 50 times per minute.
+
+There are 3 kinds of rate limiting that can be configured using `@RateLimit(type = \...)`.
+They correspond to the most common rate limiting algorithms:
+
+- `RateLimitType.FIXED`: a _fixed window_ kind of rate limiting; this is the default
+- `RateLimitType.ROLLING`: a _sliding log_ kind of rate limiting
+- `RateLimitType.SMOOTH`: a _token bucket_ kind of rate limiting (could also be called rate shaping or rate smoothing)
+
+Additionally, it is possible to define minimum spacing between invocations.
+For example, with minimum spacing of 1 second, if a second invocation happens 500 millis after the first, it is rejected even if the limit wouldn't be exceeded yet.
+
+=== Lifecycle
+
+Since rate limit is a stateful fault tolerance strategy, it is important to consider its lifecycle.
+
+Currently, rate limit is a global singleton, just like circuit breaker or bulkhead.
+{smallrye-ft} doesn't allow changing it at the moment, so e.g. rate limit per user is currently impossible to implement.
+This is something we https://github.com/smallrye/smallrye-fault-tolerance/issues/438[plan to address] in the future, so feedback is welcome!
+
+=== Other annotations
+
+`@RateLimit` can be used together with all other fault tolerance annotations, as usual.
+ If a method would hypothetically declare all fault tolerance annotations, the fault tolerance strategies would be nested like this:
+
+----
+Fallback(
+    Retry(
+        CircuitBreaker(
+            RateLimit(
+                Timeout(
+                    Bulkhead(
+                        ... the guarded method ...
+                    )
+                )
+            )
+        )
+    )
+)
+----
+
+A lot more information about rate limiting can be found https://smallrye.io/docs/smallrye-fault-tolerance/6.0.0/usage/extra.html#_rate_limit[in the documentation].
+
+== New annotation for asynchronous non-blocking methods
+
+{smallrye-ft} used to discourage `@Asynchronous` and recommend `@Blocking` and `@NonBlocking` instead.
+This is problematic, because the `@Blocking` and `@NonBlocking` annotations are used by various containers to affect how the container invokes the method.
+If a container executes a `@Blocking` method on another thread, and that method applies some fault tolerance strategy, then {smallrye-ft} would execute it on yet another thread.
+This is hardly optimal.
+
+For that reason, starting with {smallrye-ft} 5.6.0 / 6.1.0, *the usage of `@Blocking` and `@NonBlocking` _for fault tolerance purposes_ is deprecated*.
+
+The recommendation is to use `@Asynchronous` for methods that require offloading execution to another thread.
+For asynchronous methods that do not require thread offload and return `CompletionStage` (or some other async type such as `Uni`), the recommendation is:
+
+- in non-compatible mode, no additional annotation is necessary, it is detected automatically;
+- in fully compatible mode, use `@AsynchronousNonBlocking`.
+
+`@AsynchronousNonBlocking` is a new annotation introduced by {smallrye-ft} in this version.
+The https://smallrye.io/docs/smallrye-fault-tolerance/6.0.0/usage/extra.html#async-nonblocking[relevant section in the documentation] was thoroughly revised and contains all the details.
+
+=== Compatibility
+
+{smallrye-ft} will recognize and support the `@Blocking` and `@NonBlocking` annotations for the entire lifecycle of 5.x and 6.x.
+Support for these annotations will be removed in {smallrye-ft} 7.0.0.
+
+This does _not_ imply that these annotations should be avoided for other purposes.
+This change only affects {smallrye-ft}.
+
+== Fallback methods with exception parameter
+
+In the non-compatible mode, {smallrye-ft} supports access to the causing exception in a `@Fallback` method.
+
+A fallback method, as defind by the {microprofile-ft} specification, must have the same parameters as the guarded method.
+{smallrye-ft} permits defining one additional parameter, at the end of the parameter list, which must be of an exception type.
+If such parameter is defined, the exception that caused the fallback will be supplied in it.
+
+For example:
+
+[source,java]
+----
+@ApplicationScoped
+public class MyService {
+    @Fallback(fallbackMethod = "fallback")
+    public String doSomething(String param) {
+        ...
+    }
+
+    public String fallback(String param, IllegalArgumentException cause) { 
+        ...
+    }
+}
+----
+
+It is possible to declare multiple overloads of the fallback method, each having different type of the exception parameter.
+It is also possible to declare fallback method(s) with an exception parameter together with a fallback method without an exception parameter.
+
+As usual, see https://smallrye.io/docs/smallrye-fault-tolerance/6.0.0/usage/extra.html#_fallback_method_with_exception_parameter[the documentation] for more information.
+
+== Circuit breaker state transitions
+
+The circuit breaker implementation in {smallrye-ft} used to perform state transitions only during invocations (that is, synchronously).
+This is easy to implement and doesn't affect correctness of the circuit breaker algorithm, so there's nothing wrong with it.
+
+However, {smallrye-ft} also allows external observation of the circuit breaker state.
+With the existing implementation of state transitions only during invocations, such external observations would be correct when moving from closed to open and from half-open to closed (because these transitions are defined to happen as a result of an invocation), but would _not_ necessarily be correct when moving from open to half-open (which is defined to happen after certain amount of time, regardless of invocations).
+
+For example, if the circuit breaker is configured to transition from open to half-open after 5 seconds, but there are no invocations for 10 seconds, then external observers would see the circuit breaker staying open for twice the time it should be.
+
+With this release, the circuit breaker will perform transitions from open to half-open asynchronously, using a timer.
+This means that external observers of the circuit breaker state will always be correct.
+
+== {smallrye-ft} 6.1.0
+
+Coming together with {smallrye-ft} 5.6.0 is the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.1.0[release] of {smallrye-ft} 6.1.0.
+
+
+{smallrye-ft} 6.1.0 is the 6.x release corresponding to 5.6.0.
+That is, it has all the features of 5.6.0, but requires Java 11 at minimum and uses the Jakarta EE 9 and MicroProfile 5.0 APIs.
+See link:/blog/fault-tolerance-6-0-0/[the previous announcement] for more details about the correspondence between 5.x and 6.x.

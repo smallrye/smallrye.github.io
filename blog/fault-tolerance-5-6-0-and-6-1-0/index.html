@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Fault Tolerance 5.6.0 and 6.1.0</title>
+  <script id="adobe_dtm" src="https://www.redhat.com/dtm.js" type="text/javascript"></script>
+  <script src="/assets/javascript/highlightjs-pack.js" type="text/javascript"></script>
+  <META HTTP-EQUIV="Content-Security-Policy" CONTENT="default-src 'none'; script-src 'self' www.redhat.com assets.adobedtm.com jsonip.com ajax.googleapis.com www.googletagmanager.com www.google-analytics.com use.fontawesome.com; style-src 'self'  fonts.googleapis.com use.fontawesome.com; img-src 'self' *; media-src 'self' ; frame-src www.googletagmanager.com; frame-ancestors 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; font-src 'self' use.fontawesome.com fonts.gstatic.com;">
+  <META HTTP-EQUIV="X-Frame-Options" CONTENT="DENY">
+  <META HTTP-EQUIV="X-XSS-Protection" CONTENT="1; mode=block">
+  <META HTTP-EQUIV="X-Content-Type-Options" CONTENT="nosniff">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+  <link rel="shortcut icon" type="image/png" href="/favicon.ico" >
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+</head>
+
+<body class="post">
+
+  <div class="content">
+    <div class="navigation-wrapper">
+  <div class="width-12-12">
+    <div class="header navigation">
+      <div class="logo-wrapper">
+        <a href="/"><img class="project-logo" title="SmallRye" src="/assets/images/smallrye_project_logo.svg"></a>
+      </div>
+      <div class="nav-container">
+        <nav>
+          <div class="nav-mobile"><a id="nav-toggle" href="#!"><span></span></a></div>
+          <ul class="nav-list">
+            <li>
+              <a href="/projects/" class="">Projects</a>
+            </li>
+            <li>
+              <a href="/community/" class="">Community</a>
+            </li>
+            <li>
+              <a href="/blog/" class="active">Blog</a>
+            </li>
+            <li>
+              <a href="/docs/index.html" class="">Documentation</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="post-page grid-wrapper">
+  <div class="grid__item width-10-12 doc-content">
+    <h1>Fault Tolerance 5.6.0 and 6.1.0</h1>
+    <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Today, we announce the <a href="https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/5.6.0">release</a> of SmallRye Fault Tolerance 5.6.0.
+This release includes several new features, one important deprecation and one important bug fix.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="rate_limiting">Rate limiting</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>SmallRye Fault Tolerance adds a new fault tolerance strategy: <code>@RateLimit</code>.</p>
+</div>
+<div class="paragraph">
+<p>Rate limit enforces a maximum number of permitted invocations in a time window of some length.
+For example, with a rate limit, one can make sure that a method may only be called 50 times per minute.
+Invocations that would exceed the limit are rejected with an exception of type <code>RateLimitException</code>.</p>
+</div>
+<div class="paragraph">
+<p>Rate limit is superficially similar to a bulkhead (concurrency limit), but is in fact quite different.
+Bulkhead limits the number of executions happening concurrently at any point in time.
+Rate limit limits the number of executions in a time window of some length, without considering concurrency.</p>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">@RateLimit(value = 50, window = 1, windowUnit = ChronoUnit.MINUTES)
+public void doSomething() {
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This makes sure that <code>doSomething</code> may only be called 50 times per minute.</p>
+</div>
+<div class="paragraph">
+<p>There are 3 kinds of rate limiting that can be configured using <code>@RateLimit(type = ...)</code>.
+They correspond to the most common rate limiting algorithms:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>RateLimitType.FIXED</code>: a <em>fixed window</em> kind of rate limiting; this is the default</p>
+</li>
+<li>
+<p><code>RateLimitType.ROLLING</code>: a <em>sliding log</em> kind of rate limiting</p>
+</li>
+<li>
+<p><code>RateLimitType.SMOOTH</code>: a <em>token bucket</em> kind of rate limiting (could also be called rate shaping or rate smoothing)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Additionally, it is possible to define minimum spacing between invocations.
+For example, with minimum spacing of 1 second, if a second invocation happens 500 millis after the first, it is rejected even if the limit wouldn&#8217;t be exceeded yet.</p>
+</div>
+<div class="sect2">
+<h3 id="lifecycle">Lifecycle</h3>
+<div class="paragraph">
+<p>Since rate limit is a stateful fault tolerance strategy, it is important to consider its lifecycle.</p>
+</div>
+<div class="paragraph">
+<p>Currently, rate limit is a global singleton, just like circuit breaker or bulkhead.
+SmallRye Fault Tolerance doesn&#8217;t allow changing it at the moment, so e.g. rate limit per user is currently impossible to implement.
+This is something we <a href="https://github.com/smallrye/smallrye-fault-tolerance/issues/438">plan to address</a> in the future, so feedback is welcome!</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="other_annotations">Other annotations</h3>
+<div class="paragraph">
+<p><code>@RateLimit</code> can be used together with all other fault tolerance annotations, as usual.
+ If a method would hypothetically declare all fault tolerance annotations, the fault tolerance strategies would be nested like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Fallback(
+    Retry(
+        CircuitBreaker(
+            RateLimit(
+                Timeout(
+                    Bulkhead(
+                        ... the guarded method ...
+                    )
+                )
+            )
+        )
+    )
+)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A lot more information about rate limiting can be found <a href="https://smallrye.io/docs/smallrye-fault-tolerance/6.0.0/usage/extra.html#_rate_limit">in the documentation</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new_annotation_for_asynchronous_non_blocking_methods">New annotation for asynchronous non-blocking methods</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>SmallRye Fault Tolerance used to discourage <code>@Asynchronous</code> and recommend <code>@Blocking</code> and <code>@NonBlocking</code> instead.
+This is problematic, because the <code>@Blocking</code> and <code>@NonBlocking</code> annotations are used by various containers to affect how the container invokes the method.
+If a container executes a <code>@Blocking</code> method on another thread, and that method applies some fault tolerance strategy, then SmallRye Fault Tolerance would execute it on yet another thread.
+This is hardly optimal.</p>
+</div>
+<div class="paragraph">
+<p>For that reason, starting with SmallRye Fault Tolerance 5.6.0 / 6.1.0, <strong>the usage of <code>@Blocking</code> and <code>@NonBlocking</code> <em>for fault tolerance purposes</em> is deprecated</strong>.</p>
+</div>
+<div class="paragraph">
+<p>The recommendation is to use <code>@Asynchronous</code> for methods that require offloading execution to another thread.
+For asynchronous methods that do not require thread offload and return <code>CompletionStage</code> (or some other async type such as <code>Uni</code>), the recommendation is:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>in non-compatible mode, no additional annotation is necessary, it is detected automatically;</p>
+</li>
+<li>
+<p>in fully compatible mode, use <code>@AsynchronousNonBlocking</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><code>@AsynchronousNonBlocking</code> is a new annotation introduced by SmallRye Fault Tolerance in this version.
+The <a href="https://smallrye.io/docs/smallrye-fault-tolerance/6.0.0/usage/extra.html#async-nonblocking">relevant section in the documentation</a> was thoroughly revised and contains all the details.</p>
+</div>
+<div class="sect2">
+<h3 id="compatibility">Compatibility</h3>
+<div class="paragraph">
+<p>SmallRye Fault Tolerance will recognize and support the <code>@Blocking</code> and <code>@NonBlocking</code> annotations for the entire lifecycle of 5.x and 6.x.
+Support for these annotations will be removed in SmallRye Fault Tolerance 7.0.0.</p>
+</div>
+<div class="paragraph">
+<p>This does <em>not</em> imply that these annotations should be avoided for other purposes.
+This change only affects SmallRye Fault Tolerance.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fallback_methods_with_exception_parameter">Fallback methods with exception parameter</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the non-compatible mode, SmallRye Fault Tolerance supports access to the causing exception in a <code>@Fallback</code> method.</p>
+</div>
+<div class="paragraph">
+<p>A fallback method, as defind by the MicroProfile Fault Tolerance specification, must have the same parameters as the guarded method.
+SmallRye Fault Tolerance permits defining one additional parameter, at the end of the parameter list, which must be of an exception type.
+If such parameter is defined, the exception that caused the fallback will be supplied in it.</p>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">@ApplicationScoped
+public class MyService {
+    @Fallback(fallbackMethod = "fallback")
+    public String doSomething(String param) {
+        ...
+    }
+
+    public String fallback(String param, IllegalArgumentException cause) {
+        ...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is possible to declare multiple overloads of the fallback method, each having different type of the exception parameter.
+It is also possible to declare fallback method(s) with an exception parameter together with a fallback method without an exception parameter.</p>
+</div>
+<div class="paragraph">
+<p>As usual, see <a href="https://smallrye.io/docs/smallrye-fault-tolerance/6.0.0/usage/extra.html#_fallback_method_with_exception_parameter">the documentation</a> for more information.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="circuit_breaker_state_transitions">Circuit breaker state transitions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The circuit breaker implementation in SmallRye Fault Tolerance used to perform state transitions only during invocations (that is, synchronously).
+This is easy to implement and doesn&#8217;t affect correctness of the circuit breaker algorithm, so there&#8217;s nothing wrong with it.</p>
+</div>
+<div class="paragraph">
+<p>However, SmallRye Fault Tolerance also allows external observation of the circuit breaker state.
+With the existing implementation of state transitions only during invocations, such external observations would be correct when moving from closed to open and from half-open to closed (because these transitions are defined to happen as a result of an invocation), but would <em>not</em> necessarily be correct when moving from open to half-open (which is defined to happen after certain amount of time, regardless of invocations).</p>
+</div>
+<div class="paragraph">
+<p>For example, if the circuit breaker is configured to transition from open to half-open after 5 seconds, but there are no invocations for 10 seconds, then external observers would see the circuit breaker staying open for twice the time it should be.</p>
+</div>
+<div class="paragraph">
+<p>With this release, the circuit breaker will perform transitions from open to half-open asynchronously, using a timer.
+This means that external observers of the circuit breaker state will always be correct.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="smallrye_fault_tolerance_6_1_0">SmallRye Fault Tolerance 6.1.0</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Coming together with SmallRye Fault Tolerance 5.6.0 is the <a href="https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.1.0">release</a> of SmallRye Fault Tolerance 6.1.0.</p>
+</div>
+<div class="paragraph">
+<p>SmallRye Fault Tolerance 6.1.0 is the 6.x release corresponding to 5.6.0.
+That is, it has all the features of 5.6.0, but requires Java 11 at minimum and uses the Jakarta EE 9 and MicroProfile 5.0 APIs.
+See <a href="/blog/fault-tolerance-6-0-0/">the previous announcement</a> for more details about the correspondence between 5.x and 6.x.</p>
+</div>
+</div>
+</div>
+  </div>
+</div>
+
+  </div>
+
+  <div class="content project-footer">
+  <div class="footer-section">
+    <div class="logo-wrapper">
+      <a href="/"><img src="/assets/images/smallrye_project_logo.svg" class="project-logo" title="SmallRye"></a>
+    </div>
+  </div>
+  <div class="grid-wrapper">
+    <p class="grid__item width-3-12">SmallRye is open source under <a href='https://www.apache.org/licenses/LICENSE-2.0' target='_blank'>Apache Software License 2.0</a>. <br /><br />This website was built with <a href='https://jekyllrb.com/' target='_blank'>Jekyll</a> is hosted on <a href='https://pages.github.com/' target='_blank'>Github Pages</a> and is completely open source. If you want to make it better, <a href='https://github.com/smallrye/smallrye.github.io' target='_blank'>fork the website</a> and show us what you’ve got.</p>
+
+    
+      <div class="width-1-12 project-links">
+        <span>Navigation</span>
+        <ul class="footer-links width-1-12">
+          
+            <li><a href="/">Home</a></li>
+          
+        </ul>
+      </div>
+    
+      <div class="width-1-12 project-links">
+        <span>Contribute</span>
+        <ul class="footer-links width-1-12">
+          
+            <li><a href="https://twitter.com/smallrye_io">Follow us</a></li>
+          
+            <li><a href="https://github.com/smallrye">GitHub</a></li>
+          
+        </ul>
+      </div>
+    
+      <div class="width-1-12 project-links">
+        <span>Get Help</span>
+        <ul class="footer-links width-1-12">
+          
+            <li><a href="https://quarkusio.zulipchat.com">Chatroom</a></li>
+          
+            <li><a href="https://groups.google.com/d/forum/smallrye">Google&nbsp;Groups</a></li>
+          
+        </ul>
+      </div>
+    
+
+    
+      <div class="width-6-12 more-links">
+        <span>External Links</span>
+        <ul class="footer-links">
+          
+            <li><a href="https://microprofile.io/" target="_blank">Eclipse MicroProfile</a></li>
+          
+            <li><a href="https://github.com/eclipse?utf8=✓&q=microprofile" target="_blank">Eclipse MicroProfile on GitHub</a></li>
+          
+        </ul>
+      </div>
+    
+  </div>
+</div>
+  <div class="content redhat-footer">
+  <div class="grid-wrapper">
+    <span class="licence">
+      <i class="fab fa-creative-commons"></i><i class="fab fa-creative-commons-by"></i> <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">CC by 3.0</a>
+      | <a href="https://www.redhat.com/en/about/privacy-policy">Red Hat Privacy Policy</a>
+    </span>
+    <span class="redhat">
+      a Red Hat sponsored project   
+    </span>
+    <span class="redhat-logo">
+      <a href="https://www.redhat.com/" target="_blank"><img src="/assets/images/redhat_reversed.svg"></a>
+    </span>
+  </div>
+</div>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script type="text/javascript" src="/assets/javascript/mobile-nav.js"></script>
+  <script type="text/javascript" src="/assets/javascript/scroll-down.js"></script>
+  <script type="text/javascript" src="/assets/javascript/satellite.js"></script>
+</body>
+
+</html>

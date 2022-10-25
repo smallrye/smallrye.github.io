@@ -1,4 +1,216 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2022-09-16T15:06:30+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.0.1</title><link href="https://www.smallrye.io/blog/jandex-3-0-1/" rel="alternate" type="text/html" title="Jandex 3.0.1" /><published>2022-09-16T12:00:00+00:00</published><updated>2022-09-16T12:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-0-1</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-0-1/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2022-10-25T18:02:54+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 5.6.0 and 6.1.0</title><link href="https://www.smallrye.io/blog/fault-tolerance-5-6-0-and-6-1-0/" rel="alternate" type="text/html" title="Fault Tolerance 5.6.0 and 6.1.0" /><published>2022-10-25T15:00:00+00:00</published><updated>2022-10-25T15:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-5-6-0-and-6-1-0</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-5-6-0-and-6-1-0/">&lt;div id=&quot;preamble&quot;&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/5.6.0&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 5.6.0.
+This release includes several new features, one important deprecation and one important bug fix.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;rate_limiting&quot;&gt;Rate limiting&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;SmallRye Fault Tolerance adds a new fault tolerance strategy: &lt;code&gt;@RateLimit&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Rate limit enforces a maximum number of permitted invocations in a time window of some length.
+For example, with a rate limit, one can make sure that a method may only be called 50 times per minute.
+Invocations that would exceed the limit are rejected with an exception of type &lt;code&gt;RateLimitException&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Rate limit is superficially similar to a bulkhead (concurrency limit), but is in fact quite different.
+Bulkhead limits the number of executions happening concurrently at any point in time.
+Rate limit limits the number of executions in a time window of some length, without considering concurrency.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;For example:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;java&quot; class=&quot;language-java hljs&quot;&gt;@RateLimit(value = 50, window = 1, windowUnit = ChronoUnit.MINUTES)
+public void doSomething() {
+    ...
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This makes sure that &lt;code&gt;doSomething&lt;/code&gt; may only be called 50 times per minute.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;There are 3 kinds of rate limiting that can be configured using &lt;code&gt;@RateLimit(type = ...)&lt;/code&gt;.
+They correspond to the most common rate limiting algorithms:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;RateLimitType.FIXED&lt;/code&gt;: a &lt;em&gt;fixed window&lt;/em&gt; kind of rate limiting; this is the default&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;RateLimitType.ROLLING&lt;/code&gt;: a &lt;em&gt;sliding log&lt;/em&gt; kind of rate limiting&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;RateLimitType.SMOOTH&lt;/code&gt;: a &lt;em&gt;token bucket&lt;/em&gt; kind of rate limiting (could also be called rate shaping or rate smoothing)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Additionally, it is possible to define minimum spacing between invocations.
+For example, with minimum spacing of 1 second, if a second invocation happens 500 millis after the first, it is rejected even if the limit wouldn&amp;#8217;t be exceeded yet.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;lifecycle&quot;&gt;Lifecycle&lt;/h3&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Since rate limit is a stateful fault tolerance strategy, it is important to consider its lifecycle.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Currently, rate limit is a global singleton, just like circuit breaker or bulkhead.
+SmallRye Fault Tolerance doesn&amp;#8217;t allow changing it at the moment, so e.g. rate limit per user is currently impossible to implement.
+This is something we &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues/438&quot;&gt;plan to address&lt;/a&gt; in the future, so feedback is welcome!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;other_annotations&quot;&gt;Other annotations&lt;/h3&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;code&gt;@RateLimit&lt;/code&gt; can be used together with all other fault tolerance annotations, as usual.
+ If a method would hypothetically declare all fault tolerance annotations, the fault tolerance strategies would be nested like this:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;Fallback(
+    Retry(
+        CircuitBreaker(
+            RateLimit(
+                Timeout(
+                    Bulkhead(
+                        ... the guarded method ...
+                    )
+                )
+            )
+        )
+    )
+)&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;A lot more information about rate limiting can be found &lt;a href=&quot;https://smallrye.io/docs/smallrye-fault-tolerance/6.0.0/usage/extra.html#_rate_limit&quot;&gt;in the documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;new_annotation_for_asynchronous_non_blocking_methods&quot;&gt;New annotation for asynchronous non-blocking methods&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;SmallRye Fault Tolerance used to discourage &lt;code&gt;@Asynchronous&lt;/code&gt; and recommend &lt;code&gt;@Blocking&lt;/code&gt; and &lt;code&gt;@NonBlocking&lt;/code&gt; instead.
+This is problematic, because the &lt;code&gt;@Blocking&lt;/code&gt; and &lt;code&gt;@NonBlocking&lt;/code&gt; annotations are used by various containers to affect how the container invokes the method.
+If a container executes a &lt;code&gt;@Blocking&lt;/code&gt; method on another thread, and that method applies some fault tolerance strategy, then SmallRye Fault Tolerance would execute it on yet another thread.
+This is hardly optimal.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;For that reason, starting with SmallRye Fault Tolerance 5.6.0 / 6.1.0, &lt;strong&gt;the usage of &lt;code&gt;@Blocking&lt;/code&gt; and &lt;code&gt;@NonBlocking&lt;/code&gt; &lt;em&gt;for fault tolerance purposes&lt;/em&gt; is deprecated&lt;/strong&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The recommendation is to use &lt;code&gt;@Asynchronous&lt;/code&gt; for methods that require offloading execution to another thread.
+For asynchronous methods that do not require thread offload and return &lt;code&gt;CompletionStage&lt;/code&gt; (or some other async type such as &lt;code&gt;Uni&lt;/code&gt;), the recommendation is:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;in non-compatible mode, no additional annotation is necessary, it is detected automatically;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;in fully compatible mode, use &lt;code&gt;@AsynchronousNonBlocking&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;code&gt;@AsynchronousNonBlocking&lt;/code&gt; is a new annotation introduced by SmallRye Fault Tolerance in this version.
+The &lt;a href=&quot;https://smallrye.io/docs/smallrye-fault-tolerance/6.0.0/usage/extra.html#async-nonblocking&quot;&gt;relevant section in the documentation&lt;/a&gt; was thoroughly revised and contains all the details.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;compatibility&quot;&gt;Compatibility&lt;/h3&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;SmallRye Fault Tolerance will recognize and support the &lt;code&gt;@Blocking&lt;/code&gt; and &lt;code&gt;@NonBlocking&lt;/code&gt; annotations for the entire lifecycle of 5.x and 6.x.
+Support for these annotations will be removed in SmallRye Fault Tolerance 7.0.0.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This does &lt;em&gt;not&lt;/em&gt; imply that these annotations should be avoided for other purposes.
+This change only affects SmallRye Fault Tolerance.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;fallback_methods_with_exception_parameter&quot;&gt;Fallback methods with exception parameter&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;In the non-compatible mode, SmallRye Fault Tolerance supports access to the causing exception in a &lt;code&gt;@Fallback&lt;/code&gt; method.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;A fallback method, as defind by the MicroProfile Fault Tolerance specification, must have the same parameters as the guarded method.
+SmallRye Fault Tolerance permits defining one additional parameter, at the end of the parameter list, which must be of an exception type.
+If such parameter is defined, the exception that caused the fallback will be supplied in it.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;For example:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;java&quot; class=&quot;language-java hljs&quot;&gt;@ApplicationScoped
+public class MyService {
+    @Fallback(fallbackMethod = &quot;fallback&quot;)
+    public String doSomething(String param) {
+        ...
+    }
+
+    public String fallback(String param, IllegalArgumentException cause) {
+        ...
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;It is possible to declare multiple overloads of the fallback method, each having different type of the exception parameter.
+It is also possible to declare fallback method(s) with an exception parameter together with a fallback method without an exception parameter.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;As usual, see &lt;a href=&quot;https://smallrye.io/docs/smallrye-fault-tolerance/6.0.0/usage/extra.html#_fallback_method_with_exception_parameter&quot;&gt;the documentation&lt;/a&gt; for more information.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;circuit_breaker_state_transitions&quot;&gt;Circuit breaker state transitions&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The circuit breaker implementation in SmallRye Fault Tolerance used to perform state transitions only during invocations (that is, synchronously).
+This is easy to implement and doesn&amp;#8217;t affect correctness of the circuit breaker algorithm, so there&amp;#8217;s nothing wrong with it.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;However, SmallRye Fault Tolerance also allows external observation of the circuit breaker state.
+With the existing implementation of state transitions only during invocations, such external observations would be correct when moving from closed to open and from half-open to closed (because these transitions are defined to happen as a result of an invocation), but would &lt;em&gt;not&lt;/em&gt; necessarily be correct when moving from open to half-open (which is defined to happen after certain amount of time, regardless of invocations).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;For example, if the circuit breaker is configured to transition from open to half-open after 5 seconds, but there are no invocations for 10 seconds, then external observers would see the circuit breaker staying open for twice the time it should be.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;With this release, the circuit breaker will perform transitions from open to half-open asynchronously, using a timer.
+This means that external observers of the circuit breaker state will always be correct.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;smallrye_fault_tolerance_6_1_0&quot;&gt;SmallRye Fault Tolerance 6.1.0&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Coming together with SmallRye Fault Tolerance 5.6.0 is the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.1.0&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.1.0.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;SmallRye Fault Tolerance 6.1.0 is the 6.x release corresponding to 5.6.0.
+That is, it has all the features of 5.6.0, but requires Java 11 at minimum and uses the Jakarta EE 9 and MicroProfile 5.0 APIs.
+See &lt;a href=&quot;/blog/fault-tolerance-6-0-0/&quot;&gt;the previous announcement&lt;/a&gt; for more details about the correspondence between 5.x and 6.x.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Jandex 3.0.1</title><link href="https://www.smallrye.io/blog/jandex-3-0-1/" rel="alternate" type="text/html" title="Jandex 3.0.1" /><published>2022-09-16T12:00:00+00:00</published><updated>2022-09-16T12:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-0-1</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-0-1/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;A few weeks after &lt;a href=&quot;/blog/jandex-3-0-0&quot;&gt;releasing&lt;/a&gt; Jandex 3.0.0, we&amp;#8217;re back with a fresh new bugfix release: 3.0.1.
 It includes a small number of bug fixes and API improvements.&lt;/p&gt;
 &lt;/div&gt;
@@ -968,149 +1180,4 @@ We&amp;#8217;d be specifically interested in any feedback on the programmatic AP
 This is very new, so you have a unique chance to influence its future!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Log4j2 Vulnerability and SmallRye</title><link href="https://www.smallrye.io/blog/log4j2-vulnerability/" rel="alternate" type="text/html" title="Log4j2 Vulnerability and SmallRye" /><published>2021-12-13T12:00:00+00:00</published><updated>2021-12-13T12:00:00+00:00</updated><id>https://www.smallrye.io/blog/log4j2-vulnerability</id><content type="html" xml:base="https://www.smallrye.io/blog/log4j2-vulnerability/">&lt;div id=&quot;preamble&quot;&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;On Thursday (December 9th), a 0-day exploit in the popular Java logging library log4j (version 2) was discovered that
-results in Remote Code Execution (RCE) by logging a certain string. Please check the following links for additional
-information on this vulnerability:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;ulist&quot;&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;https://nvd.nist.gov/vuln/detail/CVE-2021-44228&quot;&gt;CVE-2021-44228 Detail&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/advisories/GHSA-jfh8-c2jp-5v3q&quot;&gt;Remote code injection in Log4j&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.lunasec.io/docs/blog/log4j-zero-day/&quot;&gt;Log4Shell: RCE 0-day exploit found in log4j 2, a popular Java logging package&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;&lt;strong&gt;If you are using &lt;code&gt;log4j2&lt;/code&gt;, or have it available in your runtime we advise you to update it to &lt;code&gt;2.15.0&lt;/code&gt; as soon as
-possible.&lt;/strong&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;what_does_this_mean_for_smallrye&quot;&gt;What does this mean for SmallRye?&lt;/h2&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;SmallRye libraries do not include or use any &lt;code&gt;log4j&lt;/code&gt; artifacts in their runtime dependencies. Below you can find a
-detailed report for each SmallRye dependency (we used the Maven Dependency Plugin to search for possible inclusions):&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;ulist&quot;&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;smallrye-async-api&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;smallrye-common&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;smallrye-config&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;smallrye-context-propagation&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;smallrye-converters&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;smallrye-fault-tolerance&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;smallrye-graphql&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;smallrye-health&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;smallrye-jwt&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;smallrye-maven-plugin&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;smallrye-metrics&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;smallrye-mutiny&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;smallrye-mutiny-vertx-bindings&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;smallrye-mutiny-zero&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;smallrye-open-api&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;smallrye-opentelemetry&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;smallrye-opentracing&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;smallrye-parent&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;smallrye-reactive-converters&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;smallrye-reactive-messaging&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;smallrye-safer-annotations&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;smallrye-stork&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;smallrye-testing&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;/assets/content/2021-12-12-log4j2-report.txt&quot;&gt;SmallRye Dependency Log4j2 Report&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;admonitionblock note&quot;&gt;
-&lt;table&gt;
-&lt;tr&gt;
-&lt;td class=&quot;icon&quot;&gt;
-&lt;i class=&quot;fa icon-note&quot; title=&quot;Note&quot;&gt;&lt;/i&gt;
-&lt;/td&gt;
-&lt;td class=&quot;content&quot;&gt;
-The command used was &lt;code&gt;mvn org.apache.maven.plugins:maven-dependency-plugin:2.8:tree -Dincludes=org.apache.logging.log4j::: -Dverbose&lt;/code&gt;
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;We were able to find that &lt;code&gt;smallrye-reactive-messaging-kafka&lt;/code&gt; and &lt;code&gt;smallrye-stork-service-discovery-eureka&lt;/code&gt; reference
-&lt;code&gt;log4j2&lt;/code&gt; artifacts, but only in the &lt;code&gt;test&lt;/code&gt; scope, so this is not an issue.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Additionally, since all SmallRye projects receive &lt;code&gt;dependabot&lt;/code&gt; updates, we can detect any possible updates to
-&lt;code&gt;log4j2&lt;/code&gt; dependencies with the following &lt;a href=&quot;https://github.com/pulls?q=is%3Apr+author%3Aapp%2Fdependabot+user%3Asmallrye+log4j+in%3Atitle&quot;&gt;Github Report&lt;/a&gt;. Indeed, there were two
-updates sent by &lt;code&gt;dependabot&lt;/code&gt; to &lt;code&gt;smallrye-mutiny-vertx-bindings&lt;/code&gt;, but these updates target the dependencies of a Maven
-plugin execution, so again, not an issue for runtime.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;additional_information&quot;&gt;Additional Information&lt;/h2&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Even if SmallRye itself is not directly affected by this vulnerability, the runtime where you are running may be
-compromised. Check if this is the case and upgrade the &lt;code&gt;log4j2&lt;/code&gt; version.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Feel free to reach out to the SmallRye team if you experience any issue with any of the SmallRye libraries to
-the &lt;a href=&quot;mailto:smallrye@googlegroups.com&quot;&gt;SmallRye Mailing List&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</content><author><name>Roberto Cortez</name><email>radcortez@yahoo.com</email></author><category term="log4j2" /><category term="smallrye" /></entry></feed>
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry></feed>

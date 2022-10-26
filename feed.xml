@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2022-10-25T18:02:54+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 5.6.0 and 6.1.0</title><link href="https://www.smallrye.io/blog/fault-tolerance-5-6-0-and-6-1-0/" rel="alternate" type="text/html" title="Fault Tolerance 5.6.0 and 6.1.0" /><published>2022-10-25T15:00:00+00:00</published><updated>2022-10-25T15:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-5-6-0-and-6-1-0</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-5-6-0-and-6-1-0/">&lt;div id=&quot;preamble&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2022-10-26T07:04:22+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 5.6.0 and 6.1.0</title><link href="https://www.smallrye.io/blog/fault-tolerance-5-6-0-and-6-1-0/" rel="alternate" type="text/html" title="Fault Tolerance 5.6.0 and 6.1.0" /><published>2022-10-25T15:00:00+00:00</published><updated>2022-10-25T15:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-5-6-0-and-6-1-0</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-5-6-0-and-6-1-0/">&lt;div id=&quot;preamble&quot;&gt;
 &lt;div class=&quot;sectionbody&quot;&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/5.6.0&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 5.6.0.
@@ -92,7 +92,7 @@ This is something we &lt;a href=&quot;https://github.com/smallrye/smallrye-fault
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;A lot more information about rate limiting can be found &lt;a href=&quot;https://smallrye.io/docs/smallrye-fault-tolerance/6.0.0/usage/extra.html#_rate_limit&quot;&gt;in the documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;A lot more information about rate limiting can be found &lt;a href=&quot;https://smallrye.io/docs/smallrye-fault-tolerance/5.6.0/usage/extra.html#_rate_limit&quot;&gt;in the documentation&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -125,7 +125,7 @@ For asynchronous methods that do not require thread offload and return &lt;code&
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;&lt;code&gt;@AsynchronousNonBlocking&lt;/code&gt; is a new annotation introduced by SmallRye Fault Tolerance in this version.
-The &lt;a href=&quot;https://smallrye.io/docs/smallrye-fault-tolerance/6.0.0/usage/extra.html#async-nonblocking&quot;&gt;relevant section in the documentation&lt;/a&gt; was thoroughly revised and contains all the details.&lt;/p&gt;
+The &lt;a href=&quot;https://smallrye.io/docs/smallrye-fault-tolerance/5.6.0/usage/extra.html#async-nonblocking&quot;&gt;relevant section in the documentation&lt;/a&gt; was thoroughly revised and contains all the details.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;sect2&quot;&gt;
 &lt;h3 id=&quot;compatibility&quot;&gt;Compatibility&lt;/h3&gt;
@@ -174,7 +174,7 @@ public class MyService {
 It is also possible to declare fallback method(s) with an exception parameter together with a fallback method without an exception parameter.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;As usual, see &lt;a href=&quot;https://smallrye.io/docs/smallrye-fault-tolerance/6.0.0/usage/extra.html#_fallback_method_with_exception_parameter&quot;&gt;the documentation&lt;/a&gt; for more information.&lt;/p&gt;
+&lt;p&gt;As usual, see &lt;a href=&quot;https://smallrye.io/docs/smallrye-fault-tolerance/5.6.0/usage/extra.html#_fallback_method_with_exception_parameter&quot;&gt;the documentation&lt;/a&gt; for more information.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;

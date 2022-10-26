@@ -76,7 +76,7 @@ Fallback(
 )
 ----
 
-A lot more information about rate limiting can be found https://smallrye.io/docs/smallrye-fault-tolerance/6.0.0/usage/extra.html#_rate_limit[in the documentation].
+A lot more information about rate limiting can be found https://smallrye.io/docs/smallrye-fault-tolerance/5.6.0/usage/extra.html#_rate_limit[in the documentation].
 
 == New annotation for asynchronous non-blocking methods
 
@@ -94,7 +94,7 @@ For asynchronous methods that do not require thread offload and return `Completi
 - in fully compatible mode, use `@AsynchronousNonBlocking`.
 
 `@AsynchronousNonBlocking` is a new annotation introduced by {smallrye-ft} in this version.
-The https://smallrye.io/docs/smallrye-fault-tolerance/6.0.0/usage/extra.html#async-nonblocking[relevant section in the documentation] was thoroughly revised and contains all the details.
+The https://smallrye.io/docs/smallrye-fault-tolerance/5.6.0/usage/extra.html#async-nonblocking[relevant section in the documentation] was thoroughly revised and contains all the details.
 
 === Compatibility
 
@@ -132,7 +132,7 @@ public class MyService {
 It is possible to declare multiple overloads of the fallback method, each having different type of the exception parameter.
 It is also possible to declare fallback method(s) with an exception parameter together with a fallback method without an exception parameter.
 
-As usual, see https://smallrye.io/docs/smallrye-fault-tolerance/6.0.0/usage/extra.html#_fallback_method_with_exception_parameter[the documentation] for more information.
+As usual, see https://smallrye.io/docs/smallrye-fault-tolerance/5.6.0/usage/extra.html#_fallback_method_with_exception_parameter[the documentation] for more information.
 
 == Circuit breaker state transitions
 

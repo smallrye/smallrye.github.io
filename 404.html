@@ -5,7 +5,7 @@
   <title></title>
   <script id="adobe_dtm" src="https://www.redhat.com/dtm.js" type="text/javascript"></script>
   <script src="/assets/javascript/highlightjs-pack.js" type="text/javascript"></script>
-  <META HTTP-EQUIV="Content-Security-Policy" CONTENT="default-src 'none'; script-src 'self' www.redhat.com assets.adobedtm.com jsonip.com ajax.googleapis.com www.googletagmanager.com www.google-analytics.com use.fontawesome.com; style-src 'self'  fonts.googleapis.com use.fontawesome.com; img-src 'self' *; media-src 'self' ; frame-src www.googletagmanager.com; frame-ancestors 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; font-src 'self' use.fontawesome.com fonts.gstatic.com;">
+  <META HTTP-EQUIV="Content-Security-Policy" CONTENT="default-src 'none'; script-src 'self' 'unsafe-inline' www.redhat.com assets.adobedtm.com jsonip.com ajax.googleapis.com www.googletagmanager.com www.google-analytics.com use.fontawesome.com; style-src 'self'  fonts.googleapis.com use.fontawesome.com; img-src 'self' *; media-src 'self' ; frame-src www.googletagmanager.com; frame-ancestors 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; font-src 'self' use.fontawesome.com fonts.gstatic.com;">
   <META HTTP-EQUIV="X-Frame-Options" CONTENT="DENY">
   <META HTTP-EQUIV="X-XSS-Protection" CONTENT="1; mode=block">
   <META HTTP-EQUIV="X-Content-Type-Options" CONTENT="nosniff">
@@ -16,6 +16,13 @@
   <link rel="stylesheet" href="/assets/css/main.css" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 </head>
+
+<script>
+  let url = window.location.href;
+  if (url.startsWith('https://smallrye.io/docs/smallrye-config')) {
+    window.location.replace('https://smallrye.io/smallrye-config/Main');
+  }
+</script>
 
 <body class="default">
 

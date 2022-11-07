@@ -1,0 +1,23 @@
+:page-layout: post
+:page-title: Jandex 3.0.2
+:page-synopsis: Jandex 3.0.2 released!
+:page-tags: [announcement]
+:page-date: 2022-11-08 09:00:00.000 +0100
+:page-author: lthon
+
+= Jandex 3.0.2
+
+Today, we announce the https://github.com/smallrye/jandex/releases/tag/3.0.2[release] of Jandex 3.0.2.
+It includes a small bug fix, together with a tiny API improvement, and also some infrastructure work.
+
+A method was added to determine if a method is in fact a constructor: `MethodInfo.isConstructor()`.
+
+A bug in parsing type annotations on constructors of inner classes was fixed.
+Thanks Falko Modler for the report!
+
+Finally, the build process was refactored to avoid downloading a second JDK when the build JDK is >= 17.
+This should significantly improve the workflow for downstream, air-gapped rebuilds of Jandex.
+Also, some community standards were adopted: code of conduct, contributing and security documents are now present in the repository.
+Thanks Jeff Mesnil for driving that!
+
+As usual, if you experience any troubles, or if you have any ideas for Jandex improvements, please https://github.com/smallrye/jandex/issues[file an issue].

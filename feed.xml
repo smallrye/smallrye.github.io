@@ -1,4 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2022-11-08T08:28:40+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.0.2</title><link href="https://www.smallrye.io/blog/jandex-3-0-2/" rel="alternate" type="text/html" title="Jandex 3.0.2" /><published>2022-11-08T08:00:00+00:00</published><updated>2022-11-08T08:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-0-2</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-0-2/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2022-11-09T14:32:39+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.0.3</title><link href="https://www.smallrye.io/blog/jandex-3-0-3/" rel="alternate" type="text/html" title="Jandex 3.0.3" /><published>2022-11-09T13:00:00+00:00</published><updated>2022-11-09T13:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-0-3</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-0-3/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.0.3&quot;&gt;release&lt;/a&gt; of Jandex 3.0.3.
+It includes one small bug fix.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;It turns out some JVM languages (e.g. Groovy) may generate inner classes where the constructor doesn&amp;#8217;t take an enclosing instance as a parameter.
+Jandex since version 3.0.0 assumed that inner classes always have such constructor parameter.
+This release relaxes this assumption so that Groovy classes can be indexed correctly.
+Thanks Emond Papegaaij for the report!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;As usual, if you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry><entry><title type="html">Jandex 3.0.2</title><link href="https://www.smallrye.io/blog/jandex-3-0-2/" rel="alternate" type="text/html" title="Jandex 3.0.2" /><published>2022-11-08T08:00:00+00:00</published><updated>2022-11-08T08:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-0-2</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-0-2/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.0.2&quot;&gt;release&lt;/a&gt; of Jandex 3.0.2.
 It includes a small bug fix, together with a tiny API improvement, and also some infrastructure work.&lt;/p&gt;
 &lt;/div&gt;
@@ -1030,16 +1042,4 @@ It is a safe upgrade for everyone using SmallRye Fault Tolerance 5.3.1.&lt;/p&gt
 &lt;p&gt;In &lt;a href=&quot;/blog/fault-tolerance-5-3/&quot;&gt;SmallRye Fault Tolerance 5.3&lt;/a&gt;, we revamped the support for additional async types.
 During that refactoring, we introduced a bug that manifests in environments with security manager enabled.
 In this release, the bug is fixed.&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Fault Tolerance 5.3.1</title><link href="https://www.smallrye.io/blog/fault-tolerance-5-3-1/" rel="alternate" type="text/html" title="Fault Tolerance 5.3.1" /><published>2022-02-10T13:00:00+00:00</published><updated>2022-02-10T13:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-5-3-1</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-5-3-1/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/5.3.1&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 5.3.1.
-This is a small release with one bug fix.
-It is a safe upgrade for everyone using SmallRye Fault Tolerance 5.3.0.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;In &lt;a href=&quot;/blog/fault-tolerance-5-3/&quot;&gt;SmallRye Fault Tolerance 5.3&lt;/a&gt;, we revamped the support for additional async types.
-During that refactoring, we introduced a bug that manifests in environments with complex classloading requirements, such as WildFly.
-In this release, the bug is fixed.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Additionally, the programmatic API documentation was slightly improved.&lt;/p&gt;
 &lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry></feed>

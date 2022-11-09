@@ -1,0 +1,18 @@
+:page-layout: post
+:page-title: Jandex 3.0.3
+:page-synopsis: Jandex 3.0.3 released!
+:page-tags: [announcement]
+:page-date: 2022-11-09 14:00:00.000 +0100
+:page-author: lthon
+
+= Jandex 3.0.3
+
+Today, we announce the https://github.com/smallrye/jandex/releases/tag/3.0.3[release] of Jandex 3.0.3.
+It includes one small bug fix.
+
+It turns out some JVM languages (e.g. Groovy) may generate inner classes where the constructor doesn't take an enclosing instance as a parameter.
+Jandex since version 3.0.0 assumed that inner classes always have such constructor parameter.
+This release relaxes this assumption so that Groovy classes can be indexed correctly.
+Thanks Emond Papegaaij for the report!
+
+As usual, if you experience any troubles, or if you have any ideas for Jandex improvements, please https://github.com/smallrye/jandex/issues[file an issue].

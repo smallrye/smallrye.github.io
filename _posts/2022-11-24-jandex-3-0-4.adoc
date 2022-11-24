@@ -1,0 +1,29 @@
+:page-layout: post
+:page-title: Jandex 3.0.4
+:page-synopsis: Jandex 3.0.4 released!
+:page-tags: [announcement]
+:page-date: 2022-11-24 12:00:00.000 +0100
+:page-author: lthon
+
+= Jandex 3.0.4
+
+Today, we announce the https://github.com/smallrye/jandex/releases/tag/3.0.4[release] of Jandex 3.0.4.
+It includes one bug fix and a few tiny API improvements.
+
+The most important change in this release is a workaround for wrong type paths on type annotations emitted by the Kotlin JVM bytecode compiler.
+If a Kotlin type that uses variance is present in a method signature, for example as a parameter, the Kotlin compiler emits a generic signature that may include a wildcard type.
+That happens for types such as `List` (which is covariant in its type parameter in Kotlin) or `Continuation` (which is used to compile `suspend` functions, and its type parameter is contravariant).
+When that type includes type annotations, such as `List<List<@NotNull String>>`, the type path emitted by the compiler for this type may end up inconsistent with the generic signature.
+For more details about the issue, see https://youtrack.jetbrains.com/issue/KT-55128[KT-55128].
+
+Jandex used to throw an exception when stumbling upon a type annotation with wrong type path.
+That's not very nice -- Jandex should be able to consume bytecode that exists in the wild.
+The fix simply somewhat degrades Jandex functionality to be able to survive the inconsistency.
+Specifically, the type annotation with wrong type path is ignored.
+
+As a small quality of life improvement, the method `ClassType.create()` was added to create instances of `ClassType`.
+This has already been possible using `Type.create()`, but the new method is more convenient in a lot of cases.
+
+Finally, the documentation for classes `ParameterizedType` and `ClassSummary` was improved.
+
+As usual, if you experience any troubles, or if you have any ideas for Jandex improvements, please https://github.com/smallrye/jandex/issues[file an issue].

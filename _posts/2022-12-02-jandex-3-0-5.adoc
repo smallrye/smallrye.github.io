@@ -1,0 +1,29 @@
+:page-layout: post
+:page-title: Jandex 3.0.5
+:page-synopsis: Jandex 3.0.5 released!
+:page-tags: [announcement]
+:page-date: 2022-12-02 15:00:00.000 +0100
+:page-author: lthon
+
+= Jandex 3.0.5
+
+Today, we announce the https://github.com/smallrye/jandex/releases/tag/3.0.5[release] of Jandex 3.0.5.
+It includes one bug fix and a few javadoc improvements.
+
+This release fixes a bug in index post-processing.
+When `Indexer.complete()` is called, Jandex does some post-processing that can't happen when individual classes are indexed.
+This makes sure type annotations are correctly propagated across nested classes.
+To propagate type annotations from enclosing classes to enclosed classes, they must be processed in certain order.
+That order is https://en.wikipedia.org/wiki/Partially_ordered_set[partial], because we don't really care about processing order between classes that are not enclosed in one another.
+However, Jandex used to use the JDK method for sorting the collection of classes, and that requires establishing a https://en.wikipedia.org/wiki/Total_order[total] order.
+Alas, the `Comparator` that Jandex used to use did _not_ establish a total order.
+In other words, it was written incorrectly, which sometimes manifested as the [in]famous `Comparison method violates its general contract!` exception.
+The `Comparator` is fixed in this release.
+Thanks Matthias Villiger for the report!
+
+Additionally, javadoc for some methods was improved, especially for `Type.name()`.
+This is a good reminder for all Jandex users out there: if you use `Type.toString()` to obtain a class name, please don't!
+Use `Type.name()` instead.
+`Type.toString()` is a human-readable representation of the type and should only be used for constructing human-readable messages.
+
+As usual, if you experience any troubles, or if you have any ideas for Jandex improvements, please https://github.com/smallrye/jandex/issues[file an issue].

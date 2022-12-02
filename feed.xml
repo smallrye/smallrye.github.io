@@ -1,4 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2022-11-24T12:34:59+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.0.4</title><link href="https://www.smallrye.io/blog/jandex-3-0-4/" rel="alternate" type="text/html" title="Jandex 3.0.4" /><published>2022-11-24T11:00:00+00:00</published><updated>2022-11-24T11:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-0-4</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-0-4/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2022-12-02T15:19:28+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.0.5</title><link href="https://www.smallrye.io/blog/jandex-3-0-5/" rel="alternate" type="text/html" title="Jandex 3.0.5" /><published>2022-12-02T14:00:00+00:00</published><updated>2022-12-02T14:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-0-5</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-0-5/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.0.5&quot;&gt;release&lt;/a&gt; of Jandex 3.0.5.
+It includes one bug fix and a few javadoc improvements.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This release fixes a bug in index post-processing.
+When &lt;code&gt;Indexer.complete()&lt;/code&gt; is called, Jandex does some post-processing that can&amp;#8217;t happen when individual classes are indexed.
+This makes sure type annotations are correctly propagated across nested classes.
+To propagate type annotations from enclosing classes to enclosed classes, they must be processed in certain order.
+That order is &lt;a href=&quot;https://en.wikipedia.org/wiki/Partially_ordered_set&quot;&gt;partial&lt;/a&gt;, because we don&amp;#8217;t really care about processing order between classes that are not enclosed in one another.
+However, Jandex used to use the JDK method for sorting the collection of classes, and that requires establishing a &lt;a href=&quot;https://en.wikipedia.org/wiki/Total_order&quot;&gt;total&lt;/a&gt; order.
+Alas, the &lt;code&gt;Comparator&lt;/code&gt; that Jandex used to use did &lt;em&gt;not&lt;/em&gt; establish a total order.
+In other words, it was written incorrectly, which sometimes manifested as the [in]famous &lt;code&gt;Comparison method violates its general contract!&lt;/code&gt; exception.
+The &lt;code&gt;Comparator&lt;/code&gt; is fixed in this release.
+Thanks Matthias Villiger for the report!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Additionally, javadoc for some methods was improved, especially for &lt;code&gt;Type.name()&lt;/code&gt;.
+This is a good reminder for all Jandex users out there: if you use &lt;code&gt;Type.toString()&lt;/code&gt; to obtain a class name, please don&amp;#8217;t!
+Use &lt;code&gt;Type.name()&lt;/code&gt; instead.
+&lt;code&gt;Type.toString()&lt;/code&gt; is a human-readable representation of the type and should only be used for constructing human-readable messages.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;As usual, if you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry><entry><title type="html">Jandex 3.0.4</title><link href="https://www.smallrye.io/blog/jandex-3-0-4/" rel="alternate" type="text/html" title="Jandex 3.0.4" /><published>2022-11-24T11:00:00+00:00</published><updated>2022-11-24T11:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-0-4</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-0-4/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.0.4&quot;&gt;release&lt;/a&gt; of Jandex 3.0.4.
 It includes one bug fix and a few tiny API improvements.&lt;/p&gt;
 &lt;/div&gt;
@@ -927,136 +951,4 @@ This doesn&amp;#8217;t change runtime behavior, because guarded methods that wer
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Some internal build-related improvements were also made.&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Fault Tolerance 5.4</title><link href="https://www.smallrye.io/blog/fault-tolerance-5-4/" rel="alternate" type="text/html" title="Fault Tolerance 5.4" /><published>2022-03-31T10:00:00+00:00</published><updated>2022-03-31T10:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-5-4</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-5-4/">&lt;div id=&quot;preamble&quot;&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/5.4.0&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 5.4.0.
-This release includes several new features and fixes related to the programmatic API.
-It should be a safe upgrade for everyone using SmallRye Fault Tolerance 5.3.x.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;reusable_preconfigured_fault_tolerance_strategies&quot;&gt;Reusable, preconfigured fault tolerance strategies&lt;/h2&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;In SmallRye Fault Tolerance 5.3.0, we &lt;a href=&quot;/blog/fault-tolerance-5-3/&quot;&gt;introduced&lt;/a&gt; the programmatic API.
-In this release, we augment that with a declarative way of applying programmatically created fault tolerance!
-This allows centralizing fault tolerance configuration, as well as sharing fault tolerance state, all in a nice declarative fashion consistent with MicroProfile Fault Tolerance.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Let&amp;#8217;s demonstrate it with an example.
-First, you have to create a bean of type &lt;code&gt;FaultTolerance&lt;/code&gt; with an &lt;code&gt;@Identifier&lt;/code&gt; qualifier:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;listingblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;java&quot; class=&quot;language-java hljs&quot;&gt;@ApplicationScoped
-public class PreconfiguredFaultTolerance {
-    @Produces
-    @Identifier(&quot;my-fault-tolerance&quot;)
-    public static final FaultTolerance&amp;lt;String&amp;gt; FT = FaultTolerance.&amp;lt;String&amp;gt;create()
-            .withRetry().maxRetries(2).done()
-            .withFallback().handler(() -&amp;gt; &quot;fallback&quot;).done()
-            .build();
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;It is customary to create the bean by declaring a &lt;code&gt;static&lt;/code&gt; producer field, which is what we&amp;#8217;ve done here.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Once we have that, we can apply &lt;code&gt;my-fault-tolerance&lt;/code&gt; to synchronous methods that return &lt;code&gt;String&lt;/code&gt;:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;listingblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;java&quot; class=&quot;language-java hljs&quot;&gt;@ApplicationScoped
-public class MyService {
-    @ApplyFaultTolerance(&quot;my-fault-tolerance&quot;)
-    public String doSomething() {
-        ...
-    }
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;See the &lt;a href=&quot;https://smallrye.io/docs/smallrye-fault-tolerance/5.4.0/usage/extra.html#_reusable_preconfigured_fault_tolerance&quot;&gt;documentation&lt;/a&gt; for more information.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;exception_decisions_in_programmatic_api&quot;&gt;Exception decisions in programmatic API&lt;/h2&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The circuit breaker, fallback, and retry fault tolerance strategies allow configuring what happens on certain exceptions.
-Both the declarative and programmatic API allow configuring a set of exception classes that are considered expected and unexpected.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;With this release, the programmatic API also lets you supply a simple exception predicate, which allows expressing more complex exception decisions.
-For example:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;listingblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;java&quot; class=&quot;language-java hljs&quot;&gt;Callable&amp;lt;String&amp;gt; guarded = FaultTolerance.createCallable(this::action)
-        .withFallback().handler(this::fallback).when(e -&amp;gt; e instanceof RuntimeException).done()
-        .build();&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Of course, the value of this approach is that the predicate may be more complex than a simple &lt;code&gt;instanceof&lt;/code&gt; check.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;support_for_kotlin_suspending_functions&quot;&gt;Support for Kotlin suspending functions&lt;/h2&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;SmallRye Fault Tolerance already supports some asynchronous types on top of the &lt;code&gt;CompletionStage&lt;/code&gt; type mandated by the MicroProfile Fault Tolerance specification.
-Specifically, there&amp;#8217;s support for Mutiny and RxJava 3 and more could easily be added if needed.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;In this release of SmallRye Fault Tolerance, a new module &lt;code&gt;smallrye-fault-tolerance-kotlin&lt;/code&gt; is added that provides support for Kotlin &lt;code&gt;suspend&lt;/code&gt; functions.
-They are also considered asynchronous, so fault tolerance applies across suspension points, like you&amp;#8217;d expect.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;For example:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;listingblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;pre class=&quot;highlightjs highlight&quot;&gt;&lt;code data-lang=&quot;java&quot; class=&quot;language-java hljs&quot;&gt;@ApplicationScoped
-open class MyService {
-    @Retry(maxRetries = 2)
-    @Fallback(fallbackMethod = &quot;helloFallback&quot;)
-    open suspend fun hello(): String {
-        delay(100)
-        throw IllegalArgumentException()
-    }
-
-    private suspend fun helloFallback(): String {
-        delay(100)
-        return &quot;hello&quot;
-    }
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;others&quot;&gt;Others&lt;/h2&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The SmallRye Fault Tolerance documentation of the programmatic API recommends to store &lt;code&gt;FaultTolerance&lt;/code&gt; instances into &lt;code&gt;static&lt;/code&gt; fields.
-This has some interesting implications.
-Specifically, the entire fault tolerance chain is built in the static initializer, and that includes looking up several beans from the CDI container and possibly even creating a thread.
-That is problematic in Quarkus when compiling to a native image, because static initialization code is executed during native image build.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;In this release of SmallRye Fault Tolerance, this problem is fixed.
-Almost all of the initialization is deferred to runtime.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;All in all, upgrading to 5.4.0 is very much recommended.
-As described above, there are certain new things, so if you encounter any bugs, please let us know in the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;issue tracker&lt;/a&gt;!
-We&amp;#8217;re still very much interested in any feedback on the programmatic API.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
 &lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry></feed>

@@ -1,0 +1,50 @@
+:page-layout: post
+:page-title: Fault Tolerance 6.2.0
+:page-synopsis: SmallRye Fault Tolerance 6.2.0 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2023-02-10 14:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 6.2.0
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.2.0[release] of {smallrye-ft} 6.2.0.
+
+As described in link:/blog/fault-tolerance-6-0-0/[the previous announcement], this release marks the end of life of {smallrye-ft} 5.
+There will be no more releases in the 5.x stream.
+This also means there will be no more Java 8 support.
+
+This release also upgrades to the Jakarta EE 10 dependencies.
+
+== Documentation
+
+Previously, the documentation contained numerous references to the {microprofile-ft} specification, and all {smallrye-ft} improvements on top of the specification were described in a single, long, hard to read document.
+
+In {smallrye-ft} 6.2.0, the https://smallrye.io/docs/smallrye-fault-tolerance/6.2.0/[documentation] has been thoroughly restructured and revised.
+It should contain all the necessary information, so that you no longer have to refer to the specification for pretty basic stuff.
+The improvements on top of the specification are now placed in the same guide that describes the basic feature.
+
+Overall, the documentation now contains more information and yet should be much easier to navigate and read.
+It is divided into 2 major sections:
+
+- How-to Guides: task-oriented guides that let you quickly start using some feature.
+They provide a short overview, but not many details.
+
+- References: detailed guides that let you understand some feature in depth.
+They also provide information about more advanced options or features.
+
+There are 2 other sections (Integration, Internals), but those are not terribly useful for application developers.
+
+== Circuit breaker state metric
+
+This release also adds one small feature: current state of circuit breakers is now exposed through metrics.
+
+A new metric called `ft.circuitbreaker.state.current` is added.
+It has the following tags:
+
+- `method`: the fully qualified method name, like in all other fault tolerance metrics
+- `state` = `[open|closed|halfOpen]`: the circuit breaker state
+
+This metric is a gauge with a value of `0` or `1`.
+The value of `1` means that the circuit breaker currently _is_ in given state, while `0` means that it is not.

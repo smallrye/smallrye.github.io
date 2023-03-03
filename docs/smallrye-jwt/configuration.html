@@ -39,7 +39,7 @@
           <span class="navbar-link">Projects</span>
           <div class="navbar-dropdown">
               <a class="navbar-item" href="../index/index/index.html">Index</a>
-              <a class="navbar-item" href="../smallrye-fault-tolerance/6.2.0/index.html">SmallRye Fault Tolerance</a>
+              <a class="navbar-item" href="../smallrye-fault-tolerance/6.2.1/index.html">SmallRye Fault Tolerance</a>
               <a class="navbar-item" href="../smallrye-health/3.0.1/index.html">SmallRye Health</a>
               <a class="navbar-item" href="index.html">SmallRye JWT</a>
               <a class="navbar-item" href="../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
@@ -125,6 +125,11 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">Config property allows for an external or internal location of Private Decryption Key to be specified.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mp.jwt.decrypt.key.algorithm</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RSA-OAEP, RSA-OAEP-256</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Decryption algorithm, both <code>RSA-OAEP</code> and <code>RSA-OAEP-256</code> will be supported by default. Set it to <code>RSA-OAEP-256</code> to support <code>RSA-OAEP</code> with <code>SHA-256</code> only.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>mp.jwt.verify.issuer</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Expected value of the JWT <code>iss</code> (issuer) claim.</p></td>
@@ -133,6 +138,11 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>mp.jwt.verify.audiences</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>none</code></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Comma separated list of the audiences that a token <code>aud</code> claim may contain.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mp.jwt.verify.token.age</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>none</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of seconds that must not elapse since the <code>iat</code> (issued at) time.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>mp.jwt.token.header</code></p></td>
@@ -313,7 +323,7 @@ precedence:</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.decrypt.algorithm</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>RSA_OAEP</code></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Decryption algorithm.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Decryption algorithm. This property is deprecated, use <code>mp.jwt.decrypt.key.algorithm</code>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.token.decryption.kid</code></p></td>

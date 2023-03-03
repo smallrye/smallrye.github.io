@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Fault Tolerance 6.2.1</title>
+  <script id="adobe_dtm" src="https://www.redhat.com/dtm.js" type="text/javascript"></script>
+  <script src="/assets/javascript/highlightjs-pack.js" type="text/javascript"></script>
+  <META HTTP-EQUIV="Content-Security-Policy" CONTENT="default-src 'none'; script-src 'self' www.redhat.com assets.adobedtm.com jsonip.com ajax.googleapis.com www.googletagmanager.com www.google-analytics.com use.fontawesome.com; style-src 'self'  fonts.googleapis.com use.fontawesome.com; img-src 'self' *; media-src 'self' ; frame-src www.googletagmanager.com; frame-ancestors 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; font-src 'self' use.fontawesome.com fonts.gstatic.com;">
+  <META HTTP-EQUIV="X-Frame-Options" CONTENT="DENY">
+  <META HTTP-EQUIV="X-XSS-Protection" CONTENT="1; mode=block">
+  <META HTTP-EQUIV="X-Content-Type-Options" CONTENT="nosniff">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+  <link rel="shortcut icon" type="image/png" href="/favicon.ico" >
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+</head>
+
+<body class="post">
+
+  <div class="content">
+    <div class="navigation-wrapper">
+  <div class="width-12-12">
+    <div class="header navigation">
+      <div class="logo-wrapper">
+        <a href="/"><img class="project-logo" title="SmallRye" src="/assets/images/smallrye_project_logo.svg"></a>
+      </div>
+      <div class="nav-container">
+        <nav>
+          <div class="nav-mobile"><a id="nav-toggle" href="#!"><span></span></a></div>
+          <ul class="nav-list">
+            <li>
+              <a href="/projects/" class="">Projects</a>
+            </li>
+            <li>
+              <a href="/community/" class="">Community</a>
+            </li>
+            <li>
+              <a href="/blog/" class="active">Blog</a>
+            </li>
+            <li>
+              <a href="/docs/index.html" class="">Documentation</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="post-page grid-wrapper">
+  <div class="grid__item width-10-12 doc-content">
+    <h1>Fault Tolerance 6.2.1</h1>
+    <div class="paragraph">
+<p>Today, we announce the <a href="https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.2.1">release</a> of SmallRye Fault Tolerance 6.2.1.
+This is a small release with one tiny feature useful for application server integrators.</p>
+</div>
+<div class="paragraph">
+<p>SmallRye Fault Tolerance has included support for Micrometer since <a href="/blog/fault-tolerance-5-5/">version 5.5</a>, but integrators had to fiddle with type discovery to get it working.
+In this release, for integrators that use the CDI Portable Extension present in SmallRye Fault Tolerance, we provide a direct way to select which metrics integration should be used.</p>
+</div>
+<div class="paragraph">
+<p>The <code>FaultToleranceExtension</code> class now has an additional constructor that takes a <code>MetricsIntegration</code> parameter.
+The <code>MetricsIntegration</code> is an enum with these values:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>MICROPROFILE_METRICS</code>: use MicroProfile Metrics integration</p>
+</li>
+<li>
+<p><code>MICROMETER</code>: use Micrometer integration</p>
+</li>
+<li>
+<p><code>NOOP</code>: no metrics</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Since this is a constructor parameter, it is only useful for integrators that instantiate the Portable Extension themselves.
+If the integrator relies on the CDI container to discover and instantiate Portable Extensions, this mechanism is useless and they still need to alter the set of discovered types when they want a different metrics integration.
+We&#8217;d like to provide a different mechanism in the future, though it is not clear how that could look like.
+If you have any ideas, please <a href="https://github.com/smallrye/smallrye-fault-tolerance/issues">file an issue</a>!</p>
+</div>
+  </div>
+</div>
+
+  </div>
+
+  <div class="content project-footer">
+  <div class="footer-section">
+    <div class="logo-wrapper">
+      <a href="/"><img src="/assets/images/smallrye_project_logo.svg" class="project-logo" title="SmallRye"></a>
+    </div>
+  </div>
+  <div class="grid-wrapper">
+    <p class="grid__item width-3-12">SmallRye is open source under <a href='https://www.apache.org/licenses/LICENSE-2.0' target='_blank'>Apache Software License 2.0</a>. <br /><br />This website was built with <a href='https://jekyllrb.com/' target='_blank'>Jekyll</a> is hosted on <a href='https://pages.github.com/' target='_blank'>Github Pages</a> and is completely open source. If you want to make it better, <a href='https://github.com/smallrye/smallrye.github.io' target='_blank'>fork the website</a> and show us what you’ve got.</p>
+
+    
+      <div class="width-1-12 project-links">
+        <span>Navigation</span>
+        <ul class="footer-links width-1-12">
+          
+            <li><a href="/">Home</a></li>
+          
+        </ul>
+      </div>
+    
+      <div class="width-1-12 project-links">
+        <span>Contribute</span>
+        <ul class="footer-links width-1-12">
+          
+            <li><a href="https://twitter.com/smallrye_io">Follow us</a></li>
+          
+            <li><a href="https://github.com/smallrye">GitHub</a></li>
+          
+        </ul>
+      </div>
+    
+      <div class="width-1-12 project-links">
+        <span>Get Help</span>
+        <ul class="footer-links width-1-12">
+          
+            <li><a href="https://quarkusio.zulipchat.com">Chatroom</a></li>
+          
+            <li><a href="https://groups.google.com/d/forum/smallrye">Google&nbsp;Groups</a></li>
+          
+        </ul>
+      </div>
+    
+
+    
+      <div class="width-6-12 more-links">
+        <span>External Links</span>
+        <ul class="footer-links">
+          
+            <li><a href="https://microprofile.io/" target="_blank">Eclipse MicroProfile</a></li>
+          
+            <li><a href="https://github.com/eclipse?utf8=✓&q=microprofile" target="_blank">Eclipse MicroProfile on GitHub</a></li>
+          
+        </ul>
+      </div>
+    
+  </div>
+</div>
+  <div class="content redhat-footer">
+  <div class="grid-wrapper">
+    <span class="licence">
+      <i class="fab fa-creative-commons"></i><i class="fab fa-creative-commons-by"></i> <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">CC by 3.0</a>
+      | <a href="https://www.redhat.com/en/about/privacy-policy">Red Hat Privacy Policy</a>
+    </span>
+    <span class="redhat">
+      a Red Hat sponsored project   
+    </span>
+    <span class="redhat-logo">
+      <a href="https://www.redhat.com/" target="_blank"><img src="/assets/images/redhat_reversed.svg"></a>
+    </span>
+  </div>
+</div>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script type="text/javascript" src="/assets/javascript/mobile-nav.js"></script>
+  <script type="text/javascript" src="/assets/javascript/scroll-down.js"></script>
+  <script type="text/javascript" src="/assets/javascript/satellite.js"></script>
+</body>
+
+</html>

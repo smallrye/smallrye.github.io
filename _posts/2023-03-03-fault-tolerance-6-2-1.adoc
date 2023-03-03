@@ -1,0 +1,28 @@
+:page-layout: post
+:page-title: Fault Tolerance 6.2.1
+:page-synopsis: SmallRye Fault Tolerance 6.2.1 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2023-03-03 11:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 6.2.1
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.2.1[release] of {smallrye-ft} 6.2.1.
+This is a small release with one tiny feature useful for application server integrators.
+
+{smallrye-ft} has included support for Micrometer since link:/blog/fault-tolerance-5-5/[version 5.5], but integrators had to fiddle with type discovery to get it working.
+In this release, for integrators that use the CDI Portable Extension present in {smallrye-ft}, we provide a direct way to select which metrics integration should be used.
+
+The `FaultToleranceExtension` class now has an additional constructor that takes a `MetricsIntegration` parameter.
+The `MetricsIntegration` is an enum with these values:
+
+- `MICROPROFILE_METRICS`: use MicroProfile Metrics integration
+- `MICROMETER`: use Micrometer integration
+- `NOOP`: no metrics
+
+Since this is a constructor parameter, it is only useful for integrators that instantiate the Portable Extension themselves.
+If the integrator relies on the CDI container to discover and instantiate Portable Extensions, this mechanism is useless and they still need to alter the set of discovered types when they want a different metrics integration.
+We'd like to provide a different mechanism in the future, though it is not clear how that could look like.
+If you have any ideas, please https://github.com/smallrye/smallrye-fault-tolerance/issues[file an issue]!

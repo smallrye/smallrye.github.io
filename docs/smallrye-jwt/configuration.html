@@ -39,7 +39,7 @@
           <span class="navbar-link">Projects</span>
           <div class="navbar-dropdown">
               <a class="navbar-item" href="../index/index/index.html">Index</a>
-              <a class="navbar-item" href="../smallrye-fault-tolerance/6.2.1/index.html">SmallRye Fault Tolerance</a>
+              <a class="navbar-item" href="../smallrye-fault-tolerance/6.2.2/index.html">SmallRye Fault Tolerance</a>
               <a class="navbar-item" href="../smallrye-health/3.0.1/index.html">SmallRye Health</a>
               <a class="navbar-item" href="index.html">SmallRye JWT</a>
               <a class="navbar-item" href="../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
@@ -138,6 +138,11 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>mp.jwt.verify.audiences</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>none</code></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Comma separated list of the audiences that a token <code>aud</code> claim may contain.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mp.jwt.verify.clock.skew</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>60</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clock skew in seconds used during the token expiration and age verification. An expired token is accepted if the current time is within the number of seconds specified by this property after the token expiration time. The default value is 60 seconds.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>mp.jwt.verify.token.age</code></p></td>
@@ -297,8 +302,8 @@ precedence:</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.expiration.grace</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>60</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Expiration grace in seconds. By default an expired token will still be accepted if the current time is no more than 1 min after the token expiry time.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expiration grace in seconds. By default an expired token will still be accepted if the current time is no more than 1 min after the token expiry time. This property is deprecated. Use <code>mp.jwt.verify.clock.skew</code> instead.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.verify.aud</code></p></td>

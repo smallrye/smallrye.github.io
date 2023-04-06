@@ -1,0 +1,20 @@
+:page-layout: post
+:page-title: Fault Tolerance 6.2.2
+:page-synopsis: SmallRye Fault Tolerance 6.2.2 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2023-04-06 11:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 6.2.2
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.2.2[release] of {smallrye-ft} 6.2.2.
+This is a tiny release with one bugfix for programmatic API usage.
+
+There are 2 variants of the {smallrye-ft} programmatic API: _standalone_ and _CDI_.
+At runtime, only one of them should typically be present, but if there are both, a priority mechanism exists to disambiguate.
+This priority mechanism had a bug which could lead to incorrect variant being selected.
+The bug is now fixed and the programmatic API should work as expected.
+
+And as usual, if you have any ideas for improvements, please https://github.com/smallrye/smallrye-fault-tolerance/issues[file an issue]!

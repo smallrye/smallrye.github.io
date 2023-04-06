@@ -1,4 +1,217 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2023-04-06T12:43:12+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 6.2.2</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-2-2/" rel="alternate" type="text/html" title="Fault Tolerance 6.2.2" /><published>2023-04-06T10:00:00+00:00</published><updated>2023-04-06T10:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-2-2</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-2-2/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2023-04-06T15:22:42+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.1.0</title><link href="https://www.smallrye.io/blog/jandex-3-1-0/" rel="alternate" type="text/html" title="Jandex 3.1.0" /><published>2023-04-06T14:00:00+00:00</published><updated>2023-04-06T14:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-1-0</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-1-0/">&lt;div id=&quot;preamble&quot;&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.1.0&quot;&gt;release&lt;/a&gt; of Jandex 3.1.0.
+It includes several improvements and bug fixes.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;declarations&quot;&gt;Declarations&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The top-level interface in the Jandex object model has always been an &lt;code&gt;AnnotationTarget&lt;/code&gt;: something that can be annotated.
+There are generally two kinds of things that can be annotated, speaking in Java terms: declarations and types (or type usages, to be more precise).
+This distinction hasn&amp;#8217;t been reflected in the Jandex object model hierarchy, until now.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Jandex 3.1 adds the &lt;code&gt;Declaration&lt;/code&gt; interface, which directly extends &lt;code&gt;AnnotationTarget&lt;/code&gt;.
+All classes that represent declarations now implement &lt;code&gt;Declaration&lt;/code&gt;:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;ClassInfo&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;FieldInfo&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;MethodInfo&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;MethodParameterInfo&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;RecordComponentInfo&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The only &lt;code&gt;AnnotationTarget&lt;/code&gt; that isn&amp;#8217;t &lt;code&gt;Declaration&lt;/code&gt; is:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;TypeTarget&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The &lt;code&gt;EquivalenceKey&lt;/code&gt; hierarchy also has a &lt;code&gt;DeclarationEquivalenceKey&lt;/code&gt;, so that it corresponds to the &lt;code&gt;AnnotationTarget&lt;/code&gt; hierarchy.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This is a small change that should significantly improve usage of Jandex as a language model.
+It is very common to only care about annotated declarations, but for now, there hasn&amp;#8217;t been a way to distinguish them from annotated type usages.
+The &lt;code&gt;Declaration&lt;/code&gt; interface serves this very purpose.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;factories_and_builders_for_types&quot;&gt;Factories and builders for types&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;There are different ways to instantiate a Jandex &lt;code&gt;Type&lt;/code&gt;.
+The &lt;code&gt;Type.create()&lt;/code&gt; static method is not very easy to use, and the concrete subclasses of &lt;code&gt;Type&lt;/code&gt; over time accumulated different static factory methods as well.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Jandex 3.1 adds a comprehensive set of static factory methods and builders to all complex &lt;code&gt;Type&lt;/code&gt;s:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;ClassType&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;ArrayType&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;ParameterizedType&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;TypeVariable&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;WildcardType&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;All these classes have a set of static factory methods called &lt;code&gt;create()&lt;/code&gt;, sufficient for the most common cases.
+They also have a static method called &lt;code&gt;builder()&lt;/code&gt; that returns a builder, usable for the less common cases, including type annotations.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;array_types_representation&quot;&gt;Array types representation&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The &lt;code&gt;ArrayType&lt;/code&gt; class in Jandex models Java array types.
+The Jandex representation, incidentally, is very different from the Java language representation, yet has always used the same terminology.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Quick refresher: in Java, array types have a component type and an element type.
+For example, in case of &lt;code&gt;int[][]&lt;/code&gt;, the element type is &lt;code&gt;int&lt;/code&gt;, while the component type is &lt;code&gt;int[]&lt;/code&gt; (whose component type is &lt;code&gt;int&lt;/code&gt;).
+In Jandex, &lt;code&gt;int[][]&lt;/code&gt; has always been represented as a tuple: &lt;code&gt;{ componentType = int, dimensions = 2 }&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This shows the first issue: conflicting terminology.
+The term &lt;em&gt;component type&lt;/em&gt; in Jandex has always meant something else than in Java.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;That&amp;#8217;s not everything, though.
+To faithfully represent type annotations on the dimensions of the array, Jandex sometimes has to use an array type as the component type of an array type.
+For example, the type &lt;code&gt;String[] @Ann []&lt;/code&gt; has to be represented as an array with 1 dimension, whose component type is an array type &lt;code&gt;String @Ann []&lt;/code&gt;.
+The component type of that, in turn, is &lt;code&gt;String&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;As you can see, this is completely different from the Java representation.
+This is usually not a big deal, because annotations on array dimensions are rare and multi-dimensional arrays are significantly less common than single-dimensional, but it still causes confusion.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;With the release of Jandex 3.1, this is no more.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;What Jandex used to call &lt;em&gt;component type&lt;/em&gt; of an array is now named &lt;em&gt;constituent type&lt;/em&gt;.
+To access the Jandex representation, the following methods exist:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;constituent()&lt;/code&gt;: this method is new&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;dimensions()&lt;/code&gt;: this method has existed before and hasn&amp;#8217;t been changed to avoid breaking compatibility&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Methods to access the Java representation of array types are added:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;elementType()&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;componentType()&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;deepDimensions()&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;One method has been deprecated:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;component()&lt;/code&gt;: this method has existed before and hasn&amp;#8217;t been changed to avoid breaking compatibility&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;reconstructing_descriptors_and_generic_signatures&quot;&gt;Reconstructing descriptors and generic signatures&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Advanced users of Jandex, such as Quarkus, sometimes have to reconstruct a descriptor or a generic signature of some Jandex object.
+In this release, Jandex has this functionality built-in, accessible through two interfaces: &lt;code&gt;Descriptor&lt;/code&gt; and &lt;code&gt;GenericSignature&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Jandex classes that implement the &lt;code&gt;Descriptor&lt;/code&gt; interface are able to reconstruct their bytecode descriptor.
+Similarly, Jandex classes that implement the &lt;code&gt;GenericSignature&lt;/code&gt; interface are able to reconstruct their generic signature and also return whether a generic signature is actually required.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Both descriptor and signature reconstruction can optionally perform type variable substitution.
+That is, if a type variable occurs when reconstructing the descriptor, the corresponding part of the descriptor may instead describe another type returned by a given substitution function (same for signatures).&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;other&quot;&gt;Other&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Previously, Jandex used to fail when invalid generic signature occured in the indexed bytecode.
+It turns out that ECJ may produce invalid generic signature on pretty basic code (synthetic static method generated for a lambda), so with Jandex 3.1, invalid signatures are simply ignored.
+Thanks Hélios Gilles for providing a reproducer!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;With great help from Francesco Nigro, a lot of performance improvements to the indexing process were made.
+On large JARs, we&amp;#8217;ve seen roughly 20% improvements in indexing speed and 50% improvements in allocation rate.
+Thank you!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Finally, Brian Demers and Guillaume Nodet provided fixes for build reproducibility.
+(Note that this is not an intentionally supported feature and it&amp;#8217;s only maintained on a best effort basis.)
+Thanks!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This release brings a lot of changes, but none of them break backward compatibility.
+The persistent format of Jandex has not changed either, so upgrade should be safe for everyone.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry><entry><title type="html">Fault Tolerance 6.2.2</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-2-2/" rel="alternate" type="text/html" title="Fault Tolerance 6.2.2" /><published>2023-04-06T10:00:00+00:00</published><updated>2023-04-06T10:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-2-2</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-2-2/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.2.2&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.2.2.
 This is a tiny release with one bugfix for programmatic API usage.&lt;/p&gt;
 &lt;/div&gt;
@@ -440,70 +653,4 @@ This is now fixed and all &lt;code&gt;Type&lt;/code&gt;s have proper structural 
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;As usual, if you experience any troubles, or if you have any exciting ideas for Jandex, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry><entry><title type="html">Fault Tolerance 6.0.0</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-0-0/" rel="alternate" type="text/html" title="Fault Tolerance 6.0.0" /><published>2022-09-07T14:00:00+00:00</published><updated>2022-09-07T14:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-0-0</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-0-0/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.0.0&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.0.0.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;This release implements MicroProfile Fault Tolerance 4.0 and therefore supports Jakarta EE 9 / MicroProfile 5.0.
-Implementation-wise, the 6.0.0 release corresponds to &lt;a href=&quot;/blog/fault-tolerance-5-5/&quot;&gt;SmallRye Fault Tolerance 5.5.0&lt;/a&gt;.
-Additionally, SmallRye Fault Tolerance 6.0.0 requires Java 11 at minimum; it is no longer compatible with Java 8.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;For the time being, we will produce releases both in the 5.x and 6.x streams.
-There will always be a direct correspondence between a 5.x and a 6.x release:&lt;/p&gt;
-&lt;/div&gt;
-&lt;table class=&quot;tableblock frame-all grid-all stretch&quot;&gt;
-&lt;colgroup&gt;
-&lt;col style=&quot;width: 50%;&quot;&gt;
-&lt;col style=&quot;width: 50%;&quot;&gt;
-&lt;/colgroup&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th class=&quot;tableblock halign-left valign-top&quot;&gt;5.x release&lt;/th&gt;
-&lt;th class=&quot;tableblock halign-left valign-top&quot;&gt;Corresponding 6.x release&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;5.4.0&lt;/p&gt;&lt;/td&gt;
-&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;6.0.0-RC2&lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;5.4.1&lt;/p&gt;&lt;/td&gt;
-&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;6.0.0-RC3&lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;5.5.0&lt;/p&gt;&lt;/td&gt;
-&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;6.0.0-RC4&lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;5.5.0&lt;/p&gt;&lt;/td&gt;
-&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;6.0.0&lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;5.5.1 (hypothetically)&lt;/p&gt;&lt;/td&gt;
-&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;6.0.1 (hypothetically)&lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;5.6.0 (hypothetically)&lt;/p&gt;&lt;/td&gt;
-&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;6.1.0 (hypothetically)&lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;5.6.1 (hypothetically)&lt;/p&gt;&lt;/td&gt;
-&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;6.1.1 (hypothetically)&lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;5.7.0 (hypothetically)&lt;/p&gt;&lt;/td&gt;
-&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;6.2.0 (hypothetically)&lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;At some point, we&amp;#8217;ll stop producing releases in the 5.x stream.
-Shortly after that, we&amp;#8217;ll upgrade the basic dependencies (Jakarta CDI etc.) to their Jakarta EE 10 versions.
-Since Jakarta EE 9 is mostly a transition release and runtimes we&amp;#8217;re aware of target Jakarta EE 10 anyway, we likely won&amp;#8217;t bump a major version for that.
-In other words, the upgrade to Jakarta EE 10 base will happen in the 6.x stream and will not require a 7.0 release.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;As usual, if you have any problems or ideas, including objections to the plan stated above, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry></feed>
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry></feed>

@@ -1,0 +1,122 @@
+:page-layout: post
+:page-title: Jandex 3.1.0
+:page-synopsis: Jandex 3.1.0 released!
+:page-tags: [announcement]
+:page-date: 2023-04-06 15:00:00.000 +0100
+:page-author: lthon
+
+= Jandex 3.1.0
+
+Today, we announce the https://github.com/smallrye/jandex/releases/tag/3.1.0[release] of Jandex 3.1.0.
+It includes several improvements and bug fixes.
+
+== Declarations
+
+The top-level interface in the Jandex object model has always been an `AnnotationTarget`: something that can be annotated.
+There are generally two kinds of things that can be annotated, speaking in Java terms: declarations and types (or type usages, to be more precise).
+This distinction hasn't been reflected in the Jandex object model hierarchy, until now.
+
+Jandex 3.1 adds the `Declaration` interface, which directly extends `AnnotationTarget`.
+All classes that represent declarations now implement `Declaration`:
+
+* `ClassInfo`
+* `FieldInfo`
+* `MethodInfo`
+* `MethodParameterInfo`
+* `RecordComponentInfo`
+
+The only `AnnotationTarget` that isn't `Declaration` is:
+
+* `TypeTarget`
+
+The `EquivalenceKey` hierarchy also has a `DeclarationEquivalenceKey`, so that it corresponds to the `AnnotationTarget` hierarchy.
+
+This is a small change that should significantly improve usage of Jandex as a language model.
+It is very common to only care about annotated declarations, but for now, there hasn't been a way to distinguish them from annotated type usages.
+The `Declaration` interface serves this very purpose.
+
+== Factories and builders for types
+
+There are different ways to instantiate a Jandex `Type`.
+The `Type.create()` static method is not very easy to use, and the concrete subclasses of `Type` over time accumulated different static factory methods as well.
+
+Jandex 3.1 adds a comprehensive set of static factory methods and builders to all complex ``Type``s:
+
+* `ClassType`
+* `ArrayType`
+* `ParameterizedType`
+* `TypeVariable`
+* `WildcardType`
+
+All these classes have a set of static factory methods called `create()`, sufficient for the most common cases.
+They also have a static method called `builder()` that returns a builder, usable for the less common cases, including type annotations.
+
+== Array types representation
+
+The `ArrayType` class in Jandex models Java array types.
+The Jandex representation, incidentally, is very different from the Java language representation, yet has always used the same terminology.
+
+Quick refresher: in Java, array types have a component type and an element type.
+For example, in case of `int[][]`, the element type is `int`, while the component type is `int[]` (whose component type is `int`).
+In Jandex, `int[][]` has always been represented as a tuple: `{ componentType = int, dimensions = 2 }`.
+
+This shows the first issue: conflicting terminology.
+The term _component type_ in Jandex has always meant something else than in Java.
+
+That's not everything, though.
+To faithfully represent type annotations on the dimensions of the array, Jandex sometimes has to use an array type as the component type of an array type.
+For example, the type `String[] @Ann []` has to be represented as an array with 1 dimension, whose component type is an array type `String @Ann []`.
+The component type of that, in turn, is `String`.
+
+As you can see, this is completely different from the Java representation.
+This is usually not a big deal, because annotations on array dimensions are rare and multi-dimensional arrays are significantly less common than single-dimensional, but it still causes confusion.
+
+With the release of Jandex 3.1, this is no more.
+
+What Jandex used to call _component type_ of an array is now named _constituent type_.
+To access the Jandex representation, the following methods exist:
+
+* `constituent()`: this method is new
+* `dimensions()`: this method has existed before and hasn't been changed to avoid breaking compatibility
+
+Methods to access the Java representation of array types are added:
+
+* `elementType()`
+* `componentType()`
+* `deepDimensions()`
+
+One method has been deprecated:
+
+* `component()`: this method has existed before and hasn't been changed to avoid breaking compatibility
+
+== Reconstructing descriptors and generic signatures
+
+Advanced users of Jandex, such as Quarkus, sometimes have to reconstruct a descriptor or a generic signature of some Jandex object.
+In this release, Jandex has this functionality built-in, accessible through two interfaces: `Descriptor` and `GenericSignature`.
+
+Jandex classes that implement the `Descriptor` interface are able to reconstruct their bytecode descriptor.
+Similarly, Jandex classes that implement the `GenericSignature` interface are able to reconstruct their generic signature and also return whether a generic signature is actually required.
+
+Both descriptor and signature reconstruction can optionally perform type variable substitution.
+That is, if a type variable occurs when reconstructing the descriptor, the corresponding part of the descriptor may instead describe another type returned by a given substitution function (same for signatures).
+
+== Other
+
+Previously, Jandex used to fail when invalid generic signature occured in the indexed bytecode.
+It turns out that ECJ may produce invalid generic signature on pretty basic code (synthetic static method generated for a lambda), so with Jandex 3.1, invalid signatures are simply ignored.
+Thanks Hélios Gilles for providing a reproducer!
+
+With great help from Francesco Nigro, a lot of performance improvements to the indexing process were made.
+On large JARs, we've seen roughly 20% improvements in indexing speed and 50% improvements in allocation rate.
+Thank you!
+
+Finally, Brian Demers and Guillaume Nodet provided fixes for build reproducibility.
+(Note that this is not an intentionally supported feature and it's only maintained on a best effort basis.)
+Thanks!
+
+== Summary
+
+This release brings a lot of changes, but none of them break backward compatibility.
+The persistent format of Jandex has not changed either, so upgrade should be safe for everyone.
+
+If you experience any troubles, or if you have any ideas for Jandex improvements, please https://github.com/smallrye/jandex/issues[file an issue].

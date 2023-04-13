@@ -1,4 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2023-04-06T15:22:42+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.1.0</title><link href="https://www.smallrye.io/blog/jandex-3-1-0/" rel="alternate" type="text/html" title="Jandex 3.1.0" /><published>2023-04-06T14:00:00+00:00</published><updated>2023-04-06T14:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-1-0</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-1-0/">&lt;div id=&quot;preamble&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2023-04-13T09:44:24+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.1.1</title><link href="https://www.smallrye.io/blog/jandex-3-1-1/" rel="alternate" type="text/html" title="Jandex 3.1.1" /><published>2023-04-13T09:00:00+00:00</published><updated>2023-04-13T09:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-1-1</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-1-1/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.1.1&quot;&gt;release&lt;/a&gt; of Jandex 3.1.1.
+It includes one small improvement and one small bug fix.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;As part of the effort to make creating instances of &lt;code&gt;Type&lt;/code&gt; easier for Jandex users, this release makes the &lt;code&gt;VoidType.VOID&lt;/code&gt; constant &lt;code&gt;public&lt;/code&gt;.
+To obtain an instance of &lt;code&gt;VoidType&lt;/code&gt;, it is no longer necessary to use &lt;code&gt;Type.create()&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Previous release attempted to make the indexing process reproducible, but didn&amp;#8217;t succeed entirely.
+In case an indexed class contains a recursive type parameter, which is relatively common, indexing in fact wasn&amp;#8217;t reproducible due to the unnecessary usage of &lt;code&gt;System.identityHashCode()&lt;/code&gt;.
+This release fixes that.
+Thanks Alexey Loubyansky for providing a reproducer!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry><entry><title type="html">Jandex 3.1.0</title><link href="https://www.smallrye.io/blog/jandex-3-1-0/" rel="alternate" type="text/html" title="Jandex 3.1.0" /><published>2023-04-06T14:00:00+00:00</published><updated>2023-04-06T14:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-1-0</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-1-0/">&lt;div id=&quot;preamble&quot;&gt;
 &lt;div class=&quot;sectionbody&quot;&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.1.0&quot;&gt;release&lt;/a&gt; of Jandex 3.1.0.
@@ -618,39 +634,4 @@ That is, it has all the features of 5.6.0, but requires Java 11 at minimum and u
 See &lt;a href=&quot;/blog/fault-tolerance-6-0-0/&quot;&gt;the previous announcement&lt;/a&gt; for more details about the correspondence between 5.x and 6.x.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Jandex 3.0.1</title><link href="https://www.smallrye.io/blog/jandex-3-0-1/" rel="alternate" type="text/html" title="Jandex 3.0.1" /><published>2022-09-16T12:00:00+00:00</published><updated>2022-09-16T12:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-0-1</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-0-1/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;A few weeks after &lt;a href=&quot;/blog/jandex-3-0-0&quot;&gt;releasing&lt;/a&gt; Jandex 3.0.0, we&amp;#8217;re back with a fresh new bugfix release: 3.0.1.
-It includes a small number of bug fixes and API improvements.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Methods for accessing enum constants were added: &lt;code&gt;ClassInfo.enumConstants()&lt;/code&gt; and &lt;code&gt;FieldInfo.enumConstantOrdinal()&lt;/code&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Shortcut methods for annotation access were added to &lt;code&gt;AnnotationTarget&lt;/code&gt;, so that you no longer have to manually construct an annotation &lt;code&gt;DotName&lt;/code&gt;.
-All annotation-accessing methods now have an overload that takes a &lt;code&gt;String&lt;/code&gt; and also &lt;code&gt;Class&amp;lt;? extends Annotation&amp;gt;&lt;/code&gt;.
-Note that if you use those methods frequently, it is still recommended to create constant &lt;code&gt;DotName&lt;/code&gt;s and use them.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Additionally, &lt;code&gt;DotName.createSimple()&lt;/code&gt; has a variant that takes &lt;code&gt;Class&amp;lt;?&amp;gt;&lt;/code&gt;.
-This shortens the common style of invocation from &lt;code&gt;DotName.createSimple(MyClass.class.getName())&lt;/code&gt; to &lt;code&gt;DotName.createSimple(MyClass.class)&lt;/code&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The &lt;code&gt;TypeVariable.hashCode()&lt;/code&gt; method used to have a serious bitmasking issue ever since the cached &lt;code&gt;hash&lt;/code&gt; field was repurposed to also store one bit of extra information (whether there&amp;#8217;s an implicit &lt;code&gt;Object&lt;/code&gt; bound).
-This bug caused the &lt;code&gt;hashCode()&lt;/code&gt; method to return different values over time.
-That is fixed now.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;A bug in propagating type variable annotations led to an exception when indexing certain classes, including the Guava JAR.
-This is fixed in 3.0.1.
-Thanks Mike Edgar for the report!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The introduction of &lt;code&gt;TypeVariableReference&lt;/code&gt;s in 3.0.0 caused a problem in &lt;code&gt;Type&lt;/code&gt; equality and hash code.
-This is now fixed and all &lt;code&gt;Type&lt;/code&gt;s have proper structural equality and hash code again.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;And finally, the javadoc was improved on many places.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;As usual, if you experience any troubles, or if you have any exciting ideas for Jandex, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry></feed>
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry></feed>

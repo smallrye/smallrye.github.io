@@ -1,0 +1,21 @@
+:page-layout: post
+:page-title: Jandex 3.1.1
+:page-synopsis: Jandex 3.1.1 released!
+:page-tags: [announcement]
+:page-date: 2023-04-13 10:00:00.000 +0100
+:page-author: lthon
+
+= Jandex 3.1.1
+
+Today, we announce the https://github.com/smallrye/jandex/releases/tag/3.1.1[release] of Jandex 3.1.1.
+It includes one small improvement and one small bug fix.
+
+As part of the effort to make creating instances of `Type` easier for Jandex users, this release makes the `VoidType.VOID` constant `public`.
+To obtain an instance of `VoidType`, it is no longer necessary to use `Type.create()`.
+
+Previous release attempted to make the indexing process reproducible, but didn't succeed entirely.
+In case an indexed class contains a recursive type parameter, which is relatively common, indexing in fact wasn't reproducible due to the unnecessary usage of `System.identityHashCode()`.
+This release fixes that.
+Thanks Alexey Loubyansky for providing a reproducer!
+
+If you experience any troubles, or if you have any ideas for Jandex improvements, please https://github.com/smallrye/jandex/issues[file an issue].

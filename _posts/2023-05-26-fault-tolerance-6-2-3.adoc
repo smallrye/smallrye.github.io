@@ -1,0 +1,25 @@
+:page-layout: post
+:page-title: Fault Tolerance 6.2.3
+:page-synopsis: SmallRye Fault Tolerance 6.2.3 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2023-05-26 13:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 6.2.3
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.2.3[release] of {smallrye-ft} 6.2.3.
+This is a tiny release with one bugfix for Kotlin users.
+
+The `@Fallback` annotation allows specifying 2 kinds of fallbacks: fallback methods and fallback handlers.
+Fallback method, as defined by {microprofile-ft}, must have the same parameters as the guarded method.
+{smallrye-ft} has an improvement: the fallback method may declare an additional parameter of an exception type, which must be present at the very end of the parameter list.
+This doesn't work correctly for Kotlin `suspend` functions, because `suspend` functions always have a `Continuation` parameter at the end of the parameter list.
+Therefore, a fallback method with an additional exception parameter, which is also a Kotlin `suspend` function, isn't found correctly.
+This release fixes the bug and `suspend` functions may be used as fallback methods just fine.
+
+Additionally, with this release, we made a small reordering of sections in the reference guides.
+The section on interactions with other strategies is now always present right after the description section, so that it's more visible.
+
+As usual, if you have any ideas for improvements, please https://github.com/smallrye/smallrye-fault-tolerance/issues[file an issue]!

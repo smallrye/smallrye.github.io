@@ -1,0 +1,28 @@
+:page-layout: post
+:page-title: Jandex 3.1.2
+:page-synopsis: Jandex 3.1.2 released!
+:page-tags: [announcement]
+:page-date: 2023-06-08 15:00:00.000 +0100
+:page-author: lthon
+
+= Jandex 3.1.2
+
+Today, we announce the https://github.com/smallrye/jandex/releases/tag/3.1.2[release] of Jandex 3.1.2.
+It includes a significant internal refactoring of method parameter names and synthetic parameters handling, as well as one small API improvement.
+
+JDK 18 and JDK 21 made some changes in `javac` that required refactoring of how synthetic/mandated parameters and parameters names are handled:
+
+* https://bugs.openjdk.org/browse/JDK-8271623
+* https://bugs.openjdk.org/browse/JDK-8292275
+
+With this release, method parameter handling is more robust.
+Thanks Christian Beikov for the bug report and reproducer!
+
+The `MethodInfo` class now exposes the `isDefault()` and `isBridge()` methods:
+
+* `isDefault()` returns whether the method is a `default` method declared on an interface
+* `isBridge()` returns whether the method is a synthetic bridge method
+
+Thanks Martin Kouba for the pull request!
+
+If you experience any troubles, or if you have any ideas for Jandex improvements, please https://github.com/smallrye/jandex/issues[file an issue].

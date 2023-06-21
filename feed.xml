@@ -1,4 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2023-06-08T16:07:37+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.1.2</title><link href="https://www.smallrye.io/blog/jandex-3-1-2/" rel="alternate" type="text/html" title="Jandex 3.1.2" /><published>2023-06-08T14:00:00+00:00</published><updated>2023-06-08T14:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-1-2</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-1-2/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2023-06-21T13:39:44+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 6.2.4</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-2-4/" rel="alternate" type="text/html" title="Fault Tolerance 6.2.4" /><published>2023-06-21T12:00:00+00:00</published><updated>2023-06-21T12:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-2-4</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-2-4/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.2.4&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.2.4.
+This is a tiny release with one bugfix for Micrometer integration.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;When a gauge is registered with Micrometer, a &lt;em&gt;state object&lt;/em&gt; is passed to Micrometer along with a &lt;em&gt;value extraction function&lt;/em&gt;.
+That value extraction function is supposed to extract the actual gauge value from the state object.
+In SmallRye Fault Tolerance, the state object is a &lt;code&gt;Supplier&lt;/code&gt; and the value extraction function just calls the &lt;code&gt;get&lt;/code&gt; method on the &lt;code&gt;Supplier&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The issue is that Micrometer only holds onto the state object weakly (using &lt;code&gt;WeakReference&lt;/code&gt;).
+If the state object is GC-ed, Micrometer will report &lt;code&gt;NaN&lt;/code&gt; as the gauge value.
+Since the &lt;code&gt;Supplier&lt;/code&gt; in SmallRye Fault Tolerance is not used anywhere else, gauges typically don&amp;#8217;t report the proper value.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;In this release, we make sure that the &lt;code&gt;Supplier&lt;/code&gt;s do not become garbage, so gauges work correctly.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Additionally, a test for fault tolerance on interface-based beans was simplified, together with the implementation of RestClient interface-based beans in RESTEasy MicroProfile (which is what this test mimics).
+Thanks Matěj Novotný for the PR!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Jandex 3.1.2</title><link href="https://www.smallrye.io/blog/jandex-3-1-2/" rel="alternate" type="text/html" title="Jandex 3.1.2" /><published>2023-06-08T14:00:00+00:00</published><updated>2023-06-08T14:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-1-2</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-1-2/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.1.2&quot;&gt;release&lt;/a&gt; of Jandex 3.1.2.
 It includes a significant internal refactoring of method parameter names and synthetic parameters handling, as well as one small API improvement.&lt;/p&gt;
 &lt;/div&gt;
@@ -445,18 +468,6 @@ This has already been possible using &lt;code&gt;Type.create()&lt;/code&gt;, but
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Finally, the documentation for classes &lt;code&gt;ParameterizedType&lt;/code&gt; and &lt;code&gt;ClassSummary&lt;/code&gt; was improved.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;As usual, if you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry><entry><title type="html">Jandex 3.0.3</title><link href="https://www.smallrye.io/blog/jandex-3-0-3/" rel="alternate" type="text/html" title="Jandex 3.0.3" /><published>2022-11-09T13:00:00+00:00</published><updated>2022-11-09T13:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-0-3</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-0-3/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.0.3&quot;&gt;release&lt;/a&gt; of Jandex 3.0.3.
-It includes one small bug fix.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;It turns out some JVM languages (e.g. Groovy) may generate inner classes where the constructor doesn&amp;#8217;t take an enclosing instance as a parameter.
-Jandex since version 3.0.0 assumed that inner classes always have such constructor parameter.
-This release relaxes this assumption so that Groovy classes can be indexed correctly.
-Thanks Emond Papegaaij for the report!&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;As usual, if you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;

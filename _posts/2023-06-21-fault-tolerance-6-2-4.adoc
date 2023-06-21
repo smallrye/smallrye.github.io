@@ -1,0 +1,28 @@
+:page-layout: post
+:page-title: Fault Tolerance 6.2.4
+:page-synopsis: SmallRye Fault Tolerance 6.2.4 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2023-06-21 13:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 6.2.4
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.2.4[release] of {smallrye-ft} 6.2.4.
+This is a tiny release with one bugfix for Micrometer integration.
+
+When a gauge is registered with Micrometer, a _state object_ is passed to Micrometer along with a _value extraction function_.
+That value extraction function is supposed to extract the actual gauge value from the state object.
+In {smallrye-ft}, the state object is a `Supplier` and the value extraction function just calls the `get` method on the `Supplier`.
+
+The issue is that Micrometer only holds onto the state object weakly (using `WeakReference`).
+If the state object is GC-ed, Micrometer will report `NaN` as the gauge value.
+Since the `Supplier` in {smallrye-ft} is not used anywhere else, gauges typically don't report the proper value.
+
+In this release, we make sure that the ``Supplier``s do not become garbage, so gauges work correctly.
+
+Additionally, a test for fault tolerance on interface-based beans was simplified, together with the implementation of RestClient interface-based beans in RESTEasy MicroProfile (which is what this test mimics).
+Thanks Matěj Novotný for the PR!
+
+As usual, if you have any ideas for improvements, please https://github.com/smallrye/smallrye-fault-tolerance/issues[file an issue]!

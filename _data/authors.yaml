@@ -16,9 +16,9 @@ lthon:
   name: "Ladislav Thon"
   email: "ladicek@gmail.com"
   emailhash: "238e8b2100a5366b226234b946026462"
-  job_title: ""
+  job_title: "Principal Software Engineer"
   twitter: "_Ladicek"
-  bio: 'Ladislav is a Senior Software Engineer at Red Hat, where he leads the Thorntail project and contributes to MicroProfile. Previously, he led the Red Hat OpenShift Application Runtimes QE team, and before that spent a few years in the JBoss Enterprise Application Platform QE team. He has been working as a developer for more than a decade, and besides programming, he likes good books and craft beer.'
+  bio: "Books. Software. Imagination..."
 xstefank:
   name: "Martin Stefanko"
   email: "xstefank122@gmail.com"

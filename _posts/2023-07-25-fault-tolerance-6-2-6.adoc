@@ -1,15 +1,15 @@
 :page-layout: post
-:page-title: Fault Tolerance 6.2.5
-:page-synopsis: SmallRye Fault Tolerance 6.2.5 released!
+:page-title: Fault Tolerance 6.2.6
+:page-synopsis: SmallRye Fault Tolerance 6.2.6 released!
 :page-tags: [announcement, microprofile]
 :page-date: 2023-07-25 13:00:00.000 +0100
 :page-author: lthon
 :smallrye-ft: SmallRye Fault Tolerance
 :microprofile-ft: MicroProfile Fault Tolerance
 
-= Fault Tolerance 6.2.5
+= Fault Tolerance 6.2.6
 
-Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.2.5[release] of {smallrye-ft} 6.2.5.
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.2.6[release] of {smallrye-ft} 6.2.6.
 This is a tiny release with one fix for Maven users that enable strict checksum validation.
 
 {smallrye-ft} uses Arquillian to run the {microprofile-ft} TCK.

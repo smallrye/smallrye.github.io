@@ -1,0 +1,26 @@
+:page-layout: post
+:page-title: Fault Tolerance 6.2.5
+:page-synopsis: SmallRye Fault Tolerance 6.2.5 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2023-07-25 13:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 6.2.5
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.2.5[release] of {smallrye-ft} 6.2.5.
+This is a tiny release with one fix for Maven users that enable strict checksum validation.
+
+{smallrye-ft} uses Arquillian to run the {microprofile-ft} TCK.
+To do that, it imports the Arquillian BOM for managing dependency versions.
+
+Arquillian 1.7.0 has unfortunately made a mistake in deploying checksums to Maven Central, and since {smallrye-ft} imports the Arquillian BOM in its _root_ POM, all Maven users that enable strict checksum validation and depend on {smallrye-ft} directly or transitively will observe checksum validation failures.
+
+In this release, the problem is fixed by no longer importing the Arquillian BOM in the root POM; instead, all the Arquillian dependency versions are managed by the TCK module.
+The TCK module is not something people can depend on; for a while, we haven't even been releasing its binary to Maven Central.
+Therefore, the scope of checksum validation failures is greatly reduced -- they can only happen in the {smallrye-ft} project itself.
+
+A small fix for the circuit breaker state diagram in the documentation is also included.
+
+As usual, if you have any ideas for improvements, please https://github.com/smallrye/smallrye-fault-tolerance/issues[file an issue]!

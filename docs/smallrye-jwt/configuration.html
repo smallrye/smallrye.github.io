@@ -39,7 +39,7 @@
           <span class="navbar-link">Projects</span>
           <div class="navbar-dropdown">
               <a class="navbar-item" href="../index/index/index.html">Index</a>
-              <a class="navbar-item" href="../smallrye-fault-tolerance/6.2.4/index.html">SmallRye Fault Tolerance</a>
+              <a class="navbar-item" href="../smallrye-fault-tolerance/6.2.6/index.html">SmallRye Fault Tolerance</a>
               <a class="navbar-item" href="../smallrye-health/3.0.1/index.html">SmallRye Health</a>
               <a class="navbar-item" href="index.html">SmallRye JWT</a>
               <a class="navbar-item" href="../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
@@ -221,6 +221,11 @@ precedence:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Set this property to a specific key format such as <code>PEM_KEY</code>, <code>PEM_CERTIFICATE</code>, <code>JWK</code> or <code>JWK_BASE64URL</code> to optimize the way the verification key is loaded.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.verify.key-provider</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>DEFAULT</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">By default, PEM, JWK or JWK key sets can be read from the local file system or fetched from URIs as required by MicroProfile JWT specification. Set this property to <code>AWS_ALB</code> to support an AWS Application Load Balancer verification key resolution.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.verify.relax-key-validation</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Relax the validation of the verification keys, setting this property to <code>true</code> will allow public RSA keys with the length less than 2048 bit.</p></td>
@@ -234,6 +239,16 @@ precedence:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.token.header</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>Authorization</code></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Set this property if another header such as <code>Cookie</code> is used to pass the token. This property is deprecated, use <code>mp.jwt.token.header</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.key-cache-size</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>100</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Key cache size. Use this property, as well as <code>smallrye.jwt.key-cache-time-to-live</code>, to control the key cache when a key provider such as <code>AWS_ALB</code> is configured with <code>smallrye.jwt.verify.key-provider=AWS_ALB</code> for resolving the keys dynamically.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.key-cache-time-to-live</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>10</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Key cache entry time-to-live in minutes. Use this property, as well as <code>smallrye.jwt.key-cache-size</code>,  to control the key cache when a key provider such as <code>AWS_ALB</code> is configured with <code>smallrye.jwt.verify.key-provider=AWS_ALB</code> for resolving the keys dynamically.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.token.cookie</code></p></td>

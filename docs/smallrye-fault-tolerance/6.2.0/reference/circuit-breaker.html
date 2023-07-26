@@ -237,18 +237,9 @@
 <div class="paragraph">
 <p>The circuit breaker is a simple state machine:</p>
 </div>
-<div class="listingblock kroki-error">
+<div class="imageblock kroki">
 <div class="content">
-<pre>stateDiagram-v2
-    CLOSED: [CLOSED] Allow invocations and track the number of successes and failures
-    OPEN: [OPEN] Fail fast, prevent all invocations
-    HALF_OPEN: [HALF-OPEN] Allow some probe invocations to proceed
-
-    [*] --&gt; CLOSED
-    CLOSED --&gt; OPEN: Recent invocations failed too often
-    OPEN --&gt; HALF_OPEN: After some time, determine if \n failing fast is still appropriate
-    HALF_OPEN --&gt; CLOSED: All probe invocations succeeded
-    HALF_OPEN --&gt; OPEN: Some probe invocations failed</pre>
+<img src="../_images/circuit-breaker-aa68448452c1d208b65a126eb8c0a5acdca4584f.svg" alt="circuit-breaker">
 </div>
 </div>
 <div class="paragraph">

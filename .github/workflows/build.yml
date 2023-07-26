@@ -24,6 +24,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      kroki:
+        image: yuzutech/kroki
+        env:
+          KROKI_MERMAID_HOST: kroki-mermaid
+        ports:
+          - 8000:8000
+      kroki-mermaid:
+        image: yuzutech/kroki-mermaid
+
     steps:
       - name: checkout
         uses: actions/checkout@v2

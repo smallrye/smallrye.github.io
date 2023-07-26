@@ -22,10 +22,6 @@ content:
   - url: https://github.com/smallrye/smallrye-health.git
     branches: 3.0.x
     start_path: doc
-# uncomment after the docs are merged    
-#  - url: https://github.com/smallrye/smallrye-reactive-messaging.git
-#    branches: main
-#    start_path: doc
 ui:
   bundle:
     url: https://github.com/smallrye/smallrye-antora-ui/blob/main/build/ui-bundle.zip?raw=true
@@ -36,3 +32,4 @@ asciidoc:
   attributes:
     page-pagination: ''
     kroki-fetch-diagram: true
+    kroki-server-url: http://localhost:8000

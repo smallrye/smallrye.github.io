@@ -1,0 +1,38 @@
+:page-layout: post
+:page-title: Jandex 3.1.3
+:page-synopsis: Jandex 3.1.3 released!
+:page-tags: [announcement]
+:page-date: 2023-08-28 11:00:00.000 +0100
+:page-author: lthon
+
+= Jandex 3.1.3
+
+Today, we announce the https://github.com/smallrye/jandex/releases/tag/3.1.3[release] of Jandex 3.1.3.
+This release contains several small fixes and improvements.
+
+The `AnnotationInstance.equivalentTo()` method was added that establishes the notion of _annotation equivalence_.
+Two annotation instances are equivalent if they have the same name (that is, the same annotation interface) and the same members.
+The target of the annotation is ignored (unlike the `equals()` method).
+
+The `MethodInfo.isStaticInitializer()` method was added to distinguish the special `<clinit>` methods (similarly to existing `isConstructor()`, which distinguishes the special `<init>` methods).
+
+Serialization compatibility with Jandex 2 was restored.
+Jandex 3 added a new kind of types, type variable references, and at that time, the index serialization code was not adjusted properly.
+Therefore, if Jandex 3 was asked to write an index of an older version, for consumption by Jandex 2, the result in fact was not readable by Jandex 2.
+The fix is fortunately simple, because what Jandex 3 represents as a type variable reference, Jandex 2 always represents as an unresolved type variable.
+So when emitting an index for Jandex 2, Jandex 3 can just serialize type variable references as unresolved type variables.
+(Note that Jandex 3 may still produce unresolved type variables, for example when indexing an incomplete class path.)
+Thanks Andrey Manzharov for the reproducer!
+
+The Jandex Maven plugin now supports setting the index version that should be produced.
+That way, you can upgrade your Jandex version yet keep the persistent index readable by older Jandex versions.
+Of course, if the upgraded Jandex has a newer persistent index format that includes more information, the older version will _not_ contain the new information.
+Thanks Andrey Manzharov for the pull request!
+
+The `jandex-jar` goal of the Jandex Maven plugin was improved to not omit directory entries in the resulting JAR.
+Thanks Hui Wang for the pull request!
+
+Finally, multiple places in Jandex were changed to slightly reduce allocations.
+Instead of allocating a regular `java.util.ArrayList` and then an immutable wrapper, an immutable array-backed `List` implementation is used directly.
+
+If you experience any troubles, or if you have any ideas for Jandex improvements, please https://github.com/smallrye/jandex/issues[file an issue].

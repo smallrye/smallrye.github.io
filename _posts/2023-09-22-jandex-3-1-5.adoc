@@ -1,0 +1,29 @@
+:page-layout: post
+:page-title: Jandex 3.1.5
+:page-synopsis: Jandex 3.1.5 released!
+:page-tags: [announcement]
+:page-date: 2023-09-22 11:00:00.000 +0100
+:page-author: lthon
+
+= Jandex 3.1.5
+
+Today, we announce the https://github.com/smallrye/jandex/releases/tag/3.1.5[release] of Jandex 3.1.5.
+This release contains two small fixes.
+
+Jandex heavily relies on interning (structural sharing) of objects for memory and storage efficiency.
+If there's a lot of elements (such as fields) in the index that look basically the same (have the same name and type), you can be fairly sure that there will be just one instance representing them all.
+When those elements are annotated and all the annotations also look basically the same, one might expect that the objects will still be shared.
+Alas, that is not the case.
+The `AnnotationInstance` representation of annotations includes the _annotation target_ (the element that is annotated) and that `target` is considered for annotation equality (`AnnotationInstance.equals()`).
+
+Since interning is implemented using a hash table, objects that are "basically the same" but are not equal better have different hash codes, otherwise hash collisions will slow down indexing fairly significantly if there are many such objects.
+Unfortunately, even though `AnnotationInstance.equals()` considers the `target` for equality, `AnnotationInstance.hashCode()` simply ignores it.
+This means that the significant indexing slowdowns actually may easily happen in practice.
+This releases fixes that by including the annotation target in the `AnnotationInstance` hash code, making collisions a lot less likely.
+Thanks Aaron Ogburn for finding the issue!
+
+In this release, the Maven plugin configuration option `<indexName>` also accepts (relative) paths instead of just file names.
+This was supported in previous versions of the Jandex Maven plugin, but was dropped in Jandex 3.0.0 with the introduction of `<indexDir>`.
+Thanks Ryan Lubke for the report!
+
+If you experience any troubles, or if you have any ideas for Jandex improvements, please https://github.com/smallrye/jandex/issues[file an issue].

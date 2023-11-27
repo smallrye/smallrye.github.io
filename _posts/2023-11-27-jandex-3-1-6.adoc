@@ -1,0 +1,30 @@
+:page-layout: post
+:page-title: Jandex 3.1.6
+:page-synopsis: Jandex 3.1.6 released!
+:page-tags: [announcement]
+:page-date: 2023-11-27 14:00:00.000 +0100
+:page-author: lthon
+
+= Jandex 3.1.6
+
+Today, we announce the https://github.com/smallrye/jandex/releases/tag/3.1.6[release] of Jandex 3.1.6.
+This release contains several small fixes and improvements.
+
+Jandex 3.1.3 link:/blog/jandex-3-1-3/[introduced] the notion of annotation equivalence in the form of the `AnnotationInstance.equivalentTo()` method.
+This method is like `equals()`, except it ignores the annotation target.
+In this release, annotation equivalence is expanded with the introduction of `equivalenceHashCode()`, a `hashCode()`-like method that is consistent with `equivalentTo()`.
+
+Further, `AnnotationInstance` also gains a method `createEquivalenceProxy()` which returns an `AnnotationInstanceEquivalenceProxy`.
+An _equivalence proxy_ is an object whose `equals()` and `hashCode()` implement equivalence (instead of equality) by delegating to `equivalentTo()` and `equivalenceHashCode()`.
+As opposed to an _equivalence key_, an equivalence proxy also provides access to the delegate `AnnotationInstance`.
+
+This release also fixes a NPE that could be observed when indexing certain classes that include the `Signature` attribute on fields.
+The JVM Specification says that field signatures are always reference type signatures, which is what the signature parser in Jandex assumed.
+As it turns out, there are classes out there, in the wild, that use a primitive type signature as a field signature.
+That would manifest as a NPE in previous Jandex releases, but this release accomodates this possibility.
+Thanks Václav Muzikář for the issue report and reproducer!
+
+Finally, in this release, Jandex provides somewhat nicer error message in case the parsed `.class` file is not in fact a valid JVM class file and does not begin with the expected magic value.
+Previously, the error message was just `Invalid Magic`, which is funny but not very informative.
+
+If you experience any troubles, or if you have any ideas for Jandex improvements, please https://github.com/smallrye/jandex/issues[file an issue].

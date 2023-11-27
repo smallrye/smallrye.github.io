@@ -1,4 +1,31 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2023-09-22T12:59:07+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.1.5</title><link href="https://www.smallrye.io/blog/jandex-3-1-5/" rel="alternate" type="text/html" title="Jandex 3.1.5" /><published>2023-09-22T10:00:00+00:00</published><updated>2023-09-22T10:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-1-5</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-1-5/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2023-11-27T15:17:39+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.1.6</title><link href="https://www.smallrye.io/blog/jandex-3-1-6/" rel="alternate" type="text/html" title="Jandex 3.1.6" /><published>2023-11-27T13:00:00+00:00</published><updated>2023-11-27T13:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-1-6</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-1-6/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.1.6&quot;&gt;release&lt;/a&gt; of Jandex 3.1.6.
+This release contains several small fixes and improvements.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Jandex 3.1.3 &lt;a href=&quot;/blog/jandex-3-1-3/&quot;&gt;introduced&lt;/a&gt; the notion of annotation equivalence in the form of the &lt;code&gt;AnnotationInstance.equivalentTo()&lt;/code&gt; method.
+This method is like &lt;code&gt;equals()&lt;/code&gt;, except it ignores the annotation target.
+In this release, annotation equivalence is expanded with the introduction of &lt;code&gt;equivalenceHashCode()&lt;/code&gt;, a &lt;code&gt;hashCode()&lt;/code&gt;-like method that is consistent with &lt;code&gt;equivalentTo()&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Further, &lt;code&gt;AnnotationInstance&lt;/code&gt; also gains a method &lt;code&gt;createEquivalenceProxy()&lt;/code&gt; which returns an &lt;code&gt;AnnotationInstanceEquivalenceProxy&lt;/code&gt;.
+An &lt;em&gt;equivalence proxy&lt;/em&gt; is an object whose &lt;code&gt;equals()&lt;/code&gt; and &lt;code&gt;hashCode()&lt;/code&gt; implement equivalence (instead of equality) by delegating to &lt;code&gt;equivalentTo()&lt;/code&gt; and &lt;code&gt;equivalenceHashCode()&lt;/code&gt;.
+As opposed to an &lt;em&gt;equivalence key&lt;/em&gt;, an equivalence proxy also provides access to the delegate &lt;code&gt;AnnotationInstance&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This release also fixes a NPE that could be observed when indexing certain classes that include the &lt;code&gt;Signature&lt;/code&gt; attribute on fields.
+The JVM Specification says that field signatures are always reference type signatures, which is what the signature parser in Jandex assumed.
+As it turns out, there are classes out there, in the wild, that use a primitive type signature as a field signature.
+That would manifest as a NPE in previous Jandex releases, but this release accomodates this possibility.
+Thanks Václav Muzikář for the issue report and reproducer!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Finally, in this release, Jandex provides somewhat nicer error message in case the parsed &lt;code&gt;.class&lt;/code&gt; file is not in fact a valid JVM class file and does not begin with the expected magic value.
+Previously, the error message was just &lt;code&gt;Invalid Magic&lt;/code&gt;, which is funny but not very informative.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry><entry><title type="html">Jandex 3.1.5</title><link href="https://www.smallrye.io/blog/jandex-3-1-5/" rel="alternate" type="text/html" title="Jandex 3.1.5" /><published>2023-09-22T10:00:00+00:00</published><updated>2023-09-22T10:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-1-5</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-1-5/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.1.5&quot;&gt;release&lt;/a&gt; of Jandex 3.1.5.
 This release contains two small fixes.&lt;/p&gt;
 &lt;/div&gt;
@@ -402,34 +429,4 @@ The bug is now fixed and the programmatic API should work as expected.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;And as usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Fault Tolerance 6.2.1</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-2-1/" rel="alternate" type="text/html" title="Fault Tolerance 6.2.1" /><published>2023-03-03T10:00:00+00:00</published><updated>2023-03-03T10:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-2-1</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-2-1/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.2.1&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.2.1.
-This is a small release with one tiny feature useful for application server integrators.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;SmallRye Fault Tolerance has included support for Micrometer since &lt;a href=&quot;/blog/fault-tolerance-5-5/&quot;&gt;version 5.5&lt;/a&gt;, but integrators had to fiddle with type discovery to get it working.
-In this release, for integrators that use the CDI Portable Extension present in SmallRye Fault Tolerance, we provide a direct way to select which metrics integration should be used.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The &lt;code&gt;FaultToleranceExtension&lt;/code&gt; class now has an additional constructor that takes a &lt;code&gt;MetricsIntegration&lt;/code&gt; parameter.
-The &lt;code&gt;MetricsIntegration&lt;/code&gt; is an enum with these values:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;ulist&quot;&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;MICROPROFILE_METRICS&lt;/code&gt;: use MicroProfile Metrics integration&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;MICROMETER&lt;/code&gt;: use Micrometer integration&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;NOOP&lt;/code&gt;: no metrics&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Since this is a constructor parameter, it is only useful for integrators that instantiate the Portable Extension themselves.
-If the integrator relies on the CDI container to discover and instantiate Portable Extensions, this mechanism is useless and they still need to alter the set of discovered types when they want a different metrics integration.
-We&amp;#8217;d like to provide a different mechanism in the future, though it is not clear how that could look like.
-If you have any ideas, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
 &lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry></feed>

@@ -1,4 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2023-11-27T15:17:39+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.1.6</title><link href="https://www.smallrye.io/blog/jandex-3-1-6/" rel="alternate" type="text/html" title="Jandex 3.1.6" /><published>2023-11-27T13:00:00+00:00</published><updated>2023-11-27T13:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-1-6</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-1-6/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2024-03-14T11:12:23+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.1.7</title><link href="https://www.smallrye.io/blog/jandex-3-1-7/" rel="alternate" type="text/html" title="Jandex 3.1.7" /><published>2024-03-14T09:00:00+00:00</published><updated>2024-03-14T09:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-1-7</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-1-7/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.1.7&quot;&gt;release&lt;/a&gt; of Jandex 3.1.7.
+This release contains several small fixes and improvements.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;A few utility methods are added to improve quality of life:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Type.create(Class)&lt;/code&gt; to create a &lt;code&gt;Type&lt;/code&gt; object from &lt;code&gt;java.lang.Class&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;PrimitiveType.box()&lt;/code&gt; and &lt;code&gt;unbox()&lt;/code&gt; static methods for converting between primitive types and primitive wrapper classes&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Two bugs were fixed in &lt;code&gt;AnnotationInstanceBuilder&lt;/code&gt; when adding class-valued members:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;if given a &lt;code&gt;Class&lt;/code&gt; object, it was always assumed that it represents a class type; the &lt;code&gt;void&lt;/code&gt; pseudo-type, primitive types and array types were not handled correctly&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;if given a &lt;code&gt;Type&lt;/code&gt; object that represents a multi-dimensional array, it was incorrectly rejected&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;A bug was fixed in sorting classes during type annotation propagation.
+Similar problem was already fixed before, but it turned out that with bytecode obfuscation, the previous fix was not effective.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Finally, some dependencies of the Jandex Maven plugin were updated, mainly to fix a possible issue with indexing reproducibility.
+Thanks Jorge Solórzano for the pull request!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry><entry><title type="html">Jandex 3.1.6</title><link href="https://www.smallrye.io/blog/jandex-3-1-6/" rel="alternate" type="text/html" title="Jandex 3.1.6" /><published>2023-11-27T13:00:00+00:00</published><updated>2023-11-27T13:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-1-6</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-1-6/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.1.6&quot;&gt;release&lt;/a&gt; of Jandex 3.1.6.
 This release contains several small fixes and improvements.&lt;/p&gt;
 &lt;/div&gt;
@@ -417,16 +457,4 @@ The persistent format of Jandex has not changed either, so upgrade should be saf
 &lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry><entry><title type="html">Fault Tolerance 6.2.2</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-2-2/" rel="alternate" type="text/html" title="Fault Tolerance 6.2.2" /><published>2023-04-06T10:00:00+00:00</published><updated>2023-04-06T10:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-2-2</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-2-2/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.2.2&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.2.2.
-This is a tiny release with one bugfix for programmatic API usage.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;There are 2 variants of the SmallRye Fault Tolerance programmatic API: &lt;em&gt;standalone&lt;/em&gt; and &lt;em&gt;CDI&lt;/em&gt;.
-At runtime, only one of them should typically be present, but if there are both, a priority mechanism exists to disambiguate.
-This priority mechanism had a bug which could lead to incorrect variant being selected.
-The bug is now fixed and the programmatic API should work as expected.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;And as usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry></feed>
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry></feed>

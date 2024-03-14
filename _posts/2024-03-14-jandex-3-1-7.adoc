@@ -1,0 +1,29 @@
+:page-layout: post
+:page-title: Jandex 3.1.7
+:page-synopsis: Jandex 3.1.7 released!
+:page-tags: [announcement]
+:page-date: 2024-03-14 10:00:00.000 +0100
+:page-author: lthon
+
+= Jandex 3.1.7
+
+Today, we announce the https://github.com/smallrye/jandex/releases/tag/3.1.7[release] of Jandex 3.1.7.
+This release contains several small fixes and improvements.
+
+A few utility methods are added to improve quality of life:
+
+* `Type.create(Class)` to create a `Type` object from `java.lang.Class`
+* `PrimitiveType.box()` and `unbox()` static methods for converting between primitive types and primitive wrapper classes
+
+Two bugs were fixed in `AnnotationInstanceBuilder` when adding class-valued members:
+
+* if given a `Class` object, it was always assumed that it represents a class type; the `void` pseudo-type, primitive types and array types were not handled correctly
+* if given a `Type` object that represents a multi-dimensional array, it was incorrectly rejected
+
+A bug was fixed in sorting classes during type annotation propagation.
+Similar problem was already fixed before, but it turned out that with bytecode obfuscation, the previous fix was not effective.
+
+Finally, some dependencies of the Jandex Maven plugin were updated, mainly to fix a possible issue with indexing reproducibility.
+Thanks Jorge Solórzano for the pull request!
+
+If you experience any troubles, or if you have any ideas for Jandex improvements, please https://github.com/smallrye/jandex/issues[file an issue].

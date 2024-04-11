@@ -1,0 +1,40 @@
+:page-layout: post
+:page-title: Fault Tolerance 6.3.0
+:page-synopsis: SmallRye Fault Tolerance 6.3.0 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2024-04-11 09:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 6.3.0
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.3.0[release] of {smallrye-ft} 6.3.0.
+This release contains many fixes and improvements.
+
+The `@RetryWhen` annotation was added, together with the corresponding methods in the programmatic API.
+The annotation allows defining predicate-based retries, where a predicate can be provided not only for the exception, but also for the result.
+This means that it is finally possible to retry on an undesirable result (such as `null`).
+
+The `RateLimitException` gained a new method `getRetryAfterMillis()`.
+It returns the number of milliseconds after which retry is possible.
+Retrying sooner is guaranteed to be rate limited again.
+
+Cause chain inspection was improved.
+Previously, when the `@CircuitBreaker.failOn`, `@Fallback.applyOn` or `@Retry.retryOn` annotation members were not specified, the cause chain inspection was useless, because these annotation members default to `Throwable` (or `Exception` in case of `@Retry`).
+In this release, when these annotation members have a default value, we skip the check and move straight to inspecting cause chains.
+
+The `FaultTolerance.Builder` gained a new method `withThreadOffloadExecutor()`.
+It can be used to configure an executor for thread offloads.
+If not set, the default executor, as provided by the integrator, is used.
+
+The programmatic API is now integrated with metrics, both in the CDI and in the standalone implementation.
+The number of tasks currently scheduled for future execution by the timer is now also exposed via metrics.
+
+The standalone implementation of the programmatic API has gained an integration API: `StandaloneFaultTolerance.configure()`.
+This is only useful for people who use the `smallrye-fault-tolerance-standalone` artifact.
+
+Finally, many microoptimizations in various parts of the core implementation were made.
+Thanks Andrej Fink for the issues and pull requests!
+
+As usual, if you have any ideas for improvements, please https://github.com/smallrye/smallrye-fault-tolerance/issues[file an issue]!

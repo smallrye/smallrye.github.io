@@ -1,4 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2024-04-11T09:05:25+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 6.3.0</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-3-0/" rel="alternate" type="text/html" title="Fault Tolerance 6.3.0" /><published>2024-04-11T08:00:00+00:00</published><updated>2024-04-11T08:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-3-0</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-3-0/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2024-05-07T13:38:43+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.1.8</title><link href="https://www.smallrye.io/blog/jandex-3-1-8/" rel="alternate" type="text/html" title="Jandex 3.1.8" /><published>2024-05-07T12:00:00+00:00</published><updated>2024-05-07T12:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-1-8</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-1-8/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.1.8&quot;&gt;release&lt;/a&gt; of Jandex 3.1.8.
+This release contains two small improvements.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;To locate a method from a &lt;code&gt;ClassInfo&lt;/code&gt;, one had to use the &lt;code&gt;ClassInfo.method(String, Type...)&lt;/code&gt; method.
+With this release, one can also use &lt;code&gt;ClassInfo.method(String, List&amp;lt;Type&amp;gt;)&lt;/code&gt;.
+Thanks Guillaume Smet for the issue!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Also, in this release, the runtime memory consumption of Jandex was significantly improved.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry><entry><title type="html">Fault Tolerance 6.3.0</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-3-0/" rel="alternate" type="text/html" title="Fault Tolerance 6.3.0" /><published>2024-04-11T08:00:00+00:00</published><updated>2024-04-11T08:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-3-0</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-3-0/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.3.0&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.3.0.
 This release contains many fixes and improvements.&lt;/p&gt;
 &lt;/div&gt;
@@ -266,20 +280,4 @@ The section on interactions with other strategies is now always present right af
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Jandex 3.1.1</title><link href="https://www.smallrye.io/blog/jandex-3-1-1/" rel="alternate" type="text/html" title="Jandex 3.1.1" /><published>2023-04-13T09:00:00+00:00</published><updated>2023-04-13T09:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-1-1</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-1-1/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.1.1&quot;&gt;release&lt;/a&gt; of Jandex 3.1.1.
-It includes one small improvement and one small bug fix.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;As part of the effort to make creating instances of &lt;code&gt;Type&lt;/code&gt; easier for Jandex users, this release makes the &lt;code&gt;VoidType.VOID&lt;/code&gt; constant &lt;code&gt;public&lt;/code&gt;.
-To obtain an instance of &lt;code&gt;VoidType&lt;/code&gt;, it is no longer necessary to use &lt;code&gt;Type.create()&lt;/code&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Previous release attempted to make the indexing process reproducible, but didn&amp;#8217;t succeed entirely.
-In case an indexed class contains a recursive type parameter, which is relatively common, indexing in fact wasn&amp;#8217;t reproducible due to the unnecessary usage of &lt;code&gt;System.identityHashCode()&lt;/code&gt;.
-This release fixes that.
-Thanks Alexey Loubyansky for providing a reproducer!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry></feed>
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry></feed>

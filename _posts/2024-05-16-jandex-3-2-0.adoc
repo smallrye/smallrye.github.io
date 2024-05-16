@@ -1,0 +1,59 @@
+:page-layout: post
+:page-title: Jandex 3.2.0
+:page-synopsis: Jandex 3.2.0 released!
+:page-tags: [announcement]
+:page-date: 2024-05-16 13:00:00.000 +0100
+:page-author: lthon
+
+= Jandex 3.2.0
+
+Today, we announce the https://github.com/smallrye/jandex/releases/tag/3.2.0[release] of Jandex 3.2.0.
+This release contains a number of improvements.
+
+*BREAKING CHANGE:* This Jandex version increases the persistent format version.
+Therefore, persistent indexes produced by this version will _not_ be readable by previous Jandex releases.
+
+== Annotation overlay
+
+An _annotation overlay_ was added to Jandex.
+This is a layer on top of core Jandex that allows overriding annotations.
+This is useful when Jandex is used as a language model and annotations are used directly as framework metadata.
+
+In fact, there are _two_ annotation overlays: a default `AnnotationOverlay`, which is immutable, and a `MutableAnnotationOverlay`.
+
+The default annotation overlay accepts an `IndexView` and a collection of ``AnnotationTransformation``s.
+These transformations are applied lazily, whenever the annotation overlay is first asked for annotation information of any particular declaration.
+
+The mutable annotation overlay only accepts an `IndexView` and annotations may be added and removed freely, until the overlay is _frozen_.
+When it's frozen, a list of annotation transformations is returned so that a corresponding immutable annotation overlay may be constructed.
+
+In case you're familiar with the `AnnotationStore` from from ArC or from RESTEasy Reactive, this is the very same concept, but the implementation is improved.
+
+== Other improvements
+
+Support for _sealed classes_ was added.
+This includes two methods: `ClassInfo.isSealed()` and `ClassInfo.permittedSubclasses()`.
+If a class is declared `sealed`, the `isSealed()` method returns `true` and the `permittedSubclasses()` method returns the names of permitted subclasses.
+To inspect them further, they must be looked up from the index.
+
+Together with this, the `ClassInfo.isFinal()` and `ClassInfo.isAbstract()` methods were also added, as a shortcut for the corresponding `Modifier` methods called on `ClassInfo.flags()`.
+
+An empty index (`EmptyIndex.INSTANCE` or `IndexView.empty()`) was added.
+This is a very lightweight implementation of the `IndexView` interface that always returns `null` or an empty collection.
+
+Further, a `StackedIndex` was also added.
+This is a new implementation of a composite index, which actually has well defined semantics in case the same class is present in the index multiple times (unlike `CompositeIndex`, which didn't define this situation at all).
+In a stacked index, if a class is seen in one of the indexes, it is completely ignored in other indexes _below_ the first one.
+
+The behavior of `Index.getKnownUsers()` was improved.
+Previously, this method only considered a class as a user of another class when a reference to the other class was listed in the  constant pool.
+Since this Jandex version, a class is also considered as a user of another class when the other class is present in the signature of the class or any of its members.
+
+By default, the Jandex Maven plugin will not produce an index for a module with the POM packaging.
+This is a tiny breaking change that shouldn't affect anyone, but in case it does, the `<skipForPomPackaging>` configuration option may be set to `false` to revert to the previous behavior.
+
+And last but not least, hash table collisions were significantly reduced when interning type variable references.
+This should make indexing a lot faster in certain cases.
+Thanks Patrick Reinhart for the issue!
+
+If you experience any troubles, or if you have any ideas for Jandex improvements, please https://github.com/smallrye/jandex/issues[file an issue].

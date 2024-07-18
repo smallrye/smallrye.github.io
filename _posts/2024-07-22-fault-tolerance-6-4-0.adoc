@@ -1,0 +1,21 @@
+:page-layout: post
+:page-title: Fault Tolerance 6.4.0
+:page-synopsis: SmallRye Fault Tolerance 6.4.0 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2024-07-22 10:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 6.4.0
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.4.0[release] of {smallrye-ft} 6.4.0.
+This release contains one new feature and one bugfix.
+
+The `@BeforeRetry` annotation was added, together with the corresponding methods in the programmatic API.
+The annotation allows defining an action that should happen before each retry, but not before the initial attempt.
+See the https://smallrye.io/docs/smallrye-fault-tolerance/6.4.0/reference/retry.html#_before_retry_actions[documentation] for more information.
+
+Further, the `synchronized` keyword was replaced on one place with a `ReentrantLock`, making the programmatic API more friendly with virtual threads.
+
+As usual, if you have any ideas for improvements, please https://github.com/smallrye/smallrye-fault-tolerance/issues[file an issue]!

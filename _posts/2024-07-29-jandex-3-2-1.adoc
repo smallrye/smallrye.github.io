@@ -1,0 +1,25 @@
+:page-layout: post
+:page-title: Jandex 3.2.1
+:page-synopsis: Jandex 3.2.1 released!
+:page-tags: [announcement]
+:page-date: 2024-07-29 10:00:00.000 +0100
+:page-author: lthon
+
+= Jandex 3.2.1
+
+Today, we announce the https://github.com/smallrye/jandex/releases/tag/3.2.1[release] of Jandex 3.2.1.
+This release contains several small improvements and bug fixes.
+
+All annotations in the annotation overlay (introduced in link:/blog/jandex-3-2-0[Jandex 3.2.0]) are now guaranteed to have a target.
+This was previously not the case for annotations added by the user, but with this release, all annotations added by the user that don't have a target yet are assigned a target automatically.
+Also, the `AnnotationOverlay` javadoc was improved slightly.
+
+The `ClassInfo` class will no longer hold an empty or single-element `HashMap`.
+Instead, a `Collections.emptyMap()` or `Collections.singletonMap()` are used, making Jandex memory consumption better.
+Thanks Guillaume Smet for the pull request!
+
+The `jandex-jar` goal of the Jandex Maven plugin has gained an `indexVersion` parameter.
+This parameter was already present on the `jandex` goal, so this increases feature parity.
+Thanks Martin Hickson for the pull request!
+
+If you experience any troubles, or if you have any ideas for Jandex improvements, please https://github.com/smallrye/jandex/issues[file an issue].

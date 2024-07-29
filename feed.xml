@@ -1,4 +1,25 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2024-07-22T09:24:20+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 6.4.0</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-4-0/" rel="alternate" type="text/html" title="Fault Tolerance 6.4.0" /><published>2024-07-22T09:00:00+00:00</published><updated>2024-07-22T09:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-4-0</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-4-0/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2024-07-29T10:30:53+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.2.1</title><link href="https://www.smallrye.io/blog/jandex-3-2-1/" rel="alternate" type="text/html" title="Jandex 3.2.1" /><published>2024-07-29T09:00:00+00:00</published><updated>2024-07-29T09:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-2-1</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-2-1/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.2.1&quot;&gt;release&lt;/a&gt; of Jandex 3.2.1.
+This release contains several small improvements and bug fixes.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;All annotations in the annotation overlay (introduced in &lt;a href=&quot;/blog/jandex-3-2-0&quot;&gt;Jandex 3.2.0&lt;/a&gt;) are now guaranteed to have a target.
+This was previously not the case for annotations added by the user, but with this release, all annotations added by the user that don&amp;#8217;t have a target yet are assigned a target automatically.
+Also, the &lt;code&gt;AnnotationOverlay&lt;/code&gt; javadoc was improved slightly.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The &lt;code&gt;ClassInfo&lt;/code&gt; class will no longer hold an empty or single-element &lt;code&gt;HashMap&lt;/code&gt;.
+Instead, a &lt;code&gt;Collections.emptyMap()&lt;/code&gt; or &lt;code&gt;Collections.singletonMap()&lt;/code&gt; are used, making Jandex memory consumption better.
+Thanks Guillaume Smet for the pull request!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The &lt;code&gt;jandex-jar&lt;/code&gt; goal of the Jandex Maven plugin has gained an &lt;code&gt;indexVersion&lt;/code&gt; parameter.
+This parameter was already present on the &lt;code&gt;jandex&lt;/code&gt; goal, so this increases feature parity.
+Thanks Martin Hickson for the pull request!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry><entry><title type="html">Fault Tolerance 6.4.0</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-4-0/" rel="alternate" type="text/html" title="Fault Tolerance 6.4.0" /><published>2024-07-22T09:00:00+00:00</published><updated>2024-07-22T09:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-4-0</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-4-0/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.4.0&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.4.0.
 This release contains one new feature and one bugfix.&lt;/p&gt;
 &lt;/div&gt;
@@ -286,29 +307,6 @@ Therefore, the scope of checksum validation failures is greatly reduced&amp;#820
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;A small fix for the circuit breaker state diagram in the documentation is also included.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Fault Tolerance 6.2.4</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-2-4/" rel="alternate" type="text/html" title="Fault Tolerance 6.2.4" /><published>2023-06-21T12:00:00+00:00</published><updated>2023-06-21T12:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-2-4</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-2-4/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.2.4&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.2.4.
-This is a tiny release with one bugfix for Micrometer integration.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;When a gauge is registered with Micrometer, a &lt;em&gt;state object&lt;/em&gt; is passed to Micrometer along with a &lt;em&gt;value extraction function&lt;/em&gt;.
-That value extraction function is supposed to extract the actual gauge value from the state object.
-In SmallRye Fault Tolerance, the state object is a &lt;code&gt;Supplier&lt;/code&gt; and the value extraction function just calls the &lt;code&gt;get&lt;/code&gt; method on the &lt;code&gt;Supplier&lt;/code&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The issue is that Micrometer only holds onto the state object weakly (using &lt;code&gt;WeakReference&lt;/code&gt;).
-If the state object is GC-ed, Micrometer will report &lt;code&gt;NaN&lt;/code&gt; as the gauge value.
-Since the &lt;code&gt;Supplier&lt;/code&gt; in SmallRye Fault Tolerance is not used anywhere else, gauges typically don&amp;#8217;t report the proper value.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;In this release, we make sure that the &lt;code&gt;Supplier&lt;/code&gt;s do not become garbage, so gauges work correctly.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Additionally, a test for fault tolerance on interface-based beans was simplified, together with the implementation of RestClient interface-based beans in RESTEasy MicroProfile (which is what this test mimics).
-Thanks Matěj Novotný for the PR!&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;

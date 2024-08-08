@@ -1,4 +1,50 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2024-07-29T10:30:53+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.2.1</title><link href="https://www.smallrye.io/blog/jandex-3-2-1/" rel="alternate" type="text/html" title="Jandex 3.2.1" /><published>2024-07-29T09:00:00+00:00</published><updated>2024-07-29T09:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-2-1</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-2-1/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2024-08-08T14:49:49+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.2.2</title><link href="https://www.smallrye.io/blog/jandex-3-2-2/" rel="alternate" type="text/html" title="Jandex 3.2.2" /><published>2024-08-08T13:00:00+00:00</published><updated>2024-08-08T13:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-2-2</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-2-2/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.2.2&quot;&gt;release&lt;/a&gt; of Jandex 3.2.2.
+This release contains several small improvements.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The &lt;code&gt;ClassInfo.canonicalRecordConstructor()&lt;/code&gt; method was added.
+This method returns a canonical constructor for records as a &lt;code&gt;MethodInfo&lt;/code&gt;.
+For other kinds of classes, it returns &lt;code&gt;null&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Further, the &lt;code&gt;ClassInfo.unsorted*&lt;/code&gt; methods were renamed, because the old name is not exactly intuitive.
+The old methods still exist, but are deprecated.
+The new methods are:&lt;/p&gt;
+&lt;/div&gt;
+&lt;table class=&quot;tableblock frame-all grid-all stretch&quot;&gt;
+&lt;colgroup&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th class=&quot;tableblock halign-left valign-top&quot;&gt;Old method&lt;/th&gt;
+&lt;th class=&quot;tableblock halign-left valign-top&quot;&gt;New method&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;&lt;code&gt;unsortedFields()&lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;&lt;code&gt;fieldsInDeclarationOrder()&lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;&lt;code&gt;unsortedMethods()&lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;&lt;code&gt;methodsInDeclarationOrder()&lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;&lt;code&gt;unsortedRecordComponents()&lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;&lt;code&gt;recordComponentsInDeclarationOrder()&lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The javadoc of the &lt;code&gt;fields()&lt;/code&gt;, &lt;code&gt;methods()&lt;/code&gt; and &lt;code&gt;recordComponents()&lt;/code&gt; methods was improved to point out that there is no guaranteed order in their return values.
+There is also a link to the &lt;code&gt;*InDeclarationOrder()&lt;/code&gt; methods.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry><entry><title type="html">Jandex 3.2.1</title><link href="https://www.smallrye.io/blog/jandex-3-2-1/" rel="alternate" type="text/html" title="Jandex 3.2.1" /><published>2024-07-29T09:00:00+00:00</published><updated>2024-07-29T09:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-2-1</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-2-1/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.2.1&quot;&gt;release&lt;/a&gt; of Jandex 3.2.1.
 This release contains several small improvements and bug fixes.&lt;/p&gt;
 &lt;/div&gt;
@@ -289,25 +335,4 @@ Instead of allocating a regular &lt;code&gt;java.util.ArrayList&lt;/code&gt; and
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry><entry><title type="html">Fault Tolerance 6.2.6</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-2-6/" rel="alternate" type="text/html" title="Fault Tolerance 6.2.6" /><published>2023-07-25T12:00:00+00:00</published><updated>2023-07-25T12:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-2-6</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-2-6/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.2.6&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.2.6.
-This is a tiny release with one fix for Maven users that enable strict checksum validation.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;SmallRye Fault Tolerance uses Arquillian to run the MicroProfile Fault Tolerance TCK.
-To do that, it imports the Arquillian BOM for managing dependency versions.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Arquillian 1.7.0 has unfortunately made a mistake in deploying checksums to Maven Central, and since SmallRye Fault Tolerance imports the Arquillian BOM in its &lt;em&gt;root&lt;/em&gt; POM, all Maven users that enable strict checksum validation and depend on SmallRye Fault Tolerance directly or transitively will observe checksum validation failures.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;In this release, the problem is fixed by no longer importing the Arquillian BOM in the root POM; instead, all the Arquillian dependency versions are managed by the TCK module.
-The TCK module is not something people can depend on; for a while, we haven&amp;#8217;t even been releasing its binary to Maven Central.
-Therefore, the scope of checksum validation failures is greatly reduced&amp;#8201;&amp;#8212;&amp;#8201;they can only happen in the SmallRye Fault Tolerance project itself.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;A small fix for the circuit breaker state diagram in the documentation is also included.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry></feed>
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry></feed>

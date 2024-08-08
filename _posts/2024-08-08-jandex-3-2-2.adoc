@@ -1,0 +1,39 @@
+:page-layout: post
+:page-title: Jandex 3.2.2
+:page-synopsis: Jandex 3.2.2 released!
+:page-tags: [announcement]
+:page-date: 2024-08-08 14:00:00.000 +0100
+:page-author: lthon
+
+= Jandex 3.2.2
+
+Today, we announce the https://github.com/smallrye/jandex/releases/tag/3.2.2[release] of Jandex 3.2.2.
+This release contains several small improvements.
+
+The `ClassInfo.canonicalRecordConstructor()` method was added.
+This method returns a canonical constructor for records as a `MethodInfo`.
+For other kinds of classes, it returns `null`.
+
+Further, the `ClassInfo.unsorted*` methods were renamed, because the old name is not exactly intuitive.
+The old methods still exist, but are deprecated.
+The new methods are:
+
+[cols="1,1",options="header"]
+|===
+|Old method
+|New method
+
+|`unsortedFields()`
+|`fieldsInDeclarationOrder()`
+
+|`unsortedMethods()`
+|`methodsInDeclarationOrder()`
+
+|`unsortedRecordComponents()`
+|`recordComponentsInDeclarationOrder()`
+|===
+
+The javadoc of the `fields()`, `methods()` and `recordComponents()` methods was improved to point out that there is no guaranteed order in their return values.
+There is also a link to the `*InDeclarationOrder()` methods.
+
+If you experience any troubles, or if you have any ideas for Jandex improvements, please https://github.com/smallrye/jandex/issues[file an issue].

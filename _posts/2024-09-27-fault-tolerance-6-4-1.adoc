@@ -1,0 +1,23 @@
+:page-layout: post
+:page-title: Fault Tolerance 6.4.1
+:page-synopsis: SmallRye Fault Tolerance 6.4.1 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2024-09-27 15:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 6.4.1
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.4.1[release] of {smallrye-ft} 6.4.1.
+This release contains two bugfixes.
+
+In {smallrye-ft} 6.3.0, the `ThreadTimer` internal class was made a singleton.
+That was a mistake, because that prevents 2 deployments using {smallrye-ft} in the same application server (such as WildFly).
+The second deployment would get an `IllegalStateException` with the message of _Timer already exists_.
+The mistake was fixed and there can be multiple instances of the timer once again.
+The instances of the timer are distinguished by an opaque identifier, which is also exposed via metrics.
+
+Further, the search for fallback methods (`@Fallback.fallbackMethod()`), as well as before-retry methods (`@BeforeRetry.methodName()`), was fixed to also include methods from inherited interfaces.
+
+As usual, if you have any ideas for improvements, please https://github.com/smallrye/smallrye-fault-tolerance/issues[file an issue]!

@@ -1,4 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2024-08-08T14:49:49+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.2.2</title><link href="https://www.smallrye.io/blog/jandex-3-2-2/" rel="alternate" type="text/html" title="Jandex 3.2.2" /><published>2024-08-08T13:00:00+00:00</published><updated>2024-08-08T13:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-2-2</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-2-2/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2024-09-27T15:22:29+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 6.4.1</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-4-1/" rel="alternate" type="text/html" title="Fault Tolerance 6.4.1" /><published>2024-09-27T14:00:00+00:00</published><updated>2024-09-27T14:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-4-1</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-4-1/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.4.1&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.4.1.
+This release contains two bugfixes.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;In SmallRye Fault Tolerance 6.3.0, the &lt;code&gt;ThreadTimer&lt;/code&gt; internal class was made a singleton.
+That was a mistake, because that prevents 2 deployments using SmallRye Fault Tolerance in the same application server (such as WildFly).
+The second deployment would get an &lt;code&gt;IllegalStateException&lt;/code&gt; with the message of &lt;em&gt;Timer already exists&lt;/em&gt;.
+The mistake was fixed and there can be multiple instances of the timer once again.
+The instances of the timer are distinguished by an opaque identifier, which is also exposed via metrics.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Further, the search for fallback methods (&lt;code&gt;@Fallback.fallbackMethod()&lt;/code&gt;), as well as before-retry methods (&lt;code&gt;@BeforeRetry.methodName()&lt;/code&gt;), was fixed to also include methods from inherited interfaces.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Jandex 3.2.2</title><link href="https://www.smallrye.io/blog/jandex-3-2-2/" rel="alternate" type="text/html" title="Jandex 3.2.2" /><published>2024-08-08T13:00:00+00:00</published><updated>2024-08-08T13:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-2-2</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-2-2/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.2.2&quot;&gt;release&lt;/a&gt; of Jandex 3.2.2.
 This release contains several small improvements.&lt;/p&gt;
 &lt;/div&gt;
@@ -295,43 +311,6 @@ Thanks Aaron Ogburn for finding the issue!&lt;/p&gt;
 &lt;p&gt;In this release, the Maven plugin configuration option &lt;code&gt;&amp;lt;indexName&amp;gt;&lt;/code&gt; also accepts (relative) paths instead of just file names.
 This was supported in previous versions of the Jandex Maven plugin, but was dropped in Jandex 3.0.0 with the introduction of &lt;code&gt;&amp;lt;indexDir&amp;gt;&lt;/code&gt;.
 Thanks Ryan Lubke for the report!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry><entry><title type="html">Jandex 3.1.3</title><link href="https://www.smallrye.io/blog/jandex-3-1-3/" rel="alternate" type="text/html" title="Jandex 3.1.3" /><published>2023-08-28T10:00:00+00:00</published><updated>2023-08-28T10:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-1-3</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-1-3/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.1.3&quot;&gt;release&lt;/a&gt; of Jandex 3.1.3.
-This release contains several small fixes and improvements.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The &lt;code&gt;AnnotationInstance.equivalentTo()&lt;/code&gt; method was added that establishes the notion of &lt;em&gt;annotation equivalence&lt;/em&gt;.
-Two annotation instances are equivalent if they have the same name (that is, the same annotation interface) and the same members.
-The target of the annotation is ignored (unlike the &lt;code&gt;equals()&lt;/code&gt; method).&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The &lt;code&gt;MethodInfo.isStaticInitializer()&lt;/code&gt; method was added to distinguish the special &lt;code&gt;&amp;lt;clinit&amp;gt;&lt;/code&gt; methods (similarly to existing &lt;code&gt;isConstructor()&lt;/code&gt;, which distinguishes the special &lt;code&gt;&amp;lt;init&amp;gt;&lt;/code&gt; methods).&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Serialization compatibility with Jandex 2 was restored.
-Jandex 3 added a new kind of types, type variable references, and at that time, the index serialization code was not adjusted properly.
-Therefore, if Jandex 3 was asked to write an index of an older version, for consumption by Jandex 2, the result in fact was not readable by Jandex 2.
-The fix is fortunately simple, because what Jandex 3 represents as a type variable reference, Jandex 2 always represents as an unresolved type variable.
-So when emitting an index for Jandex 2, Jandex 3 can just serialize type variable references as unresolved type variables.
-(Note that Jandex 3 may still produce unresolved type variables, for example when indexing an incomplete class path.)
-Thanks Andrey Manzharov for the reproducer!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The Jandex Maven plugin now supports setting the index version that should be produced.
-That way, you can upgrade your Jandex version yet keep the persistent index readable by older Jandex versions.
-Of course, if the upgraded Jandex has a newer persistent index format that includes more information, the older version will &lt;em&gt;not&lt;/em&gt; contain the new information.
-Thanks Andrey Manzharov for the pull request!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The &lt;code&gt;jandex-jar&lt;/code&gt; goal of the Jandex Maven plugin was improved to not omit directory entries in the resulting JAR.
-Thanks Hui Wang for the pull request!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Finally, multiple places in Jandex were changed to slightly reduce allocations.
-Instead of allocating a regular &lt;code&gt;java.util.ArrayList&lt;/code&gt; and then an immutable wrapper, an immutable array-backed &lt;code&gt;List&lt;/code&gt; implementation is used directly.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;

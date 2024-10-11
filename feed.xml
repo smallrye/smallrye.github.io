@@ -1,4 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2024-09-27T15:22:29+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 6.4.1</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-4-1/" rel="alternate" type="text/html" title="Fault Tolerance 6.4.1" /><published>2024-09-27T14:00:00+00:00</published><updated>2024-09-27T14:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-4-1</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-4-1/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2024-10-11T11:48:17+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 6.5.0</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-5-0/" rel="alternate" type="text/html" title="Fault Tolerance 6.5.0" /><published>2024-10-11T11:00:00+00:00</published><updated>2024-10-11T11:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-5-0</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-5-0/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.5.0&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.5.0.
+This release implements MicroProfile Fault Tolerance 4.1 and contains several new features.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The only new feature of MicroProfile Fault Tolerance 4.1 is support for OpenTelemetry / MicroProfile Telemetry, specifically for exposing metrics.
+Since SmallRye Fault Tolerance has already included support for MicroProfile Metrics and Micrometer, adding a third implementation was a no-brainer.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;In addition to that, SmallRye Fault Tolerance 6.5.0 resolves fallback methods (&lt;code&gt;@Fallback.fallbackMethod()&lt;/code&gt;) and before-retry methods (&lt;code&gt;@BeforeRetry.methodName()&lt;/code&gt;) statically.
+That is, instead of resolving the methods when the fault tolerance operation is being constructed, the methods are resolved during deployment.
+This makes no difference in regular environments like WildFly, but in Quarkus, where deployment happens at build time, this is a significant change.
+It allows proper native image compilation, and it is also a breaking change on the configuration front.
+The configuration of fallback methods and before-retry methods is now build-time only, and cannot be changed at runtime.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Finally, in this version, the &lt;code&gt;FaultTolerance.cast()&lt;/code&gt; and &lt;code&gt;castAsync()&lt;/code&gt; methods were added.
+These methods return the same instance of &lt;code&gt;FaultTolerance&lt;/code&gt;, but casted to guard a different type.
+This is often safe, but cannot happen when fallback is defined; in that case, these methods throw an exception.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Fault Tolerance 6.4.1</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-4-1/" rel="alternate" type="text/html" title="Fault Tolerance 6.4.1" /><published>2024-09-27T14:00:00+00:00</published><updated>2024-09-27T14:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-4-1</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-4-1/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.4.1&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.4.1.
 This release contains two bugfixes.&lt;/p&gt;
 &lt;/div&gt;
@@ -286,31 +308,6 @@ Thanks Václav Muzikář for the issue report and reproducer!&lt;/p&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Finally, in this release, Jandex provides somewhat nicer error message in case the parsed &lt;code&gt;.class&lt;/code&gt; file is not in fact a valid JVM class file and does not begin with the expected magic value.
 Previously, the error message was just &lt;code&gt;Invalid Magic&lt;/code&gt;, which is funny but not very informative.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry><entry><title type="html">Jandex 3.1.5</title><link href="https://www.smallrye.io/blog/jandex-3-1-5/" rel="alternate" type="text/html" title="Jandex 3.1.5" /><published>2023-09-22T10:00:00+00:00</published><updated>2023-09-22T10:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-1-5</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-1-5/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.1.5&quot;&gt;release&lt;/a&gt; of Jandex 3.1.5.
-This release contains two small fixes.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Jandex heavily relies on interning (structural sharing) of objects for memory and storage efficiency.
-If there&amp;#8217;s a lot of elements (such as fields) in the index that look basically the same (have the same name and type), you can be fairly sure that there will be just one instance representing them all.
-When those elements are annotated and all the annotations also look basically the same, one might expect that the objects will still be shared.
-Alas, that is not the case.
-The &lt;code&gt;AnnotationInstance&lt;/code&gt; representation of annotations includes the &lt;em&gt;annotation target&lt;/em&gt; (the element that is annotated) and that &lt;code&gt;target&lt;/code&gt; is considered for annotation equality (&lt;code&gt;AnnotationInstance.equals()&lt;/code&gt;).&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Since interning is implemented using a hash table, objects that are &quot;basically the same&quot; but are not equal better have different hash codes, otherwise hash collisions will slow down indexing fairly significantly if there are many such objects.
-Unfortunately, even though &lt;code&gt;AnnotationInstance.equals()&lt;/code&gt; considers the &lt;code&gt;target&lt;/code&gt; for equality, &lt;code&gt;AnnotationInstance.hashCode()&lt;/code&gt; simply ignores it.
-This means that the significant indexing slowdowns actually may easily happen in practice.
-This releases fixes that by including the annotation target in the &lt;code&gt;AnnotationInstance&lt;/code&gt; hash code, making collisions a lot less likely.
-Thanks Aaron Ogburn for finding the issue!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;In this release, the Maven plugin configuration option &lt;code&gt;&amp;lt;indexName&amp;gt;&lt;/code&gt; also accepts (relative) paths instead of just file names.
-This was supported in previous versions of the Jandex Maven plugin, but was dropped in Jandex 3.0.0 with the introduction of &lt;code&gt;&amp;lt;indexDir&amp;gt;&lt;/code&gt;.
-Thanks Ryan Lubke for the report!&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;

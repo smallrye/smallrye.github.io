@@ -1,0 +1,28 @@
+:page-layout: post
+:page-title: Fault Tolerance 6.5.0
+:page-synopsis: SmallRye Fault Tolerance 6.5.0 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2024-10-11 12:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 6.5.0
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.5.0[release] of {smallrye-ft} 6.5.0.
+This release implements {microprofile-ft} 4.1 and contains several new features.
+
+The only new feature of {microprofile-ft} 4.1 is support for OpenTelemetry / MicroProfile Telemetry, specifically for exposing metrics.
+Since {smallrye-ft} has already included support for MicroProfile Metrics and Micrometer, adding a third implementation was a no-brainer.
+
+In addition to that, {smallrye-ft} 6.5.0 resolves fallback methods (`@Fallback.fallbackMethod()`) and before-retry methods (`@BeforeRetry.methodName()`) statically.
+That is, instead of resolving the methods when the fault tolerance operation is being constructed, the methods are resolved during deployment.
+This makes no difference in regular environments like WildFly, but in Quarkus, where deployment happens at build time, this is a significant change.
+It allows proper native image compilation, and it is also a breaking change on the configuration front.
+The configuration of fallback methods and before-retry methods is now build-time only, and cannot be changed at runtime.
+
+Finally, in this version, the `FaultTolerance.cast()` and `castAsync()` methods were added.
+These methods return the same instance of `FaultTolerance`, but casted to guard a different type.
+This is often safe, but cannot happen when fallback is defined; in that case, these methods throw an exception.
+
+As usual, if you have any ideas for improvements, please https://github.com/smallrye/smallrye-fault-tolerance/issues[file an issue]!

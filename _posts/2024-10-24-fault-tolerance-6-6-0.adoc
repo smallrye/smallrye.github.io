@@ -1,0 +1,22 @@
+:page-layout: post
+:page-title: Fault Tolerance 6.6.0
+:page-synopsis: SmallRye Fault Tolerance 6.6.0 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2024-10-24 15:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 6.6.0
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.6.0[release] of {smallrye-ft} 6.6.0.
+This release contains two small improvements.
+
+Until now, all `@ApplyFaultTolerance` methods that used the same identifier were collapsed into the same metrics, using the `FaultTolerance` description as the `method` tag.
+With this release, `@ApplyFaultTolerance` methods have split metrics, where the `method` tag is the classic `<fully qualified class name>.<method name>` format, even though they still share the same `FaultTolerance` object and therefore the bulkhead / circuit breaker / rate limit state.
+
+The `FaultTolerance.BulkheadBuilder.enableVirtualThreadsQueueing()` method was added.
+With this method, it is possible to use bulkhead queueing even with synchronous bulkhead, but there's an important limitation: the `FaultTolerance` guard must be executed on virtual threads.
+This is not checked; it is something you have to provide yourself.
+
+As usual, if you have any ideas for improvements, please https://github.com/smallrye/smallrye-fault-tolerance/issues[file an issue]!

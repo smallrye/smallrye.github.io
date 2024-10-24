@@ -1,0 +1,18 @@
+:page-layout: post
+:page-title: Jandex 3.2.3
+:page-synopsis: Jandex 3.2.3 released!
+:page-tags: [announcement]
+:page-date: 2024-10-24 14:00:00.000 +0100
+:page-author: lthon
+
+= Jandex 3.2.3
+
+Today, we announce the https://github.com/smallrye/jandex/releases/tag/3.2.3[release] of Jandex 3.2.3.
+This release contains one small bugfix and one small improvement.
+
+The `Type.parse()` method was added.
+This method parses a string (according to a documented grammar) and produces a Jandex `Type`.
+
+The `Index.singleClass()` method now works properly when the passed class object in fact represents a module descriptor.
+
+If you experience any troubles, or if you have any ideas for Jandex improvements, please https://github.com/smallrye/jandex/issues[file an issue].

@@ -1,0 +1,20 @@
+:page-layout: post
+:page-title: Fault Tolerance 6.6.1
+:page-synopsis: SmallRye Fault Tolerance 6.6.1 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2024-10-29 11:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 6.6.1
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.6.1[release] of {smallrye-ft} 6.6.1.
+This release contains one small bugfix.
+
+The CDI extension in {smallrye-ft} (`FaultToleranceExtension`) was changed in {smallrye-ft} 6.5.0 to support multiple metric providers at the same time.
+This support wasn't functioning properly in case the metrics classes for given provider were present, but the dependencies on required beans were not satisfied.
+In this release, all the metric providers now depend on the required beans lazily (by injecting `Provider` of given class, instead of the class directly).
+This, together with some refactoring from field injection to constructor injection for simplification, fixes the issue.
+
+As usual, if you have any ideas for improvements, please https://github.com/smallrye/smallrye-fault-tolerance/issues[file an issue]!

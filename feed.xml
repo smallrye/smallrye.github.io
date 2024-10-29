@@ -1,4 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2024-10-25T12:41:43+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 6.6.0</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-6-0/" rel="alternate" type="text/html" title="Fault Tolerance 6.6.0" /><published>2024-10-24T14:00:00+00:00</published><updated>2024-10-24T14:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-6-0</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-6-0/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2024-10-29T11:44:58+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 6.6.1</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-6-1/" rel="alternate" type="text/html" title="Fault Tolerance 6.6.1" /><published>2024-10-29T10:00:00+00:00</published><updated>2024-10-29T10:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-6-1</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-6-1/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.6.1&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.6.1.
+This release contains one small bugfix.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The CDI extension in SmallRye Fault Tolerance (&lt;code&gt;FaultToleranceExtension&lt;/code&gt;) was changed in SmallRye Fault Tolerance 6.5.0 to support multiple metric providers at the same time.
+This support wasn&amp;#8217;t functioning properly in case the metrics classes for given provider were present, but the dependencies on required beans were not satisfied.
+In this release, all the metric providers now depend on the required beans lazily (by injecting &lt;code&gt;Provider&lt;/code&gt; of given class, instead of the class directly).
+This, together with some refactoring from field injection to constructor injection for simplification, fixes the issue.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Fault Tolerance 6.6.0</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-6-0/" rel="alternate" type="text/html" title="Fault Tolerance 6.6.0" /><published>2024-10-24T14:00:00+00:00</published><updated>2024-10-24T14:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-6-0</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-6-0/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.6.0&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.6.0.
 This release contains two small improvements.&lt;/p&gt;
 &lt;/div&gt;
@@ -234,42 +246,4 @@ Thanks Guillaume Smet for the issue!&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry><entry><title type="html">Fault Tolerance 6.3.0</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-3-0/" rel="alternate" type="text/html" title="Fault Tolerance 6.3.0" /><published>2024-04-11T08:00:00+00:00</published><updated>2024-04-11T08:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-3-0</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-3-0/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.3.0&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.3.0.
-This release contains many fixes and improvements.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The &lt;code&gt;@RetryWhen&lt;/code&gt; annotation was added, together with the corresponding methods in the programmatic API.
-The annotation allows defining predicate-based retries, where a predicate can be provided not only for the exception, but also for the result.
-This means that it is finally possible to retry on an undesirable result (such as &lt;code&gt;null&lt;/code&gt;).&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The &lt;code&gt;RateLimitException&lt;/code&gt; gained a new method &lt;code&gt;getRetryAfterMillis()&lt;/code&gt;.
-It returns the number of milliseconds after which retry is possible.
-Retrying sooner is guaranteed to be rate limited again.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Cause chain inspection was improved.
-Previously, when the &lt;code&gt;@CircuitBreaker.failOn&lt;/code&gt;, &lt;code&gt;@Fallback.applyOn&lt;/code&gt; or &lt;code&gt;@Retry.retryOn&lt;/code&gt; annotation members were not specified, the cause chain inspection was useless, because these annotation members default to &lt;code&gt;Throwable&lt;/code&gt; (or &lt;code&gt;Exception&lt;/code&gt; in case of &lt;code&gt;@Retry&lt;/code&gt;).
-In this release, when these annotation members have a default value, we skip the check and move straight to inspecting cause chains.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The &lt;code&gt;FaultTolerance.Builder&lt;/code&gt; gained a new method &lt;code&gt;withThreadOffloadExecutor()&lt;/code&gt;.
-It can be used to configure an executor for thread offloads.
-If not set, the default executor, as provided by the integrator, is used.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The programmatic API is now integrated with metrics, both in the CDI and in the standalone implementation.
-The number of tasks currently scheduled for future execution by the timer is now also exposed via metrics.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The standalone implementation of the programmatic API has gained an integration API: &lt;code&gt;StandaloneFaultTolerance.configure()&lt;/code&gt;.
-This is only useful for people who use the &lt;code&gt;smallrye-fault-tolerance-standalone&lt;/code&gt; artifact.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Finally, many microoptimizations in various parts of the core implementation were made.
-Thanks Andrej Fink for the issues and pull requests!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry></feed>
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry></feed>

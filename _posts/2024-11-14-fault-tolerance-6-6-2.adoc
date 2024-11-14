@@ -1,0 +1,20 @@
+:page-layout: post
+:page-title: Fault Tolerance 6.6.2
+:page-synopsis: SmallRye Fault Tolerance 6.6.2 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2024-11-14 12:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 6.6.2
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.6.2[release] of {smallrye-ft} 6.6.2.
+This release contains two small bugfixes.
+
+The `@BeforeRetry` annotation didn't work correctly when guarding asynchronous actions (returning `CompletionStage`, `Uni` etc.).
+This bug has been fixed in this release.
+
+The support for multiple metric providers was fixed to work properly in EE environments like WildFly.
+
+As usual, if you have any ideas for improvements, please https://github.com/smallrye/smallrye-fault-tolerance/issues[file an issue]!

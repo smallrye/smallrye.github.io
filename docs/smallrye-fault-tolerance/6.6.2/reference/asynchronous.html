@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Asynchronous Execution :: SmallRye documentation</title>
+    <link rel="prev" href="retry.html">
+    <link rel="next" href="rate-limit.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <button class="nav-toggle"></button>
+
+      <a class="navbar-item title" href="../index.html">SmallRye Fault Tolerance</a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <span class="navbar-link">6.6.2</span>
+        <div class="navbar-dropdown navbar-menu">
+            <a class="navbar-item  is-current" href="../index.html">6.6.2</a>
+            <a class="navbar-item " href="../../6.6.1/index.html">6.6.1</a>
+            <a class="navbar-item " href="../../6.6.0/index.html">6.6.0</a>
+            <a class="navbar-item " href="../../6.5.0/index.html">6.5.0</a>
+            <a class="navbar-item " href="../../6.4.1/index.html">6.4.1</a>
+            <a class="navbar-item " href="../../6.4.0/index.html">6.4.0</a>
+            <a class="navbar-item " href="../../6.3.0/index.html">6.3.0</a>
+            <a class="navbar-item " href="../../6.2.6/index.html">6.2.6</a>
+            <a class="navbar-item " href="../../6.2.4/index.html">6.2.4</a>
+            <a class="navbar-item " href="../../6.2.3/index.html">6.2.3</a>
+            <a class="navbar-item " href="../../6.2.2/index.html">6.2.2</a>
+            <a class="navbar-item " href="../../6.2.1/index.html">6.2.1</a>
+            <a class="navbar-item " href="../../6.2.0/index.html">6.2.0</a>
+            <a class="navbar-item " href="../../6.1.0/index.html">6.1.0</a>
+            <a class="navbar-item " href="../../6.0.0/index.html">6.0.0</a>
+            <a class="navbar-item " href="../../5.6.0/index.html">5.6.0</a>
+            <a class="navbar-item " href="../../5.5.0/index.html">5.5.0</a>
+            <a class="navbar-item " href="../../5.4.1/index.html">5.4.1</a>
+            <a class="navbar-item " href="../../5.4.0/index.html">5.4.0</a>
+            <a class="navbar-item " href="../../5.3.2/index.html">5.3.2</a>
+            <a class="navbar-item " href="../../5.3.1/index.html">5.3.1</a>
+            <a class="navbar-item " href="../../5.3.0/index.html">5.3.0</a>
+            <a class="navbar-item " href="../../5.2.1/index.html">5.2.1</a>
+            <a class="navbar-item " href="../../5.2.0/index.html">5.2.0</a>
+            <a class="navbar-item " href="../../5.1.0/index.html">5.1.0</a>
+            <a class="navbar-item " href="../../5.0.0/index.html">5.0.0</a>
+        </div>
+      </div>
+
+
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <span class="navbar-link">Projects</span>
+          <div class="navbar-dropdown">
+              <a class="navbar-item" href="../../../index/index/index.html">Index</a>
+              <a class="navbar-item" href="../index.html">SmallRye Fault Tolerance</a>
+              <a class="navbar-item" href="../../../smallrye-health/3.0.1/index.html">SmallRye Health</a>
+              <a class="navbar-item" href="../../../smallrye-jwt/index.html">SmallRye JWT</a>
+              <a class="navbar-item" href="../../../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
+          </div>
+        </div>
+
+        <a class="navbar-item" href="https://smallrye.io/">SmallRye.io main website</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="smallrye-fault-tolerance" data-version="6.6.2">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+<ul class="nav-list nav-list-level-0">
+  <li class="nav-item nav-item-level-0">
+<ul class="nav-list nav-list-level-1">
+  <li class="nav-item nav-item-level-1">
+    <a class="nav-link" href="../index.html">Index</a>
+  </li>
+  <li class="nav-item nav-item-level-1">
+    <span class="nav-text">How-to &#8230;&#8203;</span>
+<ul class="nav-list nav-list-level-2">
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/begin.html">Begin</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/fallback.html">Supply Fallback Values</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/bulkhead.html">Limit Concurrency</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/circuit-breaker.html">Fail Fast on Recurring Failures</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/timeout.html">Watch for Timeouts</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/retry.html">Retry on Failures</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/asynchronous.html">Guard Asynchronous Methods</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/rate-limit.html">Limit Execution Rate</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/multiple.html">Use Multiple Strategies</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item nav-item-level-1">
+    <span class="nav-text">Reference</span>
+<ul class="nav-list nav-list-level-2">
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="fallback.html">Fallback</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="bulkhead.html">Bulkhead</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="circuit-breaker.html">Circuit Breaker</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="timeout.html">Timeout</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="retry.html">Retry</a>
+  </li>
+  <li class="nav-item nav-item-level-2 is-current-page">
+    <a class="nav-link" href="asynchronous.html">Asynchronous Execution</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="rate-limit.html">Rate Limit</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="config.html">Configuration</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="metrics.html">Metrics</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="non-compat.html">Non-compatible Mode</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="programmatic-api.html">Programmatic API</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="reusable.html">Reusable Fault Tolerance</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item nav-item-level-1">
+    <span class="nav-text">Integration</span>
+<ul class="nav-list nav-list-level-2">
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/intro.html">Introduction</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/metrics.html">Metrics</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/thread-pool.html">Thread Pool</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/context-propagation.html">Context Propagation</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/opentracing.html">OpenTracing</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/event-loop.html">Event Loop</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/async-types.html">Additional Asynchronous Types Integration Concerns</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/kotlin.html">Kotlin Integration Concerns</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/programmatic-api.html">Programmatic API Integration Concerns</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item nav-item-level-1">
+    <span class="nav-text">Internals</span>
+<ul class="nav-list nav-list-level-2">
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/project-structure.html">Project Structure</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/instructions.html">Instructions</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/core.html">Fault Tolerance Core</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/config.html">Configuration System</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/logging.html">Logging</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+  <div class="content">
+<aside class="toc sidebar" data-title="Table of contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+  <a href="https://github.com/smallrye/smallrye-fault-tolerance/blob/6.6.2/doc/modules/ROOT/pages/reference/asynchronous.adoc" class="edit-this-page" title="Edit this page">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+<h1 class="page">Asynchronous Execution</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>For introduction, see <a href="../howto/asynchronous.html" class="page">How to Guard Asynchronous Methods</a>.
+The how-to guide also explains what <em>asynchronous fault tolerance</em> is and when does it apply.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_description"><a class="anchor" href="#_description"></a>Description</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_asynchronous"><a class="anchor" href="#_asynchronous"></a><code>@Asynchronous</code></h3>
+<div class="paragraph">
+<p>This annotation may only be placed on methods that return <code>Future</code> or <code>CompletionStage</code>.
+It may also be placed on a class, in which case all business methods must return <code>Future</code> or <code>CompletionStage</code>.</p>
+</div>
+<div class="paragraph">
+<p>The method call is offloaded to another thread.
+The thread pool that is used for offloading method calls is provided by the runtime that integrates SmallRye Fault Tolerance.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_asynchronousnonblocking"><a class="anchor" href="#_asynchronousnonblocking"></a><code>@AsynchronousNonBlocking</code></h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+This is an additional feature of SmallRye Fault Tolerance and is not specified by MicroProfile Fault Tolerance.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In addition to the MicroProfile Fault Tolerance <code>@Asynchronous</code> annotation, SmallRye Fault Tolerance offers an annotation for asynchronous non-blocking processing: <code>@AsynchronousNonBlocking</code>.</p>
+</div>
+<div class="paragraph">
+<p>This annotation may only be placed on methods that return <code>CompletionStage</code>, because the <code>Future</code> type cannot really be used for non-blocking processing.
+It may also be placed on a class, in which case all business methods must return <code>CompletionStage</code>.</p>
+</div>
+<div class="paragraph">
+<p>As opposed to <code>@Asynchronous</code>, the <code>@AsynchronousNonBlocking</code> annotation does <em>not</em> offload the method execution to another thread.
+The method is allowed to proceed on the original thread, assuming that it returns quickly and all processing it does is performed in a non-blocking way.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_asynchronous_and_asynchronousnonblocking_compared"><a class="anchor" href="#_asynchronous_and_asynchronousnonblocking_compared"></a><code>@Asynchronous</code> and <code>@AsynchronousNonBlocking</code> Compared</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Annotation</th>
+<th class="tableblock halign-left valign-top">Method return type</th>
+<th class="tableblock halign-left valign-top">Execution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Asynchronous</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Future</code> or <code>CompletionStage</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">offloaded to a thread pool</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@AsynchronousNonBlocking</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CompletionStage</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">proceeds on the original thread</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_asynchronous_and_asynchronousnonblocking_combined"><a class="anchor" href="#_asynchronous_and_asynchronousnonblocking_combined"></a><code>@Asynchronous</code> and <code>@AsynchronousNonBlocking</code> Combined</h3>
+<div class="paragraph">
+<p>When these annotations are combined, an annotation on a method has priority over an annotation on a class.
+For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@ApplicationScoped
+@Asynchronous
+public class MyService {
+    @Retry
+    CompletionStage&lt;String&gt; hello() { <i class="conum" data-value="1"></i><b>(1)</b>
+        ...
+    }
+
+    @Retry
+    @AsynchronousNonBlocking
+    CompletionStage&lt;String&gt; helloBlocking() { <i class="conum" data-value="2"></i><b>(2)</b>
+        ...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Treated as <code>@Asynchronous</code>, based on the class annotation.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Treated as <code>@AsynchronousNonBlocking</code>, the method annotation has priority over the class annotation.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>It is an error to put both <code>@Asynchronous</code> and <code>@AsynchronousNonBlocking</code> on the same program element.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="recommendation"><a class="anchor" href="#recommendation"></a>Recommendation</h3>
+<div class="paragraph">
+<p>Use the <a href="#method-asynchrony">non-compatible mode</a>.
+In this mode, methods returning <code>CompletionStage</code> are automatically treated as if they were <code>@AsynchronousNonBlocking</code>.
+Use <code>@Asynchronous</code> to mark blocking methods for thread offload.</p>
+</div>
+<div class="paragraph">
+<p>If you can&#8217;t use the non-compatible mode, use <code>@AsynchronousNonBlocking</code> or <code>@Asynchronous</code> to mark all asynchronous methods.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+In previous releases, SmallRye Fault Tolerance recommended to use the <code>@Blocking</code> and <code>@NonBlocking</code> annotations.
+Using these annotations <strong>for fault tolerance purposes</strong> is now deprecated.
+They are still supported, but at some point, SmallRye Fault Tolerance will stop recognizing them.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>We also recommend avoiding <code>@Asynchronous</code> methods that return <code>Future</code>, because the only way to obtain the future value is blocking.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="interactions"><a class="anchor" href="#interactions"></a>Interactions with Other Strategies</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>See <a href="../howto/multiple.html" class="page">How to Use Multiple Strategies</a> for an overview of how fault tolerance strategies are nested.</p>
+</div>
+<div class="sect2">
+<h3 id="_asynchronous_2"><a class="anchor" href="#_asynchronous_2"></a><code>@Asynchronous</code></h3>
+<div class="paragraph">
+<p><code>@Asynchronous</code> does not interact with other fault tolerance strategies, with the obvious exception that it moves execution to another thread.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_asynchronousnonblocking_2"><a class="anchor" href="#_asynchronousnonblocking_2"></a><code>@AsynchronousNonBlocking</code></h3>
+<div class="paragraph">
+<p>If the guarded method uses <code>@Retry</code> and some delay between retries is configured, only the initial execution is guaranteed to occur on the original thread.
+Subsequent attempts may be offloaded to an extra thread, so that the original thread is not blocked on the delay.</p>
+</div>
+<div class="paragraph">
+<p>If the guarded method uses <code>@Bulkhead</code>, the execution is <em>not</em> guaranteed to occur on the original thread.
+If the execution has to wait in the bulkhead queue, it may later end up on a different thread.</p>
+</div>
+<div class="paragraph">
+<p>If the original thread is an event loop thread and event loop integration is enabled, then the event loop is always used to execute the guarded method.
+In such case, all retry attempts and queued bulkhead executions are guaranteed to happen on the original thread.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuration"><a class="anchor" href="#configuration"></a>Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There is no configuration for <code>@Asynchronous</code> or <code>@AsynchronousNonBlocking</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="metrics"><a class="anchor" href="#metrics"></a>Metrics</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Asynchronous execution does not emit any metrics.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="metrics.html" class="page">the Metrics reference guide</a> for general metrics information.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_extra_features"><a class="anchor" href="#_extra_features"></a>Extra Features</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="async-types"><a class="anchor" href="#async-types"></a>Additional Asynchronous Types</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+This is an additional feature of SmallRye Fault Tolerance and is not specified by MicroProfile Fault Tolerance.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>MicroProfile Fault Tolerance supports asynchronous fault tolerance for methods that return <code>CompletionStage</code>.
+(The <code>Future</code> type is not truly asynchronous, so we won&#8217;t take it into account here.)
+SmallRye Fault Tolerance adds support for additional asynchronous types:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Mutiny: <code>Uni</code></p>
+</li>
+<li>
+<p>RxJava 3: <code>Single</code>, <code>Maybe</code>, <code>Completable</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These types are treated just like <code>CompletionStage</code>, so everything that works for <code>CompletionStage</code> works for these types as well.
+Stream-like types (<code>Multi</code>, <code>Observable</code>, <code>Flowable</code>) are not supported, because their semantics can&#8217;t be easily expressed in terms of <code>CompletionStage</code>.</p>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@ApplicationScoped
+public class MyService {
+    @Retry
+    @AsynchronousNonBlocking <i class="conum" data-value="1"></i><b>(1)</b>
+    Uni&lt;String&gt; hello() { <i class="conum" data-value="2"></i><b>(2)</b>
+        ...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Using the <code>@AsynchronousNonBlocking</code> annotation, because the method doesn&#8217;t block and offloading execution to another thread is not necessary.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Returning the <code>Uni</code> type from Mutiny.
+This shows that whatever works for <code>CompletionStage</code> also works for the other async types.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The implementation internally converts the async types to a <code>CompletionStage</code> and back.
+This means that to be able to use any particular asynchronous type, the corresponding converter must be present.
+SmallRye Fault Tolerance provides support libraries for popular asynchronous types, and these support libraries include the corresponding converters.</p>
+</div>
+<div class="paragraph">
+<p>It is possible that the runtime you use already provides the correct integration.
+Otherwise, add a dependency to your application:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://smallrye.io/smallrye-mutiny/">Mutiny</a>: <code>io.smallrye:smallrye-fault-tolerance-mutiny</code></p>
+</li>
+<li>
+<p><a href="https://github.com/ReactiveX/RxJava/tree/3.x">RxJava 3</a>: <code>io.smallrye:smallrye-fault-tolerance-rxjava3</code></p>
+</li>
+</ul>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Quarkus</div>
+<div class="paragraph">
+<p>In Quarkus, the Mutiny support library is present by default.
+You can use fault tolerance on methods that return <code>Uni</code> out of the box.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="kotlin-suspend-functions"><a class="anchor" href="#kotlin-suspend-functions"></a>Kotlin <code>suspend</code> Functions</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+This is an additional feature of SmallRye Fault Tolerance and is not specified by MicroProfile Fault Tolerance.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>SmallRye Fault Tolerance includes support for Kotlin suspending functions.
+They are treated as <a href="#async-types">Additional Asynchronous Types</a>, even though the internal implementation is more complex than support for Mutiny or RxJava 3.</p>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-kotlin hljs" data-lang="kotlin">@ApplicationScoped
+open class MyService {
+    @Retry(maxRetries = 2)
+    @Fallback(fallbackMethod = "helloFallback")
+    open suspend fun hello(): String { <i class="conum" data-value="1"></i><b>(1)</b>
+        delay(100)
+        throw IllegalArgumentException()
+    }
+
+    private suspend fun helloFallback(): String { <i class="conum" data-value="2"></i><b>(2)</b>
+        delay(100)
+        return "hello"
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>As a suspending function, this method can only be called from another suspending function.
+It will be guarded by the retry and fallback strategies, as defined using the annotations.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Similarly to fallback methods in Java, fallback methods in Kotlin must have the same signature as the guarded method.
+Since the guarded method is suspending, the fallback method must be suspending.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>As mentioned above, suspending functions are treated as async types.
+This means that for asynchronous fault tolerance to work correctly on suspending functions, they must be determined to be asynchronous.
+That happens automatically in the <a href="#method-asynchrony">non-compatible mode</a>, based on the method signature, but if you use strictly compatible mode, the <code>@Asynchronous</code> or <code>@AsynchronousNonBlocking</code> annotation must be present.
+It is expected that most users will use the Kotlin support in the non-compatible mode, so the example above does not include any such annotation.</p>
+</div>
+<div class="paragraph">
+<p>To be able to use this, a support library must be present.
+It is possible that the runtime you use already provides the correct integration.
+Otherwise, add a dependency to your application: <code>io.smallrye:smallrye-fault-tolerance-kotlin</code>.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Quarkus</div>
+<div class="paragraph">
+<p>In Quarkus, the Kotlin support library is present by default, if you use the Quarkus Kotlin support.
+You can declare fault tolerance annotations on suspending methods out of the box.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_programmatic_api"><a class="anchor" href="#_programmatic_api"></a>Programmatic API</h4>
+<div class="paragraph">
+<p>Suspending functions are currently only supported in the declarative, annotation-based API, as shown in the example above.
+The <a href="programmatic-api.html" class="page">Programmatic API</a> of SmallRye Fault Tolerance does not support suspending functions, but other than that, it can of course be used from Kotlin through its Java interop.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="method-asynchrony"><a class="anchor" href="#method-asynchrony"></a>Determining Asynchrony from Method Signature</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+This is an additional feature of SmallRye Fault Tolerance and is not specified by MicroProfile Fault Tolerance.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+This feature only works in the <a href="non-compat.html" class="page">non-compatible mode</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In the non-compatible mode, method asynchrony is determined solely from its signature.
+That is, methods that</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>have some fault tolerance annotation (such as <code>@Retry</code>),</p>
+</li>
+<li>
+<p>return <code>CompletionStage</code> (or some other <a href="#async-types">async type</a>),</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>always have asynchronous fault tolerance applied.</p>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@ApplicationScoped
+public class MyService {
+    @Retry
+    CompletionStage&lt;String&gt; hello() { <i class="conum" data-value="1"></i><b>(1)</b>
+        ...
+    }
+
+    @Retry
+    Uni&lt;String&gt; helloMutiny() { <i class="conum" data-value="2"></i><b>(2)</b>
+        ...
+    }
+
+    @Retry
+    @Asynchronous
+    CompletionStage&lt;String&gt; helloBlocking() { <i class="conum" data-value="3"></i><b>(3)</b>
+        ...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Executed on the original thread, because the method returns <code>CompletionStage</code>.
+It is as if the method was annotated <code>@AsynchronousNonBlocking</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Executed on the original thread, because the method returns an <a href="#async-types">async type</a>.
+It is as if the method was annotated <code>@AsynchronousNonBlocking</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The explicit <code>@Asynchronous</code> annotation is honored.
+The method is executed on a thread pool.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Note that the existing annotations still work without a change, both in compatible and non-compatible mode.
+That is, if a method (or class) is annotated <code>@Asynchronous</code>, execution will be offloaded to a thread pool.
+If a method (or class) is annotated <code>@AsynchronousNonBlocking</code>, execution will happen on the original thread.</p>
+</div>
+<div class="paragraph">
+<p>Also note that this doesn&#8217;t affect methods returning <code>Future</code>.
+You still have to annotate them <code>@Asynchronous</code> to make sure they are executed on a thread pool and are guarded properly.
+As mentioned in the <a href="#recommendation">Recommendation</a>, we discourage using these methods, because the only way to obtain the future value is blocking.</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="retry.html">Retry</a></span>
+  <span class="next"><a href="rate-limit.html">Rate Limit</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>
+    Sponsored by <a href="https://www.redhat.com"><img style="vertical-align: middle; height: 2.5em;" src="../../../_/img/redhat.svg" alt="Red Hat"></a>
+  </p>
+  <p>
+    Made with <a href="https://github.com/smallrye/smallrye-antora-ui">SmallRye Antora UI</a>, which is licensed under the MPL-2.0 license.
+    Includes portions of <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>, which is licensed under the MIT license.
+  </p>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

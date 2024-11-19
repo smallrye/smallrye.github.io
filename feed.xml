@@ -1,4 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2024-11-14T13:46:36+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 6.6.2</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-6-2/" rel="alternate" type="text/html" title="Fault Tolerance 6.6.2" /><published>2024-11-14T11:00:00+00:00</published><updated>2024-11-14T11:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-6-2</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-6-2/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2024-11-19T16:19:13+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 6.6.3</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-6-3/" rel="alternate" type="text/html" title="Fault Tolerance 6.6.3" /><published>2024-11-19T13:00:00+00:00</published><updated>2024-11-19T13:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-6-3</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-6-3/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.6.3&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.6.3.
+This release contains one small improvement.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Individual metric providers can now be disabled.
+To do that, set the following configuration properties (as in MicroProfile Config) to &lt;code&gt;true&lt;/code&gt;:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;smallrye.faulttolerance.mpmetrics.disabled&lt;/code&gt; to disable MicroProfile Metrics&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;smallrye.faulttolerance.opentelemetry.disabled&lt;/code&gt; to disable OpenTelemetry Metrics&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;smallrye.faulttolerance.micrometer.disabled&lt;/code&gt; to disable Micrometer&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;These properties complement the global &lt;code&gt;MP_Fault_Tolerance_Metrics_Enabled&lt;/code&gt; property, which can be set to &lt;code&gt;false&lt;/code&gt; to disable metrics altogether.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Note that setting &lt;code&gt;smallrye.faulttolerance.*.disabled&lt;/code&gt; to &lt;code&gt;false&lt;/code&gt; does &lt;em&gt;not&lt;/em&gt; mean the provider is enabled unconditionally.
+When that provider is not discovered or selected by the integrator, it cannot be enabled in any way.
+These properties are only meant for disabling an otherwise enabled metrics provider; not the other way around.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Fault Tolerance 6.6.2</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-6-2/" rel="alternate" type="text/html" title="Fault Tolerance 6.6.2" /><published>2024-11-14T11:00:00+00:00</published><updated>2024-11-14T11:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-6-2</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-6-2/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.6.2&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.6.2.
 This release contains two small bugfixes.&lt;/p&gt;
 &lt;/div&gt;
@@ -170,79 +201,4 @@ See the &lt;a href=&quot;https://smallrye.io/docs/smallrye-fault-tolerance/6.4.0
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Jandex 3.2.0</title><link href="https://www.smallrye.io/blog/jandex-3-2-0/" rel="alternate" type="text/html" title="Jandex 3.2.0" /><published>2024-05-16T12:00:00+00:00</published><updated>2024-05-16T12:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-2-0</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-2-0/">&lt;div id=&quot;preamble&quot;&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.2.0&quot;&gt;release&lt;/a&gt; of Jandex 3.2.0.
-This release contains a number of improvements.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;&lt;strong&gt;BREAKING CHANGE:&lt;/strong&gt; This Jandex version increases the persistent format version.
-Therefore, persistent indexes produced by this version will &lt;em&gt;not&lt;/em&gt; be readable by previous Jandex releases.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;annotation_overlay&quot;&gt;Annotation overlay&lt;/h2&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;An &lt;em&gt;annotation overlay&lt;/em&gt; was added to Jandex.
-This is a layer on top of core Jandex that allows overriding annotations.
-This is useful when Jandex is used as a language model and annotations are used directly as framework metadata.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;In fact, there are &lt;em&gt;two&lt;/em&gt; annotation overlays: a default &lt;code&gt;AnnotationOverlay&lt;/code&gt;, which is immutable, and a &lt;code&gt;MutableAnnotationOverlay&lt;/code&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The default annotation overlay accepts an &lt;code&gt;IndexView&lt;/code&gt; and a collection of &lt;code&gt;AnnotationTransformation&lt;/code&gt;s.
-These transformations are applied lazily, whenever the annotation overlay is first asked for annotation information of any particular declaration.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The mutable annotation overlay only accepts an &lt;code&gt;IndexView&lt;/code&gt; and annotations may be added and removed freely, until the overlay is &lt;em&gt;frozen&lt;/em&gt;.
-When it&amp;#8217;s frozen, a list of annotation transformations is returned so that a corresponding immutable annotation overlay may be constructed.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;In case you&amp;#8217;re familiar with the &lt;code&gt;AnnotationStore&lt;/code&gt; from from ArC or from RESTEasy Reactive, this is the very same concept, but the implementation is improved.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;other_improvements&quot;&gt;Other improvements&lt;/h2&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Support for &lt;em&gt;sealed classes&lt;/em&gt; was added.
-This includes two methods: &lt;code&gt;ClassInfo.isSealed()&lt;/code&gt; and &lt;code&gt;ClassInfo.permittedSubclasses()&lt;/code&gt;.
-If a class is declared &lt;code&gt;sealed&lt;/code&gt;, the &lt;code&gt;isSealed()&lt;/code&gt; method returns &lt;code&gt;true&lt;/code&gt; and the &lt;code&gt;permittedSubclasses()&lt;/code&gt; method returns the names of permitted subclasses.
-To inspect them further, they must be looked up from the index.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Together with this, the &lt;code&gt;ClassInfo.isFinal()&lt;/code&gt; and &lt;code&gt;ClassInfo.isAbstract()&lt;/code&gt; methods were also added, as a shortcut for the corresponding &lt;code&gt;Modifier&lt;/code&gt; methods called on &lt;code&gt;ClassInfo.flags()&lt;/code&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;An empty index (&lt;code&gt;EmptyIndex.INSTANCE&lt;/code&gt; or &lt;code&gt;IndexView.empty()&lt;/code&gt;) was added.
-This is a very lightweight implementation of the &lt;code&gt;IndexView&lt;/code&gt; interface that always returns &lt;code&gt;null&lt;/code&gt; or an empty collection.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Further, a &lt;code&gt;StackedIndex&lt;/code&gt; was also added.
-This is a new implementation of a composite index, which actually has well defined semantics in case the same class is present in the index multiple times (unlike &lt;code&gt;CompositeIndex&lt;/code&gt;, which didn&amp;#8217;t define this situation at all).
-In a stacked index, if a class is seen in one of the indexes, it is completely ignored in other indexes &lt;em&gt;below&lt;/em&gt; the first one.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The behavior of &lt;code&gt;Index.getKnownUsers()&lt;/code&gt; was improved.
-Previously, this method only considered a class as a user of another class when a reference to the other class was listed in the  constant pool.
-Since this Jandex version, a class is also considered as a user of another class when the other class is present in the signature of the class or any of its members.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;By default, the Jandex Maven plugin will not produce an index for a module with the POM packaging.
-This is a tiny breaking change that shouldn&amp;#8217;t affect anyone, but in case it does, the &lt;code&gt;&amp;lt;skipForPomPackaging&amp;gt;&lt;/code&gt; configuration option may be set to &lt;code&gt;false&lt;/code&gt; to revert to the previous behavior.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;And last but not least, hash table collisions were significantly reduced when interning type variable references.
-This should make indexing a lot faster in certain cases.
-Thanks Patrick Reinhart for the issue!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry></feed>
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry></feed>

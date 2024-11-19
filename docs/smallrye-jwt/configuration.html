@@ -39,7 +39,7 @@
           <span class="navbar-link">Projects</span>
           <div class="navbar-dropdown">
               <a class="navbar-item" href="../index/index/index.html">Index</a>
-              <a class="navbar-item" href="../smallrye-fault-tolerance/6.6.2/index.html">SmallRye Fault Tolerance</a>
+              <a class="navbar-item" href="../smallrye-fault-tolerance/6.6.3/index.html">SmallRye Fault Tolerance</a>
               <a class="navbar-item" href="../smallrye-health/3.0.1/index.html">SmallRye Health</a>
               <a class="navbar-item" href="index.html">SmallRye JWT</a>
               <a class="navbar-item" href="../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
@@ -314,6 +314,11 @@ precedence:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.jwks.refresh-interval</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>60</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">JWK cache refresh interval in minutes. It will be ignored unless the <code>mp.jwt.verify.publickey.location</code> points to the HTTP or HTTPS URL based JWK set and no HTTP <code>Cache-Control</code> response header with a positive <code>max-age</code> parameter value is returned from a JWK set endpoint.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.jwks.retain-cache-on-error-duration</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JWK cache retain on error duration in minutes which sets the length of time, before trying again, to keep using the cache when an error occurs making the request to the JWKS URI or parsing the response. It will be ignored unless the <code>mp.jwt.verify.publickey.location</code> property points to the HTTP or HTTPS URL based JWK set.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.jwks.forced-refresh-interval</code></p></td>

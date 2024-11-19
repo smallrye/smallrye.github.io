@@ -1,0 +1,28 @@
+:page-layout: post
+:page-title: Fault Tolerance 6.6.3
+:page-synopsis: SmallRye Fault Tolerance 6.6.3 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2024-11-19 14:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 6.6.3
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.6.3[release] of {smallrye-ft} 6.6.3.
+This release contains one small improvement.
+
+Individual metric providers can now be disabled.
+To do that, set the following configuration properties (as in MicroProfile Config) to `true`:
+
+* `smallrye.faulttolerance.mpmetrics.disabled` to disable MicroProfile Metrics
+* `smallrye.faulttolerance.opentelemetry.disabled` to disable OpenTelemetry Metrics
+* `smallrye.faulttolerance.micrometer.disabled` to disable Micrometer
+
+These properties complement the global `MP_Fault_Tolerance_Metrics_Enabled` property, which can be set to `false` to disable metrics altogether.
+
+Note that setting `smallrye.faulttolerance.*.disabled` to `false` does _not_ mean the provider is enabled unconditionally.
+When that provider is not discovered or selected by the integrator, it cannot be enabled in any way.
+These properties are only meant for disabling an otherwise enabled metrics provider; not the other way around.
+
+As usual, if you have any ideas for improvements, please https://github.com/smallrye/smallrye-fault-tolerance/issues[file an issue]!

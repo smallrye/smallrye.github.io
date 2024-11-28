@@ -1,0 +1,121 @@
+:page-layout: post
+:page-title: Fault Tolerance 6.7.0
+:page-synopsis: SmallRye Fault Tolerance 6.7.0 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2024-11-28 14:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 6.7.0
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.7.0[release] of {smallrye-ft} 6.7.0.
+This release contains several big improvements and refactorings.
+
+== Big Internal Refactoring
+
+The internal implementations of all fault tolerance strategies up until now had 2 copies: one synchronous and one asynchronous (based on `CompletionStage`).
+This changes now: all strategies are unified on an asynchronous implementation (based on an internal async type), with a few adjustments for sychronous invocations to support thread interrupts.
+
+This has been done especially for the next feature, which is...
+
+== New Programmatic API
+
+The first version of the programmatic API (`FaultTolerance`, `@ApplyFaultTolerance`) was deprecated and scheduled for removal in {smallrye-ft} 7.0.
+The second version (`Guard`, `TypedGuard`, `@ApplyGuard`) is fairly similar, but has some important differences too.
+
+Comparison of `FaultTolerance`, `Guard` and `TypedGuard`:
+
+[%header,cols="1,1,1"]
+|===
+|`FaultTolerance`
+|`TypedGuard`
+|`Guard`
+
+|typed
+|typed
+|not typed
+
+|allows fallback
+|allows fallback
+|does _not_ allow fallback
+
+|allows casting, but only if there is no fallback
+|does _not_ allow casting
+|no casting is necessary, target type has to be specified for each call
+
+|does not allow using synchronous `FaultTolerance` to guard asynchonous actions et vice versa
+|does not allow casting
+|allows guarding any type
+
+|created using `create()` or `createAsync()`
+|only `create()`, but it needs the target type (which may be sync or async)
+|only `create()`; the `call()` method needs the target type (which may be sync or async)
+|===
+
+Comparison of `@ApplyFaultTolerance` and `@ApplyGuard`:
+
+[%header,cols="1,1"]
+|===
+|`@ApplyFaultTolerance`
+|`@ApplyGuard`
+
+|the `value()` points to a bean of type `FaultTolerance`
+|the `value()` points to a bean of type `Guard` or `TypedGuard`
+
+|ignores all other fault tolerance annotations
+|supports `@Fallback` and thread offload (`@Asynchronous`, `@AsynchronousNonBlocking`)
+
+|does not support Kotlin `suspend` functions
+|supports Kotlin `suspend` functions
+|===
+
+For more information about migrating to the new programmatic API, see the migration guides:
+
+* link:https://smallrye.io/docs/smallrye-fault-tolerance/6.7.0/reference/programmatic-api.html#migration_from_faulttolerance[Migration from `FaultTolerance`]
+* link:https://smallrye.io/docs/smallrye-fault-tolerance/6.7.0/reference/reusable.html#migration_from_applyfaulttolerance[Migration from `@ApplyFaultTolerance`]
+
+Further, the `MutinyFaultTolerance` API has no replacement.
+The `Guard` and `TypedGuard` APIs support `Uni` out of the box, if the Mutiny support library is present.
+
+== New Configuration Properties
+
+Support for new configuration properties was added.
+The existing, {microprofile-ft}-defined configuration still works, but the new configuration is properly scoped and looks more natural:
+
+[%header,cols="1,1"]
+|===
+|Existing config property
+|New config property
+
+|`<classname>/<methodname>/<annotation>/<member>`
+| `smallrye.faulttolerance."<classname>/<methodname>".<annotation>.<member>`
+
+|`<classname>/<annotation>/<member>`
+|`smallrye.faulttolerance."<classname>".<annotation>.<member>`
+
+|`<annotation>/<member>`
+|`smallrye.faulttolerance.global.<annotation>.<member>`
+
+|`MP_Fault_Tolerance_NonFallback_Enabled`
+|`smallrye.faulttolerance.enabled`
+
+| `MP_Fault_Tolerance_Metrics_Enabled`
+|`smallrye.faulttolerance.metrics.enabled`
+|===
+
+All the `<annotation>` and `<member>` parts are changed from camel case
+(`BeforeRetry`, `methodName`) to kebab case (`before-retry`, `method-name`).
+Two annotation members are special cased to improve consistency:
+
+- `Retry/durationUnit` moves to `retry.max-duration-unit`
+- `Retry/jitterDelayUnit` moves to `retry.jitter-unit`
+
+These new configuration properties exist especially for Quarkus, where they will look Quarkus-native: instead of the `smallrye.faulttolerance` prefix, they will start with `quarkus.fault-tolerance`.
+
+== Conclusion
+
+Nothing should change externally, this release should be fully backward compatible.
+But please do pay extra attention.
+
+And as usual, if you have any ideas for improvements, please https://github.com/smallrye/smallrye-fault-tolerance/issues[file an issue]!

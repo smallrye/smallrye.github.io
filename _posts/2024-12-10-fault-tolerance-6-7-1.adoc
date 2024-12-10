@@ -1,0 +1,23 @@
+:page-layout: post
+:page-title: Fault Tolerance 6.7.1
+:page-synopsis: SmallRye Fault Tolerance 6.7.1 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2024-12-10 15:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 6.7.1
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.7.1[release] of {smallrye-ft} 6.7.1.
+This release contains one bugfix.
+
+The new programmatic API (`Guard`, `TypedGuard`) link:/blog/fault-tolerance-6-7-0/[introduced] in {smallrye-ft} 6.7.0 allows guarding multiple kinds of actions, both synchronous and asynchronous.
+To do that, all implementations of fault tolerance strategies were unified.
+This unification introduced a bug in the implementation of synchronous bulkhead, where acquiring the capacity semaphore was skipped before acquiring the work semaphore.
+This bug would only appear when the same bulkhead is used to guard both synchronous and asynchronous actions, which wasn't possible until recently, but it's still a significant issue.
+This release fixes it.
+
+Further, the documentation index page was updated to show a programmatic API example using `TypedGuard`, instead of the obsolete `FaultTolerance`.
+
+As usual, if you have any ideas for improvements, please https://github.com/smallrye/smallrye-fault-tolerance/issues[file an issue]!

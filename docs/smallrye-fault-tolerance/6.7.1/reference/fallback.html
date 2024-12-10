@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Fallback :: SmallRye documentation</title>
+    <link rel="prev" href="../howto/multiple.html">
+    <link rel="next" href="bulkhead.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <button class="nav-toggle"></button>
+
+      <a class="navbar-item title" href="../index.html">SmallRye Fault Tolerance</a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <span class="navbar-link">6.7.1</span>
+        <div class="navbar-dropdown navbar-menu">
+            <a class="navbar-item  is-current" href="../index.html">6.7.1</a>
+            <a class="navbar-item " href="../../6.7.0/index.html">6.7.0</a>
+            <a class="navbar-item " href="../../6.6.3/index.html">6.6.3</a>
+            <a class="navbar-item " href="../../6.6.2/index.html">6.6.2</a>
+            <a class="navbar-item " href="../../6.6.1/index.html">6.6.1</a>
+            <a class="navbar-item " href="../../6.6.0/index.html">6.6.0</a>
+            <a class="navbar-item " href="../../6.5.0/index.html">6.5.0</a>
+            <a class="navbar-item " href="../../6.4.1/index.html">6.4.1</a>
+            <a class="navbar-item " href="../../6.4.0/index.html">6.4.0</a>
+            <a class="navbar-item " href="../../6.3.0/index.html">6.3.0</a>
+            <a class="navbar-item " href="../../6.2.6/index.html">6.2.6</a>
+            <a class="navbar-item " href="../../6.2.4/index.html">6.2.4</a>
+            <a class="navbar-item " href="../../6.2.3/index.html">6.2.3</a>
+            <a class="navbar-item " href="../../6.2.2/index.html">6.2.2</a>
+            <a class="navbar-item " href="../../6.2.1/index.html">6.2.1</a>
+            <a class="navbar-item " href="../../6.2.0/index.html">6.2.0</a>
+            <a class="navbar-item " href="../../6.1.0/index.html">6.1.0</a>
+            <a class="navbar-item " href="../../6.0.0/index.html">6.0.0</a>
+            <a class="navbar-item " href="../../5.6.0/index.html">5.6.0</a>
+            <a class="navbar-item " href="../../5.5.0/index.html">5.5.0</a>
+            <a class="navbar-item " href="../../5.4.1/index.html">5.4.1</a>
+            <a class="navbar-item " href="../../5.4.0/index.html">5.4.0</a>
+            <a class="navbar-item " href="../../5.3.2/index.html">5.3.2</a>
+            <a class="navbar-item " href="../../5.3.1/index.html">5.3.1</a>
+            <a class="navbar-item " href="../../5.3.0/index.html">5.3.0</a>
+            <a class="navbar-item " href="../../5.2.1/index.html">5.2.1</a>
+            <a class="navbar-item " href="../../5.2.0/index.html">5.2.0</a>
+            <a class="navbar-item " href="../../5.1.0/index.html">5.1.0</a>
+            <a class="navbar-item " href="../../5.0.0/index.html">5.0.0</a>
+        </div>
+      </div>
+
+
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <span class="navbar-link">Projects</span>
+          <div class="navbar-dropdown">
+              <a class="navbar-item" href="../../../index/index/index.html">Index</a>
+              <a class="navbar-item" href="../index.html">SmallRye Fault Tolerance</a>
+              <a class="navbar-item" href="../../../smallrye-health/3.0.1/index.html">SmallRye Health</a>
+              <a class="navbar-item" href="../../../smallrye-jwt/index.html">SmallRye JWT</a>
+              <a class="navbar-item" href="../../../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
+          </div>
+        </div>
+
+        <a class="navbar-item" href="https://smallrye.io/">SmallRye.io main website</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="smallrye-fault-tolerance" data-version="6.7.1">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+<ul class="nav-list nav-list-level-0">
+  <li class="nav-item nav-item-level-0">
+<ul class="nav-list nav-list-level-1">
+  <li class="nav-item nav-item-level-1">
+    <a class="nav-link" href="../index.html">Index</a>
+  </li>
+  <li class="nav-item nav-item-level-1">
+    <span class="nav-text">How-to &#8230;&#8203;</span>
+<ul class="nav-list nav-list-level-2">
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/begin.html">Begin</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/fallback.html">Supply Fallback Values</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/bulkhead.html">Limit Concurrency</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/circuit-breaker.html">Fail Fast on Recurring Failures</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/timeout.html">Watch for Timeouts</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/retry.html">Retry on Failures</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/asynchronous.html">Guard Asynchronous Methods</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/rate-limit.html">Limit Execution Rate</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/multiple.html">Use Multiple Strategies</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item nav-item-level-1">
+    <span class="nav-text">Reference</span>
+<ul class="nav-list nav-list-level-2">
+  <li class="nav-item nav-item-level-2 is-current-page">
+    <a class="nav-link" href="fallback.html">Fallback</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="bulkhead.html">Bulkhead</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="circuit-breaker.html">Circuit Breaker</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="timeout.html">Timeout</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="retry.html">Retry</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="asynchronous.html">Asynchronous Execution</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="rate-limit.html">Rate Limit</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="config.html">Configuration</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="metrics.html">Metrics</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="non-compat.html">Non-compatible Mode</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="programmatic-api.html">Programmatic API</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="reusable.html">Reusable Fault Tolerance</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item nav-item-level-1">
+    <span class="nav-text">Integration</span>
+<ul class="nav-list nav-list-level-2">
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/intro.html">Introduction</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/metrics.html">Metrics</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/thread-pool.html">Thread Pool</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/context-propagation.html">Context Propagation</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/opentracing.html">OpenTracing</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/event-loop.html">Event Loop</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/async-types.html">Additional Asynchronous Types Integration Concerns</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/kotlin.html">Kotlin Integration Concerns</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/programmatic-api.html">Programmatic API Integration Concerns</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item nav-item-level-1">
+    <span class="nav-text">Internals</span>
+<ul class="nav-list nav-list-level-2">
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/project-structure.html">Project Structure</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/instructions.html">Instructions</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/core.html">Fault Tolerance Core</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/config.html">Configuration System</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/logging.html">Logging</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+  <div class="content">
+<aside class="toc sidebar" data-title="Table of contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+  <a href="https://github.com/smallrye/smallrye-fault-tolerance/blob/6.7.1/doc/modules/ROOT/pages/reference/fallback.adoc" class="edit-this-page" title="Edit this page">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+<h1 class="page">Fallback</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>For introduction, see <a href="../howto/fallback.html" class="page">How to Supply Fallback Values</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_description"><a class="anchor" href="#_description"></a>Description</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If a guarded method throws an exception, fallback will prevent that exception from being propagated to the caller.
+Instead, a fallback method or fallback handler is called and their result is returned.</p>
+</div>
+<div class="paragraph">
+<p>More specifically:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>If the guarded method returns normally, its return value is returned.</p>
+</li>
+<li>
+<p>Otherwise, if the guarded method throws an exception whose type is assignable to any of the <code>skipOn</code> types (see <a href="#skip-on">skipOn</a>), the exception is rethrown.</p>
+</li>
+<li>
+<p>Otherwise, if the guarded method throws an exception whose type is assignable to any of the <code>applyOn</code> types (see <a href="#apply-on">applyOn</a>), the fallback value is obtained and returned.</p>
+</li>
+<li>
+<p>Otherwise, the exception is rethrown.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="interactions"><a class="anchor" href="#interactions"></a>Interactions with Other Strategies</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>See <a href="../howto/multiple.html" class="page">How to Use Multiple Strategies</a> for an overview of how fault tolerance strategies are nested.</p>
+</div>
+<div class="paragraph">
+<p>If <code>@Fallback</code> is used, the fallback method or handler may be invoked if other fault tolerance strategies throw an exception, depending on the fallback configuration.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuration"><a class="anchor" href="#configuration"></a>Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are 4 configuration options, corresponding to the 4 members of the <code>@Fallback</code> annotation.</p>
+</div>
+<div class="paragraph">
+<p>Exactly one of <code>value</code> or <code>fallbackMethod</code> must be set explicitly, they don&#8217;t have a useful default value.</p>
+</div>
+<div class="sect2">
+<h3 id="_value"><a class="anchor" href="#_value"></a><code>value</code></h3>
+<div class="paragraph">
+<p>Type: <code>Class&lt;? extends FallbackHandler&lt;?&gt;&gt;</code></p>
+</div>
+<div class="paragraph">
+<p>Default: empty</p>
+</div>
+<div class="paragraph">
+<p>Class of the fallback handler implementation that should be used to obtain the fallback value.
+When this is set, the <code>fallbackMethod</code> must be left empty.</p>
+</div>
+<div class="paragraph">
+<p>The fallback handler class must implement the <code>FallbackHandler</code> interface.
+The type argument to <code>FallbackHandler</code> must be assignable to the return type of the guarded method.
+For example, if the guarded method returns <code>Number</code>, the fallback handler may implement <code>FallbackHandler&lt;Number&gt;</code> or <code>FallbackHandler&lt;Integer&gt;</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_fallbackmethod"><a class="anchor" href="#_fallbackmethod"></a><code>fallbackMethod</code></h3>
+<div class="paragraph">
+<p>Type: <code>String</code></p>
+</div>
+<div class="paragraph">
+<p>Default: empty</p>
+</div>
+<div class="paragraph">
+<p>Name of the fallback method that should be used to obtain the fallback value.
+When this is set, the <code>value</code> must be left empty.</p>
+</div>
+<div class="paragraph">
+<p>The fallback method must be declared directly on the class where the guarded method is declared, or must be inherited from any of the class&#8217;s supertypes.
+The fallback method must have the same parameter types as the guarded method.
+The fallback method must have a return type that is assignable to the return type of the guarded method.
+For example, if the guarded method returns <code>Number</code>, the fallback method may return <code>Number</code> or <code>Integer</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="apply-on"><a class="anchor" href="#apply-on"></a><code>applyOn</code></h3>
+<div class="paragraph">
+<p>Type: <code>Class&lt;? extends Throwable&gt;[]</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>{Throwable.class}</code></p>
+</div>
+<div class="paragraph">
+<p>Set of exception types to which fallback applies.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="skip-on"><a class="anchor" href="#skip-on"></a><code>skipOn</code></h3>
+<div class="paragraph">
+<p>Type: <code>Class&lt;? extends Throwable&gt;[]</code></p>
+</div>
+<div class="paragraph">
+<p>Default: <code>{}</code></p>
+</div>
+<div class="paragraph">
+<p>Set of exception types to which fallback does <em>not</em> apply.
+This configuration takes precedence over <code>applyOn</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="metrics"><a class="anchor" href="#metrics"></a>Metrics</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Fallback does not emit any metrics on its own.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="metrics.html" class="page">the Metrics reference guide</a> for general metrics information.
+Fallback is included in the overall method invocation metric described there.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_extra_features"><a class="anchor" href="#_extra_features"></a>Extra Features</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="fallback-methods-with-exception-parameter"><a class="anchor" href="#fallback-methods-with-exception-parameter"></a>Fallback Methods with Exception Parameter</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+This is an additional feature of SmallRye Fault Tolerance and is not specified by MicroProfile Fault Tolerance.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+This feature only works in the <a href="non-compat.html" class="page">non-compatible mode</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>SmallRye Fault Tolerance provides access to the causing exception in a fallback method.</p>
+</div>
+<div class="paragraph">
+<p>A fallback method, as defind by the MicroProfile Fault Tolerance specification, must have the same parameters as the guarded method.
+SmallRye Fault Tolerance permits defining one additional parameter, at the end of the parameter list, which must be of an exception type.
+If such parameter is defined, the exception that caused the fallback will be supplied in it.</p>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@ApplicationScoped
+public class MyService {
+    @Fallback(fallbackMethod = "fallback")
+    public String doSomething(String param) {
+        ...
+    }
+
+    public String fallback(String param, IllegalArgumentException cause) { <i class="conum" data-value="1"></i><b>(1)</b>
+        ...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The fallback method matches the guarded method signature, except for one additional parameter at the end.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>All rules of MicroProfile Fault Tolerance specification related to looking up fallback methods still apply.
+That is, the return types must match, the parameter types must match (with this one exception), etc.</p>
+</div>
+<div class="paragraph">
+<p>If the thrown exception is not assignable to the exception parameter type, it is rethrown as if no fallback was declared.
+In the previous example, if <code>IllegalStateException</code> was thrown, the fallback method would not be called, as <code>IllegalStateException</code> is not a subtype of <code>IllegalArgumentException</code>.</p>
+</div>
+<div class="paragraph">
+<p>If the guarded method has a vararg parameter and you want to declare a fallback method with an exception parameter, simply replace the vararg syntax with an array type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@ApplicationScoped
+public class MyService {
+    @Fallback(fallbackMethod = "fallback")
+    public String doSomething(String... params) {
+        ...
+    }
+
+    public String fallback(String[] params, IllegalArgumentException cause) {
+        ...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_multiple_fallback_methods_with_exception_parameter"><a class="anchor" href="#_multiple_fallback_methods_with_exception_parameter"></a>Multiple Fallback Methods with Exception Parameter</h4>
+<div class="paragraph">
+<p>It is possible to declare multiple overloads of the fallback method, each having different type of the exception parameter:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@ApplicationScoped
+public class MyService {
+    @Fallback(fallbackMethod = "fallback")
+    public String doSomething(String param) {
+        ...
+    }
+
+    public String fallback(String param, IllegalArgumentException cause) {
+        ...
+    }
+
+    public String fallback(String param, RuntimeException cause) {
+        ...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In that case, which fallback method is called depends on the type of thrown exception.
+The method that declares a most-specific supertype of the actual exception is selected.</p>
+</div>
+<div class="paragraph">
+<p>In the previous example, if <code>IllegalArgumentException</code> was thrown by <code>doSomething</code>, the first fallback method would be called.
+If <code>IllegalStateException</code> was thrown, the second fallback method would be called.</p>
+</div>
+<div class="paragraph">
+<p>If the thrown exception is not assignable to the exception parameter type of any fallback method, it is rethrown as if no fallback was declared.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_fallback_methods_with_and_without_exception_parameter"><a class="anchor" href="#_fallback_methods_with_and_without_exception_parameter"></a>Fallback Methods with and without Exception Parameter</h4>
+<div class="paragraph">
+<p>It is possible to declare the fallback method with and without an exception parameter at the same time:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@ApplicationScoped
+public class MyService {
+    @Fallback(fallbackMethod = "fallback")
+    public String doSomething(String param) {
+        ...
+    }
+
+    public String fallback(String param, IllegalArgumentException cause) {
+        ...
+    }
+
+    public String fallback(String param, RuntimeException cause) {
+        ...
+    }
+
+    public String fallback(String param) {
+        ...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The fallback methods with an exception parameter have precedence.
+The fallback method without an exception parameter is only called if the thrown exception is not assignable to any declared exception parameter.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_interactions_with_applyon_skipon"><a class="anchor" href="#_interactions_with_applyon_skipon"></a>Interactions with <code>applyOn</code> / <code>skipOn</code></h4>
+<div class="paragraph">
+<p>The presence or absence of a fallback method with specific exception parameter may seem related to the usage of <code>applyOn</code> / <code>skipOn</code> on the <code>@Fallback</code> annotation, but in fact, it is not.
+These features are completely independent.</p>
+</div>
+<div class="paragraph">
+<p>Simply put, the <code>applyOn</code> / <code>skipOn</code> configuration is always evaluated first.
+A fallback method is only selected and invoked when this configuration indicates that a fallback should apply.</p>
+</div>
+<div class="paragraph">
+<p>If <code>@Fallback</code> is configured to skip <code>IllegalStateException</code> and <code>IllegalStateException</code> is thrown, no fallback method is invoked.
+That applies even if a fallback method with a matching exception parameter exists.</p>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@ApplicationScoped
+public class MyService {
+    @Fallback(fallbackMethod = "fallback", skipOn = IllegalStateException.class)
+    public String doSomething(String param) {
+        ...
+    }
+
+    public String fallback(String param, IllegalArgumentException cause) {
+        ...
+    }
+
+    public String fallback(String param, RuntimeException cause) {
+        ...
+    }
+
+    public String fallback(String param) {
+        ...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this case:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>if <code>doSomething</code> throws <code>IllegalArgumentException</code>, the first fallback method is called;</p>
+</li>
+<li>
+<p>if <code>doSomething</code> throws <code>IllegalStateException</code>, no fallback method is called, because this exception type is skipped;</p>
+</li>
+<li>
+<p>if <code>doSomething</code> throws any other <code>RuntimeException</code>, the second fallback method is called;</p>
+</li>
+<li>
+<p>if <code>doSomething</code> throws any other exception, the last fallback method is called.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="inspecting-exception-cause-chains"><a class="anchor" href="#inspecting-exception-cause-chains"></a>Inspecting Exception Cause Chains</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+This is an additional feature of SmallRye Fault Tolerance and is not specified by MicroProfile Fault Tolerance.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+This feature only works in the <a href="non-compat.html" class="page">non-compatible mode</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The <code>@Fallback</code> annotation can specify that certain exceptions should be treated as failures (<code>applyOn</code>) and others as successes (<code>skipOn</code>).
+The specification limits this to inspecting the actual exception that was thrown.
+However, in many cases, exceptions are wrapped and the exception the user wants to decide on is only present in the cause chain.</p>
+</div>
+<div class="paragraph">
+<p>For that reason, in the non-compatible mode, if the actual thrown exception isn&#8217;t known failure or known success, SmallRye Fault Tolerance inspects the cause chain.
+To be specific, in case a <code>@Fallback</code> method throws an exception, the decision process is:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>If the <code>skipOn</code> exceptions are not default and the exception is assignable to one of the <code>skipOn</code> exceptions, fallback is skipped and the exception is rethrown.</p>
+</li>
+<li>
+<p>Otherwise, if the <code>applyOn</code> exceptions are not default and the exception is assignable to one of the <code>applyOn</code> exceptions, fallback is applied.</p>
+</li>
+<li>
+<p>Otherwise, if the exception is assignable to one of the <code>skipOn</code> exceptions or its cause chain contains an exception assignable to one of the <code>skipOn</code> exceptions, fallback is skipped and the exception is rethrown.</p>
+</li>
+<li>
+<p>Otherwise, if the exception is assignable to one of the <code>applyOn</code> exceptions or its cause chain contains an exception assignable to one of the <code>applyOn</code> exceptions, fallback is applied.</p>
+</li>
+<li>
+<p>Otherwise, the exception is rethrown.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Fallback(fallbackMethod = "fallback",
+    skipOn = ExpectedOutcomeException.class, <i class="conum" data-value="1"></i><b>(1)</b>
+    applyOn = IOException.class) <i class="conum" data-value="2"></i><b>(2)</b>
+public Result doSomething() {
+    ...
+}
+
+public Result fallback() {
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>If <code>doSomething</code> throws an <code>ExpectedOutcomeException</code>, or a <code>WrapperException</code> whose cause is <code>ExpectedOutcomeException</code>, fallback is skipped and the exception is thrown.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>If <code>doSomething</code> throws an <code>IOException</code>, or a <code>WrapperException</code> whose cause is <code>IOException</code>, fallback is applied.</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Fallback(fallbackMethod = "fallback",
+    skipOn = ExpectedOutcomeException.class) <i class="conum" data-value="1"></i><b>(1)</b> <i class="conum" data-value="2"></i><b>(2)</b>
+public Result doSomething() {
+    ...
+}
+
+public Result fallback() {
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>If <code>doSomething</code> throws an <code>ExpectedOutcomeException</code>, or a <code>WrapperException</code> whose cause is <code>ExpectedOutcomeException</code>, fallback is skipped and the exception is thrown.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>There&#8217;s no <code>applyOn</code>, so the 2nd step in the algorithm above is skipped.
+This is what turns the <code>WrapperException</code> whose cause is <code>ExpectedOutcomeException</code> into a skipped fallback.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../howto/multiple.html">Use Multiple Strategies</a></span>
+  <span class="next"><a href="bulkhead.html">Bulkhead</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>
+    Sponsored by <a href="https://www.redhat.com"><img style="vertical-align: middle; height: 2.5em;" src="../../../_/img/redhat.svg" alt="Red Hat"></a>
+  </p>
+  <p>
+    Made with <a href="https://github.com/smallrye/smallrye-antora-ui">SmallRye Antora UI</a>, which is licensed under the MPL-2.0 license.
+    Includes portions of <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>, which is licensed under the MIT license.
+  </p>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

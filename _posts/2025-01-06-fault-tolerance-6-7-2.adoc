@@ -1,0 +1,25 @@
+:page-layout: post
+:page-title: Fault Tolerance 6.7.2
+:page-synopsis: SmallRye Fault Tolerance 6.7.2 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2025-01-06 12:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 6.7.2
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.7.2[release] of {smallrye-ft} 6.7.2.
+This release contains one bugfix and one improvement.
+
+The event loop integration was significantly improved.
+In case the original invocation happened on an event loop thread, it is now guaranteed that the asynchronous completion also happens on the same event loop, even if the method completed on a different thread.
+Timeouts are now also signalled on the event loop.
+In case of the Vert.x integration in {smallrye-ft} (and therefore Quarkus), Vert.x worker threads are now also treated as event loops (although the guarantee of "the same event loop" is not as strict).
+
+The capacity of a bulkhead is a sum of the bulkhead limit and the bulkhead queue size.
+That sum could overflow, which wasn't detected before.
+In this release, an overflow is a validation error which fails the deployment (in case of the `@Bulkhead` annotation; when using the programmatic API, the `BulkheadBuilder.done()` method will throw an exception).
+Thanks Sayra Gmelig Meyling for the issue report!
+
+As usual, if you have any ideas for improvements, please https://github.com/smallrye/smallrye-fault-tolerance/issues[file an issue]!

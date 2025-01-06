@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Reusable Fault Tolerance :: SmallRye documentation</title>
+    <link rel="prev" href="programmatic-api.html">
+    <link rel="next" href="../integration/intro.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <button class="nav-toggle"></button>
+
+      <a class="navbar-item title" href="../index.html">SmallRye Fault Tolerance</a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <span class="navbar-link">6.7.2</span>
+        <div class="navbar-dropdown navbar-menu">
+            <a class="navbar-item  is-current" href="../index.html">6.7.2</a>
+            <a class="navbar-item " href="../../6.7.1/index.html">6.7.1</a>
+            <a class="navbar-item " href="../../6.7.0/index.html">6.7.0</a>
+            <a class="navbar-item " href="../../6.6.3/index.html">6.6.3</a>
+            <a class="navbar-item " href="../../6.6.2/index.html">6.6.2</a>
+            <a class="navbar-item " href="../../6.6.1/index.html">6.6.1</a>
+            <a class="navbar-item " href="../../6.6.0/index.html">6.6.0</a>
+            <a class="navbar-item " href="../../6.5.0/index.html">6.5.0</a>
+            <a class="navbar-item " href="../../6.4.1/index.html">6.4.1</a>
+            <a class="navbar-item " href="../../6.4.0/index.html">6.4.0</a>
+            <a class="navbar-item " href="../../6.3.0/index.html">6.3.0</a>
+            <a class="navbar-item " href="../../6.2.6/index.html">6.2.6</a>
+            <a class="navbar-item " href="../../6.2.4/index.html">6.2.4</a>
+            <a class="navbar-item " href="../../6.2.3/index.html">6.2.3</a>
+            <a class="navbar-item " href="../../6.2.2/index.html">6.2.2</a>
+            <a class="navbar-item " href="../../6.2.1/index.html">6.2.1</a>
+            <a class="navbar-item " href="../../6.2.0/index.html">6.2.0</a>
+            <a class="navbar-item " href="../../6.1.0/index.html">6.1.0</a>
+            <a class="navbar-item " href="../../6.0.0/index.html">6.0.0</a>
+            <a class="navbar-item " href="../../5.6.0/index.html">5.6.0</a>
+            <a class="navbar-item " href="../../5.5.0/index.html">5.5.0</a>
+            <a class="navbar-item " href="../../5.4.1/index.html">5.4.1</a>
+            <a class="navbar-item " href="../../5.4.0/index.html">5.4.0</a>
+            <a class="navbar-item " href="../../5.3.2/index.html">5.3.2</a>
+            <a class="navbar-item " href="../../5.3.1/index.html">5.3.1</a>
+            <a class="navbar-item " href="../../5.3.0/index.html">5.3.0</a>
+            <a class="navbar-item " href="../../5.2.1/index.html">5.2.1</a>
+            <a class="navbar-item " href="../../5.2.0/index.html">5.2.0</a>
+            <a class="navbar-item " href="../../5.1.0/index.html">5.1.0</a>
+            <a class="navbar-item " href="../../5.0.0/index.html">5.0.0</a>
+        </div>
+      </div>
+
+
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <span class="navbar-link">Projects</span>
+          <div class="navbar-dropdown">
+              <a class="navbar-item" href="../../../index/index/index.html">Index</a>
+              <a class="navbar-item" href="../index.html">SmallRye Fault Tolerance</a>
+              <a class="navbar-item" href="../../../smallrye-health/3.0.1/index.html">SmallRye Health</a>
+              <a class="navbar-item" href="../../../smallrye-jwt/index.html">SmallRye JWT</a>
+              <a class="navbar-item" href="../../../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
+          </div>
+        </div>
+
+        <a class="navbar-item" href="https://smallrye.io/">SmallRye.io main website</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="smallrye-fault-tolerance" data-version="6.7.2">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+<ul class="nav-list nav-list-level-0">
+  <li class="nav-item nav-item-level-0">
+<ul class="nav-list nav-list-level-1">
+  <li class="nav-item nav-item-level-1">
+    <a class="nav-link" href="../index.html">Index</a>
+  </li>
+  <li class="nav-item nav-item-level-1">
+    <span class="nav-text">How-to &#8230;&#8203;</span>
+<ul class="nav-list nav-list-level-2">
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/begin.html">Begin</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/fallback.html">Supply Fallback Values</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/bulkhead.html">Limit Concurrency</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/circuit-breaker.html">Fail Fast on Recurring Failures</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/timeout.html">Watch for Timeouts</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/retry.html">Retry on Failures</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/asynchronous.html">Guard Asynchronous Methods</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/rate-limit.html">Limit Execution Rate</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/multiple.html">Use Multiple Strategies</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item nav-item-level-1">
+    <span class="nav-text">Reference</span>
+<ul class="nav-list nav-list-level-2">
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="fallback.html">Fallback</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="bulkhead.html">Bulkhead</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="circuit-breaker.html">Circuit Breaker</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="timeout.html">Timeout</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="retry.html">Retry</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="asynchronous.html">Asynchronous Execution</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="rate-limit.html">Rate Limit</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="config.html">Configuration</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="metrics.html">Metrics</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="non-compat.html">Non-compatible Mode</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="programmatic-api.html">Programmatic API</a>
+  </li>
+  <li class="nav-item nav-item-level-2 is-current-page">
+    <a class="nav-link" href="reusable.html">Reusable Fault Tolerance</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item nav-item-level-1">
+    <span class="nav-text">Integration</span>
+<ul class="nav-list nav-list-level-2">
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/intro.html">Introduction</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/metrics.html">Metrics</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/thread-pool.html">Thread Pool</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/context-propagation.html">Context Propagation</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/opentracing.html">OpenTracing</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/event-loop.html">Event Loop</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/async-types.html">Additional Asynchronous Types Integration Concerns</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/kotlin.html">Kotlin Integration Concerns</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/programmatic-api.html">Programmatic API Integration Concerns</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item nav-item-level-1">
+    <span class="nav-text">Internals</span>
+<ul class="nav-list nav-list-level-2">
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/project-structure.html">Project Structure</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/instructions.html">Instructions</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/core.html">Fault Tolerance Core</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/config.html">Configuration System</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/logging.html">Logging</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+  <div class="content">
+<aside class="toc sidebar" data-title="Table of contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+  <a href="https://github.com/smallrye/smallrye-fault-tolerance/blob/6.7.2/doc/modules/ROOT/pages/reference/reusable.adoc" class="edit-this-page" title="Edit this page">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+<h1 class="page">Reusable Fault Tolerance</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+This is an additional feature of SmallRye Fault Tolerance and is not specified by MicroProfile Fault Tolerance.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The declarative, annotation-based API of MicroProfile Fault Tolerance doesn&#8217;t allow sharing configuration of fault tolerance strategies across multiple classes.
+In a single class, the configuration may be shared across all methods by putting the annotations on the class instead of individual methods, but even then, <em>stateful</em> fault tolerance strategies are not shared.
+Each method has its own bulkhead, circuit breaker and/or rate limit, which is often not what you want.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="programmatic-api.html" class="page">programmatic API</a> of SmallRye Fault Tolerance allows using a single <code>Guard</code> or <code>TypedGuard</code> object to guard multiple disparate actions, which allows reuse and state sharing.
+It is possible to use a programmatically constructed <code>Guard</code> or <code>TypedGuard</code> object declaratively, using the <code>@ApplyGuard</code> annotation.</p>
+</div>
+<div class="paragraph">
+<p>To be able to do that, we need a bean of type <code>Guard</code> (or <code>TypedGuard</code>) with the <code>@Identifier</code> qualifier:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@ApplicationScoped
+public class PreconfiguredFaultTolerance {
+    @Produces
+    @Identifier("my-fault-tolerance")
+    public static final Guard GUARD = Guard.create()
+            .withRetry().maxRetries(2).done()
+            .withTimeout().done()
+            .build();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See the <a href="programmatic-api.html" class="page">programmatic API</a> documentation for more information about creating the <code>Guard</code> or <code>TypedGuard</code> instance.</p>
+</div>
+<div class="paragraph">
+<p>It is customary to create the bean by declaring a <code>static</code> producer field, just like in the previous example.</p>
+</div>
+<div class="paragraph">
+<p>Once we have that, we can apply <code>my-fault-tolerance</code> to any method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@ApplicationScoped
+public class MyService {
+    @ApplyGuard("my-fault-tolerance")
+    public String doSomething() {
+        ...
+    }
+
+    @ApplyGuard("my-fault-tolerance")
+    public CompletionStage&lt;Integer&gt; doSomethingElse() {
+        ...
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_defining_fallback"><a class="anchor" href="#_defining_fallback"></a>Defining Fallback</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Note that it is not possible to define a fallback on <code>Guard</code>, because fallback is tied to the action type.
+It is possible to define a fallback on <code>TypedGuard</code>, because it can only be used to guard methods with a single return type, equal to the type the <code>TypedGuard</code> was created with.</p>
+</div>
+<div class="paragraph">
+<p>However, the <code>@ApplyGuard</code> annotation pays attention to the <code>@Fallback</code> annotation.
+If <code>@Fallback</code> is defined, it is used both by <code>Guard</code> and <code>TypedGuard</code> instances, and it overrides the possible fallback defined on the <code>TypedGuard</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_defining_thread_offload"><a class="anchor" href="#_defining_thread_offload"></a>Defining Thread Offload</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Both <code>Guard</code> and <code>TypedGuard</code> allow enabling or disabling thread offload.
+This is ignored by <code>@ApplyGuard</code> if the annotated method is asynchronous as determined from the method signature and possible annotations (<code>@Asynchronous</code> and <code>@AsynchronousNonBlocking</code>).
+See <a href="asynchronous.html" class="page">Asynchronous Execution</a> for more information about how that determination works.</p>
+</div>
+<div class="paragraph">
+<p>The thread offload configuration of <code>Guard</code> or <code>TypedGuard</code> is only honored when the method cannot be determined to be asynchronous, but it still declares an asynchronous return type.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Compatible Mode</div>
+<div class="paragraph">
+<p>In the compatible mode, methods are determined to be asynchronous when they are annotated <code>@Asynchronous</code> or <code>@AsynchronousNonBlocking</code> and they declare an asynchronous return type.
+For such methods, the <code>Guard</code> / <code>TypedGuard</code> thread offload configuration does not apply.</p>
+</div>
+<div class="paragraph">
+<p>For methods that declare an asynchronous return type but are not annotated with <code>@Asynchronous</code> or <code>@AsynchronousNonBlocking</code>, the configuration on <code>Guard</code> / <code>TypedGuard</code> is honored.</p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Non-compatible Mode</div>
+<div class="paragraph">
+<p>In the non-compatible mode, methods are determined to be asynchronous whenever they declare an asynchronous return type.
+The <code>@Asynchronous</code> and <code>@AsynchronousNonBlocking</code> only affect whether the invocation of that method is offloaded to an extra thread.
+If none of these annotations is present, no thread offload happens.</p>
+</div>
+<div class="paragraph">
+<p>In other words, in non-compatible mode, the <code>Guard</code> / <code>TypedGuard</code> thread offload configuration never applies.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="non-compat.html" class="page">Non-compatible Mode</a> for more information about the non-compatible mode.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_metrics"><a class="anchor" href="#_metrics"></a>Metrics</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Methods annotated <code>@ApplyGuard</code> gather metrics similarly to methods annotated with MicroProfile Fault Tolerance annotations.
+That is, each method gets its own metrics, with the <code>method</code> tag being <code>&lt;fully qualified class name&gt;.&lt;method name&gt;</code>.</p>
+</div>
+<div class="paragraph">
+<p>At the same time, state is still shared.
+All methods annotated <code>@ApplyGuard</code> share the same bulkhead, circuit breaker and/or rate limit.</p>
+</div>
+<div class="paragraph">
+<p>If the <code>Guard</code> or <code>TypedGuard</code> object used for <code>@ApplyGuard</code> is also used <a href="programmatic-api.html" class="page">programmatically</a>, that usage is coalesced in metrics under the description as the <code>method</code> tag.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_differences_to_the_specification"><a class="anchor" href="#_differences_to_the_specification"></a>Differences to the Specification</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>@ApplyGuard</code> has the same differences to standard MicroProfile Fault Tolerance as <code>Guard</code> / <code>TypedGuard</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>asynchronous actions of type <code>java.util.concurrent.Future</code> are not supported;</p>
+</li>
+<li>
+<p>the fallback, circuit breaker and retry strategies always inspect the cause chain of exceptions, following the behavior of SmallRye Fault Tolerance in the non-compatible mode.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_kotlin_suspend_functions"><a class="anchor" href="#_kotlin_suspend_functions"></a>Kotlin <code>suspend</code> Functions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Even though the programmatic API of <code>Guard</code> and <code>TypedGuard</code> does not support Kotlin <code>suspend</code> functions, the declarative API of <code>@ApplyGuard</code> does.
+When the guard is a <code>Guard</code>, no restrictions apply.</p>
+</div>
+<div class="paragraph">
+<p>When the guard is a <code>TypedGuard</code>, however, its type must be a synchronous return type of the <code>suspend</code> function.
+For example, when the <code>suspend</code> function is declared to return a <code>String</code> asynchronously:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-kotlin hljs" data-lang="kotlin">@ApplyGuard("my-fault-tolerance")
+@Fallback(fallbackMethod = "fallback")
+suspend fun hello(): String {
+    delay(100)
+    throw IllegalArgumentException()
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>TypedGuard</code> must be declared to guard actions of type <code>String</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-kotlin hljs" data-lang="kotlin">@Produces
+@Identifier("my-fault-tolerance")
+val GUARD = TypedGuard.create(String::class.java)
+    .withRetry().maxRetries(2).done()
+    .withFallback().handler(Supplier { "fallback" }).done()
+    .build()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This means that a possible fallback declared on the <code>TypedGuard</code> must be synchronous; it cannot be a <code>suspend</code> lambda.</p>
+</div>
+<div class="paragraph">
+<p>The <code>@Fallback</code> method, if declared, must have a matching signature and so must be a <code>suspend</code> function:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-kotlin hljs" data-lang="kotlin">suspend fun fallback(): String {
+    delay(100)
+    return "fallback"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="migration_from_applyfaulttolerance"><a class="anchor" href="#migration_from_applyfaulttolerance"></a>Migration from <code>@ApplyFaultTolerance</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The 1st version of the programmatic API had the <code>@ApplyFaultTolerance</code> annotation.
+That annotation is deprecated and scheduled for removal in SmallRye Fault Tolerance 7.0.</p>
+</div>
+<div class="paragraph">
+<p>To migrate, replace <code>@ApplyFaultTolerance</code> with <code>@ApplyGuard</code> and change the <code>FaultTolerance&lt;&gt;</code> producers to produce <code>Guard</code> or <code>TypedGuard&lt;&gt;</code>.
+See <a href="programmatic-api.html#migration_from_faulttolerance" class="page">the programmatic API migration guide</a> for more details about that.</p>
+</div>
+<div class="paragraph">
+<p>Note that it is not possible to define both <code>Guard</code> and <code>TypedGuard&lt;&gt;</code> with the same identifier; that leads to a deployment problem.
+Therefore, for each producer of <code>FaultTolerance&lt;&gt;</code>, you have to decide whether the replacement should be <code>Guard</code> or <code>TypedGuard&lt;&gt;</code>.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="programmatic-api.html">Programmatic API</a></span>
+  <span class="next"><a href="../integration/intro.html">Introduction</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>
+    Sponsored by <a href="https://www.redhat.com"><img style="vertical-align: middle; height: 2.5em;" src="../../../_/img/redhat.svg" alt="Red Hat"></a>
+  </p>
+  <p>
+    Made with <a href="https://github.com/smallrye/smallrye-antora-ui">SmallRye Antora UI</a>, which is licensed under the MPL-2.0 license.
+    Includes portions of <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>, which is licensed under the MIT license.
+  </p>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

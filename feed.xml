@@ -1,4 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2025-01-06T13:59:44+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 6.7.2</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-7-2/" rel="alternate" type="text/html" title="Fault Tolerance 6.7.2" /><published>2025-01-06T11:00:00+00:00</published><updated>2025-01-06T11:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-7-2</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-7-2/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2025-01-10T08:24:54+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 6.7.3</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-7-3/" rel="alternate" type="text/html" title="Fault Tolerance 6.7.3" /><published>2025-01-09T16:00:00+00:00</published><updated>2025-01-09T16:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-7-3</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-7-3/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.7.3&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.7.3.
+This release contains one bugfix.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;In the &lt;a href=&quot;/blog/fault-tolerance-6-7-2&quot;&gt;previous release&lt;/a&gt;, the event loop integration was significantly improved.
+That improvement, alas, contains a bug in the Vert.x integration.
+We assumed that a Vert.x thread is always associated with a current Vert.x context, but that doesn&amp;#8217;t have to be the case.
+Especially in case of a worker thread pool, which can be (in Quarkus, for example) used as a classic thread pool as well and tasks can be submitted to it outside of a Vert.x context.
+This wrong assumption lead to a NPE, which is fixed now.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Fault Tolerance 6.7.2</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-7-2/" rel="alternate" type="text/html" title="Fault Tolerance 6.7.2" /><published>2025-01-06T11:00:00+00:00</published><updated>2025-01-06T11:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-7-2</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-7-2/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.7.2&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.7.2.
 This release contains one bugfix and one improvement.&lt;/p&gt;
 &lt;/div&gt;
@@ -326,22 +339,6 @@ The configuration of fallback methods and before-retry methods is now build-time
 &lt;p&gt;Finally, in this version, the &lt;code&gt;FaultTolerance.cast()&lt;/code&gt; and &lt;code&gt;castAsync()&lt;/code&gt; methods were added.
 These methods return the same instance of &lt;code&gt;FaultTolerance&lt;/code&gt;, but casted to guard a different type.
 This is often safe, but cannot happen when fallback is defined; in that case, these methods throw an exception.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Fault Tolerance 6.4.1</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-4-1/" rel="alternate" type="text/html" title="Fault Tolerance 6.4.1" /><published>2024-09-27T14:00:00+00:00</published><updated>2024-09-27T14:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-4-1</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-4-1/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.4.1&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.4.1.
-This release contains two bugfixes.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;In SmallRye Fault Tolerance 6.3.0, the &lt;code&gt;ThreadTimer&lt;/code&gt; internal class was made a singleton.
-That was a mistake, because that prevents 2 deployments using SmallRye Fault Tolerance in the same application server (such as WildFly).
-The second deployment would get an &lt;code&gt;IllegalStateException&lt;/code&gt; with the message of &lt;em&gt;Timer already exists&lt;/em&gt;.
-The mistake was fixed and there can be multiple instances of the timer once again.
-The instances of the timer are distinguished by an opaque identifier, which is also exposed via metrics.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Further, the search for fallback methods (&lt;code&gt;@Fallback.fallbackMethod()&lt;/code&gt;), as well as before-retry methods (&lt;code&gt;@BeforeRetry.methodName()&lt;/code&gt;), was fixed to also include methods from inherited interfaces.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;

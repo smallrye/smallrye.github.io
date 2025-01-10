@@ -1,0 +1,21 @@
+:page-layout: post
+:page-title: Fault Tolerance 6.7.3
+:page-synopsis: SmallRye Fault Tolerance 6.7.3 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2025-01-09 17:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 6.7.3
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.7.3[release] of {smallrye-ft} 6.7.3.
+This release contains one bugfix.
+
+In the link:/blog/fault-tolerance-6-7-2[previous release], the event loop integration was significantly improved.
+That improvement, alas, contains a bug in the Vert.x integration.
+We assumed that a Vert.x thread is always associated with a current Vert.x context, but that doesn't have to be the case.
+Especially in case of a worker thread pool, which can be (in Quarkus, for example) used as a classic thread pool as well and tasks can be submitted to it outside of a Vert.x context.
+This wrong assumption lead to a NPE, which is fixed now.
+
+As usual, if you have any ideas for improvements, please https://github.com/smallrye/smallrye-fault-tolerance/issues[file an issue]!

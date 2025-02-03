@@ -1,0 +1,18 @@
+:page-layout: post
+:page-title: Jandex 3.2.4
+:page-synopsis: Jandex 3.2.4 released!
+:page-tags: [announcement]
+:page-date: 2025-02-03 08:00:00.000 +0100
+:page-author: lthon
+
+= Jandex 3.2.4
+
+Today, we announce the https://github.com/smallrye/jandex/releases/tag/3.2.4[release] of Jandex 3.2.4.
+This release contains one small improvement.
+
+The `JandexReflection.loadType()` method was added.
+This method accepts a Jandex `Type` and returns a corresponding Reflection `Type`.
+The result is equal to the reflectively obtained `Type` and has the same hash code, as long as there are no type variables.
+The JDK implementation of `TypeVariable.equals()` checks for a specific implementation class, so proper equality is impossible to achieve in this case.
+
+If you experience any troubles, or if you have any ideas for Jandex improvements, please https://github.com/smallrye/jandex/issues[file an issue].

@@ -1,0 +1,52 @@
+:page-layout: post
+:page-title: Fault Tolerance 6.8.0
+:page-synopsis: SmallRye Fault Tolerance 6.8.0 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2025-02-04 08:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 6.8.0
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.8.0[release] of {smallrye-ft} 6.8.0.
+This release contains one new feature.
+
+In link:/blog/fault-tolerance-6-7-0[{smallrye-ft} 6.7.0], we introduced a new programmatic API, together with an annotation to use the programmatically created `Guard` / `TypedGuard` objects declaratively: `@ApplyGuard`.
+In this release, we add support for configuration for `@ApplyGuard` using MicroProfile Config.
+Note that `Guard` and `TypedGuard` themselves still do not support configuration, only `@ApplyGuard` does.
+
+This means that if you want to configure the `Guard`/`TypedGuard` used declaratively via `@ApplyGuard`, you should *NEVER* use those objects programmatically.
+Configuration is applied on creation, which happens lazily, on the first use.
+This first use must be through `@ApplyGuard`, otherwise configuration would be ignored.
+
+Configuration keys are still the same, except you use the `@Identifier` value instead of a `<classname>` or `<classname>/<methodname>`.
+
+For example, let's assume the following `Guard` declaration:
+
+[source,java]
+----
+@ApplicationScoped
+public class PreconfiguredFaultTolerance {
+    @Produces
+    @Identifier("my-fault-tolerance")
+    public static final Guard GUARD = Guard.create()
+            .withRetry().maxRetries(2).done()
+            .build();
+}
+----
+
+Then, to configure the maximum number of retries, one can use the following configuration keys:
+
+* {smallrye-ft} specific: `smallrye.faulttolerance."my-fault-tolerance".retry.max-retries`
+* specification defined: `my-fault-tolerance/Retry/maxRetries`
+
+Global configuration also applies to `@ApplyGuard`. In this case, the keys are:
+
+* {smallrye-ft} specific: `smallrye.faulttolerance.global.retry.max-retries`
+* specification defined: `Retry/maxRetries`
+
+Enablement configuration also applies. Note however that if the `Guard` or `TypedGuard` is created _without_ certain fault tolerance strategy, no amount of configuration can add it.
+Configuration only applies to strategies that were added in the builder.
+
+As usual, if you have any ideas for improvements, please https://github.com/smallrye/smallrye-fault-tolerance/issues[file an issue]!

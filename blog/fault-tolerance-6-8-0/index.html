@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Fault Tolerance 6.8.0</title>
+  <script id="adobe_dtm" src="https://www.redhat.com/dtm.js" type="text/javascript"></script>
+  <script src="/assets/javascript/highlightjs-pack.js" type="text/javascript"></script>
+  <meta http-equiv="Content-Security-Policy" content="
+  connect-src 'self' https://dpm.demdex.net https://adobedc.demdex.net https://smetrics.redhat.com; 
+  script-src 'self' 'unsafe-inline' 'unsafe-eval'
+      
+      https://assets.adobedtm.com
+      https://www.redhat.com
+      https://static.redhat.com
+      jsonip.com
+      https://ajax.googleapis.com
+      https://use.fontawesome.com
+      http://www.youtube.com
+      http://www.googleadservices.com
+      https://googleads.g.doubleclick.net
+      https://www.google-analytics.com;
+
+  style-src 'self' https://fonts.googleapis.com https://use.fontawesome.com; 
+  img-src 'self' * data:; 
+  media-src 'self'; 
+  frame-src https://redhat.demdex.net; 
+  base-uri 'none'; 
+  object-src 'none'; 
+  form-action 'none'; 
+  font-src 'self' https://use.fontawesome.com https://fonts.gstatic.com;" />
+  <META HTTP-EQUIV="X-Frame-Options" CONTENT="DENY">
+  <META HTTP-EQUIV="X-XSS-Protection" CONTENT="1; mode=block">
+  <META HTTP-EQUIV="X-Content-Type-Options" CONTENT="nosniff">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+  <link rel="shortcut icon" type="image/png" href="/favicon.ico" >
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+</head>
+
+<body class="post">
+
+  <div class="content">
+    <div class="navigation-wrapper">
+  <div class="width-12-12">
+    <div class="header navigation">
+      <div class="logo-wrapper">
+        <a href="/"><img class="project-logo" title="SmallRye" src="/assets/images/smallrye_project_logo.svg"></a>
+      </div>
+      <div class="nav-container">
+        <nav>
+          <div class="nav-mobile"><a id="nav-toggle" href="#!"><span></span></a></div>
+          <ul class="nav-list">
+            <li>
+              <a href="/projects/" class="">Projects</a>
+            </li>
+            <li>
+              <a href="/community/" class="">Community</a>
+            </li>
+            <li>
+              <a href="/blog/" class="active">Blog</a>
+            </li>
+            <li>
+              <a href="/docs/index.html" class="">Documentation</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="post-page grid-wrapper">
+  <div class="grid__item width-10-12 doc-content">
+    <h1>Fault Tolerance 6.8.0</h1>
+    <div class="paragraph">
+<p>Today, we announce the <a href="https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.8.0">release</a> of SmallRye Fault Tolerance 6.8.0.
+This release contains one new feature.</p>
+</div>
+<div class="paragraph">
+<p>In <a href="/blog/fault-tolerance-6-7-0">SmallRye Fault Tolerance 6.7.0</a>, we introduced a new programmatic API, together with an annotation to use the programmatically created <code>Guard</code> / <code>TypedGuard</code> objects declaratively: <code>@ApplyGuard</code>.
+In this release, we add support for configuration for <code>@ApplyGuard</code> using MicroProfile Config.
+Note that <code>Guard</code> and <code>TypedGuard</code> themselves still do not support configuration, only <code>@ApplyGuard</code> does.</p>
+</div>
+<div class="paragraph">
+<p>This means that if you want to configure the <code>Guard</code>/<code>TypedGuard</code> used declaratively via <code>@ApplyGuard</code>, you should <strong>NEVER</strong> use those objects programmatically.
+Configuration is applied on creation, which happens lazily, on the first use.
+This first use must be through <code>@ApplyGuard</code>, otherwise configuration would be ignored.</p>
+</div>
+<div class="paragraph">
+<p>Configuration keys are still the same, except you use the <code>@Identifier</code> value instead of a <code>&lt;classname&gt;</code> or <code>&lt;classname&gt;/&lt;methodname&gt;</code>.</p>
+</div>
+<div class="paragraph">
+<p>For example, let&#8217;s assume the following <code>Guard</code> declaration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">@ApplicationScoped
+public class PreconfiguredFaultTolerance {
+    @Produces
+    @Identifier("my-fault-tolerance")
+    public static final Guard GUARD = Guard.create()
+            .withRetry().maxRetries(2).done()
+            .build();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then, to configure the maximum number of retries, one can use the following configuration keys:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>SmallRye Fault Tolerance specific: <code>smallrye.faulttolerance."my-fault-tolerance".retry.max-retries</code></p>
+</li>
+<li>
+<p>specification defined: <code>my-fault-tolerance/Retry/maxRetries</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Global configuration also applies to <code>@ApplyGuard</code>. In this case, the keys are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>SmallRye Fault Tolerance specific: <code>smallrye.faulttolerance.global.retry.max-retries</code></p>
+</li>
+<li>
+<p>specification defined: <code>Retry/maxRetries</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Enablement configuration also applies. Note however that if the <code>Guard</code> or <code>TypedGuard</code> is created <em>without</em> certain fault tolerance strategy, no amount of configuration can add it.
+Configuration only applies to strategies that were added in the builder.</p>
+</div>
+<div class="paragraph">
+<p>As usual, if you have any ideas for improvements, please <a href="https://github.com/smallrye/smallrye-fault-tolerance/issues">file an issue</a>!</p>
+</div>
+  </div>
+</div>
+
+  </div>
+
+  <div class="content project-footer">
+  <div class="footer-section">
+    <div class="logo-wrapper">
+      <a href="/"><img src="/assets/images/smallrye_project_logo.svg" class="project-logo" title="SmallRye"></a>
+    </div>
+  </div>
+  <div class="grid-wrapper">
+    <p class="grid__item width-3-12">SmallRye is open source under <a href='https://www.apache.org/licenses/LICENSE-2.0' target='_blank'>Apache Software License 2.0</a>. <br /><br />This website was built with <a href='https://jekyllrb.com/' target='_blank'>Jekyll</a> is hosted on <a href='https://pages.github.com/' target='_blank'>Github Pages</a> and is completely open source. If you want to make it better, <a href='https://github.com/smallrye/smallrye.github.io' target='_blank'>fork the website</a> and show us what you’ve got.</p>
+
+    
+      <div class="width-1-12 project-links">
+        <span>Navigation</span>
+        <ul class="footer-links width-1-12">
+          
+            <li><a href="/">Home</a></li>
+          
+        </ul>
+      </div>
+    
+      <div class="width-1-12 project-links">
+        <span>Contribute</span>
+        <ul class="footer-links width-1-12">
+          
+            <li><a href="https://twitter.com/smallrye_io">Follow us</a></li>
+          
+            <li><a href="https://github.com/smallrye">GitHub</a></li>
+          
+        </ul>
+      </div>
+    
+      <div class="width-1-12 project-links">
+        <span>Get Help</span>
+        <ul class="footer-links width-1-12">
+          
+            <li><a href="https://quarkusio.zulipchat.com">Chatroom</a></li>
+          
+            <li><a href="https://groups.google.com/d/forum/smallrye">Google&nbsp;Groups</a></li>
+          
+        </ul>
+      </div>
+    
+
+    
+      <div class="width-6-12 more-links">
+        <span>External Links</span>
+        <ul class="footer-links">
+          
+            <li><a href="https://microprofile.io/" target="_blank">Eclipse MicroProfile</a></li>
+          
+            <li><a href="https://github.com/eclipse?utf8=✓&q=microprofile" target="_blank">Eclipse MicroProfile on GitHub</a></li>
+          
+        </ul>
+      </div>
+    
+  </div>
+</div>
+  <div class="content redhat-footer">
+  <div class="grid-wrapper">
+    <span class="licence">
+      <i class="fab fa-creative-commons"></i><i class="fab fa-creative-commons-by"></i> <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">CC by 3.0</a>
+      | <a href="https://www.redhat.com/en/about/privacy-policy">Red Hat Privacy Policy</a>
+    </span>
+    <span class="redhat">
+      a Red Hat sponsored project   
+    </span>
+    <span class="redhat-logo">
+      <a href="https://www.redhat.com/" target="_blank"><img src="/assets/images/redhat_reversed.svg"></a>
+    </span>
+  </div>
+</div>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script type="text/javascript" src="/assets/javascript/mobile-nav.js"></script>
+  <script type="text/javascript" src="/assets/javascript/scroll-down.js"></script>
+  <script type="text/javascript" src="/assets/javascript/satellite.js"></script>
+</body>
+
+</html>

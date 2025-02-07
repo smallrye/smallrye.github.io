@@ -1,4 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2025-02-04T08:53:11+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 6.8.0</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-8-0/" rel="alternate" type="text/html" title="Fault Tolerance 6.8.0" /><published>2025-02-04T07:00:00+00:00</published><updated>2025-02-04T07:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-8-0</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-8-0/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2025-02-07T09:14:18+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.2.5</title><link href="https://www.smallrye.io/blog/jandex-3-2-5/" rel="alternate" type="text/html" title="Jandex 3.2.5" /><published>2025-02-07T07:00:00+00:00</published><updated>2025-02-07T07:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-2-5</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-2-5/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.2.5&quot;&gt;release&lt;/a&gt; of Jandex 3.2.5.
+This release contains two bugfixes.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The &lt;code&gt;ClassInfo.canonicalRecordConstructor()&lt;/code&gt; method had two issues.
+If the record only had 1 component, it didn&amp;#8217;t work at all.
+It also didn&amp;#8217;t work properly when &lt;code&gt;javac&lt;/code&gt; emitted type annotations on the record components differently from the canonical constructor parameters.
+That in theory shouldn&amp;#8217;t happen, but in practice, there are cases like that.
+Both of these issues are fixed.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Further, certain type annotations were sometimes forgotten.
+This happened when one target (such as a &lt;code&gt;MethodInfo&lt;/code&gt;) had both class-retained and runtime-retained type annotations.
+In this case, only one kind would survive; type annotations of the other kind would be lost.
+This bug is fixed now and all type annotations are now present in the index.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry><entry><title type="html">Fault Tolerance 6.8.0</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-8-0/" rel="alternate" type="text/html" title="Fault Tolerance 6.8.0" /><published>2025-02-04T07:00:00+00:00</published><updated>2025-02-04T07:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-8-0</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-8-0/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.8.0&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.8.0.
 This release contains one new feature.&lt;/p&gt;
 &lt;/div&gt;
@@ -365,21 +384,6 @@ This release contains one small bugfix.&lt;/p&gt;
 This support wasn&amp;#8217;t functioning properly in case the metrics classes for given provider were present, but the dependencies on required beans were not satisfied.
 In this release, all the metric providers now depend on the required beans lazily (by injecting &lt;code&gt;Provider&lt;/code&gt; of given class, instead of the class directly).
 This, together with some refactoring from field injection to constructor injection for simplification, fixes the issue.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Fault Tolerance 6.6.0</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-6-0/" rel="alternate" type="text/html" title="Fault Tolerance 6.6.0" /><published>2024-10-24T14:00:00+00:00</published><updated>2024-10-24T14:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-6-0</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-6-0/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.6.0&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.6.0.
-This release contains two small improvements.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Until now, all &lt;code&gt;@ApplyFaultTolerance&lt;/code&gt; methods that used the same identifier were collapsed into the same metrics, using the &lt;code&gt;FaultTolerance&lt;/code&gt; description as the &lt;code&gt;method&lt;/code&gt; tag.
-With this release, &lt;code&gt;@ApplyFaultTolerance&lt;/code&gt; methods have split metrics, where the &lt;code&gt;method&lt;/code&gt; tag is the classic &lt;code&gt;&amp;lt;fully qualified class name&amp;gt;.&amp;lt;method name&amp;gt;&lt;/code&gt; format, even though they still share the same &lt;code&gt;FaultTolerance&lt;/code&gt; object and therefore the bulkhead / circuit breaker / rate limit state.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The &lt;code&gt;FaultTolerance.BulkheadBuilder.enableVirtualThreadsQueueing()&lt;/code&gt; method was added.
-With this method, it is possible to use bulkhead queueing even with synchronous bulkhead, but there&amp;#8217;s an important limitation: the &lt;code&gt;FaultTolerance&lt;/code&gt; guard must be executed on virtual threads.
-This is not checked; it is something you have to provide yourself.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;

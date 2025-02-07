@@ -1,0 +1,24 @@
+:page-layout: post
+:page-title: Jandex 3.2.5
+:page-synopsis: Jandex 3.2.5 released!
+:page-tags: [announcement]
+:page-date: 2025-02-07 08:00:00.000 +0100
+:page-author: lthon
+
+= Jandex 3.2.5
+
+Today, we announce the https://github.com/smallrye/jandex/releases/tag/3.2.5[release] of Jandex 3.2.5.
+This release contains two bugfixes.
+
+The `ClassInfo.canonicalRecordConstructor()` method had two issues.
+If the record only had 1 component, it didn't work at all.
+It also didn't work properly when `javac` emitted type annotations on the record components differently from the canonical constructor parameters.
+That in theory shouldn't happen, but in practice, there are cases like that.
+Both of these issues are fixed.
+
+Further, certain type annotations were sometimes forgotten.
+This happened when one target (such as a `MethodInfo`) had both class-retained and runtime-retained type annotations.
+In this case, only one kind would survive; type annotations of the other kind would be lost.
+This bug is fixed now and all type annotations are now present in the index.
+
+If you experience any troubles, or if you have any ideas for Jandex improvements, please https://github.com/smallrye/jandex/issues[file an issue].

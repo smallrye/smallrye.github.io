@@ -1,0 +1,19 @@
+:page-layout: post
+:page-title: Jandex 3.2.6
+:page-synopsis: Jandex 3.2.6 released!
+:page-tags: [announcement]
+:page-date: 2025-02-11 15:00:00.000 +0100
+:page-author: lthon
+
+= Jandex 3.2.6
+
+Today, we announce the https://github.com/smallrye/jandex/releases/tag/3.2.6[release] of Jandex 3.2.6.
+This release contains one improvement.
+
+Performance of the immutable annotation overlay (`AnnotationOverlay`) was significantly improved, especially in the most common case of no annotation transformation.
+That improvement consists of caching the result of annotation transformations for all declarations, even for those where no transformation applied.
+This was originall omitted, but it turns out that the memory overhead is very small, because most objects already exist.
+There are other small improvements too, including significant shrinking of allocation rate.
+Thanks Martin Panzer for the original pull request!
+
+If you experience any troubles, or if you have any ideas for Jandex improvements, please https://github.com/smallrye/jandex/issues[file an issue].

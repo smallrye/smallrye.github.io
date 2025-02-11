@@ -1,4 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2025-02-07T09:14:18+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.2.5</title><link href="https://www.smallrye.io/blog/jandex-3-2-5/" rel="alternate" type="text/html" title="Jandex 3.2.5" /><published>2025-02-07T07:00:00+00:00</published><updated>2025-02-07T07:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-2-5</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-2-5/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2025-02-11T18:48:37+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.2.6</title><link href="https://www.smallrye.io/blog/jandex-3-2-6/" rel="alternate" type="text/html" title="Jandex 3.2.6" /><published>2025-02-11T14:00:00+00:00</published><updated>2025-02-11T14:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-2-6</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-2-6/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.2.6&quot;&gt;release&lt;/a&gt; of Jandex 3.2.6.
+This release contains one improvement.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Performance of the immutable annotation overlay (&lt;code&gt;AnnotationOverlay&lt;/code&gt;) was significantly improved, especially in the most common case of no annotation transformation.
+That improvement consists of caching the result of annotation transformations for all declarations, even for those where no transformation applied.
+This was originall omitted, but it turns out that the memory overhead is very small, because most objects already exist.
+There are other small improvements too, including significant shrinking of allocation rate.
+Thanks Martin Panzer for the original pull request!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry><entry><title type="html">Jandex 3.2.5</title><link href="https://www.smallrye.io/blog/jandex-3-2-5/" rel="alternate" type="text/html" title="Jandex 3.2.5" /><published>2025-02-07T07:00:00+00:00</published><updated>2025-02-07T07:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-2-5</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-2-5/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.2.5&quot;&gt;release&lt;/a&gt; of Jandex 3.2.5.
 This release contains two bugfixes.&lt;/p&gt;
 &lt;/div&gt;
@@ -372,18 +385,6 @@ This bug has been fixed in this release.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;The support for multiple metric providers was fixed to work properly in EE environments like WildFly.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Fault Tolerance 6.6.1</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-6-1/" rel="alternate" type="text/html" title="Fault Tolerance 6.6.1" /><published>2024-10-29T10:00:00+00:00</published><updated>2024-10-29T10:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-6-1</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-6-1/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.6.1&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.6.1.
-This release contains one small bugfix.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The CDI extension in SmallRye Fault Tolerance (&lt;code&gt;FaultToleranceExtension&lt;/code&gt;) was changed in SmallRye Fault Tolerance 6.5.0 to support multiple metric providers at the same time.
-This support wasn&amp;#8217;t functioning properly in case the metrics classes for given provider were present, but the dependencies on required beans were not satisfied.
-In this release, all the metric providers now depend on the required beans lazily (by injecting &lt;code&gt;Provider&lt;/code&gt; of given class, instead of the class directly).
-This, together with some refactoring from field injection to constructor injection for simplification, fixes the issue.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;

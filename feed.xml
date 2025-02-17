@@ -1,4 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2025-02-11T18:48:37+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.2.6</title><link href="https://www.smallrye.io/blog/jandex-3-2-6/" rel="alternate" type="text/html" title="Jandex 3.2.6" /><published>2025-02-11T14:00:00+00:00</published><updated>2025-02-11T14:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-2-6</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-2-6/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2025-02-17T09:45:53+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.2.7</title><link href="https://www.smallrye.io/blog/jandex-3-2-7/" rel="alternate" type="text/html" title="Jandex 3.2.7" /><published>2025-02-17T08:00:00+00:00</published><updated>2025-02-17T08:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-2-7</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-2-7/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.2.7&quot;&gt;release&lt;/a&gt; of Jandex 3.2.7.
+This release contains one bugfix.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;An annotation overlay configured to include inherited annotations didn&amp;#8217;t necessarily work correctly when asked for annotations on the &lt;code&gt;Object&lt;/code&gt; class, depending on the underlying &lt;code&gt;IndexView&lt;/code&gt; implementation.
+That was fixed in this release: when the passed class does not have a superclass (which means it is &lt;code&gt;Object&lt;/code&gt;), the index is not queried at all.
+Thanks Matěj Novotný for the issue and pull request!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry><entry><title type="html">Jandex 3.2.6</title><link href="https://www.smallrye.io/blog/jandex-3-2-6/" rel="alternate" type="text/html" title="Jandex 3.2.6" /><published>2025-02-11T14:00:00+00:00</published><updated>2025-02-11T14:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-2-6</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-2-6/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.2.6&quot;&gt;release&lt;/a&gt; of Jandex 3.2.6.
 This release contains one improvement.&lt;/p&gt;
 &lt;/div&gt;
@@ -372,19 +383,6 @@ To do that, set the following configuration properties (as in MicroProfile Confi
 &lt;p&gt;Note that setting &lt;code&gt;smallrye.faulttolerance.*.disabled&lt;/code&gt; to &lt;code&gt;false&lt;/code&gt; does &lt;em&gt;not&lt;/em&gt; mean the provider is enabled unconditionally.
 When that provider is not discovered or selected by the integrator, it cannot be enabled in any way.
 These properties are only meant for disabling an otherwise enabled metrics provider; not the other way around.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Fault Tolerance 6.6.2</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-6-2/" rel="alternate" type="text/html" title="Fault Tolerance 6.6.2" /><published>2024-11-14T11:00:00+00:00</published><updated>2024-11-14T11:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-6-2</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-6-2/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.6.2&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.6.2.
-This release contains two small bugfixes.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The &lt;code&gt;@BeforeRetry&lt;/code&gt; annotation didn&amp;#8217;t work correctly when guarding asynchronous actions (returning &lt;code&gt;CompletionStage&lt;/code&gt;, &lt;code&gt;Uni&lt;/code&gt; etc.).
-This bug has been fixed in this release.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The support for multiple metric providers was fixed to work properly in EE environments like WildFly.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;

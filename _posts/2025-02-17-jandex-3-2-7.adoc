@@ -1,0 +1,17 @@
+:page-layout: post
+:page-title: Jandex 3.2.7
+:page-synopsis: Jandex 3.2.7 released!
+:page-tags: [announcement]
+:page-date: 2025-02-17 09:00:00.000 +0100
+:page-author: lthon
+
+= Jandex 3.2.7
+
+Today, we announce the https://github.com/smallrye/jandex/releases/tag/3.2.7[release] of Jandex 3.2.7.
+This release contains one bugfix.
+
+An annotation overlay configured to include inherited annotations didn't necessarily work correctly when asked for annotations on the `Object` class, depending on the underlying `IndexView` implementation.
+That was fixed in this release: when the passed class does not have a superclass (which means it is `Object`), the index is not queried at all.
+Thanks Matěj Novotný for the issue and pull request!
+
+If you experience any troubles, or if you have any ideas for Jandex improvements, please https://github.com/smallrye/jandex/issues[file an issue].

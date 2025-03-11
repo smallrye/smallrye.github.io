@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Programmatic API :: SmallRye documentation</title>
+    <link rel="prev" href="non-compat.html">
+    <link rel="next" href="reusable.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <button class="nav-toggle"></button>
+
+      <a class="navbar-item title" href="../index.html">SmallRye Fault Tolerance</a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <span class="navbar-link">6.9.0</span>
+        <div class="navbar-dropdown navbar-menu">
+            <a class="navbar-item  is-current" href="../index.html">6.9.0</a>
+            <a class="navbar-item " href="../../6.8.0/index.html">6.8.0</a>
+            <a class="navbar-item " href="../../6.7.3/index.html">6.7.3</a>
+            <a class="navbar-item " href="../../6.7.2/index.html">6.7.2</a>
+            <a class="navbar-item " href="../../6.7.1/index.html">6.7.1</a>
+            <a class="navbar-item " href="../../6.7.0/index.html">6.7.0</a>
+            <a class="navbar-item " href="../../6.6.3/index.html">6.6.3</a>
+            <a class="navbar-item " href="../../6.6.2/index.html">6.6.2</a>
+            <a class="navbar-item " href="../../6.6.1/index.html">6.6.1</a>
+            <a class="navbar-item " href="../../6.6.0/index.html">6.6.0</a>
+            <a class="navbar-item " href="../../6.5.0/index.html">6.5.0</a>
+            <a class="navbar-item " href="../../6.4.2/index.html">6.4.2</a>
+            <a class="navbar-item " href="../../6.4.1/index.html">6.4.1</a>
+            <a class="navbar-item " href="../../6.4.0/index.html">6.4.0</a>
+            <a class="navbar-item " href="../../6.3.0/index.html">6.3.0</a>
+            <a class="navbar-item " href="../../6.2.6/index.html">6.2.6</a>
+            <a class="navbar-item " href="../../6.2.4/index.html">6.2.4</a>
+            <a class="navbar-item " href="../../6.2.3/index.html">6.2.3</a>
+            <a class="navbar-item " href="../../6.2.2/index.html">6.2.2</a>
+            <a class="navbar-item " href="../../6.2.1/index.html">6.2.1</a>
+            <a class="navbar-item " href="../../6.2.0/index.html">6.2.0</a>
+            <a class="navbar-item " href="../../6.1.0/index.html">6.1.0</a>
+            <a class="navbar-item " href="../../6.0.0/index.html">6.0.0</a>
+            <a class="navbar-item " href="../../5.6.0/index.html">5.6.0</a>
+            <a class="navbar-item " href="../../5.5.0/index.html">5.5.0</a>
+            <a class="navbar-item " href="../../5.4.1/index.html">5.4.1</a>
+            <a class="navbar-item " href="../../5.4.0/index.html">5.4.0</a>
+            <a class="navbar-item " href="../../5.3.2/index.html">5.3.2</a>
+            <a class="navbar-item " href="../../5.3.1/index.html">5.3.1</a>
+            <a class="navbar-item " href="../../5.3.0/index.html">5.3.0</a>
+            <a class="navbar-item " href="../../5.2.1/index.html">5.2.1</a>
+            <a class="navbar-item " href="../../5.2.0/index.html">5.2.0</a>
+            <a class="navbar-item " href="../../5.1.0/index.html">5.1.0</a>
+            <a class="navbar-item " href="../../5.0.0/index.html">5.0.0</a>
+        </div>
+      </div>
+
+
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <span class="navbar-link">Projects</span>
+          <div class="navbar-dropdown">
+              <a class="navbar-item" href="../../../index/index/index.html">Index</a>
+              <a class="navbar-item" href="../index.html">SmallRye Fault Tolerance</a>
+              <a class="navbar-item" href="../../../smallrye-health/3.0.1/index.html">SmallRye Health</a>
+              <a class="navbar-item" href="../../../smallrye-jwt/index.html">SmallRye JWT</a>
+              <a class="navbar-item" href="../../../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
+          </div>
+        </div>
+
+        <a class="navbar-item" href="https://smallrye.io/">SmallRye.io main website</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="smallrye-fault-tolerance" data-version="6.9.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+<ul class="nav-list nav-list-level-0">
+  <li class="nav-item nav-item-level-0">
+<ul class="nav-list nav-list-level-1">
+  <li class="nav-item nav-item-level-1">
+    <a class="nav-link" href="../index.html">Index</a>
+  </li>
+  <li class="nav-item nav-item-level-1">
+    <span class="nav-text">How-to &#8230;&#8203;</span>
+<ul class="nav-list nav-list-level-2">
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/begin.html">Begin</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/fallback.html">Supply Fallback Values</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/bulkhead.html">Limit Concurrency</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/circuit-breaker.html">Fail Fast on Recurring Failures</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/timeout.html">Watch for Timeouts</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/retry.html">Retry on Failures</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/asynchronous.html">Guard Asynchronous Methods</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/rate-limit.html">Limit Execution Rate</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/multiple.html">Use Multiple Strategies</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item nav-item-level-1">
+    <span class="nav-text">Reference</span>
+<ul class="nav-list nav-list-level-2">
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="fallback.html">Fallback</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="bulkhead.html">Bulkhead</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="circuit-breaker.html">Circuit Breaker</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="timeout.html">Timeout</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="retry.html">Retry</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="asynchronous.html">Asynchronous Execution</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="rate-limit.html">Rate Limit</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="config.html">Configuration</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="metrics.html">Metrics</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="non-compat.html">Non-compatible Mode</a>
+  </li>
+  <li class="nav-item nav-item-level-2 is-current-page">
+    <a class="nav-link" href="programmatic-api.html">Programmatic API</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="reusable.html">Reusable Fault Tolerance</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item nav-item-level-1">
+    <span class="nav-text">Integration</span>
+<ul class="nav-list nav-list-level-2">
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/intro.html">Introduction</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/metrics.html">Metrics</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/thread-pool.html">Thread Pool</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/context-propagation.html">Context Propagation</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/opentracing.html">OpenTracing</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/event-loop.html">Event Loop</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/async-types.html">Additional Asynchronous Types Integration Concerns</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/kotlin.html">Kotlin Integration Concerns</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/programmatic-api.html">Programmatic API Integration Concerns</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item nav-item-level-1">
+    <span class="nav-text">Internals</span>
+<ul class="nav-list nav-list-level-2">
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/project-structure.html">Project Structure</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/instructions.html">Instructions</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/core.html">Fault Tolerance Core</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/config.html">Configuration System</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/logging.html">Logging</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+  <div class="content">
+<aside class="toc sidebar" data-title="Table of contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+  <a href="https://github.com/smallrye/smallrye-fault-tolerance/blob/6.9.0/doc/modules/ROOT/pages/reference/programmatic-api.adoc" class="edit-this-page" title="Edit this page">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+<h1 class="page">Programmatic API</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+This is an additional feature of SmallRye Fault Tolerance and is not specified by MicroProfile Fault Tolerance.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In addition to the declarative, annotation-based API of MicroProfile Fault Tolerance, SmallRye Fault Tolerance also offers a programmatic API for advanced scenarios.
+This API is present in the <code>io.smallrye:smallrye-fault-tolerance-api</code> artifact, just like all other additional APIs SmallRye Fault Tolerance provides.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation"><a class="anchor" href="#_installation"></a>Installation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you use SmallRye Fault Tolerance as part of a runtime that implements MicroProfile Fault Tolerance, you don&#8217;t have to do anything.
+The programmatic API is ready to use.
+In this documentation, we&#8217;ll call this the <em>CDI implementation</em> of the programmatic API, because it&#8217;s integrated with the MicroProfile Fault Tolerance implementation, which is naturally based on CDI.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Quarkus</div>
+<div class="paragraph">
+<p>In Quarkus, the SmallRye Fault Tolerance API is brought in automatically, as a transitive dependency of the Quarkus extension for SmallRye Fault Tolerance.
+That is, you don&#8217;t need to do anything to be able to use the programmatic API.</p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">WildFly</div>
+<div class="paragraph">
+<p>In WildFly, the SmallRye Fault Tolerance API is not readily available to deployments.
+If you want to use it, you need to add a module dependency to the deployment using <code>jboss-deployment-structure.xml</code>.</p>
+</div>
+<div class="paragraph">
+<p>Note that at the time of this writing, the SmallRye Fault Tolerance module in WildFly is considered private.
+If you do add a module dependency on it, to be able to use the SmallRye Fault Tolerance API, you may be stepping out of the WildFly support scope.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>In addition to the CDI implementation, SmallRye Fault Tolerance also offers a <em>standalone implementation</em> that is meant to be used outside of any runtime.
+This implementation does not need CDI or anything else.
+If you want to use SmallRye Fault Tolerance in a standalone fashion, just add a dependency on <code>io.smallrye:smallrye-fault-tolerance-standalone</code>.
+The API is brought in transitively.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_usage"><a class="anchor" href="#_usage"></a>Usage</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The entrypoints to the programmatic API are the <code>Guard</code> and <code>TypedGuard</code> interfaces.</p>
+</div>
+<div class="paragraph">
+<p>These interfaces represent a configured set of fault tolerance strategies.
+Their configuration, order of application and behavior in general corresponds to the declarative API, so if you know that, you&#8217;ll feel right at home.
+If not, the javadoc has all the information you need (though it often points to the annotation-based API for more information).</p>
+</div>
+<div class="paragraph">
+<p>The interfaces are very similar, there are only 2 differences:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>Guard</code> requires specifying the return type of the guarded operation for each <code>call()</code> or <code>get()</code> (or <code>adapt*</code>) method call.
+<code>TypedGuard</code>, on the other hand, requires specifying the return type once, when creating an instance using <code>create()</code>.
+Therefore, <code>Guard</code> may be used for guarding many different types, while <code>TypedGuard</code> may only be used to guard single type.</p>
+</li>
+<li>
+<p><code>TypedGuard</code> allows defining a fallback.
+<code>Guard</code> does not.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>In the following text, we&#8217;ll only talk about <code>Guard</code>, but it also applies to <code>TypedGuard</code> without a change (except of the differences mentioned above).</p>
+</div>
+<div class="paragraph">
+<p>To create an instance of <code>Guard</code>, you can use the <code>create</code> static method.
+It returns a builder which has to be used to add and configure all the fault tolerance strategies that should apply.
+There is no external configuration, so all configuration properties have to be set explicitly, using the builder methods.
+If you don&#8217;t set a configuration property, it will default to the same value the annotation-based API uses.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Disabling Fault Tolerance</div>
+<div class="paragraph">
+<p>There&#8217;s one exception to the "no external configuration" rule.</p>
+</div>
+<div class="paragraph">
+<p>The CDI implementation looks for the <code>smallrye.faulttolerance.enabled</code> / <code>MP_Fault_Tolerance_NonFallback_Enabled</code> configuration properties in MicroProfile Config.
+The standalone implementation looks for system properties with the same name, or obtains the value from custom configuration (as <a href="../integration/programmatic-api.html" class="page">described</a> in the integration section).</p>
+</div>
+<div class="paragraph">
+<p>If at least one of these properties exists and is set to <code>false</code>, only the fallback and thread offload fault tolerance strategies will be applied.
+Everything else will be ignored.</p>
+</div>
+<div class="paragraph">
+<p>Note that this is somewhat different to the declarative, annotation-based API, where only fallback is retained and the <code>@Asynchronous</code> strategy is skipped as well.
+Since this significantly changes execution semantics, the programmatic API will apply thread offload even if fault tolerance is disabled.</p>
+</div>
+<div class="paragraph">
+<p>Similarly to the declarative API, implementations of the programmatic API also read this property only once, when the <code>Guard</code> API is first used.
+It is <em>not</em> read again later.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s take a look at a simple example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public class MyService {
+    private static final Guard GUARD = Guard.create()
+        .withRetry().maxRetries(3).done()
+        .build();
+
+    public String hello() throws Exception {
+        return GUARD.call(() -&gt; externalService.hello(), String.class); <i class="conum" data-value="1"></i><b>(1)</b>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Here, we call <code>externalService.hello()</code> and guard the call with the previously configured set of fault tolerance strategies.
+The <code>call</code> method used here takes the <code>Callable</code> type, which represent the guarded action.
+The <code>get</code> method works just like <code>call</code>, but accepts a <code>Supplier</code>.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The previous example shows how to apply fault tolerance to synchronous actions.
+SmallRye Fault Tolerance naturally also supports guarding asynchronous actions, using the <code>CompletionStage</code> type.
+Unlike the declarative API, the programmatic API doesn&#8217;t support asynchronous actions that return the <code>Future</code> type.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public class MyService {
+    private static final Guard GUARD = Guard.create()
+        .withBulkhead().done()
+        .withThreadOffload(true) <i class="conum" data-value="1"></i><b>(1)</b>
+        .build();
+
+    public CompletionStage&lt;String&gt; hello() throws Exception {
+        return GUARD.call(() -&gt; externalService.hello(),
+                new TypeLiteral&lt;CompletionStage&lt;String&gt;&gt;() {}); <i class="conum" data-value="2"></i><b>(2)</b>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The thread offload here only applies to asynchronous actions.
+If you use the same <code>GUARD</code> to guard a synchronous action, no thread offload will apply.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Note that here, we use the <code>TypeLiteral</code> class (from CDI) to specify the type of the guarded action.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Asynchronous actions may be blocking or non-blocking.
+In the example above, we assume the <code>externalService.hello()</code> call is blocking, so we set thread offload to <code>true</code>.
+SmallRye Fault Tolerance will automatically move the actual execution of the action to another thread.</p>
+</div>
+<div class="paragraph">
+<p>If we didn&#8217;t configure <code>withThreadOffload</code>, however, the execution of an asynchronous action would continue on the original thread.
+This is often desired for non-blocking actions, which are very common in modern reactive architectures.</p>
+</div>
+<div class="paragraph">
+<p>Also note that in this example, we configured multiple fault tolerance strategies: bulkhead and thread offload.
+When that happens, the fault tolerance strategies are ordered according to the MicroProfile Fault Tolerance specification, just like in the declarative API.
+Order of all the <code>with*</code> method invocations doesn’t matter.</p>
+</div>
+<div class="sect2">
+<h3 id="_single_action_usage"><a class="anchor" href="#_single_action_usage"></a>Single-Action Usage</h3>
+<div class="paragraph">
+<p>The <code>Guard</code> API is general and permits guarding multiple different actions using the same set of fault tolerance strategies.
+Often, we need to guard just a single action, although possibly several times.</p>
+</div>
+<div class="paragraph">
+<p>For such use case, the <code>Guard</code> instance may be adapted to a <code>Callable&lt;T&gt;</code> or <code>Supplier&lt;T&gt;</code> using the <code>adapt*</code> methods:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public class MyService {
+    private static final Callable&lt;String&gt; guard = Guard.create()
+        .withTimeout().duration(5, ChronoUnit.SECONDS).done()
+        .build() <i class="conum" data-value="1"></i><b>(1)</b>
+        .adaptCallable(() -&gt; externalService.hello(), String.class); <i class="conum" data-value="2"></i><b>(2)</b>
+
+    public String hello() throws Exception {
+        return callable.call(); <i class="conum" data-value="3"></i><b>(3)</b>
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Create a <code>Guard</code> object that can guard arbitrary actions.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Adapt the general <code>Guard</code> instance to a <code>Callable</code> that guards the <code>externalService.hello()</code> invocation.
+Similar method exists that accepts and returns a <code>Supplier</code>: <code>adaptSupplier</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>You can do whatever you wish with the adapted <code>Callable</code>.
+Here, we just call it once, which isn&#8217;t very interesting, but it could possibly be called multiple times, passed to other methods etc.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_synchronous_vs_asynchronous"><a class="anchor" href="#_synchronous_vs_asynchronous"></a>Synchronous vs. Asynchronous</h3>
+<div class="paragraph">
+<p>The <code>Guard</code> and <code>TypedGuard</code> interfaces both decide whether the guarded action is synchronous or asynchronous based on the action type.
+This is given to <code>Guard</code> when calling or adapting the action, and to <code>TypedGuard</code> when creating it.</p>
+</div>
+<div class="paragraph">
+<p>If the type is asynchronous (such as <code>CompletionStage</code>), the asynchronous behavior will also be guarded; the action is only considered complete when the <code>CompletionStage</code> actually completes.
+If the type is not asynchronous, only the synchronous behavior will be guarded; the action is considered complete when the method returns.</p>
+</div>
+<div class="sect3">
+<h4 id="_mutiny_support"><a class="anchor" href="#_mutiny_support"></a>Mutiny Support</h4>
+<div class="paragraph">
+<p>It is enough to include the Mutiny support library <code>io.smallrye:smallrye-fault-tolerance-mutiny</code>, as described in <a href="asynchronous.html#async-types" class="page">Additional Asynchronous Types</a>.
+With this library present, both <code>Guard</code> and <code>TypedGuard</code> will recognize <code>Uni</code> as an asynchronous type and guard it properly.
+Guarding a <code>Multi</code> is not supported.</p>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public class MyService {
+    private final Supplier&lt;Uni&lt;String&gt;&gt; GUARD = TypedGuard.create(
+            new TypeLiteral&lt;Uni&lt;String&gt;&gt;() {})
+        .withTimeout().duration(5, ChronoUnit.SECONDS).done()
+        .withFallback().handler(() -&gt; Uni.createFrom().item("fallback")).done()
+        .build()
+        .adaptSupplier(() -&gt; externalService.hello()); <i class="conum" data-value="1"></i><b>(1)</b>
+
+    public Uni&lt;String&gt; hello() {
+        return guard.get();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The call to <code>externalService.hello()</code> is supposed to return <code>Uni&lt;String&gt;</code>.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Note that the <code>Uni</code> type is lazy, so the action itself won&#8217;t execute until the guarded <code>Uni</code> is subscribed to.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Quarkus</div>
+<div class="paragraph">
+<p>In Quarkus, the Mutiny support library is present by default.
+You can guard <code>Uni</code>-returning actions out of the box.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_stateful_fault_tolerance_strategies"><a class="anchor" href="#_stateful_fault_tolerance_strategies"></a>Stateful Fault Tolerance Strategies</h3>
+<div class="paragraph">
+<p>The bulkhead, circuit breaker and rate limit strategies are stateful.
+That is, they hold some state required for their correct functioning, such as the number of current executions for bulkhead, the rolling window of successes/failures for circuit breaker, or the time window for rate limit.
+If you use these strategies, you have to consider their lifecycle.</p>
+</div>
+<div class="paragraph">
+<p>The SmallRye Fault Tolerance programmatic API makes such reasoning pretty straightforward.
+Each <code>Guard</code> object has its own instance of each fault tolerance strategy, including the stateful strategies.
+If you use a single <code>Guard</code> object for guarding multiple different actions, all those actions will be guarded by the same bulkhead, circuit breaker and/or rate limit.
+If, on the other hand, you use different <code>Guard</code> objects for guarding different actions, each action will be guarded by its own bulkhead, circuit breaker and/or rate limit.</p>
+</div>
+<div class="paragraph">
+<p>If you call the <code>adapt*</code> methods on the same <code>Guard</code> multiple times, the resulting <code>Callable</code> or <code>Supplier</code> objects will guard the underlying action using the original <code>Guard</code> instance, so stateful strategies will be shared.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_circuit_breaker_maintenance"><a class="anchor" href="#_circuit_breaker_maintenance"></a>Circuit Breaker Maintenance</h3>
+<div class="paragraph">
+<p>The <code>CircuitBreakerMaintenance</code> API, accessed through <code>CircuitBreakerMaintenance.get()</code> or by injection in the CDI implementation, can be used to manipulate all named circuit breakers.
+A circuit breaker is given a name by calling <code>withCircuitBreaker().name("...")</code> on the fault tolerance builder, or using the <code>@CircuitBreakerName</code> annotation in the declarative API.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, <code>CircuitBreakerMaintenance.resetAll()</code> will also reset all unnamed circuit breakers declared using the <code>@CicruitBreaker</code> annotation.
+For this to work, all unnamed circuit breakers have to be remembered.
+This is safe in case of the declarative, annotation-based API, because the number of such declared circuit breakers is fixed.
+At the same time, this would <em>not</em> be safe to do for all unnamed circuit breakers created using the programmatic API, as their number is potentially unbounded.
+(In other words, remembering all unnamed circuit breakers created using the programmatic API would easily lead to a memory leak.)</p>
+</div>
+<div class="paragraph">
+<p>Therefore, all circuit breakers created using the programmatic API must be given a name when <code>CircuitBreakerMaintenance</code> is supposed to affect them.
+Note that duplicate names are not permitted and lead to an error, so lifecycle of the circuit breaker must be carefully considered.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_event_listeners"><a class="anchor" href="#_event_listeners"></a>Event Listeners</h3>
+<div class="paragraph">
+<p>The programmatic API has one feature that the declarative API doesn&#8217;t have: ability to observe certain events.
+For example, when configuring a circuit breaker, it is possible to register a callback for circuit breaker state changes or for a situation when an open circuit breaker prevents an invocation.
+When configuring a timeout, it is possible to register a callback for when the invocation times out, etc. etc.
+For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">private static final Guard GUARD = Guard.create()
+    .withTimeout().duration(5, ChronoUnit.SECONDS).onTimeout(() -&gt; ...).done() <i class="conum" data-value="1"></i><b>(1)</b>
+    .build();</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The <code>onTimeout</code> method takes a <code>Runnable</code> that will later be executed whenever an invocation guarded by <code>GUARD</code> times out.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>All event listeners registered like this must run quickly and must not throw exceptions.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration"><a class="anchor" href="#_configuration"></a>Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As mentioned above, except of <code>smallrye.faulttolerance.enabled</code> / <code>MP_Fault_Tolerance_NonFallback_Enabled</code>, there is no support for external configuration of fault tolerance strategies.
+This may change in the future, though possibly only in the CDI implementation.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_metrics"><a class="anchor" href="#_metrics"></a>Metrics</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The programmatic API is integrated with metrics.
+All metrics, as described <a href="metrics.html" class="page">in the Metrics reference guide</a> and the linked guides, are supported.
+The only difference is the value of the <code>method</code> tag.
+With the programmatic API, the <code>method</code> tag will be set to the <em>description</em> of the guarded operation, provided on the <code>Guard</code> builder.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">private static final Guard GUARD = Guard.create()
+    .withDescription("hello") <i class="conum" data-value="1"></i><b>(1)</b>
+    .withRetry().maxRetries(3).done()
+    .build();</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>A description of <code>hello</code> is set, it will be used as a value of the <code>method</code> tag in all metrics.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>It is possible to create multiple <code>Guard</code> objects with the same description.
+In this case, it won&#8217;t be possible to distinguish the different <code>Guard</code> objects in metrics; their values will be aggregated.</p>
+</div>
+<div class="paragraph">
+<p>If no description is provided, metrics are not emitted.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_differences_to_the_specification"><a class="anchor" href="#_differences_to_the_specification"></a>Differences to the Specification</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>Guard</code> and <code>TypedGuard</code> have the following differences to standard MicroProfile Fault Tolerance:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>asynchronous actions of type <code>java.util.concurrent.Future</code> are not supported;</p>
+</li>
+<li>
+<p>the fallback, circuit breaker and retry strategies always inspect the cause chain of exceptions, following the behavior of SmallRye Fault Tolerance in the non-compatible mode.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_kotlin_suspend_functions"><a class="anchor" href="#_kotlin_suspend_functions"></a>Kotlin <code>suspend</code> Functions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>Guard</code> and <code>TypedGuard</code> APIs do not support Kotlin <code>suspend</code> functions at the moment.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_integration_concerns"><a class="anchor" href="#_integration_concerns"></a>Integration Concerns</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Integration concerns, which are particularly interesting for users of the standalone implementation, are <a href="../integration/programmatic-api.html" class="page">described</a> in the integration section.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="migration_from_faulttolerance"><a class="anchor" href="#migration_from_faulttolerance"></a>Migration from <code>FaultTolerance</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The 1st version of the programmatic API had the <code>FaultTolerance</code> interface.
+This is deprecated and scheduled for removal in SmallRye Fault Tolerance 7.0.
+The replacement are the <code>Guard</code> and <code>TypedGuard</code> types.</p>
+</div>
+<div class="paragraph">
+<p>When migrating, one first has to decide which type to use as a replacement.
+The <code>TypedGuard</code> is much closer to the <code>FaultTolerance</code> type, so that is the easiest way to migrate.
+There are some differences still:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the <code>create()</code> static method now takes a parameter that expresses the guarded action type, either as a <code>Class</code> or as a <code>TypeLiteral</code>;</p>
+</li>
+<li>
+<p>there are no <code>cast()</code> and <code>castAsync()</code> methods, because <code>TypedGuard</code> only guards actions of a single type;</p>
+</li>
+<li>
+<p>there is no support for guarding or adapting <code>Runnable</code>s, only <code>Callable</code>s and <code>Supplier</code>s are supported.
+As a replacement for <code>Runnable</code>, a <code>Supplier&lt;Void&gt;</code> (or <code>Supplier&lt;CompletionStage&lt;Void&gt;&gt;</code> etc.) can be used.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example, these usages of <code>FaultTolerance</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">static final FaultTolerance&lt;String&gt; FT1 = FaultTolerance.&lt;String&gt;create()
+    .withDescription("ft1")
+    .withRetry().maxRetries(3).done()
+    .withFallback().handler(() -&gt; "fallback").done()
+    .build();
+
+static final FaultTolerance&lt;CompletionStage&lt;String&gt;&gt; FT2 = FaultTolerance.&lt;String&gt;createAsync()
+    .withDescription("ft2")
+    .withBulkhead().limit(5).queueSize(100).done()
+    .withTimeout().duration(3, ChronoUnit.SECONDS).done()
+    .build();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>can be rewritten to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">static final TypedGuard&lt;String&gt; GUARD1 = TypedGuard.create(String.class)
+        .withDescription("ft1")
+        .withRetry().maxRetries(3).done()
+        .withFallback().handler(() -&gt; "fallback").done()
+        .build();
+
+static final TypedGuard&lt;CompletionStage&lt;String&gt;&gt; GUARD2 = TypedGuard.create(
+                new TypeLiteral&lt;CompletionStage&lt;String&gt;&gt;() {})
+        .withDescription("ft2")
+        .withBulkhead().limit(5).queueSize(100).done()
+        .withTimeout().duration(3, ChronoUnit.SECONDS).done()
+        .build();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After creating a <code>TypedGuard</code>, there&#8217;s no change in how it&#8217;s used.
+The methods <code>call()</code>, <code>get()</code>, <code>adaptCallable()</code> and <code>adaptSupplier()</code> have the same signatures as before.</p>
+</div>
+<div class="paragraph">
+<p><code>TypedGuard</code> is the only possible replacement if you need fallback.
+If you don&#8217;t need fallback, and especially if you need to guard actions of multiple types, <code>Guard</code> is a better choice.</p>
+</div>
+<div class="paragraph">
+<p>The differences are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Guard</code> has no type parameter (is not generic) and does not allow defining fallback;</p>
+</li>
+<li>
+<p>there are no <code>cast()</code> and <code>castAsync()</code> methods, because they are no longer needed;</p>
+</li>
+<li>
+<p>there is no support for guarding or adapting <code>Runnable</code>s, only <code>Callable</code>s and <code>Supplier</code>s are supported.
+As a replacement for <code>Runnable</code>, a <code>Supplier&lt;Void&gt;</code> (or <code>Supplier&lt;CompletionStage&lt;Void&gt;&gt;</code> etc.) can be used.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example, these usages of <code>FaultTolerance</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">static final FaultTolerance&lt;String&gt; FT1 = FaultTolerance.&lt;String&gt;create()
+    .withDescription("ft1")
+    .withRetry().maxRetries(3).done()
+    .withCircuitBreaker().done()
+    .build();
+
+static final FaultTolerance&lt;CompletionStage&lt;String&gt;&gt; FT2 = FaultTolerance.&lt;String&gt;createAsync()
+    .withDescription("ft2")
+    .withBulkhead().limit(5).queueSize(100).done()
+    .withTimeout().duration(3, ChronoUnit.SECONDS).done()
+    .build();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>can be rewritten to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">static final Guard GUARD1 = Guard.create()
+        .withDescription("ft1")
+        .withRetry().maxRetries(3).done()
+        .withCircuitBreaker().done()
+        .build();
+
+static final Guard GUARD2 = Guard.create()
+        .withDescription("ft2")
+        .withBulkhead().limit(5).queueSize(100).done()
+        .withTimeout().duration(3, ChronoUnit.SECONDS).done()
+        .build();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, as mentioned above, <code>Guard</code> is used slightly differently than <code>FaultTolerance</code>.
+The methods <code>call()</code>, <code>get()</code>, <code>adaptCallable()</code> and <code>adaptSupplier()</code> take an extra parameter that expresses the type of the guarded action, again either as a <code>Class</code> or as a <code>TypeLiteral</code>.</p>
+</div>
+<div class="paragraph">
+<p>For example, these usages of <code>FaultTolerance</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">String result1 = FT1.call(() -&gt; externalService.hello());
+CompletionStage&lt;String&gt; result2 = FT2.get(() -&gt; externalService.helloAsync());
+
+Callable&lt;String&gt; callable = FT1.adaptCallable(
+        () -&gt; externalService.hello());
+Supplier&lt;CompletionStage&lt;String&gt;&gt; supplier = FT2.adaptSupplier(
+        () -&gt; externalService.helloAsync());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>can be rewritten to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">String result1 = GUARD1.call(() -&gt; externalService.hello(), String.class);
+CompletionStage&lt;String&gt; result2 = GUARD2.get(() -&gt; externalService.helloAsync(),
+        new TypeLiteral&lt;CompletionStage&lt;String&gt;&gt;() {});
+
+Callable&lt;String&gt; callable = GUARD1.adaptCallable(
+        () -&gt; externalService.hello(), String.class);
+Supplier&lt;CompletionStage&lt;String&gt;&gt; supplier = GUARD2.adaptSupplier(
+        () -&gt; externalService.helloAsync(),
+        new TypeLiteral&lt;CompletionStage&lt;String&gt;&gt;() {});</code></pre>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="non-compat.html">Non-compatible Mode</a></span>
+  <span class="next"><a href="reusable.html">Reusable Fault Tolerance</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>
+    Sponsored by <a href="https://www.redhat.com"><img style="vertical-align: middle; height: 2.5em;" src="../../../_/img/redhat.svg" alt="Red Hat"></a>
+  </p>
+  <p>
+    Made with <a href="https://github.com/smallrye/smallrye-antora-ui">SmallRye Antora UI</a>, which is licensed under the MPL-2.0 license.
+    Includes portions of <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>, which is licensed under the MIT license.
+  </p>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

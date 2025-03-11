@@ -1,4 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2025-02-17T09:45:53+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.2.7</title><link href="https://www.smallrye.io/blog/jandex-3-2-7/" rel="alternate" type="text/html" title="Jandex 3.2.7" /><published>2025-02-17T08:00:00+00:00</published><updated>2025-02-17T08:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-2-7</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-2-7/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2025-03-11T10:45:51+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 6.9.0</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-9-0/" rel="alternate" type="text/html" title="Fault Tolerance 6.9.0" /><published>2025-03-11T07:00:00+00:00</published><updated>2025-03-11T07:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-9-0</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-9-0/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.9.0&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.9.0.
+This release contains an important bugfix.
+Upgrade is strongly recommended.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Starting with &lt;a href=&quot;/blog/fault-tolerance-6-3-0&quot;&gt;the 6.3.0 release&lt;/a&gt;, SmallRye Fault Tolerance emits metrics even when using the programmatic API.
+If there is no description set on the &lt;code&gt;Guard&lt;/code&gt; / &lt;code&gt;TypedGuard&lt;/code&gt; / &lt;code&gt;FaultTolerance&lt;/code&gt; object, a UUID was used as the value of the &lt;code&gt;method&lt;/code&gt; tag.
+However, at least in some metrics implementations, the keys and values of all tags are retained in memory.
+If a &lt;code&gt;Guard&lt;/code&gt; / &lt;code&gt;TypedGuard&lt;/code&gt; / &lt;code&gt;FaultTolerance&lt;/code&gt; object is created for each action (which is relatively easy to achieve without even knowing), a fresh UUID is generated for each object.
+Since those UUIDs are stored in memory indefinitely, this basically amounts to a memory leak.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;In this release, this memory leak is fixed.
+If there is no description set on the &lt;code&gt;Guard&lt;/code&gt; / &lt;code&gt;TypedGuard&lt;/code&gt; / &lt;code&gt;FaultTolerance&lt;/code&gt; object, metrics are simply not emitted.
+This is technically speaking a breaking change, but we feel it is very much warranted.
+Noone likes memory leaks and OOMs happening in production.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The bug is also fixed in the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.4.2&quot;&gt;6.4.2 release&lt;/a&gt;, which doesn&amp;#8217;t have an announcement.
+More backports might be coming.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Jandex 3.2.7</title><link href="https://www.smallrye.io/blog/jandex-3-2-7/" rel="alternate" type="text/html" title="Jandex 3.2.7" /><published>2025-02-17T08:00:00+00:00</published><updated>2025-02-17T08:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-2-7</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-2-7/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.2.7&quot;&gt;release&lt;/a&gt; of Jandex 3.2.7.
 This release contains one bugfix.&lt;/p&gt;
 &lt;/div&gt;
@@ -355,35 +379,4 @@ But please do pay extra attention.&lt;/p&gt;
 &lt;p&gt;And as usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Fault Tolerance 6.6.3</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-6-3/" rel="alternate" type="text/html" title="Fault Tolerance 6.6.3" /><published>2024-11-19T13:00:00+00:00</published><updated>2024-11-19T13:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-6-3</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-6-3/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.6.3&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.6.3.
-This release contains one small improvement.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Individual metric providers can now be disabled.
-To do that, set the following configuration properties (as in MicroProfile Config) to &lt;code&gt;true&lt;/code&gt;:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;ulist&quot;&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;smallrye.faulttolerance.mpmetrics.disabled&lt;/code&gt; to disable MicroProfile Metrics&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;smallrye.faulttolerance.opentelemetry.disabled&lt;/code&gt; to disable OpenTelemetry Metrics&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;smallrye.faulttolerance.micrometer.disabled&lt;/code&gt; to disable Micrometer&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;These properties complement the global &lt;code&gt;MP_Fault_Tolerance_Metrics_Enabled&lt;/code&gt; property, which can be set to &lt;code&gt;false&lt;/code&gt; to disable metrics altogether.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Note that setting &lt;code&gt;smallrye.faulttolerance.*.disabled&lt;/code&gt; to &lt;code&gt;false&lt;/code&gt; does &lt;em&gt;not&lt;/em&gt; mean the provider is enabled unconditionally.
-When that provider is not discovered or selected by the integrator, it cannot be enabled in any way.
-These properties are only meant for disabling an otherwise enabled metrics provider; not the other way around.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
 &lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry></feed>

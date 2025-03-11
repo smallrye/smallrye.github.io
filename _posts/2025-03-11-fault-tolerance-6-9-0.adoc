@@ -1,0 +1,30 @@
+:page-layout: post
+:page-title: Fault Tolerance 6.9.0
+:page-synopsis: SmallRye Fault Tolerance 6.9.0 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2025-03-11 08:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 6.9.0
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.9.0[release] of {smallrye-ft} 6.9.0.
+This release contains an important bugfix.
+Upgrade is strongly recommended.
+
+Starting with link:/blog/fault-tolerance-6-3-0[the 6.3.0 release], {smallrye-ft} emits metrics even when using the programmatic API.
+If there is no description set on the `Guard` / `TypedGuard` / `FaultTolerance` object, a UUID was used as the value of the `method` tag.
+However, at least in some metrics implementations, the keys and values of all tags are retained in memory.
+If a `Guard` / `TypedGuard` / `FaultTolerance` object is created for each action (which is relatively easy to achieve without even knowing), a fresh UUID is generated for each object.
+Since those UUIDs are stored in memory indefinitely, this basically amounts to a memory leak.
+
+In this release, this memory leak is fixed.
+If there is no description set on the `Guard` / `TypedGuard` / `FaultTolerance` object, metrics are simply not emitted.
+This is technically speaking a breaking change, but we feel it is very much warranted.
+Noone likes memory leaks and OOMs happening in production.
+
+The bug is also fixed in the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.4.2[6.4.2 release], which doesn't have an announcement.
+More backports might be coming.
+
+As usual, if you have any ideas for improvements, please https://github.com/smallrye/smallrye-fault-tolerance/issues[file an issue]!

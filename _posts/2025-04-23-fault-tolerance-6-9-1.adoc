@@ -1,0 +1,27 @@
+:page-layout: post
+:page-title: Fault Tolerance 6.9.1
+:page-synopsis: SmallRye Fault Tolerance 6.9.1 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2025-04-23 08:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 6.9.1
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.9.1[release] of {smallrye-ft} 6.9.1.
+This release contains an important bugfix.
+
+After the link:/blog/fault-tolerance-6-7-0[big async rewrite], the retry strategy used recursion to implement a loop even in the synchronous case.
+That is wrong, because it may easily lead to a stack overflow error in case of a high number of retry attempts.
+This bug is now fixed.
+The internal `Future` type has gained a dedicated `loop()` method to implement `while` loops.
+The implementation is structured so that recursion is used for asynchronous iterations, while classic loop is used for synchronous iterations.
+In other words, it is a "just enough" implementation of trampolines.
+Thanks Maxuel Macavilca Montjoy for the issue report!
+
+Also, with this release, the portable extension in {smallrye-ft} ignores synthetic methods.
+This means they are not intercepted anymore by the fault tolerance interceptor.
+The Quarkus extension for {smallrye-ft} has already been ignoring synthetic methods for a long time; now all the other CDI Full based implementations work similarly.
+
+As usual, if you have any ideas for improvements, please https://github.com/smallrye/smallrye-fault-tolerance/issues[file an issue]!

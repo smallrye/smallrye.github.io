@@ -1,4 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2025-04-07T13:41:15+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.3.0</title><link href="https://www.smallrye.io/blog/jandex-3-3-0/" rel="alternate" type="text/html" title="Jandex 3.3.0" /><published>2025-04-07T12:00:00+00:00</published><updated>2025-04-07T12:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-3-0</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-3-0/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2025-04-23T08:18:48+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 6.9.1</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-9-1/" rel="alternate" type="text/html" title="Fault Tolerance 6.9.1" /><published>2025-04-23T07:00:00+00:00</published><updated>2025-04-23T07:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-9-1</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-9-1/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.9.1&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.9.1.
+This release contains an important bugfix.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;After the &lt;a href=&quot;/blog/fault-tolerance-6-7-0&quot;&gt;big async rewrite&lt;/a&gt;, the retry strategy used recursion to implement a loop even in the synchronous case.
+That is wrong, because it may easily lead to a stack overflow error in case of a high number of retry attempts.
+This bug is now fixed.
+The internal &lt;code&gt;Future&lt;/code&gt; type has gained a dedicated &lt;code&gt;loop()&lt;/code&gt; method to implement &lt;code&gt;while&lt;/code&gt; loops.
+The implementation is structured so that recursion is used for asynchronous iterations, while classic loop is used for synchronous iterations.
+In other words, it is a &quot;just enough&quot; implementation of trampolines.
+Thanks Maxuel Macavilca Montjoy for the issue report!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Also, with this release, the portable extension in SmallRye Fault Tolerance ignores synthetic methods.
+This means they are not intercepted anymore by the fault tolerance interceptor.
+The Quarkus extension for SmallRye Fault Tolerance has already been ignoring synthetic methods for a long time; now all the other CDI Full based implementations work similarly.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Jandex 3.3.0</title><link href="https://www.smallrye.io/blog/jandex-3-3-0/" rel="alternate" type="text/html" title="Jandex 3.3.0" /><published>2025-04-07T12:00:00+00:00</published><updated>2025-04-07T12:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-3-0</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-3-0/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.3.0&quot;&gt;release&lt;/a&gt; of Jandex 3.3.0.
 This release contains two improvements.&lt;/p&gt;
 &lt;/div&gt;
@@ -193,22 +213,6 @@ In case of the Vert.x integration in SmallRye Fault Tolerance (and therefore Qua
 That sum could overflow, which wasn&amp;#8217;t detected before.
 In this release, an overflow is a validation error which fails the deployment (in case of the &lt;code&gt;@Bulkhead&lt;/code&gt; annotation; when using the programmatic API, the &lt;code&gt;BulkheadBuilder.done()&lt;/code&gt; method will throw an exception).
 Thanks Sayra Gmelig Meyling for the issue report!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Fault Tolerance 6.7.1</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-7-1/" rel="alternate" type="text/html" title="Fault Tolerance 6.7.1" /><published>2024-12-10T14:00:00+00:00</published><updated>2024-12-10T14:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-7-1</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-7-1/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.7.1&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.7.1.
-This release contains one bugfix.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The new programmatic API (&lt;code&gt;Guard&lt;/code&gt;, &lt;code&gt;TypedGuard&lt;/code&gt;) &lt;a href=&quot;/blog/fault-tolerance-6-7-0/&quot;&gt;introduced&lt;/a&gt; in SmallRye Fault Tolerance 6.7.0 allows guarding multiple kinds of actions, both synchronous and asynchronous.
-To do that, all implementations of fault tolerance strategies were unified.
-This unification introduced a bug in the implementation of synchronous bulkhead, where acquiring the capacity semaphore was skipped before acquiring the work semaphore.
-This bug would only appear when the same bulkhead is used to guard both synchronous and asynchronous actions, which wasn&amp;#8217;t possible until recently, but it&amp;#8217;s still a significant issue.
-This release fixes it.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Further, the documentation index page was updated to show a programmatic API example using &lt;code&gt;TypedGuard&lt;/code&gt;, instead of the obsolete &lt;code&gt;FaultTolerance&lt;/code&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;

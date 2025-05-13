@@ -1,0 +1,28 @@
+:page-layout: post
+:page-title: Jandex 3.3.1
+:page-synopsis: Jandex 3.3.1 released!
+:page-tags: [announcement]
+:page-date: 2025-05-13 10:00:00.000 +0100
+:page-author: lthon
+
+= Jandex 3.3.1
+
+Today, we announce the https://github.com/smallrye/jandex/releases/tag/3.3.1[release] of Jandex 3.3.1.
+This release contains a few small improvements and bugfixes.
+
+The `MethodInfo.isAbstract()` method was added.
+It is a simple shortcut for `Modifier.isAbstract(method.flags())`.
+
+The `PrimitiveType.isBox()` method was added.
+It returns whether the given `Type` is a class that is a wrapper type of a primitive type (or, in other words, possible result of a boxing conversion).
+
+The `ClassInfo.simpleName()` method was fixed in case of top-level classes with dollar `$` in their names.
+Thanks Martin Kouba for the bug report!
+
+The module descriptor (`module-info.class`) was added.
+Since Jandex is still a Java 8 project, the `module-info.java` class is not compiled by `javac`; instead, it is present outside of `src/main/java` and is turned into the `.class` file by Moditect.
+
+Missing deprecation notices (missing `@deprecated` javadoc tags for `@Deprecated` methods) were added.
+Thanks Martin Panzer for the bug report!
+
+If you experience any troubles, or if you have any ideas for Jandex improvements, please https://github.com/smallrye/jandex/issues[file an issue].

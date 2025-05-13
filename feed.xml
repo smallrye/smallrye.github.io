@@ -1,4 +1,30 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2025-04-23T08:18:48+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 6.9.1</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-9-1/" rel="alternate" type="text/html" title="Fault Tolerance 6.9.1" /><published>2025-04-23T07:00:00+00:00</published><updated>2025-04-23T07:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-9-1</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-9-1/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2025-05-13T09:52:30+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.3.1</title><link href="https://www.smallrye.io/blog/jandex-3-3-1/" rel="alternate" type="text/html" title="Jandex 3.3.1" /><published>2025-05-13T09:00:00+00:00</published><updated>2025-05-13T09:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-3-1</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-3-1/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.3.1&quot;&gt;release&lt;/a&gt; of Jandex 3.3.1.
+This release contains a few small improvements and bugfixes.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The &lt;code&gt;MethodInfo.isAbstract()&lt;/code&gt; method was added.
+It is a simple shortcut for &lt;code&gt;Modifier.isAbstract(method.flags())&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The &lt;code&gt;PrimitiveType.isBox()&lt;/code&gt; method was added.
+It returns whether the given &lt;code&gt;Type&lt;/code&gt; is a class that is a wrapper type of a primitive type (or, in other words, possible result of a boxing conversion).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The &lt;code&gt;ClassInfo.simpleName()&lt;/code&gt; method was fixed in case of top-level classes with dollar &lt;code&gt;$&lt;/code&gt; in their names.
+Thanks Martin Kouba for the bug report!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The module descriptor (&lt;code&gt;module-info.class&lt;/code&gt;) was added.
+Since Jandex is still a Java 8 project, the &lt;code&gt;module-info.java&lt;/code&gt; class is not compiled by &lt;code&gt;javac&lt;/code&gt;; instead, it is present outside of &lt;code&gt;src/main/java&lt;/code&gt; and is turned into the &lt;code&gt;.class&lt;/code&gt; file by Moditect.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Missing deprecation notices (missing &lt;code&gt;@deprecated&lt;/code&gt; javadoc tags for &lt;code&gt;@Deprecated&lt;/code&gt; methods) were added.
+Thanks Martin Panzer for the bug report!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry><entry><title type="html">Fault Tolerance 6.9.1</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-9-1/" rel="alternate" type="text/html" title="Fault Tolerance 6.9.1" /><published>2025-04-23T07:00:00+00:00</published><updated>2025-04-23T07:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-9-1</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-9-1/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.9.1&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.9.1.
 This release contains an important bugfix.&lt;/p&gt;
 &lt;/div&gt;
@@ -195,24 +221,6 @@ That improvement, alas, contains a bug in the Vert.x integration.
 We assumed that a Vert.x thread is always associated with a current Vert.x context, but that doesn&amp;#8217;t have to be the case.
 Especially in case of a worker thread pool, which can be (in Quarkus, for example) used as a classic thread pool as well and tasks can be submitted to it outside of a Vert.x context.
 This wrong assumption lead to a NPE, which is fixed now.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Fault Tolerance 6.7.2</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-7-2/" rel="alternate" type="text/html" title="Fault Tolerance 6.7.2" /><published>2025-01-06T11:00:00+00:00</published><updated>2025-01-06T11:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-7-2</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-7-2/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.7.2&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.7.2.
-This release contains one bugfix and one improvement.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The event loop integration was significantly improved.
-In case the original invocation happened on an event loop thread, it is now guaranteed that the asynchronous completion also happens on the same event loop, even if the method completed on a different thread.
-Timeouts are now also signalled on the event loop.
-In case of the Vert.x integration in SmallRye Fault Tolerance (and therefore Quarkus), Vert.x worker threads are now also treated as event loops (although the guarantee of &quot;the same event loop&quot; is not as strict).&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The capacity of a bulkhead is a sum of the bulkhead limit and the bulkhead queue size.
-That sum could overflow, which wasn&amp;#8217;t detected before.
-In this release, an overflow is a validation error which fails the deployment (in case of the &lt;code&gt;@Bulkhead&lt;/code&gt; annotation; when using the programmatic API, the &lt;code&gt;BulkheadBuilder.done()&lt;/code&gt; method will throw an exception).
-Thanks Sayra Gmelig Meyling for the issue report!&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;

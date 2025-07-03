@@ -1,4 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2025-05-13T09:52:30+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.3.1</title><link href="https://www.smallrye.io/blog/jandex-3-3-1/" rel="alternate" type="text/html" title="Jandex 3.3.1" /><published>2025-05-13T09:00:00+00:00</published><updated>2025-05-13T09:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-3-1</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-3-1/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2025-07-03T15:12:25+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.3.2</title><link href="https://www.smallrye.io/blog/jandex-3-3-2/" rel="alternate" type="text/html" title="Jandex 3.3.2" /><published>2025-07-03T14:00:00+00:00</published><updated>2025-07-03T14:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-3-2</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-3-2/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.3.2&quot;&gt;release&lt;/a&gt; of Jandex 3.3.2.
+This release contains a few small improvements.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The possible existence of an implicit &lt;code&gt;Object&lt;/code&gt; bound of a type variable has never been a public API on &lt;code&gt;TypeVariable&lt;/code&gt;.
+That changes now: the &lt;code&gt;hasImplicitObjectBound()&lt;/code&gt; method becomes &lt;code&gt;public&lt;/code&gt;.
+Also, the &lt;code&gt;TypeVariable.Builder&lt;/code&gt; API now has a method &lt;code&gt;implicitObjectBound()&lt;/code&gt; to declare that the type variable has an implicit &lt;code&gt;Object&lt;/code&gt; bound.
+This happens when all bounds of a type variable are interface types.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;code&gt;EquivalenceKey&lt;/code&gt;s for primitive types and &lt;code&gt;java.*&lt;/code&gt; class types are now interned.
+Together with other improvements, this should lower allocation rate significantly when working with equivalence keys (for example, when using the &lt;code&gt;AnnotationOverlay&lt;/code&gt;).
+Thanks Guillaume Smet for the initial pull request!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry><entry><title type="html">Jandex 3.3.1</title><link href="https://www.smallrye.io/blog/jandex-3-3-1/" rel="alternate" type="text/html" title="Jandex 3.3.1" /><published>2025-05-13T09:00:00+00:00</published><updated>2025-05-13T09:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-3-1</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-3-1/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.3.1&quot;&gt;release&lt;/a&gt; of Jandex 3.3.1.
 This release contains a few small improvements and bugfixes.&lt;/p&gt;
 &lt;/div&gt;
@@ -211,17 +228,4 @@ The JDK implementation of &lt;code&gt;TypeVariable.equals()&lt;/code&gt; checks 
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry><entry><title type="html">Fault Tolerance 6.7.3</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-7-3/" rel="alternate" type="text/html" title="Fault Tolerance 6.7.3" /><published>2025-01-09T16:00:00+00:00</published><updated>2025-01-09T16:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-7-3</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-7-3/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.7.3&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.7.3.
-This release contains one bugfix.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;In the &lt;a href=&quot;/blog/fault-tolerance-6-7-2&quot;&gt;previous release&lt;/a&gt;, the event loop integration was significantly improved.
-That improvement, alas, contains a bug in the Vert.x integration.
-We assumed that a Vert.x thread is always associated with a current Vert.x context, but that doesn&amp;#8217;t have to be the case.
-Especially in case of a worker thread pool, which can be (in Quarkus, for example) used as a classic thread pool as well and tasks can be submitted to it outside of a Vert.x context.
-This wrong assumption lead to a NPE, which is fixed now.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry></feed>
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry></feed>

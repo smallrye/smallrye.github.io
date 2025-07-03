@@ -1,0 +1,22 @@
+:page-layout: post
+:page-title: Jandex 3.3.2
+:page-synopsis: Jandex 3.3.2 released!
+:page-tags: [announcement]
+:page-date: 2025-07-03 15:00:00.000 +0100
+:page-author: lthon
+
+= Jandex 3.3.2
+
+Today, we announce the https://github.com/smallrye/jandex/releases/tag/3.3.2[release] of Jandex 3.3.2.
+This release contains a few small improvements.
+
+The possible existence of an implicit `Object` bound of a type variable has never been a public API on `TypeVariable`.
+That changes now: the `hasImplicitObjectBound()` method becomes `public`.
+Also, the `TypeVariable.Builder` API now has a method `implicitObjectBound()` to declare that the type variable has an implicit `Object` bound.
+This happens when all bounds of a type variable are interface types.
+
+``EquivalenceKey``s for primitive types and `java.*` class types are now interned.
+Together with other improvements, this should lower allocation rate significantly when working with equivalence keys (for example, when using the `AnnotationOverlay`).
+Thanks Guillaume Smet for the initial pull request!
+
+If you experience any troubles, or if you have any ideas for Jandex improvements, please https://github.com/smallrye/jandex/issues[file an issue].

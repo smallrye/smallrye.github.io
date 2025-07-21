@@ -87,8 +87,35 @@ This bug is fixed in this release.</p>
 Gizmo 2 is an evolution of Gizmo, the bytecode generation framework used in Quarkus.
 Gizmo version 1 used Jandex in its core, but Gizmo version 2 does not.
 Therefore, an integration package is needed.
-This version of Jandex includes one, providing all the necessary methods like <code>classDescOf(org.jboss.jandex.Type)</code> or <code>genericTypeOf(org.jboss.jandex.Type)</code>.
-All integration code is present in <code>static</code> methods of the class <code>Jandex2Gizmo</code>.</p>
+This version of Jandex includes a new module, <code>io.smallrye:jandex-gizmo2</code>, which contains a class called <code>Jandex2Gizmo</code> with these <code>static</code> methods:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>classDescOf()</code> to create <code>java.lang.constant.ClassDesc</code></p>
+</li>
+<li>
+<p><code>fieldDescOf()</code> to create <code>io.quarkus.gizmo2.desc.FieldDesc</code></p>
+</li>
+<li>
+<p><code>methodDescOf()</code> to create <code>io.quarkus.gizmo2.desc.MethodDesc</code></p>
+</li>
+<li>
+<p><code>constructorDescOf()</code> to create <code>io.quarkus.gizmo2.desc.ConstructorDesc</code></p>
+</li>
+<li>
+<p><code>genericTypeOf*()</code> to create <code>io.quarkus.gizmo2.GenericType</code> and its subtypes</p>
+</li>
+<li>
+<p><code>typeArgumentOf()</code> to create <code>io.quarkus.gizmo2.TypeArgument</code></p>
+</li>
+<li>
+<p><code>copyTypeParameters()</code> and <code>addTypeParameter()</code></p>
+</li>
+<li>
+<p><code>copyAnnotations()</code> and <code>addAnnotation()</code></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>If you experience any troubles, or if you have any ideas for Jandex improvements, please <a href="https://github.com/smallrye/jandex/issues">file an issue</a>.</p>

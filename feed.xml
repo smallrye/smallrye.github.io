@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2025-07-21T08:35:20+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.4.0</title><link href="https://www.smallrye.io/blog/jandex-3-4-0/" rel="alternate" type="text/html" title="Jandex 3.4.0" /><published>2025-07-21T08:00:00+00:00</published><updated>2025-07-21T08:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-4-0</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-4-0/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2025-07-21T10:28:40+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.4.0</title><link href="https://www.smallrye.io/blog/jandex-3-4-0/" rel="alternate" type="text/html" title="Jandex 3.4.0" /><published>2025-07-21T08:00:00+00:00</published><updated>2025-07-21T08:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-4-0</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-4-0/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.4.0&quot;&gt;release&lt;/a&gt; of Jandex 3.4.0.
 This release contains one bugfix and one new feature.&lt;/p&gt;
 &lt;/div&gt;
@@ -11,8 +11,35 @@ This bug is fixed in this release.&lt;/p&gt;
 Gizmo 2 is an evolution of Gizmo, the bytecode generation framework used in Quarkus.
 Gizmo version 1 used Jandex in its core, but Gizmo version 2 does not.
 Therefore, an integration package is needed.
-This version of Jandex includes one, providing all the necessary methods like &lt;code&gt;classDescOf(org.jboss.jandex.Type)&lt;/code&gt; or &lt;code&gt;genericTypeOf(org.jboss.jandex.Type)&lt;/code&gt;.
-All integration code is present in &lt;code&gt;static&lt;/code&gt; methods of the class &lt;code&gt;Jandex2Gizmo&lt;/code&gt;.&lt;/p&gt;
+This version of Jandex includes a new module, &lt;code&gt;io.smallrye:jandex-gizmo2&lt;/code&gt;, which contains a class called &lt;code&gt;Jandex2Gizmo&lt;/code&gt; with these &lt;code&gt;static&lt;/code&gt; methods:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;classDescOf()&lt;/code&gt; to create &lt;code&gt;java.lang.constant.ClassDesc&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;fieldDescOf()&lt;/code&gt; to create &lt;code&gt;io.quarkus.gizmo2.desc.FieldDesc&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;methodDescOf()&lt;/code&gt; to create &lt;code&gt;io.quarkus.gizmo2.desc.MethodDesc&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;constructorDescOf()&lt;/code&gt; to create &lt;code&gt;io.quarkus.gizmo2.desc.ConstructorDesc&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;genericTypeOf*()&lt;/code&gt; to create &lt;code&gt;io.quarkus.gizmo2.GenericType&lt;/code&gt; and its subtypes&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;typeArgumentOf()&lt;/code&gt; to create &lt;code&gt;io.quarkus.gizmo2.TypeArgument&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;copyTypeParameters()&lt;/code&gt; and &lt;code&gt;addTypeParameter()&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;copyAnnotations()&lt;/code&gt; and &lt;code&gt;addAnnotation()&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;

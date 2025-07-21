@@ -17,7 +17,15 @@ Jandex now also includes integration with Gizmo 2.
 Gizmo 2 is an evolution of Gizmo, the bytecode generation framework used in Quarkus.
 Gizmo version 1 used Jandex in its core, but Gizmo version 2 does not.
 Therefore, an integration package is needed.
-This version of Jandex includes one, providing all the necessary methods like `classDescOf(org.jboss.jandex.Type)` or `genericTypeOf(org.jboss.jandex.Type)`.
-All integration code is present in `static` methods of the class `Jandex2Gizmo`.
+This version of Jandex includes a new module, `io.smallrye:jandex-gizmo2`, which contains a class called `Jandex2Gizmo` with these `static` methods:
+
+* `classDescOf()` to create `java.lang.constant.ClassDesc`
+* `fieldDescOf()` to create `io.quarkus.gizmo2.desc.FieldDesc`
+* `methodDescOf()` to create `io.quarkus.gizmo2.desc.MethodDesc`
+* `constructorDescOf()` to create `io.quarkus.gizmo2.desc.ConstructorDesc`
+* `genericTypeOf*()` to create `io.quarkus.gizmo2.GenericType` and its subtypes
+* `typeArgumentOf()` to create `io.quarkus.gizmo2.TypeArgument`
+* `copyTypeParameters()` and `addTypeParameter()`
+* `copyAnnotations()` and `addAnnotation()`
 
 If you experience any troubles, or if you have any ideas for Jandex improvements, please https://github.com/smallrye/jandex/issues[file an issue].

@@ -1,4 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2025-07-03T15:12:25+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.3.2</title><link href="https://www.smallrye.io/blog/jandex-3-3-2/" rel="alternate" type="text/html" title="Jandex 3.3.2" /><published>2025-07-03T14:00:00+00:00</published><updated>2025-07-03T14:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-3-2</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-3-2/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2025-07-21T08:35:20+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.4.0</title><link href="https://www.smallrye.io/blog/jandex-3-4-0/" rel="alternate" type="text/html" title="Jandex 3.4.0" /><published>2025-07-21T08:00:00+00:00</published><updated>2025-07-21T08:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-4-0</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-4-0/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.4.0&quot;&gt;release&lt;/a&gt; of Jandex 3.4.0.
+This release contains one bugfix and one new feature.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Type annotations were not parsed correctly in certain situations involving nested types.
+This bug is fixed in this release.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Jandex now also includes integration with Gizmo 2.
+Gizmo 2 is an evolution of Gizmo, the bytecode generation framework used in Quarkus.
+Gizmo version 1 used Jandex in its core, but Gizmo version 2 does not.
+Therefore, an integration package is needed.
+This version of Jandex includes one, providing all the necessary methods like &lt;code&gt;classDescOf(org.jboss.jandex.Type)&lt;/code&gt; or &lt;code&gt;genericTypeOf(org.jboss.jandex.Type)&lt;/code&gt;.
+All integration code is present in &lt;code&gt;static&lt;/code&gt; methods of the class &lt;code&gt;Jandex2Gizmo&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry><entry><title type="html">Jandex 3.3.2</title><link href="https://www.smallrye.io/blog/jandex-3-3-2/" rel="alternate" type="text/html" title="Jandex 3.3.2" /><published>2025-07-03T14:00:00+00:00</published><updated>2025-07-03T14:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-3-2</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-3-2/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.3.2&quot;&gt;release&lt;/a&gt; of Jandex 3.3.2.
 This release contains a few small improvements.&lt;/p&gt;
 &lt;/div&gt;
@@ -216,16 +234,4 @@ Configuration only applies to strategies that were added in the builder.&lt;/p&g
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Jandex 3.2.4</title><link href="https://www.smallrye.io/blog/jandex-3-2-4/" rel="alternate" type="text/html" title="Jandex 3.2.4" /><published>2025-02-03T07:00:00+00:00</published><updated>2025-02-03T07:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-2-4</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-2-4/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.2.4&quot;&gt;release&lt;/a&gt; of Jandex 3.2.4.
-This release contains one small improvement.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The &lt;code&gt;JandexReflection.loadType()&lt;/code&gt; method was added.
-This method accepts a Jandex &lt;code&gt;Type&lt;/code&gt; and returns a corresponding Reflection &lt;code&gt;Type&lt;/code&gt;.
-The result is equal to the reflectively obtained &lt;code&gt;Type&lt;/code&gt; and has the same hash code, as long as there are no type variables.
-The JDK implementation of &lt;code&gt;TypeVariable.equals()&lt;/code&gt; checks for a specific implementation class, so proper equality is impossible to achieve in this case.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry></feed>
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry></feed>

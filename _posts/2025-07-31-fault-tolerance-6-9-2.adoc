@@ -1,0 +1,24 @@
+:page-layout: post
+:page-title: Fault Tolerance 6.9.2
+:page-synopsis: SmallRye Fault Tolerance 6.9.2 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2025-07-31 15:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 6.9.2
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.9.2[release] of {smallrye-ft} 6.9.2.
+This release contains an important bugfix.
+
+Since the link:/blog/fault-tolerance-6-7-2[6.7.2] and link:/blog/fault-tolerance-6-7-3/[6.7.3] releases, Vert.x worker threads are treated as event loops as well.
+In case of a worker thread execution from an event loop context, the event loop integration code used to use `Context.executeBlocking()` in an ordered fashion.
+This may lead to a deadlock-like situation in case the original call also occurs in an ordered `executeBlocking()` situation, because:
+
+. the original handler that called a guarded method may wait for it to complete,
+. the newly scheduled handler comes after the original handler, so has to wait for it to complete.
+
+In this release, the issue is fixed: the event loop integration code no longer requires ordering.
+
+As usual, if you have any ideas for improvements, please https://github.com/smallrye/smallrye-fault-tolerance/issues[file an issue]!

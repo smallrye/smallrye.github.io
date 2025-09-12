@@ -1,0 +1,19 @@
+:page-layout: post
+:page-title: Fault Tolerance 6.9.3
+:page-synopsis: SmallRye Fault Tolerance 6.9.3 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2025-09-12 14:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 6.9.3
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.9.3[release] of {smallrye-ft} 6.9.3.
+This release contains one small improvement.
+
+{smallrye-ft} is not a tiny project anymore; these days, it consists of roughly 15 subprojects.
+Therefore, starting with this release, we provide a BOM: `io.smallrye:smallrye-fault-tolerance-bom`.
+Use this BOM to manage version numbers of all {smallrye-ft} modules.
+
+As usual, if you have any ideas for improvements, please https://github.com/smallrye/smallrye-fault-tolerance/issues[file an issue]!

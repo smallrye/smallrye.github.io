@@ -1,0 +1,32 @@
+:page-layout: post
+:page-title: Jandex 3.5.0
+:page-synopsis: Jandex 3.5.0 released!
+:page-tags: [announcement]
+:page-date: 2025-09-12 12:00:00.000 +0100
+:page-author: lthon
+
+= Jandex 3.5.0
+
+Today, we announce the https://github.com/smallrye/jandex/releases/tag/3.5.0[release] of Jandex 3.5.0.
+This release contains multiple optizations, bug fixes and and small new features.
+
+Class `MethodSignatureKey` was added, together with `MethodInfo.signatureKey()`.
+A method signature key implements `equals()` and `hashCode()` according to the method signature (that is, method name, parameter types, return type).
+This allows skipping methods during processing of an inheritance hierarchy if another method with the same signature has already been processed.
+The concept has already existed in Quarkus, but the implementation added in Jandex is slightly more optimized.
+
+Method `MethodParameterInfo.nameOrDefault()` was added.
+As opposed to `MethodParameterInfo.name()`, this method never returns `null`; instead, when the parameter name is not known, it returns `argN`, where `N` is a zero-based parameter index.
+
+Methods `copyModifiers()` and `constOfEnum()` were added to `Jandex2Gizmo`, simplifying the Gizmo 2 integration in certain cases.
+
+Index reproducibility was fixed in case of type annotations.
+Jandex has been trying to produce reproducible output since version link:/blog/jandex-3-1-0[ 3.1.0], but since that version, several bugs have been found.
+This time, a bug was found in case type annotations were used.
+This bug was fixed, leading to reproducible output in even more cases.
+Thanks Robert Stupp for the issue report, reproducer and an attempt to fix!
+
+Finally, several optimizations were performed especially to reduce allocations.
+Thanks Guillaume Smet for issues and fixes!
+
+If you experience any troubles, or if you have any ideas for Jandex improvements, please https://github.com/smallrye/jandex/issues[file an issue].

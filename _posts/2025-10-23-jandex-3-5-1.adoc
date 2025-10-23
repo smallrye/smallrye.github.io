@@ -1,0 +1,22 @@
+:page-layout: post
+:page-title: Jandex 3.5.1
+:page-synopsis: Jandex 3.5.1 released!
+:page-tags: [announcement]
+:page-date: 2025-10-23 12:00:00.000 +0100
+:page-author: lthon
+
+= Jandex 3.5.1
+
+Today, we announce the https://github.com/smallrye/jandex/releases/tag/3.5.1[release] of Jandex 3.5.1.
+This release contains one small improvement (which may be seen as a bug fix by some) and one small new feature.
+
+The Gizmo 2 integration module now includes a `StringBuilderGen` class.
+This is a replacement for the `StringBuilderOps` class that was removed in Gizmo 2.0.0.Beta8 due to unresolved disputes over the API design, particularly around reusability.
+It is highly likely that `StringBuilderOps` are coming back to Gizmo 2 in some shape, likely different to the previous version.
+In the meantime, you can use `StringBuilderGen` from Jandex.
+
+Certain well-known class types (as in, instances of `ClassType`) are now guaranteed singletons (if they have no type annotations).
+This applies for example to `java.lang.Object`, which has a nice side effect: all unbounded wildcards are now guaranteed to be represented as `?` and never as `? extends java.lang.Object`.
+Thanks Robert Stupp for the pull request!
+
+If you experience any troubles, or if you have any ideas for Jandex improvements, please https://github.com/smallrye/jandex/issues[file an issue].

@@ -1,4 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2025-09-12T14:47:00+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 6.9.3</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-9-3/" rel="alternate" type="text/html" title="Fault Tolerance 6.9.3" /><published>2025-09-12T13:00:00+00:00</published><updated>2025-09-12T13:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-9-3</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-9-3/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2025-10-23T13:43:10+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.5.1</title><link href="https://www.smallrye.io/blog/jandex-3-5-1/" rel="alternate" type="text/html" title="Jandex 3.5.1" /><published>2025-10-23T11:00:00+00:00</published><updated>2025-10-23T11:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-5-1</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-5-1/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.5.1&quot;&gt;release&lt;/a&gt; of Jandex 3.5.1.
+This release contains one small improvement (which may be seen as a bug fix by some) and one small new feature.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The Gizmo 2 integration module now includes a &lt;code&gt;StringBuilderGen&lt;/code&gt; class.
+This is a replacement for the &lt;code&gt;StringBuilderOps&lt;/code&gt; class that was removed in Gizmo 2.0.0.Beta8 due to unresolved disputes over the API design, particularly around reusability.
+It is highly likely that &lt;code&gt;StringBuilderOps&lt;/code&gt; are coming back to Gizmo 2 in some shape, likely different to the previous version.
+In the meantime, you can use &lt;code&gt;StringBuilderGen&lt;/code&gt; from Jandex.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Certain well-known class types (as in, instances of &lt;code&gt;ClassType&lt;/code&gt;) are now guaranteed singletons (if they have no type annotations).
+This applies for example to &lt;code&gt;java.lang.Object&lt;/code&gt;, which has a nice side effect: all unbounded wildcards are now guaranteed to be represented as &lt;code&gt;?&lt;/code&gt; and never as &lt;code&gt;? extends java.lang.Object&lt;/code&gt;.
+Thanks Robert Stupp for the pull request!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry><entry><title type="html">Fault Tolerance 6.9.3</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-9-3/" rel="alternate" type="text/html" title="Fault Tolerance 6.9.3" /><published>2025-09-12T13:00:00+00:00</published><updated>2025-09-12T13:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-9-3</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-9-3/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.9.3&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.9.3.
 This release contains one small improvement.&lt;/p&gt;
 &lt;/div&gt;
@@ -219,15 +236,4 @@ More backports might be coming.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Jandex 3.2.7</title><link href="https://www.smallrye.io/blog/jandex-3-2-7/" rel="alternate" type="text/html" title="Jandex 3.2.7" /><published>2025-02-17T08:00:00+00:00</published><updated>2025-02-17T08:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-2-7</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-2-7/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.2.7&quot;&gt;release&lt;/a&gt; of Jandex 3.2.7.
-This release contains one bugfix.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;An annotation overlay configured to include inherited annotations didn&amp;#8217;t necessarily work correctly when asked for annotations on the &lt;code&gt;Object&lt;/code&gt; class, depending on the underlying &lt;code&gt;IndexView&lt;/code&gt; implementation.
-That was fixed in this release: when the passed class does not have a superclass (which means it is &lt;code&gt;Object&lt;/code&gt;), the index is not queried at all.
-Thanks Matěj Novotný for the issue and pull request!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry></feed>
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry></feed>

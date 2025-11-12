@@ -1,4 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2025-10-23T13:43:10+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.5.1</title><link href="https://www.smallrye.io/blog/jandex-3-5-1/" rel="alternate" type="text/html" title="Jandex 3.5.1" /><published>2025-10-23T11:00:00+00:00</published><updated>2025-10-23T11:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-5-1</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-5-1/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2025-11-12T11:46:33+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.5.2</title><link href="https://www.smallrye.io/blog/jandex-3-5-2/" rel="alternate" type="text/html" title="Jandex 3.5.2" /><published>2025-11-12T10:00:00+00:00</published><updated>2025-11-12T10:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-5-2</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-5-2/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.5.2&quot;&gt;release&lt;/a&gt; of Jandex 3.5.2.
+This release contains a few small improvements and new features.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;A method &lt;code&gt;ClassInfo.method(MethodInfo)&lt;/code&gt; was added that allows finding a method declared in a given class based on a signature of the given method (which is supposedly declared in another class).
+This has already been possible using other overloads of &lt;code&gt;method()&lt;/code&gt;, but if you already have a &lt;code&gt;MethodInfo&lt;/code&gt; based on which you want to search, the new method allows that directly.
+Thanks Michael Edgar for the pull request!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;A method &lt;code&gt;DotName.startsWith(DotName)&lt;/code&gt; was added that allows figuring out if a dotted name starts with another dotted name.
+Note that the prefix determination is not analogous to &lt;code&gt;String.startsWith()&lt;/code&gt;; instead, it works on the dotted name structure level.
+For example, &lt;code&gt;com.example.FooBar&lt;/code&gt; starts with &lt;code&gt;com&lt;/code&gt;, &lt;code&gt;com.example&lt;/code&gt; and &lt;code&gt;com.example.FooBar&lt;/code&gt;, but it does &lt;em&gt;not&lt;/em&gt; start with &lt;code&gt;com.exam&lt;/code&gt; or &lt;code&gt;com.example.Foo&lt;/code&gt;.
+Thanks Michael Edgar for the issue!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Finally, searching for annotations (internally, &lt;code&gt;AnnotationInstance.binarySearch()&lt;/code&gt;) was optimized slightly.
+If the annotation array is empty or contains just one element, the code answers directly instead of starting the search process.
+Thanks Michael Edgar for the issue!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry><entry><title type="html">Jandex 3.5.1</title><link href="https://www.smallrye.io/blog/jandex-3-5-1/" rel="alternate" type="text/html" title="Jandex 3.5.1" /><published>2025-10-23T11:00:00+00:00</published><updated>2025-10-23T11:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-5-1</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-5-1/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.5.1&quot;&gt;release&lt;/a&gt; of Jandex 3.5.1.
 This release contains one small improvement (which may be seen as a bug fix by some) and one small new feature.&lt;/p&gt;
 &lt;/div&gt;
@@ -212,28 +234,4 @@ Since the only change in the persistent index is the addition of enclosing class
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry><entry><title type="html">Fault Tolerance 6.9.0</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-9-0/" rel="alternate" type="text/html" title="Fault Tolerance 6.9.0" /><published>2025-03-11T07:00:00+00:00</published><updated>2025-03-11T07:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-9-0</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-9-0/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.9.0&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.9.0.
-This release contains an important bugfix.
-Upgrade is strongly recommended.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Starting with &lt;a href=&quot;/blog/fault-tolerance-6-3-0&quot;&gt;the 6.3.0 release&lt;/a&gt;, SmallRye Fault Tolerance emits metrics even when using the programmatic API.
-If there is no description set on the &lt;code&gt;Guard&lt;/code&gt; / &lt;code&gt;TypedGuard&lt;/code&gt; / &lt;code&gt;FaultTolerance&lt;/code&gt; object, a UUID was used as the value of the &lt;code&gt;method&lt;/code&gt; tag.
-However, at least in some metrics implementations, the keys and values of all tags are retained in memory.
-If a &lt;code&gt;Guard&lt;/code&gt; / &lt;code&gt;TypedGuard&lt;/code&gt; / &lt;code&gt;FaultTolerance&lt;/code&gt; object is created for each action (which is relatively easy to achieve without even knowing), a fresh UUID is generated for each object.
-Since those UUIDs are stored in memory indefinitely, this basically amounts to a memory leak.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;In this release, this memory leak is fixed.
-If there is no description set on the &lt;code&gt;Guard&lt;/code&gt; / &lt;code&gt;TypedGuard&lt;/code&gt; / &lt;code&gt;FaultTolerance&lt;/code&gt; object, metrics are simply not emitted.
-This is technically speaking a breaking change, but we feel it is very much warranted.
-Noone likes memory leaks and OOMs happening in production.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The bug is also fixed in the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.4.2&quot;&gt;6.4.2 release&lt;/a&gt;, which doesn&amp;#8217;t have an announcement.
-More backports might be coming.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry></feed>
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry></feed>

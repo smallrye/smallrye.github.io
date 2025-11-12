@@ -1,0 +1,26 @@
+:page-layout: post
+:page-title: Jandex 3.5.2
+:page-synopsis: Jandex 3.5.2 released!
+:page-tags: [announcement]
+:page-date: 2025-11-12 11:00:00.000 +0100
+:page-author: lthon
+
+= Jandex 3.5.2
+
+Today, we announce the https://github.com/smallrye/jandex/releases/tag/3.5.2[release] of Jandex 3.5.2.
+This release contains a few small improvements and new features.
+
+A method `ClassInfo.method(MethodInfo)` was added that allows finding a method declared in a given class based on a signature of the given method (which is supposedly declared in another class).
+This has already been possible using other overloads of `method()`, but if you already have a `MethodInfo` based on which you want to search, the new method allows that directly.
+Thanks Michael Edgar for the pull request!
+
+A method `DotName.startsWith(DotName)` was added that allows figuring out if a dotted name starts with another dotted name.
+Note that the prefix determination is not analogous to `String.startsWith()`; instead, it works on the dotted name structure level.
+For example, `com.example.FooBar` starts with `com`, `com.example` and `com.example.FooBar`, but it does _not_ start with `com.exam` or `com.example.Foo`.
+Thanks Michael Edgar for the issue!
+
+Finally, searching for annotations (internally, `AnnotationInstance.binarySearch()`) was optimized slightly.
+If the annotation array is empty or contains just one element, the code answers directly instead of starting the search process.
+Thanks Michael Edgar for the issue!
+
+If you experience any troubles, or if you have any ideas for Jandex improvements, please https://github.com/smallrye/jandex/issues[file an issue].

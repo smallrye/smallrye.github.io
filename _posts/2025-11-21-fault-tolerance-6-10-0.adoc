@@ -1,0 +1,23 @@
+:page-layout: post
+:page-title: Fault Tolerance 6.10.0
+:page-synopsis: SmallRye Fault Tolerance 6.10.0 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2025-11-21 12:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 6.10.0
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.10.0[release] of {smallrye-ft} 6.10.0.
+This release contains one improvement and one bug fix.
+
+Previous versions of {smallrye-ft} included support libraries for async types from Mutiny (`Uni`) and RxJava 3 (`Single`, `Maybe` and `Completable`).
+In this release, the Vert.x support library, which previously only included support for the Vert.x event loop, also includes support for the Vert.x `Future` type.
+All guarded asynchronous methods may now return `io.vertx.core.Future` and if the Vert.x support library is present, it will all work.
+
+Also, the previous {smallrye-ft} versions supported `@Fallback` methods on interfaces where the fallback method is a `default` method in the interface.
+As it turned out, this only worked when the interface was `public`.
+This release fixes the issue.
+
+As usual, if you have any ideas for improvements, please https://github.com/smallrye/smallrye-fault-tolerance/issues[file an issue]!

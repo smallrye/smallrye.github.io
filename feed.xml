@@ -1,4 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2025-11-12T11:46:33+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Jandex 3.5.2</title><link href="https://www.smallrye.io/blog/jandex-3-5-2/" rel="alternate" type="text/html" title="Jandex 3.5.2" /><published>2025-11-12T10:00:00+00:00</published><updated>2025-11-12T10:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-5-2</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-5-2/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://www.smallrye.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.smallrye.io/" rel="alternate" type="text/html" /><updated>2025-11-21T14:27:07+00:00</updated><id>https://www.smallrye.io/feed.xml</id><title type="html">SmallRye</title><subtitle>SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.</subtitle><entry><title type="html">Fault Tolerance 6.10.0</title><link href="https://www.smallrye.io/blog/fault-tolerance-6-10-0/" rel="alternate" type="text/html" title="Fault Tolerance 6.10.0" /><published>2025-11-21T11:00:00+00:00</published><updated>2025-11-21T11:00:00+00:00</updated><id>https://www.smallrye.io/blog/fault-tolerance-6-10-0</id><content type="html" xml:base="https://www.smallrye.io/blog/fault-tolerance-6-10-0/">&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.10.0&quot;&gt;release&lt;/a&gt; of SmallRye Fault Tolerance 6.10.0.
+This release contains one improvement and one bug fix.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Previous versions of SmallRye Fault Tolerance included support libraries for async types from Mutiny (&lt;code&gt;Uni&lt;/code&gt;) and RxJava 3 (&lt;code&gt;Single&lt;/code&gt;, &lt;code&gt;Maybe&lt;/code&gt; and &lt;code&gt;Completable&lt;/code&gt;).
+In this release, the Vert.x support library, which previously only included support for the Vert.x event loop, also includes support for the Vert.x &lt;code&gt;Future&lt;/code&gt; type.
+All guarded asynchronous methods may now return &lt;code&gt;io.vertx.core.Future&lt;/code&gt; and if the Vert.x support library is present, it will all work.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Also, the previous SmallRye Fault Tolerance versions supported &lt;code&gt;@Fallback&lt;/code&gt; methods on interfaces where the fallback method is a &lt;code&gt;default&lt;/code&gt; method in the interface.
+As it turned out, this only worked when the interface was &lt;code&gt;public&lt;/code&gt;.
+This release fixes the issue.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Jandex 3.5.2</title><link href="https://www.smallrye.io/blog/jandex-3-5-2/" rel="alternate" type="text/html" title="Jandex 3.5.2" /><published>2025-11-12T10:00:00+00:00</published><updated>2025-11-12T10:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-5-2</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-5-2/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.5.2&quot;&gt;release&lt;/a&gt; of Jandex 3.5.2.
 This release contains a few small improvements and new features.&lt;/p&gt;
 &lt;/div&gt;
@@ -210,28 +226,4 @@ The Quarkus extension for SmallRye Fault Tolerance has already been ignoring syn
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;As usual, if you have any ideas for improvements, please &lt;a href=&quot;https://github.com/smallrye/smallrye-fault-tolerance/issues&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry><entry><title type="html">Jandex 3.3.0</title><link href="https://www.smallrye.io/blog/jandex-3-3-0/" rel="alternate" type="text/html" title="Jandex 3.3.0" /><published>2025-04-07T12:00:00+00:00</published><updated>2025-04-07T12:00:00+00:00</updated><id>https://www.smallrye.io/blog/jandex-3-3-0</id><content type="html" xml:base="https://www.smallrye.io/blog/jandex-3-3-0/">&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Today, we announce the &lt;a href=&quot;https://github.com/smallrye/jandex/releases/tag/3.3.0&quot;&gt;release&lt;/a&gt; of Jandex 3.3.0.
-This release contains two improvements.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The &lt;code&gt;ClassInfo.enclosingClassAlways()&lt;/code&gt; method was added.
-Contrary to &lt;code&gt;enclosingClass()&lt;/code&gt;, which only returns the enclosing class for member classes, this method returns the enclosing class in case of all classes: member, local and anonymous, regardless of their declaration site.
-Notably, in case of local and anonymous classes, they can also occur in static initializers, instance initializers and field initializers.
-In this case, it wasn&amp;#8217;t possible to determine the enclosing class before.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The &lt;code&gt;IndexView.getKnownDirectImplementations()&lt;/code&gt; and &lt;code&gt;getAllKnownImplementations()&lt;/code&gt; methods were added.
-The &lt;code&gt;getKnownDirectImplementations()&lt;/code&gt; differs from the existing &lt;code&gt;getKnownDirectImplementors()&lt;/code&gt; method in that it &lt;em&gt;doesn&amp;#8217;t&lt;/em&gt; return direct subinterfaces, which is most likely what users expect.
-The &lt;code&gt;getAllKnownImplementations()&lt;/code&gt; is not different to &lt;code&gt;getAllKnownImplementors()&lt;/code&gt; at all, it exists just for symmetry.
-Also, the &lt;code&gt;getKnownDirectImplementors()&lt;/code&gt; and &lt;code&gt;getAllKnownImplementors()&lt;/code&gt; methods are now deprecated.
-Use the &lt;code&gt;get*Implementations()&lt;/code&gt; methods instead; pay attention to the difference mentioned above, but it shouldn&amp;#8217;t affect most of the code out there.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;&lt;strong&gt;BREAKING CHANGE:&lt;/strong&gt; This Jandex release increments the persistent format version.
-This means that indices generated by Jandex 3.3.0 are &lt;em&gt;not&lt;/em&gt; readable by previous Jandex versions.
-Since the only change in the persistent index is the addition of enclosing class information for the initializer case, it is recommended to stay on the previous format version for most users for a while.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;If you experience any troubles, or if you have any ideas for Jandex improvements, please &lt;a href=&quot;https://github.com/smallrye/jandex/issues&quot;&gt;file an issue&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /></entry></feed>
+&lt;/div&gt;</content><author><name>Ladislav Thon</name><email>ladicek@gmail.com</email></author><category term="announcement" /><category term="microprofile" /></entry></feed>

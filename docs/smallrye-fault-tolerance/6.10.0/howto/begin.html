@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>How to Begin :: SmallRye documentation</title>
+    <link rel="prev" href="../index.html">
+    <link rel="next" href="fallback.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <button class="nav-toggle"></button>
+
+      <a class="navbar-item title" href="../index.html">SmallRye Fault Tolerance</a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <span class="navbar-link">6.10.0</span>
+        <div class="navbar-dropdown navbar-menu">
+            <a class="navbar-item  is-current" href="../index.html">6.10.0</a>
+            <a class="navbar-item " href="../../6.9.3/index.html">6.9.3</a>
+            <a class="navbar-item " href="../../6.9.2/index.html">6.9.2</a>
+            <a class="navbar-item " href="../../6.9.1/index.html">6.9.1</a>
+            <a class="navbar-item " href="../../6.9.0/index.html">6.9.0</a>
+            <a class="navbar-item " href="../../6.8.0/index.html">6.8.0</a>
+            <a class="navbar-item " href="../../6.7.3/index.html">6.7.3</a>
+            <a class="navbar-item " href="../../6.7.2/index.html">6.7.2</a>
+            <a class="navbar-item " href="../../6.7.1/index.html">6.7.1</a>
+            <a class="navbar-item " href="../../6.7.0/index.html">6.7.0</a>
+            <a class="navbar-item " href="../../6.6.3/index.html">6.6.3</a>
+            <a class="navbar-item " href="../../6.6.2/index.html">6.6.2</a>
+            <a class="navbar-item " href="../../6.6.1/index.html">6.6.1</a>
+            <a class="navbar-item " href="../../6.6.0/index.html">6.6.0</a>
+            <a class="navbar-item " href="../../6.5.0/index.html">6.5.0</a>
+            <a class="navbar-item " href="../../6.4.3/index.html">6.4.3</a>
+            <a class="navbar-item " href="../../6.4.2/index.html">6.4.2</a>
+            <a class="navbar-item " href="../../6.4.1/index.html">6.4.1</a>
+            <a class="navbar-item " href="../../6.4.0/index.html">6.4.0</a>
+            <a class="navbar-item " href="../../6.3.0/index.html">6.3.0</a>
+            <a class="navbar-item " href="../../6.2.6/index.html">6.2.6</a>
+            <a class="navbar-item " href="../../6.2.4/index.html">6.2.4</a>
+            <a class="navbar-item " href="../../6.2.3/index.html">6.2.3</a>
+            <a class="navbar-item " href="../../6.2.2/index.html">6.2.2</a>
+            <a class="navbar-item " href="../../6.2.1/index.html">6.2.1</a>
+            <a class="navbar-item " href="../../6.2.0/index.html">6.2.0</a>
+            <a class="navbar-item " href="../../6.1.0/index.html">6.1.0</a>
+            <a class="navbar-item " href="../../6.0.0/index.html">6.0.0</a>
+            <a class="navbar-item " href="../../5.6.0/index.html">5.6.0</a>
+            <a class="navbar-item " href="../../5.5.0/index.html">5.5.0</a>
+            <a class="navbar-item " href="../../5.4.1/index.html">5.4.1</a>
+            <a class="navbar-item " href="../../5.4.0/index.html">5.4.0</a>
+            <a class="navbar-item " href="../../5.3.2/index.html">5.3.2</a>
+            <a class="navbar-item " href="../../5.3.1/index.html">5.3.1</a>
+            <a class="navbar-item " href="../../5.3.0/index.html">5.3.0</a>
+            <a class="navbar-item " href="../../5.2.1/index.html">5.2.1</a>
+            <a class="navbar-item " href="../../5.2.0/index.html">5.2.0</a>
+            <a class="navbar-item " href="../../5.1.0/index.html">5.1.0</a>
+            <a class="navbar-item " href="../../5.0.0/index.html">5.0.0</a>
+        </div>
+      </div>
+
+
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <span class="navbar-link">Projects</span>
+          <div class="navbar-dropdown">
+              <a class="navbar-item" href="../../../index/index/index.html">Index</a>
+              <a class="navbar-item" href="../index.html">SmallRye Fault Tolerance</a>
+              <a class="navbar-item" href="../../../smallrye-health/3.0.1/index.html">SmallRye Health</a>
+              <a class="navbar-item" href="../../../smallrye-jwt/index.html">SmallRye JWT</a>
+              <a class="navbar-item" href="../../../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
+          </div>
+        </div>
+
+        <a class="navbar-item" href="https://smallrye.io/">SmallRye.io main website</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="smallrye-fault-tolerance" data-version="6.10.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+<ul class="nav-list nav-list-level-0">
+  <li class="nav-item nav-item-level-0">
+<ul class="nav-list nav-list-level-1">
+  <li class="nav-item nav-item-level-1">
+    <a class="nav-link" href="../index.html">Index</a>
+  </li>
+  <li class="nav-item nav-item-level-1">
+    <span class="nav-text">How-to &#8230;&#8203;</span>
+<ul class="nav-list nav-list-level-2">
+  <li class="nav-item nav-item-level-2 is-current-page">
+    <a class="nav-link" href="begin.html">Begin</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="fallback.html">Supply Fallback Values</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="bulkhead.html">Limit Concurrency</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="circuit-breaker.html">Fail Fast on Recurring Failures</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="timeout.html">Watch for Timeouts</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="retry.html">Retry on Failures</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="asynchronous.html">Guard Asynchronous Methods</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="rate-limit.html">Limit Execution Rate</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="multiple.html">Use Multiple Strategies</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item nav-item-level-1">
+    <span class="nav-text">Reference</span>
+<ul class="nav-list nav-list-level-2">
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../reference/fallback.html">Fallback</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../reference/bulkhead.html">Bulkhead</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../reference/circuit-breaker.html">Circuit Breaker</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../reference/timeout.html">Timeout</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../reference/retry.html">Retry</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../reference/asynchronous.html">Asynchronous Execution</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../reference/rate-limit.html">Rate Limit</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../reference/config.html">Configuration</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../reference/metrics.html">Metrics</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../reference/non-compat.html">Non-compatible Mode</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../reference/programmatic-api.html">Programmatic API</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../reference/reusable.html">Reusable Fault Tolerance</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item nav-item-level-1">
+    <span class="nav-text">Integration</span>
+<ul class="nav-list nav-list-level-2">
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/intro.html">Introduction</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/metrics.html">Metrics</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/thread-pool.html">Thread Pool</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/context-propagation.html">Context Propagation</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/opentracing.html">OpenTracing</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/event-loop.html">Event Loop</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/async-types.html">Additional Asynchronous Types Integration Concerns</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/kotlin.html">Kotlin Integration Concerns</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../integration/programmatic-api.html">Programmatic API Integration Concerns</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item nav-item-level-1">
+    <span class="nav-text">Internals</span>
+<ul class="nav-list nav-list-level-2">
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/project-structure.html">Project Structure</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/instructions.html">Instructions</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/core.html">Fault Tolerance Core</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/config.html">Configuration System</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/logging.html">Logging</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+  <div class="content">
+<aside class="toc sidebar" data-title="Table of contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+  <a href="https://github.com/smallrye/smallrye-fault-tolerance/blob/6.10.0/doc/modules/ROOT/pages/howto/begin.adoc" class="edit-this-page" title="Edit this page">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+<h1 class="page">How to Begin</h1>
+<div class="sect1">
+<h2 id="_installation"><a class="anchor" href="#_installation"></a>Installation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As an application developer, you don&#8217;t have to "install" SmallRye Fault Tolerance in any way.
+Your chosen runtime, such as Quarkus or WildFly, already integrates SmallRye Fault Tolerance to provide MicroProfile Fault Tolerance.
+Please refer to the documentation of your selected runtime to understand how to enable MicroProfile Fault Tolerance.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Quarkus</div>
+<div class="paragraph">
+<p>In case of Quarkus, it is enough to add a dependency on <code>io.quarkus:quarkus-smallrye-fault-tolerance</code>.</p>
+</div>
+<div class="paragraph">
+<p>See the <a href="https://quarkus.io/guides/smallrye-fault-tolerance">SmallRye Fault Tolerance guide</a> in Quarkus documentation for more.</p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">WildFly</div>
+<div class="paragraph">
+<p>In case of WildFly, the MicroProfile Fault Tolerance subsystem must be enabled.
+It is not included in the default <code>standalone</code> or <code>standalone-full</code> profiles, but it is included in the <code>standalone-microprofile</code> profile.
+It is easiest to just start WildFly in this profile.</p>
+</div>
+<div class="paragraph">
+<p>See the <a href="https://docs.wildfly.org/27/Admin_Guide.html#MicroProfile-Fault-Tolerance-SmallRye">MicroProfile Fault Tolerance chapter</a> in WildFly Admin Guide for more.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>If you are a framework developer, interested in integrating SmallRye Fault Tolerance in your framework or runtime, please refer to the <a href="../integration/intro.html" class="page">Integration</a> section.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_usage"><a class="anchor" href="#_usage"></a>Usage</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>MicroProfile Fault Tolerance is built on top of CDI and interceptors.
+This lets you guard method calls with selected fault tolerance strategies simply by annotating a CDI bean class or method with one of the fault tolerance annotations.
+For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@ApplicationScoped <i class="conum" data-value="1"></i><b>(1)</b>
+public class MyService {
+    @Retry <i class="conum" data-value="2"></i><b>(2)</b>
+    public String hello() {
+        ...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>@ApplicationScoped</code> is a bean defining annotation.
+It makes the <code>MyService</code> class a CDI bean.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><code>@Retry</code> is a fault tolerance annotation.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Here, if the <code>hello</code> method throws an exception, the invocation will be retried several times, until the method returns a value.</p>
+</div>
+<div class="paragraph">
+<p>The annotation may also be present on a class, in which case it applies to all business method in the class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package com.example;
+
+@ApplicationScoped
+@Retry <i class="conum" data-value="1"></i><b>(1)</b>
+public class MyService {
+    public String hello() { <i class="conum" data-value="2"></i><b>(2)</b>
+        ...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>@Retry</code> is a fault tolerance annotation.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The <code>hello()</code> method will use the retry strategy, because it is defined on the class.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>A class-level annotation may be overridden by explicitly annotating a method.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+CDI beginners often expect that this will work if you create an instance manually: <code>new MyService()</code>.
+That is not the case.
+You have to let the CDI container construct an instance for you and inject it: <code>@Inject MyService service</code>.
+What you get injected is actually a proxy that implements the additional behaviors.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The fault tolerance strategies present in MicroProfile Fault Tolerance, together with the corresponding annotations, are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>@Asynchronous</code>: offload method execution to another thread</p>
+</li>
+<li>
+<p><code>@Bulkhead</code>: limit concurrent invocations</p>
+</li>
+<li>
+<p><code>@CircuitBreaker</code>: prevent invocations if previous invocations failed too often</p>
+</li>
+<li>
+<p><code>@Fallback</code>: provide alternative result in case of a failure</p>
+</li>
+<li>
+<p><code>@Retry</code>: retry several times in case of a failure</p>
+</li>
+<li>
+<p><code>@Timeout</code>: fail if the invocation takes too long</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>SmallRye Fault Tolerance adds some more fault tolerance strategies and annotations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>@ApplyGuard</code>: apply a programmatically-defined guard</p>
+</li>
+<li>
+<p><code>@AsynchronousNonBlocking</code>: apply asynchronous fault tolerance without offloading method execution to another thread</p>
+</li>
+<li>
+<p><code>@RateLimit</code>: limit rate of method invocations</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These are all described in the corresponding how-to and reference guides.
+The MicroProfile Fault Tolerance features are also described in the <a href="https://download.eclipse.org/microprofile/microprofile-fault-tolerance-4.1/microprofile-fault-tolerance-spec-4.1.html">specification</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration"><a class="anchor" href="#_configuration"></a>Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The fault tolerance strategies can be configured using annotations, such as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@ApplicationScoped
+public class MyService {
+    @Retry(maxRetries = 10, retryOn = IOException.class) <i class="conum" data-value="1"></i><b>(1)</b>
+    public String hello() {
+        ...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Retries will only be attempted if the thrown exception was <code>IOException</code>.
+Other exceptions will be rethrown directly.
+Also, the maximum number of retry attempts is changed to 10 (the default is 3).</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>This is convenient, but changing such configuration requires recompilation.
+For that reason, configuration using MicroProfile Config is also possible.
+For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">smallrye.faulttolerance."com.example.MyService/hello".retry.max-retries=5 <i class="conum" data-value="1"></i><b>(1)</b>
+
+# alternatively, a specification-defined property can be used
+com.example.MyService/hello/Retry/maxRetries=5 <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Even though the <code>@Retry</code> annotation says that <code>maxRetries</code> should be 10, this configuration takes precedence.
+The maximum number of retries will be 5.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Since this example configuration does not modify the <code>retryOn</code> setting, the configuration provided in the annotation still applies.</p>
+</div>
+<div class="paragraph">
+<p>For more information about configuration, see <a href="../reference/config.html" class="page">the Configuration reference guide</a>.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../index.html">Index</a></span>
+  <span class="next"><a href="fallback.html">Supply Fallback Values</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>
+    Sponsored by <a href="https://www.redhat.com"><img style="vertical-align: middle; height: 2.5em;" src="../../../_/img/redhat.svg" alt="Red Hat"></a>
+  </p>
+  <p>
+    Made with <a href="https://github.com/smallrye/smallrye-antora-ui">SmallRye Antora UI</a>, which is licensed under the MPL-2.0 license.
+    Includes portions of <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>, which is licensed under the MIT license.
+  </p>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

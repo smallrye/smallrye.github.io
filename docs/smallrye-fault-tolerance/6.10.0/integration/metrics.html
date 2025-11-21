@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Metrics :: SmallRye documentation</title>
+    <link rel="prev" href="intro.html">
+    <link rel="next" href="thread-pool.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <button class="nav-toggle"></button>
+
+      <a class="navbar-item title" href="../index.html">SmallRye Fault Tolerance</a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <span class="navbar-link">6.10.0</span>
+        <div class="navbar-dropdown navbar-menu">
+            <a class="navbar-item  is-current" href="../index.html">6.10.0</a>
+            <a class="navbar-item " href="../../6.9.3/index.html">6.9.3</a>
+            <a class="navbar-item " href="../../6.9.2/index.html">6.9.2</a>
+            <a class="navbar-item " href="../../6.9.1/index.html">6.9.1</a>
+            <a class="navbar-item " href="../../6.9.0/index.html">6.9.0</a>
+            <a class="navbar-item " href="../../6.8.0/index.html">6.8.0</a>
+            <a class="navbar-item " href="../../6.7.3/index.html">6.7.3</a>
+            <a class="navbar-item " href="../../6.7.2/index.html">6.7.2</a>
+            <a class="navbar-item " href="../../6.7.1/index.html">6.7.1</a>
+            <a class="navbar-item " href="../../6.7.0/index.html">6.7.0</a>
+            <a class="navbar-item " href="../../6.6.3/index.html">6.6.3</a>
+            <a class="navbar-item " href="../../6.6.2/index.html">6.6.2</a>
+            <a class="navbar-item " href="../../6.6.1/index.html">6.6.1</a>
+            <a class="navbar-item " href="../../6.6.0/index.html">6.6.0</a>
+            <a class="navbar-item " href="../../6.5.0/index.html">6.5.0</a>
+            <a class="navbar-item " href="../../6.4.3/index.html">6.4.3</a>
+            <a class="navbar-item " href="../../6.4.2/index.html">6.4.2</a>
+            <a class="navbar-item " href="../../6.4.1/index.html">6.4.1</a>
+            <a class="navbar-item " href="../../6.4.0/index.html">6.4.0</a>
+            <a class="navbar-item " href="../../6.3.0/index.html">6.3.0</a>
+            <a class="navbar-item " href="../../6.2.6/index.html">6.2.6</a>
+            <a class="navbar-item " href="../../6.2.4/index.html">6.2.4</a>
+            <a class="navbar-item " href="../../6.2.3/index.html">6.2.3</a>
+            <a class="navbar-item " href="../../6.2.2/index.html">6.2.2</a>
+            <a class="navbar-item " href="../../6.2.1/index.html">6.2.1</a>
+            <a class="navbar-item " href="../../6.2.0/index.html">6.2.0</a>
+            <a class="navbar-item " href="../../6.1.0/index.html">6.1.0</a>
+            <a class="navbar-item " href="../../6.0.0/index.html">6.0.0</a>
+            <a class="navbar-item " href="../../5.6.0/index.html">5.6.0</a>
+            <a class="navbar-item " href="../../5.5.0/index.html">5.5.0</a>
+            <a class="navbar-item " href="../../5.4.1/index.html">5.4.1</a>
+            <a class="navbar-item " href="../../5.4.0/index.html">5.4.0</a>
+            <a class="navbar-item " href="../../5.3.2/index.html">5.3.2</a>
+            <a class="navbar-item " href="../../5.3.1/index.html">5.3.1</a>
+            <a class="navbar-item " href="../../5.3.0/index.html">5.3.0</a>
+            <a class="navbar-item " href="../../5.2.1/index.html">5.2.1</a>
+            <a class="navbar-item " href="../../5.2.0/index.html">5.2.0</a>
+            <a class="navbar-item " href="../../5.1.0/index.html">5.1.0</a>
+            <a class="navbar-item " href="../../5.0.0/index.html">5.0.0</a>
+        </div>
+      </div>
+
+
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <span class="navbar-link">Projects</span>
+          <div class="navbar-dropdown">
+              <a class="navbar-item" href="../../../index/index/index.html">Index</a>
+              <a class="navbar-item" href="../index.html">SmallRye Fault Tolerance</a>
+              <a class="navbar-item" href="../../../smallrye-health/3.0.1/index.html">SmallRye Health</a>
+              <a class="navbar-item" href="../../../smallrye-jwt/index.html">SmallRye JWT</a>
+              <a class="navbar-item" href="../../../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
+          </div>
+        </div>
+
+        <a class="navbar-item" href="https://smallrye.io/">SmallRye.io main website</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="smallrye-fault-tolerance" data-version="6.10.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+<ul class="nav-list nav-list-level-0">
+  <li class="nav-item nav-item-level-0">
+<ul class="nav-list nav-list-level-1">
+  <li class="nav-item nav-item-level-1">
+    <a class="nav-link" href="../index.html">Index</a>
+  </li>
+  <li class="nav-item nav-item-level-1">
+    <span class="nav-text">How-to &#8230;&#8203;</span>
+<ul class="nav-list nav-list-level-2">
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/begin.html">Begin</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/fallback.html">Supply Fallback Values</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/bulkhead.html">Limit Concurrency</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/circuit-breaker.html">Fail Fast on Recurring Failures</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/timeout.html">Watch for Timeouts</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/retry.html">Retry on Failures</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/asynchronous.html">Guard Asynchronous Methods</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/rate-limit.html">Limit Execution Rate</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../howto/multiple.html">Use Multiple Strategies</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item nav-item-level-1">
+    <span class="nav-text">Reference</span>
+<ul class="nav-list nav-list-level-2">
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../reference/fallback.html">Fallback</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../reference/bulkhead.html">Bulkhead</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../reference/circuit-breaker.html">Circuit Breaker</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../reference/timeout.html">Timeout</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../reference/retry.html">Retry</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../reference/asynchronous.html">Asynchronous Execution</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../reference/rate-limit.html">Rate Limit</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../reference/config.html">Configuration</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../reference/metrics.html">Metrics</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../reference/non-compat.html">Non-compatible Mode</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../reference/programmatic-api.html">Programmatic API</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../reference/reusable.html">Reusable Fault Tolerance</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item nav-item-level-1">
+    <span class="nav-text">Integration</span>
+<ul class="nav-list nav-list-level-2">
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="intro.html">Introduction</a>
+  </li>
+  <li class="nav-item nav-item-level-2 is-current-page">
+    <a class="nav-link" href="metrics.html">Metrics</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="thread-pool.html">Thread Pool</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="context-propagation.html">Context Propagation</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="opentracing.html">OpenTracing</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="event-loop.html">Event Loop</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="async-types.html">Additional Asynchronous Types Integration Concerns</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="kotlin.html">Kotlin Integration Concerns</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="programmatic-api.html">Programmatic API Integration Concerns</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item nav-item-level-1">
+    <span class="nav-text">Internals</span>
+<ul class="nav-list nav-list-level-2">
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/project-structure.html">Project Structure</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/instructions.html">Instructions</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/core.html">Fault Tolerance Core</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/config.html">Configuration System</a>
+  </li>
+  <li class="nav-item nav-item-level-2">
+    <a class="nav-link" href="../internals/logging.html">Logging</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+  <div class="content">
+<aside class="toc sidebar" data-title="Table of contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+  <a href="https://github.com/smallrye/smallrye-fault-tolerance/blob/6.10.0/doc/modules/ROOT/pages/integration/metrics.adoc" class="edit-this-page" title="Edit this page">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+<h1 class="page">Metrics</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>SmallRye Fault Tolerance provides support for MicroProfile Metrics, OpenTelemetry and Micrometer.
+Alternatively, metrics may be completely disabled at the integration level.</p>
+</div>
+<div class="paragraph">
+<p>As usual, this integration is based on CDI.
+SmallRye Fault Tolerance includes an internal interface <code>MetricsProvider</code> and these implementations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>io.smallrye.faulttolerance.metrics.MicroProfileMetricsProvider</code></p>
+</li>
+<li>
+<p><code>io.smallrye.faulttolerance.metrics.OpenTelemetryProvider</code></p>
+</li>
+<li>
+<p><code>io.smallrye.faulttolerance.metrics.MicrometerProvider</code></p>
+</li>
+<li>
+<p><code>io.smallrye.faulttolerance.metrics.NoopProvider</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>There are 2 possible ways how to integrate metrics:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>exactly 1 class from the list above is a bean;</p>
+</li>
+<li>
+<p>more than 1 class from the list above is a bean, in which case, <code>io.smallrye.faulttolerance.metrics.CompoundMetricsProvider</code> must also be a bean.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Only the <em>names</em> of the classes listed above are treated as public.
+That is, the classes should be treated as opaque, no guarantees about their internals are made.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_default_integration"><a class="anchor" href="#_default_integration"></a>Default Integration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In case the integrator uses the CDI Portable Extension <code>FaultToleranceExtension</code> and lets the container create an instance, metrics presence is discovered automatically.
+All present metrics systems are used.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_using_a_faulttoleranceextension_constructor"><a class="anchor" href="#_using_a_faulttoleranceextension_constructor"></a>Using a <code>FaultToleranceExtension</code> Constructor</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In case the integrator uses the CDI Portable Extension <code>FaultToleranceExtension</code> and creates its instance manually, they can use a constructor.</p>
+</div>
+<div class="paragraph">
+<p>In addition to a zero-parameter constructor, which is used in the default integration as described above, there are constructors that take a parameter of <code>MetricsIntegration</code> or <code>Set&lt;MetricsIntegration&gt;</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>MetricsIntegration</code> is an enum with these values:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>MICROPROFILE_METRICS</code>: use MicroProfile Metrics integration</p>
+</li>
+<li>
+<p><code>OPENTELEMETRY</code>: use OpenTelemetry (MicroProfile Telemetry) integration</p>
+</li>
+<li>
+<p><code>MICROMETER</code>: use Micrometer integration</p>
+</li>
+<li>
+<p><code>NOOP</code>: no metrics</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_metrics_providers"><a class="anchor" href="#_metrics_providers"></a>Metrics Providers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Metrics providers have additional requirements, as described below.</p>
+</div>
+<div class="sect2">
+<h3 id="_microprofile_metrics"><a class="anchor" href="#_microprofile_metrics"></a>MicroProfile Metrics</h3>
+<div class="paragraph">
+<p>If MicroProfile Metrics should be used, the integrator must ensure that the following artifacts are present:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>org.eclipse.microprofile.metrics:microprofile-metrics-api</code>;</p>
+</li>
+<li>
+<p>some implementation of MicroProfile Metrics.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_opentelemetry"><a class="anchor" href="#_opentelemetry"></a>OpenTelemetry</h3>
+<div class="paragraph">
+<p>If OpenTelemetry should be used, the integrator must ensure that the following artifact is present:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>io.opentelemetry:opentelemetry-api</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Further, a bean of type <code>io.opentelemetry.api.metrics.Meter</code> must exist.
+This bean is used to emit the actual metrics.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_micrometer"><a class="anchor" href="#_micrometer"></a>Micrometer</h3>
+<div class="paragraph">
+<p>If Micrometer should be used, the integrator must ensure that the following artifact is present:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>io.micrometer:micrometer-core</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Further, a bean of type <code>io.micrometer.core.instrument.MeterRegistry</code> must exist.
+This bean is used to emit the actual metrics.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_noop"><a class="anchor" href="#_noop"></a>Noop</h3>
+<div class="paragraph">
+<p>If the "noop" provider is used, metrics are completely disabled.</p>
+</div>
+<div class="paragraph">
+<p>No metrics API and implementation is required in this case.</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="intro.html">Introduction</a></span>
+  <span class="next"><a href="thread-pool.html">Thread Pool</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>
+    Sponsored by <a href="https://www.redhat.com"><img style="vertical-align: middle; height: 2.5em;" src="../../../_/img/redhat.svg" alt="Red Hat"></a>
+  </p>
+  <p>
+    Made with <a href="https://github.com/smallrye/smallrye-antora-ui">SmallRye Antora UI</a>, which is licensed under the MPL-2.0 license.
+    Includes portions of <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>, which is licensed under the MIT license.
+  </p>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

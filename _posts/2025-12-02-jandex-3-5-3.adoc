@@ -1,0 +1,19 @@
+:page-layout: post
+:page-title: Jandex 3.5.3
+:page-synopsis: Jandex 3.5.3 released!
+:page-tags: [announcement]
+:page-date: 2025-12-02 14:00:00.000 +0100
+:page-author: lthon
+
+= Jandex 3.5.3
+
+Today, we announce the https://github.com/smallrye/jandex/releases/tag/3.5.3[release] of Jandex 3.5.3.
+This release contains a few small improvements.
+
+`EquivalenceKey` performance was improved, thanks to some wonderful ideas of Francesco Nigro.
+Notably, caching of `ClassTypeEquivalenceKey` was improved, and the exact same caching approach was added to `ClassEquivalenceKey`, which previously had no caching at all.
+Also, all `equals()` and `hashCode()` methods were improved to avoid null-safe calls (`Objects.equals()`, `Objects.hashCode()`), because all fields in these classes are never `null`.
+
+The `StringBuilderGen` implementation (in the `gizmo2` module) was updated to latest improvements in Gizmo 2.
+
+If you experience any troubles, or if you have any ideas for Jandex improvements, please https://github.com/smallrye/jandex/issues[file an issue].

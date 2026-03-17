@@ -55,7 +55,7 @@ jobs:
         run: |
           cd docs
           npm i @antora/cli@2.3 @antora/site-generator-default@2.3 asciidoctor-kroki
-          ./node_modules/@antora/cli/bin/antora antora generate antora-playbook.yml
+          ./node_modules/@antora/cli/bin/antora --stacktrace generate antora-playbook.yml
           cd ..
           cp -r docs/build/site website/docs
 

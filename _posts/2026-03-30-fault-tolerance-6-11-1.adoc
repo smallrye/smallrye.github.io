@@ -1,0 +1,20 @@
+:page-layout: post
+:page-title: Fault Tolerance 6.11.1
+:page-synopsis: SmallRye Fault Tolerance 6.11.1 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2026-03-30 13:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 6.11.1
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/6.11.1[release] of {smallrye-ft} 6.11.1.
+This release contains one small bugfix.
+
+The Micrometer integration registers all metrics early.
+During that registration, incorrect tags were used for rate limit metrics.
+The actual collection of rate limit metrics is correct, but the disparity between initial registration and actual collection may lead to failures with certain observability systems, such as Prometheus.
+Initial registration uses correct tags now, so the issue is fixed.
+
+As usual, if you have any ideas for improvements, please https://github.com/smallrye/smallrye-fault-tolerance/issues[file an issue]!

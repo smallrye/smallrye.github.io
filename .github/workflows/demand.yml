@@ -36,7 +36,9 @@ jobs:
       - name: generate docs
         run: |
           cd docs
-          npm i @antora/cli@2.3 @antora/site-generator-default@2.3 asciidoctor-kroki
+          # asciidoctor-kroki must stay on 0.18.1: since 1.0.0, its extensions are
+          # async and require Asciidoctor.js 4, while Antora 2.3 uses Asciidoctor.js 1.5.9
+          npm i @antora/cli@2.3 @antora/site-generator-default@2.3 asciidoctor-kroki@0.18.1
           ./node_modules/@antora/cli/bin/antora antora generate antora-playbook.yml
           cd ..
           cp -r docs/build/site website/docs

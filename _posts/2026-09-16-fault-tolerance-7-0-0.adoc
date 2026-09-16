@@ -1,0 +1,44 @@
+:page-layout: post
+:page-title: Fault Tolerance 7.0.0
+:page-synopsis: SmallRye Fault Tolerance 7.0.0 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2026-09-16 15:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 7.0.0
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/7.0.0[release] of {smallrye-ft} 7.0.0.
+This is a major release that bumps the minimum Java version, removes several deprecated features, fixes multiple bugs and updates significant dependencies.
+
+The new minimum Java version is 17. This is long overdue, there's probably no user out there still on Java 8 or 11.
+
+The following deprecated features were removed:
+
+* support for `@Blocking` and `@NonBlocking`
+** use `@Asynchronous` and `@AsynchronousNonBlocking` instead
+* the old programmatic API: `FaultTolerance`, `@ApplyFaultTolerance`
+** use the new programmatic API: `Guard`, `TypedGuard`, `@ApplyGuard`
+* support for MicroProfile Metrics
+** use Micrometer or OpenTelemetry Metrics
+* the integration of OpenTracing with MicroProfile Context Propegation
+** use OpenTelemetry Tracing
+* support for Security Manager
+
+The dependencies on the following libraries were updated:
+
+* Jakarta EE: we now use Jakarta EE 11
+* Vert.x: we now use Vert.x 5
+* Micrometer: we were stuck on Micrometer 1.12 due to a breaking change in the Prometheus client, but we're on the latest release now
+* many others (Mutiny 3, JUnit Jupiter 6, etc.)
+
+The fixed issues are:
+
+* fault tolerance annotations (`@Fallback` etc.) present on a stereotype that is present on the guarded class are now correctly applied
+** thanks Teles Nascimento for the issue report and the fix!
+* memory leak in metrics when `@ApplyGuard` is used
+** thanks Zaiqi Yang for the issue report and the fix!
+* multiple concurrency issues (AI assisted)
+
+As usual, if you have any ideas for improvements, please https://github.com/smallrye/smallrye-fault-tolerance/issues[file an issue]!

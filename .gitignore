@@ -1,9 +1,8 @@
-_site
-.sass-cache
-.jekyll-metadata
-.jekyll-cache
+target/
+node_modules/
+docs/build
+package-lock.json
 .DS_Store
 .idea
-docs/build
-node_modules
-package-lock.json
+.vscode
+.quarkus

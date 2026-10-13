@@ -1,0 +1,17 @@
+---
+layout: default
+---
+{@io.quarkiverse.roq.frontmatter.runtime.model.Page page}
+{@io.quarkiverse.roq.frontmatter.runtime.model.Site site}
+<section class="page-banner">
+  <div class="container">
+    {#if page.data.eyebrow??}<p class="eyebrow">{=page.data.eyebrow}</p>{/if}
+    <h1>{=page.title}</h1>
+    {#if page.description}<p class="lead">{=page.description}</p>{/if}
+  </div>
+</section>
+<article class="section{#if page.data.variant??} {=page.data.variant}{/if}">
+  <div class="container prose">
+    {#insert /}
+  </div>
+</article>

@@ -1,0 +1,42 @@
+# Post authors, by the key a post names in :page-author:. avatar is a file in
+# public/images/authors/ (96px square); without one the byline shows initials.
+clementescoffier:
+  name: "Clement Escoffier"
+  email: "clement.escoffier@redhat.com"
+  emailhash: "f85a377b48d0f1f77a04cbcdbf62bcb5"
+  avatar: "clementescoffier.jpg"
+  job_title: ""
+  twitter: "clementplop"
+  bio: "Clement Escoffier (@clementplop) is Reactive Chief Architect at Red Hat. He had several professional lives, from academic positions to management. Currently, he is mainly working as a Quarkus and Vert.x developer. He has been involved in projects and products touching many domains and technologies such as OSGi, mobile app development, continuous delivery, DevOps... His main area of interest is software engineering - processes, methods, tools that make the development of software more efficient and also more fun. Clement is an active contributor to many open-source projects such as Apache Felix, iPOJO, Wisdom Framework, and Eclipse Vert.x, Eclipse MicroProfile and, Quarkus."
+kenfinnigan:
+  name: "Ken Finnigan"
+  email: "ken@kenfinnigan.me"
+  emailhash: "74e721dd22b0d509b85746c5edf559c8"
+  avatar: "kenfinnigan.jpg"
+  job_title: "SmallRye lead"
+  twitter: "kenfinnigan"
+  bio: 'Ken is a Senior Principal Software Engineer for Red Hat Middleware and has been a consultant and software engineer for over 20 years with enterprises throughout the world. Ken leads the SmallRye project, which implements the Eclipse MicroProfile specifications while also looking to innovate with Cloud Native development. As part of his work on SmallRye, Ken is heavily involved in the Eclipse MicroProfile community to develop specifications for Java microservices in the Cloud. Ken has previously served as the project lead for Thorntail and LiveOak, along with other JBoss projects. Ken recently published “Enterprise Java Microservices” and has previously written two books, including "JBoss Weld CDI for Java Platform."'
+lthon:
+  name: "Ladislav Thon"
+  email: "ladicek@gmail.com"
+  emailhash: "238e8b2100a5366b226234b946026462"
+  avatar: "lthon.jpg"
+  job_title: "Principal Software Engineer"
+  twitter: "_Ladicek"
+  bio: "Books. Software. Imagination..."
+xstefank:
+  name: "Martin Stefanko"
+  email: "xstefank122@gmail.com"
+  emailhash: "90d476babcdae7b684459d5476aca309"
+  avatar: "xstefank.jpg"
+  job_title: ""
+  twitter: "xstefank"
+  bio: "Martin Stefanko (@xstefank) is a Senior Software Engineer at Red Hat. He works on the Red Hat middleware portfolio - MicroProfile, SmallRye, WildFly, Quarkus and individual projects that are included in these runtimes."
+radcortez:
+  name: "Roberto Cortez"
+  email: "radcortez@yahoo.com"
+  emailhash: "d9a06fda174419c0dffb982f226518c2"
+  avatar: "radcortez.jpg"
+  job_title: ""
+  twitter: "radcortez"
+  bio: "Roberto Cortez is a passionate Java Developer with more than 10 years of experience. He is involved within the Open Source Community to help other individuals spread the knowledge about Java technologies. He is a regular speaker at conferences like JavaOne, Devoxx, Devnexus, JFokus and others. He leads the Coimbra JUG and founded the JNation Conference in Portugal. When he is not working, he hangs out with friends, play computer games and spends time with family."

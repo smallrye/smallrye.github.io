@@ -1,0 +1,5 @@
+---
+# Jekyll published the feed at /feed.xml; readers subscribed to it keep working.
+link: /feed.xml
+---
+{#include fm/rss.html /}

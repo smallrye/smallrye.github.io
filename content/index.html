@@ -1,0 +1,102 @@
+---
+title: "SmallRye"
+description: "SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile."
+image: rye-field-og.jpg
+layout: default
+---
+{@io.quarkiverse.roq.frontmatter.runtime.model.Page page}
+{@io.quarkiverse.roq.frontmatter.runtime.model.Site site}
+<section class="hero">
+  <img class="hero-photo" src="{=site.url('images/rye-field-1600.webp')}" srcset="{=site.url('images/rye-field-800.webp')} 900w, {=site.url('images/rye-field-1600.webp')} 1600w" sizes="100vw" width="1600" height="800" alt="" fetchpriority="high" data-no-zoom>
+  <div class="container hero-inner">
+    <h1>Helping Java Developers deliver for tomorrow</h1>
+    <p class="lead">APIs and implementations tailored for Cloud development, including, but not limited to, <a href="https://microprofile.io/">Eclipse MicroProfile</a>.</p>
+    <p class="hero-actions">
+      <a class="btn btn-primary" href="{=site.url('projects')}">Browse the projects</a>
+      <a class="btn btn-ghost" href="{=site.url('docs/index.html')}">Documentation</a>
+    </p>
+  </div>
+</section>
+
+<section class="section pillars">
+  <div class="container pillar-grid">
+    <div class="pillar">
+      <p class="label">01</p>
+      <h2>Cloud Native development</h2>
+      <p>SmallRye improves the developer experience for Cloud Native development through innovation in the critical functionality required for Cloud environments.</p>
+    </div>
+    <div class="pillar">
+      <p class="label">02</p>
+      <h2>Community implementations</h2>
+      <p>SmallRye develops implementations of Eclipse MicroProfile APIs that are usable by any vendor or project. Come join the community to contribute to Cloud Native innovation.</p>
+    </div>
+    <div class="pillar">
+      <p class="label">03</p>
+      <h2>Containers are great</h2>
+      <p>With containers being the new operating system, it's important that developers are able to build applications that can easily be deployed to container environments.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section releases">
+  <div class="container releases-grid">
+    <div class="releases-intro">
+      <p class="label">From the blog</p>
+      <h2>Latest releases and news</h2>
+      <p><a class="more" href="{=site.url('blog')}">All posts &rarr;</a></p>
+    </div>
+    <ol class="ledger">
+      {#for post in site.collections.posts}
+      {#if post_index < 6}
+      <li>
+        <time datetime="{=post.date.isoDate}">{=post.date.format('d MMMM yyyy')}</time>
+        <a href="{=post.url}">{=post.title}</a>
+      </li>
+      {/if}
+      {/for}
+    </ol>
+  </div>
+</section>
+
+<section class="section used-by">
+  <div class="container">
+    <p class="label">SmallRye usage</p>
+    <h2>Use SmallRye in your applications</h2>
+    <p class="lead">SmallRye is included with the following projects, go check them out to use SmallRye in your applications.</p>
+    {! Each project's own light and dark logo; main.css shows the one that suits the theme. !}
+    <ul class="logo-row">
+      <li><a href="https://quarkus.io/">
+        <img class="logo-light" src="{=site.url('images/quarkus.svg')}" alt="Quarkus" width="1280" height="195" loading="lazy" data-no-zoom>
+        <img class="logo-dark" src="{=site.url('images/quarkus-dark.svg')}" alt="Quarkus" width="1280" height="195" loading="lazy" data-no-zoom>
+      </a></li>
+      <li><a href="https://wildfly.org">
+        <img class="logo-light" src="{=site.url('images/wildfly.svg')}" alt="WildFly" width="1280" height="400" loading="lazy" data-no-zoom>
+        <img class="logo-dark" src="{=site.url('images/wildfly-dark.svg')}" alt="WildFly" width="1280" height="400" loading="lazy" data-no-zoom>
+      </a></li>
+      <li><a href="https://openliberty.io/">
+        <img class="logo-light" src="{=site.url('images/openliberty.svg')}" alt="Open Liberty" width="360" height="97" loading="lazy" data-no-zoom>
+        <img class="logo-dark" src="{=site.url('images/openliberty-dark.svg')}" alt="Open Liberty" width="360" height="97" loading="lazy" data-no-zoom>
+      </a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section join">
+  <div class="container join-grid">
+    <div>
+      <h2>Feedback and help</h2>
+      <p>You can contact the SmallRye project team using:</p>
+      <ul>
+        <li>Chat using <a href="https://quarkusio.zulipchat.com/">Zulip</a></li>
+        <li>Ask questions or discuss contributions in the <a href="https://groups.google.com/d/forum/smallrye">SmallRye Google Group</a></li>
+      </ul>
+      <p>Your help is more than welcome. Don't hesitate to join us.</p>
+    </div>
+    <div>
+      <h2>Join the SmallRye community</h2>
+      <p>Check out our <a href="https://github.com/smallrye">GitHub</a> for details on reporting issues and the process for submitting pull requests.</p>
+      <p>Every contribution is valuable. It can be a bug report, an example application, a feature request, a fix in the documentation or just feedback.</p>
+      <p><a class="btn btn-primary" href="{=site.url('community')}">Get involved</a></p>
+    </div>
+  </div>
+</section>

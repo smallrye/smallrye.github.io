@@ -1,0 +1,31 @@
+{@io.quarkiverse.roq.frontmatter.runtime.model.Site site}
+{! schema.org data for search engines: the project as an Organization, and the site. !}
+<script type="application/ld+json">
+{|{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "|}{=site.url.absolute}{|#organization",
+      "name": "SmallRye",
+      "url": "|}{=site.url.absolute}{|",
+      "logo": "|}{=site.url('images/logo.svg').absolute}{|",
+      "description": "SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.",
+      "email": "smallrye@googlegroups.com",
+      "sameAs": [
+        "https://github.com/smallrye",
+        "https://twitter.com/smallrye_io",
+        "https://groups.google.com/d/forum/smallrye"
+      ],
+      "parentOrganization": { "@type": "Organization", "name": "Red Hat", "url": "https://www.redhat.com/" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "|}{=site.url.absolute}{|#website",
+      "name": "SmallRye",
+      "url": "|}{=site.url.absolute}{|",
+      "publisher": { "@id": "|}{=site.url.absolute}{|#organization" }
+    }
+  ]
+}|}
+</script>

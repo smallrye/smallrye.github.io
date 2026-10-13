@@ -1,0 +1,5 @@
+{! Content Security Policy carried over from the Jekyll site, minus what nothing loads any more
+   (jQuery, Font Awesome, Google Fonts, ad services). The only third party left is Red Hat's
+   analytics, and YouTube because that analytics script loads its player API. 'unsafe-inline'
+   is for the theme script and the inlined stylesheet. !}
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.redhat.com https://static.redhat.com https://assets.adobedtm.com https://www.youtube.com http://www.youtube.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://dpm.demdex.net https://adobedc.demdex.net https://smetrics.redhat.com; frame-src https://redhat.demdex.net; base-uri 'none'; object-src 'none'; form-action 'none'">

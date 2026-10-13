@@ -1,0 +1,30 @@
+= Community
+:page-layout: page
+:description: How to get help with SmallRye, report a bug or request a feature, and contribute to the SmallRye projects.
+:page-eyebrow: SmallRye
+
+== Getting help
+
+=== Discussions
+
+Mailing list::
+You can ask questions on our mailing list.
+Join the Google group via email smallrye+subscribe@googlegroups.com or by visiting the Google Groups page https://groups.google.com/d/forum/smallrye.
+
+Live chat on Zulip::
+
+If you prefer live chat with the developers, we have a https://quarkusio.zulipchat.com[Zulip] chat.
+
+== Code and issue tracker
+
+The source code is hosted in the https://github.com/smallrye[SmallRye] organization on GitHub.
+If you need to report a bug or request a new feature, look for any existing issues in the GitHub repository for the specific project.
+If you don’t find any, create a new issue.
+
+If you believe you found a bug, please indicate a way to reproduce it,
+what you are seeing, and what you would expect to see.
+Don't forget to indicate your SmallRye project, Java, and Maven version.
+
+== Contributing
+
+Details on how to contribute can be found https://github.com/smallrye/smallrye-parent/wiki/Contributing-to-SmallRye-projects[here].

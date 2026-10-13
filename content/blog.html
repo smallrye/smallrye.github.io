@@ -1,0 +1,25 @@
+---
+title: "Blog"
+description: "Release announcements and news from the SmallRye projects: Fault Tolerance, Jandex, Config, Health, GraphQL and more."
+layout: page
+eyebrow: "SmallRye"
+paginate:
+  collection: posts
+  size: 10
+  link: blog/page/:page
+# The Jekyll blog listed five posts a page, so it reached /blog/page/17/. With ten a page
+# the later page numbers no longer exist; send them to the start of the blog.
+aliases: ["/blog/page/10/", "/blog/page/11/", "/blog/page/12/", "/blog/page/13/", "/blog/page/14/", "/blog/page/15/", "/blog/page/16/", "/blog/page/17/"]
+---
+{@io.quarkiverse.roq.frontmatter.runtime.model.NormalPage page}
+{@io.quarkiverse.roq.frontmatter.runtime.model.Site site}
+<ol class="post-list">
+  {#for post in site.collections.posts.paginated(page.paginator)}
+  <li>
+    <h2><a href="{=post.url}">{=post.title}</a></h2>
+    {#include partials/byline post=post /}
+    <p>{=post.data.synopsis ?: post.contentAbstract(40)}</p>
+  </li>
+  {/for}
+</ol>
+{#include partials/pagination /}

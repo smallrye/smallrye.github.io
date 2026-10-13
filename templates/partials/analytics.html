@@ -1,0 +1,3 @@
+{! Red Hat's site analytics (Adobe Launch), as on the Jekyll site. Loaded async so it never
+   holds up the page; pageBottom() is what the old satellite.js called at the end of <body>. !}
+<script id="adobe_dtm" src="https://www.redhat.com/dtm.js" async onload="if (window._satellite && typeof _satellite.pageBottom === 'function') _satellite.pageBottom();"></script>

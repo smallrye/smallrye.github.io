@@ -1,0 +1,34 @@
+{@io.quarkiverse.roq.frontmatter.runtime.model.Page page}
+{@io.quarkiverse.roq.frontmatter.runtime.model.Site site}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  {#include partials/csp /}
+  {#include partials/seo /}
+  {#rss site /}
+  <link rel="icon" href="{=site.url('favicon.svg')}" type="image/svg+xml">
+  <link rel="icon" href="{=site.url('favicon.ico')}" sizes="32x32">
+  <script>{|
+    try {
+      var t = localStorage.getItem('site-theme');
+      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    } catch (e) { /* private mode: follow the OS preference */ }
+  |}</script>
+  <link rel="stylesheet" href="{=site.url('css/main.css')}">
+  {#include partials/structured-data /}
+  {#include partials/analytics /}
+  {#insert head /}
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  {#include partials/header /}
+  <main id="main">
+  {#insert /}
+  </main>
+  {#include partials/footer /}
+  {#include partials/theme-toggle /}
+</body>
+</html>

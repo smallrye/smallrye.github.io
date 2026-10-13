@@ -1,0 +1,28 @@
+---
+layout: default
+---
+{@io.quarkiverse.roq.frontmatter.runtime.model.DocumentPage page}
+{@io.quarkiverse.roq.frontmatter.runtime.model.Site site}
+{#head}
+{! Code highlighting (web/app/main.js): bundled, loaded on posts only. !}
+{#bundle /}
+{/head}
+<section class="page-banner post-banner">
+  <div class="container">
+    <p class="eyebrow"><a href="{=site.url('blog')}">Blog</a></p>
+    <h1>{=page.title}</h1>
+    {#include partials/byline post=page /}
+  </div>
+</section>
+<article class="section">
+  <div class="container prose post-body">
+    {#if page.toc.size >= 3}
+    <nav class="toc" aria-label="On this page">
+      <p class="toc-title">On this page</p>
+      {=page.tocHtml}
+    </nav>
+    {/if}
+    {#insert /}
+    <p class="post-back"><a href="{=site.url('blog')}">&larr; All posts</a></p>
+  </div>
+</article>

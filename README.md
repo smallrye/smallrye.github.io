@@ -1,59 +1,78 @@
-# SmallRye.io Website Based on Jekyll
+# SmallRye.io website
 
-## Getting Started
+The source of [smallrye.io](https://smallrye.io), built with [Quarkus Roq](https://iamroq.dev/),
+a static site generator. Blog posts and most pages are AsciiDoc, rendered by Asciidoctor.
 
-These instructions will get you a copy of the SmallRye.io website up and running on your local machine for development and testing purposes.
+## Running locally
 
-### Installation
-[Jekyll static site generator docs](https://jekyllrb.com/docs/).
+Requires Java 21 or newer. Maven comes with the project (`./mvnw`).
 
-1. Install a full [Ruby development environment](https://jekyllrb.com/docs/installation/)
-2. Install Jekyll and [bundler](https://jekyllrb.com/docs/ruby-101/#bundler)  [gems](https://jekyllrb.com/docs/ruby-101/#gems) 
-  
-        gem install jekyll bundler
+```bash
+./mvnw quarkus:dev
+```
 
-3. Fork the [project repository](https://github.com/smallrye/smallrye.github.io), then clone your fork.
-  
-        git clone git@github.com:YOUR_USER_NAME/smallrye.github.io.git
+Then browse to http://localhost:8080. Pages, posts, templates and styles reload as you edit them.
 
-4. Change into the project directory:
-  
-        cd smallrye.github.io
+To generate the static site the way CI does:
 
-5. Use bundler to fetch all required gems in their respective versions
+```bash
+QUARKUS_ROQ_GENERATOR_BATCH=true ./mvnw package quarkus:run
+```
 
-        bundle install
+The output lands in `target/roq/`.
 
-6. Build the site and make it available on a local server
-  
-        bundle exec jekyll serve
-        
-7. Now browse to http://localhost:4000
+## Where things are
 
-> If you encounter any unexpected errors during the above, please refer to the
-[troubleshooting](https://jekyllrb.com/docs/troubleshooting/#configuration-problems) page
-or the [requirements](https://jekyllrb.com/docs/installation/#requirements) page,
-as you might be missing development headers or other prerequisites.
+| What | Where |
+| --- | --- |
+| Blog posts | `content/posts/YYYY-MM-DD-name.adoc`, published at `/blog/name/` |
+| Pages | `content/*.adoc` and `content/*.html` |
+| Post authors | `data/authors.yml` |
+| Layouts and partials | `templates/` |
+| Styles | `public/css/main.css` |
+| Images and other static files | `public/` (served from the site root) |
+| Site configuration | `config/application.properties` |
+| Code highlighting | `web/app/main.js` (highlight.js, from mvnpm) |
 
-**For more regarding the use of Jekyll, please refer to the [Jekyll Step by Step Tutorial](https://jekyllrb.com/docs/step-by-step/01-setup/).**
+## Writing a blog post
 
-### Building the documentation
+Add `content/posts/YYYY-MM-DD-name.adoc`. The header carries the post's details:
 
-Documentation of SmallRye projects is built separately, because it's not using Jekyll. Instead, it's using Antora.
+```asciidoc
+= Fault Tolerance 7.0.0
+:page-layout: post
+:page-synopsis: SmallRye Fault Tolerance 7.0.0 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2026-09-16 15:00:00.000 +0100
+:page-author: lthon
+```
 
-1. Install Antora. See [Antora installation](https://docs.antora.org/antora/2.0/install/install-antora/).
+`:page-synopsis:` is the summary on the blog list and the description search engines show.
+`:page-author:` is a key in `data/authors.yml`; add yourself there first. A post dated in the
+future is published by the first build on or after that date (the workflow runs daily).
 
+## Building the documentation
+
+The documentation at `/docs/` is built separately with Antora, from the repositories listed in
+`docs/antora-playbook.yml`, and copied into the site by CI.
+
+1. Install Antora. See [Antora installation](https://docs.antora.org/antora/2.3/install/install-antora/).
 2. Go to the `docs` directory and run
 
-	antora generate antora-playbook.yml --fetch
+        antora generate antora-playbook.yml --fetch
 
-3. Now you should have the html files for SmallRye documentation in the `docs/build/site` directory. Make sure you're viewing these files directly rather than through Jekyll - explanation is in the following paragraph.
+3. The HTML for the SmallRye documentation is now in `docs/build/site`.
 
-There is a caveat in using Antora together with GitHub Pages, because GitHub Pages runs all files in the repository through Jekyll, which breaks Antora's directory structure. To prevent this, before committing the documentation site to a GitHub Pages repository, create an empty file named `.nojekyll` in the root of the repository. See [Antora documentation](https://docs.antora.org/antora/2.2/run-antora/#publish-to-github-pages) for more information.
+## Deployment
+
+Pushing to `develop` runs `.github/workflows/build.yml`: it generates the site with the Roq
+GitHub Action, builds the documentation with Antora, and pushes the result to the `main`
+branch, which GitHub Pages serves. Pull requests build the site without deploying it. The
+workflow also runs daily and can be started by hand from the Actions tab.
 
 ## Contributing
 
-Please refer to our Wiki for the [Contribution Guidelines](https://github.com/smallrye/smallrye/).
+Please refer to our Wiki for the [Contribution Guidelines](https://github.com/smallrye/smallrye-parent/wiki/Contributing-to-SmallRye-projects).
 
 ## License
 

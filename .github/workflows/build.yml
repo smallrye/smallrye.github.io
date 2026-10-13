@@ -2,7 +2,7 @@ name: SmallRye Website
 
 on:
   push:
-    branches: 
+    branches:
       - develop
     paths-ignore:
       - '.gitignore'
@@ -19,6 +19,16 @@ on:
       - 'LICENSE'
       - 'NOTICE'
       - 'README*'
+  # Daily, so a post dated later than the merge publishes on its date
+  # (future-dated posts are left out until then), and the docs pick up new releases.
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+# One deploy at a time: a second run queues behind the first instead of racing its push.
+concurrency:
+  group: website-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -37,20 +47,12 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v4
-
-      - name: set up ruby
-        uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.6
+          # The sitemap plugin reads each page's last change from git history.
+          fetch-depth: 0
 
-      - name: generate website
-        env:
-          JEKYLL_ENV: production
-        run: |
-          mkdir website
-          bundle install
-          bundle exec jekyll build --destination website
-
+      # Before the site: the Roq build leaves a node_modules/ in the repository root, and
+      # npm would install Antora there instead of in docs/.
       - name: generate docs
         run: |
           cd docs
@@ -58,18 +60,31 @@ jobs:
           # async and require Asciidoctor.js 4, while Antora 2.3 uses Asciidoctor.js 1.5.9
           npm i @antora/cli@2.3 @antora/site-generator-default@2.3 asciidoctor-kroki@0.18.1
           ./node_modules/@antora/cli/bin/antora --stacktrace generate antora-playbook.yml
-          cd ..
-          cp -r docs/build/site website/docs
+
+      - name: generate website
+        uses: quarkiverse/quarkus-roq@v1.1
+        with:
+          github-pages: 'false'
+          site-url: 'https://smallrye.io'
+
+      # A page that carries its own stylesheet can be drawn from the first file the
+      # browser receives, without a second request.
+      - name: put the stylesheet in the pages
+        run: java .github/InlineStyles.java target/roq
+
+      - name: add docs to the website
+        run: cp -r docs/build/site target/roq/docs
 
       - name: attach website
         uses: actions/upload-artifact@v4
         with:
           name: website
-          path: website
+          path: target/roq
+          include-hidden-files: true
 
   deploy:
     needs: [build]
-    if: github.event_name == 'push' && github.repository_owner == 'smallrye'
+    if: github.event_name != 'pull_request' && github.repository_owner == 'smallrye'
     runs-on: ubuntu-latest
 
     steps:
@@ -103,8 +118,12 @@ jobs:
 
       - name: push website
         run: |
-          git status
-          git diff
           git add -A .
+          # The daily run often has nothing new to publish.
+          if git diff --cached --quiet; then
+            echo "Website unchanged, nothing to deploy"
+            exit 0
+          fi
+          git status --short | head -50
           git commit -m "CI: Build and deploy website updates"
           git push --force

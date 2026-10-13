@@ -1,0 +1,19 @@
+{@io.quarkiverse.roq.frontmatter.runtime.model.DocumentPage post}
+{@io.quarkiverse.roq.frontmatter.runtime.model.Site site}
+{! Author photo, name and date for a post: the post page and the blog list. Authors and their
+   photos are in data/authors.yml and public/images/authors/; no photo shows an initial. !}
+<div class="byline">
+  {#if post.data.author?? && cdi:authors.containsKey(post.data.author)}
+  {#let author=cdi:authors.getJsonObject(post.data.author)}
+  {#if author.containsKey('avatar')}
+  <img class="avatar" src="{=site.url('images/authors/' + author.getString('avatar'))}" alt="" width="48" height="48" loading="lazy" data-no-zoom>
+  {#else}
+  <span class="avatar avatar-initial" aria-hidden="true">{=author.getString('name').substring(0, 1)}</span>
+  {/if}
+  <p><span class="byline-name">{=author.getString('name')}</span>
+  <time datetime="{=post.date.isoDate}">{=post.date.format('d MMMM yyyy')}</time></p>
+  {/let}
+  {#else}
+  <p><time datetime="{=post.date.isoDate}">{=post.date.format('d MMMM yyyy')}</time></p>
+  {/if}
+</div>

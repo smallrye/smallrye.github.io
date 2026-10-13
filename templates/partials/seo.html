@@ -1,0 +1,35 @@
+{@io.quarkiverse.roq.frontmatter.runtime.model.Site site}
+{@io.quarkiverse.roq.frontmatter.runtime.model.Page page}
+{! Roq's {#seo} tag, assembled here so posts can use their Jekyll-era :page-synopsis: as the
+   description and their author key resolves to a name from data/authors.yml. !}
+{#let description=(page.description ?: page.data.synopsis ?: site.description)}
+{#if page.url.path.startsWith('/blog/page/')}
+{! Later pages of the blog listing: say which page, so no two pages share a title or description. !}
+{#let n=page.url.path.replace('/blog/page/', '').replace('/', '')}
+{#seoTitle pageTitle=(page.title + ', page ' + n) siteTitle=site.title /}
+{#seoDescription pageDescription=(description + ' Page ' + n + '.') siteDescription=site.description /}
+{/let}
+{#else}
+{#seoTitle pageTitle=page.title siteTitle=site.title /}
+{#seoDescription pageDescription=description siteDescription=site.description /}
+{/if}
+{#if page.data.author?? && cdi:authors.containsKey(page.data.author)}
+{#seoAuthor pageAuthor=cdi:authors.getJsonObject(page.data.author).getString('name') /}
+{/if}
+{#seoRobots page /}
+{#seoUrl url=page.url /}
+{#seoType page /}
+{#if page.image}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image" content="{=page.image.absolute}">
+  <meta name="twitter:image" content="{=page.image.absolute}">
+{#else}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image" content="{=site.url('images/rye-field-og.jpg').absolute}">
+  <meta name="twitter:image" content="{=site.url('images/rye-field-og.jpg').absolute}">
+{/if}
+{#seoPaginator page site /}
+{#seoTwitter twitter="smallrye_io" /}
+{#seoLocale pageLocale=page.data.lang?? siteLocale=site.data.lang?? defaultLocale=global:locale /}
+{#seoGenerator name="Quarkus Roq" version=global:roqVersion /}
+{/let}

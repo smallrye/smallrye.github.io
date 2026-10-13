@@ -1,0 +1,19 @@
+---
+# The Jekyll site had a style showcase at /components.html. An alias would publish it as
+# components.html/index.html, which is a folder, so this page keeps the old file name and
+# sends visitors home.
+link: /components.html
+sitemap: false
+llmstxt: false
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>SmallRye</title>
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="{=site.url.absolute}">
+  <meta http-equiv="refresh" content="0; url={=site.url}">
+</head>
+<body><p><a href="{=site.url}">SmallRye</a></p></body>
+</html>

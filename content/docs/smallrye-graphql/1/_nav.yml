@@ -1,0 +1,54 @@
+title: SmallRye GraphQL
+nav:
+- title: Overview
+  page: index
+- title: Server side features
+  items:
+  - title: Customizing JSON deserializers
+    page: custom-json-deserializers
+  - title: Directives
+    page: directives
+  - title: Federation
+    page: federation
+  - title: Custom error extensions
+    page: custom-error-extensions
+  - title: Response extensions
+    page: extensions
+- title: Typesafe client
+  items:
+  - title: Basic usage
+    page: typesafe-client-usage
+  - title: Reactive
+    page: typesafe-client-reactive-types
+  - title: Custom scalar types
+    page: typesafe-client-custom-scalars
+  - title: Adding headers
+    page: typesafe-client-headers
+  - title: Logging
+    page: typesafe-client-logging
+  - title: Running multiple queries at once
+    page: typesafe-client-multiple-queries
+  - title: Error handling
+    page: typesafe-client-error-handling
+- title: Dynamic client
+  items:
+  - title: Basic usage
+    page: dynamic-client-usage
+  - title: Error handling
+    page: dynamic-client-error-handling
+- title: Clients in general
+  items:
+  - title: Using SmallRye Stork
+    page: using-smallrye-stork
+- title: Developer tools
+  items:
+  - title: Maven plugin
+    page: maven-plugin
+  - title: Gradle plugin
+    page: gradle-plugin
+- title: Reference material
+  items:
+  - title: Server-side configuration
+    page: server-configuration
+  - title: Client-side configuration
+    page: client-configuration

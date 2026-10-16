@@ -1,0 +1,259 @@
+# Every SmallRye project with documentation, listed on /docs/.
+#
+# A project with `repo` and `path` has its documentation on this site: the sync (tools/docs/Docs.java) copies
+# the AsciiDoc in <repo>/<path> into content/docs/<key>/<version>/, published at
+# /docs/<key>/<version>/. Versions it follows:
+#   main    the branch head, synced every night
+#   latest  the newest tag matching `latest-tag`
+#   streams older release lines kept online, as  - id: "2"  tag: "^2\.\d+\.\d+$"
+#           (ids are lowercase letters, digits and hyphens: they are part of the address)
+# An archived project follows no branch (`archived: true`): its streams are all it has.
+# Until a release carries AsciiDoc docs, the sync converts that release's MkDocs pages
+# (`mkdocs`) on the fly, so the site never waits for a project's next release.
+#
+# A project without `path` is not migrated yet: `url` is where its documentation lives today.
+# `maven-attributes` sets attributes from the Maven properties of the version published
+# (attribute: property, from the repository's pom.xml), so versions the pages mention follow the
+# build instead of being copied by hand.
+# A stream can carry its own `mkdocs` settings, for a release line that laid its MkDocs sources out
+# differently.
+# `redirects` maps single old addresses on this site to new ones.
+# `archive` points to the documentation of releases published before the move, on the project's
+# own pages. `legacy` lists the addresses this site published before (Antora's
+# /docs/<key>/<release>/<page>.html): `Docs.java redirects` points each of them to the same page
+# in the version that replaces it.
+
+projects:
+  - key: smallrye-graphql
+    name: SmallRye GraphQL
+    description: Implementation of MicroProfile GraphQL, with type-safe and dynamic Java clients.
+    group: microprofile
+    repo: smallrye/smallrye-graphql
+    path: docs/src/main/asciidoc
+    branch: main
+    latest-tag: '^\d+\.\d+\.\d+(\.(Final|Beta\d+|CR\d+|Alpha\d+))?$'
+    streams:
+      - id: '2'
+        tag: '^2\.\d+\.\d+$'
+      - id: '1'
+        tag: '^1\.\d+\.\d+$'
+    mkdocs:
+      config: mkdocs.yml
+      snippet-prefix: 'docs/snippets/='
+      examples-dir: ../java
+      examples-root: docs/snippets
+
+  - key: smallrye-config
+    name: SmallRye Config
+    description: A Java configuration library, and the implementation of MicroProfile Config.
+    group: microprofile
+    repo: smallrye/smallrye-config
+    path: documentation/src/main/asciidoc
+    branch: main
+    latest-tag: '^\d+\.\d+\.\d+$'
+    streams:
+      - id: '3'
+        tag: '^3\.\d+\.\d+$'
+      - id: '2'
+        tag: '^2\.\d+\.\d+$'
+    mkdocs:
+      config: documentation/mkdocs.yaml
+      examples-root: documentation/src/main/java
+    redirects:
+      # the Antora documentation of Config 1.x, gone since 2022
+      /docs/smallrye-config/index.html: /docs/smallrye-config/latest/
+
+  - key: smallrye-fault-tolerance
+    name: SmallRye Fault Tolerance
+    description: Bulkheads, circuit breakers, fallbacks, rate limits, retries and timeouts; implements MicroProfile Fault Tolerance.
+    group: microprofile
+    repo: smallrye/smallrye-fault-tolerance
+    path: docs/src/main/asciidoc
+    branch: main
+    latest-tag: '^\d+\.\d+\.\d+$'
+    streams:
+      - id: '6'
+        tag: '^6\.\d+\.\d+$'
+      - id: '5'
+        tag: '^5\.\d+\.\d+$'
+    antora: doc
+    legacy:
+      url: '/docs/smallrye-fault-tolerance/{release}/{page}.html'
+      # sections renamed between the releases and the version that replaces them
+      anchors:
+        blocking-nonblocking: async-nonblocking
+        _additional_asynchronous_types: async-types
+      releases:
+        '6': ['6.0.0', '6.1.0', '6.2.0', '6.2.1', '6.2.2', '6.2.3', '6.2.4', '6.2.6', '6.3.0', '6.4.0', '6.4.1', '6.4.2', '6.4.3', '6.5.0', '6.6.0', '6.6.1', '6.6.2', '6.6.3', '6.7.0', '6.7.1', '6.7.2', '6.7.3', '6.8.0', '6.9.0', '6.9.1', '6.9.2', '6.9.3', '6.9.4', '6.10.0', '6.10.1', '6.10.2', '6.11.0', '6.11.1', '6.11.2', '6.11.3', '6.11.4']
+        '5': ['5.0.0', '5.1.0', '5.2.0', '5.2.1', '5.3.0', '5.3.1', '5.3.2', '5.4.0', '5.4.1', '5.5.0', '5.6.0']
+
+  - key: smallrye-health
+    name: SmallRye Health
+    description: Implementation of MicroProfile Health.
+    group: microprofile
+    repo: smallrye/smallrye-health
+    path: docs/src/main/asciidoc
+    branch: main
+    latest-tag: '^\d+\.\d+\.\d+$'
+    antora: doc
+    legacy:
+      url: '/docs/smallrye-health/{release}/{page}.html'
+      releases:
+        latest: ['3.0.0', '3.0.1']
+
+  - key: smallrye-jwt
+    name: SmallRye JWT
+    description: Implementation of MicroProfile JWT RBAC, plus an API to build and sign tokens.
+    group: microprofile
+    repo: smallrye/smallrye-jwt
+    path: docs/src/main/asciidoc
+    branch: main
+    latest-tag: '^\d+\.\d+\.\d+$'
+    antora: doc
+    legacy:
+      url: '/docs/smallrye-jwt/{page}.html'
+      releases:
+        latest: ['']
+
+  - key: smallrye-metrics
+    name: SmallRye Metrics
+    description: Implementation of MicroProfile Metrics. The project is archived; this is its last documentation.
+    group: microprofile
+    repo: smallrye/smallrye-metrics
+    path: docs/src/main/asciidoc
+    archived: true
+    streams:
+      - id: '3'
+        tag: '^3\.0\.\d+$'
+      - id: '2'
+        tag: '^2\.4\.\d+$'
+    antora: doc
+    legacy:
+      url: '/docs/smallrye-metrics/{release}/{page}.html'
+      releases:
+        '3': ['3.0.0']
+        '2': ['2.4.0']
+
+  - key: smallrye-reactive-messaging
+    name: SmallRye Reactive Messaging
+    description: Event-driven, message-based applications on Kafka, AMQP, MQTT, RabbitMQ, Pulsar and more.
+    group: reactive
+    repo: smallrye/smallrye-reactive-messaging
+    path: documentation/src/main/asciidoc
+    branch: main
+    latest-tag: '^\d+\.\d+\.\d+(-RC\d+)?$'
+    streams:
+      - id: '4'
+        tag: '^4\.\d+\.\d+$'
+      - id: '3'
+        tag: '^3\.\d+\.\d+$'
+    mkdocs:
+      config: documentation/mkdocs.yml
+      examples-root: documentation/src/main/java
+      snippet-prefix: '../../../target/connectors/={generated-dir}/'
+    # The connector attribute tables are generated into each connector jar (META-INF/connector/).
+    generated:
+      maven-dependencies-of: documentation/pom.xml
+      group: io.smallrye.reactive
+      extract: META-INF/connector/
+    # Dependency versions the pages mention, from the pom.xml of the version published.
+    maven-attributes:
+      attributes:
+        weld-version: weld.version
+        smallrye-config-version: smallrye-config.version
+        mutiny-version: mutiny.version
+        camel-version: camel.version
+        spec-version: microprofile-reactive-messaging.version
+
+  - key: smallrye-mutiny
+    name: SmallRye Mutiny
+    description: An intuitive, event-driven reactive programming library for Java.
+    group: reactive
+    repo: smallrye/smallrye-mutiny
+    path: documentation/src/main/asciidoc
+    branch: main
+    latest-tag: '^\d+\.\d+\.\d+$'
+    streams:
+      - id: '2'
+        tag: '^2\.\d+\.\d+$'
+    mkdocs:
+      config: documentation/mkdocs.yml
+      examples-root: documentation/src/test
+
+  - key: smallrye-mutiny-vertx-bindings
+    name: Mutiny Vert.x bindings
+    description: Mutiny APIs for Eclipse Vert.x.
+    group: reactive
+    repo: smallrye/smallrye-mutiny-vertx-bindings
+    path: docs/src/main/asciidoc
+    branch: main
+    latest-tag: '^\d+\.\d+\.\d+$'
+    streams:
+      - id: '3'
+        tag: '^3\.\d+\.\d+$'
+      - id: '2'
+        tag: '^2\.\d+\.\d+$'
+    mkdocs:
+      config: mkdocs.yml
+
+  - key: smallrye-mutiny-zero
+    name: Mutiny Zero
+    description: A zero-dependency Reactive Streams publishers library.
+    group: reactive
+    repo: smallrye/smallrye-mutiny-zero
+    path: docs/src/main/asciidoc
+    branch: main
+    latest-tag: '^\d+\.\d+\.\d+$'
+    streams:
+      - id: '0'
+        tag: '^0\.\d+\.\d+$'
+    mkdocs:
+      config: mkdocs.yml
+      examples-root: .
+
+  - key: smallrye-stork
+    name: SmallRye Stork
+    description: Service discovery and client-side load balancing.
+    group: standalone
+    repo: smallrye/smallrye-stork
+    path: docs/src/main/asciidoc
+    branch: main
+    latest-tag: '^\d+\.\d+\.\d+$'
+    streams:
+      - id: '2'
+        tag: '^2\.\d+\.\d+$'
+      - id: '1'
+        tag: '^1\.\d+\.\d+$'
+        # 1.x includes its examples as snippets/examples/... (relative to docs/)
+        mkdocs:
+          snippet-prefix:
+            - 'snippets/='
+            - 're:^.*META-INF/stork-docs/={generated-dir}/'
+    mkdocs:
+      config: docs/mkdocs.yml
+      examples-root: docs/snippets
+      # the tables, wherever a page took them from (target/attributes/ or a module's target/classes/)
+      snippet-prefix: 're:^.*META-INF/stork-docs/={generated-dir}/'
+    # The configuration attribute tables are generated into each Stork jar (META-INF/stork-docs/).
+    generated:
+      maven-dependencies-of: docs/pom.xml
+      group: io.smallrye.stork
+      extract: META-INF/stork-docs/
+
+  - key: jandex
+    name: Jandex
+    description: A space-efficient Java class file indexer and offline reflection library.
+    group: standalone
+    repo: smallrye/jandex
+    path: docs/src/main/asciidoc
+    branch: main
+    latest-tag: '^\d+\.\d+\.\d+$'
+    antora: doc
+
+groups:
+  - key: microprofile
+    name: MicroProfile implementations
+  - key: reactive
+    name: Reactive
+  - key: standalone
+    name: Libraries

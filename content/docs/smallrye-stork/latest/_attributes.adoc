@@ -1,0 +1,20 @@
+:project-version: 3.0.3
+// Attributes shared by every page. smallrye.io overrides the ones it needs when it publishes.
+// Pages in subdirectories set :version-root: (../ per level) before including this file.
+ifndef::version-root[:version-root:]
+:idprefix:
+:idseparator: -
+:sectanchors:
+:examples-dir: {version-root}_examples
+:partialsdir: {version-root}_partials
+:project-name: SmallRye Stork
+:javadoc-version: latest
+:generated-dir: {version-root}_generated
+
+// Added by smallrye.io (tools/docs/Docs.java sync)
+:javadoc-version: 3.0.3
+:relfileprefix: /docs/smallrye-stork/latest/
+:imagesdir: /docs/smallrye-stork/latest
+:docs-project: smallrye-stork
+:docs-version: latest
+:docs-ref: 3.0.3

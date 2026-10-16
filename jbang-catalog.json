@@ -1,0 +1,13 @@
+{
+  "aliases": {
+    "docs-preview": {
+      "script-ref": "tools/docs/Docs.java",
+      "arguments": ["preview"],
+      "description": "Preview a SmallRye project's documentation the way smallrye.io shows it: run it in the project's checkout"
+    },
+    "smallrye-docs": {
+      "script-ref": "tools/docs/Docs.java",
+      "description": "The tools behind smallrye.io/docs (sync, preview, redirects, ...)"
+    }
+  }
+}

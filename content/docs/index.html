@@ -1,0 +1,31 @@
+---
+layout: page
+title: Documentation
+description: Documentation for every SmallRye project, from the latest release back to the main branch.
+eyebrow: SmallRye
+link: /docs/
+---
+{@io.quarkiverse.roq.frontmatter.runtime.model.Site site}
+{! The projects and their documentation versions come from data/docs.yml and data/docversions.yml. !}
+{#for g in cdi:docs.getJsonArray('groups')}
+<h2>{=g.getString('name')}</h2>
+<ul class="docs-hub">
+  {#for p in cdi:docs.getJsonArray('projects')}{#if p.getString('group') == g.getString('key')}
+  <li>
+    {#if p.containsKey('path') && cdi:docversions.containsKey(p.getString('key'))}
+    {#let versions=cdi:docversions.getJsonObject(p.getString('key')).getJsonArray('versions')}
+    <h3><a href="{=site.url('docs/' + p.getString('key') + '/' + versions.getJsonObject(0).getString('id') + '/')}">{=p.getString('name')}</a></h3>
+    <p>{=p.getString('description')}</p>
+    <p class="docs-hub-versions">
+      {#for v in versions}<a href="{=site.url('docs/' + p.getString('key') + '/' + v.getString('id') + '/')}">{#if v.getString('id') == 'latest'}{=v.getString('ref')}{#else if v.getString('id') == 'main'}main{#else}{=v.getString('ref')}{/if}</a>{#if !v_isLast} &middot; {/if}{/for}
+      {#if p.containsKey('archive')} &middot; <a href="{=p.getString('archive')}">older versions</a>{/if}
+    </p>
+    {/let}
+    {#else}
+    <h3><a href="{=p.getString('url')}">{=p.getString('name')}</a></h3>
+    <p>{=p.getString('description')}</p>
+    {/if}
+  </li>
+  {/if}{/for}
+</ul>
+{/for}

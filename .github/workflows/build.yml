@@ -20,7 +20,7 @@ on:
       - 'NOTICE'
       - 'README*'
   # Daily, so a post dated later than the merge publishes on its date
-  # (future-dated posts are left out until then), and the docs pick up new releases.
+  # (future-dated posts are left out until then).
   schedule:
     - cron: "0 6 * * *"
   workflow_dispatch:
@@ -34,32 +34,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    services:
-      kroki:
-        image: yuzutech/kroki
-        env:
-          KROKI_MERMAID_HOST: kroki-mermaid
-        ports:
-          - 8000:8000
-      kroki-mermaid:
-        image: yuzutech/kroki-mermaid
-
     steps:
       - name: checkout
         uses: actions/checkout@v4
         with:
           # The sitemap plugin reads each page's last change from git history.
           fetch-depth: 0
-
-      # Before the site: the Roq build leaves a node_modules/ in the repository root, and
-      # npm would install Antora there instead of in docs/.
-      - name: generate docs
-        run: |
-          cd docs
-          # asciidoctor-kroki must stay on 0.18.1: since 1.0.0, its extensions are
-          # async and require Asciidoctor.js 4, while Antora 2.3 uses Asciidoctor.js 1.5.9
-          npm i @antora/cli@2.3 @antora/site-generator-default@2.3 asciidoctor-kroki@0.18.1
-          ./node_modules/@antora/cli/bin/antora --stacktrace generate antora-playbook.yml
 
       - name: generate website
         uses: quarkiverse/quarkus-roq@v1.1
@@ -72,8 +52,14 @@ jobs:
       - name: put the stylesheet in the pages
         run: java .github/InlineStyles.java target/roq
 
-      - name: add docs to the website
-        run: cp -r docs/build/site target/roq/docs
+      # GitHub Pages cannot redirect: the documentation addresses this site published before
+      # (Antora's /docs/<project>/<release>/<page>.html) get small redirect pages.
+      - uses: jbangdev/setup-jbang@2b1b465a7b75f4222b81426f23a01e013aa7b95c # v0.1.1
+        with:
+          version: 0.138.0
+
+      - name: add redirects for moved documentation
+        run: jbang tools/docs/Docs.java redirects target/roq
 
       - name: attach website
         uses: actions/upload-artifact@v4

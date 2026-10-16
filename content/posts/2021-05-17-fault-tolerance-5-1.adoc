@@ -41,7 +41,7 @@ In this release, we provide an integration API for event loops, as well as an im
 
 With this integration enabled, invocations of `@NonBlocking` methods made on an event loop thread are always executed on the same event loop thread.
 
-For more information, see link:https://smallrye.io/docs/smallrye-fault-tolerance/5.1.0/usage/extra.html#blocking-nonblocking[user documentation] and link:https://smallrye.io/docs/smallrye-fault-tolerance/5.1.0/integration/event-loop.html[integration documentation].
+For more information, see link:https://smallrye.io/docs/smallrye-fault-tolerance/5/usage/extra/#async-nonblocking[user documentation] and link:https://smallrye.io/docs/smallrye-fault-tolerance/5/integration/event-loop/[integration documentation].
 
 == Others
 

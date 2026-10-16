@@ -1,0 +1,10 @@
+# Written by tools/docs/Docs.java sync: pages stored in a newer version (see Inherit.java)
+available-modules: latest
+blocking-and-testing: latest
+compatibility-report-3-to-4: latest
+error-handling: latest
+getting-started: latest
+migration-guide-3x-4x: latest
+type-mapping: latest
+uni-and-multi: latest
+using-the-generator: latest

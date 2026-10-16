@@ -1,0 +1,6 @@
+# Written by tools/docs/Docs.java sync: pages stored in a newer version (see Inherit.java)
+concepts: latest
+load-balancer/round-robin: latest
+load-balancer/sticky: latest
+observability: '2.7'
+quarkus: latest

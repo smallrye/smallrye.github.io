@@ -1,0 +1,8 @@
+# Written by tools/docs/Docs.java sync: pages stored in a newer version (see Inherit.java)
+integration/context-propagation: latest
+integration/intro: '6.8'
+integration/opentracing: '6.11'
+integration/thread-pool: latest
+internals/instructions: latest
+internals/logging: '6.6'
+internals/project-structure: '6.6'

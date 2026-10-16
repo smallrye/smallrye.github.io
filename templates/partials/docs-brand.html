@@ -1,0 +1,22 @@
+{@io.quarkiverse.roq.frontmatter.runtime.model.Site site}
+{@io.quarkiverse.roq.frontmatter.runtime.model.Page page}
+{! On a project's documentation page (/docs/<project>/<version>/...): the project and the version
+   picker, in the header next to the logo. !}
+{#let key=page.url.path.split('/').get(2) version=page.url.path.split('/').get(3)}
+{#if cdi:docversions.containsKey(key)}
+{#for p in cdi:docs.getJsonArray('projects')}{#if p.getString('key') == key}
+<div class="docs-brand">
+  <a class="docs-brand-project" href="{=site.url('docs/' + key + '/' + version + '/')}">{=p.getString('name').replace('SmallRye ', '')}</a>
+  <label class="docs-version">
+    <span class="visually-hidden">Version</span>
+    <select data-docs-version data-current="{=version}" data-base="{=site.url('docs/' + key + '/')}">
+      {#for v in cdi:docversions.getJsonObject(key).getJsonArray('versions')}
+      <option value="{=v.getString('id')}"{#if v.getString('id') == version} selected{/if}>{#if v.getString('id') == 'latest'}{=v.getString('ref')} (latest){#else if v.getString('id') == 'main'}main (snapshot){#else}{=v.getString('ref')}{/if}</option>
+      {/for}
+      {#if p.containsKey('archive')}<option value="archive" data-url="{=p.getString('archive')}">Older versions&hellip;</option>{/if}
+    </select>
+  </label>
+</div>
+{/if}{/for}
+{/if}
+{/let}

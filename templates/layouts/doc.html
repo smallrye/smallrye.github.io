@@ -1,0 +1,71 @@
+---
+layout: default
+---
+{@io.quarkiverse.roq.frontmatter.runtime.model.Page page}
+{@io.quarkiverse.roq.frontmatter.runtime.model.Site site}
+{! A page of a project's documentation: content/docs/<project>/<version>/<page>.adoc, synced from
+   the project's repository by tools/docs (sync). The project comes from data/docs.yml, its
+   versions and navigation from data/docversions.yml. !}
+{#head}
+{#bundle /}
+{! The sidebar starts closed and the page's contents open; each stays the way the reader left it. !}
+<script>{|
+  try {
+    if (matchMedia('(min-width: 60rem)').matches && localStorage.getItem('docs-nav') === 'open') document.documentElement.classList.add('docs-nav-open');
+    if (localStorage.getItem('docs-toc') === 'closed') document.documentElement.classList.add('docs-toc-closed');
+  } catch (e) { /* storage blocked: closed */ }
+|}</script>
+<noscript><style>.docs-nav { display: block !important; } .docs-nav-button { display: none !important; }</style></noscript>
+{/head}
+{#let key=page.url.path.split('/').get(2) version=page.url.path.split('/').get(3)}
+{#let base=site.url('docs/' + key + '/' + version + '/') current=page.url.path.replace('/docs/' + key + '/' + version + '/', '').replaceAll('/$', '')}
+{#for p in cdi:docs.getJsonArray('projects')}{#if p.getString('key') == key}
+{#let versions=cdi:docversions.getJsonObject(key).getJsonArray('versions')}
+<div class="container docs-layout">
+  <aside class="docs-side">
+    <button type="button" class="docs-nav-button" aria-controls="docs-nav" aria-expanded="false" data-docs-nav-button>
+      <span class="docs-nav-icon" aria-hidden="true"></span><span class="docs-nav-label">Contents</span>
+    </button>
+    <nav id="docs-nav" class="docs-nav" aria-label="{=p.getString('name')} documentation">
+      {#for v in versions}{#if v.getString('id') == version}
+      {#include partials/docs-nav items=v.getJsonArray('nav') base=base current=current /}
+      {/if}{/for}
+    </nav>
+  </aside>
+  <article class="docs-main prose">
+    {#if version == 'main'}
+    <p class="docs-notice">This is the documentation of the main branch: it may describe changes that are not released yet. {#if versions.size > 1}<a href="{=site.url('docs/' + key + '/latest/')}">Read the latest release&rsquo;s documentation</a>.{/if}</p>
+    {#else if p.containsKey('archived')}
+    <p class="docs-notice">{=p.getString('name')} is archived: this documentation is no longer updated.</p>
+    {#else if version != 'latest'}
+    <p class="docs-notice">This is the documentation of an older release line. <a href="{=site.url('docs/' + key + '/latest/')}">Read the latest release&rsquo;s documentation</a>.</p>
+    {/if}
+    {! The start page's title only repeats the project named in the header: kept for screen readers and search engines !}
+    <h1{#if !current} class="visually-hidden"{/if}>{=page.title}</h1>
+    {#insert /}
+    {#if !current}{#for v in versions}{#if v.getString('id') == version}
+    {#include partials/docs-contents items=v.getJsonArray('nav') base=base /}
+    {/if}{/for}{/if}
+    {#for v in versions}{#if v.getString('id') == version}
+    <p class="docs-source">
+      {#if version == 'main' && !v.getBoolean('converted')}
+      <a href="https://github.com/{=p.getString('repo')}/edit/{=p.getString('branch') ?: 'main'}/{=p.getString('path')}/{#if current}{=current}{#else}index{/if}.adoc">Edit this page on GitHub</a>
+      {#else if !v.getBoolean('converted')}
+      <a href="https://github.com/{=p.getString('repo')}/blob/{=v.getString('ref')}/{=p.getString('path')}/{#if current}{=current}{#else}index{/if}.adoc">View the source of this page</a>
+      {/if}
+    </p>
+    {/if}{/for}
+  </article>
+  {#if page.toc.size >= 2}
+  <nav class="docs-toc" aria-label="On this page">
+    <details open data-docs-toc>
+      <summary class="toc-title">On this page</summary>
+      {=page.tocHtml}
+    </details>
+  </nav>
+  {/if}
+</div>
+{/let}
+{/if}{/for}
+{/let}
+{/let}

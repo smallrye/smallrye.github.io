@@ -6,6 +6,7 @@
       <img class="logo-light" src="{=site.url('images/logo.svg')}" alt="SmallRye" width="160" height="41">
       <img class="logo-dark" src="{=site.url('images/logo-dark.svg')}" alt="SmallRye" width="160" height="41">
     </a>
+    {#if page.url.path.startsWith('/docs/') && page.url.path.split('/').length > 3}{#include partials/docs-brand /}{/if}
     <input type="checkbox" id="nav-toggle" class="nav-toggle-input" aria-label="Toggle menu">
     <label for="nav-toggle" class="nav-toggle"><span></span></label>
     <nav class="site-nav" aria-label="Main navigation">
@@ -13,7 +14,7 @@
         <li><a href="{=site.url('projects')}"{#if page.url.path.startsWith('/projects')} aria-current="page"{/if}>Projects</a></li>
         <li><a href="{=site.url('community')}"{#if page.url.path.startsWith('/community')} aria-current="page"{/if}>Community</a></li>
         <li><a href="{=site.url('blog')}"{#if page.url.path.startsWith('/blog')} aria-current="page"{/if}>Blog</a></li>
-        <li><a href="{=site.url('docs/index.html')}">Documentation</a></li>
+        <li><a href="{=site.url('docs/')}"{#if page.url.path.startsWith('/docs')} aria-current="page"{/if}>Documentation</a></li>
       </ul>
     </nav>
   </div>

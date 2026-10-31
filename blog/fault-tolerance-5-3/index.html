@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.redhat.com https://static.redhat.com https://assets.adobedtm.com https://www.youtube.com http://www.youtube.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://dpm.demdex.net https://adobedc.demdex.net https://smetrics.redhat.com; frame-src https://redhat.demdex.net; base-uri 'none'; object-src 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self'; base-uri 'none'; object-src 'none'; form-action 'none'">
 
   <!-- SEO TITLE -->
   
@@ -351,6 +351,8 @@ code, kbd, pre, samp { font-family: var(--font-mono); font-size: 0.9em; }
 .footer-bottom-bar a { display: inline-flex; align-items: center; min-height: 2.75rem; }
 .sponsor { display: flex; align-items: center; gap: 0.75rem; }
 .sponsor img { display: block; width: 200px; height: auto; }
+.footer-trademark { flex-basis: 100%; }
+.footer-bottom-bar .footer-trademark a { display: inline; min-height: 0; }
 
 /* ---- Theme toggle -------------------------------------------------------- */
 .theme-toggle { position: fixed; right: 1rem; bottom: 1rem; z-index: 30; width: 2.9rem; height: 2.9rem; border-radius: var(--radius); border: 1px solid var(--line); background: var(--bg-card); color: var(--fg); display: grid; place-items: center; cursor: pointer; }
@@ -409,7 +411,6 @@ code, kbd, pre, samp { font-family: var(--font-mono); font-size: 0.9em; }
   ]
 }
 </script>
-<script id="adobe_dtm" src="https://www.redhat.com/dtm.js" async onload="if (window._satellite && typeof _satellite.pageBottom === 'function') _satellite.pageBottom();"></script>
     <script type="module" src="/static/bundle/app-RBDOCUG6.js"></script>
       <!-- no style found for key 'app' in Bundler mapping !-->
 </head>
@@ -667,8 +668,9 @@ This is very new, so you have a unique chance to influence its future!</p>
   </div>
   <div class="footer-bottom">
     <div class="container footer-bottom-bar">
-      <p><a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a> <span aria-hidden="true">|</span> <a href="https://www.redhat.com/en/about/privacy-policy">Red Hat Privacy Policy</a></p>
+      <p><a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></p>
       <p class="sponsor">A <a href="https://www.commonhaus.org/">Commonhaus Foundation</a> project <a href="https://www.commonhaus.org/"><img src="/assets/images/commonhaus_reversed.svg" alt="Commonhaus Foundation" width="200" height="21" loading="lazy"></a></p>
+      <p class="footer-trademark">Copyright &copy; SmallRye. For details on our trademarks, please visit our <a href="https://www.commonhaus.org/policies/trademark-policy/">Trademark Policy</a> and <a href="https://www.commonhaus.org/trademarks/">Trademark List</a>. Trademarks of third parties are owned by their respective holders and their mention here does not suggest any endorsement or association.</p>
     </div>
   </div>
 </footer>

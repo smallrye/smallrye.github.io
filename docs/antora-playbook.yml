@@ -7,7 +7,9 @@ content:
     start_path: docs
     branches: HEAD
   - url: https://github.com/smallrye/smallrye-jwt.git
-    branches: main
+    # main no longer has doc/ (docs moved out of Antora in smallrye-jwt#935); pin the last tag that does
+    branches: ~
+    tags: 5.0.0-RC4
     start_path: doc
   - url: https://github.com/smallrye/smallrye-metrics.git
     branches: [2.4.x, main]

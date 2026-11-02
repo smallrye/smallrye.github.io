@@ -1,12 +1,576 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<title>Moved</title>
-<meta name="robots" content="noindex">
-<link rel="canonical" href="https://smallrye.io/docs/smallrye-jwt/latest/configuration/">
-<meta http-equiv="refresh" content="0; url=/docs/smallrye-jwt/latest/configuration/">
-<script>location.replace("/docs/smallrye-jwt/latest/configuration/" + location.hash)</script>
-</head>
-<body><p>This page has moved to <a href="/docs/smallrye-jwt/latest/configuration/">/docs/smallrye-jwt/latest/configuration/</a>.</p></body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Configuration :: SmallRye documentation</title>
+    <link rel="prev" href="index.html">
+    <link rel="next" href="generate-jwt.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../_/css/site.css">
+    <script>var uiRootPath = '../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <button class="nav-toggle"></button>
+
+      <a class="navbar-item title" href="index.html">SmallRye JWT</a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <span class="navbar-link">master</span>
+        <div class="navbar-dropdown navbar-menu">
+            <a class="navbar-item  is-current" href="index.html">master</a>
+        </div>
+      </div>
+
+
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <span class="navbar-link">Projects</span>
+          <div class="navbar-dropdown">
+              <a class="navbar-item" href="../index/index/index.html">Index</a>
+              <a class="navbar-item" href="../smallrye-fault-tolerance/6.11.4/index.html">SmallRye Fault Tolerance</a>
+              <a class="navbar-item" href="../smallrye-health/3.0.1/index.html">SmallRye Health</a>
+              <a class="navbar-item" href="index.html">SmallRye JWT</a>
+              <a class="navbar-item" href="../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
+          </div>
+        </div>
+
+        <a class="navbar-item" href="https://smallrye.io/">SmallRye.io main website</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="smallrye-jwt" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+<ul class="nav-list nav-list-level-0">
+  <li class="nav-item nav-item-level-0">
+<ul class="nav-list nav-list-level-1">
+  <li class="nav-item nav-item-level-1">
+    <a class="nav-link" href="index.html">Index</a>
+  </li>
+  <li class="nav-item nav-item-level-1 is-current-page">
+    <a class="nav-link" href="configuration.html">Configuration</a>
+  </li>
+  <li class="nav-item nav-item-level-1">
+    <a class="nav-link" href="generate-jwt.html">Generate JWT Tokens</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+  <div class="content">
+<aside class="toc sidebar" data-title="Table of contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+  <a href="https://github.com/smallrye/smallrye-jwt/blob/5.0.0-RC4/doc/modules/ROOT/pages/configuration.adoc" class="edit-this-page" title="Edit this page">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+<h1 class="page">Configuration</h1>
+<div class="sect1">
+<h2 id="_microprofile_jwt_properties"><a class="anchor" href="#_microprofile_jwt_properties"></a>MicroProfile JWT properties</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property Name</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mp.jwt.verify.publickey</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Public Key supplied as a string, parsed from it in the order defined in section <a href="#_supported_public_key_formats">Supported Public Key Formats</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mp.jwt.verify.publickey.location</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Config property allows for an external or internal location of Public Key to be specified.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mp.jwt.verify.publickey.algorithm</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>RS256</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Signature algorithm. Set it to <code>ES256</code> to support the Elliptic Curve signature algorithm.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mp.jwt.decrypt.key.location</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Config property allows for an external or internal location of Private Decryption Key to be specified.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mp.jwt.decrypt.key.algorithm</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RSA-OAEP, RSA-OAEP-256</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Decryption algorithm, both <code>RSA-OAEP</code> and <code>RSA-OAEP-256</code> will be supported by default. Set it to <code>RSA-OAEP-256</code> to support <code>RSA-OAEP</code> with <code>SHA-256</code> only.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mp.jwt.verify.issuer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expected value of the JWT <code>iss</code> (issuer) claim.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mp.jwt.verify.audiences</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>none</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Comma separated list of the audiences that a token <code>aud</code> claim may contain.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mp.jwt.verify.clock.skew</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>60</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clock skew in seconds used during the token expiration and age verification. An expired token is accepted if the current time is within the number of seconds specified by this property after the token expiration time. The default value is 60 seconds.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mp.jwt.verify.token.age</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>none</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of seconds that must not elapse since the <code>iat</code> (issued at) time.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mp.jwt.token.header</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>Authorization</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set this property if another header such as <code>Cookie</code> is used to pass the token.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mp.jwt.token.cookie</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>Bearer</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the cookie containing a token. This property will be effective only if  <code>mp.jwt.token.header</code> is set to <code>Cookie</code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_supported_public_key_formats"><a class="anchor" href="#_supported_public_key_formats"></a>Supported Public Key Formats</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Public Keys may be formatted in any of the following formats, specified in order of
+precedence:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Public Key Cryptography Standards #8 (PKCS#8) PEM</p>
+</li>
+<li>
+<p>JSON Web Key (JWK) or JSON Web Key Set (JWKS)</p>
+</li>
+<li>
+<p>Base64 URL encoded JSON Web Key (JWK) or JSON Web Key Set (JWKS)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_smallrye_jwt_properties"><a class="anchor" href="#_smallrye_jwt_properties"></a>SmallRye JWT properties</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>SmallRye JWT supports many properties which can be used to customize the token processing:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property Name</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.verify.secretkey</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Secret key supplied as a string.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.verify.key.location</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NONE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Location of the verification key which can point to both public and secret keys. Secret keys can only be in the JWK format. Note that 'mp.jwt.verify.publickey.location' will be ignored if this property is set.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.verify.algorithm</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>RS256</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Signature algorithm. Set it to <code>ES256</code> to support the Elliptic Curve signature algorithm. This property is deprecated, use <code>mp.jwt.verify.publickey.algorithm</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.verify.key-format</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>ANY</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set this property to a specific key format such as <code>PEM_KEY</code>, <code>PEM_CERTIFICATE</code>, <code>JWK</code> or <code>JWK_BASE64URL</code> to optimize the way the verification key is loaded.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.verify.key-provider</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>DEFAULT</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">By default, PEM, JWK or JWK key sets can be read from the local file system or fetched from URIs as required by MicroProfile JWT specification. Set this property to <code>AWS_ALB</code> to support an AWS Application Load Balancer verification key resolution.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.verify.relax-key-validation</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Relax the validation of the verification keys, setting this property to <code>true</code> will allow public RSA keys with the length less than 2048 bit.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.verify.certificate-thumbprint</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If this property is enabled then a signed token must contain either 'x5t' or 'x5t#S256' X509Certificate thumbprint headers. Verification keys can only be in JWK or PEM Certificate key formats in this case. JWK keys must have a 'x5c' (Base64-encoded X509Certificate) property set.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.token.header</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>Authorization</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set this property if another header such as <code>Cookie</code> is used to pass the token. This property is deprecated, use <code>mp.jwt.token.header</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.key-cache-size</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>100</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Key cache size. Use this property, as well as <code>smallrye.jwt.key-cache-time-to-live</code>, to control the key cache when a key provider such as <code>AWS_ALB</code> is configured with <code>smallrye.jwt.verify.key-provider=AWS_ALB</code> for resolving the keys dynamically.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.key-cache-time-to-live</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>10</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Key cache entry time-to-live in minutes. Use this property, as well as <code>smallrye.jwt.key-cache-size</code>,  to control the key cache when a key provider such as <code>AWS_ALB</code> is configured with <code>smallrye.jwt.verify.key-provider=AWS_ALB</code> for resolving the keys dynamically.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.token.cookie</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the cookie containing a token. This property will be effective only if  <code>smallrye.jwt.token.header</code> is set to <code>Cookie</code>. This property is deprecated, use <code>mp.jwt.token.cookie</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.always-check-authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set this property to <code>true</code> for <code>Authorization</code> header be checked even if the <code>smallrye.jwt.token.header</code> is set to <code>Cookie</code> but no cookie with a <code>smallrye.jwt.token.cookie</code> name exists.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.token.schemes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>Bearer</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Comma-separated list containing an alternative single or multiple schemes, for example, <code>DPoP</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.token.kid</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Key identifier. If it is set then the verification JWK key as well every JWT token must have a matching <code>kid</code> header.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.time-to-live</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The maximum number of seconds that a JWT may be issued for use. Effectively, the difference between the expiration date of the JWT and the issued at date must not exceed this value. Setting this property to a non-positive value relaxes the requirement for the token to have a valid 'iat' (issued at) claim.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.require.named-principal</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>false</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If an application relies on <code>java.security.Principal</code> returning a name then a token must have a <code>upn</code> or <code>preferred_username</code> or <code>sub</code> claim set. Setting this property will result in SmallRye JWT throwing an exception if none of these claims is available for the application code to reliably deal with a non-null <code>Principal</code> name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.path.sub</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Path to the claim containing the subject name. It starts from the top level JSON object and can contain multiple segments where each segment represents a JSON object name only, example: <code>realms/subject</code>. This property can be used if a token has no 'sub' claim but has the subject set in a different claim. Use double quotes with the namespace qualified claims.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.claims.sub</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This property can be used to set a default sub claim value when the current token has no standard or custom <code>sub</code> claim available. Effectively this property can be used to customize <code>java.security.Principal</code> name if no <code>upn</code> or <code>preferred_username</code> or <code>sub</code> claim is set.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.path.groups</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Path to the claim containing the groups. It starts from the top level JSON object and can contain multiple segments where each segment represents a JSON object name only, example: <code>realm/groups</code>. This property can be used if a token has the groups set in a claim different to <code>groups</code>. Use double quotes with the namespace qualified claims.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.groups-separator</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>' '</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Separator for splitting a string which may contain multiple group values. It will only be used if the <code>smallrye.jwt.path.groups</code> property points to a custom claim whose value is a string. The default value is a single space because a standard OAuth2 <code>scope</code> claim may contain a space separated sequence.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.claims.groups</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This property can be used to set a default groups claim value when the current token has no standard groups claim available (or no custom groups claim when <code>smallrye.jwt.path.groups</code> is used).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.jwks.refresh-interval</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>60</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JWK cache refresh interval in minutes. It will be ignored unless the <code>mp.jwt.verify.publickey.location</code> points to the HTTP or HTTPS URL based JWK set and no HTTP <code>Cache-Control</code> response header with a positive <code>max-age</code> parameter value is returned from a JWK set endpoint.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.jwks.retain-cache-on-error-duration</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JWK cache retain on error duration in minutes which sets the length of time, before trying again, to keep using the cache when an error occurs making the request to the JWKS URI or parsing the response. It will be ignored unless the <code>mp.jwt.verify.publickey.location</code> property points to the HTTP or HTTPS URL based JWK set.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.jwks.forced-refresh-interval</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>30</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Forced JWK cache refresh interval in minutes which is used to restrict the frequency of the forced refresh attempts which may happen when the token verification fails due to the cache having no JWK key with a <code>kid</code> property matching the current token&#8217;s <code>kid</code> header. It will be ignored unless the <code>mp.jwt.verify.publickey.location</code> points to the HTTP or HTTPS URL based JWK set.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.expiration.grace</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expiration grace in seconds. By default an expired token will still be accepted if the current time is no more than 1 min after the token expiry time. This property is deprecated. Use <code>mp.jwt.verify.clock.skew</code> instead.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.verify.aud</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Comma separated list of the audiences that a token <code>aud</code> claim may contain. This property is deprecated. Use <code>mp.jwt.verify.audiences</code> instead.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.required.claims</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Comma separated list of the claims that a token must contain.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.decrypt.key.location</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Config property allows for an external or internal location of Private Decryption Key to be specified. This property is deprecated, use <code>mp.jwt.decrypt.key.location</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.decrypt.key</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Decryption key supplied as a string.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.decrypt.algorithm</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>RSA_OAEP</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Decryption algorithm. This property is deprecated, use <code>mp.jwt.decrypt.key.algorithm</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.token.decryption.kid</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Decryption Key identifier. If it is set then the decryption JWK key as well every JWT token must have a matching <code>kid</code> header.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.client.tls.certificate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TLS trusted certificate which may need to be configured if the keys have to be fetched over <code>HTTPS</code>. If this property is set then the <code>smallrye.jwt.client.tls.certificate.path</code> property will be ignored.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.client.tls.certificate.path</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Path to TLS trusted certificate which may need to be configured if the keys have to be fetched over <code>HTTPS</code>. This property will be ignored if the <code>smallrye.jwt.client.tls.certificate</code> property is set.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.client.tls.trust-all</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Trust all the hostnames. If the keys have to be fetched over <code>HTTPS</code> and this property is set to <code>true</code> then all the hostnames are trusted by default.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.client.tls.hosts</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set of trusted hostnames. If the keys have to be fetched over <code>HTTPS</code> and <code>smallrye.jwt.client.tls.trust-all</code> is set to <code>false</code> then then this property can be used to configure the trusted hostnames.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.http.proxy.host</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTTP proxy host.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.http.proxy.port</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>80</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTTP proxy port.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.keystore.type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>JKS</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This property can be used to customize a keystore type if either <code>mp.jwt.verify.publickey.location</code> or mp.jwt.decrypt.key.location` points to a <code>KeyStore</code> file. If it is not set then the file name will be checked to determine the keystore type before defaulting to <code>JKS</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.keystore.provider</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This property can be used to customize a <code>KeyStore</code> provider if <code>mp.jwt.verify.publickey.location</code> or <code>mp.jwt.decrypt.key.location</code> points to a <code>KeyStore</code> file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.keystore.password</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keystore password. If <code>mp.jwt.verify.publickey.location</code> or <code>mp.jwt.decrypt.key.location</code> then this property has be set.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.keystore.verify.key.alias</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This property has to be set to identify a public verification key which will be extracted from <code>KeyStore</code> from a matching certificate if <code>mp.jwt.verify.publickey.location</code> points to a <code>KeyStore</code> file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.keystore.decrypt.key.alias</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This property has to be set to identify a private decryption key if <code>mp.jwt.decrypt.key.location</code> points to a <code>KeyStore</code> file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.keystore.decrypt.key.password</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This property may be set if a private decryption key&#8217;s password in <code>KeyStore</code> is different to <code>smallrye.jwt.keystore.password</code> when <code>mp.jwt.decrypt.key.location</code> points to a <code>KeyStore</code> file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smallrye.jwt.resolve-remote-keys-at-startup</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set this property to <code>true</code> to resolve the remote keys at the application startup.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<h1 id="_create_jsonwebtoken_with_jwtparser" class="sect0"><a class="anchor" href="#_create_jsonwebtoken_with_jwtparser"></a>Create JsonWebToken with JWTParser</h1>
+<div class="openblock partintro">
+<div class="content">
+<div class="paragraph">
+<p>If the JWT token can not be injected, for example, if it is embedded in the service request payload or the service endpoint acquires it out of band, then one can use <code>JWTParser</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code>import org.eclipse.microprofile.jwt.JsonWebToken;
+import io.smallrye.jwt.auth.principal.JWTParser;
+...
+@Inject JWTParser parser;
+
+String token = getTokenFromOidcServer();
+
+// Parse and verify the token
+JsonWebToken jwt = parser.parse(token);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also use it to customize the way the token is verified or decrypted. For example, one can supply a local <code>SecretKey</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code>import javax.crypto.SecretKey;
+import javax.ws.rs.GET;
+import javax.ws.rs.core.NewCookie;
+import javax.ws.rs.core.Response;
+import org.eclipse.microprofile.jwt.JsonWebToken;
+import io.smallrye.jwt.auth.principal.JWTParser;
+import io.smallrye.jwt.build.Jwt;
+
+@Path("/secured")
+public class SecuredResource {
+ @Inject JWTParser parser;
+ private SecretKey key = createSecretKey();
+
+ @GET
+ @Produces("text/plain")
+ public Response getUserName(@CookieParam("jwt") String jwtCookie) {
+    Response response = null;
+    if (jwtCookie == null) {
+        String newJwtCookie = Jwt.upn("Alice").sign(key);
+        // or newJwtCookie = Jwt.upn("alice").encrypt(key);
+        return Response.ok("Alice").cookie(new NewCookie("jwt", newJwtCookie)).build();
+    else {
+        // All mp.jwt and smallrye.jwt properties are still effective, only the verification key is customized.
+        JsonWebToken jwt = parser.verify(jwtCookie, key);
+        // or jwt = parser.decrypt(jwtCookie, key);
+        return Response.ok(jwt.getName()).build();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that if you need to use <code>JWTParser</code> to verify the tokens with different verification constraints (for example, tokens have been signed by different providers, using different algorithms, etc) then please use a new instance of <code>io.smallrye.jwt.auth.principal.DefaultJWTParser</code> per every request - <code>DefaultJWTParser</code> has several methods for customizing the verification requirements.</p>
+</div>
+<div class="paragraph">
+<p>If the same provider uses different keys to secure the token then using a <code>JsonWebKey Set</code> containing several keys may also work with the injected <code>JWTParser</code>.</p>
+</div>
+</div>
+</div>
+<h1 id="_token_decryption" class="sect0"><a class="anchor" href="#_token_decryption"></a>Token Decryption</h1>
+<div class="openblock partintro">
+<div class="content">
+<div class="paragraph">
+<p>If your application needs to accept the tokens with the encrypted claims or with the encrypted inner signed claims then all you have to do is to set
+<code>smallrye.jwt.decrypt.key-location</code> pointing to the decryption key.</p>
+</div>
+<div class="paragraph">
+<p>If this is the only key property which is set then the incoming token is expected to contain the encrypted claims only.
+If either <code>mp.jwt.verify.publickey</code> or <code>mp.jwt.verify.publickey.location</code> verification properties are also set then the incoming token is expected to contain
+the encrypted inner-signed token.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="#generate-jwt-tokens">Generate JWT tokens</a> and learn how to generate the encrypted or inner-signed and then encrypted tokens fast.</p>
+</div>
+</div>
+</div>
+<h1 id="_custom_factories" class="sect0"><a class="anchor" href="#_custom_factories"></a>Custom Factories</h1>
+<div class="openblock partintro">
+<div class="content">
+<div class="paragraph">
+<p><code>io.smallrye.jwt.auth.principal.DefaultJWTCallerPrincipalFactory</code> is used by default to parse and verify JWT tokens and convert them to <code>JsonWebToken</code> principals.
+It uses <code>MP JWT</code> and <code>smallrye-jwt</code> properties listed in the <code>Configuration</code> section to verify and customize JWT tokens.</p>
+</div>
+<div class="paragraph">
+<p>If you need to provide your own factory, for example, to avoid verifying the tokens again which have already been verified by the firewall, then you can either use a <code>ServiceLoader</code> mechanism by providing a <code>META-INF/services/io.smallrye.jwt.auth.principal.JWTCallerPrincipalFactory</code> resource or simply have an <code>Alternative</code> CDI bean implementation like this one:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+import javax.annotation.Priority;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Alternative;
+import org.jose4j.jwt.JwtClaims;
+import org.jose4j.jwt.consumer.InvalidJwtException;
+import io.smallrye.jwt.auth.principal.DefaultJWTCallerPrincipal;
+import io.smallrye.jwt.auth.principal.JWTAuthContextInfo;
+import io.smallrye.jwt.auth.principal.JWTCallerPrincipal;
+import io.smallrye.jwt.auth.principal.JWTCallerPrincipalFactory;
+import io.smallrye.jwt.auth.principal.ParseException;
+
+@ApplicationScoped
+@Alternative
+@Priority(1)
+public class TestJWTCallerPrincipalFactory extends JWTCallerPrincipalFactory {
+
+    @Override
+    public JWTCallerPrincipal parse(String token, JWTAuthContextInfo authContextInfo) throws ParseException {
+        try {
+            // Token has already been verified, parse the token claims only
+            String json = new String(Base64.getUrlDecoder().decode(token.split("\\.")[1]), StandardCharsets.UTF_8);
+            return new DefaultJWTCallerPrincipal(JwtClaims.parse(json));
+        } catch (InvalidJwtException ex) {
+            throw new ParseException(ex.getMessage());
+        }
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="index.html">Index</a></span>
+  <span class="next"><a href="generate-jwt.html">Generate JWT Tokens</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>
+    Sponsored by <a href="https://www.redhat.com"><img style="vertical-align: middle; height: 2.5em;" src="../_/img/redhat.svg" alt="Red Hat"></a>
+  </p>
+  <p>
+    Made with <a href="https://github.com/smallrye/smallrye-antora-ui">SmallRye Antora UI</a>, which is licensed under the MPL-2.0 license.
+    Includes portions of <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>, which is licensed under the MIT license.
+  </p>
+</footer>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
 </html>

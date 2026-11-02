@@ -1,0 +1,34 @@
+[cols="<,<,^,^,<",options="header",]
+|===
+|Attribute (_alias_) |Description |Type |Mandatory |Default
+|_address_ |The AMQP address. If not set, the channel name is used |string |false |
+|_capabilities_ |A comma-separated list of capabilities proposed by the sender or receiver client. |string |false |
+|_client-options-name_ _(amqp-client-options-name)_ |The name of the AMQP Client Option bean used to customize the AMQP client configuration |string |false |
+|_cloud-events_ |Enables (default) or disables the Cloud Event support. If enabled on an _incoming_ channel, the connector analyzes the incoming records and try to create Cloud Event metadata. If enabled on an _outgoing_, the connector sends the outgoing messages as Cloud Event if the message includes Cloud Event Metadata. |boolean |false |`true`
+|_cloud-events-data-content-type_ _(cloud-events-default-data-content-type)_ |Configure the default `datacontenttype` attribute of the outgoing Cloud Event. Requires `cloud-events` to be set to `true`. This value is used if the message does not configure the `datacontenttype` attribute itself |string |false |
+|_cloud-events-data-schema_ _(cloud-events-default-data-schema)_ |Configure the default `dataschema` attribute of the outgoing Cloud Event. Requires `cloud-events` to be set to `true`. This value is used if the message does not configure the `dataschema` attribute itself |string |false |
+|_cloud-events-insert-timestamp_ _(cloud-events-default-timestamp)_ |Whether or not the connector should insert automatically the `time` attribute into the outgoing Cloud Event. Requires `cloud-events` to be set to `true`. This value is used if the message does not configure the `time` attribute itself |boolean |false |`true`
+|_cloud-events-mode_ |The Cloud Event mode (`structured` or `binary` (default)). Indicates how are written the cloud events in the outgoing record |string |false |`binary`
+|_cloud-events-source_ _(cloud-events-default-source)_ |Configure the default `source` attribute of the outgoing Cloud Event. Requires `cloud-events` to be set to `true`. This value is used if the message does not configure the `source` attribute itself |string |false |
+|_cloud-events-subject_ _(cloud-events-default-subject)_ |Configure the default `subject` attribute of the outgoing Cloud Event. Requires `cloud-events` to be set to `true`. This value is used if the message does not configure the `subject` attribute itself |string |false |
+|_cloud-events-type_ _(cloud-events-default-type)_ |Configure the default `type` attribute of the outgoing Cloud Event. Requires `cloud-events` to be set to `true`. This value is used if the message does not configure the `type` attribute itself |string |false |
+|_connect-timeout_ _(amqp-connect-timeout)_ |The connection timeout in milliseconds |int |false |`1000`
+|_container-id_ |The AMQP container id |string |false |
+|_credit-retrieval-period_ |The period (in milliseconds) between two attempts to retrieve the credits granted by the broker. This time is used when the sender run out of credits. |int |false |`2000`
+|_durable_ |Whether sent AMQP messages are marked durable |boolean |false |`false`
+|_health-timeout_ |The max number of seconds to wait to determine if the connection with the broker is still established for the readiness check. After that threshold, the check is considered as failed. |int |false |`3`
+|_host_ _(amqp-host)_ |The broker hostname |string |false |`localhost`
+|_link-name_ |The name of the link. If not set, the channel name is used. |string |false |
+|_merge_ |Whether the connector should allow multiple upstreams |boolean |false |`false`
+|_password_ _(amqp-password)_ |The password used to authenticate to the broker |string |false |
+|_port_ _(amqp-port)_ |The broker port |int |false |`5672`
+|_reconnect-attempts_ _(amqp-reconnect-attempts)_ |The number of reconnection attempts |int |false |`100`
+|_reconnect-interval_ _(amqp-reconnect-interval)_ |The interval in second between two reconnection attempts |int |false |`10`
+|_sni-server-name_ _(amqp-sni-server-name)_ |If set, explicitly override the hostname to use for the TLS SNI server name |string |false |
+|_tracing-enabled_ |Whether tracing is enabled (default) or disabled |boolean |false |`true`
+|_ttl_ |The time-to-live of the send AMQP messages. 0 to disable the TTL |long |false |`0`
+|_use-anonymous-sender_ |Whether or not the connector should use an anonymous sender. Default value is `true` if the broker supports it, `false` otherwise. If not supported, it is not possible to dynamically change the destination address. |boolean |false |
+|_use-ssl_ _(amqp-use-ssl)_ |Whether the AMQP connection uses SSL/TLS |boolean |false |`false`
+|_username_ _(amqp-username)_ |The username used to authenticate to the broker |string |false |
+|_virtual-host_ _(amqp-virtual-host)_ |If set, configure the hostname value used for the connection AMQP Open frame and TLS SNI server name (if TLS is in use) |string |false |
+|===

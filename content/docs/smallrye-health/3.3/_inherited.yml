@@ -1,0 +1,7 @@
+# Written by tools/docs/Docs.java sync: pages stored in a newer version (see Inherit.java)
+async-checks: latest
+custom-config-properties: latest
+health-groups: latest
+health-registry: latest
+static-access: latest
+wellness: latest

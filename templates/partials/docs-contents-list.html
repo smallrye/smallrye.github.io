@@ -1,0 +1,14 @@
+{! The pages of a section on a start page; sections inside it recurse under their titles. !}
+<ul>
+  {#for item in items}
+  {#if item.containsKey('items')}
+  <li class="docs-contents-section"><span>{=item.getString('title')}</span>
+    {#include partials/docs-contents-list items=item.getJsonArray('items') base=base /}
+  </li>
+  {#else if item.containsKey('url')}
+  {#if item.getString('url').startsWith('http')}<li><a href="{=item.getString('url')}">{=item.getString('title')}</a></li>{/if}
+  {#else if item.containsKey('page')}
+  <li><a href="{=base}{#if item.getString('page') != 'index'}{=item.getString('page')}/{/if}">{=item.getString('title')}</a></li>
+  {/if}
+  {/for}
+</ul>

@@ -1,0 +1,21 @@
+# Written by tools/docs/Docs.java sync: pages stored in a newer version (see Inherit.java)
+config-sources/custom: latest
+config-sources/factories: latest
+config-sources/json: latest
+config-sources/locations: latest
+config/config-value: latest
+config/configuration: latest
+config/customizer: latest
+config/environment-variables: latest
+config/expressions: latest
+config/getting-started: latest
+config/indexed-properties: latest
+config/instance-builder: latest
+config/map-support: latest
+config/mappings: latest
+config/profiles: latest
+converters/custom: latest
+extensions/fallback: latest
+extensions/interceptors: latest
+extensions/logging: latest
+extensions/relocate: latest

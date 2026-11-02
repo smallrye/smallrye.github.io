@@ -1,0 +1,10 @@
+[cols=",,,",options="header",]
+|===
+|Attribute |Mandatory |Default Value |Description
+|`k8s-host` |No | |The Kubernetes API host.
+|`k8s-namespace` |No | |The namespace of the service. Use all to discover all namespaces.
+|`application` |No | |The Kubernetes application Id; if not defined Stork service name will be used.
+|`port-name` |No | |The Kubernetes application port name. If not defined, when exposing multiple ports, Stork will use the first one.
+|`refresh-period` |No |`5M` |Service discovery cache refresh period.
+|`secure` |No | |Whether the connection with the service should be encrypted with TLS.
+|===

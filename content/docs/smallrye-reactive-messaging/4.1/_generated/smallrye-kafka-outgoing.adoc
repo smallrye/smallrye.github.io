@@ -1,0 +1,39 @@
+[cols="<,<,^,^,<",options="header",]
+|===
+|Attribute (_alias_) |Description |Type |Mandatory |Default
+|_acks_ |The number of acknowledgments the producer requires the leader to have received before considering a request complete. This controls the durability of records that are sent. Accepted values are: 0, 1, all |string |false |`1`
+|_bootstrap.servers_ _(kafka.bootstrap.servers)_ |A comma-separated list of host:port to use for establishing the initial connection to the Kafka cluster. |string |false |`localhost:9092`
+|_buffer.memory_ |The total bytes of memory the producer can use to buffer records waiting to be sent to the server. |long |false |`33554432`
+|_client-id-prefix_ |Prefix for Kafka client `client.id` attribute. If defined configured or generated `client.id` will be prefixed with the given value. |string |false |
+|_close-timeout_ |The amount of milliseconds waiting for a graceful shutdown of the Kafka producer |int |false |`10000`
+|_cloud-events_ |Enables (default) or disables the Cloud Event support. If enabled on an _incoming_ channel, the connector analyzes the incoming records and try to create Cloud Event metadata. If enabled on an _outgoing_, the connector sends the outgoing messages as Cloud Event if the message includes Cloud Event Metadata. |boolean |false |`true`
+|_cloud-events-data-content-type_ _(cloud-events-default-data-content-type)_ |Configure the default `datacontenttype` attribute of the outgoing Cloud Event. Requires `cloud-events` to be set to `true`. This value is used if the message does not configure the `datacontenttype` attribute itself |string |false |
+|_cloud-events-data-schema_ _(cloud-events-default-data-schema)_ |Configure the default `dataschema` attribute of the outgoing Cloud Event. Requires `cloud-events` to be set to `true`. This value is used if the message does not configure the `dataschema` attribute itself |string |false |
+|_cloud-events-insert-timestamp_ _(cloud-events-default-timestamp)_ |Whether or not the connector should insert automatically the `time` attribute into the outgoing Cloud Event. Requires `cloud-events` to be set to `true`. This value is used if the message does not configure the `time` attribute itself |boolean |false |`true`
+|_cloud-events-mode_ |The Cloud Event mode (`structured` or `binary` (default)). Indicates how are written the cloud events in the outgoing record |string |false |`binary`
+|_cloud-events-source_ _(cloud-events-default-source)_ |Configure the default `source` attribute of the outgoing Cloud Event. Requires `cloud-events` to be set to `true`. This value is used if the message does not configure the `source` attribute itself |string |false |
+|_cloud-events-subject_ _(cloud-events-default-subject)_ |Configure the default `subject` attribute of the outgoing Cloud Event. Requires `cloud-events` to be set to `true`. This value is used if the message does not configure the `subject` attribute itself |string |false |
+|_cloud-events-type_ _(cloud-events-default-type)_ |Configure the default `type` attribute of the outgoing Cloud Event. Requires `cloud-events` to be set to `true`. This value is used if the message does not configure the `type` attribute itself |string |false |
+|_health-enabled_ |Whether health reporting is enabled (default) or disabled |boolean |false |`true`
+|_health-readiness-enabled_ |Whether readiness health reporting is enabled (default) or disabled |boolean |false |`true`
+|_health-readiness-timeout_ |_deprecated_ - During the readiness health check, the connector connects to the broker and retrieves the list of topics. This attribute specifies the maximum duration (in ms) for the retrieval. If exceeded, the channel is considered not-ready. Deprecated: Use 'health-topic-verification-timeout' instead. |long |false |
+|_health-readiness-topic-verification_ |_deprecated_ - Whether the readiness check should verify that topics exist on the broker. Default to false. Enabling it requires an admin connection. Deprecated: Use 'health-topic-verification-enabled' instead. |boolean |false |
+|_health-topic-verification-enabled_ |Whether the startup and readiness check should verify that topics exist on the broker. Default to false. Enabling it requires an admin client connection. |boolean |false |`false`
+|_health-topic-verification-timeout_ |During the startup and readiness health check, the connector connects to the broker and retrieves the list of topics. This attribute specifies the maximum duration (in ms) for the retrieval. If exceeded, the channel is considered not-ready. |long |false |`2000`
+|_kafka-configuration_ |Identifier of a CDI bean that provides the default Kafka consumer/producer configuration for this channel. The channel configuration can still override any attribute. The bean must have a type of Map++<++String, Object++>++ and must use the @io.smallrye.common.annotation.Identifier qualifier to set the identifier. |string |false |
+|_key_ |A key to used when writing the record |string |false |
+|_key-serialization-failure-handler_ |The name set in `@Identifier` of a bean that implements `io.smallrye.reactive.messaging.kafka.SerializationFailureHandler`. If set, serialization failure happening when serializing keys are delegated to this handler which may provide a fallback value. |string |false |
+|_key.serializer_ |The serializer classname used to serialize the record's key |string |false |`org.apache.kafka.common.serialization.StringSerializer`
+|_lazy-client_ |Whether Kafka client is created lazily or eagerly. |boolean |false |`false`
+|_max-inflight-messages_ |The maximum number of messages to be written to Kafka concurrently. It limits the number of messages waiting to be written and acknowledged by the broker. You can set this attribute to `0` remove the limit |long |false |`1024`
+|_merge_ |Whether the connector should allow multiple upstreams |boolean |false |`false`
+|_partition_ |The target partition id. -1 to let the client determine the partition |int |false |`-1`
+|_propagate-headers_ |A comma-separating list of incoming record headers to be propagated to the outgoing record |string |false |++``++
+|_propagate-record-key_ |Propagate incoming record key to the outgoing record |boolean |false |`false`
+|_retries_ |If set to a positive number, the connector will try to resend any record that was not delivered successfully (with a potentially transient error) until the number of retries is reached. If set to 0, retries are disabled. If not set, the connector tries to resend any record that failed to be delivered (because of a potentially transient error) during an amount of time configured by `delivery.timeout.ms`. |long |false |`2147483647`
+|_topic_ |The consumed / populated Kafka topic. If neither this property nor the `topics` properties are set, the channel name is used |string |false |
+|_tracing-enabled_ |Whether tracing is enabled (default) or disabled |boolean |false |`true`
+|_value-serialization-failure-handler_ |The name set in `@Identifier` of a bean that implements `io.smallrye.reactive.messaging.kafka.SerializationFailureHandler`. If set, serialization failure happening when serializing values are delegated to this handler which may provide a fallback value. |string |false |
+|_value.serializer_ |The serializer classname used to serialize the payload |string |true |
+|_waitForWriteCompletion_ |Whether the client waits for Kafka to acknowledge the written record before acknowledging the message |boolean |false |`true`
+|===

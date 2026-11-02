@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://api.github.com; base-uri 'none'; object-src 'none'; form-action 'none'">
+
+  <!-- SEO TITLE -->
+  
+  <title>Emitter and Channels - SmallRye</title>
+  <meta property="og:title" content="Emitter and Channels" />
+  <meta name="twitter:title" content="Emitter and Channels">
+  <meta property="og:site_name" content="SmallRye">
+  <!-- SEO DESCRIPTION -->
+  <meta name="description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+  <meta property="og:description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile." />
+  <meta name="twitter:description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+
+  <!-- SEO URL -->
+  <link rel="canonical" href="https://smallrye.io/docs/smallrye-reactive-messaging/4.15/concepts/emitter/" />
+  <meta property="og:url" content="https://smallrye.io/docs/smallrye-reactive-messaging/4.15/concepts/emitter/" />
+  <meta name="twitter:url" content="https://smallrye.io/docs/smallrye-reactive-messaging/4.15/concepts/emitter/">
+
+  <!-- SEO TYPE -->
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2026-11-02T00:30:18.782804271Z[UTC]" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image" content="https://smallrye.io/images/rye-field-og.jpg">
+  <meta name="twitter:image" content="https://smallrye.io/images/rye-field-og.jpg">
+  <!-- SEO COLLECTION PAGES -->
+  <!-- SEO TWITTER -->
+  <meta name="twitter:site" content="@smallrye_io" />
+  <meta name="twitter:creator" content="@smallrye_io" />
+  <!-- SEO LOCALE -->
+  <meta property="og:locale" content="en" />
+  <!-- SEO GENERATOR -->
+  <meta name="generator" content="Quarkus Roq v2.1.9" />
+
+<link rel="alternate" type="application/rss+xml" title="SmallRye" href="https://smallrye.io/rss.xml"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <script>
+    try {
+      var t = localStorage.getItem('site-theme');
+      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    } catch (e) { /* private mode: follow the OS preference */ }
+  </script>
+  <link rel="stylesheet" href="/css/main.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://smallrye.io/#organization",
+      "name": "SmallRye",
+      "url": "https://smallrye.io/",
+      "logo": "https://smallrye.io/images/logo.svg",
+      "description": "SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.",
+      "email": "smallrye@googlegroups.com",
+      "sameAs": [
+        "https://github.com/smallrye",
+        "https://twitter.com/smallrye_io",
+        "https://groups.google.com/d/forum/smallrye"
+      ],
+      "parentOrganization": { "@type": "Organization", "name": "Commonhaus Foundation", "url": "https://www.commonhaus.org/" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://smallrye.io/#website",
+      "name": "SmallRye",
+      "url": "https://smallrye.io/",
+      "publisher": { "@id": "https://smallrye.io/#organization" }
+    }
+  ]
+}
+</script>
+    <script type="module" src="/static/bundle/app-KFNV2DMD.js"></script>
+      <!-- no style found for key 'app' in Bundler mapping !-->
+<script>
+  try {
+    if (matchMedia('(min-width: 60rem)').matches && localStorage.getItem('docs-nav') === 'open') document.documentElement.classList.add('docs-nav-open');
+    if (localStorage.getItem('docs-toc') === 'closed') document.documentElement.classList.add('docs-toc-closed');
+  } catch (e) { /* storage blocked: closed */ }
+</script>
+<noscript><style>.docs-nav { display: block !important; } .docs-nav-button { display: none !important; }</style></noscript>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand" href="/">
+      <img class="logo-light" src="/images/logo.svg" alt="SmallRye" width="160" height="41">
+      <img class="logo-dark" src="/images/logo-dark.svg" alt="SmallRye" width="160" height="41">
+    </a>
+<div class="docs-brand">
+  <a class="docs-brand-project" href="/docs/smallrye-reactive-messaging/4.15/"><span class="project-logo" style="--logo: url('/images/projects/smallrye-reactive-messaging.png')" aria-hidden="true"></span><span class="docs-brand-name">Reactive Messaging</span></a>
+  <!--docs-version--><label class="docs-version">
+    <span class="visually-hidden">Version</span>
+    <select data-docs-version data-current="4.15" data-base="/docs/smallrye-reactive-messaging/">
+      
+      <option value="latest">5.0.0-RC2 (latest)</option>
+      
+                  <optgroup label="4.x">
+      
+      <option value="4.37">4.37.1</option>
+      
+                  
+      
+      <option value="4.36">4.36.0</option>
+      
+                  
+      
+      <option value="4.35">4.35.0</option>
+      
+                  
+      
+      <option value="4.34">4.34.0</option>
+      
+                  
+      
+      <option value="4.33">4.33.1</option>
+      
+                  
+      
+      <option value="4.32">4.32.1</option>
+      
+                  
+      
+      <option value="4.31">4.31.0</option>
+      
+                  
+      
+      <option value="4.30">4.30.0</option>
+      
+                  
+      
+      <option value="4.29">4.29.0</option>
+      
+                  
+      
+      <option value="4.28">4.28.0</option>
+      
+                  
+      
+      <option value="4.27">4.27.0</option>
+      
+                  
+      
+      <option value="4.26">4.26.0</option>
+      
+                  
+      
+      <option value="4.25">4.25.0</option>
+      
+                  
+      
+      <option value="4.24">4.24.1</option>
+      
+                  
+      
+      <option value="4.23">4.23.0</option>
+      
+                  
+      
+      <option value="4.22">4.22.0</option>
+      
+                  
+      
+      <option value="4.21">4.21.0</option>
+      
+                  
+      
+      <option value="4.20">4.20.0</option>
+      
+                  
+      
+      <option value="4.19">4.19.0</option>
+      
+                  
+      
+      <option value="4.18">4.18.1</option>
+      
+                  
+      
+      <option value="4.17">4.17.0</option>
+      
+                  
+      
+      <option value="4.16">4.16.2</option>
+      
+                  
+      
+      <option value="4.15" selected>4.15.0</option>
+      
+                  
+      
+      <option value="4.14">4.14.0</option>
+      
+                  
+      
+      <option value="4.13">4.13.0</option>
+      
+                  
+      
+      <option value="4.12">4.12.0</option>
+      
+                  
+      
+      <option value="4.11">4.11.0</option>
+      
+                  
+      
+      <option value="4.10">4.10.2</option>
+      
+                  
+      
+      <option value="4.9">4.9.0</option>
+      
+                  
+      
+      <option value="4.8">4.8.0</option>
+      
+                  
+      
+      <option value="4.7">4.7.0</option>
+      
+                  
+      
+      <option value="4.6">4.6.1</option>
+      
+                  
+      
+      <option value="4.5">4.5.0</option>
+      
+                  
+      
+      <option value="4.4">4.4.0</option>
+      
+                  
+      
+      <option value="4.3">4.3.0</option>
+      
+                  
+      
+      <option value="4.2">4.2.0</option>
+      
+                  
+      
+      <option value="4.1">4.1.1</option>
+      
+                  
+      
+      <option value="4.0">4.0.0</option>
+      
+                  </optgroup><optgroup label="3.x">
+      
+      <option value="3">3.25.0</option>
+      
+      </optgroup>
+      <option value="main">main (snapshot)</option>
+      
+      
+    </select>
+  </label><!--/docs-version-->
+  <div class="docs-tools">
+    <button type="button" class="docs-search-button" data-docs-search-open aria-haspopup="dialog" aria-keyshortcuts="/">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <span>Search</span><kbd aria-hidden="true">/</kbd>
+    </button>
+    <a class="docs-github" href="https://github.com/smallrye/smallrye-reactive-messaging" title="smallrye/smallrye-reactive-messaging on GitHub" data-docs-github="smallrye/smallrye-reactive-messaging">
+      <svg aria-hidden="true" viewBox="0 0 16 16" width="26" height="26"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      <span class="docs-github-text">
+        <span class="docs-github-name">GitHub<span class="visually-hidden">: smallrye/smallrye-reactive-messaging</span></span>
+        <span class="docs-github-facts"><span title="Latest release">5.0.0-RC2</span><span data-docs-github-stars hidden></span><span data-docs-github-forks hidden></span></span>
+      </span>
+    </a>
+  </div>
+</div>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-input" aria-label="Toggle menu">
+    <label for="nav-toggle" class="nav-toggle"><span></span></label>
+    <nav class="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/docs/" aria-current="page">Documentation</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+  <main id="main">
+
+<div class="container docs-layout">
+  <aside class="docs-side">
+    <button type="button" class="docs-nav-button" aria-controls="docs-nav" aria-expanded="false" data-docs-nav-button>
+      <span class="docs-nav-icon" aria-hidden="true"></span><span class="docs-nav-label">Contents</span>
+    </button>
+    <nav id="docs-nav" class="docs-nav" aria-label="SmallRye Reactive Messaging documentation">
+      <!--docs-version-->
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/">Home</a></li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Core</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/getting-started/">Getting Started</a></li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Concepts</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/concepts/concepts/">Introduction</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/concepts/model/">Development Model</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/concepts/emitter/" aria-current="page">Emitters and Channel</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/concepts/connectors/">Connectors</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/concepts/contributing-connectors/">Contributing Connectors</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/concepts/acknowledgement/">Acknowledgement</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/concepts/blocking/">Blocking Processing</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/concepts/signatures/">Method Signatures</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/concepts/skipping/">Skipping Messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/concepts/converters/">Message Converters</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/concepts/keyed-multi/">Keyed Streams</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/concepts/decorators/">Channel Decorators and Interceptors</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/concepts/broadcast/">Broadcast</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/concepts/merge/">Merge channels</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/concepts/incoming-concurrency/">Incoming Channel Concurrency</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/concepts/incomings/">@Incomings</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/concepts/outgoings/">@Outgoings</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/concepts/testing/">Testing</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/concepts/logging/">Logging</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/concepts/observability/">Observability API</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/concepts/advanced-config/">Advanced Configuration</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/concepts/message-context/">Message Context</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/concepts/incoming-metadata-injection/">Metadata Injection</a></li>
+</ul>
+    </details>
+  </li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Kafka</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/kafka/kafka/">Apache Kafka Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/kafka/receiving-kafka-records/">Receiving records</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/kafka/writing-kafka-records/">Writing records</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/kafka/health/">Health Checks</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/kafka/avro-configuration/">Using Avro</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/kafka/protobuf-configuration/">Using Protobuf</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/kafka/consumer-rebalance-listener/">Rebalance Listeners</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/kafka/kerberos/">Kerberos authentication</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/kafka/client-service/">Accessing the client</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/kafka/default-configuration/">Customizing Default Kafka Configuration</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/kafka/test-companion/">Test Companion for Kafka</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/kafka/transactions/">Kafka Transactions and Exactly-Once Processing</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/kafka/request-reply/">Kafka Request/Reply</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">AMQP 1.0</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/amqp/amqp/">AMQP 1.0 Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/amqp/receiving-amqp-messages/">Receiving messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/amqp/sending-amqp-messages/">Sending messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/amqp/health/">Health Checks</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/amqp/client-customization/">Client Customization</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/amqp/rabbitmq/">Using RabbitMQ</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">RabbitMQ</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/rabbitmq/rabbitmq/">RabbitMQ Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/rabbitmq/receiving-messages-from-rabbitmq/">Receiving messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/rabbitmq/sending-messages-to-rabbitmq/">Sending messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/rabbitmq/rabbitmq-health/">Health Checks</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/rabbitmq/rabbitmq-client-customization/">Client Customization</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/rabbitmq/rabbitmq-cloud/">Connecting to managed instances</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Pulsar</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/pulsar/pulsar/">Apache Pulsar Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/pulsar/receiving-pulsar-messages/">Receiving messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/pulsar/sending-messages-to-pulsar/">Sending messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/pulsar/schema-configuration/">Configuring the Schema</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/pulsar/client-configuration/">Configuring the Pulsar client</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/pulsar/health/">Health Checks</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/pulsar/client-service/">Accessing the client</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/pulsar/transactions/">Pulsar Transactions and Exactly-Once Processing</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Apache Camel</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/camel/camel/">Apache Camel Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/camel/receiving-messages-from-camel/">Receiving messages from Camel</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/camel/sending-messages-to-camel/">Sending messages to Camel</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/camel/camel-processor/">Implementing Camel processor</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/camel/using-existing-routes/">Using existing Camel routes</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">JMS</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/jms/jms/">The JMS connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/jms/receiving-jms-messages/">Receiving JMS messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/jms/sending-jms-messages/">Sending JMS messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/jms/advanced-jms/">Advanced configuration</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">MQTT</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/mqtt/mqtt/">MQTT Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/mqtt/receiving-mqtt-messages/">Receiving MQTT messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/mqtt/sending-messages-to-mqtt/">Sending MQTT messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.15/mqtt/client-customization/">Customizing the MQTT client</a></li>
+</ul>
+    </details>
+  </li>
+</ul>
+      <!--/docs-version-->
+    </nav>
+  </aside>
+  <article class="docs-main prose" data-pagefind-body>
+    <!--docs-version-->
+    <span data-pagefind-filter="version:4.15" hidden></span>
+    <p class="docs-notice" data-pagefind-ignore>This is the documentation of SmallRye Reactive Messaging 4.15.0, released <time datetime="2024-01-09">2024-01-09</time>. It is not the latest release: <a href="/docs/smallrye-reactive-messaging/latest/" data-docs-same-page>read the documentation of 5.0.0-RC2</a>.</p>
+    <!--/docs-version-->
+    <h1>Emitter and Channels</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>It is not rare to combine in a single application imperative parts
+(Jax-RS, regular CDI <em>beans</em>) and reactive parts (<em>beans</em> with
+<code>@Incoming</code> and <code>@Outgoing</code> annotations). In these case, it’s often
+required to send <em>messages</em> from the imperative part to the reactive
+part. In other words, send messages to channels handled by reactive
+messaging and how can you retrieve messages.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="emitter-and-channel"><a class="anchor" href="#emitter-and-channel"></a>Emitter and @Channel</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To send <em>things</em> (payload or <code>Message</code>) from imperative code to a
+specific channel you need to use:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>the <a href="https://javadoc.io/doc/io.smallrye.reactive/smallrye-reactive-messaging-api/4.15.0/org/eclipse/microprofile/reactive/messaging/Channel.html"><code>org.eclipse.microprofile.reactive.messaging.Channel</code></a> annotations</p>
+</li>
+<li>
+<p>the <a href="https://javadoc.io/doc/io.smallrye.reactive/smallrye-reactive-messaging-api/4.15.0/org/eclipse/microprofile/reactive/messaging/Emitter.html"><code>org.eclipse.microprofile.reactive.messaging.Emitter</code></a> type</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The <code>@Channel</code> lets you indicate to which channel you are going to send
+your payloads or messages. The <code>Emitter</code> is the object to use to send
+these payloads or messages.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">import org.eclipse.microprofile.reactive.messaging.Channel;
+import org.eclipse.microprofile.reactive.messaging.Emitter;
+
+@ApplicationScoped
+public class MyImperativeBean {
+
+    @Inject
+    @Channel("prices")
+    Emitter&lt;Double&gt; emitter;
+
+    // ...
+
+    public void send(double d) {
+        emitter.send(d);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>Emitter</code> class takes a type parameter. It’s the type of payload.
+Even if you want to send <code>Messages</code>, the type is the payload type.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You must have a <code>@Incoming("prices")</code> somewhere in your application
+(meaning a method consuming messages transiting on the channel
+<code>prices</code>), or an outbound connector configured to manage the <code>prices</code>
+channel (<code>mp.messaging.outgoing.prices&#8230;&#8203;</code>)</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sending-payloads"><a class="anchor" href="#sending-payloads"></a>Sending payloads</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Sending payloads is done as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Inject
+@Channel("prices")
+Emitter&lt;Double&gt; emitterForPrices;
+
+public void send(double d) {
+    emitterForPrices.send(d);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When sending a payload, the emitter returns a <code>CompletionStage</code>. This
+<code>CompletionStage</code> gets completed once the message created from the
+payload is acknowledged:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public void sendAndAwaitAcknowledgement(double d) {
+    CompletionStage&lt;Void&gt; acked = emitterForPrices.send(d);
+    // sending a payload returns a CompletionStage completed
+    // when the message is acknowledged
+    acked.toCompletableFuture().join();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the processing fails, the <code>CompletionStage</code> gets completed
+exceptionally (with the reason of the nack).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sending-messages"><a class="anchor" href="#sending-messages"></a>Sending messages</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can also send <code>Messages</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public void sendAsMessage(double d) {
+    emitterForPrices.send(Message.of(d));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When sending a <code>Message</code>, the emitter does not return a
+<code>CompletionStage</code>, but you can pass the ack/nack callback, and be called
+when the message is acked/nacked.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public void sendAsMessageWithAck(double d) {
+    emitterForPrices.send(Message.of(d, () -&gt; {
+        // Called when the message is acknowledged.
+        return CompletableFuture.completedFuture(null);
+    },
+            reason -&gt; {
+                // Called when the message is acknowledged negatively.
+                return CompletableFuture.completedFuture(null);
+            }));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Sending messages also let you pass metadata.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public void sendAsMessageWithAckAndMetadata(double d) {
+    MyMetadata metadata = new MyMetadata();
+    emitterForPrices.send(Message.of(d, Metadata.of(metadata),
+            () -&gt; {
+                // Called when the message is acknowledged.
+                return CompletableFuture.completedFuture(null);
+            },
+            reason -&gt; {
+                // Called when the message is acknowledged negatively.
+                return CompletableFuture.completedFuture(null);
+            }));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Metadata can be used to propagate some context objects with the message.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overflow-management"><a class="anchor" href="#overflow-management"></a>Overflow management</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When sending messages from imperative code to reactive code, you must be
+aware of back-pressure. Indeed, messages sent using the emitter and
+stored in a <em>queue</em>. If the consumer does not process the messages
+quickly enough, this queue can become a memory hog and you may even run
+out of memory.</p>
+</div>
+<div class="paragraph">
+<p>To control what need to happen when the queue becomes out of control,
+use the <a href="https://javadoc.io/doc/io.smallrye.reactive/smallrye-reactive-messaging-api/4.15.0/org/eclipse/microprofile/reactive/messaging/OnOverflow.html"><code>OnOverflow</code></a> annotation. <code>@OnOverflow</code> lets you configure:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the maximum size of the queue (default is 256)</p>
+</li>
+<li>
+<p>what needs to happen when this size is reached (fail, drop&#8230;&#8203;)</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// Set the max size to 10 and fail if reached
+@OnOverflow(value = OnOverflow.Strategy.BUFFER, bufferSize = 10)
+@Inject
+@Channel("channel")
+Emitter&lt;String&gt; emitterWithBuffer;
+
+// [DANGER ZONE] no limit
+@OnOverflow(OnOverflow.Strategy.UNBOUNDED_BUFFER)
+@Inject
+@Channel("channel")
+Emitter&lt;String&gt; danger;
+
+// Drop the new messages if the size is reached
+@OnOverflow(OnOverflow.Strategy.DROP)
+@Inject
+@Channel("channel")
+Emitter&lt;String&gt; dropping;
+
+// Drop the previously sent messages if the size is reached
+@OnOverflow(OnOverflow.Strategy.LATEST)
+@Inject
+@Channel("channel")
+Emitter&lt;String&gt; dropOldMessages;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The supported strategies are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>OnOverflow.Strategy.BUFFER</code> - use a buffer to store the elements
+until they are consumed. If the buffer is full, a failure is
+propagated (and the thread using the emitted gets an exception)</p>
+</li>
+<li>
+<p><code>OnOverflow.Strategy.UNBOUNDED_BUFFER</code> - use an unbounded buffer to
+store the elements</p>
+</li>
+<li>
+<p><code>OnOverflow.Strategy.DROP</code> - drops the most recent value if the
+downstream can’t keep up. It means that new value emitted by the
+emitter are ignored.</p>
+</li>
+<li>
+<p><code>OnOverflow.Strategy.FAIL</code> - propagates a failure in case the
+downstream can’t keep up.</p>
+</li>
+<li>
+<p><code>OnOverflow.Strategy.LATEST</code> - keeps only the latest value, dropping
+any previous value if the downstream can’t keep up.</p>
+</li>
+<li>
+<p><code>OnOverflow.Strategy.NONE</code> - ignore the back-pressure signals
+letting the downstream consumer to implement a strategy.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="defensive-emission"><a class="anchor" href="#defensive-emission"></a>Defensive emission</h3>
+<div class="paragraph">
+<p>Having an emitter injected into your code does not guarantee that
+someone is ready to consume the message. For example, a subscriber may
+be connecting to a remote broker. If there are no subscribers, using the
+<code>send</code> method will throw an exception.</p>
+</div>
+<div class="paragraph">
+<p>The <code>emitter.hasRequests()</code> method indicates that a subscriber
+subscribes to the channel and requested items. So, you can wrap your
+emission with:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">if (emitter.hasRequests()) {
+    emitter.send("hello");
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you use the <code>OnOverflow.Strategy.DROP</code>, you can use the <code>send</code> method
+even with no subscribers nor demands. The message will be nacked
+immediately.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="retrieving-channels"><a class="anchor" href="#retrieving-channels"></a>Retrieving channels</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can use the <code>@Channel</code> annotation to inject in your bean the
+underlying stream. Note that in this case, you will be responsible for
+the subscription:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Inject
+@Channel("my-channel")
+Multi&lt;String&gt; streamOfPayloads;
+
+@Inject
+@Channel("my-channel")
+Multi&lt;Message&lt;String&gt;&gt; streamOfMessages;
+
+@Inject
+@Channel("my-channel")
+Publisher&lt;String&gt; publisherOfPayloads;
+
+@Inject
+@Channel("my-channel")
+Publisher&lt;Message&lt;String&gt;&gt; publisherOfMessages;</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You must have a <code>@Outgoing("my-channel")</code> somewhere in your application
+(meaning a method generating messages transiting on the channel
+<code>my-channel</code>), or an inbound connector configured to manage the <code>prices</code>
+channel (<code>mp.messaging.incoming.prices&#8230;&#8203;</code>)</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Injected <em>channels</em> merge all the matching <em>outgoing</em> - so if you have
+multiple <code>@Outgoing("out")</code>, <code>@Inject @Channel("out")</code> gets all the
+messages.</p>
+</div>
+<div class="paragraph">
+<p>If your injected <em>channel</em> receives <em>payloads</em> (<code>Multi&lt;T&gt;</code>), it
+acknowledges the message automatically, and support multiple
+subscribers. If you injected <em>channel</em> receives <code>Message</code>
+(<code>Multi&lt;Message&lt;T&gt;&gt;</code>), you will be responsible for the acknowledgement
+and broadcasting.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="emitter-and-broadcast"><a class="anchor" href="#emitter-and-broadcast"></a>Emitter and @Broadcast</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When using an <code>Emitter</code>, you can now <code>@Broadcast</code> what is emitted to all
+subscribers.</p>
+</div>
+<div class="paragraph">
+<p>Here is an example of emitting a price with two methods marked
+<code>@Incoming</code> to receive the broadcast:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Inject
+@Broadcast
+@Channel("prices")
+Emitter&lt;Double&gt; emitter;
+
+public void emit(double d) {
+    emitter.send(d);
+}
+
+@Incoming("prices")
+public void handle(double d) {
+    // Handle the new price
+}
+
+@Incoming("prices")
+public void audit(double d) {
+    // Audit the price change
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For more details see <a href="/docs/smallrye-reactive-messaging/4.15/concepts/broadcast/">@Broadcast</a>
+documentation.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="mutiny-emitter"><a class="anchor" href="#mutiny-emitter"></a>Mutiny Emitter</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you prefer to utilize <code>Uni</code> in all your code, there is now a
+<code>MutinyEmitter</code> that will return <code>Uni&lt;Void&gt;</code> instead of <code>void</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Inject
+@Channel("prices")
+MutinyEmitter&lt;Double&gt; emitter;
+
+public Uni&lt;Void&gt; send(double d) {
+    return emitter.send(d);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>There’s also the ability to block on sending the event to the emitter.
+It will only return from the method when the event is acknowledged, or
+nacked, by the receiver:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public void sendAwait(double d) {
+    emitter.sendAndAwait(d);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And if you don’t need to worry about the success or failure of sending
+an event, you can <code>sendAndForget</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public Cancellable sendForget(double d) {
+    return emitter.sendAndForget(d);
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="custom-emitter-implementations"><a class="anchor" href="#custom-emitter-implementations"></a>Custom Emitter Implementations</h2>
+<div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="title">Experimental</div>
+<div class="paragraph">
+<p>Custom emitter implementations is an experimental feature.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>Emitter</code> and <code>MutinyEmitter</code> are two implementations of the emitter concept,
+where imperative code in your application can send messages to Reactive Messaging channels.</p>
+</div>
+<div class="paragraph">
+<p>With <code>EmitterFactory</code> it is possible to provide custom implementations, and application facing emitter interfaces.</p>
+</div>
+<div class="paragraph">
+<p>In the following example, the injectable custom emitter interface is <code>CustomEmitter</code>,
+and it is implemented by <code>CustomEmitterImpl</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public interface CustomEmitter&lt;T&gt; extends EmitterType {
+
+    &lt;M extends Message&lt;? extends T&gt;&gt; void sendAndForget(M msg);
+
+}
+
+public static class CustomEmitterImpl&lt;T&gt; implements CustomEmitter&lt;T&gt;, MessagePublisherProvider&lt;Object&gt; {
+
+    Publisher&lt;Message&lt;?&gt;&gt; publisher;
+
+    public CustomEmitterImpl(EmitterConfiguration configuration, long defaultBufferSize) {
+        //... initialize emitter with configuration
+    }
+
+    @Override
+    public Publisher&lt;Message&lt;?&gt;&gt; getPublisher() {
+        return publisher;
+    }
+
+    @Override
+    public &lt;M extends Message&lt;? extends T&gt;&gt; void sendAndForget(M msg) {
+        //... send to stream
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that <code>CustomEmitter</code> interface extends <code>EmitterType</code>, which is a marker interface for discovering custom emitter types.
+Also, <code>CustomEmitterImpl</code> implements the <code>MessagePublisherProvider</code>, which is used by the framework to transform this emitter to a channel.</p>
+</div>
+<div class="paragraph">
+<p>Then we need to provide an implementation of the <code>EmitterFactory</code> interface:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@EmitterFactoryFor(CustomEmitter.class)
+@ApplicationScoped
+public static class CustomEmitterFactory implements EmitterFactory&lt;CustomEmitterImpl&lt;Object&gt;&gt; {
+
+    @Inject
+    ChannelRegistry channelRegistry;
+
+    @Override
+    public CustomEmitterImpl&lt;Object&gt; createEmitter(EmitterConfiguration configuration, long defaultBufferSize) {
+        return new CustomEmitterImpl&lt;&gt;(configuration, defaultBufferSize);
+    }
+
+    @Produces
+    @Channel("") // Stream name is ignored during type-safe resolution
+    &lt;T&gt; CustomEmitter&lt;T&gt; produce(InjectionPoint injectionPoint) {
+        String channelName = ChannelProducer.getChannelName(injectionPoint);
+        return channelRegistry.getEmitter(channelName, CustomEmitter.class);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>CustomEmitterFactory</code> is a CDI managed bean, which implements the <code>EmitterFactory</code>.
+It is qualified with <code>EmitterFactoryFor</code> annotation which is configured with the emitter interface <code>CustomEmitter</code> that this factory provides.</p>
+</div>
+<div class="paragraph">
+<p>Smallrye Reactive Messaging discovers the emitter factory during the CDI deployment validation
+and verifies that custom emitters used by the application have corresponding emitter factories.
+It&#8217;ll use the emitter factory to create the emitter implementation and will register the implementation into the <code>ChannelRegistry</code>.</p>
+</div>
+<div class="paragraph">
+<p>Note that the <code>CustomEmitterFactory</code> also uses the <code>ChannelRegistry</code> and provides the custom emitter with <code>@Produces</code>.</p>
+</div>
+<div class="paragraph">
+<p>Finally, the application can inject and use the <code>CustomEmitter</code> as a normal emitter channel:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Inject
+@Channel("custom-emitter-channel")
+CustomEmitter&lt;String&gt; customEmitter;
+
+//...
+
+public void emitMessage() {
+    customEmitter.sendAndForget(Message.of("a"));
+    customEmitter.sendAndForget(Message.of("b"));
+    customEmitter.sendAndForget(Message.of("c"));
+}</code></pre>
+</div>
+</div>
+</div>
+</div>    <!--docs-version--><p class="docs-source" data-pagefind-ignore>
+    </p><!--/docs-version-->
+  </article>
+  <nav class="docs-toc" aria-label="On this page">
+    <details open data-docs-toc>
+      <summary class="toc-title">On this page</summary>
+      <nav class="roq-toc" aria-label="Table of contents">
+<ul>
+<li data-level="1"><a href="#emitter-and-channel">Emitter and @Channel</a></li>
+<li data-level="1"><a href="#sending-payloads">Sending payloads</a></li>
+<li data-level="1"><a href="#sending-messages">Sending messages</a></li>
+<li data-level="1"><a href="#overflow-management">Overflow management</a>
+<ul>
+<li data-level="2"><a href="#defensive-emission">Defensive emission</a></li>
+</ul>
+</li>
+<li data-level="1"><a href="#retrieving-channels">Retrieving channels</a></li>
+<li data-level="1"><a href="#emitter-and-broadcast">Emitter and @Broadcast</a></li>
+<li data-level="1"><a href="#mutiny-emitter">Mutiny Emitter</a></li>
+<li data-level="1"><a href="#custom-emitter-implementations">Custom Emitter Implementations</a></li>
+</ul>
+</nav>
+
+    </details>
+  </nav>
+</div>
+<dialog class="docs-search" data-docs-search aria-label="Search SmallRye Reactive Messaging">
+  <div class="docs-search-bar" role="search">
+    <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <input type="search" data-docs-search-input placeholder="Search SmallRye Reactive Messaging 5.0.0-RC2" aria-label="Search SmallRye Reactive Messaging documentation" autocomplete="off" spellcheck="false">
+    <button type="button" class="docs-search-close" data-docs-search-close>Esc</button>
+  </div>
+  <p class="docs-search-status" data-docs-search-status aria-live="polite"></p>
+  <ul class="docs-search-results" data-docs-search-results></ul>
+</dialog>
+
+  </main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-about">
+      <a class="footer-logo" href="/"><img src="/images/logo-dark.svg" alt="SmallRye" width="140" height="36" loading="lazy"></a>
+      <p>SmallRye is open source under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache Software License 2.0</a>.</p>
+      <p>This website is built with <a href="https://iamroq.dev/">Quarkus Roq</a>, hosted on <a href="https://pages.github.com/">GitHub Pages</a> and is completely open source. If you want to make it better, <a href="https://github.com/smallrye/smallrye.github.io">fork the website</a> and show us what you've got.</p>
+    </div>
+    <nav aria-label="Site">
+      <p class="footer-head">Navigation</p>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/docs/">Documentation</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Contribute and get help">
+      <p class="footer-head">Contribute</p>
+      <ul>
+        <li><a href="https://github.com/smallrye">GitHub</a></li>
+        <li><a href="https://twitter.com/smallrye_io">Follow us</a></li>
+      </ul>
+      <p class="footer-head">Get help</p>
+      <ul>
+        <li><a href="https://quarkusio.zulipchat.com">Chatroom</a></li>
+        <li><a href="https://groups.google.com/d/forum/smallrye">Google Groups</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="External links">
+      <p class="footer-head">External links</p>
+      <ul>
+        <li><a href="https://microprofile.io/">Eclipse MicroProfile</a></li>
+        <li><a href="https://github.com/eclipse?q=microprofile">Eclipse MicroProfile on GitHub</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <div class="container footer-bottom-bar">
+      <p><a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></p>
+      <p class="sponsor">A <a href="https://www.commonhaus.org/">Commonhaus Foundation</a> project <a href="https://www.commonhaus.org/"><img src="/assets/images/commonhaus_reversed.svg" alt="Commonhaus Foundation" width="200" height="21" loading="lazy"></a></p>
+      <p class="footer-trademark">Copyright &copy; SmallRye. For details on our trademarks, please visit our <a href="https://www.commonhaus.org/policies/trademark-policy/">Trademark Policy</a> and <a href="https://www.commonhaus.org/trademarks/">Trademark List</a>. Trademarks of third parties are owned by their respective holders and their mention here does not suggest any endorsement or association.</p>
+    </div>
+  </div>
+</footer>
+<!-- Light/dark switch. Hidden until the script wires it, so a no-JS visitor
+     never sees a dead button. Every site has it: keep it. -->
+<button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark theme" hidden>
+  <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
+  <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/></svg>
+</button>
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.querySelector('.theme-toggle');
+    if (!btn) return;
+    btn.hidden = false;
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    function isDark() { var t = root.getAttribute('data-theme'); return t ? t === 'dark' : mq.matches; }
+    function sync() {
+      btn.setAttribute('aria-pressed', isDark() ? 'true' : 'false');
+      btn.setAttribute('aria-label', isDark() ? 'Switch to light theme' : 'Switch to dark theme');
+    }
+    btn.addEventListener('click', function () {
+      var next = isDark() ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('site-theme', next); } catch (e) { /* not fatal */ }
+      sync();
+    });
+    mq.addEventListener('change', sync);
+    sync();
+  })();
+</script>
+</body>
+</html>

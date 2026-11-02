@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://api.github.com; base-uri 'none'; object-src 'none'; form-action 'none'">
+
+  <!-- SEO TITLE -->
+  
+  <title>Multiple Incoming Channels - SmallRye</title>
+  <meta property="og:title" content="Multiple Incoming Channels" />
+  <meta name="twitter:title" content="Multiple Incoming Channels">
+  <meta property="og:site_name" content="SmallRye">
+  <!-- SEO DESCRIPTION -->
+  <meta name="description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+  <meta property="og:description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile." />
+  <meta name="twitter:description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+
+  <!-- SEO URL -->
+  <link rel="canonical" href="https://smallrye.io/docs/smallrye-reactive-messaging/4.28/concepts/incomings/" />
+  <meta property="og:url" content="https://smallrye.io/docs/smallrye-reactive-messaging/4.28/concepts/incomings/" />
+  <meta name="twitter:url" content="https://smallrye.io/docs/smallrye-reactive-messaging/4.28/concepts/incomings/">
+
+  <!-- SEO TYPE -->
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2026-11-02T00:30:18.782912724Z[UTC]" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image" content="https://smallrye.io/images/rye-field-og.jpg">
+  <meta name="twitter:image" content="https://smallrye.io/images/rye-field-og.jpg">
+  <!-- SEO COLLECTION PAGES -->
+  <!-- SEO TWITTER -->
+  <meta name="twitter:site" content="@smallrye_io" />
+  <meta name="twitter:creator" content="@smallrye_io" />
+  <!-- SEO LOCALE -->
+  <meta property="og:locale" content="en" />
+  <!-- SEO GENERATOR -->
+  <meta name="generator" content="Quarkus Roq v2.1.9" />
+
+<link rel="alternate" type="application/rss+xml" title="SmallRye" href="https://smallrye.io/rss.xml"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <script>
+    try {
+      var t = localStorage.getItem('site-theme');
+      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    } catch (e) { /* private mode: follow the OS preference */ }
+  </script>
+  <link rel="stylesheet" href="/css/main.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://smallrye.io/#organization",
+      "name": "SmallRye",
+      "url": "https://smallrye.io/",
+      "logo": "https://smallrye.io/images/logo.svg",
+      "description": "SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.",
+      "email": "smallrye@googlegroups.com",
+      "sameAs": [
+        "https://github.com/smallrye",
+        "https://twitter.com/smallrye_io",
+        "https://groups.google.com/d/forum/smallrye"
+      ],
+      "parentOrganization": { "@type": "Organization", "name": "Commonhaus Foundation", "url": "https://www.commonhaus.org/" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://smallrye.io/#website",
+      "name": "SmallRye",
+      "url": "https://smallrye.io/",
+      "publisher": { "@id": "https://smallrye.io/#organization" }
+    }
+  ]
+}
+</script>
+    <script type="module" src="/static/bundle/app-KFNV2DMD.js"></script>
+      <!-- no style found for key 'app' in Bundler mapping !-->
+<script>
+  try {
+    if (matchMedia('(min-width: 60rem)').matches && localStorage.getItem('docs-nav') === 'open') document.documentElement.classList.add('docs-nav-open');
+    if (localStorage.getItem('docs-toc') === 'closed') document.documentElement.classList.add('docs-toc-closed');
+  } catch (e) { /* storage blocked: closed */ }
+</script>
+<noscript><style>.docs-nav { display: block !important; } .docs-nav-button { display: none !important; }</style></noscript>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand" href="/">
+      <img class="logo-light" src="/images/logo.svg" alt="SmallRye" width="160" height="41">
+      <img class="logo-dark" src="/images/logo-dark.svg" alt="SmallRye" width="160" height="41">
+    </a>
+<div class="docs-brand">
+  <a class="docs-brand-project" href="/docs/smallrye-reactive-messaging/4.28/"><span class="project-logo" style="--logo: url('/images/projects/smallrye-reactive-messaging.png')" aria-hidden="true"></span><span class="docs-brand-name">Reactive Messaging</span></a>
+  <!--docs-version--><label class="docs-version">
+    <span class="visually-hidden">Version</span>
+    <select data-docs-version data-current="4.28" data-base="/docs/smallrye-reactive-messaging/">
+      
+      <option value="latest">5.0.0-RC2 (latest)</option>
+      
+                  <optgroup label="4.x">
+      
+      <option value="4.37">4.37.1</option>
+      
+                  
+      
+      <option value="4.36">4.36.0</option>
+      
+                  
+      
+      <option value="4.35">4.35.0</option>
+      
+                  
+      
+      <option value="4.34">4.34.0</option>
+      
+                  
+      
+      <option value="4.33">4.33.1</option>
+      
+                  
+      
+      <option value="4.32">4.32.1</option>
+      
+                  
+      
+      <option value="4.31">4.31.0</option>
+      
+                  
+      
+      <option value="4.30">4.30.0</option>
+      
+                  
+      
+      <option value="4.29">4.29.0</option>
+      
+                  
+      
+      <option value="4.28" selected>4.28.0</option>
+      
+                  
+      
+      <option value="4.27">4.27.0</option>
+      
+                  
+      
+      <option value="4.26">4.26.0</option>
+      
+                  
+      
+      <option value="4.25">4.25.0</option>
+      
+                  
+      
+      <option value="4.24">4.24.1</option>
+      
+                  
+      
+      <option value="4.23">4.23.0</option>
+      
+                  
+      
+      <option value="4.22">4.22.0</option>
+      
+                  
+      
+      <option value="4.21">4.21.0</option>
+      
+                  
+      
+      <option value="4.20">4.20.0</option>
+      
+                  
+      
+      <option value="4.19">4.19.0</option>
+      
+                  
+      
+      <option value="4.18">4.18.1</option>
+      
+                  
+      
+      <option value="4.17">4.17.0</option>
+      
+                  
+      
+      <option value="4.16">4.16.2</option>
+      
+                  
+      
+      <option value="4.15">4.15.0</option>
+      
+                  
+      
+      <option value="4.14">4.14.0</option>
+      
+                  
+      
+      <option value="4.13">4.13.0</option>
+      
+                  
+      
+      <option value="4.12">4.12.0</option>
+      
+                  
+      
+      <option value="4.11">4.11.0</option>
+      
+                  
+      
+      <option value="4.10">4.10.2</option>
+      
+                  
+      
+      <option value="4.9">4.9.0</option>
+      
+                  
+      
+      <option value="4.8">4.8.0</option>
+      
+                  
+      
+      <option value="4.7">4.7.0</option>
+      
+                  
+      
+      <option value="4.6">4.6.1</option>
+      
+                  
+      
+      <option value="4.5">4.5.0</option>
+      
+                  
+      
+      <option value="4.4">4.4.0</option>
+      
+                  
+      
+      <option value="4.3">4.3.0</option>
+      
+                  
+      
+      <option value="4.2">4.2.0</option>
+      
+                  
+      
+      <option value="4.1">4.1.1</option>
+      
+                  
+      
+      <option value="4.0">4.0.0</option>
+      
+                  </optgroup><optgroup label="3.x">
+      
+      <option value="3">3.25.0</option>
+      
+      </optgroup>
+      <option value="main">main (snapshot)</option>
+      
+      
+    </select>
+  </label><!--/docs-version-->
+  <div class="docs-tools">
+    <button type="button" class="docs-search-button" data-docs-search-open aria-haspopup="dialog" aria-keyshortcuts="/">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <span>Search</span><kbd aria-hidden="true">/</kbd>
+    </button>
+    <a class="docs-github" href="https://github.com/smallrye/smallrye-reactive-messaging" title="smallrye/smallrye-reactive-messaging on GitHub" data-docs-github="smallrye/smallrye-reactive-messaging">
+      <svg aria-hidden="true" viewBox="0 0 16 16" width="26" height="26"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      <span class="docs-github-text">
+        <span class="docs-github-name">GitHub<span class="visually-hidden">: smallrye/smallrye-reactive-messaging</span></span>
+        <span class="docs-github-facts"><span title="Latest release">5.0.0-RC2</span><span data-docs-github-stars hidden></span><span data-docs-github-forks hidden></span></span>
+      </span>
+    </a>
+  </div>
+</div>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-input" aria-label="Toggle menu">
+    <label for="nav-toggle" class="nav-toggle"><span></span></label>
+    <nav class="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/docs/" aria-current="page">Documentation</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+  <main id="main">
+
+<div class="container docs-layout">
+  <aside class="docs-side">
+    <button type="button" class="docs-nav-button" aria-controls="docs-nav" aria-expanded="false" data-docs-nav-button>
+      <span class="docs-nav-icon" aria-hidden="true"></span><span class="docs-nav-label">Contents</span>
+    </button>
+    <nav id="docs-nav" class="docs-nav" aria-label="SmallRye Reactive Messaging documentation">
+      <!--docs-version-->
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/">Home</a></li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Core</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/getting-started/">Getting Started</a></li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Concepts</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/concepts/concepts/">Introduction</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/concepts/model/">Development Model</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/concepts/emitter/">Emitters and Channel</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/concepts/connectors/">Connectors</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/concepts/contributing-connectors/">Contributing Connectors</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/concepts/acknowledgement/">Acknowledgement</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/concepts/blocking/">Blocking Processing</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/concepts/signatures/">Method Signatures</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/concepts/skipping/">Skipping Messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/concepts/converters/">Message Converters</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/concepts/keyed-multi/">Keyed Streams</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/concepts/decorators/">Channel Decorators and Interceptors</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/concepts/broadcast/">Broadcast</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/concepts/merge/">Merge channels</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/concepts/incoming-concurrency/">Incoming Channel Concurrency</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/concepts/incomings/" aria-current="page">@Incomings</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/concepts/outgoings/">@Outgoings</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/concepts/testing/">Testing</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/concepts/logging/">Logging</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/concepts/observability/">Observability API</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/concepts/advanced-config/">Advanced Configuration</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/concepts/message-context/">Message Context</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/concepts/incoming-metadata-injection/">Metadata Injection</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/concepts/generic-payloads/">Generic Payloads</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/concepts/pausable-channels/">Pausable Channels</a></li>
+</ul>
+    </details>
+  </li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Kafka</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/kafka/kafka/">Apache Kafka Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/kafka/receiving-kafka-records/">Receiving records</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/kafka/writing-kafka-records/">Writing records</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/kafka/health/">Health Checks</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/kafka/avro-configuration/">Using Avro</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/kafka/protobuf-configuration/">Using Protobuf</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/kafka/consumer-rebalance-listener/">Rebalance Listeners</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/kafka/kerberos/">Kerberos authentication</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/kafka/client-service/">Accessing the client</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/kafka/default-configuration/">Customizing Default Kafka Configuration</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/kafka/test-companion/">Test Companion for Kafka</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/kafka/transactions/">Kafka Transactions and Exactly-Once Processing</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/kafka/request-reply/">Kafka Request/Reply</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">AMQP 1.0</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/amqp/amqp/">AMQP 1.0 Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/amqp/receiving-amqp-messages/">Receiving messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/amqp/sending-amqp-messages/">Sending messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/amqp/health/">Health Checks</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/amqp/client-customization/">Client Customization</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/amqp/rabbitmq/">Using RabbitMQ</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">RabbitMQ</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/rabbitmq/rabbitmq/">RabbitMQ Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/rabbitmq/receiving-messages-from-rabbitmq/">Receiving messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/rabbitmq/sending-messages-to-rabbitmq/">Sending messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/rabbitmq/rabbitmq-health/">Health Checks</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/rabbitmq/rabbitmq-client-customization/">Client Customization</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/rabbitmq/rabbitmq-cloud/">Connecting to managed instances</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Pulsar</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/pulsar/pulsar/">Apache Pulsar Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/pulsar/receiving-pulsar-messages/">Receiving messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/pulsar/sending-messages-to-pulsar/">Sending messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/pulsar/schema-configuration/">Configuring the Schema</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/pulsar/client-configuration/">Configuring the Pulsar client</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/pulsar/health/">Health Checks</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/pulsar/client-service/">Accessing the client</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/pulsar/transactions/">Pulsar Transactions and Exactly-Once Processing</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Apache Camel</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/camel/camel/">Apache Camel Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/camel/receiving-messages-from-camel/">Receiving messages from Camel</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/camel/sending-messages-to-camel/">Sending messages to Camel</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/camel/camel-processor/">Implementing Camel processor</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/camel/using-existing-routes/">Using existing Camel routes</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">JMS</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/jms/jms/">The JMS connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/jms/receiving-jms-messages/">Receiving JMS messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/jms/sending-jms-messages/">Sending JMS messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/jms/advanced-jms/">Advanced configuration</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">MQTT</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/mqtt/mqtt/">MQTT Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/mqtt/receiving-mqtt-messages/">Receiving MQTT messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/mqtt/sending-messages-to-mqtt/">Sending MQTT messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/mqtt/client-customization/">Customizing the MQTT client</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">AWS SQS</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/sqs/sqs/">AWS SQS Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/sqs/receiving-aws-sqs-messages/">Receiving AWS SQS messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/sqs/sending-aws-sqs-messages/">Sending AWS SQS messages</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">AWS SNS</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/sns/sns/">AWS SNS Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.28/sns/sending-aws-sns-messages/">Sending AWS SNS messages</a></li>
+</ul>
+    </details>
+  </li>
+</ul>
+      <!--/docs-version-->
+    </nav>
+  </aside>
+  <article class="docs-main prose" data-pagefind-body>
+    <!--docs-version-->
+    <span data-pagefind-filter="version:4.28" hidden></span>
+    <p class="docs-notice" data-pagefind-ignore>This is the documentation of SmallRye Reactive Messaging 4.28.0, released <time datetime="2025-05-22">2025-05-22</time>. It is not the latest release: <a href="/docs/smallrye-reactive-messaging/latest/" data-docs-same-page>read the documentation of 5.0.0-RC2</a>.</p>
+    <!--/docs-version-->
+    <h1>Multiple Incoming Channels</h1>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="title">Experimental</div>
+<div class="paragraph">
+<p>Multiple <code>@Incomings</code> is an experimental feature.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The <code>@Incoming</code> annotation is repeatable. It means that the method
+receives the messages transiting on every listed channels, in no
+specific order:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Incoming("channel-1")
+@Incoming("channel-2")
+public String process(String s) {
+    // get messages from channel-1 and channel-2
+    return s.toUpperCase();
+}</code></pre>
+</div>
+</div>    <!--docs-version--><p class="docs-source" data-pagefind-ignore>
+    </p><!--/docs-version-->
+  </article>
+</div>
+<dialog class="docs-search" data-docs-search aria-label="Search SmallRye Reactive Messaging">
+  <div class="docs-search-bar" role="search">
+    <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <input type="search" data-docs-search-input placeholder="Search SmallRye Reactive Messaging 5.0.0-RC2" aria-label="Search SmallRye Reactive Messaging documentation" autocomplete="off" spellcheck="false">
+    <button type="button" class="docs-search-close" data-docs-search-close>Esc</button>
+  </div>
+  <p class="docs-search-status" data-docs-search-status aria-live="polite"></p>
+  <ul class="docs-search-results" data-docs-search-results></ul>
+</dialog>
+
+  </main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-about">
+      <a class="footer-logo" href="/"><img src="/images/logo-dark.svg" alt="SmallRye" width="140" height="36" loading="lazy"></a>
+      <p>SmallRye is open source under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache Software License 2.0</a>.</p>
+      <p>This website is built with <a href="https://iamroq.dev/">Quarkus Roq</a>, hosted on <a href="https://pages.github.com/">GitHub Pages</a> and is completely open source. If you want to make it better, <a href="https://github.com/smallrye/smallrye.github.io">fork the website</a> and show us what you've got.</p>
+    </div>
+    <nav aria-label="Site">
+      <p class="footer-head">Navigation</p>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/docs/">Documentation</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Contribute and get help">
+      <p class="footer-head">Contribute</p>
+      <ul>
+        <li><a href="https://github.com/smallrye">GitHub</a></li>
+        <li><a href="https://twitter.com/smallrye_io">Follow us</a></li>
+      </ul>
+      <p class="footer-head">Get help</p>
+      <ul>
+        <li><a href="https://quarkusio.zulipchat.com">Chatroom</a></li>
+        <li><a href="https://groups.google.com/d/forum/smallrye">Google Groups</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="External links">
+      <p class="footer-head">External links</p>
+      <ul>
+        <li><a href="https://microprofile.io/">Eclipse MicroProfile</a></li>
+        <li><a href="https://github.com/eclipse?q=microprofile">Eclipse MicroProfile on GitHub</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <div class="container footer-bottom-bar">
+      <p><a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></p>
+      <p class="sponsor">A <a href="https://www.commonhaus.org/">Commonhaus Foundation</a> project <a href="https://www.commonhaus.org/"><img src="/assets/images/commonhaus_reversed.svg" alt="Commonhaus Foundation" width="200" height="21" loading="lazy"></a></p>
+      <p class="footer-trademark">Copyright &copy; SmallRye. For details on our trademarks, please visit our <a href="https://www.commonhaus.org/policies/trademark-policy/">Trademark Policy</a> and <a href="https://www.commonhaus.org/trademarks/">Trademark List</a>. Trademarks of third parties are owned by their respective holders and their mention here does not suggest any endorsement or association.</p>
+    </div>
+  </div>
+</footer>
+<!-- Light/dark switch. Hidden until the script wires it, so a no-JS visitor
+     never sees a dead button. Every site has it: keep it. -->
+<button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark theme" hidden>
+  <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
+  <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/></svg>
+</button>
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.querySelector('.theme-toggle');
+    if (!btn) return;
+    btn.hidden = false;
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    function isDark() { var t = root.getAttribute('data-theme'); return t ? t === 'dark' : mq.matches; }
+    function sync() {
+      btn.setAttribute('aria-pressed', isDark() ? 'true' : 'false');
+      btn.setAttribute('aria-label', isDark() ? 'Switch to light theme' : 'Switch to dark theme');
+    }
+    btn.addEventListener('click', function () {
+      var next = isDark() ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('site-theme', next); } catch (e) { /* not fatal */ }
+      sync();
+    });
+    mq.addEventListener('change', sync);
+    sync();
+  })();
+</script>
+</body>
+</html>

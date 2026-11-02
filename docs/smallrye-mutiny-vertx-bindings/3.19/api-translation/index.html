@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://api.github.com; base-uri 'none'; object-src 'none'; form-action 'none'">
+
+  <!-- SEO TITLE -->
+  
+  <title>API translation - SmallRye</title>
+  <meta property="og:title" content="API translation" />
+  <meta name="twitter:title" content="API translation">
+  <meta property="og:site_name" content="SmallRye">
+  <!-- SEO DESCRIPTION -->
+  <meta name="description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+  <meta property="og:description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile." />
+  <meta name="twitter:description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+
+  <!-- SEO URL -->
+  <link rel="canonical" href="https://smallrye.io/docs/smallrye-mutiny-vertx-bindings/3.19/api-translation/" />
+  <meta property="og:url" content="https://smallrye.io/docs/smallrye-mutiny-vertx-bindings/3.19/api-translation/" />
+  <meta name="twitter:url" content="https://smallrye.io/docs/smallrye-mutiny-vertx-bindings/3.19/api-translation/">
+
+  <!-- SEO TYPE -->
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2026-11-02T00:30:18.746624953Z[UTC]" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image" content="https://smallrye.io/images/rye-field-og.jpg">
+  <meta name="twitter:image" content="https://smallrye.io/images/rye-field-og.jpg">
+  <!-- SEO COLLECTION PAGES -->
+  <!-- SEO TWITTER -->
+  <meta name="twitter:site" content="@smallrye_io" />
+  <meta name="twitter:creator" content="@smallrye_io" />
+  <!-- SEO LOCALE -->
+  <meta property="og:locale" content="en" />
+  <!-- SEO GENERATOR -->
+  <meta name="generator" content="Quarkus Roq v2.1.9" />
+
+<link rel="alternate" type="application/rss+xml" title="SmallRye" href="https://smallrye.io/rss.xml"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <script>
+    try {
+      var t = localStorage.getItem('site-theme');
+      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    } catch (e) { /* private mode: follow the OS preference */ }
+  </script>
+  <link rel="stylesheet" href="/css/main.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://smallrye.io/#organization",
+      "name": "SmallRye",
+      "url": "https://smallrye.io/",
+      "logo": "https://smallrye.io/images/logo.svg",
+      "description": "SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.",
+      "email": "smallrye@googlegroups.com",
+      "sameAs": [
+        "https://github.com/smallrye",
+        "https://twitter.com/smallrye_io",
+        "https://groups.google.com/d/forum/smallrye"
+      ],
+      "parentOrganization": { "@type": "Organization", "name": "Commonhaus Foundation", "url": "https://www.commonhaus.org/" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://smallrye.io/#website",
+      "name": "SmallRye",
+      "url": "https://smallrye.io/",
+      "publisher": { "@id": "https://smallrye.io/#organization" }
+    }
+  ]
+}
+</script>
+    <script type="module" src="/static/bundle/app-KFNV2DMD.js"></script>
+      <!-- no style found for key 'app' in Bundler mapping !-->
+<script>
+  try {
+    if (matchMedia('(min-width: 60rem)').matches && localStorage.getItem('docs-nav') === 'open') document.documentElement.classList.add('docs-nav-open');
+    if (localStorage.getItem('docs-toc') === 'closed') document.documentElement.classList.add('docs-toc-closed');
+  } catch (e) { /* storage blocked: closed */ }
+</script>
+<noscript><style>.docs-nav { display: block !important; } .docs-nav-button { display: none !important; }</style></noscript>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand" href="/">
+      <img class="logo-light" src="/images/logo.svg" alt="SmallRye" width="160" height="41">
+      <img class="logo-dark" src="/images/logo-dark.svg" alt="SmallRye" width="160" height="41">
+    </a>
+<div class="docs-brand">
+  <a class="docs-brand-project" href="/docs/smallrye-mutiny-vertx-bindings/3.19/"><span class="docs-brand-name">Mutiny Vert.x bindings</span></a>
+  <!--docs-version--><label class="docs-version">
+    <span class="visually-hidden">Version</span>
+    <select data-docs-version data-current="3.19" data-base="/docs/smallrye-mutiny-vertx-bindings/">
+      
+      <option value="latest">4.1.0 (latest)</option>
+      
+                  <optgroup label="4.x">
+      
+      <option value="4.0">4.0.2</option>
+      
+                  </optgroup><optgroup label="3.x">
+      
+      <option value="3.23">3.23.1</option>
+      
+                  
+      
+      <option value="3.22">3.22.2</option>
+      
+                  
+      
+      <option value="3.21">3.21.6</option>
+      
+                  
+      
+      <option value="3.20">3.20.4</option>
+      
+                  
+      
+      <option value="3.19" selected>3.19.2</option>
+      
+                  
+      
+      <option value="3.18">3.18.1</option>
+      
+                  
+      
+      <option value="3.17">3.17.1</option>
+      
+                  
+      
+      <option value="3.16">3.16.0</option>
+      
+                  
+      
+      <option value="3.15">3.15.1</option>
+      
+                  
+      
+      <option value="3.14">3.14.0</option>
+      
+                  
+      
+      <option value="3.13">3.13.2</option>
+      
+                  
+      
+      <option value="3.12">3.12.0</option>
+      
+                  
+      
+      <option value="3.11">3.11.0</option>
+      
+                  
+      
+      <option value="3.10">3.10.0</option>
+      
+                  
+      
+      <option value="3.9">3.9.0</option>
+      
+                  
+      
+      <option value="3.8">3.8.0</option>
+      
+                  
+      
+      <option value="3.7">3.7.2</option>
+      
+                  
+      
+      <option value="3.6">3.6.0</option>
+      
+                  
+      
+      <option value="3.5">3.5.0</option>
+      
+                  
+      
+      <option value="3.4">3.4.2</option>
+      
+                  
+      
+      <option value="3.3">3.3.0</option>
+      
+                  
+      
+      <option value="3.2">3.2.0</option>
+      
+                  
+      
+      <option value="3.1">3.1.0</option>
+      
+                  
+      
+      <option value="3.0">3.0.0</option>
+      
+                  </optgroup><optgroup label="2.x">
+      
+      <option value="2">2.30.1</option>
+      
+      </optgroup>
+      <option value="main">main (snapshot)</option>
+      
+      
+    </select>
+  </label><!--/docs-version-->
+  <div class="docs-tools">
+    <button type="button" class="docs-search-button" data-docs-search-open aria-haspopup="dialog" aria-keyshortcuts="/">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <span>Search</span><kbd aria-hidden="true">/</kbd>
+    </button>
+    <a class="docs-github" href="https://github.com/smallrye/smallrye-mutiny-vertx-bindings" title="smallrye/smallrye-mutiny-vertx-bindings on GitHub" data-docs-github="smallrye/smallrye-mutiny-vertx-bindings">
+      <svg aria-hidden="true" viewBox="0 0 16 16" width="26" height="26"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      <span class="docs-github-text">
+        <span class="docs-github-name">GitHub<span class="visually-hidden">: smallrye/smallrye-mutiny-vertx-bindings</span></span>
+        <span class="docs-github-facts"><span title="Latest release">4.1.0</span><span data-docs-github-stars hidden></span><span data-docs-github-forks hidden></span></span>
+      </span>
+    </a>
+  </div>
+</div>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-input" aria-label="Toggle menu">
+    <label for="nav-toggle" class="nav-toggle"><span></span></label>
+    <nav class="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/docs/" aria-current="page">Documentation</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+  <main id="main">
+
+<div class="container docs-layout">
+  <aside class="docs-side">
+    <button type="button" class="docs-nav-button" aria-controls="docs-nav" aria-expanded="false" data-docs-nav-button>
+      <span class="docs-nav-icon" aria-hidden="true"></span><span class="docs-nav-label">Contents</span>
+    </button>
+    <nav id="docs-nav" class="docs-nav" aria-label="Mutiny Vert.x bindings documentation">
+      <!--docs-version-->
+<ul>
+  <li><a href="/docs/smallrye-mutiny-vertx-bindings/3.19/">Overview</a></li>
+  <li><a href="/docs/smallrye-mutiny-vertx-bindings/3.19/api-translation/" aria-current="page">API Translation</a></li>
+</ul>
+      <!--/docs-version-->
+    </nav>
+  </aside>
+  <article class="docs-main prose" data-pagefind-body>
+    <!--docs-version-->
+    <span data-pagefind-filter="version:3.19" hidden></span>
+    <p class="docs-notice" data-pagefind-ignore>This is the documentation of Mutiny Vert.x bindings 3.19.2, released <time datetime="2025-07-23">2025-07-23</time>. It is not the latest release: <a href="/docs/smallrye-mutiny-vertx-bindings/latest/" data-docs-same-page>read the documentation of 4.1.0</a>.</p>
+    <!--/docs-version-->
+    <h1>API translation</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Vert.x Mutiny bindings are generated from the existing Vert.x APIs.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="vert-x-and-asynchronous-operation-methods"><a class="anchor" href="#vert-x-and-asynchronous-operation-methods"></a>Vert.x and asynchronous operation methods</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Vert.x is a toolkit that simplifies asynchronous I/O programming.
+The Vert.x APIs rely on simple conventions to denote methods doing asynchronous operations:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>methods that accept a <em>callback</em> as a last parameter, and</p>
+</li>
+<li>
+<p>methods that return a Vert.x <code>Future</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Vert.x has historically relied on callbacks, as in:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public void someOperation(Foo a, Bar b, Baz c, Handler&lt;AsyncResult&lt;T&gt;&gt; handler) {
+    // (...)
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here <code>someOperation</code> is a method where <code>a</code>, <code>b</code> and <code>c</code> are <em>parameters</em>, and <code>handler</code> is a <em>callback</em>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the callback is notified when the asynchronous operation done in <code>someOperation</code> completes (<em>continuation</em>), and</p>
+</li>
+<li>
+<p>callbacks are always passed as a last parameter of type <code>Handler&lt;AsyncResult&lt;T&gt;&gt;</code>, and</p>
+</li>
+<li>
+<p><code>AsyncResult</code> encapsulates an asynchronous result of type <code>T</code>, or a failure.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Since Vert.x 4 asynchronous operations can also be defined by returning a <code>Future&lt;T&gt;</code>, as in:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public Future&lt;T&gt; someOperation(Foo a, Bar b, Baz c) {
+    // (...)
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Code generators (e.g., Mutiny, RxJava, Kotlin coroutines, etc) can spot these methods and derive their own <a href="https://en.wikipedia.org/wiki/Shim_(computing)">shim APIs</a>.</p>
+</div>
+<div class="paragraph">
+<p>For instance with Mutiny <code>someOperation</code> becomes:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public Uni&lt;T&gt; someOperation(Foo a, Bar b, Baz c) {
+    // (...)
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="what-does-the-mutiny-code-generator-do"><a class="anchor" href="#what-does-the-mutiny-code-generator-do"></a>What does the Mutiny code generator do?</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/docs/smallrye-mutiny-vertx-bindings/3.19/images/codegen.png" alt="Mutiny code generator">
+</div>
+<div class="title">Figure 1. Mutiny code generator</div>
+</div>
+<div class="paragraph">
+<p>The code generator is applied to selected modules from the Vert.x stack.</p>
+</div>
+<div class="paragraph">
+<p>The translation rules are the following.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Rule</th>
+<th class="tableblock halign-left valign-top">Translation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>io.vertx</code> package</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>io.vertx.mutiny</code> package</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Asynchronous method</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A method returning a <code>Uni&lt;T&gt;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ReadStreams&lt;T&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Consumed as a <code>Multi&lt;T&gt;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WriteStreams&lt;T&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Consumed as a <em>Reactive Streams</em> <code>Subscriber&lt;T&gt;</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Because Mutiny is a <em>Reactive Streams</em> compliant implementation, the generated shims also adapt the Vert.x back-pressure protocol to that of <em>Reactive Streams</em>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="title">Method erasure</div>
+<div class="paragraph">
+<p>The Mutiny code generator <em>erases</em> methods.
+Given an asynchronous method <code>foo(Handler&lt;AsyncResult&lt;T&gt;&gt;)</code>, then it is not present in the generated shim as it is replaced with <code>Uni&lt;T&gt; foo()</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="helper-methods"><a class="anchor" href="#helper-methods"></a>Helper methods</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Given an asynchronous operation method, the Mutiny code generator also provides 2 further variants:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>xAndAwait()</code> to block the caller thread until the outcome is received, or throw a <code>RuntimeException</code> when a failure arises, and</p>
+</li>
+<li>
+<p><code>xAndForget()</code> to trigger the operation then discard the outcome (failures will be logged).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Given the <code>someOperation</code> method above, the generator provides these 3 methods:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// The canonical Mutiny method
+public Uni&lt;T&gt; someOperation(Foo a, Bar b, Baz c) {
+    // (...)
+}
+
+// Blocks, may throw a RuntimeException
+public T someOperationAndAwait(Foo a, Bar b, Baz c) {
+    // (...)
+}
+
+// Does not block, the result or failure is discarded
+public void someOperationAndForget(Foo a, Bar b, Baz c) {
+    // (...),
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="generate-mutiny-variants-from-your-own-apis"><a class="anchor" href="#generate-mutiny-variants-from-your-own-apis"></a>Generate Mutiny variants from your own APIs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Vert.x uses an open code generator, so you can generate Mutiny APIs for your own asynchronous interfaces.</p>
+</div>
+<div class="paragraph">
+<p>The code generator is available from the <code>io.smallrye.reactive:vertx-mutiny-generator</code> artifact.
+It works with the Vert.x <code>io.vertx:vertx-codegen</code> annotation processor.</p>
+</div>
+<div class="paragraph">
+<p>You can generate bindings by having the artifacts on the classpath for annotation processing at compilation time, or you may use other ways in your builds.
+The code for this project shows how to generate the files using Maven plugins.</p>
+</div>
+</div>
+</div>    <!--docs-version--><p class="docs-source" data-pagefind-ignore>
+    </p><!--/docs-version-->
+  </article>
+  <nav class="docs-toc" aria-label="On this page">
+    <details open data-docs-toc>
+      <summary class="toc-title">On this page</summary>
+      <nav class="roq-toc" aria-label="Table of contents">
+<ul>
+<li data-level="1"><a href="#vert-x-and-asynchronous-operation-methods">Vert.x and asynchronous operation methods</a></li>
+<li data-level="1"><a href="#what-does-the-mutiny-code-generator-do">What does the Mutiny code generator do?</a></li>
+<li data-level="1"><a href="#helper-methods">Helper methods</a></li>
+<li data-level="1"><a href="#generate-mutiny-variants-from-your-own-apis">Generate Mutiny variants from your own APIs</a></li>
+</ul>
+</nav>
+
+    </details>
+  </nav>
+</div>
+<dialog class="docs-search" data-docs-search aria-label="Search Mutiny Vert.x bindings">
+  <div class="docs-search-bar" role="search">
+    <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <input type="search" data-docs-search-input placeholder="Search Mutiny Vert.x bindings 3.23.1" aria-label="Search Mutiny Vert.x bindings documentation" autocomplete="off" spellcheck="false">
+    <button type="button" class="docs-search-close" data-docs-search-close>Esc</button>
+  </div>
+  <p class="docs-search-status" data-docs-search-status aria-live="polite"></p>
+  <ul class="docs-search-results" data-docs-search-results></ul>
+</dialog>
+
+  </main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-about">
+      <a class="footer-logo" href="/"><img src="/images/logo-dark.svg" alt="SmallRye" width="140" height="36" loading="lazy"></a>
+      <p>SmallRye is open source under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache Software License 2.0</a>.</p>
+      <p>This website is built with <a href="https://iamroq.dev/">Quarkus Roq</a>, hosted on <a href="https://pages.github.com/">GitHub Pages</a> and is completely open source. If you want to make it better, <a href="https://github.com/smallrye/smallrye.github.io">fork the website</a> and show us what you've got.</p>
+    </div>
+    <nav aria-label="Site">
+      <p class="footer-head">Navigation</p>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/docs/">Documentation</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Contribute and get help">
+      <p class="footer-head">Contribute</p>
+      <ul>
+        <li><a href="https://github.com/smallrye">GitHub</a></li>
+        <li><a href="https://twitter.com/smallrye_io">Follow us</a></li>
+      </ul>
+      <p class="footer-head">Get help</p>
+      <ul>
+        <li><a href="https://quarkusio.zulipchat.com">Chatroom</a></li>
+        <li><a href="https://groups.google.com/d/forum/smallrye">Google Groups</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="External links">
+      <p class="footer-head">External links</p>
+      <ul>
+        <li><a href="https://microprofile.io/">Eclipse MicroProfile</a></li>
+        <li><a href="https://github.com/eclipse?q=microprofile">Eclipse MicroProfile on GitHub</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <div class="container footer-bottom-bar">
+      <p><a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></p>
+      <p class="sponsor">A <a href="https://www.commonhaus.org/">Commonhaus Foundation</a> project <a href="https://www.commonhaus.org/"><img src="/assets/images/commonhaus_reversed.svg" alt="Commonhaus Foundation" width="200" height="21" loading="lazy"></a></p>
+      <p class="footer-trademark">Copyright &copy; SmallRye. For details on our trademarks, please visit our <a href="https://www.commonhaus.org/policies/trademark-policy/">Trademark Policy</a> and <a href="https://www.commonhaus.org/trademarks/">Trademark List</a>. Trademarks of third parties are owned by their respective holders and their mention here does not suggest any endorsement or association.</p>
+    </div>
+  </div>
+</footer>
+<!-- Light/dark switch. Hidden until the script wires it, so a no-JS visitor
+     never sees a dead button. Every site has it: keep it. -->
+<button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark theme" hidden>
+  <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
+  <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/></svg>
+</button>
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.querySelector('.theme-toggle');
+    if (!btn) return;
+    btn.hidden = false;
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    function isDark() { var t = root.getAttribute('data-theme'); return t ? t === 'dark' : mq.matches; }
+    function sync() {
+      btn.setAttribute('aria-pressed', isDark() ? 'true' : 'false');
+      btn.setAttribute('aria-label', isDark() ? 'Switch to light theme' : 'Switch to dark theme');
+    }
+    btn.addEventListener('click', function () {
+      var next = isDark() ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('site-theme', next); } catch (e) { /* not fatal */ }
+      sync();
+    });
+    mq.addEventListener('change', sync);
+    sync();
+  })();
+</script>
+</body>
+</html>

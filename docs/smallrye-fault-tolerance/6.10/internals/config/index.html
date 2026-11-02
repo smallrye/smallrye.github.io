@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://api.github.com; base-uri 'none'; object-src 'none'; form-action 'none'">
+
+  <!-- SEO TITLE -->
+  
+  <title>Configuration System - SmallRye</title>
+  <meta property="og:title" content="Configuration System" />
+  <meta name="twitter:title" content="Configuration System">
+  <meta property="og:site_name" content="SmallRye">
+  <!-- SEO DESCRIPTION -->
+  <meta name="description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+  <meta property="og:description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile." />
+  <meta name="twitter:description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+
+  <!-- SEO URL -->
+  <link rel="canonical" href="https://smallrye.io/docs/smallrye-fault-tolerance/6.10/internals/config/" />
+  <meta property="og:url" content="https://smallrye.io/docs/smallrye-fault-tolerance/6.10/internals/config/" />
+  <meta name="twitter:url" content="https://smallrye.io/docs/smallrye-fault-tolerance/6.10/internals/config/">
+
+  <!-- SEO TYPE -->
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2026-11-02T00:30:18.735603482Z[UTC]" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image" content="https://smallrye.io/images/rye-field-og.jpg">
+  <meta name="twitter:image" content="https://smallrye.io/images/rye-field-og.jpg">
+  <!-- SEO COLLECTION PAGES -->
+  <!-- SEO TWITTER -->
+  <meta name="twitter:site" content="@smallrye_io" />
+  <meta name="twitter:creator" content="@smallrye_io" />
+  <!-- SEO LOCALE -->
+  <meta property="og:locale" content="en" />
+  <!-- SEO GENERATOR -->
+  <meta name="generator" content="Quarkus Roq v2.1.9" />
+
+<link rel="alternate" type="application/rss+xml" title="SmallRye" href="https://smallrye.io/rss.xml"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <script>
+    try {
+      var t = localStorage.getItem('site-theme');
+      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    } catch (e) { /* private mode: follow the OS preference */ }
+  </script>
+  <link rel="stylesheet" href="/css/main.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://smallrye.io/#organization",
+      "name": "SmallRye",
+      "url": "https://smallrye.io/",
+      "logo": "https://smallrye.io/images/logo.svg",
+      "description": "SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.",
+      "email": "smallrye@googlegroups.com",
+      "sameAs": [
+        "https://github.com/smallrye",
+        "https://twitter.com/smallrye_io",
+        "https://groups.google.com/d/forum/smallrye"
+      ],
+      "parentOrganization": { "@type": "Organization", "name": "Commonhaus Foundation", "url": "https://www.commonhaus.org/" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://smallrye.io/#website",
+      "name": "SmallRye",
+      "url": "https://smallrye.io/",
+      "publisher": { "@id": "https://smallrye.io/#organization" }
+    }
+  ]
+}
+</script>
+    <script type="module" src="/static/bundle/app-KFNV2DMD.js"></script>
+      <!-- no style found for key 'app' in Bundler mapping !-->
+<script>
+  try {
+    if (matchMedia('(min-width: 60rem)').matches && localStorage.getItem('docs-nav') === 'open') document.documentElement.classList.add('docs-nav-open');
+    if (localStorage.getItem('docs-toc') === 'closed') document.documentElement.classList.add('docs-toc-closed');
+  } catch (e) { /* storage blocked: closed */ }
+</script>
+<noscript><style>.docs-nav { display: block !important; } .docs-nav-button { display: none !important; }</style></noscript>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand" href="/">
+      <img class="logo-light" src="/images/logo.svg" alt="SmallRye" width="160" height="41">
+      <img class="logo-dark" src="/images/logo-dark.svg" alt="SmallRye" width="160" height="41">
+    </a>
+<div class="docs-brand">
+  <a class="docs-brand-project" href="/docs/smallrye-fault-tolerance/6.10/"><span class="docs-brand-name">Fault Tolerance</span></a>
+  <!--docs-version--><label class="docs-version">
+    <span class="visually-hidden">Version</span>
+    <select data-docs-version data-current="6.10" data-base="/docs/smallrye-fault-tolerance/">
+      
+      <option value="latest">7.0.0 (latest)</option>
+      
+                  <optgroup label="6.x">
+      
+      <option value="6.11">6.11.4</option>
+      
+                  
+      
+      <option value="6.10" selected>6.10.2</option>
+      
+                  
+      
+      <option value="6.9">6.9.4</option>
+      
+                  
+      
+      <option value="6.8">6.8.0</option>
+      
+                  
+      
+      <option value="6.7">6.7.3</option>
+      
+                  
+      
+      <option value="6.6">6.6.3</option>
+      
+                  
+      
+      <option value="6.5">6.5.0</option>
+      
+                  
+      
+      <option value="6.4">6.4.3</option>
+      
+                  
+      
+      <option value="6.3">6.3.0</option>
+      
+                  
+      
+      <option value="6.2">6.2.6</option>
+      
+                  
+      
+      <option value="6.1">6.1.0</option>
+      
+                  
+      
+      <option value="6.0">6.0.0</option>
+      
+                  </optgroup><optgroup label="5.x">
+      
+      <option value="5">5.6.0</option>
+      
+      </optgroup>
+      <option value="main">main (snapshot)</option>
+      
+      
+    </select>
+  </label><!--/docs-version-->
+  <div class="docs-tools">
+    <button type="button" class="docs-search-button" data-docs-search-open aria-haspopup="dialog" aria-keyshortcuts="/">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <span>Search</span><kbd aria-hidden="true">/</kbd>
+    </button>
+    <a class="docs-github" href="https://github.com/smallrye/smallrye-fault-tolerance" title="smallrye/smallrye-fault-tolerance on GitHub" data-docs-github="smallrye/smallrye-fault-tolerance">
+      <svg aria-hidden="true" viewBox="0 0 16 16" width="26" height="26"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      <span class="docs-github-text">
+        <span class="docs-github-name">GitHub<span class="visually-hidden">: smallrye/smallrye-fault-tolerance</span></span>
+        <span class="docs-github-facts"><span title="Latest release">7.0.0</span><span data-docs-github-stars hidden></span><span data-docs-github-forks hidden></span></span>
+      </span>
+    </a>
+  </div>
+</div>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-input" aria-label="Toggle menu">
+    <label for="nav-toggle" class="nav-toggle"><span></span></label>
+    <nav class="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/docs/" aria-current="page">Documentation</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+  <main id="main">
+
+<div class="container docs-layout">
+  <aside class="docs-side">
+    <button type="button" class="docs-nav-button" aria-controls="docs-nav" aria-expanded="false" data-docs-nav-button>
+      <span class="docs-nav-icon" aria-hidden="true"></span><span class="docs-nav-label">Contents</span>
+    </button>
+    <nav id="docs-nav" class="docs-nav" aria-label="SmallRye Fault Tolerance documentation">
+      <!--docs-version-->
+<ul>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/">Overview</a></li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">How-to</summary>
+<ul>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/howto/begin/">Begin</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/howto/fallback/">Supply Fallback Values</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/howto/bulkhead/">Limit Concurrency</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/howto/circuit-breaker/">Fail Fast on Recurring Failures</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/howto/timeout/">Watch for Timeouts</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/howto/retry/">Retry on Failures</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/howto/asynchronous/">Guard Asynchronous Methods</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/howto/rate-limit/">Limit Execution Rate</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/howto/multiple/">Use Multiple Strategies</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Reference</summary>
+<ul>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/reference/fallback/">Fallback</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/reference/bulkhead/">Bulkhead</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/reference/circuit-breaker/">Circuit Breaker</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/reference/timeout/">Timeout</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/reference/retry/">Retry</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/reference/asynchronous/">Asynchronous Execution</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/reference/rate-limit/">Rate Limit</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/reference/config/">Configuration</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/reference/metrics/">Metrics</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/reference/non-compat/">Non-compatible Mode</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/reference/programmatic-api/">Programmatic API</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/reference/reusable/">Reusable Fault Tolerance</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Integration</summary>
+<ul>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/integration/intro/">Introduction</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/integration/metrics/">Metrics</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/integration/thread-pool/">Thread Pool</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/integration/context-propagation/">Context Propagation</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/integration/opentracing/">OpenTracing</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/integration/event-loop/">Event Loop</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/integration/async-types/">Additional Asynchronous Types Integration Concerns</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/integration/kotlin/">Kotlin Integration Concerns</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/integration/programmatic-api/">Programmatic API Integration Concerns</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Internals</summary>
+<ul>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/internals/project-structure/">Project Structure</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/internals/instructions/">Instructions</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/internals/core/">Fault Tolerance Core</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/internals/config/" aria-current="page">Configuration System</a></li>
+  <li><a href="/docs/smallrye-fault-tolerance/6.10/internals/logging/">Logging</a></li>
+</ul>
+    </details>
+  </li>
+</ul>
+      <!--/docs-version-->
+    </nav>
+  </aside>
+  <article class="docs-main prose" data-pagefind-body>
+    <!--docs-version-->
+    <span data-pagefind-filter="version:6.10" hidden></span>
+    <p class="docs-notice" data-pagefind-ignore>This is the documentation of SmallRye Fault Tolerance 6.10.2, released <time datetime="2026-09-16">2026-09-16</time>. It is not the latest release: <a href="/docs/smallrye-fault-tolerance/latest/" data-docs-same-page>read the documentation of 7.0.0</a>.</p>
+    <!--/docs-version-->
+    <h1>Configuration System</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+Note that everything explained here is an implementation detail.
+API stability for these interfaces and classes is <em>not</em> guaranteed!
+This documentation is only present to provide implementation insight for people who have to debug issues or want to contribute.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The <a href="/docs/smallrye-fault-tolerance/6.10/internals/core/">core</a> fault tolerance strategies are configured simply by constructor parameters.
+This is fine, since they are an internal implementation detail.
+However, the constructor parameters correspond closely to the members of MicroProfile Fault Tolerance annotations.
+The idea is that core fault tolerance strategies have no dependency on the MicroProfile Fault Tolerance API, but given a fault tolerance annotation, creating an instance of the corresponding strategy should be straightforward.</p>
+</div>
+<div class="paragraph">
+<p>On top of the core layer, SmallRye Fault Tolerance implements MicroProfile Fault Tolerance, including a configuration system conforming to the specification.
+This document briefly describes how the configuration system works.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="faulttoleranceoperation"><a class="anchor" href="#faulttoleranceoperation"></a><code>FaultToleranceOperation</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The fault tolerance interceptor, which is the main entrypoint, looks up a <code>FaultToleranceOperation</code> instance for each class/method combination it has to process.
+The <code>FaultToleranceOperation</code> holds a bean class, a descriptor of the guarded method, and configuration for each fault tolerance strategy applied to the method.
+It also orchestrates configuration validation.
+The interceptor uses a <code>FaultToleranceOperation</code> to instantiate all the core fault tolerance strategies for given guarded method.</p>
+</div>
+<div class="paragraph">
+<p>The <code>FaultToleranceOperation</code> instances are created early on, during application deployment, for all beans that use MicroProfile Fault Tolerance.
+It may happen that a <code>FaultToleranceOperation</code> is created lazily, for special constructs such as runtime-built proxies, but that is largely irrelevant from the configuration perspective.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="faulttolerancemethod"><a class="anchor" href="#faulttolerancemethod"></a><code>FaultToleranceMethod</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <code>FaultToleranceOperation</code> is created from a <code>FaultToleranceMethod</code>.
+A <code>FaultToleranceMethod</code> holds, again, a bean class, a descriptor of the guarded method, and the annotation instance for each annotation that is present on the guarded method or the class declaring the method.
+It also knows what annotations have been declared directly on the method, and what annotations have been declared on the class.
+This is because the MicroProfile Fault Tolerance configuration rules distinguish these two cases.</p>
+</div>
+<div class="paragraph">
+<p>A <code>FaultToleranceMethod</code> must be created in a CDI extension, because it represents the knowledge CDI has about the guarded method.
+Note that CDI extensions may add, remove or modify annotations, so <code>FaultToleranceMethod</code> doesn&#8217;t just hold the annotation instances as present in the class bytecode.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Quarkus</div>
+<div class="paragraph">
+<p>In environments that bootstrap the CDI container during application build, such as Quarkus, the set of all <code>FaultToleranceMethod</code>s in the application should be collected during build and transferred to runtime.
+Then, at application runtime, <code>FaultToleranceOperation</code>s should be created and validated.</p>
+</div>
+<div class="paragraph">
+<p>SmallRye Fault Tolerance doesn&#8217;t do anything like that, but is designed with Quarkus (and CDI Lite) in mind.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The main difference between <code>FaultToleranceMethod</code> and <code>FaultToleranceOperation</code> is that <code>FaultToleranceMethod</code> holds annotation instances, while <code>FaultToleranceOperation</code> holds configuration.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="autoconfig"><a class="anchor" href="#autoconfig"></a><code>@AutoConfig</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As described above, <code>FaultToleranceMethod</code> holds annotation instances, while <code>FaultToleranceOperation</code> holds configuration.
+Yet, <code>FaultToleranceOperation</code> exposes the annotation types (such as <code>@CircuitBreaker</code>) to anyone who needs the configuration.
+The configuration consumers simply call the annotation methods (such as <code>requestVolumeThreshold()</code>), and configuration is handled behind the scenes, following the MicroProfile Fault Tolerance configuration rules.</p>
+</div>
+<div class="paragraph">
+<p>The infrastructure behind this is present in the <code>autoconfig</code> module.
+This module allows creating simple configuration interfaces like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@AutoConfig
+interface CircuitBreakerConfig extends CircuitBreaker, Config {
+    default void validate() {
+        ...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The config interface must:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>be annotated with <code>@AutoConfig</code>;</p>
+</li>
+<li>
+<p>extend the annotation interface (<code>CircuitBreaker</code> in this case);</p>
+</li>
+<li>
+<p>extend the <code>Config</code> (or <code>ConfigDeclarativeOnly</code>) interface (from the <code>autoconfig/core</code> module);</p>
+</li>
+<li>
+<p>provide a <code>default</code> implementation of the <code>validate</code> method (defined in <code>Config</code>).</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>For each such interface, an implementation class will be automatically generated by an annotation processor (implemented in the <code>autoconfig/processor</code> module).
+In this case, it would be called <code>CircuitBreakerConfigImpl</code>.</p>
+</div>
+<div class="paragraph">
+<p>This implementation class has a <code>static</code> method called <code>create()</code> that accepts a <code>FaultToleranceMethod</code>.
+It follows that for each guarded method, a new instance must be created.
+If given <code>FaultToleranceMethod</code> doesn&#8217;t contain an instance of particular annotation, <code>create()</code> simply returns <code>null</code>.</p>
+</div>
+<div class="paragraph">
+<p>The implementation class also overrides all methods from the annotation type.
+Each annotation method is implemented to first consult MicroProfile Config, and only second to consult the annotation instance (which, as we described above, is present on the <code>FaultToleranceMethod</code>).</p>
+</div>
+<div class="paragraph">
+<p>The implementation class is supposed to be used just like the annotation type itself.
+In other words, to obtain configured values, call the annotation methods on the config interface instance.
+For example, to obtain the <code>requestVolumeThreshold</code> value, with respect to the MicroProfile Fault Tolerance configuration rules, we obtain an instance of <code>CircuitBreakerConfigImpl</code> and call <code>requestVolumeThreshold()</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>FaultToleranceOperation</code> class holds instances of these config interfaces, and exposes them to configuration consumers.
+It actually only exposes the annotation types, not the full config interface, but that is enough.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="putting-it-all-together"><a class="anchor" href="#putting-it-all-together"></a>Putting it all together</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s recap how it all works.</p>
+</div>
+<div class="paragraph">
+<p>First, for each guarded method in the application, a <code>FaultToleranceMethod</code> instance is created, holding all the annotations that affect the method.</p>
+</div>
+<div class="paragraph">
+<p>Second, for each <code>FaultToleranceMethod</code>, a <code>FaultToleranceOperation</code> is created.
+That, in turn, creates an instance of all relevant config interfaces.</p>
+</div>
+<div class="paragraph">
+<p>Finally, the fault tolerance interceptor looks up a <code>FaultToleranceOperation</code> and creates a chain of fault tolerance strategies.
+For each fault tolerance strategy in the chain, the interceptor looks up configuration values from the corresponding config interface.</p>
+</div>
+<div class="paragraph">
+<p>The chain of fault tolerance strategies is created on the first invocation to a given guarded method and cached for all subsequent invocations.
+That is how we satisfy the requirement that all stateful fault tolerance strategies are singletons, but that&#8217;s a different story.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="supplement-programmatic-api"><a class="anchor" href="#supplement-programmatic-api"></a>Supplement: Programmatic API</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The description above is slightly simplified for readability.
+It is precise enough to describe how configuration works in the declarative, annotation-based API.</p>
+</div>
+<div class="paragraph">
+<p>The programmatic API itself supports configuration when used together with <code>@ApplyGuard</code>.
+However, it doesn&#8217;t support configuring <em>all</em> strategies; some are built in a different manner and no configuration is possible.</p>
+</div>
+<div class="paragraph">
+<p>Therefore, the <code>FaultToleranceOperation</code> class described above is actually split into 2 classes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>BasicFaultToleranceOperation</code>, which is shared for both configuration systems and holds all <code>Config</code> objects,</p>
+</li>
+<li>
+<p>its subclass <code>FaultToleranceOperation</code>, which only applies in case of the declarative API and holds all <code>ConfigDeclarativeOnly</code> objects.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In addition to the description above, implementations of the <code>Config</code> interface (but not <code>ConfigDeclarativeOnly</code>) also include a <code>create()</code> method that takes a <code>String</code> identifier and a <code>Supplier</code> of the backing annotation instance.
+This is supposed to be used to create an instance for configuring the programmatic API, because there&#8217;s no <code>FaultToleranceMethod</code> in such case.
+Also, a zero-configuration implementation of the <code>Config</code> interface is generated, called <code>&#8230;&#8203;NoConfigImpl</code>.
+This exists to be able to use the config interface even in the non-<code>@ApplyGuard</code> case, where no configuration is possible.</p>
+</div>
+</div>
+</div>    <!--docs-version--><p class="docs-source" data-pagefind-ignore>
+    </p><!--/docs-version-->
+  </article>
+  <nav class="docs-toc" aria-label="On this page">
+    <details open data-docs-toc>
+      <summary class="toc-title">On this page</summary>
+      <nav class="roq-toc" aria-label="Table of contents">
+<ul>
+<li data-level="1"><a href="#faulttoleranceoperation">FaultToleranceOperation</a></li>
+<li data-level="1"><a href="#faulttolerancemethod">FaultToleranceMethod</a></li>
+<li data-level="1"><a href="#autoconfig">@AutoConfig</a></li>
+<li data-level="1"><a href="#putting-it-all-together">Putting it all together</a></li>
+<li data-level="1"><a href="#supplement-programmatic-api">Supplement: Programmatic API</a></li>
+</ul>
+</nav>
+
+    </details>
+  </nav>
+</div>
+<dialog class="docs-search" data-docs-search aria-label="Search SmallRye Fault Tolerance">
+  <div class="docs-search-bar" role="search">
+    <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <input type="search" data-docs-search-input placeholder="Search SmallRye Fault Tolerance 7.0.0" aria-label="Search SmallRye Fault Tolerance documentation" autocomplete="off" spellcheck="false">
+    <button type="button" class="docs-search-close" data-docs-search-close>Esc</button>
+  </div>
+  <p class="docs-search-status" data-docs-search-status aria-live="polite"></p>
+  <ul class="docs-search-results" data-docs-search-results></ul>
+</dialog>
+
+  </main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-about">
+      <a class="footer-logo" href="/"><img src="/images/logo-dark.svg" alt="SmallRye" width="140" height="36" loading="lazy"></a>
+      <p>SmallRye is open source under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache Software License 2.0</a>.</p>
+      <p>This website is built with <a href="https://iamroq.dev/">Quarkus Roq</a>, hosted on <a href="https://pages.github.com/">GitHub Pages</a> and is completely open source. If you want to make it better, <a href="https://github.com/smallrye/smallrye.github.io">fork the website</a> and show us what you've got.</p>
+    </div>
+    <nav aria-label="Site">
+      <p class="footer-head">Navigation</p>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/docs/">Documentation</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Contribute and get help">
+      <p class="footer-head">Contribute</p>
+      <ul>
+        <li><a href="https://github.com/smallrye">GitHub</a></li>
+        <li><a href="https://twitter.com/smallrye_io">Follow us</a></li>
+      </ul>
+      <p class="footer-head">Get help</p>
+      <ul>
+        <li><a href="https://quarkusio.zulipchat.com">Chatroom</a></li>
+        <li><a href="https://groups.google.com/d/forum/smallrye">Google Groups</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="External links">
+      <p class="footer-head">External links</p>
+      <ul>
+        <li><a href="https://microprofile.io/">Eclipse MicroProfile</a></li>
+        <li><a href="https://github.com/eclipse?q=microprofile">Eclipse MicroProfile on GitHub</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <div class="container footer-bottom-bar">
+      <p><a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></p>
+      <p class="sponsor">A <a href="https://www.commonhaus.org/">Commonhaus Foundation</a> project <a href="https://www.commonhaus.org/"><img src="/assets/images/commonhaus_reversed.svg" alt="Commonhaus Foundation" width="200" height="21" loading="lazy"></a></p>
+      <p class="footer-trademark">Copyright &copy; SmallRye. For details on our trademarks, please visit our <a href="https://www.commonhaus.org/policies/trademark-policy/">Trademark Policy</a> and <a href="https://www.commonhaus.org/trademarks/">Trademark List</a>. Trademarks of third parties are owned by their respective holders and their mention here does not suggest any endorsement or association.</p>
+    </div>
+  </div>
+</footer>
+<!-- Light/dark switch. Hidden until the script wires it, so a no-JS visitor
+     never sees a dead button. Every site has it: keep it. -->
+<button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark theme" hidden>
+  <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
+  <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/></svg>
+</button>
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.querySelector('.theme-toggle');
+    if (!btn) return;
+    btn.hidden = false;
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    function isDark() { var t = root.getAttribute('data-theme'); return t ? t === 'dark' : mq.matches; }
+    function sync() {
+      btn.setAttribute('aria-pressed', isDark() ? 'true' : 'false');
+      btn.setAttribute('aria-label', isDark() ? 'Switch to light theme' : 'Switch to dark theme');
+    }
+    btn.addEventListener('click', function () {
+      var next = isDark() ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('site-theme', next); } catch (e) { /* not fatal */ }
+      sync();
+    });
+    mq.addEventListener('change', sync);
+    sync();
+  })();
+</script>
+</body>
+</html>

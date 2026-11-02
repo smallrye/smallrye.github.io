@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://api.github.com; base-uri 'none'; object-src 'none'; form-action 'none'">
+
+  <!-- SEO TITLE -->
+  
+  <title>Sending messages to AMQP - SmallRye</title>
+  <meta property="og:title" content="Sending messages to AMQP" />
+  <meta name="twitter:title" content="Sending messages to AMQP">
+  <meta property="og:site_name" content="SmallRye">
+  <!-- SEO DESCRIPTION -->
+  <meta name="description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+  <meta property="og:description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile." />
+  <meta name="twitter:description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+
+  <!-- SEO URL -->
+  <link rel="canonical" href="https://smallrye.io/docs/smallrye-reactive-messaging/4.29/amqp/sending-amqp-messages/" />
+  <meta property="og:url" content="https://smallrye.io/docs/smallrye-reactive-messaging/4.29/amqp/sending-amqp-messages/" />
+  <meta name="twitter:url" content="https://smallrye.io/docs/smallrye-reactive-messaging/4.29/amqp/sending-amqp-messages/">
+
+  <!-- SEO TYPE -->
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2026-11-02T00:30:18.776297613Z[UTC]" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image" content="https://smallrye.io/images/rye-field-og.jpg">
+  <meta name="twitter:image" content="https://smallrye.io/images/rye-field-og.jpg">
+  <!-- SEO COLLECTION PAGES -->
+  <!-- SEO TWITTER -->
+  <meta name="twitter:site" content="@smallrye_io" />
+  <meta name="twitter:creator" content="@smallrye_io" />
+  <!-- SEO LOCALE -->
+  <meta property="og:locale" content="en" />
+  <!-- SEO GENERATOR -->
+  <meta name="generator" content="Quarkus Roq v2.1.9" />
+
+<link rel="alternate" type="application/rss+xml" title="SmallRye" href="https://smallrye.io/rss.xml"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <script>
+    try {
+      var t = localStorage.getItem('site-theme');
+      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    } catch (e) { /* private mode: follow the OS preference */ }
+  </script>
+  <link rel="stylesheet" href="/css/main.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://smallrye.io/#organization",
+      "name": "SmallRye",
+      "url": "https://smallrye.io/",
+      "logo": "https://smallrye.io/images/logo.svg",
+      "description": "SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.",
+      "email": "smallrye@googlegroups.com",
+      "sameAs": [
+        "https://github.com/smallrye",
+        "https://twitter.com/smallrye_io",
+        "https://groups.google.com/d/forum/smallrye"
+      ],
+      "parentOrganization": { "@type": "Organization", "name": "Commonhaus Foundation", "url": "https://www.commonhaus.org/" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://smallrye.io/#website",
+      "name": "SmallRye",
+      "url": "https://smallrye.io/",
+      "publisher": { "@id": "https://smallrye.io/#organization" }
+    }
+  ]
+}
+</script>
+    <script type="module" src="/static/bundle/app-KFNV2DMD.js"></script>
+      <!-- no style found for key 'app' in Bundler mapping !-->
+<script>
+  try {
+    if (matchMedia('(min-width: 60rem)').matches && localStorage.getItem('docs-nav') === 'open') document.documentElement.classList.add('docs-nav-open');
+    if (localStorage.getItem('docs-toc') === 'closed') document.documentElement.classList.add('docs-toc-closed');
+  } catch (e) { /* storage blocked: closed */ }
+</script>
+<noscript><style>.docs-nav { display: block !important; } .docs-nav-button { display: none !important; }</style></noscript>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand" href="/">
+      <img class="logo-light" src="/images/logo.svg" alt="SmallRye" width="160" height="41">
+      <img class="logo-dark" src="/images/logo-dark.svg" alt="SmallRye" width="160" height="41">
+    </a>
+<div class="docs-brand">
+  <a class="docs-brand-project" href="/docs/smallrye-reactive-messaging/4.29/"><span class="project-logo" style="--logo: url('/images/projects/smallrye-reactive-messaging.png')" aria-hidden="true"></span><span class="docs-brand-name">Reactive Messaging</span></a>
+  <!--docs-version--><label class="docs-version">
+    <span class="visually-hidden">Version</span>
+    <select data-docs-version data-current="4.29" data-base="/docs/smallrye-reactive-messaging/">
+      
+      <option value="latest">5.0.0-RC2 (latest)</option>
+      
+                  <optgroup label="4.x">
+      
+      <option value="4.37">4.37.1</option>
+      
+                  
+      
+      <option value="4.36">4.36.0</option>
+      
+                  
+      
+      <option value="4.35">4.35.0</option>
+      
+                  
+      
+      <option value="4.34">4.34.0</option>
+      
+                  
+      
+      <option value="4.33">4.33.1</option>
+      
+                  
+      
+      <option value="4.32">4.32.1</option>
+      
+                  
+      
+      <option value="4.31">4.31.0</option>
+      
+                  
+      
+      <option value="4.30">4.30.0</option>
+      
+                  
+      
+      <option value="4.29" selected>4.29.0</option>
+      
+                  
+      
+      <option value="4.28">4.28.0</option>
+      
+                  
+      
+      <option value="4.27">4.27.0</option>
+      
+                  
+      
+      <option value="4.26">4.26.0</option>
+      
+                  
+      
+      <option value="4.25">4.25.0</option>
+      
+                  
+      
+      <option value="4.24">4.24.1</option>
+      
+                  
+      
+      <option value="4.23">4.23.0</option>
+      
+                  
+      
+      <option value="4.22">4.22.0</option>
+      
+                  
+      
+      <option value="4.21">4.21.0</option>
+      
+                  
+      
+      <option value="4.20">4.20.0</option>
+      
+                  
+      
+      <option value="4.19">4.19.0</option>
+      
+                  
+      
+      <option value="4.18">4.18.1</option>
+      
+                  
+      
+      <option value="4.17">4.17.0</option>
+      
+                  
+      
+      <option value="4.16">4.16.2</option>
+      
+                  
+      
+      <option value="4.15">4.15.0</option>
+      
+                  
+      
+      <option value="4.14">4.14.0</option>
+      
+                  
+      
+      <option value="4.13">4.13.0</option>
+      
+                  
+      
+      <option value="4.12">4.12.0</option>
+      
+                  
+      
+      <option value="4.11">4.11.0</option>
+      
+                  
+      
+      <option value="4.10">4.10.2</option>
+      
+                  
+      
+      <option value="4.9">4.9.0</option>
+      
+                  
+      
+      <option value="4.8">4.8.0</option>
+      
+                  
+      
+      <option value="4.7">4.7.0</option>
+      
+                  
+      
+      <option value="4.6">4.6.1</option>
+      
+                  
+      
+      <option value="4.5">4.5.0</option>
+      
+                  
+      
+      <option value="4.4">4.4.0</option>
+      
+                  
+      
+      <option value="4.3">4.3.0</option>
+      
+                  
+      
+      <option value="4.2">4.2.0</option>
+      
+                  
+      
+      <option value="4.1">4.1.1</option>
+      
+                  
+      
+      <option value="4.0">4.0.0</option>
+      
+                  </optgroup><optgroup label="3.x">
+      
+      <option value="3">3.25.0</option>
+      
+      </optgroup>
+      <option value="main">main (snapshot)</option>
+      
+      
+    </select>
+  </label><!--/docs-version-->
+  <div class="docs-tools">
+    <button type="button" class="docs-search-button" data-docs-search-open aria-haspopup="dialog" aria-keyshortcuts="/">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <span>Search</span><kbd aria-hidden="true">/</kbd>
+    </button>
+    <a class="docs-github" href="https://github.com/smallrye/smallrye-reactive-messaging" title="smallrye/smallrye-reactive-messaging on GitHub" data-docs-github="smallrye/smallrye-reactive-messaging">
+      <svg aria-hidden="true" viewBox="0 0 16 16" width="26" height="26"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      <span class="docs-github-text">
+        <span class="docs-github-name">GitHub<span class="visually-hidden">: smallrye/smallrye-reactive-messaging</span></span>
+        <span class="docs-github-facts"><span title="Latest release">5.0.0-RC2</span><span data-docs-github-stars hidden></span><span data-docs-github-forks hidden></span></span>
+      </span>
+    </a>
+  </div>
+</div>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-input" aria-label="Toggle menu">
+    <label for="nav-toggle" class="nav-toggle"><span></span></label>
+    <nav class="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/docs/" aria-current="page">Documentation</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+  <main id="main">
+
+<div class="container docs-layout">
+  <aside class="docs-side">
+    <button type="button" class="docs-nav-button" aria-controls="docs-nav" aria-expanded="false" data-docs-nav-button>
+      <span class="docs-nav-icon" aria-hidden="true"></span><span class="docs-nav-label">Contents</span>
+    </button>
+    <nav id="docs-nav" class="docs-nav" aria-label="SmallRye Reactive Messaging documentation">
+      <!--docs-version-->
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/">Home</a></li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Core</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/getting-started/">Getting Started</a></li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Concepts</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/concepts/concepts/">Introduction</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/concepts/model/">Development Model</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/concepts/emitter/">Emitters and Channel</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/concepts/connectors/">Connectors</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/concepts/contributing-connectors/">Contributing Connectors</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/concepts/acknowledgement/">Acknowledgement</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/concepts/blocking/">Blocking Processing</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/concepts/signatures/">Method Signatures</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/concepts/skipping/">Skipping Messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/concepts/converters/">Message Converters</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/concepts/keyed-multi/">Keyed Streams</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/concepts/decorators/">Channel Decorators and Interceptors</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/concepts/broadcast/">Broadcast</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/concepts/merge/">Merge channels</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/concepts/incoming-concurrency/">Incoming Channel Concurrency</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/concepts/incomings/">@Incomings</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/concepts/outgoings/">@Outgoings</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/concepts/testing/">Testing</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/concepts/logging/">Logging</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/concepts/observability/">Observability API</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/concepts/advanced-config/">Advanced Configuration</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/concepts/message-context/">Message Context</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/concepts/incoming-metadata-injection/">Metadata Injection</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/concepts/generic-payloads/">Generic Payloads</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/concepts/pausable-channels/">Pausable Channels</a></li>
+</ul>
+    </details>
+  </li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Kafka</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/kafka/kafka/">Apache Kafka Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/kafka/receiving-kafka-records/">Receiving records</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/kafka/writing-kafka-records/">Writing records</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/kafka/health/">Health Checks</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/kafka/avro-configuration/">Using Avro</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/kafka/protobuf-configuration/">Using Protobuf</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/kafka/consumer-rebalance-listener/">Rebalance Listeners</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/kafka/kerberos/">Kerberos authentication</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/kafka/client-service/">Accessing the client</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/kafka/default-configuration/">Customizing Default Kafka Configuration</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/kafka/test-companion/">Test Companion for Kafka</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/kafka/transactions/">Kafka Transactions and Exactly-Once Processing</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/kafka/request-reply/">Kafka Request/Reply</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">AMQP 1.0</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/amqp/amqp/">AMQP 1.0 Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/amqp/receiving-amqp-messages/">Receiving messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/amqp/sending-amqp-messages/" aria-current="page">Sending messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/amqp/health/">Health Checks</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/amqp/client-customization/">Client Customization</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/amqp/rabbitmq/">Using RabbitMQ</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">RabbitMQ</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/rabbitmq/rabbitmq/">RabbitMQ Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/rabbitmq/receiving-messages-from-rabbitmq/">Receiving messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/rabbitmq/sending-messages-to-rabbitmq/">Sending messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/rabbitmq/rabbitmq-health/">Health Checks</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/rabbitmq/rabbitmq-client-customization/">Client Customization</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/rabbitmq/rabbitmq-cloud/">Connecting to managed instances</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Pulsar</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/pulsar/pulsar/">Apache Pulsar Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/pulsar/receiving-pulsar-messages/">Receiving messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/pulsar/sending-messages-to-pulsar/">Sending messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/pulsar/schema-configuration/">Configuring the Schema</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/pulsar/client-configuration/">Configuring the Pulsar client</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/pulsar/health/">Health Checks</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/pulsar/client-service/">Accessing the client</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/pulsar/transactions/">Pulsar Transactions and Exactly-Once Processing</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Apache Camel</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/camel/camel/">Apache Camel Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/camel/receiving-messages-from-camel/">Receiving messages from Camel</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/camel/sending-messages-to-camel/">Sending messages to Camel</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/camel/camel-processor/">Implementing Camel processor</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/camel/using-existing-routes/">Using existing Camel routes</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">JMS</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/jms/jms/">The JMS connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/jms/receiving-jms-messages/">Receiving JMS messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/jms/sending-jms-messages/">Sending JMS messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/jms/advanced-jms/">Advanced configuration</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">MQTT</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/mqtt/mqtt/">MQTT Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/mqtt/receiving-mqtt-messages/">Receiving MQTT messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/mqtt/sending-messages-to-mqtt/">Sending MQTT messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/mqtt/client-customization/">Customizing the MQTT client</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">AWS SQS</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/sqs/sqs/">AWS SQS Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/sqs/receiving-aws-sqs-messages/">Receiving AWS SQS messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/sqs/sending-aws-sqs-messages/">Sending AWS SQS messages</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">AWS SNS</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/sns/sns/">AWS SNS Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.29/sns/sending-aws-sns-messages/">Sending AWS SNS messages</a></li>
+</ul>
+    </details>
+  </li>
+</ul>
+      <!--/docs-version-->
+    </nav>
+  </aside>
+  <article class="docs-main prose" data-pagefind-body>
+    <!--docs-version-->
+    <span data-pagefind-filter="version:4.29" hidden></span>
+    <p class="docs-notice" data-pagefind-ignore>This is the documentation of SmallRye Reactive Messaging 4.29.0, released <time datetime="2025-09-14">2025-09-14</time>. It is not the latest release: <a href="/docs/smallrye-reactive-messaging/latest/" data-docs-same-page>read the documentation of 5.0.0-RC2</a>.</p>
+    <!--/docs-version-->
+    <h1>Sending messages to AMQP</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The AMQP connector can write Reactive Messaging <code>Messages</code> as AMQP
+Messages.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="example"><a class="anchor" href="#example"></a>Example</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let’s imagine you have an AMQP broker (such as <a href="https://activemq.apache.org/components/artemis/">Apache ActiveMQ
+Artemis</a>) running, and
+accessible using the <code>amqp:5672</code> address (by default it would use
+<code>localhost:5672</code>). Configure your application to send the messages from
+the <code>prices</code> channel as AMQP Message as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">amqp-host=amqp  # <b class="conum">(1)</b>
+amqp-port=5672  # <b class="conum">(2)</b>
+amqp-username=my-username # <b class="conum">(3)</b>
+amqp-password=my-password # <b class="conum">(4)</b>
+
+mp.messaging.outgoing.prices.connector=smallrye-amqp # <b class="conum">(5)</b></code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Configures the broker/router host name. You can do it per channel
+(using the <code>host</code> attribute) or globally using <code>amqp-host</code></p>
+</li>
+<li>
+<p>Configures the broker/router port. You can do it per channel (using
+the <code>port</code> attribute) or globally using <code>amqp-port</code>. The default is
+<code>5672</code>.</p>
+</li>
+<li>
+<p>Configures the broker/router username if required. You can do it per
+channel (using the <code>username</code> attribute) or globally using
+<code>amqp-username</code>.</p>
+</li>
+<li>
+<p>Configures the broker/router password if required. You can do it per
+channel (using the <code>password</code> attribute) or globally using
+<code>amqp-password</code>.</p>
+</li>
+<li>
+<p>Instructs the <code>prices</code> channel to be managed by the AMQP connector</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You don’t need to set the <em>address</em>. By default, it uses the channel
+name (<code>prices</code>). You can configure the <code>address</code> attribute to override
+it.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Then, your application must send <code>Message&lt;Double&gt;</code> to the <code>prices</code>
+channel. It can use <code>double</code> payloads as in the following snippet:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package amqp.outbound;
+
+import java.time.Duration;
+import java.util.Random;
+
+import jakarta.enterprise.context.ApplicationScoped;
+
+import org.eclipse.microprofile.reactive.messaging.Outgoing;
+
+import io.smallrye.mutiny.Multi;
+
+@ApplicationScoped
+public class AmqpPriceProducer {
+
+    private Random random = new Random();
+
+    @Outgoing("prices")
+    public Multi&lt;Double&gt; generate() {
+        // Build an infinite stream of random prices
+        // It emits a price every second
+        return Multi.createFrom().ticks().every(Duration.ofSeconds(1))
+                .map(x -&gt; random.nextDouble());
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or, you can send <code>Message&lt;Double&gt;</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package amqp.outbound;
+
+import java.time.Duration;
+import java.util.Random;
+
+import jakarta.enterprise.context.ApplicationScoped;
+
+import org.eclipse.microprofile.reactive.messaging.Message;
+import org.eclipse.microprofile.reactive.messaging.Outgoing;
+
+import io.smallrye.mutiny.Multi;
+
+@ApplicationScoped
+public class AmqpPriceMessageProducer {
+
+    private Random random = new Random();
+
+    @Outgoing("prices")
+    public Multi&lt;Message&lt;Double&gt;&gt; generate() {
+        // Build an infinite stream of random prices
+        // It emits a price every second
+        return Multi.createFrom().ticks().every(Duration.ofSeconds(1))
+                .map(x -&gt; Message.of(random.nextDouble()));
+    }
+
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="serialization"><a class="anchor" href="#serialization"></a>Serialization</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When receiving a <code>Message&lt;T&gt;</code>, the connector convert the message into an
+AMQP Message. The payload is converted to the AMQP Message <em>body</em>.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><code>T</code></th>
+<th class="tableblock halign-left valign-top">AMQP Message Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">primitive types or <code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AMQP Value with the payload</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Instant</code> or <code>UUID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AMQP Value using the corresponding AMQP Type</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://vertx.io/docs/apidocs/io/vertx/core/json/JsonObject.html"><code>JsonObject</code></a> or <a href="https://vertx.io/docs/apidocs/io/vertx/core/json/JsonArray.html"><code>JsonArray</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AMQP Data using a binary content. The <code>content-type</code> is set to <code>application/json</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>io.vertx.mutiny.core.buffer.Buffer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AMQP Data using a binary content. No <code>content-type</code> set</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any other class</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The payload is converted to JSON (using a Json Mapper). The result is wrapped into AMQP Data using a <strong>binary</strong> content. The <code>content-type</code> is set to <code>application/json</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>If the message payload cannot be serialized to JSON, the message is
+<em>nacked</em>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="outbound-metadata"><a class="anchor" href="#outbound-metadata"></a>Outbound Metadata</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When sending <code>Messages</code>, you can add an instance of
+<a href="https://javadoc.io/doc/io.smallrye.reactive/smallrye-reactive-messaging-amqp/4.29.0/io/smallrye/reactive/messaging/amqp/OutgoingAmqpMetadata.html"><code>OutgoingAmqpMetadata</code></a>
+to influence how the message is going to be sent to AMQP. For example, you
+can configure the subjects, properties:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">OutgoingAmqpMetadata metadata = OutgoingAmqpMetadata.builder()
+        .withDurable(true)
+        .withSubject("my-subject")
+        .build();
+
+// Create a new message from the `incoming` message
+// Add `metadata` to the metadata from the `incoming` message.
+return incoming.addMetadata(metadata);</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="dynamic-address-names"><a class="anchor" href="#dynamic-address-names"></a>Dynamic address names</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Sometimes it is desirable to select the destination of a message
+dynamically. In this case, you should not configure the address inside
+your application configuration file, but instead, use the outbound
+metadata to set the address.</p>
+</div>
+<div class="paragraph">
+<p>For example, you can send to a dynamic address based on the incoming
+message:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">String addressName = selectAddressFromIncommingMessage(incoming);
+OutgoingAmqpMetadata metadata = OutgoingAmqpMetadata.builder()
+        .withAddress(addressName)
+        .withDurable(true)
+        .build();
+
+// Create a new message from the `incoming` message
+// Add `metadata` to the metadata from the `incoming` message.
+return incoming.addMetadata(metadata);</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>To be able to set the address per message, the connector is using an
+<em>anonymous sender</em>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="acknowledgement"><a class="anchor" href="#acknowledgement"></a>Acknowledgement</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By default, the Reactive Messaging <code>Message</code> is acknowledged when the
+broker acknowledged the message. When using routers, this
+acknowledgement may not be enabled. In this case, configure the
+<code>auto-acknowledgement</code> attribute to acknowledge the message as soon as
+it has been sent to the router.</p>
+</div>
+<div class="paragraph">
+<p>If an AMQP message is rejected/released/modified by the broker (or
+cannot be sent successfully), the message is nacked.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="back-pressure-and-credits"><a class="anchor" href="#back-pressure-and-credits"></a>Back Pressure and Credits</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The back-pressure is handled by the <code>max-inflight-messages</code> attribute and AMQP <em>credits</em>.
+The outbound connector requests messages minimum between <code>max-inflight-messages</code> and credits allowed by the broker.
+When the amount of credits reaches 0, it waits (in a non-blocking fashion) until the broker grants more credits to the AMQP sender.</p>
+</div>
+<div class="paragraph">
+<p>When <code>max-inflight-messages</code> is set to 0, only AMQP credits apply to limit the requests.</p>
+</div>
+<div class="paragraph">
+<p>Note that if an AMQP message send fails, it is retried until <code>retry-on-fail-attempts</code> is reached.
+If the client reconnects to the broker during the retry, failing messages are sent again but the message order is not preserved.</p>
+</div>
+<div class="paragraph">
+<p>To preserve the message order in this case you can set <code>max-inflight-messages</code> to</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuration-reference"><a class="anchor" href="#configuration-reference"></a>Configuration Reference</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute (<em>alias</em>)</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Type</th>
+<th class="tableblock halign-center valign-top">Mandatory</th>
+<th class="tableblock halign-left valign-top">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>address</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The AMQP address. If not set, the channel name is used</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>capabilities</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A comma-separated list of capabilities proposed by the sender or receiver client.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>client-options-name</em> <em>(amqp-client-options-name)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the AMQP Client Option bean used to customize the AMQP client configuration</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>cloud-events</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enables (default) or disables the Cloud Event support. If enabled on an <em>incoming</em> channel, the connector analyzes the incoming records and try to create Cloud Event metadata. If enabled on an <em>outgoing</em>, the connector sends the outgoing messages as Cloud Event if the message includes Cloud Event Metadata.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>cloud-events-data-content-type</em> <em>(cloud-events-default-data-content-type)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Configure the default <code>datacontenttype</code> attribute of the outgoing Cloud Event. Requires <code>cloud-events</code> to be set to <code>true</code>. This value is used if the message does not configure the <code>datacontenttype</code> attribute itself</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>cloud-events-data-schema</em> <em>(cloud-events-default-data-schema)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Configure the default <code>dataschema</code> attribute of the outgoing Cloud Event. Requires <code>cloud-events</code> to be set to <code>true</code>. This value is used if the message does not configure the <code>dataschema</code> attribute itself</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>cloud-events-insert-timestamp</em> <em>(cloud-events-default-timestamp)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether or not the connector should insert automatically the <code>time</code> attribute into the outgoing Cloud Event. Requires <code>cloud-events</code> to be set to <code>true</code>. This value is used if the message does not configure the <code>time</code> attribute itself</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>cloud-events-mode</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Cloud Event mode (<code>structured</code> or <code>binary</code> (default)). Indicates how are written the cloud events in the outgoing record</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>binary</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>cloud-events-source</em> <em>(cloud-events-default-source)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Configure the default <code>source</code> attribute of the outgoing Cloud Event. Requires <code>cloud-events</code> to be set to <code>true</code>. This value is used if the message does not configure the <code>source</code> attribute itself</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>cloud-events-subject</em> <em>(cloud-events-default-subject)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Configure the default <code>subject</code> attribute of the outgoing Cloud Event. Requires <code>cloud-events</code> to be set to <code>true</code>. This value is used if the message does not configure the <code>subject</code> attribute itself</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>cloud-events-type</em> <em>(cloud-events-default-type)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Configure the default <code>type</code> attribute of the outgoing Cloud Event. Requires <code>cloud-events</code> to be set to <code>true</code>. This value is used if the message does not configure the <code>type</code> attribute itself</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>connect-timeout</em> <em>(amqp-connect-timeout)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The connection timeout in milliseconds</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1000</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>container-id</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The AMQP container id</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>credit-retrieval-period</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The period (in milliseconds) between two attempts to retrieve the credits granted by the broker. This time is used when the sender run out of credits.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>2000</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>durable</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether sent AMQP messages are marked durable</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>health-timeout</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The max number of seconds to wait to determine if the connection with the broker is still established for the readiness check. After that threshold, the check is considered as failed.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>3</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>host</em> <em>(amqp-host)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The broker hostname</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>localhost</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>lazy-client</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to create the connection and sender at startup or at first send request</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>link-name</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the link. If not set, the channel name is used.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>max-inflight-messages</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The maximum number of messages to be written to the broker concurrently. The number of sent messages waiting to be acknowledged by the broker are limited by this value and credits granted by the broker. The default value <code>0</code> means only credits apply.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">long</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>merge</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the connector should allow multiple upstreams</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>password</em> <em>(amqp-password)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The password used to authenticate to the broker</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>port</em> <em>(amqp-port)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The broker port</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>5672</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>reconnect-attempts</em> <em>(amqp-reconnect-attempts)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of reconnection attempts</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>100</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>reconnect-interval</em> <em>(amqp-reconnect-interval)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The interval in second between two reconnection attempts</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>10</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>retry-on-fail-attempts</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of tentative to retry on failure</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>6</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>retry-on-fail-interval</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The interval (in seconds) between two sending attempts</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>5</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>sni-server-name</em> <em>(amqp-sni-server-name)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If set, explicitly override the hostname to use for the TLS SNI server name</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>tracing-enabled</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether tracing is enabled (default) or disabled</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>ttl</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The time-to-live of the send AMQP messages. 0 to disable the TTL</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">long</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>use-anonymous-sender</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether or not the connector should use an anonymous sender. Default value is <code>true</code> if the broker supports it, <code>false</code> otherwise. If not supported, it is not possible to dynamically change the destination address.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>use-ssl</em> <em>(amqp-use-ssl)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the AMQP connection uses SSL/TLS</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>username</em> <em>(amqp-username)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The username used to authenticate to the broker</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>virtual-host</em> <em>(amqp-virtual-host)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If set, configure the hostname value used for the connection AMQP Open frame and TLS SNI server name (if TLS is in use)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>You can also pass any property supported by the <a href="https://vertx.io/docs/vertx-amqp-client/java/">Vert.x AMQP
+client</a> as attribute.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="using-existing-destinations"><a class="anchor" href="#using-existing-destinations"></a>Using existing destinations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To use an existing <em>address</em> or <em>queue</em>, you need to configure the
+<code>address</code>, <code>container-id</code> and, optionally, the <code>link-name</code> attributes.
+For example, if you have an Apache Artemis broker configured with:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;queues&gt;
+    &lt;queue name="people"&gt;
+        &lt;address&gt;people&lt;/address&gt;
+        &lt;durable&gt;true&lt;/durable&gt;
+        &lt;user&gt;artemis&lt;/user&gt;
+    &lt;/queue&gt;
+&lt;/queues&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You need the following configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">mp.messaging.outgoing.people.connector=smallrye-amqp
+mp.messaging.outgoing.people.durable=true
+mp.messaging.outgoing.people.address=people
+mp.messaging.outgoing.people.container-id=people</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You may need to configure the <code>link-name</code> attribute, if the queue name
+is not the channel name:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">mp.messaging.outgoing.people-out.connector=smallrye-amqp
+mp.messaging.outgoing.people-out.durable=true
+mp.messaging.outgoing.people-out.address=people
+mp.messaging.outgoing.people-out.container-id=people
+mp.messaging.outgoing.people-out.link-name=people</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To use a <code>MULTICAST</code> queue, you need to provide the <em>FQQN</em>
+(Fully-qualified queue name) instead of just the name of the queue:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">mp.messaging.outgoing.people-out.connector=smallrye-amqp
+mp.messaging.outgoing.people-out.durable=true
+mp.messaging.outgoing.people-out.address=foo
+mp.messaging.outgoing.people-out.container-id=foo
+
+mp.messaging.incoming.people-out.connector=smallrye-amqp
+mp.messaging.incoming.people-out.durable=true
+mp.messaging.incoming.people-out.address=foo::bar # Note the syntax: address-name::queue-name
+mp.messaging.incoming.people-out.container-id=bar
+mp.messaging.incoming.people-out.link-name=people</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>More details about the AMQP Address model can be found on <a href="https://activemq.apache.org/components/artemis/documentation/2.0.0/address-model.html">the Artemis
+documentation</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sending-cloud-events"><a class="anchor" href="#sending-cloud-events"></a>Sending Cloud Events</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The AMQP connector supports <a href="https://cloudevents.io/">Cloud Events</a>. The
+connector sends the outbound record as Cloud Events if:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the message metadata contains an
+<code>io.smallrye.reactive.messaging.ce.OutgoingCloudEventMetadata</code>
+instance,</p>
+</li>
+<li>
+<p>the channel configuration defines the <code>cloud-events-type</code> and
+<code>cloud-events-source</code> attributes.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You can create
+<code>io.smallrye.reactive.messaging.ce.OutgoingCloudEventMetadata</code> instances
+using:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package amqp.outbound;
+
+import java.net.URI;
+
+import jakarta.enterprise.context.ApplicationScoped;
+
+import org.eclipse.microprofile.reactive.messaging.Message;
+import org.eclipse.microprofile.reactive.messaging.Outgoing;
+
+import io.smallrye.reactive.messaging.ce.OutgoingCloudEventMetadata;
+
+@ApplicationScoped
+public class AmqpCloudEventProcessor {
+
+    @Outgoing("cloud-events")
+    public Message&lt;String&gt; toCloudEvents(Message&lt;String&gt; in) {
+        return in.addMetadata(OutgoingCloudEventMetadata.builder()
+                .withId("id-" + in.getPayload())
+                .withType("greetings")
+                .withSource(URI.create("http://example.com"))
+                .withSubject("greeting-message")
+                .build());
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the metadata does not contain an id, the connector generates one
+(random UUID). The <code>type</code> and <code>source</code> can be configured per message or
+at the channel level using the <code>cloud-events-type</code> and
+<code>cloud-events-source</code> attributes. Other attributes are also
+configurable.</p>
+</div>
+<div class="paragraph">
+<p>The metadata can be contributed by multiple methods, however, you must
+always retrieve the already existing metadata to avoid overriding the
+values:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package amqp.outbound;
+
+import java.net.URI;
+
+import jakarta.enterprise.context.ApplicationScoped;
+
+import org.eclipse.microprofile.reactive.messaging.Incoming;
+import org.eclipse.microprofile.reactive.messaging.Message;
+import org.eclipse.microprofile.reactive.messaging.Outgoing;
+
+import io.smallrye.reactive.messaging.ce.OutgoingCloudEventMetadata;
+
+@ApplicationScoped
+public class AmqpCloudEventMultipleProcessors {
+
+    @Incoming("source")
+    @Outgoing("processed")
+    public Message&lt;String&gt; process(Message&lt;String&gt; in) {
+        return in.addMetadata(OutgoingCloudEventMetadata.builder()
+                .withId("id-" + in.getPayload())
+                .withType("greeting")
+                .build());
+    }
+
+    @SuppressWarnings("unchecked")
+    @Incoming("processed")
+    @Outgoing("cloud-events")
+    public Message&lt;String&gt; process2(Message&lt;String&gt; in) {
+        OutgoingCloudEventMetadata&lt;String&gt; metadata = in
+                .getMetadata(OutgoingCloudEventMetadata.class)
+                .orElseGet(() -&gt; OutgoingCloudEventMetadata.builder().build());
+
+        return in.addMetadata(OutgoingCloudEventMetadata.from(metadata)
+                .withSource(URI.create("source://me"))
+                .withSubject("test")
+                .build());
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By default, the connector sends the Cloud Events using the <em>binary</em>
+format. You can write <em>structured</em> Cloud Events by setting the
+<code>cloud-events-mode</code> to <code>structured</code>. Only JSON is supported, so the
+created records had its <code>content-type</code> header set to
+<code>application/cloudevents&#43;json; charset=UTF-8</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>you can disable the Cloud Event support by setting the <code>cloud-events</code>
+attribute to <code>false</code></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>    <!--docs-version--><p class="docs-source" data-pagefind-ignore>
+    </p><!--/docs-version-->
+  </article>
+  <nav class="docs-toc" aria-label="On this page">
+    <details open data-docs-toc>
+      <summary class="toc-title">On this page</summary>
+      <nav class="roq-toc" aria-label="Table of contents">
+<ul>
+<li data-level="1"><a href="#example">Example</a></li>
+<li data-level="1"><a href="#serialization">Serialization</a></li>
+<li data-level="1"><a href="#outbound-metadata">Outbound Metadata</a></li>
+<li data-level="1"><a href="#dynamic-address-names">Dynamic address names</a></li>
+<li data-level="1"><a href="#acknowledgement">Acknowledgement</a></li>
+<li data-level="1"><a href="#back-pressure-and-credits">Back Pressure and Credits</a></li>
+<li data-level="1"><a href="#configuration-reference">Configuration Reference</a></li>
+<li data-level="1"><a href="#using-existing-destinations">Using existing destinations</a></li>
+<li data-level="1"><a href="#sending-cloud-events">Sending Cloud Events</a></li>
+</ul>
+</nav>
+
+    </details>
+  </nav>
+</div>
+<dialog class="docs-search" data-docs-search aria-label="Search SmallRye Reactive Messaging">
+  <div class="docs-search-bar" role="search">
+    <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <input type="search" data-docs-search-input placeholder="Search SmallRye Reactive Messaging 4.30.0" aria-label="Search SmallRye Reactive Messaging documentation" autocomplete="off" spellcheck="false">
+    <button type="button" class="docs-search-close" data-docs-search-close>Esc</button>
+  </div>
+  <p class="docs-search-status" data-docs-search-status aria-live="polite"></p>
+  <ul class="docs-search-results" data-docs-search-results></ul>
+</dialog>
+
+  </main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-about">
+      <a class="footer-logo" href="/"><img src="/images/logo-dark.svg" alt="SmallRye" width="140" height="36" loading="lazy"></a>
+      <p>SmallRye is open source under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache Software License 2.0</a>.</p>
+      <p>This website is built with <a href="https://iamroq.dev/">Quarkus Roq</a>, hosted on <a href="https://pages.github.com/">GitHub Pages</a> and is completely open source. If you want to make it better, <a href="https://github.com/smallrye/smallrye.github.io">fork the website</a> and show us what you've got.</p>
+    </div>
+    <nav aria-label="Site">
+      <p class="footer-head">Navigation</p>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/docs/">Documentation</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Contribute and get help">
+      <p class="footer-head">Contribute</p>
+      <ul>
+        <li><a href="https://github.com/smallrye">GitHub</a></li>
+        <li><a href="https://twitter.com/smallrye_io">Follow us</a></li>
+      </ul>
+      <p class="footer-head">Get help</p>
+      <ul>
+        <li><a href="https://quarkusio.zulipchat.com">Chatroom</a></li>
+        <li><a href="https://groups.google.com/d/forum/smallrye">Google Groups</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="External links">
+      <p class="footer-head">External links</p>
+      <ul>
+        <li><a href="https://microprofile.io/">Eclipse MicroProfile</a></li>
+        <li><a href="https://github.com/eclipse?q=microprofile">Eclipse MicroProfile on GitHub</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <div class="container footer-bottom-bar">
+      <p><a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></p>
+      <p class="sponsor">A <a href="https://www.commonhaus.org/">Commonhaus Foundation</a> project <a href="https://www.commonhaus.org/"><img src="/assets/images/commonhaus_reversed.svg" alt="Commonhaus Foundation" width="200" height="21" loading="lazy"></a></p>
+      <p class="footer-trademark">Copyright &copy; SmallRye. For details on our trademarks, please visit our <a href="https://www.commonhaus.org/policies/trademark-policy/">Trademark Policy</a> and <a href="https://www.commonhaus.org/trademarks/">Trademark List</a>. Trademarks of third parties are owned by their respective holders and their mention here does not suggest any endorsement or association.</p>
+    </div>
+  </div>
+</footer>
+<!-- Light/dark switch. Hidden until the script wires it, so a no-JS visitor
+     never sees a dead button. Every site has it: keep it. -->
+<button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark theme" hidden>
+  <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
+  <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/></svg>
+</button>
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.querySelector('.theme-toggle');
+    if (!btn) return;
+    btn.hidden = false;
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    function isDark() { var t = root.getAttribute('data-theme'); return t ? t === 'dark' : mq.matches; }
+    function sync() {
+      btn.setAttribute('aria-pressed', isDark() ? 'true' : 'false');
+      btn.setAttribute('aria-label', isDark() ? 'Switch to light theme' : 'Switch to dark theme');
+    }
+    btn.addEventListener('click', function () {
+      var next = isDark() ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('site-theme', next); } catch (e) { /* not fatal */ }
+      sync();
+    });
+    mq.addEventListener('change', sync);
+    sync();
+  })();
+</script>
+</body>
+</html>

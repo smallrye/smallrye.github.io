@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://api.github.com; base-uri 'none'; object-src 'none'; form-action 'none'">
+
+  <!-- SEO TITLE -->
+  
+  <title>Broadcasting to multiple subscribers (like server-sent events, websockets, etc) - SmallRye</title>
+  <meta property="og:title" content="Broadcasting to multiple subscribers (like server-sent events, websockets, etc)" />
+  <meta name="twitter:title" content="Broadcasting to multiple subscribers (like server-sent events, websockets, etc)">
+  <meta property="og:site_name" content="SmallRye">
+  <!-- SEO DESCRIPTION -->
+  <meta name="description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+  <meta property="og:description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile." />
+  <meta name="twitter:description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+
+  <!-- SEO URL -->
+  <link rel="canonical" href="https://smallrye.io/docs/smallrye-mutiny/2.5/guides/broadcasting-to-multiple-subscribers/" />
+  <meta property="og:url" content="https://smallrye.io/docs/smallrye-mutiny/2.5/guides/broadcasting-to-multiple-subscribers/" />
+  <meta name="twitter:url" content="https://smallrye.io/docs/smallrye-mutiny/2.5/guides/broadcasting-to-multiple-subscribers/">
+
+  <!-- SEO TYPE -->
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2026-11-02T00:30:18.751537049Z[UTC]" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image" content="https://smallrye.io/images/rye-field-og.jpg">
+  <meta name="twitter:image" content="https://smallrye.io/images/rye-field-og.jpg">
+  <!-- SEO COLLECTION PAGES -->
+  <!-- SEO TWITTER -->
+  <meta name="twitter:site" content="@smallrye_io" />
+  <meta name="twitter:creator" content="@smallrye_io" />
+  <!-- SEO LOCALE -->
+  <meta property="og:locale" content="en" />
+  <!-- SEO GENERATOR -->
+  <meta name="generator" content="Quarkus Roq v2.1.9" />
+
+<link rel="alternate" type="application/rss+xml" title="SmallRye" href="https://smallrye.io/rss.xml"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <script>
+    try {
+      var t = localStorage.getItem('site-theme');
+      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    } catch (e) { /* private mode: follow the OS preference */ }
+  </script>
+  <link rel="stylesheet" href="/css/main.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://smallrye.io/#organization",
+      "name": "SmallRye",
+      "url": "https://smallrye.io/",
+      "logo": "https://smallrye.io/images/logo.svg",
+      "description": "SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.",
+      "email": "smallrye@googlegroups.com",
+      "sameAs": [
+        "https://github.com/smallrye",
+        "https://twitter.com/smallrye_io",
+        "https://groups.google.com/d/forum/smallrye"
+      ],
+      "parentOrganization": { "@type": "Organization", "name": "Commonhaus Foundation", "url": "https://www.commonhaus.org/" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://smallrye.io/#website",
+      "name": "SmallRye",
+      "url": "https://smallrye.io/",
+      "publisher": { "@id": "https://smallrye.io/#organization" }
+    }
+  ]
+}
+</script>
+    <script type="module" src="/static/bundle/app-KFNV2DMD.js"></script>
+      <!-- no style found for key 'app' in Bundler mapping !-->
+<script>
+  try {
+    if (matchMedia('(min-width: 60rem)').matches && localStorage.getItem('docs-nav') === 'open') document.documentElement.classList.add('docs-nav-open');
+    if (localStorage.getItem('docs-toc') === 'closed') document.documentElement.classList.add('docs-toc-closed');
+  } catch (e) { /* storage blocked: closed */ }
+</script>
+<noscript><style>.docs-nav { display: block !important; } .docs-nav-button { display: none !important; }</style></noscript>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand" href="/">
+      <img class="logo-light" src="/images/logo.svg" alt="SmallRye" width="160" height="41">
+      <img class="logo-dark" src="/images/logo-dark.svg" alt="SmallRye" width="160" height="41">
+    </a>
+<div class="docs-brand">
+  <a class="docs-brand-project" href="/docs/smallrye-mutiny/2.5/"><span class="project-logo" style="--logo: url('/images/projects/smallrye-mutiny.png')" aria-hidden="true"></span><span class="docs-brand-name">Mutiny</span></a>
+  <!--docs-version--><label class="docs-version">
+    <span class="visually-hidden">Version</span>
+    <select data-docs-version data-current="2.5" data-base="/docs/smallrye-mutiny/">
+      
+      <option value="latest">3.3.1 (latest)</option>
+      
+                  <optgroup label="3.x">
+      
+      <option value="3.2">3.2.1</option>
+      
+                  
+      
+      <option value="3.1">3.1.1</option>
+      
+                  
+      
+      <option value="3.0">3.0.3</option>
+      
+                  </optgroup><optgroup label="2.x">
+      
+      <option value="2.9">2.9.5</option>
+      
+                  
+      
+      <option value="2.8">2.8.0</option>
+      
+                  
+      
+      <option value="2.7">2.7.0</option>
+      
+                  
+      
+      <option value="2.6">2.6.2</option>
+      
+                  
+      
+      <option value="2.5" selected>2.5.8</option>
+      
+                  
+      
+      <option value="2.4">2.4.0</option>
+      
+                  
+      
+      <option value="2.3">2.3.1</option>
+      
+                  
+      
+      <option value="2.2">2.2.0</option>
+      
+                  
+      
+      <option value="2.1">2.1.0</option>
+      
+                  
+      
+      <option value="2.0">2.0.0</option>
+      
+      </optgroup>
+      <option value="main">main (snapshot)</option>
+      
+      
+    </select>
+  </label><!--/docs-version-->
+  <div class="docs-tools">
+    <button type="button" class="docs-search-button" data-docs-search-open aria-haspopup="dialog" aria-keyshortcuts="/">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <span>Search</span><kbd aria-hidden="true">/</kbd>
+    </button>
+    <a class="docs-github" href="https://github.com/smallrye/smallrye-mutiny" title="smallrye/smallrye-mutiny on GitHub" data-docs-github="smallrye/smallrye-mutiny">
+      <svg aria-hidden="true" viewBox="0 0 16 16" width="26" height="26"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      <span class="docs-github-text">
+        <span class="docs-github-name">GitHub<span class="visually-hidden">: smallrye/smallrye-mutiny</span></span>
+        <span class="docs-github-facts"><span title="Latest release">3.3.1</span><span data-docs-github-stars hidden></span><span data-docs-github-forks hidden></span></span>
+      </span>
+    </a>
+  </div>
+</div>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-input" aria-label="Toggle menu">
+    <label for="nav-toggle" class="nav-toggle"><span></span></label>
+    <nav class="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/docs/" aria-current="page">Documentation</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+  <main id="main">
+
+<div class="container docs-layout">
+  <aside class="docs-side">
+    <button type="button" class="docs-nav-button" aria-controls="docs-nav" aria-expanded="false" data-docs-nav-button>
+      <span class="docs-nav-icon" aria-hidden="true"></span><span class="docs-nav-label">Contents</span>
+    </button>
+    <nav id="docs-nav" class="docs-nav" aria-label="SmallRye Mutiny documentation">
+      <!--docs-version-->
+<ul>
+  <li><a href="/docs/smallrye-mutiny/2.5/">Mutiny -- Intuitive Event-Driven Reactive Programming Library for Java</a></li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Tutorials</summary>
+<ul>
+  <li><a href="/docs/smallrye-mutiny/2.5/tutorials/getting-mutiny/">Getting started with Mutiny</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/tutorials/hello-mutiny/">Hello Mutiny!</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/tutorials/creating-uni-pipelines/">Creating `Uni` pipelines</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/tutorials/creating-multi-pipelines/">Creating `Multi` pipelines</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/tutorials/observing-events/">Observing events</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/tutorials/transforming-items/">Transforming items</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/tutorials/transforming-items-asynchronously/">Transforming items asynchronously</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/tutorials/handling-failures/">Handling failures</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/tutorials/retrying/">Retrying on failures</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/tutorials/mutiny-workshop/">Go further with the Mutiny workshop!</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Guides</summary>
+<ul>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/imperative-to-reactive/">From imperative to reactive</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/reactive-to-imperative/">From reactive to imperative</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/unchecked-exceptions/">Dealing with checked exceptions</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/filtering-items/">Filtering items from Multi</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/collecting-items/">Collecting items from Multi</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/take-skip-items/">Take/Skip the first or last items</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/eliminate-duplicates-and-repetitions/">Eliminate duplicates and repetitions</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/handling-null/">How to handle null?</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/handling-timeouts/">How to handle timeouts?</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/delaying-events/">How to delay events?</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/pagination/">How to use paginated APIs?</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/polling/">How to use polling?</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/emission-threads/">How to change the emission thread?</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/emit-on-vs-run-subscription-on/">What is the difference between emitOn and runSubscriptionOn?</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/completion-stage/">How to deal with CompletionStage?</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/rx/">Using map, flatMap and concatMap</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/shortcut-methods/">Shortcut methods</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/merging-and-concatenating-streams/">Merging and Concatenating Streams</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/combining-items/">Combining items from streams</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/joining-unis/">Joining several unis</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/converters/">Using other reactive programming libraries</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/testing/">How can I write unit / integration tests?</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/spies/">Spying on events</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/custom-operators/">Can I have custom operators?</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/dropped-exceptions/">How to deal with dropped exceptions?</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/framework-integration/">How can I integrate Mutiny with my framework?</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/hot-streams/">Hot streams</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/integrate-a-non-reactive-source/">How can I create a Multi from a non-reactive source?</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/kotlin/">Kotlin integration</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/logging/">Logging events</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/context-passing/">Context passing</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/replaying-multis/">Replaying Multis</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/controlling-demand/">Controlling the demand</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/multi-split/">Splitting a Multi into several Multi</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/branching/">How to do branching in a reactive pipeline?</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/guides/broadcasting-to-multiple-subscribers/" aria-current="page">Broadcasting to multiple subscribers (like server-sent events, websockets, etc)</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Reference</summary>
+<ul>
+  <li><a href="/docs/smallrye-mutiny/2.5/reference/migrating-to-mutiny-2/">Migrating to Mutiny 2</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/reference/why-is-asynchronous-important/">Why is asynchronous important?</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/reference/what-is-reactive-programming/">What is Reactive Programming?</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/reference/what-makes-mutiny-different/">What makes Mutiny different?</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/reference/uni-and-multi/">Uni and Multi</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/reference/publications/">Publications</a></li>
+  <li><a href="/docs/smallrye-mutiny/2.5/tags-index/">Tags index</a></li>
+</ul>
+    </details>
+  </li>
+  <li><a href="https://javadoc.io/doc/io.smallrye.reactive/mutiny/latest/index.html">API</a></li>
+  <li><a href="https://github.com/smallrye/smallrye-mutiny/discussions">Discussions/Questions</a></li>
+</ul>
+      <!--/docs-version-->
+    </nav>
+  </aside>
+  <article class="docs-main prose" data-pagefind-body>
+    <!--docs-version-->
+    <span data-pagefind-filter="version:2.5" hidden></span>
+    <p class="docs-notice" data-pagefind-ignore>This is the documentation of SmallRye Mutiny 2.5.8, released <time datetime="2024-03-06">2024-03-06</time>. It is not the latest release: <a href="/docs/smallrye-mutiny/latest/" data-docs-same-page>read the documentation of 3.3.1</a>.</p>
+    <!--/docs-version-->
+    <h1>Broadcasting to multiple subscribers (like server-sent events, websockets, etc)</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>It is a common requirement in event-driven applications to have multiple subscribers receiving events from a single events source:</p>
+</div>
+<div class="imageblock has-dark">
+<div class="content">
+<img src="/docs/smallrye-mutiny/2.5/images/diagrams/mermaid-f74f7917dcf7.svg" alt="mermaid diagram">
+</div>
+</div>
+<div class="paragraph">
+<p>A good example would be a periodic events stream where the events get pushed every second to multiple <a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events">server-sent event</a> subscribers.</p>
+</div>
+<div class="paragraph">
+<p>Let us see how this can be done using Mutiny and the <a href="https://quarkus.io/">Quarkus framework</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>We use Quarkus to illustrate a classic real-world usage for the broadcast operator, but the same kind of construct
+could be done with another framework or the <a href="https://vertx.io/">Vert.x toolkit</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="use-case-dynamic-subscribers"><a class="anchor" href="#use-case-dynamic-subscribers"></a>Use-case: dynamic subscribers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We expose a HTTP endpoint for server-sent events, and each second we receive the current list of subscribers.
+The endpoint is exposed on path <code>/hello/ticks/{id}</code> where <code>id</code> is an identifier for a subscriber.</p>
+</div>
+<div class="paragraph">
+<p>We could subscribe and follow the stream using <a href="https://httpie.io/">HTTPie</a> for subscriber <code>1</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-text" data-lang="text">$ http --stream :8080/hello/ticks/1
+HTTP/1.1 200 OK
+Content-Type: text/event-stream
+X-SSE-Content-Type: text/plain
+transfer-encoding: chunked
+
+data:1
+
+data:1
+
+data:1
+
+data:1,2
+
+data:1,2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The first 3 ticks have just one subscriber (<code>data:1</code>), but then once another subscriber arrives at path <code>/hello/ticks/2</code> we get ticks with identifiers <code>1,2</code>.</p>
+</div>
+<div class="paragraph">
+<p>When the connection for subscriber <code>1</code> closes, we see the impact on subscriber <code>2</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-text" data-lang="text">http --stream :8080/hello/ticks/2
+HTTP/1.1 200 OK
+Content-Type: text/event-stream
+X-SSE-Content-Type: text/plain
+transfer-encoding: chunked
+
+data:1,2
+
+data:1,2
+
+data:2
+
+data:2
+
+data:2</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="why-is-broadcasting-required"><a class="anchor" href="#why-is-broadcasting-required"></a>Why is broadcasting required?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Mutiny offers a publisher for periodic event streams:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">var ticks = Multi.createFrom().ticks().every(Duration.ofSeconds(1));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You might wonder why we couldn&#8217;t simply build our Quarkus endpoints as in:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Path("/hello")
+public class GreetingResource {
+
+    @GET
+    @Path("ticks/{id}")
+    @RestStreamElementType(MediaType.TEXT_PLAIN)
+    public Multi&lt;String&gt; ticks(String id) {
+        return Multi.createFrom().ticks().every(Duration.ofSeconds(1))
+                // (rest of the pipeline...)
+            ;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The problem here is that instead of having a single events source to emit ticks, you will have as many as there are subscribers:</p>
+</div>
+<div class="imageblock has-dark">
+<div class="content">
+<img src="/docs/smallrye-mutiny/2.5/images/diagrams/mermaid-cbd13fb6d19b.svg" alt="mermaid diagram">
+</div>
+</div>
+<div class="paragraph">
+<p>You might be able to articulate some logic around such construct, but you will end up with many scheduled operations on the Quarkus thread pool.</p>
+</div>
+<div class="paragraph">
+<p>Even worse: if your source is not periodic ticks emitted by Mutiny but some event source (e.g., a Kafka topic, a message broker queue, etc) then you might add correctness issues (e.g., not all subscribers get all messages).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="broadcasting-listening-to-subscriptions-and-cancellations"><a class="anchor" href="#broadcasting-listening-to-subscriptions-and-cancellations"></a>Broadcasting, listening to subscriptions and cancellations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>It is fortunately quite easy to express such construct by sharing a common <code>Multi</code>, and broadcasting events to each subscriber.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s start with the HTTP endpoint:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">private ConcurrentHashSet&lt;String&gt; identifiers = new ConcurrentHashSet&lt;&gt;();
+
+private Multi&lt;String&gt; ticks = (...);
+
+@GET
+@Path("ticks/{id}")
+@RestStreamElementType(MediaType.TEXT_PLAIN)
+public Multi&lt;String&gt; ticks(String id) {
+    Log.info("New client with id " + id);
+    identifiers.add(id);
+    return ticks.onCancellation().invoke(() -&gt; {
+        Log.info("Removing client with id " + id);
+        identifiers.remove(id);
+    });
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>ticks</code> method registers a new client in <code>identifiers</code>, and removes it upon cancellation.
+The returned <code>Multi</code> pipeline piggy-backs on top of the <em>shared</em> <code>Multi</code>, which is built as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">private Multi&lt;String&gt; ticks = Multi.createFrom().ticks().every(Duration.ofSeconds(1))
+        .onItem().transform(tick -&gt; {
+            Log.info("tick");
+            return identifiers.stream().collect(Collectors.joining(","));
+        })
+        .onSubscription().invoke(() -&gt; Log.info("Starting to emit ticks"))
+        .onCancellation().invoke(() -&gt; Log.info("No more ticks"))
+        .broadcast()
+            .withCancellationAfterLastSubscriberDeparture()
+            .toAtLeast(1);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here are a few observations.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>For each periodic tick event, we assemble the current subscribers as a string of the form <code>"1,2,3"</code> with <code>.onItem().transform(&#8230;&#8203;)</code>.</p>
+</li>
+<li>
+<p>We log an event when the periodic event stream starts (see <code>onSubscription().invoke(&#8230;&#8203;)</code>).</p>
+</li>
+<li>
+<p>We log an event when the periodic event stream stops (see <code>onCancellation().invoke(&#8230;&#8203;)</code>).</p>
+</li>
+<li>
+<p>We broadcast events to all subscribers, but:</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>there must be at least one subscriber before the stream starts, and</p>
+</li>
+<li>
+<p>the stream is cancelled when the last subscriber departs.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>This construction is quite interesting because we don&#8217;t emit ticks when there are no subscribers, and we stop it when there are none.</p>
+</div>
+<div class="paragraph">
+<p>If you play with such an example then you will see logs similar to these:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-text" data-lang="text">INFO  [org.acm.GreetingResource] (vert.x-eventloop-thread-0) New client with id 1
+INFO  [org.acm.GreetingResource] (vert.x-eventloop-thread-0) Starting to emit ticks
+INFO  [org.acm.GreetingResource] (executor-thread-1) tick
+INFO  [org.acm.GreetingResource] (executor-thread-1) tick
+INFO  [org.acm.GreetingResource] (vert.x-eventloop-thread-0) Removing client with id 1
+INFO  [org.acm.GreetingResource] (vert.x-eventloop-thread-0) No more ticks
+INFO  [org.acm.GreetingResource] (vert.x-eventloop-thread-1) New client with id 1
+INFO  [org.acm.GreetingResource] (vert.x-eventloop-thread-1) Starting to emit ticks
+INFO  [org.acm.GreetingResource] (executor-thread-1) tick
+INFO  [org.acm.GreetingResource] (executor-thread-1) tick
+INFO  [org.acm.GreetingResource] (executor-thread-1) tick
+INFO  [org.acm.GreetingResource] (vert.x-eventloop-thread-0) New client with id 2
+INFO  [org.acm.GreetingResource] (executor-thread-1) tick
+INFO  [org.acm.GreetingResource] (executor-thread-1) tick
+INFO  [org.acm.GreetingResource] (vert.x-eventloop-thread-1) Removing client with id 1
+INFO  [org.acm.GreetingResource] (executor-thread-1) tick
+INFO  [org.acm.GreetingResource] (executor-thread-1) tick
+INFO  [org.acm.GreetingResource] (executor-thread-1) tick
+INFO  [org.acm.GreetingResource] (vert.x-eventloop-thread-0) Removing client with id 2
+INFO  [org.acm.GreetingResource] (vert.x-eventloop-thread-0) No more ticks</code></pre>
+</div>
+</div>
+</div>
+</div>    <!--docs-version--><p class="docs-source" data-pagefind-ignore>
+    </p><!--/docs-version-->
+  </article>
+  <nav class="docs-toc" aria-label="On this page">
+    <details open data-docs-toc>
+      <summary class="toc-title">On this page</summary>
+      <nav class="roq-toc" aria-label="Table of contents">
+<ul>
+<li data-level="1"><a href="#use-case-dynamic-subscribers">Use-case: dynamic subscribers</a></li>
+<li data-level="1"><a href="#why-is-broadcasting-required">Why is broadcasting required?</a></li>
+<li data-level="1"><a href="#broadcasting-listening-to-subscriptions-and-cancellations">Broadcasting, listening to subscriptions and cancellations</a></li>
+</ul>
+</nav>
+
+    </details>
+  </nav>
+</div>
+<dialog class="docs-search" data-docs-search aria-label="Search SmallRye Mutiny">
+  <div class="docs-search-bar" role="search">
+    <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <input type="search" data-docs-search-input placeholder="Search SmallRye Mutiny 3.3.1" aria-label="Search SmallRye Mutiny documentation" autocomplete="off" spellcheck="false">
+    <button type="button" class="docs-search-close" data-docs-search-close>Esc</button>
+  </div>
+  <p class="docs-search-status" data-docs-search-status aria-live="polite"></p>
+  <ul class="docs-search-results" data-docs-search-results></ul>
+</dialog>
+
+  </main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-about">
+      <a class="footer-logo" href="/"><img src="/images/logo-dark.svg" alt="SmallRye" width="140" height="36" loading="lazy"></a>
+      <p>SmallRye is open source under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache Software License 2.0</a>.</p>
+      <p>This website is built with <a href="https://iamroq.dev/">Quarkus Roq</a>, hosted on <a href="https://pages.github.com/">GitHub Pages</a> and is completely open source. If you want to make it better, <a href="https://github.com/smallrye/smallrye.github.io">fork the website</a> and show us what you've got.</p>
+    </div>
+    <nav aria-label="Site">
+      <p class="footer-head">Navigation</p>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/docs/">Documentation</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Contribute and get help">
+      <p class="footer-head">Contribute</p>
+      <ul>
+        <li><a href="https://github.com/smallrye">GitHub</a></li>
+        <li><a href="https://twitter.com/smallrye_io">Follow us</a></li>
+      </ul>
+      <p class="footer-head">Get help</p>
+      <ul>
+        <li><a href="https://quarkusio.zulipchat.com">Chatroom</a></li>
+        <li><a href="https://groups.google.com/d/forum/smallrye">Google Groups</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="External links">
+      <p class="footer-head">External links</p>
+      <ul>
+        <li><a href="https://microprofile.io/">Eclipse MicroProfile</a></li>
+        <li><a href="https://github.com/eclipse?q=microprofile">Eclipse MicroProfile on GitHub</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <div class="container footer-bottom-bar">
+      <p><a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></p>
+      <p class="sponsor">A <a href="https://www.commonhaus.org/">Commonhaus Foundation</a> project <a href="https://www.commonhaus.org/"><img src="/assets/images/commonhaus_reversed.svg" alt="Commonhaus Foundation" width="200" height="21" loading="lazy"></a></p>
+      <p class="footer-trademark">Copyright &copy; SmallRye. For details on our trademarks, please visit our <a href="https://www.commonhaus.org/policies/trademark-policy/">Trademark Policy</a> and <a href="https://www.commonhaus.org/trademarks/">Trademark List</a>. Trademarks of third parties are owned by their respective holders and their mention here does not suggest any endorsement or association.</p>
+    </div>
+  </div>
+</footer>
+<!-- Light/dark switch. Hidden until the script wires it, so a no-JS visitor
+     never sees a dead button. Every site has it: keep it. -->
+<button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark theme" hidden>
+  <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
+  <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/></svg>
+</button>
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.querySelector('.theme-toggle');
+    if (!btn) return;
+    btn.hidden = false;
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    function isDark() { var t = root.getAttribute('data-theme'); return t ? t === 'dark' : mq.matches; }
+    function sync() {
+      btn.setAttribute('aria-pressed', isDark() ? 'true' : 'false');
+      btn.setAttribute('aria-label', isDark() ? 'Switch to light theme' : 'Switch to dark theme');
+    }
+    btn.addEventListener('click', function () {
+      var next = isDark() ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('site-theme', next); } catch (e) { /* not fatal */ }
+      sync();
+    });
+    mq.addEventListener('change', sync);
+    sync();
+  })();
+</script>
+</body>
+</html>

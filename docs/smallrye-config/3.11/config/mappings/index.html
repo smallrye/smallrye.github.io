@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://api.github.com; base-uri 'none'; object-src 'none'; form-action 'none'">
+
+  <!-- SEO TITLE -->
+  
+  <title>Mappings - SmallRye</title>
+  <meta property="og:title" content="Mappings" />
+  <meta name="twitter:title" content="Mappings">
+  <meta property="og:site_name" content="SmallRye">
+  <!-- SEO DESCRIPTION -->
+  <meta name="description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+  <meta property="og:description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile." />
+  <meta name="twitter:description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+
+  <!-- SEO URL -->
+  <link rel="canonical" href="https://smallrye.io/docs/smallrye-config/3.11/config/mappings/" />
+  <meta property="og:url" content="https://smallrye.io/docs/smallrye-config/3.11/config/mappings/" />
+  <meta name="twitter:url" content="https://smallrye.io/docs/smallrye-config/3.11/config/mappings/">
+
+  <!-- SEO TYPE -->
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2026-11-02T00:30:18.715095801Z[UTC]" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image" content="https://smallrye.io/images/rye-field-og.jpg">
+  <meta name="twitter:image" content="https://smallrye.io/images/rye-field-og.jpg">
+  <!-- SEO COLLECTION PAGES -->
+  <!-- SEO TWITTER -->
+  <meta name="twitter:site" content="@smallrye_io" />
+  <meta name="twitter:creator" content="@smallrye_io" />
+  <!-- SEO LOCALE -->
+  <meta property="og:locale" content="en" />
+  <!-- SEO GENERATOR -->
+  <meta name="generator" content="Quarkus Roq v2.1.9" />
+
+<link rel="alternate" type="application/rss+xml" title="SmallRye" href="https://smallrye.io/rss.xml"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <script>
+    try {
+      var t = localStorage.getItem('site-theme');
+      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    } catch (e) { /* private mode: follow the OS preference */ }
+  </script>
+  <link rel="stylesheet" href="/css/main.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://smallrye.io/#organization",
+      "name": "SmallRye",
+      "url": "https://smallrye.io/",
+      "logo": "https://smallrye.io/images/logo.svg",
+      "description": "SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.",
+      "email": "smallrye@googlegroups.com",
+      "sameAs": [
+        "https://github.com/smallrye",
+        "https://twitter.com/smallrye_io",
+        "https://groups.google.com/d/forum/smallrye"
+      ],
+      "parentOrganization": { "@type": "Organization", "name": "Commonhaus Foundation", "url": "https://www.commonhaus.org/" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://smallrye.io/#website",
+      "name": "SmallRye",
+      "url": "https://smallrye.io/",
+      "publisher": { "@id": "https://smallrye.io/#organization" }
+    }
+  ]
+}
+</script>
+    <script type="module" src="/static/bundle/app-KFNV2DMD.js"></script>
+      <!-- no style found for key 'app' in Bundler mapping !-->
+<script>
+  try {
+    if (matchMedia('(min-width: 60rem)').matches && localStorage.getItem('docs-nav') === 'open') document.documentElement.classList.add('docs-nav-open');
+    if (localStorage.getItem('docs-toc') === 'closed') document.documentElement.classList.add('docs-toc-closed');
+  } catch (e) { /* storage blocked: closed */ }
+</script>
+<noscript><style>.docs-nav { display: block !important; } .docs-nav-button { display: none !important; }</style></noscript>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand" href="/">
+      <img class="logo-light" src="/images/logo.svg" alt="SmallRye" width="160" height="41">
+      <img class="logo-dark" src="/images/logo-dark.svg" alt="SmallRye" width="160" height="41">
+    </a>
+<div class="docs-brand">
+  <a class="docs-brand-project" href="/docs/smallrye-config/3.11/"><span class="docs-brand-name">Config</span></a>
+  <!--docs-version--><label class="docs-version">
+    <span class="visually-hidden">Version</span>
+    <select data-docs-version data-current="3.11" data-base="/docs/smallrye-config/">
+      
+      <option value="latest">4.2.0 (latest)</option>
+      
+                  <optgroup label="4.x">
+      
+      <option value="4.1">4.1.0</option>
+      
+                  
+      
+      <option value="4.0">4.0.0</option>
+      
+                  </optgroup><optgroup label="3.x">
+      
+      <option value="3.18">3.18.3</option>
+      
+                  
+      
+      <option value="3.17">3.17.2</option>
+      
+                  
+      
+      <option value="3.16">3.16.0</option>
+      
+                  
+      
+      <option value="3.15">3.15.1</option>
+      
+                  
+      
+      <option value="3.14">3.14.1</option>
+      
+                  
+      
+      <option value="3.13">3.13.4</option>
+      
+                  
+      
+      <option value="3.12">3.12.4</option>
+      
+                  
+      
+      <option value="3.11" selected>3.11.4</option>
+      
+                  
+      
+      <option value="3.10">3.10.2</option>
+      
+                  
+      
+      <option value="3.9">3.9.1</option>
+      
+                  
+      
+      <option value="3.8">3.8.3</option>
+      
+                  
+      
+      <option value="3.7">3.7.1</option>
+      
+                  
+      
+      <option value="3.6">3.6.1</option>
+      
+                  
+      
+      <option value="3.5">3.5.4</option>
+      
+                  
+      
+      <option value="3.4">3.4.4</option>
+      
+                  
+      
+      <option value="3.3">3.3.4</option>
+      
+                  
+      
+      <option value="3.2">3.2.1</option>
+      
+                  
+      
+      <option value="3.1">3.1.3</option>
+      
+                  
+      
+      <option value="3.0">3.0.0</option>
+      
+                  </optgroup><optgroup label="2.x">
+      
+      <option value="2">2.13.3</option>
+      
+      </optgroup>
+      <option value="main">main (snapshot)</option>
+      
+      
+    </select>
+  </label><!--/docs-version-->
+  <div class="docs-tools">
+    <button type="button" class="docs-search-button" data-docs-search-open aria-haspopup="dialog" aria-keyshortcuts="/">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <span>Search</span><kbd aria-hidden="true">/</kbd>
+    </button>
+    <a class="docs-github" href="https://github.com/smallrye/smallrye-config" title="smallrye/smallrye-config on GitHub" data-docs-github="smallrye/smallrye-config">
+      <svg aria-hidden="true" viewBox="0 0 16 16" width="26" height="26"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      <span class="docs-github-text">
+        <span class="docs-github-name">GitHub<span class="visually-hidden">: smallrye/smallrye-config</span></span>
+        <span class="docs-github-facts"><span title="Latest release">4.2.0</span><span data-docs-github-stars hidden></span><span data-docs-github-forks hidden></span></span>
+      </span>
+    </a>
+  </div>
+</div>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-input" aria-label="Toggle menu">
+    <label for="nav-toggle" class="nav-toggle"><span></span></label>
+    <nav class="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/docs/" aria-current="page">Documentation</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+  <main id="main">
+
+<div class="container docs-layout">
+  <aside class="docs-side">
+    <button type="button" class="docs-nav-button" aria-controls="docs-nav" aria-expanded="false" data-docs-nav-button>
+      <span class="docs-nav-icon" aria-hidden="true"></span><span class="docs-nav-label">Contents</span>
+    </button>
+    <nav id="docs-nav" class="docs-nav" aria-label="SmallRye Config documentation">
+      <!--docs-version-->
+<ul>
+  <li><a href="/docs/smallrye-config/3.11/">Home</a></li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Config</summary>
+<ul>
+  <li><a href="/docs/smallrye-config/3.11/config/getting-started/">Getting Started</a></li>
+  <li><a href="/docs/smallrye-config/3.11/config/expressions/">Expressions</a></li>
+  <li><a href="/docs/smallrye-config/3.11/config/profiles/">Profiles</a></li>
+  <li><a href="/docs/smallrye-config/3.11/config/environment-variables/">Environment Variables</a></li>
+  <li><a href="/docs/smallrye-config/3.11/config/indexed-properties/">Indexed Properties</a></li>
+  <li><a href="/docs/smallrye-config/3.11/config/config-value/">ConfigValue</a></li>
+  <li><a href="/docs/smallrye-config/3.11/config/mappings/" aria-current="page">Mappings</a></li>
+  <li><a href="/docs/smallrye-config/3.11/config/map-support/">Map Support</a></li>
+  <li><a href="/docs/smallrye-config/3.11/config/secret-keys/">Secret Keys</a></li>
+  <li><a href="/docs/smallrye-config/3.11/config/customizer/">Customizer</a></li>
+  <li><a href="/docs/smallrye-config/3.11/config/configuration/">Configuration Reference</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Config Sources</summary>
+<ul>
+  <li><a href="/docs/smallrye-config/3.11/config-sources/custom/">Custom</a></li>
+  <li><a href="/docs/smallrye-config/3.11/config-sources/factories/">Factories</a></li>
+  <li><a href="/docs/smallrye-config/3.11/config-sources/locations/">Locations</a></li>
+  <li><a href="/docs/smallrye-config/3.11/config-sources/yaml/">YAML</a></li>
+  <li><a href="/docs/smallrye-config/3.11/config-sources/json/">JSON</a></li>
+  <li><a href="/docs/smallrye-config/3.11/config-sources/filesystem/">FileSystem</a></li>
+  <li><a href="/docs/smallrye-config/3.11/config-sources/zookeeper/">ZooKeeper</a></li>
+  <li><a href="/docs/smallrye-config/3.11/config-sources/hocon/">HOCON</a></li>
+  <li><a href="/docs/smallrye-config/3.11/config-sources/keystore/">KeyStore</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Converters</summary>
+<ul>
+  <li><a href="/docs/smallrye-config/3.11/converters/custom/">Custom</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Extensions</summary>
+<ul>
+  <li><a href="/docs/smallrye-config/3.11/extensions/interceptors/">Interceptors</a></li>
+  <li><a href="/docs/smallrye-config/3.11/extensions/fallback/">Fallback</a></li>
+  <li><a href="/docs/smallrye-config/3.11/extensions/relocate/">Relocate</a></li>
+  <li><a href="/docs/smallrye-config/3.11/extensions/logging/">Logging</a></li>
+</ul>
+    </details>
+  </li>
+</ul>
+      <!--/docs-version-->
+    </nav>
+  </aside>
+  <article class="docs-main prose" data-pagefind-body>
+    <!--docs-version-->
+    <span data-pagefind-filter="version:3.11" hidden></span>
+    <p class="docs-notice" data-pagefind-ignore>This is the documentation of SmallRye Config 3.11.4, released <time datetime="2025-02-24">2025-02-24</time>. It is not the latest release: <a href="/docs/smallrye-config/latest/" data-docs-same-page>read the documentation of 4.2.0</a>.</p>
+    <!--/docs-version-->
+    <h1>Mappings</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>With SmallRye Config Mappings, it is possible to group multiple configuration properties in a single interface that
+share the same prefix (or namespace). It supports the following set of features:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Automatic conversion of the configuration type, including <code>List</code>, <code>Set</code>, <code>Map</code>, <code>Optional</code> and primitive types.</p>
+</li>
+<li>
+<p>Nested Config Mapping groups.</p>
+</li>
+<li>
+<p>Configuration Properties Naming Strategies</p>
+</li>
+<li>
+<p>Integration with Bean Validation</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="mapping-rules"><a class="anchor" href="#mapping-rules"></a>Mapping Rules</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A complex object type uses the following rules to map configuration values to their member values:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A configuration path is built by taking the object type prefix (or namespace) and the mapping member name</p>
+</li>
+<li>
+<p>The member name is converted to its kebab-case format</p>
+</li>
+<li>
+<p>If the member name is represented as a getter, the member name is taken from its property name equivalent, and then
+converted to its kebab-case format.</p>
+</li>
+<li>
+<p>The configuration value is automatically converted to the member type</p>
+</li>
+<li>
+<p>The configuration path is required to exist with a valid configuration value or the mapping will fail.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Kebab-case - the method name is derived by replacing case changes with a dash to map the configuration property.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>A Config Mapping requires an interface with minimal metadata configuration annotated with
+<code>io.smallrye.config.ConfigMapping</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@ConfigMapping(prefix = "server")
+interface Server {
+    String host();
+
+    int port();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>Server</code> interface is able to map configurations with the name <code>server.host</code> into the <code>Server#host()</code> method and
+<code>server.port</code> into <code>Server#port()</code> method. The configuration property name to lookup is built from the prefix, and the
+method name with <code>.</code> (dot) as the separator.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If a mapping fails to match a configuration property the config system throws a <code>NoSuchElementException</code>, unless
+the mapped element is an <code>Optional</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="registration"><a class="anchor" href="#registration"></a>Registration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Registration of Config Mappings is automatic in CDI aware environments with the <code>@ConfigMapping</code> annotation.</p>
+</div>
+<div class="paragraph">
+<p>In non-CDI environments, the Config Mapping can be registered via <code>SmallRyeConfigBuilder#withMapping</code>. In this case,
+the <code>@ConfigMapping</code> is completely optional (but recommendeded to set the prefix).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">SmallRyeConfig config = new SmallRyeConfigBuilder()
+        .withMapping(Server.class)
+        .build();</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="retrieval"><a class="anchor" href="#retrieval"></a>Retrieval</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A config mapping interface can be injected into any CDI aware bean:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@ApplicationScoped
+class BusinessBean {
+    @Inject
+    Server server;
+
+    public void businessMethod() {
+        String host = server.host();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In non-CDI environments, use the API <code>io.smallrye.config.SmallRyeConfig#getConfigMapping</code> to retrieve the config
+mapping instance:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">SmallRyeConfig config = ConfigProvider.getConfig().unwrap(SmallRyeConfig.class);
+Server server = config.getConfigMapping(Server.class);</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Config Mapping instances are cached. They are populated when the <code>SmallRyeConfig</code> instance is initialized and
+their values are not updated on <code>ConfigSource</code> changes.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>For a Config Mapping to be valid, it needs to match every configuration property name contained in the <code>Config</code> under
+the specified prefix set in <code>@ConfigMapping</code>. This prevents unknown configuration properties in the <code>Config</code>. This
+behaviour can be disabled with the configuration <code>smallrye.config.mapping.validate-unknown=false</code>, or by ignoring
+specified paths with <code>io.smallrye.config.SmallRyeConfigBuilder.withMappingIgnore</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="defaults"><a class="anchor" href="#defaults"></a>Defaults</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>io.smallrye.config.WithDefault</code> annotation allows to set a default property value into a mapping (and prevent
+errors if the configuration value is not available in any <code>ConfigSource</code>).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public interface Defaults {
+    @WithDefault("foo")
+    String foo();
+
+    @WithDefault("bar")
+    String bar();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>No configuration properties are required. The <code>Defaults#foo()</code> will return the value <code>foo</code> and <code>Defaults#bar()</code> will
+return the value <code>bar</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="nested-groups"><a class="anchor" href="#nested-groups"></a>Nested Groups</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A nested mapping provides a way to map sub-groups of configuration properties.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A nested type contributes with its name (converted to its kebab-case format)</p>
+</li>
+<li>
+<p>The configuration path is built by taking the root object type prefix (or namespace), the nested type name and the
+member name of the nested type</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@ConfigMapping(prefix = "server")
+public interface Server {
+    String host();
+
+    int port();
+
+    Log log();
+
+    interface Log {
+        boolean enabled();
+
+        String suffix();
+
+        boolean rotate();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">server.host=localhost
+server.port=8080
+server.log.enabled=true
+server.log.suffix=.log
+server.log.rotate=false</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The method name of a mapping group acts as a sub-prefix in the property name. In this case the matching property to
+<code>Server.Log#enabled</code> is <code>server.log.enabled</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="hierarchy"><a class="anchor" href="#hierarchy"></a>Hierarchy</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A config mapping can extend another mapping and inherit all its super members:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public interface Parent {
+    String name();
+}
+
+@ConfigMapping(prefix = "child")
+public interface Child extends Parent {
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And override members:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public interface Parent {
+    String name();
+}
+
+@ConfigMapping(prefix = "child")
+public interface Child extends Parent {
+    @WithName("child-name")
+    String name();
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overriding-property-names"><a class="anchor" href="#overriding-property-names"></a>Overriding property names</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="withname"><a class="anchor" href="#withname"></a><code>@WithName</code></h3>
+<div class="paragraph">
+<p>If a method name and a property name do not match, the <code>io.smallrye.config.WithName</code> annotation can
+override the method name mapping and use the name supplied in the annotation.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@ConfigMapping(prefix = "server")
+interface Server {
+    @WithName("name")
+    String host();
+
+    int port();
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">server.name=localhost
+server.port=8080</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="withparentname"><a class="anchor" href="#withparentname"></a><code>@WithParentName</code></h3>
+<div class="paragraph">
+<p>The <code>io.smallrye.config.WithParentName</code> annotation allows configurations mappings to inherit its parent container name,
+simplifying the configuration property name required to match the mapping.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@ConfigMapping(prefix = "server")
+interface Server {
+    @WithParentName
+    ServerHostAndPort hostAndPort();
+
+    @WithParentName
+    ServerInfo info();
+}
+
+interface ServerHostAndPort {
+    String host();
+
+    int port();
+}
+
+interface ServerInfo {
+    String name();
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">server.host=localhost
+server.port=8080
+server.name=konoha</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Without the <code>@WithParentName</code> the method <code>ServerInfo#name</code> maps the configuration property <code>server.info.name</code>. With
+<code>@WithParentName</code>, the <code>Server#info</code> mapping will inherit the parent name from <code>Server</code> and <code>ServerInfo#name</code> maps to
+the property <code>server.name</code> instead.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="namingstrategy"><a class="anchor" href="#namingstrategy"></a>NamingStrategy</h3>
+<div class="paragraph">
+<p>Method names in camelCase map to kebab-case configuration property names by default.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@ConfigMapping(prefix = "server")
+interface Server {
+    String theHost();
+
+    int thePort();
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">server.the-host=localhost
+server.the-port=8080</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The mapping strategy can be adjusted by setting <code>namingStrategy</code> value in the <code>@ConfigMapping</code> annotation.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@ConfigMapping(prefix = "server", namingStrategy = ConfigMapping.NamingStrategy.VERBATIM)
+public interface ServerVerbatimNamingStrategy {
+    String theHost();
+
+    int thePort();
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">server.theHost=localhost
+server.thePort=8080</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>@ConfigMapping</code> annotation support the following naming stategies:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>KEBAB_CASE - The method name is derived by replacing case changes with a dash to map the configuration property.</p>
+</li>
+<li>
+<p>VERBATIM - The method name is used as is to map the configuration property.</p>
+</li>
+<li>
+<p>SNAKE_CASE - The method name is derived by replacing case changes with an underscore to map the configuration property.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="conversion"><a class="anchor" href="#conversion"></a>Conversion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A config mapping interface support automatic conversions of all types available for conversion in <code>Config</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@ConfigMapping
+public interface SomeTypes {
+    @WithName("int")
+    int intPrimitive();
+
+    @WithName("int")
+    Integer intWrapper();
+
+    @WithName("long")
+    long longPrimitive();
+
+    @WithName("long")
+    Long longWrapper();
+
+    @WithName("float")
+    float floatPrimitive();
+
+    @WithName("float")
+    Float floatWrapper();
+
+    @WithName("double")
+    double doublePrimitive();
+
+    @WithName("double")
+    Double doubleWrapper();
+
+    @WithName("char")
+    char charPrimitive();
+
+    @WithName("char")
+    Character charWrapper();
+
+    @WithName("boolean")
+    boolean booleanPrimitive();
+
+    @WithName("boolean")
+    Boolean booleanWrapper();
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">int=9
+long=9999999999
+float=99.9
+double=99.99
+char=c
+boolean=true</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is also valid for <code>Optional</code> and friends.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@ConfigMapping
+public interface Optionals {
+    Optional&lt;Server&gt; server();
+
+    Optional&lt;String&gt; optional();
+
+    @WithName("optional.int")
+    OptionalInt optionalInt();
+
+    interface Server {
+        String host();
+
+        int port();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this case, the mapping won’t fail if the configuraton properties values are missing.</p>
+</div>
+<div class="sect2">
+<h3 id="withconverter"><a class="anchor" href="#withconverter"></a><code>@WithConverter</code></h3>
+<div class="paragraph">
+<p>The <code>io.smallrye.config.WithConverter</code> annotation provides a way to set a specific <code>Converter</code> in a mapping.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@ConfigMapping
+public interface Converters {
+    @WithConverter(FooBarConverter.class)
+    String foo();
+}
+
+public static class FooBarConverter implements Converter&lt;String&gt; {
+    @Override
+    public String convert(final String value) {
+        return "bar";
+    }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">foo=foo</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A call to <code>Converters.foo()</code> results in the value <code>bar</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="collections"><a class="anchor" href="#collections"></a>Collections</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A config mapping is also able to map the collections types <code>List</code> and <code>Set</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A member with a <code>Collection</code> type requires the configuration name to be in its indexed format</p>
+</li>
+<li>
+<p>Each configuration name, plus its index maps the configuration value to the corresponding <code>Collection</code> element in the
+object type</p>
+</li>
+<li>
+<p>The index must be part of the configuration path, by appending the index between square brackets to the`Collection`
+member</p>
+</li>
+<li>
+<p>The index specified in the configuration name is used to order the element in the <code>Collection</code></p>
+</li>
+<li>
+<p>Missing elements or gaps are removed</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@ConfigMapping(prefix = "server")
+public interface ServerCollections {
+    Set&lt;Environment&gt; environments();
+
+    interface Environment {
+        String name();
+
+        List&lt;App&gt; apps();
+
+        interface App {
+            String name();
+
+            List&lt;String&gt; services();
+
+            Optional&lt;List&lt;String&gt;&gt; databases();
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">server.environments[0].name=dev
+server.environments[0].apps[0].name=rest
+server.environments[0].apps[0].services=bookstore,registration
+server.environments[0].apps[0].databases=pg,h2
+server.environments[0].apps[1].name=batch
+server.environments[0].apps[1].services=stock,warehouse</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>List</code> and <code>Set</code> mappings can use <a href="/docs/smallrye-config/3.11/config/indexed-properties/">Indexed Properties</a> to map configuration values in
+mapping groups.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>A <code>List</code> mapping is backed by an <code>ArrayList</code>, and a <code>Set</code> mapping is backed by a <code>HashSet</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="maps"><a class="anchor" href="#maps"></a>Maps</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A config mapping is also able to map a <code>Map</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A member with a <code>Map</code> type requires an additional configuration name added to the configuration path of the <code>Map</code>
+member to act as a map key</p>
+</li>
+<li>
+<p>The additional configuration name maps a Map entry with the configuration name as the <code>Map</code> entry key and
+the configuration value as the Map entry value</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@ConfigMapping(prefix = "server")
+public interface Server {
+    String host();
+
+    int port();
+
+    Map&lt;String, String&gt; form();
+
+    Map&lt;String, List&lt;Alias&gt;&gt; aliases();
+
+    interface Alias {
+        String name();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">server.host=localhost
+server.port=8080
+server.form.index=index.html
+server.form.login.page=login.html
+server.form.error.page=error.html
+server.aliases.localhost[0].name=prod
+server.aliases.localhost[1].name=127.0.0.1
+server.aliases.\"io.smallrye\"[0].name=smallrye</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The configuration property name needs to specify an additional segment to act as the map key. The <code>server.form</code> matches
+the <code>Server#form</code> <code>Map</code> and the segments <code>index</code>, <code>login.page</code> and <code>error.page</code> represent the <code>Map</code>
+keys.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>A <code>Map</code> mapping is backed by an <code>HashMap</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>When populating a <code>Map</code>, <code>SmallRyeConfig</code> requires the configuration names listed in
+<code>SmallRyeConfig#getPropertyNames</code> to find the <code>Map</code> keys. If a <code>ConfigSource</code> does not support
+<code>getPropertyNames</code> (empty), the names must be provided by another <code>ConfigSource</code> that can do so. After retrieving the
+map keys, <code>SmallRyeConfig</code> performs the lookup of the values with the regular <code>ConfigSource</code> ordinal ordering. Even if
+a <code>ConfigSource</code> does not provide <code>getPropertyNames</code> it can provide the value by having the name listed in another
+capable <code>ConfigSource</code>.</p>
+</div>
+<div class="paragraph">
+<p>For collection types, the key requires the indexed format. The configuration name <code>server.aliases.localhost[0].name</code>
+maps to the <code>Map&lt;String, List&lt;Alias&gt;&gt; aliases()</code> member, where <code>localhost</code> is the <code>Map</code> key, <code>[0]</code> is the index of the
+<code>List&lt;Alias&gt;</code> collection where the <code>Alias</code> element will be stored, containing the name <code>prod</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>They <code>Map</code> key part in the configuration property name may require quotes to delimit the key.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="withunnamedkey"><a class="anchor" href="#withunnamedkey"></a><code>@WithUnnamedKey</code></h3>
+<div class="paragraph">
+<p>The <code>io.smallrye.config.WithUnnamedKey</code> annotation allows to omit a single map key in the configuration path:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@ConfigMapping(prefix = "server")
+public interface Server {
+    @WithUnnamedKey("localhost")
+    Map&lt;String, Alias&gt; aliases();
+
+    interface Alias {
+        String name();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">server.aliases.name=localhost
+server.aliases.prod.name=prod</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>sever.aliases.name</code> is an unnamed <code>Map</code> property, because it does not contain the <code>Map</code> key to populate the <code>Map</code>
+entry. Due to <code>@WithUnnamedKey("localhost")</code> the <code>Map</code> key is not required in the configuration path. The key used to
+look up the Map entry is given by <code>io.smallrye.config.WithUnnamedKey#value</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Server server = config.getConfigMapping(Server.class);
+Map&lt;String, Alias&gt; localhost = server.aliases.get("localhost");</code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If the unnamed key (in this case <code>localhost</code>) is explicitly set in a property name, the mapping will throw an error.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="withkeys"><a class="anchor" href="#withkeys"></a><code>@WithKeys</code></h3>
+<div class="paragraph">
+<p>The <code>io.smallrye.config.WithKeys</code> annotation allows to define which <code>Map</code> keys must be loaded by
+the configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@ConfigMapping(prefix = "server")
+public interface Server {
+    @WithKeys(KeysProvider.class)
+    Map&lt;String, Alias&gt; aliases();
+
+    interface Alias {
+        String name();
+    }
+
+    class KeysProvider implements Supplier&lt;Iterable&lt;String&gt;&gt; {
+        @Override
+        public Iterable&lt;String&gt; get() {
+            return List.of("dev", "test", "prod");
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this case, <code>SmallRyeConfig</code> will look for the map keys <code>dev</code>, <code>test</code> and <code>prod</code> instead of discovering the keys
+with <code>SmallRyeConfig#getPropertyNames</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">servers.alias.dev.name=dev
+servers.alias.test.name=test
+servers.alias.prod.name=prod</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The provided list will effectively substitute the lookup in <code>SmallRyeConfig#getPropertyNames</code>, thus enabling a
+<code>ConfigSource</code> that does not list its properties, to contribute configuration to the <code>Map</code>. Each key must exist in
+the final configuration (relative to the <code>Map</code> path segment), or the mapping will fail with a
+<code>ConfigValidationException</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="withdefaults"><a class="anchor" href="#withdefaults"></a><code>@WithDefaults</code></h3>
+<div class="paragraph">
+<p>The <code>io.smallrye.config.WithDefaults</code> is a marker annotation to use only in a <code>Map</code> to return the default value for
+the value element on any key lookup:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@ConfigMapping(prefix = "server")
+public interface Server {
+    @WithDefaults
+    Map&lt;String, Alias&gt; aliases();
+
+    interface Alias {
+        @WithDefault("localhost")
+        String name();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">server.aliases.prod.name=prod</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A look-up to the <code>aliases</code> <code>Map</code> with the key <code>localhost</code>, <code>any</code> or any other key, returns a <code>Alias</code> instance, where
+<code>Alias.name</code> is <code>localhost</code>, which is the default value. A look-up to <code>prod</code> returns a <code>Alias</code> instance, where
+<code>Alias.name</code> is <code>prod</code> because the property is defined in the configuration as <code>server.aliases.prod.name=prod</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>Map</code> can only iterate and size the defined keys. In this case, the <code>aliases</code> <code>Map</code> only iterates the <code>prod</code> key,
+and the size is <code>1</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Server server = config.getConfigMapping(Server.class);
+Map&lt;String, Alias&gt; localhost = server.aliases.get("localhost");
+Map&lt;String, Alias&gt; any = server.aliases.get("any");
+Map&lt;String, Alias&gt; any = server.aliases.get("prod");</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="optionals"><a class="anchor" href="#optionals"></a>Optionals</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>A mapping can wrap any complex type with an <code>Optional</code></p>
+</li>
+<li>
+<p><code>Optional</code> mappings do not require the configuration path and value to be present</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="tostring-equals-hashcode"><a class="anchor" href="#tostring-equals-hashcode"></a>toString, equals, hashcode</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If the config mapping contains a <code>toString</code> method declaration, the config mapping instance will include a proper
+implementation of the <code>toString</code> method. The <code>equals</code> and <code>hashcode</code> methods are included automatically.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Do not include a <code>toString</code> declaration in a config mapping with sensitive information.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="validation"><a class="anchor" href="#validation"></a>Validation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A config mapping may combine annotations from <a href="https://beanvalidation.org/">Bean Validation</a> to validate configuration
+properties values.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@ConfigMapping(prefix = "server")
+interface Server {
+    @Size(min = 2, max = 20)
+    String host();
+
+    @Max(10000)
+    int port();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The application startup fails with a <code>io.smallrye.config.ConfigValidationException</code> if the configuration properties
+values do not follow the contraints defined in <code>Server</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>For validation to work, the <code>smallrye-config-validator</code> dependency is required in the classpath.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>    <!--docs-version--><p class="docs-source" data-pagefind-ignore>
+    </p><!--/docs-version-->
+  </article>
+  <nav class="docs-toc" aria-label="On this page">
+    <details open data-docs-toc>
+      <summary class="toc-title">On this page</summary>
+      <nav class="roq-toc" aria-label="Table of contents">
+<ul>
+<li data-level="1"><a href="#mapping-rules">Mapping Rules</a></li>
+<li data-level="1"><a href="#registration">Registration</a></li>
+<li data-level="1"><a href="#retrieval">Retrieval</a></li>
+<li data-level="1"><a href="#defaults">Defaults</a></li>
+<li data-level="1"><a href="#nested-groups">Nested Groups</a></li>
+<li data-level="1"><a href="#hierarchy">Hierarchy</a></li>
+<li data-level="1"><a href="#overriding-property-names">Overriding property names</a>
+<ul>
+<li data-level="2"><a href="#withname">@WithName</a></li>
+<li data-level="2"><a href="#withparentname">@WithParentName</a></li>
+<li data-level="2"><a href="#namingstrategy">NamingStrategy</a></li>
+</ul>
+</li>
+<li data-level="1"><a href="#conversion">Conversion</a>
+<ul>
+<li data-level="2"><a href="#withconverter">@WithConverter</a></li>
+</ul>
+</li>
+<li data-level="1"><a href="#collections">Collections</a></li>
+<li data-level="1"><a href="#maps">Maps</a>
+<ul>
+<li data-level="2"><a href="#withunnamedkey">@WithUnnamedKey</a></li>
+<li data-level="2"><a href="#withkeys">@WithKeys</a></li>
+<li data-level="2"><a href="#withdefaults">@WithDefaults</a></li>
+</ul>
+</li>
+<li data-level="1"><a href="#optionals">Optionals</a></li>
+<li data-level="1"><a href="#tostring-equals-hashcode">toString, equals, hashcode</a></li>
+<li data-level="1"><a href="#validation">Validation</a></li>
+</ul>
+</nav>
+
+    </details>
+  </nav>
+</div>
+<dialog class="docs-search" data-docs-search aria-label="Search SmallRye Config">
+  <div class="docs-search-bar" role="search">
+    <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <input type="search" data-docs-search-input placeholder="Search SmallRye Config 3.13.4" aria-label="Search SmallRye Config documentation" autocomplete="off" spellcheck="false">
+    <button type="button" class="docs-search-close" data-docs-search-close>Esc</button>
+  </div>
+  <p class="docs-search-status" data-docs-search-status aria-live="polite"></p>
+  <ul class="docs-search-results" data-docs-search-results></ul>
+</dialog>
+
+  </main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-about">
+      <a class="footer-logo" href="/"><img src="/images/logo-dark.svg" alt="SmallRye" width="140" height="36" loading="lazy"></a>
+      <p>SmallRye is open source under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache Software License 2.0</a>.</p>
+      <p>This website is built with <a href="https://iamroq.dev/">Quarkus Roq</a>, hosted on <a href="https://pages.github.com/">GitHub Pages</a> and is completely open source. If you want to make it better, <a href="https://github.com/smallrye/smallrye.github.io">fork the website</a> and show us what you've got.</p>
+    </div>
+    <nav aria-label="Site">
+      <p class="footer-head">Navigation</p>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/docs/">Documentation</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Contribute and get help">
+      <p class="footer-head">Contribute</p>
+      <ul>
+        <li><a href="https://github.com/smallrye">GitHub</a></li>
+        <li><a href="https://twitter.com/smallrye_io">Follow us</a></li>
+      </ul>
+      <p class="footer-head">Get help</p>
+      <ul>
+        <li><a href="https://quarkusio.zulipchat.com">Chatroom</a></li>
+        <li><a href="https://groups.google.com/d/forum/smallrye">Google Groups</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="External links">
+      <p class="footer-head">External links</p>
+      <ul>
+        <li><a href="https://microprofile.io/">Eclipse MicroProfile</a></li>
+        <li><a href="https://github.com/eclipse?q=microprofile">Eclipse MicroProfile on GitHub</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <div class="container footer-bottom-bar">
+      <p><a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></p>
+      <p class="sponsor">A <a href="https://www.commonhaus.org/">Commonhaus Foundation</a> project <a href="https://www.commonhaus.org/"><img src="/assets/images/commonhaus_reversed.svg" alt="Commonhaus Foundation" width="200" height="21" loading="lazy"></a></p>
+      <p class="footer-trademark">Copyright &copy; SmallRye. For details on our trademarks, please visit our <a href="https://www.commonhaus.org/policies/trademark-policy/">Trademark Policy</a> and <a href="https://www.commonhaus.org/trademarks/">Trademark List</a>. Trademarks of third parties are owned by their respective holders and their mention here does not suggest any endorsement or association.</p>
+    </div>
+  </div>
+</footer>
+<!-- Light/dark switch. Hidden until the script wires it, so a no-JS visitor
+     never sees a dead button. Every site has it: keep it. -->
+<button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark theme" hidden>
+  <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
+  <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/></svg>
+</button>
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.querySelector('.theme-toggle');
+    if (!btn) return;
+    btn.hidden = false;
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    function isDark() { var t = root.getAttribute('data-theme'); return t ? t === 'dark' : mq.matches; }
+    function sync() {
+      btn.setAttribute('aria-pressed', isDark() ? 'true' : 'false');
+      btn.setAttribute('aria-label', isDark() ? 'Switch to light theme' : 'Switch to dark theme');
+    }
+    btn.addEventListener('click', function () {
+      var next = isDark() ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('site-theme', next); } catch (e) { /* not fatal */ }
+      sync();
+    });
+    mq.addEventListener('change', sync);
+    sync();
+  })();
+</script>
+</body>
+</html>

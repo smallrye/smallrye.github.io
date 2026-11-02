@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://api.github.com; base-uri 'none'; object-src 'none'; form-action 'none'">
+
+  <!-- SEO TITLE -->
+  
+  <title>Basic usage - SmallRye</title>
+  <meta property="og:title" content="Basic usage" />
+  <meta name="twitter:title" content="Basic usage">
+  <meta property="og:site_name" content="SmallRye">
+  <!-- SEO DESCRIPTION -->
+  <meta name="description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+  <meta property="og:description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile." />
+  <meta name="twitter:description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+
+  <!-- SEO URL -->
+  <link rel="canonical" href="https://smallrye.io/docs/smallrye-graphql/2.4/typesafe-client-usage/" />
+  <meta property="og:url" content="https://smallrye.io/docs/smallrye-graphql/2.4/typesafe-client-usage/" />
+  <meta name="twitter:url" content="https://smallrye.io/docs/smallrye-graphql/2.4/typesafe-client-usage/">
+
+  <!-- SEO TYPE -->
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2026-11-02T00:30:18.740059615Z[UTC]" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image" content="https://smallrye.io/images/rye-field-og.jpg">
+  <meta name="twitter:image" content="https://smallrye.io/images/rye-field-og.jpg">
+  <!-- SEO COLLECTION PAGES -->
+  <!-- SEO TWITTER -->
+  <meta name="twitter:site" content="@smallrye_io" />
+  <meta name="twitter:creator" content="@smallrye_io" />
+  <!-- SEO LOCALE -->
+  <meta property="og:locale" content="en" />
+  <!-- SEO GENERATOR -->
+  <meta name="generator" content="Quarkus Roq v2.1.9" />
+
+<link rel="alternate" type="application/rss+xml" title="SmallRye" href="https://smallrye.io/rss.xml"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <script>
+    try {
+      var t = localStorage.getItem('site-theme');
+      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    } catch (e) { /* private mode: follow the OS preference */ }
+  </script>
+  <link rel="stylesheet" href="/css/main.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://smallrye.io/#organization",
+      "name": "SmallRye",
+      "url": "https://smallrye.io/",
+      "logo": "https://smallrye.io/images/logo.svg",
+      "description": "SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.",
+      "email": "smallrye@googlegroups.com",
+      "sameAs": [
+        "https://github.com/smallrye",
+        "https://twitter.com/smallrye_io",
+        "https://groups.google.com/d/forum/smallrye"
+      ],
+      "parentOrganization": { "@type": "Organization", "name": "Commonhaus Foundation", "url": "https://www.commonhaus.org/" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://smallrye.io/#website",
+      "name": "SmallRye",
+      "url": "https://smallrye.io/",
+      "publisher": { "@id": "https://smallrye.io/#organization" }
+    }
+  ]
+}
+</script>
+    <script type="module" src="/static/bundle/app-KFNV2DMD.js"></script>
+      <!-- no style found for key 'app' in Bundler mapping !-->
+<script>
+  try {
+    if (matchMedia('(min-width: 60rem)').matches && localStorage.getItem('docs-nav') === 'open') document.documentElement.classList.add('docs-nav-open');
+    if (localStorage.getItem('docs-toc') === 'closed') document.documentElement.classList.add('docs-toc-closed');
+  } catch (e) { /* storage blocked: closed */ }
+</script>
+<noscript><style>.docs-nav { display: block !important; } .docs-nav-button { display: none !important; }</style></noscript>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand" href="/">
+      <img class="logo-light" src="/images/logo.svg" alt="SmallRye" width="160" height="41">
+      <img class="logo-dark" src="/images/logo-dark.svg" alt="SmallRye" width="160" height="41">
+    </a>
+<div class="docs-brand">
+  <a class="docs-brand-project" href="/docs/smallrye-graphql/2.4/"><span class="docs-brand-name">GraphQL</span></a>
+  <!--docs-version--><label class="docs-version">
+    <span class="visually-hidden">Version</span>
+    <select data-docs-version data-current="2.4" data-base="/docs/smallrye-graphql/">
+      
+      <option value="latest">3.0.0.Beta9 (latest)</option>
+      
+                  <optgroup label="2.x">
+      
+      <option value="2.18">2.18.5</option>
+      
+                  
+      
+      <option value="2.17">2.17.1</option>
+      
+                  
+      
+      <option value="2.16">2.16.0</option>
+      
+                  
+      
+      <option value="2.15">2.15.0</option>
+      
+                  
+      
+      <option value="2.14">2.14.3</option>
+      
+                  
+      
+      <option value="2.13">2.13.0</option>
+      
+                  
+      
+      <option value="2.12">2.12.2</option>
+      
+                  
+      
+      <option value="2.11">2.11.0</option>
+      
+                  
+      
+      <option value="2.10">2.10.0</option>
+      
+                  
+      
+      <option value="2.9">2.9.2</option>
+      
+                  
+      
+      <option value="2.8">2.8.6</option>
+      
+                  
+      
+      <option value="2.7">2.7.0</option>
+      
+                  
+      
+      <option value="2.6">2.6.1</option>
+      
+                  
+      
+      <option value="2.5">2.5.2</option>
+      
+                  
+      
+      <option value="2.4" selected>2.4.0</option>
+      
+                  
+      
+      <option value="2.3">2.3.0</option>
+      
+                  
+      
+      <option value="2.2">2.2.3</option>
+      
+                  
+      
+      <option value="2.1">2.1.3</option>
+      
+                  
+      
+      <option value="2.0">2.0.1</option>
+      
+                  </optgroup><optgroup label="1.x">
+      
+      <option value="1">1.9.5</option>
+      
+      </optgroup>
+      <option value="main">main (snapshot)</option>
+      
+      
+    </select>
+  </label><!--/docs-version-->
+  <div class="docs-tools">
+    <button type="button" class="docs-search-button" data-docs-search-open aria-haspopup="dialog" aria-keyshortcuts="/">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <span>Search</span><kbd aria-hidden="true">/</kbd>
+    </button>
+    <a class="docs-github" href="https://github.com/smallrye/smallrye-graphql" title="smallrye/smallrye-graphql on GitHub" data-docs-github="smallrye/smallrye-graphql">
+      <svg aria-hidden="true" viewBox="0 0 16 16" width="26" height="26"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      <span class="docs-github-text">
+        <span class="docs-github-name">GitHub<span class="visually-hidden">: smallrye/smallrye-graphql</span></span>
+        <span class="docs-github-facts"><span title="Latest release">3.0.0.Beta9</span><span data-docs-github-stars hidden></span><span data-docs-github-forks hidden></span></span>
+      </span>
+    </a>
+  </div>
+</div>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-input" aria-label="Toggle menu">
+    <label for="nav-toggle" class="nav-toggle"><span></span></label>
+    <nav class="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/docs/" aria-current="page">Documentation</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+  <main id="main">
+
+<div class="container docs-layout">
+  <aside class="docs-side">
+    <button type="button" class="docs-nav-button" aria-controls="docs-nav" aria-expanded="false" data-docs-nav-button>
+      <span class="docs-nav-icon" aria-hidden="true"></span><span class="docs-nav-label">Contents</span>
+    </button>
+    <nav id="docs-nav" class="docs-nav" aria-label="SmallRye GraphQL documentation">
+      <!--docs-version-->
+<ul>
+  <li><a href="/docs/smallrye-graphql/2.4/">Overview</a></li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Server side features</summary>
+<ul>
+  <li><a href="/docs/smallrye-graphql/2.4/custom-json-deserializers/">Customizing JSON deserializers</a></li>
+  <li><a href="/docs/smallrye-graphql/2.4/directives/">Directives</a></li>
+  <li><a href="/docs/smallrye-graphql/2.4/federation/">Federation</a></li>
+  <li><a href="/docs/smallrye-graphql/2.4/custom-error-extensions/">Custom error extensions</a></li>
+  <li><a href="/docs/smallrye-graphql/2.4/extensions/">Response extensions</a></li>
+  <li><a href="/docs/smallrye-graphql/2.4/mutation-void/">Returning Void from Mutations</a></li>
+  <li><a href="/docs/smallrye-graphql/2.4/handling-init-payload-from-the-websocket/">Handling of the WebSocket&#39;s init-payload</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Typesafe client</summary>
+<ul>
+  <li><a href="/docs/smallrye-graphql/2.4/typesafe-client-usage/" aria-current="page">Basic usage</a></li>
+  <li><a href="/docs/smallrye-graphql/2.4/typesafe-client-reactive-types/">Reactive</a></li>
+  <li><a href="/docs/smallrye-graphql/2.4/typesafe-client-custom-scalars/">Custom scalar types</a></li>
+  <li><a href="/docs/smallrye-graphql/2.4/typesafe-client-headers/">Adding headers</a></li>
+  <li><a href="/docs/smallrye-graphql/2.4/typesafe-client-logging/">Logging</a></li>
+  <li><a href="/docs/smallrye-graphql/2.4/typesafe-client-multiple-queries/">Running multiple queries at once</a></li>
+  <li><a href="/docs/smallrye-graphql/2.4/typesafe-client-error-handling/">Error handling</a></li>
+  <li><a href="/docs/smallrye-graphql/2.4/typesafe-client-accessing-metadata-of-responses/">Accessing metadata of responses</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Dynamic client</summary>
+<ul>
+  <li><a href="/docs/smallrye-graphql/2.4/dynamic-client-usage/">Basic usage</a></li>
+  <li><a href="/docs/smallrye-graphql/2.4/dynamic-client-error-handling/">Error handling</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Clients in general</summary>
+<ul>
+  <li><a href="/docs/smallrye-graphql/2.4/client-standalone/">Bootstrapping the client</a></li>
+  <li><a href="/docs/smallrye-graphql/2.4/using-smallrye-stork/">Using SmallRye Stork</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Developer tools</summary>
+<ul>
+  <li><a href="/docs/smallrye-graphql/2.4/maven-plugin/">Maven plugin</a></li>
+  <li><a href="/docs/smallrye-graphql/2.4/gradle-plugin/">Gradle plugin</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Reference material</summary>
+<ul>
+  <li><a href="/docs/smallrye-graphql/2.4/server-configuration/">Server-side configuration</a></li>
+  <li><a href="/docs/smallrye-graphql/2.4/client-configuration/">Client-side configuration</a></li>
+</ul>
+    </details>
+  </li>
+</ul>
+      <!--/docs-version-->
+    </nav>
+  </aside>
+  <article class="docs-main prose" data-pagefind-body>
+    <!--docs-version-->
+    <span data-pagefind-filter="version:2.4" hidden></span>
+    <p class="docs-notice" data-pagefind-ignore>This is the documentation of SmallRye GraphQL 2.4.0, released <time datetime="2023-09-05">2023-09-05</time>. It is not the latest release: <a href="/docs/smallrye-graphql/latest/" data-docs-same-page>read the documentation of 3.0.0.Beta9</a>.</p>
+    <!--/docs-version-->
+    <h1>Basic usage</h1>
+<div class="paragraph">
+<p>A Java code-first type-safe GraphQL Client API suggestion for
+<a href="https://github.com/eclipse/microprofile-graphql/issues/185">Microprofile GraphQL Issue
+#185</a>.</p>
+</div>
+<div class="paragraph">
+<p>Basic Usage</p>
+</div>
+<div class="paragraph">
+<p>Creating the client-side counterpart of the GraphQL API:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package examples.typesafeclient;
+
+import io.smallrye.graphql.client.typesafe.api.GraphQLClientApi;
+
+import java.util.List;
+
+@GraphQLClientApi
+public interface SuperHeroesApi {
+
+    List&lt;SuperHero&gt; allHeroesIn(String location);
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A model class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package examples.typesafeclient;
+
+import java.util.List;
+
+public class SuperHero {
+
+    private String name;
+    private List&lt;String&gt; superPowers;
+
+    // plus getters and setters
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Injecting the client using CDI and using it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package examples.typesafeclient;
+
+import jakarta.inject.Inject;
+import java.util.List;
+
+public class MyClientUsage {
+
+    @Inject
+    SuperHeroesApi superHeroesApi;
+
+    public void execute() {
+        List&lt;SuperHero&gt; allHeroes = superHeroesApi.allHeroesIn("Outer Space");
+        // ...
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The default request type is <code>query</code>. To make it a mutation, annotate
+it <code>@Mutation</code>. The parameter name is only available if you compile
+the source with the <code>-parameters</code> option. Otherwise, you’ll have to
+annotate all parameters with <code>@Name</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The example above uses CDI, e.g. when you are in a MicroProfile or
+Jakarta EE environment. If you are in an environment without CDI
+support, you need to instantiate the API interface by using the builder:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">SuperHeroesApi api = TypesafeGraphQLClientBuilder.newBuilder().build(SuperHeroesApi.class);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The basic idea of the Java code-first approach is that you start by
+writing the DTOs and query/mutation methods as you need them in your
+client. This ensures that you don’t request fields that you don’t need;
+the thinking is inspired by <a href="https://martinfowler.com/articles/consumerDrivenContracts.html">Consumer Driven
+Contracts</a>.</p>
+</div>
+<div class="paragraph">
+<p>If the server uses names different from yours, you can simply use
+annotations to do a mapping:</p>
+</div>
+<div class="paragraph">
+<p>Name Mapping / Aliases</p>
+</div>
+<div class="paragraph">
+<p>If the server defines a different field or parameter name, annotate it
+with <code>@Name</code>. If the server defines a different query name, annotate the
+method as, e.g., <code>@Query("findHeroesCurrentlyLocatedIn")</code>.</p>
+</div>
+<div class="paragraph">
+<p>By renaming methods, you can also define several variations of the same
+request but using different return types or parameters. E.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public interface SuperHeroesApi {
+    SuperHero findHeroByName(String name);
+
+    @Query("findHeroByName")
+    SuperHeroWithTeams findHeroWithTeamsByName(String name);
+}</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>SuperHero</code> class has no team affiliations (for this example).</p>
+</li>
+<li>
+<p>The <code>SuperHeroWithTeams</code> class has a <code>List&lt;Team&gt; teamAffiliations</code>
+field. The actual query name is still <code>findHeroByName</code>. The <code>Team</code>
+class doesn’t contain the members to break recursion.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If you rename a field or method, the real field or method name will be
+used as an alias, so you can select the same data twice (see <code>and</code>
+below).</p>
+</div>
+<div class="paragraph">
+<p>Configuration</p>
+</div>
+<div class="paragraph">
+<p>If the endpoint is always the same, e.g. a public API of a cloud
+service, you can add the URL to your API annotation, e.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@GraphQLClientApi(endpoint = "https://superheroes.org/graphql")
+interface SuperHeroesApi {
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When instantiating the API with the builder, you can set (or overwrite)
+the endpoint there:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">SuperHeroesApi api = TypesafeGraphQLClientBuilder.newBuilder()
+    .endpoint("https://superheroes.org/graphql")
+    .build(SuperHeroesApi.class);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Commonly you’ll need different endpoints, e.g. when you need one
+endpoint for your production system, but a different endpoint for your
+test system. Simply use <a href="https://download.eclipse.org/microprofile/microprofile-config-1.4/microprofile-config-spec.html">MicroProfile
+Config</a>
+to set the endpoint; similar to the <a href="https://download.eclipse.org/microprofile/microprofile-rest-client-1.4.1/microprofile-rest-client-1.4.1.html">MicroProfile Rest
+Client</a>,
+the key for the endpoint is the fully qualified name of the api
+interface, plus <code>/mp-graphql/url</code>, e.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">org.superheroes.SuperHeroesApi/mp-graphql/url=https://superheroes.org/graphql</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want to use a different key, set the base config key on the
+annotation <code>@GraphQLClientApi(configKey = "superheroes")</code>; then use this
+key for the endpoint <code>superheroes/mp-graphql/url</code>.</p>
+</div>
+<div class="paragraph">
+<p>When using the builder, you can override the config key as well:
+<code>TypesafeGraphQLClientBuilder.newBuilder().configKey("superheroes")</code>.</p>
+</div>
+<div class="paragraph">
+<p>NestedParameter</p>
+</div>
+<div class="paragraph">
+<p>Some APIs require parameters beyond the root level, e.g. for filtering
+or paginating nested lists. Say you have a schema like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-graphql" data-lang="graphql">type Query {
+    team(name: String!): Team!
+}
+
+type Team {
+    members(first: Int!): [SuperHero!]!
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To pass the parameter to the nested field/method, annotate it as
+<code>@NestedParameter</code>, e.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@GraphQLClientApi
+interface TeamsApi {
+    Team team(String name, @NestedParameter("members") int first);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The value of the <code>@NestedParameter</code> annotation is the dot-delimited path
+to the nested field/method that the value should be added to.</p>
+</div>    <!--docs-version--><p class="docs-source" data-pagefind-ignore>
+    </p><!--/docs-version-->
+  </article>
+</div>
+<dialog class="docs-search" data-docs-search aria-label="Search SmallRye GraphQL">
+  <div class="docs-search-bar" role="search">
+    <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <input type="search" data-docs-search-input placeholder="Search SmallRye GraphQL 2.9.2" aria-label="Search SmallRye GraphQL documentation" autocomplete="off" spellcheck="false">
+    <button type="button" class="docs-search-close" data-docs-search-close>Esc</button>
+  </div>
+  <p class="docs-search-status" data-docs-search-status aria-live="polite"></p>
+  <ul class="docs-search-results" data-docs-search-results></ul>
+</dialog>
+
+  </main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-about">
+      <a class="footer-logo" href="/"><img src="/images/logo-dark.svg" alt="SmallRye" width="140" height="36" loading="lazy"></a>
+      <p>SmallRye is open source under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache Software License 2.0</a>.</p>
+      <p>This website is built with <a href="https://iamroq.dev/">Quarkus Roq</a>, hosted on <a href="https://pages.github.com/">GitHub Pages</a> and is completely open source. If you want to make it better, <a href="https://github.com/smallrye/smallrye.github.io">fork the website</a> and show us what you've got.</p>
+    </div>
+    <nav aria-label="Site">
+      <p class="footer-head">Navigation</p>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/docs/">Documentation</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Contribute and get help">
+      <p class="footer-head">Contribute</p>
+      <ul>
+        <li><a href="https://github.com/smallrye">GitHub</a></li>
+        <li><a href="https://twitter.com/smallrye_io">Follow us</a></li>
+      </ul>
+      <p class="footer-head">Get help</p>
+      <ul>
+        <li><a href="https://quarkusio.zulipchat.com">Chatroom</a></li>
+        <li><a href="https://groups.google.com/d/forum/smallrye">Google Groups</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="External links">
+      <p class="footer-head">External links</p>
+      <ul>
+        <li><a href="https://microprofile.io/">Eclipse MicroProfile</a></li>
+        <li><a href="https://github.com/eclipse?q=microprofile">Eclipse MicroProfile on GitHub</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <div class="container footer-bottom-bar">
+      <p><a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></p>
+      <p class="sponsor">A <a href="https://www.commonhaus.org/">Commonhaus Foundation</a> project <a href="https://www.commonhaus.org/"><img src="/assets/images/commonhaus_reversed.svg" alt="Commonhaus Foundation" width="200" height="21" loading="lazy"></a></p>
+      <p class="footer-trademark">Copyright &copy; SmallRye. For details on our trademarks, please visit our <a href="https://www.commonhaus.org/policies/trademark-policy/">Trademark Policy</a> and <a href="https://www.commonhaus.org/trademarks/">Trademark List</a>. Trademarks of third parties are owned by their respective holders and their mention here does not suggest any endorsement or association.</p>
+    </div>
+  </div>
+</footer>
+<!-- Light/dark switch. Hidden until the script wires it, so a no-JS visitor
+     never sees a dead button. Every site has it: keep it. -->
+<button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark theme" hidden>
+  <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
+  <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/></svg>
+</button>
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.querySelector('.theme-toggle');
+    if (!btn) return;
+    btn.hidden = false;
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    function isDark() { var t = root.getAttribute('data-theme'); return t ? t === 'dark' : mq.matches; }
+    function sync() {
+      btn.setAttribute('aria-pressed', isDark() ? 'true' : 'false');
+      btn.setAttribute('aria-label', isDark() ? 'Switch to light theme' : 'Switch to dark theme');
+    }
+    btn.addEventListener('click', function () {
+      var next = isDark() ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('site-theme', next); } catch (e) { /* not fatal */ }
+      sync();
+    });
+    mq.addEventListener('change', sync);
+    sync();
+  })();
+</script>
+</body>
+</html>

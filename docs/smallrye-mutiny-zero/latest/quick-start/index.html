@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://api.github.com; base-uri 'none'; object-src 'none'; form-action 'none'">
+
+  <!-- SEO TITLE -->
+  
+  <title>Quick start - SmallRye</title>
+  <meta property="og:title" content="Quick start" />
+  <meta name="twitter:title" content="Quick start">
+  <meta property="og:site_name" content="SmallRye">
+  <!-- SEO DESCRIPTION -->
+  <meta name="description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+  <meta property="og:description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile." />
+  <meta name="twitter:description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+
+  <!-- SEO URL -->
+  <link rel="canonical" href="https://smallrye.io/docs/smallrye-mutiny-zero/latest/quick-start/" />
+  <meta property="og:url" content="https://smallrye.io/docs/smallrye-mutiny-zero/latest/quick-start/" />
+  <meta name="twitter:url" content="https://smallrye.io/docs/smallrye-mutiny-zero/latest/quick-start/">
+
+  <!-- SEO TYPE -->
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2026-11-02T00:30:18.748579949Z[UTC]" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image" content="https://smallrye.io/images/rye-field-og.jpg">
+  <meta name="twitter:image" content="https://smallrye.io/images/rye-field-og.jpg">
+  <!-- SEO COLLECTION PAGES -->
+  <link rel="prev" href="https://smallrye.io/docs/smallrye-mutiny-zero/latest/vertx-based-reactive-streams-publishers/" />
+  <link rel="next" href="https://smallrye.io/docs/smallrye-mutiny-zero/latest/flow-adapters/" />
+  <!-- SEO TWITTER -->
+  <meta name="twitter:site" content="@smallrye_io" />
+  <meta name="twitter:creator" content="@smallrye_io" />
+  <!-- SEO LOCALE -->
+  <meta property="og:locale" content="en" />
+  <!-- SEO GENERATOR -->
+  <meta name="generator" content="Quarkus Roq v2.1.9" />
+
+<link rel="alternate" type="application/rss+xml" title="SmallRye" href="https://smallrye.io/rss.xml"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <script>
+    try {
+      var t = localStorage.getItem('site-theme');
+      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    } catch (e) { /* private mode: follow the OS preference */ }
+  </script>
+  <link rel="stylesheet" href="/css/main.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://smallrye.io/#organization",
+      "name": "SmallRye",
+      "url": "https://smallrye.io/",
+      "logo": "https://smallrye.io/images/logo.svg",
+      "description": "SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.",
+      "email": "smallrye@googlegroups.com",
+      "sameAs": [
+        "https://github.com/smallrye",
+        "https://twitter.com/smallrye_io",
+        "https://groups.google.com/d/forum/smallrye"
+      ],
+      "parentOrganization": { "@type": "Organization", "name": "Commonhaus Foundation", "url": "https://www.commonhaus.org/" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://smallrye.io/#website",
+      "name": "SmallRye",
+      "url": "https://smallrye.io/",
+      "publisher": { "@id": "https://smallrye.io/#organization" }
+    }
+  ]
+}
+</script>
+    <script type="module" src="/static/bundle/app-KFNV2DMD.js"></script>
+      <!-- no style found for key 'app' in Bundler mapping !-->
+<script>
+  try {
+    if (matchMedia('(min-width: 60rem)').matches && localStorage.getItem('docs-nav') === 'open') document.documentElement.classList.add('docs-nav-open');
+    if (localStorage.getItem('docs-toc') === 'closed') document.documentElement.classList.add('docs-toc-closed');
+  } catch (e) { /* storage blocked: closed */ }
+</script>
+<noscript><style>.docs-nav { display: block !important; } .docs-nav-button { display: none !important; }</style></noscript>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand" href="/">
+      <img class="logo-light" src="/images/logo.svg" alt="SmallRye" width="160" height="41">
+      <img class="logo-dark" src="/images/logo-dark.svg" alt="SmallRye" width="160" height="41">
+    </a>
+<div class="docs-brand">
+  <a class="docs-brand-project" href="/docs/smallrye-mutiny-zero/latest/"><span class="docs-brand-name">Mutiny Zero</span></a>
+  <!--docs-version--><label class="docs-version">
+    <span class="visually-hidden">Version</span>
+    <select data-docs-version data-current="latest" data-base="/docs/smallrye-mutiny-zero/">
+      
+      <option value="latest" selected>1.3.1 (latest)</option>
+      
+                  <optgroup label="1.x">
+      
+      <option value="1.2">1.2.1</option>
+      
+                  
+      
+      <option value="1.1">1.1.1</option>
+      
+                  
+      
+      <option value="1.0">1.0.0</option>
+      
+                  </optgroup><optgroup label="0.x">
+      
+      <option value="0.5">0.5.0</option>
+      
+                  
+      
+      <option value="0.4">0.4.3</option>
+      
+                  
+      
+      <option value="0.3">0.3.0</option>
+      
+                  
+      
+      <option value="0.2">0.2.0</option>
+      
+                  
+      
+      <option value="0.1">0.1.0</option>
+      
+      </optgroup>
+      <option value="main">main (snapshot)</option>
+      
+      
+    </select>
+  </label><!--/docs-version-->
+  <div class="docs-tools">
+    <button type="button" class="docs-search-button" data-docs-search-open aria-haspopup="dialog" aria-keyshortcuts="/">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <span>Search</span><kbd aria-hidden="true">/</kbd>
+    </button>
+    <a class="docs-github" href="https://github.com/smallrye/smallrye-mutiny-zero" title="smallrye/smallrye-mutiny-zero on GitHub" data-docs-github="smallrye/smallrye-mutiny-zero">
+      <svg aria-hidden="true" viewBox="0 0 16 16" width="26" height="26"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      <span class="docs-github-text">
+        <span class="docs-github-name">GitHub<span class="visually-hidden">: smallrye/smallrye-mutiny-zero</span></span>
+        <span class="docs-github-facts"><span title="Latest release">1.3.1</span><span data-docs-github-stars hidden></span><span data-docs-github-forks hidden></span></span>
+      </span>
+    </a>
+  </div>
+</div>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-input" aria-label="Toggle menu">
+    <label for="nav-toggle" class="nav-toggle"><span></span></label>
+    <nav class="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/docs/" aria-current="page">Documentation</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+  <main id="main">
+
+<div class="container docs-layout">
+  <aside class="docs-side">
+    <button type="button" class="docs-nav-button" aria-controls="docs-nav" aria-expanded="false" data-docs-nav-button>
+      <span class="docs-nav-icon" aria-hidden="true"></span><span class="docs-nav-label">Contents</span>
+    </button>
+    <nav id="docs-nav" class="docs-nav" aria-label="Mutiny Zero documentation">
+      <!--docs-version-->
+<ul>
+  <li><a href="/docs/smallrye-mutiny-zero/latest/">Overview</a></li>
+  <li><a href="/docs/smallrye-mutiny-zero/latest/quick-start/" aria-current="page">Quick start</a></li>
+  <li><a href="/docs/smallrye-mutiny-zero/latest/flow-adapters/">JDK Flow from/to Reactive Streams Adapters</a></li>
+  <li><a href="/docs/smallrye-mutiny-zero/latest/vertx-based-reactive-streams-publishers/">Vert.x-based Reactive Streams Publishers</a></li>
+</ul>
+      <!--/docs-version-->
+    </nav>
+  </aside>
+  <article class="docs-main prose" data-pagefind-body>
+    <!--docs-version-->
+    <span data-pagefind-filter="version:latest" hidden></span>
+    <p class="docs-release" data-pagefind-ignore>Version 1.3.1 (latest release), released <time datetime="2026-09-03">2026-09-03</time></p>
+    <!--/docs-version-->
+    <h1>Quick start</h1>
+<div class="sect1">
+<h2 id="getting-mutiny-zero"><a class="anchor" href="#getting-mutiny-zero"></a>Getting Mutiny Zero</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can get Mutiny Zero through the following Maven coordinates:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>groupId</code>: <code>io.smallrye.reactive</code></p>
+</li>
+<li>
+<p><code>artifactId</code>: <code>mutiny-zero</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Mutiny Zero exposes publishers (see <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/concurrent/Flow.html"><code>java.util.concurrent.Flow</code></a>).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="creating-publishers"><a class="anchor" href="#creating-publishers"></a>Creating publishers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Your main entry point in the Mutiny Zero API is the <code>mutiny.zero.ZeroPublisher</code> interface that exposes factory methods.</p>
+</div>
+<div class="sect2">
+<h3 id="creating-from-known-values"><a class="anchor" href="#creating-from-known-values"></a>Creating from known values</h3>
+<div class="paragraph">
+<p>If you already know the values to be emitted (or a failure), then you can use following factory methods:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package docsamples;
+
+import static mutiny.zero.ZeroPublisher.*;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.concurrent.Flow.Publisher;
+
+public class FromKnownValues {
+
+    public static void main(String[] args) {
+
+        // From values
+        Publisher&lt;Integer&gt; pub1 = fromItems(1, 2, 3);
+
+        // From an iterable
+        Publisher&lt;Integer&gt; pub2 = fromIterable(Arrays.asList(1, 2, 3));
+
+        // From a failure
+        Publisher&lt;?&gt; pub3 = fromFailure(new IOException("Broken pipe"));
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="creating-from-completionstage"><a class="anchor" href="#creating-from-completionstage"></a>Creating from <code>CompletionStage</code></h3>
+<div class="paragraph">
+<p><code>CompletionStage</code> is the Java SDK API for asynchronous operations that emit either a result or a failure.</p>
+</div>
+<div class="paragraph">
+<p>Mutiny Zero can create a <code>Publisher</code> from a <code>CompletionStage</code> that emits exactly 1 item or a failure, then a completion signal:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package docsamples;
+
+import static java.util.concurrent.CompletableFuture.supplyAsync;
+import static mutiny.zero.ZeroPublisher.fromCompletionStage;
+
+import java.util.concurrent.Flow;
+
+public class FromCompletionStage {
+
+    public static void main(String[] args) {
+
+        Flow.Publisher&lt;Long&gt; pun = fromCompletionStage(() -&gt; supplyAsync(() -&gt; 58L));
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="creating-using-the-general-purpose-tube-api"><a class="anchor" href="#creating-using-the-general-purpose-tube-api"></a>Creating using the general-purpose <code>Tube</code> API</h3>
+<div class="paragraph">
+<p>For all other cases you should use the <code>mutiny.zero.Tube</code> API.</p>
+</div>
+<div class="paragraph">
+<p>A <code>Tube</code> represents an object you can interact with to emit values, error and completion.
+It is aware of cancellation and items requests made by the subscriber.</p>
+</div>
+<div class="paragraph">
+<p>A <code>Tube</code> is a good abstraction if you want to pass events from an existing asynchronous I/O source as they arrive.
+Here is a not so fictional example where <code>SampleAsyncSource</code> (an asynchronous I/O API) has to be adapted to a <code>Publisher</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package docsamples;
+
+import static mutiny.zero.ZeroPublisher.create;
+
+import java.util.concurrent.Flow.Publisher;
+
+import mutiny.zero.BackpressureStrategy;
+import mutiny.zero.TubeConfiguration;
+
+public class FromTube {
+
+    public static void main(String[] args) {
+
+        SampleAsyncSource source = new SampleAsyncSource();
+
+        TubeConfiguration configuration = new TubeConfiguration()
+                .withBackpressureStrategy(BackpressureStrategy.BUFFER)
+                .withBufferSize(256);
+
+        Publisher&lt;String&gt; pub = create(configuration, tube -&gt; {
+
+            // Start
+            source.start();
+
+            // Allow items to be received
+            tube.whenRequested(n -&gt; source.resume());
+
+            // Termination cases
+            tube.whenCancelled(source::close);
+            tube.whenTerminates(() -&gt; System.out.println("Done"));
+
+            // Emit items, pause the source if need be
+            source.onItem(str -&gt; {
+                tube.send(str);
+                if (tube.outstandingRequests() == 0L) {
+                    source.pause();
+                }
+            });
+
+            // Error
+            source.onError(tube::fail);
+
+            // Completion
+            source.onEnd(tube::complete);
+
+        });
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Since <code>SampleAsyncSource</code> does not support reactive streams but can be paused and resumed, the <code>Tube</code> API is used not just to send items but also to control <code>SampleAsyncSource</code>.
+The <code>Tube</code> also has a buffer of 256 items in case of overflow to cope with the fact that pausing <code>SampleAsyncSource</code> may not be immediate.</p>
+</div>
+<div class="paragraph">
+<p>Several back-pressure strategies are offered by <code>Tube</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>buffer items (with or without a bound),</p>
+</li>
+<li>
+<p>drop items,</p>
+</li>
+<li>
+<p>signal an error,</p>
+</li>
+<li>
+<p>ignore back-pressure and still send items,</p>
+</li>
+<li>
+<p>keep only the last values in a fixed-size buffer.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><code>Tube</code> enforces the reactive streams protocol.
+For instance if you have several threads competing to send items, then items will still be emitted <em>serially</em> by one of the threads rather than concurrently.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="helpers"><a class="anchor" href="#helpers"></a>Helpers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Mutiny Zero offers a few helpers for commonly-needed tasks, but without the intention of becoming a full-fledge reactive programming API.</p>
+</div>
+<div class="paragraph">
+<p>Introducing new helpers will always be done carefully by observing real world implementation patterns.</p>
+</div>
+<div class="sect2">
+<h3 id="completionstage-helpers"><a class="anchor" href="#completionstage-helpers"></a><code>CompletionStage</code> helpers</h3>
+<div class="paragraph">
+<p>The <code>AsyncHelpers</code> class offers a few helpers to simplify developing against the <code>CompletionStage</code>, especially before Java 11.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>applyExceptionally</code> applies a function to map a failure <code>Throwable</code> to another <code>Throwable</code>.</p>
+</li>
+<li>
+<p><code>composeExceptionally</code> applies a function to compose a failure <code>Throwable</code> to another <code>CompletionStage</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="publisher-helpers"><a class="anchor" href="#publisher-helpers"></a><code>Publisher</code> helpers</h3>
+<div class="paragraph">
+<p>More often than not we need a little help when dealing with a <code>Publisher</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>collectToList</code> assembles all items from a <code>Publisher</code> to a <code>CompletionStage&lt;List&gt;</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>    <!--docs-version--><p class="docs-source" data-pagefind-ignore>
+    </p><!--/docs-version-->
+  </article>
+  <nav class="docs-toc" aria-label="On this page">
+    <details open data-docs-toc>
+      <summary class="toc-title">On this page</summary>
+      <nav class="roq-toc" aria-label="Table of contents">
+<ul>
+<li data-level="1"><a href="#getting-mutiny-zero">Getting Mutiny Zero</a></li>
+<li data-level="1"><a href="#creating-publishers">Creating publishers</a>
+<ul>
+<li data-level="2"><a href="#creating-from-known-values">Creating from known values</a></li>
+<li data-level="2"><a href="#creating-from-completionstage">Creating from CompletionStage</a></li>
+<li data-level="2"><a href="#creating-using-the-general-purpose-tube-api">Creating using the general-purpose Tube API</a></li>
+</ul>
+</li>
+<li data-level="1"><a href="#helpers">Helpers</a>
+<ul>
+<li data-level="2"><a href="#completionstage-helpers">CompletionStage helpers</a></li>
+<li data-level="2"><a href="#publisher-helpers">Publisher helpers</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+
+    </details>
+  </nav>
+</div>
+<dialog class="docs-search" data-docs-search aria-label="Search Mutiny Zero">
+  <div class="docs-search-bar" role="search">
+    <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <input type="search" data-docs-search-input placeholder="Search Mutiny Zero 1.3.1" aria-label="Search Mutiny Zero documentation" autocomplete="off" spellcheck="false">
+    <button type="button" class="docs-search-close" data-docs-search-close>Esc</button>
+  </div>
+  <p class="docs-search-status" data-docs-search-status aria-live="polite"></p>
+  <ul class="docs-search-results" data-docs-search-results></ul>
+</dialog>
+
+  </main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-about">
+      <a class="footer-logo" href="/"><img src="/images/logo-dark.svg" alt="SmallRye" width="140" height="36" loading="lazy"></a>
+      <p>SmallRye is open source under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache Software License 2.0</a>.</p>
+      <p>This website is built with <a href="https://iamroq.dev/">Quarkus Roq</a>, hosted on <a href="https://pages.github.com/">GitHub Pages</a> and is completely open source. If you want to make it better, <a href="https://github.com/smallrye/smallrye.github.io">fork the website</a> and show us what you've got.</p>
+    </div>
+    <nav aria-label="Site">
+      <p class="footer-head">Navigation</p>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/docs/">Documentation</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Contribute and get help">
+      <p class="footer-head">Contribute</p>
+      <ul>
+        <li><a href="https://github.com/smallrye">GitHub</a></li>
+        <li><a href="https://twitter.com/smallrye_io">Follow us</a></li>
+      </ul>
+      <p class="footer-head">Get help</p>
+      <ul>
+        <li><a href="https://quarkusio.zulipchat.com">Chatroom</a></li>
+        <li><a href="https://groups.google.com/d/forum/smallrye">Google Groups</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="External links">
+      <p class="footer-head">External links</p>
+      <ul>
+        <li><a href="https://microprofile.io/">Eclipse MicroProfile</a></li>
+        <li><a href="https://github.com/eclipse?q=microprofile">Eclipse MicroProfile on GitHub</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <div class="container footer-bottom-bar">
+      <p><a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></p>
+      <p class="sponsor">A <a href="https://www.commonhaus.org/">Commonhaus Foundation</a> project <a href="https://www.commonhaus.org/"><img src="/assets/images/commonhaus_reversed.svg" alt="Commonhaus Foundation" width="200" height="21" loading="lazy"></a></p>
+      <p class="footer-trademark">Copyright &copy; SmallRye. For details on our trademarks, please visit our <a href="https://www.commonhaus.org/policies/trademark-policy/">Trademark Policy</a> and <a href="https://www.commonhaus.org/trademarks/">Trademark List</a>. Trademarks of third parties are owned by their respective holders and their mention here does not suggest any endorsement or association.</p>
+    </div>
+  </div>
+</footer>
+<!-- Light/dark switch. Hidden until the script wires it, so a no-JS visitor
+     never sees a dead button. Every site has it: keep it. -->
+<button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark theme" hidden>
+  <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
+  <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/></svg>
+</button>
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.querySelector('.theme-toggle');
+    if (!btn) return;
+    btn.hidden = false;
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    function isDark() { var t = root.getAttribute('data-theme'); return t ? t === 'dark' : mq.matches; }
+    function sync() {
+      btn.setAttribute('aria-pressed', isDark() ? 'true' : 'false');
+      btn.setAttribute('aria-label', isDark() ? 'Switch to light theme' : 'Switch to dark theme');
+    }
+    btn.addEventListener('click', function () {
+      var next = isDark() ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('site-theme', next); } catch (e) { /* not fatal */ }
+      sync();
+    });
+    mq.addEventListener('change', sync);
+    sync();
+  })();
+</script>
+</body>
+</html>

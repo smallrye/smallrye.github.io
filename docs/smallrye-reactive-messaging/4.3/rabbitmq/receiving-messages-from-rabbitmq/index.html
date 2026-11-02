@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://api.github.com; base-uri 'none'; object-src 'none'; form-action 'none'">
+
+  <!-- SEO TITLE -->
+  
+  <title>Receiving messages from RabbitMQ - SmallRye</title>
+  <meta property="og:title" content="Receiving messages from RabbitMQ" />
+  <meta name="twitter:title" content="Receiving messages from RabbitMQ">
+  <meta property="og:site_name" content="SmallRye">
+  <!-- SEO DESCRIPTION -->
+  <meta name="description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+  <meta property="og:description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile." />
+  <meta name="twitter:description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+
+  <!-- SEO URL -->
+  <link rel="canonical" href="https://smallrye.io/docs/smallrye-reactive-messaging/4.3/rabbitmq/receiving-messages-from-rabbitmq/" />
+  <meta property="og:url" content="https://smallrye.io/docs/smallrye-reactive-messaging/4.3/rabbitmq/receiving-messages-from-rabbitmq/" />
+  <meta name="twitter:url" content="https://smallrye.io/docs/smallrye-reactive-messaging/4.3/rabbitmq/receiving-messages-from-rabbitmq/">
+
+  <!-- SEO TYPE -->
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2026-11-02T00:30:18.780695167Z[UTC]" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image" content="https://smallrye.io/images/rye-field-og.jpg">
+  <meta name="twitter:image" content="https://smallrye.io/images/rye-field-og.jpg">
+  <!-- SEO COLLECTION PAGES -->
+  <!-- SEO TWITTER -->
+  <meta name="twitter:site" content="@smallrye_io" />
+  <meta name="twitter:creator" content="@smallrye_io" />
+  <!-- SEO LOCALE -->
+  <meta property="og:locale" content="en" />
+  <!-- SEO GENERATOR -->
+  <meta name="generator" content="Quarkus Roq v2.1.9" />
+
+<link rel="alternate" type="application/rss+xml" title="SmallRye" href="https://smallrye.io/rss.xml"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <script>
+    try {
+      var t = localStorage.getItem('site-theme');
+      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    } catch (e) { /* private mode: follow the OS preference */ }
+  </script>
+  <link rel="stylesheet" href="/css/main.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://smallrye.io/#organization",
+      "name": "SmallRye",
+      "url": "https://smallrye.io/",
+      "logo": "https://smallrye.io/images/logo.svg",
+      "description": "SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.",
+      "email": "smallrye@googlegroups.com",
+      "sameAs": [
+        "https://github.com/smallrye",
+        "https://twitter.com/smallrye_io",
+        "https://groups.google.com/d/forum/smallrye"
+      ],
+      "parentOrganization": { "@type": "Organization", "name": "Commonhaus Foundation", "url": "https://www.commonhaus.org/" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://smallrye.io/#website",
+      "name": "SmallRye",
+      "url": "https://smallrye.io/",
+      "publisher": { "@id": "https://smallrye.io/#organization" }
+    }
+  ]
+}
+</script>
+    <script type="module" src="/static/bundle/app-KFNV2DMD.js"></script>
+      <!-- no style found for key 'app' in Bundler mapping !-->
+<script>
+  try {
+    if (matchMedia('(min-width: 60rem)').matches && localStorage.getItem('docs-nav') === 'open') document.documentElement.classList.add('docs-nav-open');
+    if (localStorage.getItem('docs-toc') === 'closed') document.documentElement.classList.add('docs-toc-closed');
+  } catch (e) { /* storage blocked: closed */ }
+</script>
+<noscript><style>.docs-nav { display: block !important; } .docs-nav-button { display: none !important; }</style></noscript>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand" href="/">
+      <img class="logo-light" src="/images/logo.svg" alt="SmallRye" width="160" height="41">
+      <img class="logo-dark" src="/images/logo-dark.svg" alt="SmallRye" width="160" height="41">
+    </a>
+<div class="docs-brand">
+  <a class="docs-brand-project" href="/docs/smallrye-reactive-messaging/4.3/"><span class="project-logo" style="--logo: url('/images/projects/smallrye-reactive-messaging.png')" aria-hidden="true"></span><span class="docs-brand-name">Reactive Messaging</span></a>
+  <!--docs-version--><label class="docs-version">
+    <span class="visually-hidden">Version</span>
+    <select data-docs-version data-current="4.3" data-base="/docs/smallrye-reactive-messaging/">
+      
+      <option value="latest">5.0.0-RC2 (latest)</option>
+      
+                  <optgroup label="4.x">
+      
+      <option value="4.37">4.37.1</option>
+      
+                  
+      
+      <option value="4.36">4.36.0</option>
+      
+                  
+      
+      <option value="4.35">4.35.0</option>
+      
+                  
+      
+      <option value="4.34">4.34.0</option>
+      
+                  
+      
+      <option value="4.33">4.33.1</option>
+      
+                  
+      
+      <option value="4.32">4.32.1</option>
+      
+                  
+      
+      <option value="4.31">4.31.0</option>
+      
+                  
+      
+      <option value="4.30">4.30.0</option>
+      
+                  
+      
+      <option value="4.29">4.29.0</option>
+      
+                  
+      
+      <option value="4.28">4.28.0</option>
+      
+                  
+      
+      <option value="4.27">4.27.0</option>
+      
+                  
+      
+      <option value="4.26">4.26.0</option>
+      
+                  
+      
+      <option value="4.25">4.25.0</option>
+      
+                  
+      
+      <option value="4.24">4.24.1</option>
+      
+                  
+      
+      <option value="4.23">4.23.0</option>
+      
+                  
+      
+      <option value="4.22">4.22.0</option>
+      
+                  
+      
+      <option value="4.21">4.21.0</option>
+      
+                  
+      
+      <option value="4.20">4.20.0</option>
+      
+                  
+      
+      <option value="4.19">4.19.0</option>
+      
+                  
+      
+      <option value="4.18">4.18.1</option>
+      
+                  
+      
+      <option value="4.17">4.17.0</option>
+      
+                  
+      
+      <option value="4.16">4.16.2</option>
+      
+                  
+      
+      <option value="4.15">4.15.0</option>
+      
+                  
+      
+      <option value="4.14">4.14.0</option>
+      
+                  
+      
+      <option value="4.13">4.13.0</option>
+      
+                  
+      
+      <option value="4.12">4.12.0</option>
+      
+                  
+      
+      <option value="4.11">4.11.0</option>
+      
+                  
+      
+      <option value="4.10">4.10.2</option>
+      
+                  
+      
+      <option value="4.9">4.9.0</option>
+      
+                  
+      
+      <option value="4.8">4.8.0</option>
+      
+                  
+      
+      <option value="4.7">4.7.0</option>
+      
+                  
+      
+      <option value="4.6">4.6.1</option>
+      
+                  
+      
+      <option value="4.5">4.5.0</option>
+      
+                  
+      
+      <option value="4.4">4.4.0</option>
+      
+                  
+      
+      <option value="4.3" selected>4.3.0</option>
+      
+                  
+      
+      <option value="4.2">4.2.0</option>
+      
+                  
+      
+      <option value="4.1">4.1.1</option>
+      
+                  
+      
+      <option value="4.0">4.0.0</option>
+      
+                  </optgroup><optgroup label="3.x">
+      
+      <option value="3">3.25.0</option>
+      
+      </optgroup>
+      <option value="main">main (snapshot)</option>
+      
+      
+    </select>
+  </label><!--/docs-version-->
+  <div class="docs-tools">
+    <button type="button" class="docs-search-button" data-docs-search-open aria-haspopup="dialog" aria-keyshortcuts="/">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <span>Search</span><kbd aria-hidden="true">/</kbd>
+    </button>
+    <a class="docs-github" href="https://github.com/smallrye/smallrye-reactive-messaging" title="smallrye/smallrye-reactive-messaging on GitHub" data-docs-github="smallrye/smallrye-reactive-messaging">
+      <svg aria-hidden="true" viewBox="0 0 16 16" width="26" height="26"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      <span class="docs-github-text">
+        <span class="docs-github-name">GitHub<span class="visually-hidden">: smallrye/smallrye-reactive-messaging</span></span>
+        <span class="docs-github-facts"><span title="Latest release">5.0.0-RC2</span><span data-docs-github-stars hidden></span><span data-docs-github-forks hidden></span></span>
+      </span>
+    </a>
+  </div>
+</div>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-input" aria-label="Toggle menu">
+    <label for="nav-toggle" class="nav-toggle"><span></span></label>
+    <nav class="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/docs/" aria-current="page">Documentation</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+  <main id="main">
+
+<div class="container docs-layout">
+  <aside class="docs-side">
+    <button type="button" class="docs-nav-button" aria-controls="docs-nav" aria-expanded="false" data-docs-nav-button>
+      <span class="docs-nav-icon" aria-hidden="true"></span><span class="docs-nav-label">Contents</span>
+    </button>
+    <nav id="docs-nav" class="docs-nav" aria-label="SmallRye Reactive Messaging documentation">
+      <!--docs-version-->
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/">Home</a></li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Core</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/getting-started/">Getting Started</a></li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Concepts</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/concepts/concepts/">Introduction</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/concepts/model/">Development Model</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/concepts/emitter/">Emitters and Channel</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/concepts/connectors/">Connectors</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/concepts/acknowledgement/">Acknowledgement</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/concepts/blocking/">Blocking Processing</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/concepts/signatures/">Method Signatures</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/concepts/skipping/">Skipping Messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/concepts/converters/">Message Converters</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/concepts/decorators/">Channel Decorators</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/concepts/broadcast/">Broadcast</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/concepts/merge/">Merge channels</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/concepts/incomings/">@Incomings</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/concepts/testing/">Testing</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/concepts/logging/">Logging</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/concepts/advanced-config/">Advanced Configuration</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/concepts/message-context/">Message Context</a></li>
+</ul>
+    </details>
+  </li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Kafka</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/kafka/kafka/">Apache Kafka Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/kafka/receiving-kafka-records/">Receiving records</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/kafka/writing-kafka-records/">Writing records</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/kafka/health/">Health Checks</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/kafka/avro-configuration/">Using Avro</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/kafka/protobuf-configuration/">Using Protobuf</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/kafka/consumer-rebalance-listener/">Rebalance Listeners</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/kafka/kerberos/">Kerberos authentication</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/kafka/client-service/">Accessing the client</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/kafka/default-configuration/">Customizing Default Kafka Configuration</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/kafka/test-companion/">Test Companion for Kafka</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/kafka/transactions/">Kafka Transactions and Exactly-Once Processing</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">AMQP 1.0</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/amqp/amqp/">AMQP 1.0 Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/amqp/receiving-amqp-messages/">Receiving messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/amqp/sending-amqp-messages/">Sending messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/amqp/health/">Health Checks</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/amqp/client-customization/">Client Customization</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/amqp/rabbitmq/">Using RabbitMQ</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">RabbitMQ</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/rabbitmq/rabbitmq/">RabbitMQ Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/rabbitmq/receiving-messages-from-rabbitmq/" aria-current="page">Receiving messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/rabbitmq/sending-messages-to-rabbitmq/">Sending messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/rabbitmq/rabbitmq-health/">Health Checks</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/rabbitmq/rabbitmq-client-customization/">Client Customization</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/rabbitmq/rabbitmq-cloud/">Connecting to managed instances</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">JMS</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/jms/jms/">The JMS connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/jms/receiving-jms-messages/">Receiving JMS messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/jms/sending-jms-messages/">Sending JMS messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/jms/advanced-jms/">Advanced configuration</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">MQTT</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/mqtt/mqtt/">MQTT Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/mqtt/receiving-mqtt-messages/">Receiving MQTT messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/mqtt/sending-messages-to-mqtt/">Sending MQTT messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.3/mqtt/client-customization/">Customizing the MQTT client</a></li>
+</ul>
+    </details>
+  </li>
+</ul>
+      <!--/docs-version-->
+    </nav>
+  </aside>
+  <article class="docs-main prose" data-pagefind-body>
+    <!--docs-version-->
+    <span data-pagefind-filter="version:4.3" hidden></span>
+    <p class="docs-notice" data-pagefind-ignore>This is the documentation of SmallRye Reactive Messaging 4.3.0, released <time datetime="2023-02-07">2023-02-07</time>. It is not the latest release: <a href="/docs/smallrye-reactive-messaging/latest/" data-docs-same-page>read the documentation of 5.0.0-RC2</a>.</p>
+    <!--/docs-version-->
+    <h1>Receiving messages from RabbitMQ</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The RabbitMQ connector lets you retrieve messages from a <a href="https://www.rabbitmq.com/">RabbitMQ
+broker</a>. The RabbitMQ connector retrieves
+<em>RabbitMQ Messages</em> and maps each of them into Reactive Messaging
+<code>Messages</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>In this context, the reactive messaging concept of a <em>Channel</em> is
+realised as a <a href="https://www.rabbitmq.com/queues.html">RabbitMQ Queue</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="example"><a class="anchor" href="#example"></a>Example</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let’s imagine you have a RabbitMQ broker running, and accessible using
+the <code>rabbitmq:5672</code> address (by default it would use <code>localhost:5672</code>).
+Configure your application to receive RabbitMQ Messages on the <code>prices</code>
+channel as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">rabbitmq-host=rabbitmq  # <b class="conum">(1)</b>
+rabbitmq-port=5672      # <b class="conum">(2)</b>
+rabbitmq-username=my-username   # <b class="conum">(3)</b>
+rabbitmq-password=my-password   # <b class="conum">(4)</b>
+
+mp.messaging.incoming.prices.connector=smallrye-rabbitmq # <b class="conum">(5)</b>
+mp.messaging.incoming.prices.queue.name=my-queue         # <b class="conum">(6)</b>
+mp.messaging.incoming.prices.routing-keys=urgent         # <b class="conum">(7)</b></code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Configures the broker/router host name. You can do it per channel
+(using the <code>host</code> attribute) or globally using <code>rabbitmq-host</code>.</p>
+</li>
+<li>
+<p>Configures the broker/router port. You can do it per channel (using
+the <code>port</code> attribute) or globally using <code>rabbitmq-port</code>. The default
+is 5672.</p>
+</li>
+<li>
+<p>Configures the broker/router username if required. You can do it per
+channel (using the <code>username</code> attribute) or globally using
+<code>rabbitmq-username</code>.</p>
+</li>
+<li>
+<p>Configures the broker/router password if required. You can do it per
+channel (using the <code>password</code> attribute) or globally using
+<code>rabbitmq-password</code>.</p>
+</li>
+<li>
+<p>Instructs the <code>prices</code> channel to be managed by the RabbitMQ
+connector.</p>
+</li>
+<li>
+<p>Configures the RabbitMQ queue to read messages from.</p>
+</li>
+<li>
+<p>Configures the binding between the RabbitMQ exchange and the
+RabbitMQ queue using a routing key. The default is <code>#</code> (all messages
+will be forwarded from the exchange to the queue) but in general
+this can be a comma-separated list of one or more keys.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Then, your application receives <code>Message&lt;String&gt;</code>. You can consume the
+payload directly:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package rabbitmq.inbound;
+
+import jakarta.enterprise.context.ApplicationScoped;
+
+import org.eclipse.microprofile.reactive.messaging.Incoming;
+
+@ApplicationScoped
+public class RabbitMQPriceConsumer {
+
+    @Incoming("prices")
+    public void consume(String price) {
+        // process your price.
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or, you can retrieve the <code>Message&lt;String&gt;</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package rabbitmq.inbound;
+
+import java.util.concurrent.CompletionStage;
+
+import jakarta.enterprise.context.ApplicationScoped;
+
+import org.eclipse.microprofile.reactive.messaging.Incoming;
+import org.eclipse.microprofile.reactive.messaging.Message;
+
+@ApplicationScoped
+public class RabbitMQPriceMessageConsumer {
+
+    @Incoming("prices")
+    public CompletionStage&lt;Void&gt; consume(Message&lt;String&gt; price) {
+        // process your price.
+
+        // Acknowledge the incoming message, marking the RabbitMQ message as `accepted`.
+        return price.ack();
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Whether you need to explicitly acknowledge the message depends on the
+<code>auto-acknowledgement</code> channel setting; if that is set to <code>true</code> then
+your message will be automatically acknowledged on receipt.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="deserialization"><a class="anchor" href="#deserialization"></a>Deserialization</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The connector converts incoming RabbitMQ Messages into Reactive
+Messaging <code>Message&lt;T&gt;</code> instances. The payload type <code>T</code> depends on the
+value of the RabbitMQ received message Envelope <code>content_type</code> and
+<code>content_encoding</code> properties.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 7%;">
+<col style="width: 6%;">
+<col style="width: 87%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">content_encoding</th>
+<th class="tableblock halign-left valign-top">content_type</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Value present</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>n/a</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>byte[]</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>No value</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>text/plain</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>No value</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>application/json</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a JSON element which can be a <a href="https://vertx.io/docs/apidocs/io/vertx/core/json/JsonArray.html"><code>JsonArray</code></a>, <a href="https://vertx.io/docs/apidocs/io/vertx/core/json/JsonObject.html"><code>JsonObject</code></a>, <code>String</code>, &#8230;&#8203; if the buffer contains an array, object, string,&#8230;&#8203;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>No value</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Anything else</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>byte[]</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>If you send objects with this RabbitMQ connector (outbound connector),
+they are encoded as JSON and sent with <code>content_type</code> set to
+<code>application/json</code>. You can receive this payload using (Vert.x) JSON
+Objects, and then map it to the object class you want:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@ApplicationScoped
+public static class Generator {
+
+    @Outgoing("to-rabbitmq")
+    public Multi&lt;Price&gt; prices() {             // <b class="conum">(1)</b>
+        AtomicInteger count = new AtomicInteger();
+        return Multi.createFrom().ticks().every(Duration.ofMillis(1000))
+                .map(l -&gt; new Price().setPrice(count.incrementAndGet()))
+                .onOverflow().drop();
+    }
+
+}
+
+@ApplicationScoped
+public static class Consumer {
+
+    List&lt;Price&gt; prices = new CopyOnWriteArrayList&lt;&gt;();
+
+    @Incoming("from-rabbitmq")
+    public void consume(JsonObject p) {      // <b class="conum">(2)</b>
+        Price price = p.mapTo(Price.class);  // <b class="conum">(3)</b>
+        prices.add(price);
+    }
+
+    public List&lt;Price&gt; list() {
+        return prices;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The <code>Price</code> instances are automatically encoded to JSON by the
+connector</p>
+</li>
+<li>
+<p>You can receive it using a <code>JsonObject</code></p>
+</li>
+<li>
+<p>Then, you can reconstruct the instance using the <code>mapTo</code> method</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="inbound-metadata"><a class="anchor" href="#inbound-metadata"></a>Inbound Metadata</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Messages coming from RabbitMQ contain an instance of <a href="https://javadoc.io/doc/io.smallrye.reactive/smallrye-reactive-messaging-rabbitmq/4.3.0/io/smallrye/reactive/messaging/rabbitmq/IncomingRabbitMQMetadata.html"><code>IncomingRabbitMQMetadata</code></a>
+in the metadata.</p>
+</div>
+<div class="paragraph">
+<p>RabbitMQ message headers can be accessed from the metadata either by
+calling <code>getHeader(String header, Class&lt;T&gt; type)</code> to retrieve a single
+header value. or <code>getHeaders()</code> to get a map of all header values.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">final Optional&lt;IncomingRabbitMQMetadata&gt; metadata = incomingMessage.getMetadata(IncomingRabbitMQMetadata.class);
+metadata.ifPresent(meta -&gt; {
+    final Optional&lt;String&gt; contentEncoding = meta.getContentEncoding();
+    final Optional&lt;String&gt; contentType = meta.getContentType();
+    final Optional&lt;String&gt; correlationId = meta.getCorrelationId();
+    final Optional&lt;ZonedDateTime&gt; timestamp = meta.getTimestamp(ZoneId.systemDefault());
+    final Optional&lt;Integer&gt; priority = meta.getPriority();
+    final Optional&lt;String&gt; replyTo = meta.getReplyTo();
+    final Optional&lt;String&gt; userId = meta.getUserId();
+
+    // Access a single String-valued header
+    final Optional&lt;String&gt; stringHeader = meta.getHeader("my-header", String.class);
+
+    // Access all headers
+    final Map&lt;String, Object&gt; headers = meta.getHeaders();
+    // ...
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The type <code>&lt;T&gt;</code> of the header value depends on the RabbitMQ type used for
+the header:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">RabbitMQ Header Type</th>
+<th class="tableblock halign-left valign-top">T</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.util.List</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="acknowledgement"><a class="anchor" href="#acknowledgement"></a>Acknowledgement</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When a Reactive Messaging Message associated with a RabbitMQ Message is
+acknowledged, it informs the broker that the message has been
+<em>accepted</em>.</p>
+</div>
+<div class="paragraph">
+<p>Whether you need to explicitly acknowledge the message depends on the
+<code>auto-acknowledgement</code> setting for the channel; if that is set to <code>true</code>
+then your message will be automatically acknowledged on receipt.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="failure-management"><a class="anchor" href="#failure-management"></a>Failure Management</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If a message produced from a RabbitMQ message is <em>nacked</em>, a failure
+strategy is applied. The RabbitMQ connector supports three strategies,
+controlled by the <code>failure-strategy</code> channel setting:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>fail</code> - fail the application; no more RabbitMQ messages will be
+processed. The RabbitMQ message is marked as rejected.</p>
+</li>
+<li>
+<p><code>accept</code> - this strategy marks the RabbitMQ message as accepted. The
+processing continues ignoring the failure.</p>
+</li>
+<li>
+<p><code>reject</code> - this strategy marks the RabbitMQ message as rejected
+(default). The processing continues with the next message.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuration-reference"><a class="anchor" href="#configuration-reference"></a>Configuration Reference</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute (<em>alias</em>)</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Type</th>
+<th class="tableblock halign-center valign-top">Mandatory</th>
+<th class="tableblock halign-left valign-top">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>auto-acknowledgement</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the received RabbitMQ messages must be acknowledged when received; if true then delivery constitutes acknowledgement</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>auto-bind-dlq</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to automatically declare the DLQ and bind it to the binder DLX</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>automatic-recovery-enabled</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether automatic connection recovery is enabled</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>automatic-recovery-on-initial-connection</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether automatic recovery on initial connections is enabled</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>broadcast</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the received RabbitMQ messages must be dispatched to multiple <em>subscribers</em></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>client-options-name</em> <em>(rabbitmq-client-options-name)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the RabbitMQ Client Option bean used to customize the RabbitMQ client configuration</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>connection-count</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of RabbitMQ connections to create for consuming from this queue. This might be necessary to consume from a sharded queue with a single client.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>connection-timeout</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The TCP connection timeout (ms); 0 is interpreted as no timeout</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>60000</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>content-type-override</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Override the content_type attribute of the incoming message, should be a valid MINE type</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>credentials-provider-name</em> <em>(rabbitmq-credentials-provider-name)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the RabbitMQ Credentials Provider bean used to provide dynamic credentials to the RabbitMQ client</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>dead-letter-exchange</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A DLX to assign to the queue. Relevant only if auto-bind-dlq is true</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DLX</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>dead-letter-exchange-type</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The type of the DLX to assign to the queue. Relevant only if auto-bind-dlq is true</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>direct</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>dead-letter-queue-mode</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If automatically declare DLQ, we can choose different modes of DLQ [lazy, default]</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>dead-letter-queue-name</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the DLQ; if not supplied will default to the queue name with '.dlq' appended</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>dead-letter-queue-type</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If automatically declare DLQ, we can choose different types of DLQ [quorum, classic, stream]</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>dead-letter-routing-key</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A dead letter routing key to assign to the queue; if not supplied will default to the queue name</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>dlx.declare</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to declare the dead letter exchange binding. Relevant only if auto-bind-dlq is true; set to false if these are expected to be set up independently</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>exchange.auto-delete</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the exchange should be deleted after use</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>exchange.declare</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to declare the exchange; set to false if the exchange is expected to be set up independently</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>exchange.durable</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the exchange is durable</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>exchange.name</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The exchange that messages are published to or consumed from. If not set, the channel name is used. If set to "", the default exchange is used.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>exchange.type</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The exchange type: direct, fanout, headers or topic (default)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>topic</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>failure-strategy</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The failure strategy to apply when a RabbitMQ message is nacked. Accepted values are <code>fail</code>, <code>accept</code>, <code>reject</code> (default)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>reject</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>handshake-timeout</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The AMQP 0-9-1 protocol handshake timeout (ms)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>10000</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>host</em> <em>(rabbitmq-host)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The broker hostname</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>localhost</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>include-properties</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to include properties when a broker message is passed on the event bus</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>keep-most-recent</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to discard old messages instead of recent ones</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>max-incoming-internal-queue-size</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The maximum size of the incoming internal queue</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>500000</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>max-outstanding-messages</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The maximum number of outstanding/unacknowledged messages being processed by the connector at a time; must be a positive number</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>network-recovery-interval</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How long (ms) will automatic recovery wait before attempting to reconnect</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>5000</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>password</em> <em>(rabbitmq-password)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The password used to authenticate to the broker</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>port</em> <em>(rabbitmq-port)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The broker port</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>5672</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>queue.auto-delete</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the queue should be deleted after use</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>queue.declare</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to declare the queue and binding; set to false if these are expected to be set up independently</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>queue.durable</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the queue is durable</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>queue.exclusive</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the queue is for exclusive use</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>queue.name</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The queue from which messages are consumed.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>queue.single-active-consumer</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If set to true, only one consumer can actively consume messages</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>queue.ttl</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If specified, the time (ms) for which a message can remain in the queue undelivered before it is dead</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">long</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>queue.x-max-priority</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Define priority level queue consumer</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>queue.x-queue-mode</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If automatically declare queue, we can choose different modes of queue [lazy, default]</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>queue.x-queue-type</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If automatically declare queue, we can choose different types of queue [quorum, classic, stream]</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>reconnect-attempts</em> <em>(rabbitmq-reconnect-attempts)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of reconnection attempts</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>100</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>reconnect-interval</em> <em>(rabbitmq-reconnect-interval)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The interval (in seconds) between two reconnection attempts</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>10</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>requested-channel-max</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The initially requested maximum channel number</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>2047</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>requested-heartbeat</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The initially requested heartbeat interval (seconds), zero for none</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>60</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>routing-keys</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A comma-separated list of routing keys to bind the queue to the exchange</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>#</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>ssl</em> <em>(rabbitmq-ssl)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether or not the connection should use SSL</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>tracing.attribute-headers</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A comma-separated list of headers that should be recorded as span attributes. Relevant only if tracing.enabled=true</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">``</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>tracing.enabled</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether tracing is enabled (default) or disabled</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>trust-all</em> <em>(rabbitmq-trust-all)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to skip trust certificate verification</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>trust-store-password</em> <em>(rabbitmq-trust-store-password)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The password of the JKS trust store</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>trust-store-path</em> <em>(rabbitmq-trust-store-path)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The path to a JKS trust store</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>use-nio</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether usage of NIO Sockets is enabled</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>user</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The user name to use when connecting to the broker</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>guest</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>username</em> <em>(rabbitmq-username)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The username used to authenticate to the broker</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>virtual-host</em> <em>(rabbitmq-virtual-host)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The virtual host to use when connecting to the broker</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>To use an existing <em>queue</em>, you need to configure the <code>queue.name</code>
+attribute.</p>
+</div>
+<div class="paragraph">
+<p>For example, if you have a RabbitMQ broker already configured with a
+queue called <code>peopleQueue</code> that you wish to read messages from, you need
+the following configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">mp.messaging.incoming.people.connector=smallrye-rabbitmq
+mp.messaging.incoming.people.queue.name=peopleQueue</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want RabbitMQ to create the queue for you but bind it to an
+existing topic exchange <code>people</code>, you need the following configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">mp.messaging.incoming.people.connector=smallrye-rabbitmq
+mp.messaging.incoming.people.queue.name=peopleQueue
+mp.messaging.incoming.people.queue.declare=true</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>In the above the channel name <code>people</code> is implicitly assumed to be the
+name of the exchange; if this is not the case you would need to name the
+exchange explicitly using the <code>exchange.name</code> property.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The connector supports RabbitMQ&#8217;s "Server-named Queues" feature to create
+an exclusive, auto-deleting, non-durable and randomly named queue. To
+enable this feature you set the queue name to exactly <code>(server.auto)</code>.
+Using this name not only enables the server named queue feature but also
+automatically makes ths queue exclusive, auto-deleting, and non-durable;
+therefore ignoring any values provided for the <code>exclusive</code>, <code>auto-delete</code>
+and <code>durable</code> options.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If you want RabbitMQ to create the <code>people</code> exchange, queue and binding,
+you need the following configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">mp.messaging.incoming.people.connector=smallrye-rabbitmq
+mp.messaging.incoming.people.exchange.declare=true
+mp.messaging.incoming.people.queue.name=peopleQueue
+mp.messaging.incoming.people.queue.declare=true
+mp.messaging.incoming.people.queue.routing-keys=tall,short</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the above we have used an explicit list of routing keys rather than
+the default (<code>#</code>). Each component of the list creates a separate binding
+between the queue and the exchange, so in the case above we would have
+two bindings; one based on a routing key of <code>tall</code>, the other based on
+one of <code>short</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The default value of <code>routing-keys</code> is <code>#</code> (indicating a match against
+all possible routing keys) which is only appropriate for <em>topic</em>
+Exchanges. If you are using other types of exchange and/or need to
+declare queue bindings, you’ll need to supply a valid value for the
+exchange in question.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>    <!--docs-version--><p class="docs-source" data-pagefind-ignore>
+    </p><!--/docs-version-->
+  </article>
+  <nav class="docs-toc" aria-label="On this page">
+    <details open data-docs-toc>
+      <summary class="toc-title">On this page</summary>
+      <nav class="roq-toc" aria-label="Table of contents">
+<ul>
+<li data-level="1"><a href="#example">Example</a></li>
+<li data-level="1"><a href="#deserialization">Deserialization</a></li>
+<li data-level="1"><a href="#inbound-metadata">Inbound Metadata</a></li>
+<li data-level="1"><a href="#acknowledgement">Acknowledgement</a></li>
+<li data-level="1"><a href="#failure-management">Failure Management</a></li>
+<li data-level="1"><a href="#configuration-reference">Configuration Reference</a></li>
+</ul>
+</nav>
+
+    </details>
+  </nav>
+</div>
+<dialog class="docs-search" data-docs-search aria-label="Search SmallRye Reactive Messaging">
+  <div class="docs-search-bar" role="search">
+    <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <input type="search" data-docs-search-input placeholder="Search SmallRye Reactive Messaging 4.5.0" aria-label="Search SmallRye Reactive Messaging documentation" autocomplete="off" spellcheck="false">
+    <button type="button" class="docs-search-close" data-docs-search-close>Esc</button>
+  </div>
+  <p class="docs-search-status" data-docs-search-status aria-live="polite"></p>
+  <ul class="docs-search-results" data-docs-search-results></ul>
+</dialog>
+
+  </main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-about">
+      <a class="footer-logo" href="/"><img src="/images/logo-dark.svg" alt="SmallRye" width="140" height="36" loading="lazy"></a>
+      <p>SmallRye is open source under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache Software License 2.0</a>.</p>
+      <p>This website is built with <a href="https://iamroq.dev/">Quarkus Roq</a>, hosted on <a href="https://pages.github.com/">GitHub Pages</a> and is completely open source. If you want to make it better, <a href="https://github.com/smallrye/smallrye.github.io">fork the website</a> and show us what you've got.</p>
+    </div>
+    <nav aria-label="Site">
+      <p class="footer-head">Navigation</p>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/docs/">Documentation</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Contribute and get help">
+      <p class="footer-head">Contribute</p>
+      <ul>
+        <li><a href="https://github.com/smallrye">GitHub</a></li>
+        <li><a href="https://twitter.com/smallrye_io">Follow us</a></li>
+      </ul>
+      <p class="footer-head">Get help</p>
+      <ul>
+        <li><a href="https://quarkusio.zulipchat.com">Chatroom</a></li>
+        <li><a href="https://groups.google.com/d/forum/smallrye">Google Groups</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="External links">
+      <p class="footer-head">External links</p>
+      <ul>
+        <li><a href="https://microprofile.io/">Eclipse MicroProfile</a></li>
+        <li><a href="https://github.com/eclipse?q=microprofile">Eclipse MicroProfile on GitHub</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <div class="container footer-bottom-bar">
+      <p><a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></p>
+      <p class="sponsor">A <a href="https://www.commonhaus.org/">Commonhaus Foundation</a> project <a href="https://www.commonhaus.org/"><img src="/assets/images/commonhaus_reversed.svg" alt="Commonhaus Foundation" width="200" height="21" loading="lazy"></a></p>
+      <p class="footer-trademark">Copyright &copy; SmallRye. For details on our trademarks, please visit our <a href="https://www.commonhaus.org/policies/trademark-policy/">Trademark Policy</a> and <a href="https://www.commonhaus.org/trademarks/">Trademark List</a>. Trademarks of third parties are owned by their respective holders and their mention here does not suggest any endorsement or association.</p>
+    </div>
+  </div>
+</footer>
+<!-- Light/dark switch. Hidden until the script wires it, so a no-JS visitor
+     never sees a dead button. Every site has it: keep it. -->
+<button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark theme" hidden>
+  <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
+  <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/></svg>
+</button>
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.querySelector('.theme-toggle');
+    if (!btn) return;
+    btn.hidden = false;
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    function isDark() { var t = root.getAttribute('data-theme'); return t ? t === 'dark' : mq.matches; }
+    function sync() {
+      btn.setAttribute('aria-pressed', isDark() ? 'true' : 'false');
+      btn.setAttribute('aria-label', isDark() ? 'Switch to light theme' : 'Switch to dark theme');
+    }
+    btn.addEventListener('click', function () {
+      var next = isDark() ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('site-theme', next); } catch (e) { /* not fatal */ }
+      sync();
+    });
+    mq.addEventListener('change', sync);
+    sync();
+  })();
+</script>
+</body>
+</html>

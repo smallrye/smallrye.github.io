@@ -1,0 +1,1975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://api.github.com; base-uri 'none'; object-src 'none'; form-action 'none'">
+
+  <!-- SEO TITLE -->
+  
+  <title>Connector Contribution Guide - SmallRye</title>
+  <meta property="og:title" content="Connector Contribution Guide" />
+  <meta name="twitter:title" content="Connector Contribution Guide">
+  <meta property="og:site_name" content="SmallRye">
+  <!-- SEO DESCRIPTION -->
+  <meta name="description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+  <meta property="og:description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile." />
+  <meta name="twitter:description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+
+  <!-- SEO URL -->
+  <link rel="canonical" href="https://smallrye.io/docs/smallrye-reactive-messaging/4.13/concepts/contributing-connectors/" />
+  <meta property="og:url" content="https://smallrye.io/docs/smallrye-reactive-messaging/4.13/concepts/contributing-connectors/" />
+  <meta name="twitter:url" content="https://smallrye.io/docs/smallrye-reactive-messaging/4.13/concepts/contributing-connectors/">
+
+  <!-- SEO TYPE -->
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2026-11-02T00:30:18.757682111Z[UTC]" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image" content="https://smallrye.io/images/rye-field-og.jpg">
+  <meta name="twitter:image" content="https://smallrye.io/images/rye-field-og.jpg">
+  <!-- SEO COLLECTION PAGES -->
+  <link rel="prev" href="https://smallrye.io/docs/smallrye-reactive-messaging/4.13/concepts/testing/" />
+  <link rel="next" href="https://smallrye.io/docs/smallrye-reactive-messaging/4.13/concepts/connectors/" />
+  <!-- SEO TWITTER -->
+  <meta name="twitter:site" content="@smallrye_io" />
+  <meta name="twitter:creator" content="@smallrye_io" />
+  <!-- SEO LOCALE -->
+  <meta property="og:locale" content="en" />
+  <!-- SEO GENERATOR -->
+  <meta name="generator" content="Quarkus Roq v2.1.9" />
+
+<link rel="alternate" type="application/rss+xml" title="SmallRye" href="https://smallrye.io/rss.xml"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <script>
+    try {
+      var t = localStorage.getItem('site-theme');
+      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    } catch (e) { /* private mode: follow the OS preference */ }
+  </script>
+  <link rel="stylesheet" href="/css/main.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://smallrye.io/#organization",
+      "name": "SmallRye",
+      "url": "https://smallrye.io/",
+      "logo": "https://smallrye.io/images/logo.svg",
+      "description": "SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.",
+      "email": "smallrye@googlegroups.com",
+      "sameAs": [
+        "https://github.com/smallrye",
+        "https://twitter.com/smallrye_io",
+        "https://groups.google.com/d/forum/smallrye"
+      ],
+      "parentOrganization": { "@type": "Organization", "name": "Commonhaus Foundation", "url": "https://www.commonhaus.org/" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://smallrye.io/#website",
+      "name": "SmallRye",
+      "url": "https://smallrye.io/",
+      "publisher": { "@id": "https://smallrye.io/#organization" }
+    }
+  ]
+}
+</script>
+    <script type="module" src="/static/bundle/app-KFNV2DMD.js"></script>
+      <!-- no style found for key 'app' in Bundler mapping !-->
+<script>
+  try {
+    if (matchMedia('(min-width: 60rem)').matches && localStorage.getItem('docs-nav') === 'open') document.documentElement.classList.add('docs-nav-open');
+    if (localStorage.getItem('docs-toc') === 'closed') document.documentElement.classList.add('docs-toc-closed');
+  } catch (e) { /* storage blocked: closed */ }
+</script>
+<noscript><style>.docs-nav { display: block !important; } .docs-nav-button { display: none !important; }</style></noscript>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand" href="/">
+      <img class="logo-light" src="/images/logo.svg" alt="SmallRye" width="160" height="41">
+      <img class="logo-dark" src="/images/logo-dark.svg" alt="SmallRye" width="160" height="41">
+    </a>
+<div class="docs-brand">
+  <a class="docs-brand-project" href="/docs/smallrye-reactive-messaging/4.13/"><span class="project-logo" style="--logo: url('/images/projects/smallrye-reactive-messaging.png')" aria-hidden="true"></span><span class="docs-brand-name">Reactive Messaging</span></a>
+  <!--docs-version--><label class="docs-version">
+    <span class="visually-hidden">Version</span>
+    <select data-docs-version data-current="4.13" data-base="/docs/smallrye-reactive-messaging/">
+      
+      <option value="latest">5.0.0-RC2 (latest)</option>
+      
+                  <optgroup label="4.x">
+      
+      <option value="4.37">4.37.1</option>
+      
+                  
+      
+      <option value="4.36">4.36.0</option>
+      
+                  
+      
+      <option value="4.35">4.35.0</option>
+      
+                  
+      
+      <option value="4.34">4.34.0</option>
+      
+                  
+      
+      <option value="4.33">4.33.1</option>
+      
+                  
+      
+      <option value="4.32">4.32.1</option>
+      
+                  
+      
+      <option value="4.31">4.31.0</option>
+      
+                  
+      
+      <option value="4.30">4.30.0</option>
+      
+                  
+      
+      <option value="4.29">4.29.0</option>
+      
+                  
+      
+      <option value="4.28">4.28.0</option>
+      
+                  
+      
+      <option value="4.27">4.27.0</option>
+      
+                  
+      
+      <option value="4.26">4.26.0</option>
+      
+                  
+      
+      <option value="4.25">4.25.0</option>
+      
+                  
+      
+      <option value="4.24">4.24.1</option>
+      
+                  
+      
+      <option value="4.23">4.23.0</option>
+      
+                  
+      
+      <option value="4.22">4.22.0</option>
+      
+                  
+      
+      <option value="4.21">4.21.0</option>
+      
+                  
+      
+      <option value="4.20">4.20.0</option>
+      
+                  
+      
+      <option value="4.19">4.19.0</option>
+      
+                  
+      
+      <option value="4.18">4.18.1</option>
+      
+                  
+      
+      <option value="4.17">4.17.0</option>
+      
+                  
+      
+      <option value="4.16">4.16.2</option>
+      
+                  
+      
+      <option value="4.15">4.15.0</option>
+      
+                  
+      
+      <option value="4.14">4.14.0</option>
+      
+                  
+      
+      <option value="4.13" selected>4.13.0</option>
+      
+                  
+      
+      <option value="4.12">4.12.0</option>
+      
+                  
+      
+      <option value="4.11">4.11.0</option>
+      
+                  
+      
+      <option value="4.10">4.10.2</option>
+      
+                  
+      
+      <option value="4.9">4.9.0</option>
+      
+                  
+      
+      <option value="4.8">4.8.0</option>
+      
+                  
+      
+      <option value="4.7">4.7.0</option>
+      
+                  
+      
+      <option value="4.6">4.6.1</option>
+      
+                  
+      
+      <option value="4.5">4.5.0</option>
+      
+                  
+      
+      <option value="4.4">4.4.0</option>
+      
+                  
+      
+      <option value="4.3">4.3.0</option>
+      
+                  
+      
+      <option value="4.2">4.2.0</option>
+      
+                  
+      
+      <option value="4.1">4.1.1</option>
+      
+                  
+      
+      <option value="4.0">4.0.0</option>
+      
+                  </optgroup><optgroup label="3.x">
+      
+      <option value="3">3.25.0</option>
+      
+      </optgroup>
+      <option value="main">main (snapshot)</option>
+      
+      
+    </select>
+  </label><!--/docs-version-->
+  <div class="docs-tools">
+    <button type="button" class="docs-search-button" data-docs-search-open aria-haspopup="dialog" aria-keyshortcuts="/">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <span>Search</span><kbd aria-hidden="true">/</kbd>
+    </button>
+    <a class="docs-github" href="https://github.com/smallrye/smallrye-reactive-messaging" title="smallrye/smallrye-reactive-messaging on GitHub" data-docs-github="smallrye/smallrye-reactive-messaging">
+      <svg aria-hidden="true" viewBox="0 0 16 16" width="26" height="26"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      <span class="docs-github-text">
+        <span class="docs-github-name">GitHub<span class="visually-hidden">: smallrye/smallrye-reactive-messaging</span></span>
+        <span class="docs-github-facts"><span title="Latest release">5.0.0-RC2</span><span data-docs-github-stars hidden></span><span data-docs-github-forks hidden></span></span>
+      </span>
+    </a>
+  </div>
+</div>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-input" aria-label="Toggle menu">
+    <label for="nav-toggle" class="nav-toggle"><span></span></label>
+    <nav class="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/docs/" aria-current="page">Documentation</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+  <main id="main">
+
+<div class="container docs-layout">
+  <aside class="docs-side">
+    <button type="button" class="docs-nav-button" aria-controls="docs-nav" aria-expanded="false" data-docs-nav-button>
+      <span class="docs-nav-icon" aria-hidden="true"></span><span class="docs-nav-label">Contents</span>
+    </button>
+    <nav id="docs-nav" class="docs-nav" aria-label="SmallRye Reactive Messaging documentation">
+      <!--docs-version-->
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/">Home</a></li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Core</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/getting-started/">Getting Started</a></li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Concepts</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/concepts/concepts/">Introduction</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/concepts/model/">Development Model</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/concepts/emitter/">Emitters and Channel</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/concepts/connectors/">Connectors</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/concepts/contributing-connectors/" aria-current="page">Contributing Connectors</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/concepts/acknowledgement/">Acknowledgement</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/concepts/blocking/">Blocking Processing</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/concepts/signatures/">Method Signatures</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/concepts/skipping/">Skipping Messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/concepts/converters/">Message Converters</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/concepts/keyed-multi/">Keyed Streams</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/concepts/decorators/">Channel Decorators and Interceptors</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/concepts/broadcast/">Broadcast</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/concepts/merge/">Merge channels</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/concepts/incoming-concurrency/">Incoming Channel Concurrency</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/concepts/incomings/">@Incomings</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/concepts/outgoings/">@Outgoings</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/concepts/testing/">Testing</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/concepts/logging/">Logging</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/concepts/observability/">Observability API</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/concepts/advanced-config/">Advanced Configuration</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/concepts/message-context/">Message Context</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/concepts/incoming-metadata-injection/">Metadata Injection</a></li>
+</ul>
+    </details>
+  </li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Kafka</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/kafka/kafka/">Apache Kafka Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/kafka/receiving-kafka-records/">Receiving records</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/kafka/writing-kafka-records/">Writing records</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/kafka/health/">Health Checks</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/kafka/avro-configuration/">Using Avro</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/kafka/protobuf-configuration/">Using Protobuf</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/kafka/consumer-rebalance-listener/">Rebalance Listeners</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/kafka/kerberos/">Kerberos authentication</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/kafka/client-service/">Accessing the client</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/kafka/default-configuration/">Customizing Default Kafka Configuration</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/kafka/test-companion/">Test Companion for Kafka</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/kafka/transactions/">Kafka Transactions and Exactly-Once Processing</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/kafka/request-reply/">Kafka Request/Reply</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">AMQP 1.0</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/amqp/amqp/">AMQP 1.0 Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/amqp/receiving-amqp-messages/">Receiving messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/amqp/sending-amqp-messages/">Sending messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/amqp/health/">Health Checks</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/amqp/client-customization/">Client Customization</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/amqp/rabbitmq/">Using RabbitMQ</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">RabbitMQ</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/rabbitmq/rabbitmq/">RabbitMQ Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/rabbitmq/receiving-messages-from-rabbitmq/">Receiving messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/rabbitmq/sending-messages-to-rabbitmq/">Sending messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/rabbitmq/rabbitmq-health/">Health Checks</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/rabbitmq/rabbitmq-client-customization/">Client Customization</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/rabbitmq/rabbitmq-cloud/">Connecting to managed instances</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Pulsar</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/pulsar/pulsar/">Apache Pulsar Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/pulsar/receiving-pulsar-messages/">Receiving messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/pulsar/sending-messages-to-pulsar/">Sending messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/pulsar/schema-configuration/">Configuring the Schema</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/pulsar/client-configuration/">Configuring the Pulsar client</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/pulsar/health/">Health Checks</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/pulsar/client-service/">Accessing the client</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/pulsar/transactions/">Pulsar Transactions and Exactly-Once Processing</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Apache Camel</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/camel/camel/">Apache Camel Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/camel/receiving-messages-from-camel/">Receiving messages from Camel</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/camel/sending-messages-to-camel/">Sending messages to Camel</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/camel/camel-processor/">Implementing Camel processor</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/camel/using-existing-routes/">Using existing Camel routes</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">JMS</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/jms/jms/">The JMS connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/jms/receiving-jms-messages/">Receiving JMS messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/jms/sending-jms-messages/">Sending JMS messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/jms/advanced-jms/">Advanced configuration</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">MQTT</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/mqtt/mqtt/">MQTT Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/mqtt/receiving-mqtt-messages/">Receiving MQTT messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/mqtt/sending-messages-to-mqtt/">Sending MQTT messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.13/mqtt/client-customization/">Customizing the MQTT client</a></li>
+</ul>
+    </details>
+  </li>
+</ul>
+      <!--/docs-version-->
+    </nav>
+  </aside>
+  <article class="docs-main prose" data-pagefind-body>
+    <!--docs-version-->
+    <span data-pagefind-filter="version:4.13" hidden></span>
+    <p class="docs-notice" data-pagefind-ignore>This is the documentation of SmallRye Reactive Messaging 4.13.0, released <time datetime="2023-12-15">2023-12-15</time>. It is not the latest release: <a href="/docs/smallrye-reactive-messaging/latest/" data-docs-same-page>read the documentation of 5.0.0-RC2</a>.</p>
+    <!--/docs-version-->
+    <h1>Connector Contribution Guide</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>A connector implementation is a CDI-managed bean, typically an <code>@ApplicationScoped</code> bean,
+which is identified by the <code>@Connector</code> identifier.
+In order to provide inbound and outbound channels, the connector implements two interfaces <code>InboundConnector</code> and <code>OutboundConnector</code> respectively.
+In addition to that, the connector bean is annotated with <code>@ConnectorAttribute</code>, which describes attributes to configure channels.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="title">Maven Archetype</div>
+<div class="paragraph">
+<p>Smallrye Reactive Messaging provides a Maven archetype to bootstrap a new connector.
+You can generate a new connector project with the code described in this guide using:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">mvn -N archetype:generate \
+-DarchetypeGroupId=io.smallrye.reactive \
+-DarchetypeArtifactId=smallrye-reactive-messaging-connector-archetype \
+-DarchetypeVersion=4.13.0 \
+-DgroupId=io.smallrye.reactive \
+-Dpackage=io.smallrye.reactive.messaging.my \
+-Dversion=4.13.0 \
+-DartifactId=smallrye-reactive-messaging-my \
+-DconnectorName=my</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following is an example of a connector skeleton :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package connectors;
+
+import static io.smallrye.reactive.messaging.annotations.ConnectorAttribute.Direction.INCOMING;
+import static io.smallrye.reactive.messaging.annotations.ConnectorAttribute.Direction.INCOMING_AND_OUTGOING;
+import static io.smallrye.reactive.messaging.annotations.ConnectorAttribute.Direction.OUTGOING;
+
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.Flow;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+
+import org.eclipse.microprofile.config.Config;
+import org.eclipse.microprofile.reactive.messaging.Message;
+import org.eclipse.microprofile.reactive.messaging.spi.Connector;
+
+import connectors.api.BrokerClient;
+import io.smallrye.reactive.messaging.annotations.ConnectorAttribute;
+import io.smallrye.reactive.messaging.connector.InboundConnector;
+import io.smallrye.reactive.messaging.connector.OutboundConnector;
+import io.smallrye.reactive.messaging.providers.connectors.ExecutionHolder;
+import io.vertx.mutiny.core.Vertx;
+
+@ApplicationScoped
+@Connector(MyConnector.CONNECTOR_NAME)
+@ConnectorAttribute(name = "client-id", type = "string", direction = INCOMING_AND_OUTGOING, description = "The client id ", mandatory = true)
+@ConnectorAttribute(name = "buffer-size", type = "int", direction = INCOMING, description = "The size buffer of incoming messages waiting to be processed", defaultValue = "128")
+@ConnectorAttribute(name = "topic", type = "string", direction = OUTGOING, description = "The default topic to send the messages, defaults to channel name if not set")
+@ConnectorAttribute(name = "maxPendingMessages", type = "int", direction = OUTGOING, description = "The maximum size of a queue holding pending messages", defaultValue = "1000")
+@ConnectorAttribute(name = "waitForWriteCompletion", type = "boolean", direction = OUTGOING, description = "Whether the outgoing channel waits for the write completion", defaultValue = "true")
+public class MyConnector implements InboundConnector, OutboundConnector {
+
+    public static final String CONNECTOR_NAME = "smallrye-my-connector";
+
+    @Inject
+    ExecutionHolder executionHolder;
+
+    Vertx vertx;
+
+    List&lt;MyIncomingChannel&gt; incomingChannels = new CopyOnWriteArrayList&lt;&gt;();
+    List&lt;MyOutgoingChannel&gt; outgoingChannels = new CopyOnWriteArrayList&lt;&gt;();
+
+    @PostConstruct
+    void init() {
+        this.vertx = executionHolder.vertx();
+    }
+
+    @Override
+    public Flow.Publisher&lt;? extends Message&lt;?&gt;&gt; getPublisher(Config config) {
+        MyConnectorIncomingConfiguration ic = new MyConnectorIncomingConfiguration(config);
+        String channelName = ic.getChannel();
+        String clientId = ic.getClientId();
+        int bufferSize = ic.getBufferSize();
+        // ...
+        BrokerClient client = BrokerClient.create(clientId);
+        MyIncomingChannel channel = new MyIncomingChannel(vertx, ic, client);
+        incomingChannels.add(channel);
+        return channel.getStream();
+    }
+
+    @Override
+    public Flow.Subscriber&lt;? extends Message&lt;?&gt;&gt; getSubscriber(Config config) {
+        MyConnectorOutgoingConfiguration oc = new MyConnectorOutgoingConfiguration(config);
+        String channelName = oc.getChannel();
+        String clientId = oc.getClientId();
+        int pendingMessages = oc.getMaxPendingMessages();
+        // ...
+        BrokerClient client = BrokerClient.create(clientId);
+        MyOutgoingChannel channel = new MyOutgoingChannel(vertx, oc, client);
+        outgoingChannels.add(channel);
+        return channel.getSubscriber();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that the <code>getPublisher</code> and <code>getSubscriber</code> methods receive MicroProfile Config <code>Config</code> instance and wrap it with
+<code>MyConnectorIncomingConfiguration</code> and <code>MyConnectorOutgoingConfiguration</code> objects.</p>
+</div>
+<div class="paragraph">
+<p>These custom channel configuration types ease getting channel configuration, including the optional or default values.
+They are generated by the <code>smallrye-connector-attribute-processor</code> annotation processor, and can be configured in project pom like the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">    &lt;dependencies&gt;
+      &lt;dependency&gt;
+        &lt;groupId&gt;${project.groupId}&lt;/groupId&gt;
+        &lt;artifactId&gt;smallrye-reactive-messaging-provider&lt;/artifactId&gt;
+        &lt;version&gt;${project.version}&lt;/version&gt;
+      &lt;/dependency&gt;
+      &lt;dependency&gt;
+        &lt;groupId&gt;io.smallrye.reactive&lt;/groupId&gt;
+        &lt;artifactId&gt;smallrye-connector-attribute-processor&lt;/artifactId&gt;
+        &lt;version&gt;${project.version}&lt;/version&gt;
+      &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+    &lt;build&gt;
+      &lt;plugins&gt;
+        &lt;plugin&gt;
+          &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+          &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+          &lt;configuration&gt;
+            &lt;generatedSourcesDirectory&gt;${project.build.directory}/generated-sources/&lt;/generatedSourcesDirectory&gt;
+            &lt;annotationProcessors&gt;
+              &lt;annotationProcessor&gt;
+                io.smallrye.reactive.messaging.connector.ConnectorAttributeProcessor
+              &lt;/annotationProcessor&gt;
+              &lt;annotationProcessor&gt;
+                org.jboss.logging.processor.apt.LoggingToolsProcessor
+              &lt;/annotationProcessor&gt;
+            &lt;/annotationProcessors&gt;
+          &lt;/configuration&gt;
+        &lt;/plugin&gt;
+      &lt;/plugins&gt;
+    &lt;/build&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>smallrye-reactive-messaging-provider</code> is the minimum required dependency for a connector implementation.
+You&#8217;ll also note that the <code>LoggingToolsProcessor</code> annotation processor is also configured.
+This enables generating internationalized log statements and exceptions.
+Typically, you would create following interfaces in <code>i18n</code> sub-package: <code>[Connector]Exceptions</code>, <code>[Connector]Logging</code> and <code>[Connector]Messages</code>.
+More information can be found in <a href="https://jboss-logging.github.io/jboss-logging-tools/">JBoss Logging Tools documentation</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="implementing-inbound-channels"><a class="anchor" href="#implementing-inbound-channels"></a>Implementing Inbound Channels</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>InboundConnector</code> implementation returns, for a given channel configuration, a reactive stream of <code>Message`s.
+The returned reactive stream is an instance of `Flow.Publisher</code> and typically can be implemented using Mutiny <code>Multi</code> type.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="title"><code>IncomingConnectorFactory</code></div>
+<div class="paragraph">
+<p>The inbound channels can also implement the <code>IncomingConnectorFactory</code> from the MicroProfile Reactive Messaging specification.
+However, the <code>PublisherBuilder</code> type can be more challenging to work with and
+Smallrye Reactive Messaging converts the provided stream to Mutiny types to do the wiring anyway.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The returned <code>Flow.Publisher</code> would allow controlling the flow of ingestion using backpressure.
+It would be preferable to use pull-based APIs of the underlying messaging library to receive messages from the message broker.
+You can refer to the <a href="https://smallrye.io/smallrye-mutiny/latest/guides/polling/"><code>Mutiny</code> "How to use polling?" guide</a>
+to construct a <code>Multi</code> using Mutiny APIs, or implement the <code>Flow.Subscription</code> from scratch and wrap it in an <code>AbstractMulti</code>.</p>
+</div>
+<div class="paragraph">
+<p>Here is an example channel implementation which constructs the reactive stream using the polling API:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package connectors;
+
+import java.util.concurrent.Flow;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import org.eclipse.microprofile.reactive.messaging.Message;
+
+import connectors.api.BrokerClient;
+import io.smallrye.mutiny.Multi;
+import io.smallrye.mutiny.Uni;
+import io.smallrye.reactive.messaging.health.HealthReport;
+import io.vertx.core.impl.VertxInternal;
+import io.vertx.mutiny.core.Context;
+import io.vertx.mutiny.core.Vertx;
+
+public class MyIncomingChannel {
+
+    private final String channel;
+    private final BrokerClient client;
+    private final Context context;
+    private final MyAckHandler ackHandler;
+    private final MyFailureHandler failureHandler;
+    private final AtomicBoolean closed = new AtomicBoolean(false);
+    private Flow.Publisher&lt;? extends Message&lt;?&gt;&gt; stream;
+
+    public MyIncomingChannel(Vertx vertx, MyConnectorIncomingConfiguration cfg, BrokerClient client) {
+        // create and configure the client with MyConnectorIncomingConfiguration
+        this.channel = cfg.getChannel();
+        this.client = client;
+        this.context = Context.newInstance(((VertxInternal) vertx.getDelegate()).createEventLoopContext());
+        this.ackHandler = MyAckHandler.create(this.client);
+        this.failureHandler = MyFailureHandler.create(this.client);
+        this.stream = Multi.createBy().repeating()
+                .uni(() -&gt; Uni.createFrom().completionStage(this.client.poll()))
+                .until(__ -&gt; closed.get())
+                .emitOn(context::runOnContext)
+                .map(consumed -&gt; new MyMessage&lt;&gt;(consumed, ackHandler, failureHandler));
+    }
+
+    public String getChannel() {
+        return channel;
+    }
+
+    public Flow.Publisher&lt;? extends Message&lt;?&gt;&gt; getStream() {
+        return this.stream;
+    }
+
+    public void close() {
+        closed.compareAndSet(false, true);
+        client.close();
+    }
+
+    void isReady(HealthReport.HealthReportBuilder healthReportBuilder) {
+
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="connector-threading-and-vert-x"><a class="anchor" href="#connector-threading-and-vert-x"></a>Connector Threading and Vert.x</h3>
+<div class="paragraph">
+<p>Whether the external API call is blocking or non-blocking, managing the thread on which the message processing will be dispatched can be challenging.
+Smallrye Reactive Messaging depends on <a href="https://vertx.io/">Eclipse Vert.x</a> to consistently dispatch messages in event-loop or worker threads,
+propagating the message context along different processing stages.
+You can read more on <a href="/docs/smallrye-reactive-messaging/4.13/concepts/message-context/">Message Context</a> and <a href="https://vertx.io/blog/an-introduction-to-the-vert-x-context-object/">Vert.x Context</a>.</p>
+</div>
+<div class="paragraph">
+<p>Some connectors already use Vert.x clients, such as RabbitMQ, AMQP 1.0 or MQTT.
+Other connectors such as Kafka or Pulsar directly use the client library of the messaging technology,
+therefore they create a Vert.x Context per channel to dispatch messages on that context.
+Connectors can access the <code>Vertx</code> instance by injecting the <code>ExecutionHolder</code> bean.
+<a href="https://smallrye.io/smallrye-mutiny/latest/guides/emit-on-vs-run-subscription-on/">Mutiny operators <code>runSubscribtionOn</code> and <code>emitOn</code></a> can be used to switch threads the events are dispatched on.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="custom-message-and-metadata-implementations"><a class="anchor" href="#custom-message-and-metadata-implementations"></a>Custom Message and Metadata implementations</h3>
+<div class="paragraph">
+<p>Reactive messaging <a href="https://javadoc.io/doc/io.smallrye.reactive/smallrye-reactive-messaging-api/4.13.0/org/eclipse/microprofile/reactive/messaging/Message.html"><code>Message</code></a>
+type is a thin wrapper around a payload and some metadata, which lets implementing acknowledgment and negative acknowledgment of that message.</p>
+</div>
+<div class="paragraph">
+<p>Messages received from the underlying library very often return with a custom type,
+wrapping the payload and some properties such as key, timestamp, schema information, or any other metadata.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The client may propose different strategies for consuming messages individually or in batches.
+If a batch consuming is available the incoming channel may receive wrap and dispatch message as a batch or individually.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>While it is possible to use <code>Message.of</code> builder methods to wrap the incoming message type,
+a custom type implementing <code>Message</code> interface helps to deal with different aspects we&#8217;ll cover later,
+such as deserialization, message acknowledgment or tracing.</p>
+</div>
+<div class="paragraph">
+<p>An example message implementation would be like the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package connectors;
+
+import java.util.concurrent.CompletionStage;
+
+import org.eclipse.microprofile.reactive.messaging.Message;
+import org.eclipse.microprofile.reactive.messaging.Metadata;
+
+import connectors.api.ConsumedMessage;
+import io.smallrye.reactive.messaging.providers.locals.ContextAwareMessage;
+
+public class MyMessage&lt;T&gt; implements Message&lt;T&gt;, ContextAwareMessage&lt;T&gt; {
+
+    private final T payload;
+    private final Metadata metadata;
+    private final MyAckHandler ackHandler;
+
+    private final MyFailureHandler nackHandler;
+    private ConsumedMessage&lt;?&gt; consumed;
+
+    public MyMessage(ConsumedMessage&lt;T&gt; message, MyAckHandler ackHandler, MyFailureHandler nackHandler) {
+        this.consumed = message;
+        this.payload = message.body();
+        this.ackHandler = ackHandler;
+        this.nackHandler = nackHandler;
+        this.metadata = ContextAwareMessage.captureContextMetadata(new MyIncomingMetadata&lt;&gt;(message));
+    }
+
+    public ConsumedMessage&lt;?&gt; getConsumedMessage() {
+        return consumed;
+    }
+
+    @Override
+    public T getPayload() {
+        return payload;
+    }
+
+    @Override
+    public Metadata getMetadata() {
+        return metadata;
+    }
+
+    @Override
+    public CompletionStage&lt;Void&gt; ack() {
+        return ackHandler.handle(this);
+    }
+
+    @Override
+    public CompletionStage&lt;Void&gt; nack(Throwable reason, Metadata nackMetadata) {
+        return nackHandler.handle(this, reason, nackMetadata);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that <code>MyMessage</code> implements the <code>ContextAwareMessage</code>.
+In the constructor <code>captureContextMetadata</code> helper method is used to capture the Vert.x context which created the object and capturing it into the <code>LocalContextMetadata</code>.
+This metadata allows running <a href="/docs/smallrye-reactive-messaging/4.13/concepts/message-context/">each message in its own Vert.x context&#44; supporting context propagation</a>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>MyMessage</code> type implements the accessors for the <code>metadata</code> and <code>payload</code> from the <code>Message</code> interface.
+If the messaging technology doesn&#8217;t have a built-in unmarshalling mechanism, the message can deserialize the raw payload to a primitive or a complex object.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The custom message implementation is usually not the type consumed by the application injecting channels.
+Applications usually inject in the payload, the raw consumed type (in the above example the <code>ConsumedMessage</code>),
+or some other type provided by the <a href="/docs/smallrye-reactive-messaging/4.13/concepts/converters/"><code>MessageConverter`s</a>.
+Handling of `Message</code> types by the application is restricted only to advanced use cases, because handling of message acknowledgment is manual
+Even then the message may be intercepted before and changed, conserving the <code>metadata</code>, <code>ack</code> and <code>nack</code> handlers but not the original type created by the connector.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The <code>MyIncomingMetadata</code> gives access to the underlying consumed message attributes, and applications can inject this object for accessing message details:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package connectors;
+
+import java.util.Map;
+
+import connectors.api.ConsumedMessage;
+
+public class MyIncomingMetadata&lt;T&gt; {
+
+    private final ConsumedMessage&lt;T&gt; msg;
+
+    public MyIncomingMetadata(ConsumedMessage&lt;T&gt; msg) {
+        this.msg = msg;
+    }
+
+    public ConsumedMessage&lt;T&gt; getCustomMessage() {
+        return msg;
+    }
+
+    public T getBody() {
+        return msg.body();
+    }
+
+    public String getKey() {
+        return msg.key();
+    }
+
+    public long getTimestamp() {
+        return msg.timestamp();
+    }
+
+    public Map&lt;String, String&gt; getProperties() {
+        return msg.properties();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Also note that <code>ack</code> and <code>nack</code> method implementations are delegated to handler objects.
+This allows configuring different strategies at channel level.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="acknowledgment-strategies"><a class="anchor" href="#acknowledgment-strategies"></a>Acknowledgment strategies</h3>
+<div class="paragraph">
+<p>The <a href="/docs/smallrye-reactive-messaging/4.13/concepts/acknowledgement/">acknowledgement</a> is the way for message consumers to inform the broker that the message has been successfully received and processed.
+Depending on the messaging technology the broker then can decide to remove the message from the queue, flag as consumed or purge it completely.
+In Reactive Messaging there are different policies to trigger the acknowledgement but the canonical one is to acknowledge a message when the processing (potentially asynchronous) has completed (<code>POST_PROCESSING</code>).</p>
+</div>
+<div class="paragraph">
+<p>The Reactive Messaging defines <code>Message#ack</code> method as non-blocking asynchronous, returning a <code>CompletionStage&lt;Void&gt;</code>,
+because potentially the acknowledgement action sends a network call to the broker.</p>
+</div>
+<div class="paragraph">
+<p>The following example simply calls the client <code>ack</code> method using the Mutiny <code>Uni</code> and switch the emitter to the Message context.
+Returning back to the message context is essential for chaining asynchronous actions without losing the context and for keeping the consistency on message consumption flow.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package connectors;
+
+import java.util.concurrent.CompletionStage;
+
+import connectors.api.BrokerClient;
+import io.smallrye.mutiny.Uni;
+
+public class MyAckHandler {
+
+    private final BrokerClient client;
+
+    static MyAckHandler create(BrokerClient client) {
+        return new MyAckHandler(client);
+    }
+
+    public MyAckHandler(BrokerClient client) {
+        this.client = client;
+    }
+
+    public CompletionStage&lt;Void&gt; handle(MyMessage&lt;?&gt; msg) {
+        return Uni.createFrom().completionStage(client.ack(msg.getConsumedMessage()))
+                .emitOn(msg::runOnMessageContext)
+                .subscribeAsCompletionStage();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>While this ack handler strategy acknowledges each message to the broker,
+the messaging technology can allow employing different strategies for acknowledging messages.
+For example an ack strategy can track processed messages and acknowledge them altogether or call a different client side endpoint to acknowledge the message batch.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="failure-handling-strategies"><a class="anchor" href="#failure-handling-strategies"></a>Failure handling strategies</h3>
+<div class="paragraph">
+<p>The failure handling, or the <a href="/docs/smallrye-reactive-messaging/4.13/concepts/acknowledgement/#negative-acknowledgement">negative acknowledgment</a> allows indicating that a message was not processed correctly.
+Similar to the acknowledgment the Reactive Messaging defines <code>Message#nack(Throwable reason, Metadata metadata)</code> method as non-blocking asynchronous, returning a <code>CompletionStage&lt;Void&gt;</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package connectors;
+
+import java.util.concurrent.CompletionStage;
+
+import org.eclipse.microprofile.reactive.messaging.Metadata;
+
+import connectors.api.BrokerClient;
+import io.smallrye.mutiny.Uni;
+
+public class MyFailureHandler {
+
+    private final BrokerClient client;
+
+    static MyFailureHandler create(BrokerClient client) {
+        return new MyFailureHandler(client);
+    }
+
+    public MyFailureHandler(BrokerClient client) {
+        this.client = client;
+    }
+
+    public CompletionStage&lt;Void&gt; handle(MyMessage&lt;?&gt; msg, Throwable reason, Metadata metadata) {
+        return Uni.createFrom().completionStage(() -&gt; client.reject(msg.getConsumedMessage(), reason.getMessage()))
+                .emitOn(msg::runOnMessageContext)
+                .subscribeAsCompletionStage();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Different failure handling strategies can, for example,
+- Ignore the failure, log and call the <code>ack</code> instead
+- Send the message to a dead letter queue and call the <code>ack</code>
+- Employ a different strategy depending on the <code>Metadata</code> associated with the <code>nack</code> method call.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="message-converters"><a class="anchor" href="#message-converters"></a>Message Converters</h3>
+<div class="paragraph">
+<p>The connector can propose default <a href="/docs/smallrye-reactive-messaging/4.13/concepts/converters/"><code>MessageConverter</code></a> implementations for converting the payload to a custom type.
+As an example the following converter extracts the <code>CustomMessage</code> and puts it in the payload:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package connectors;
+
+import java.lang.reflect.Type;
+
+import jakarta.enterprise.context.ApplicationScoped;
+
+import org.eclipse.microprofile.reactive.messaging.Message;
+
+import connectors.api.ConsumedMessage;
+import io.smallrye.reactive.messaging.MessageConverter;
+import io.smallrye.reactive.messaging.providers.helpers.TypeUtils;
+
+@ApplicationScoped
+public class MyMessageConverter implements MessageConverter {
+    @Override
+    public boolean canConvert(Message&lt;?&gt; in, Type target) {
+        return TypeUtils.isAssignable(target, ConsumedMessage.class)
+                &amp;&amp; in.getMetadata(MyIncomingMetadata.class).isPresent();
+    }
+
+    @Override
+    public Message&lt;?&gt; convert(Message&lt;?&gt; in, Type target) {
+        return in.withPayload(in.getMetadata(MyIncomingMetadata.class)
+                .map(MyIncomingMetadata::getCustomMessage)
+                .orElse(null));
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="implementing-outbound-channels"><a class="anchor" href="#implementing-outbound-channels"></a>Implementing Outbound Channels</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>OutboundConnector</code> implementation returns, for a given channel configuration, a <code>Flow.Subscriber</code> of messages.
+This is typically implemented by a custom <code>Flow.Processor</code> and using the <code>MultiUtils.via</code> helper methods to apply message transformations.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="title"><code>OutgoingConnectorFactory</code></div>
+<div class="paragraph">
+<p>The outbound channels can also implement the <code>OutgoingConnectorFactory</code> from the MicroProfile Reactive Messaging specification.
+However, it is usually more friendly to work with the <code>MultiUtils.via</code> methods to construct and transform outgoing messages.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Here is an example outgoing channel implementation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package connectors;
+
+import java.util.concurrent.Flow;
+
+import org.eclipse.microprofile.reactive.messaging.Message;
+
+import connectors.api.BrokerClient;
+import connectors.api.SendMessage;
+import io.smallrye.mutiny.Uni;
+import io.smallrye.reactive.messaging.providers.helpers.MultiUtils;
+import io.vertx.mutiny.core.Vertx;
+
+public class MyOutgoingChannel {
+    private final String channel;
+    private Flow.Subscriber&lt;? extends Message&lt;?&gt;&gt; subscriber;
+    private final BrokerClient client;
+    private final String topic;
+
+    public MyOutgoingChannel(Vertx vertx, MyConnectorOutgoingConfiguration oc, BrokerClient client) {
+        this.channel = oc.getChannel();
+        this.client = client;
+        this.topic = oc.getTopic().orElse(oc.getChannel());
+        this.subscriber = MultiUtils.via(multi -&gt; multi.call(m -&gt; publishMessage(this.client, m)));
+    }
+
+    private Uni&lt;Void&gt; publishMessage(BrokerClient client, Message&lt;?&gt; m) {
+        // construct the outgoing message
+        SendMessage sendMessage = new SendMessage();
+        Object payload = m.getPayload();
+        sendMessage.setPayload(payload);
+        sendMessage.setTopic(topic);
+        m.getMetadata(MyOutgoingMetadata.class).ifPresent(out -&gt; {
+            sendMessage.setTopic(out.getTopic());
+            sendMessage.setKey(out.getKey());
+            //...
+        });
+        return Uni.createFrom().completionStage(() -&gt; client.send(sendMessage))
+                .onItem().transformToUni(receipt -&gt; Uni.createFrom().completionStage(m.ack()))
+                .onFailure().recoverWithUni(t -&gt; Uni.createFrom().completionStage(m.nack(t)));
+    }
+
+    public Flow.Subscriber&lt;? extends Message&lt;?&gt;&gt; getSubscriber() {
+        return this.subscriber;
+    }
+
+    public String getChannel() {
+        return this.channel;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>MultiUtils.via</code> helper method allows using the <code>Multi</code> chaining methods and in the same time provides a <code>Flow.Subscriber</code>.
+However, this implementation allows sending messages one at a time:
+one only after the previous outgoing message send is completed.</p>
+</div>
+<div class="paragraph">
+<p>Some messaging technologies provide publish receipt,
+a message back from the broker to the sender that asynchronously acknowledges the sent operation.
+In this case the connector can only be sure of the send operation when it receives the publish receipt of that message.
+Some technologies may provide blocking sending calls,
+in that case the connector needs to delegate the sending call to a worker thread.</p>
+</div>
+<div class="paragraph">
+<p>Depending on whether the client supports multiple in-flight outgoing messages, you can also use a <code>SenderProcessor</code>,
+which allows receiving configuration for the maximum number of in-flight messages and whether it waits for completion (publish receipt from the broker):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">long requests = oc.getMaxPendingMessages();
+boolean waitForWriteCompletion = oc.getWaitForWriteCompletion();
+if (requests &lt;= 0) {
+    requests = Long.MAX_VALUE;
+}
+this.processor = new SenderProcessor(requests, waitForWriteCompletion, m -&gt; publishMessage(client, m));
+this.subscriber = MultiUtils.via(processor, m -&gt; m.onFailure().invoke(f -&gt; {
+    // log the failure
+}));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Other more advanced scenarios can be implemented to retry the transmission in case of a retryable failure,
+or batch multiple outgoing messages to a single send operation.</p>
+</div>
+<div class="sect2">
+<h3 id="outgoing-message-builder"><a class="anchor" href="#outgoing-message-builder"></a>Outgoing <code>Message</code> Builder</h3>
+<div class="paragraph">
+<p>In order to convey all attributes of the outgoing message to the client library
+connectors provide outgoing <code>Message</code> implementation and a corresponding outgoing message metadata.
+These allow the application developer to build the message attributes that will be sent to the broker.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package connectors;
+
+import java.util.concurrent.CompletionStage;
+import java.util.function.Function;
+import java.util.function.Supplier;
+
+import org.eclipse.microprofile.reactive.messaging.Message;
+import org.eclipse.microprofile.reactive.messaging.Metadata;
+
+import io.smallrye.reactive.messaging.providers.locals.ContextAwareMessage;
+
+public class MyOutgoingMessage&lt;T&gt; implements Message&lt;T&gt;, ContextAwareMessage&lt;T&gt; {
+
+    private final T payload;
+    private final Metadata metadata;
+
+    private final Supplier&lt;CompletionStage&lt;Void&gt;&gt; ack;
+    private final Function&lt;Throwable, CompletionStage&lt;Void&gt;&gt; nack;
+
+    public static &lt;T&gt; MyOutgoingMessage&lt;T&gt; from(Message&lt;T&gt; message) {
+        return new MyOutgoingMessage&lt;&gt;(message.getPayload(), message.getMetadata(), message.getAck(), message.getNack());
+    }
+
+    public MyOutgoingMessage(T payload, Metadata metadata,
+            Supplier&lt;CompletionStage&lt;Void&gt;&gt; ack,
+            Function&lt;Throwable, CompletionStage&lt;Void&gt;&gt; nack) {
+        this.payload = payload;
+        this.metadata = metadata;
+        this.ack = ack;
+        this.nack = nack;
+    }
+
+    public MyOutgoingMessage(T payload, String key, String topic,
+            Supplier&lt;CompletionStage&lt;Void&gt;&gt; ack,
+            Function&lt;Throwable, CompletionStage&lt;Void&gt;&gt; nack) {
+        this(payload, Metadata.of(new MyOutgoingMetadata(topic, key)), ack, nack);
+    }
+
+    @Override
+    public T getPayload() {
+        return payload;
+    }
+
+    @Override
+    public Metadata getMetadata() {
+        return metadata;
+    }
+
+    @Override
+    public Supplier&lt;CompletionStage&lt;Void&gt;&gt; getAck() {
+        return this.ack;
+    }
+
+    @Override
+    public Function&lt;Throwable, CompletionStage&lt;Void&gt;&gt; getNack() {
+        return this.nack;
+    }
+
+    public MyOutgoingMessage&lt;T&gt; withKey(String key) {
+        this.metadata.with(this.metadata.get(MyOutgoingMetadata.class)
+                .map(m -&gt; MyOutgoingMetadata.builder(m).withKey(key).build()));
+        return this;
+    }
+
+    public MyOutgoingMessage&lt;T&gt; withTopic(String topic) {
+        this.metadata.with(this.metadata.get(MyOutgoingMetadata.class)
+                .map(m -&gt; MyOutgoingMetadata.builder(m).withTopic(topic).build()));
+        return this;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package connectors;
+
+public class MyOutgoingMetadata {
+    private String topic;
+    private String key;
+
+    public static MyOutgoingMetadataBuilder builder() {
+        return new MyOutgoingMetadataBuilder();
+    }
+
+    public static MyOutgoingMetadataBuilder builder(MyOutgoingMetadata metadata) {
+        return new MyOutgoingMetadataBuilder(metadata);
+    }
+
+    public MyOutgoingMetadata(String topic, String key) {
+        this.topic = topic;
+        this.key = key;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public static class MyOutgoingMetadataBuilder {
+        private String topic;
+        private String key;
+
+        public MyOutgoingMetadataBuilder() {
+
+        }
+
+        public MyOutgoingMetadataBuilder(MyOutgoingMetadata metadata) {
+            this.key = metadata.getKey();
+            this.topic = metadata.getTopic();
+        }
+
+        public MyOutgoingMetadataBuilder withTopic(String topic) {
+            this.topic = topic;
+            return this;
+        }
+
+        public MyOutgoingMetadataBuilder withKey(String key) {
+            this.key = key;
+            return this;
+        }
+
+        public MyOutgoingMetadata build() {
+            return new MyOutgoingMetadata(topic, key);
+        }
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The outgoing channel implementation then will construct the client library object that represents the outbound message, <code>SendMessage</code> in this example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">private Uni&lt;Void&gt; publishMessage(BrokerClient client, Message&lt;?&gt; message) {
+    // construct the outgoing message
+    SendMessage sendMessage;
+    Object payload = message.getPayload();
+    if (payload instanceof SendMessage) {
+        sendMessage = (SendMessage) message.getPayload();
+    } else {
+        sendMessage = new SendMessage();
+        sendMessage.setPayload(payload);
+        sendMessage.setTopic(topic);
+        message.getMetadata(MyOutgoingMetadata.class).ifPresent(out -&gt; {
+            sendMessage.setTopic(out.getTopic());
+            sendMessage.setKey(out.getKey());
+            //...
+        });
+    }
+    return Uni.createFrom().completionStage(() -&gt; client.send(sendMessage))
+            .onItem().transformToUni(receipt -&gt; Uni.createFrom().completionStage(message.ack()))
+            .onFailure().recoverWithUni(t -&gt; Uni.createFrom().completionStage(message.nack(t)));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is a best practice to also allow the application to return a payload of the client outbound library object (<code>SendMessage</code>).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="outgoing-message-acknowledgement"><a class="anchor" href="#outgoing-message-acknowledgement"></a>Outgoing message acknowledgement</h3>
+<div class="paragraph">
+<p>Because the Reactive Messaging <a href="/docs/smallrye-reactive-messaging/4.13/concepts/acknowledgement/#chain-of-acknowledgment">chains acknowledgements</a> from incoming message until the outgoing message,
+it is crucial for the outgoing channel to correctly ack and nack the message.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="smallrye-health-integration"><a class="anchor" href="#smallrye-health-integration"></a>Smallrye Health Integration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Smallrye Reactive Messaging allows connectors to integrate with Smallrye Health to contribute channel state to the health reports.
+Connectors need to implement the <code>HealthReporter</code> interface and implement some or all of the <code>getReadiness</code>, <code>getLiveness</code> and <code>getStartup</code> methods:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@ApplicationScoped
+@Connector(MyConnectorWithPartials.CONNECTOR_NAME)
+public class MyConnectorWithPartials implements InboundConnector, OutboundConnector, HealthReporter {
+
+    public static final String CONNECTOR_NAME = "smallrye-my-connector";
+
+    List&lt;MyIncomingChannel&gt; incomingChannels = new CopyOnWriteArrayList&lt;&gt;();
+    List&lt;MyOutgoingChannel&gt; outgoingChannels = new CopyOnWriteArrayList&lt;&gt;();
+
+    @Override
+    public HealthReport getReadiness() {
+        HealthReport.HealthReportBuilder builder = HealthReport.builder();
+        for (MyIncomingChannel channel : incomingChannels) {
+            builder.add(channel.getChannel(), true);
+        }
+        for (MyOutgoingChannel channel : outgoingChannels) {
+            builder.add(channel.getChannel(), true);
+        }
+        return builder.build();
+    }
+
+    @Override
+    public HealthReport getLiveness() {
+        HealthReport.HealthReportBuilder builder = HealthReport.builder();
+        for (MyIncomingChannel channel : incomingChannels) {
+            builder.add(channel.getChannel(), true);
+        }
+        for (MyOutgoingChannel channel : outgoingChannels) {
+            builder.add(channel.getChannel(), true);
+        }
+        return builder.build();
+    }
+
+    @Override
+    public HealthReport getStartup() {
+        HealthReport.HealthReportBuilder builder = HealthReport.builder();
+        for (MyIncomingChannel channel : incomingChannels) {
+            builder.add(channel.getChannel(), true);
+        }
+        for (MyOutgoingChannel channel : outgoingChannels) {
+            builder.add(channel.getChannel(), true);
+        }
+        return builder.build();
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Implementing health reports per channel depends on what information is available to the connector.
+For more information on different health check probes you can check out <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/">Configure Liveness&#44; Readiness and Startup Probes</a></p>
+</div>
+<div class="paragraph">
+<p>You may want to add a connector attribute to enable/disable the health reporting per channel:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">import io.smallrye.reactive.messaging.annotations.ConnectorAttribute;
+
+@ConnectorAttribute(name = "health-enabled", type = "boolean", direction = ConnectorAttribute.Direction.INCOMING_AND_OUTGOING, description = "Whether health reporting is enabled (default) or disabled", defaultValue = "true")</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="opentelemetry-tracing-integration"><a class="anchor" href="#opentelemetry-tracing-integration"></a>OpenTelemetry Tracing Integration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Smallrye Reactive Messaging allows connectors to easily integrate with OpenTelemetry tracing.
+It propagates the tracing context from inbound messages and to outbound messages.
+The <code>smallrye-reactive-messaging-otel</code> module provides necessary dependencies to the OpenTelemetry artifacts and also provides <code>TracingUtils</code> helper class for setting up the tracing.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;io.smallrye.reactive.messaging&lt;/groupId&gt;
+    &lt;artifactId&gt;smallrye-reactive-messaging-otel&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For integrating tracing you&#8217;d need to create a couple of classes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Holder class for tracing information</p>
+</li>
+<li>
+<p>Implementation of <code>io.opentelemetry.context.propagation.TextMapGetter</code>, which retrieves for a given key the value of a tracing attributed from the holder object</p>
+</li>
+<li>
+<p>Implementation of <code>io.opentelemetry.context.propagation.TextMapSetter</code>, which sets on the holder object the key and value of tracing attributes</p>
+</li>
+<li>
+<p>Implementations of <code>io.opentelemetry.instrumentation.api.instrumenter.AttributesExtractor</code> and <code>io.opentelemetry.instrumentation.api.instrumenter.messaging.MessagingAttributesGetter</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Then you&#8217;d need to configure instrumenters per incoming and outgoing channel:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    public static Instrumenter&lt;MyTrace, Void&gt; createInstrumenter(boolean incoming) {
+        MessageOperation messageOperation = incoming ? MessageOperation.RECEIVE : MessageOperation.PUBLISH;
+
+        MyAttributesExtractor myExtractor = new MyAttributesExtractor();
+        MessagingAttributesGetter&lt;MyTrace, Void&gt; attributesGetter = myExtractor.getMessagingAttributesGetter();
+        var spanNameExtractor = MessagingSpanNameExtractor.create(attributesGetter, messageOperation);
+        InstrumenterBuilder&lt;MyTrace, Void&gt; builder = Instrumenter.builder(GlobalOpenTelemetry.get(),
+                "io.smallrye.reactive.messaging", spanNameExtractor);
+        var attributesExtractor = MessagingAttributesExtractor.create(attributesGetter, messageOperation);
+
+        builder
+                .addAttributesExtractor(attributesExtractor)
+                .addAttributesExtractor(myExtractor);
+
+        if (incoming) {
+            return builder.buildConsumerInstrumenter(MyTraceTextMapGetter.INSTANCE);
+        } else {
+            return builder.buildProducerInstrumenter(MyTraceTextMapSetter.INSTANCE);
+        }
+    }
+    // &lt;/create-instrumener&gt;
+
+    public Message&lt;?&gt; traceIncoming(Message&lt;?&gt; message, MyTrace myTrace, boolean makeCurrent) {
+        return TracingUtils.traceIncoming(instrumenter, message, myTrace, makeCurrent);
+    }
+
+    public void traceOutgoing(Message&lt;?&gt; message, MyTrace myTrace) {
+        TracingUtils.traceOutgoing(instrumenter, message, myTrace);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, you&#8217;d need to configure instrumenters per incoming and outgoing channels and wire the call to instrumenter using <code>TracingUtils</code>.</p>
+</div>
+<div class="paragraph">
+<p>For an incoming channel, you&#8217;d need to call the instrumenter on an inbound message:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Multi&lt;? extends Message&lt;?&gt;&gt; receiveMulti = Multi.createBy().repeating()
+        .uni(() -&gt; Uni.createFrom().completionStage(this.client.poll()))
+        .until(__ -&gt; closed.get())
+        .emitOn(context::runOnContext)
+        .map(consumed -&gt; new MyMessage&lt;&gt;(consumed, ackHandler, failureHandler));
+
+Instrumenter&lt;MyTrace, Void&gt; instrumenter = MyOpenTelemetryInstrumenter.createInstrumenter(true);
+if (tracingEnabled) {
+    receiveMulti = receiveMulti.map(message -&gt; {
+        ConsumedMessage&lt;?&gt; consumedMessage = message.getMetadata(MyIncomingMetadata.class).get().getCustomMessage();
+        return TracingUtils.traceIncoming(instrumenter, message, new MyTrace.Builder()
+                .withClientId(consumedMessage.clientId())
+                .withTopic(consumedMessage.topic())
+                .withProperties(consumedMessage.properties())
+                .build());
+    });
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For an outgoing channel, you&#8217;d need to call the instrumenter on constructing the outbound message:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">private Uni&lt;Void&gt; publishMessageWithTracing(BrokerClient client, Message&lt;?&gt; message) {
+    // construct the outgoing message
+    SendMessage sendMessage;
+    Object payload = message.getPayload();
+    if (payload instanceof SendMessage) {
+        sendMessage = (SendMessage) message.getPayload();
+    } else {
+        sendMessage = new SendMessage();
+        sendMessage.setPayload(payload);
+        sendMessage.setTopic(topic);
+        message.getMetadata(MyOutgoingMetadata.class).ifPresent(out -&gt; {
+            sendMessage.setTopic(out.getTopic());
+            sendMessage.setKey(out.getKey());
+            //...
+        });
+    }
+    if (tracingEnabled) {
+        Map&lt;String, String&gt; properties = new HashMap&lt;&gt;();
+        TracingUtils.traceOutgoing(instrumenter, message, new MyTrace.Builder()
+                .withProperties(properties)
+                .withTopic(sendMessage.getTopic())
+                .build());
+        sendMessage.setProperties(properties);
+    }
+    return Uni.createFrom().completionStage(() -&gt; client.send(sendMessage))
+            .onItem().transformToUni(receipt -&gt; Uni.createFrom().completionStage(message.ack()))
+            .onFailure().recoverWithUni(t -&gt; Uni.createFrom().completionStage(message.nack(t)));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You may want to add a connector attribute to enable/disable the tracing per channel:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">import io.smallrye.reactive.messaging.annotations.ConnectorAttribute;
+
+@ConnectorAttribute(name = "tracing-enabled", type = "boolean", direction = ConnectorAttribute.Direction.INCOMING_AND_OUTGOING, description = "Whether tracing is enabled (default) or disabled", defaultValue = "true")</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="testing-the-connector"><a class="anchor" href="#testing-the-connector"></a>Testing the connector</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>While unit tests are highly encouraged for validating ad-hoc logic in connector code,
+by nature connector tests are mostly integration tests validating the correct configuration and functioning of channels.
+Most of the time tests need to run against a broker instance.
+This instance can be mocked or embedded in the test JVM,
+or provisioned in a container runtime using <a href="https://testcontainers.org">Testcontainers</a>.
+The testcontainers approach is encouraged as it&#8217;ll provide a testing environment closest to reality.</p>
+</div>
+<div class="paragraph">
+<p>It may take too much time and resources to start a broker per test method or per test class,
+so may want to share the same broker instance between all test classes.
+In that case you can checkout how to write a <a href="https://junit.org/junit5/docs/current/user-guide/#extensions">JUnit 5 Extension</a>
+and start only one container instance in the beginning of tests and stop it at the end of all the tests.</p>
+</div>
+<div class="paragraph">
+<p>There are essentially two ways of creating the connector behavior to test against:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Instantiating channels directly by passing the custom configuration.
+With this you can get the Reactive stream directly from the channel implementation and send/receive messages.
+You can use <a href="https://smallrye.io/smallrye-mutiny/2.5.1/guides/testing/">AssertSubscriber from Mutiny</a> to regulate demand and write assertions.</p>
+</li>
+<li>
+<p>CDI-based tests which write configuration and instantiate application beans.
+You can use <a href="https://weld.cdi-spec.org/">Weld&#44; the reference implementation of CDI specification</a> with configured set of beans and extensions:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package connectors.test;
+
+import jakarta.enterprise.inject.spi.BeanManager;
+
+import org.eclipse.microprofile.config.ConfigProvider;
+import org.eclipse.microprofile.reactive.messaging.spi.ConnectorLiteral;
+import org.jboss.weld.environment.se.Weld;
+import org.jboss.weld.environment.se.WeldContainer;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+
+import connectors.MyConnector;
+import connectors.MyMessageConverter;
+import io.smallrye.config.SmallRyeConfigProviderResolver;
+import io.smallrye.config.inject.ConfigExtension;
+import io.smallrye.reactive.messaging.providers.MediatorFactory;
+import io.smallrye.reactive.messaging.providers.connectors.ExecutionHolder;
+import io.smallrye.reactive.messaging.providers.connectors.WorkerPoolRegistry;
+import io.smallrye.reactive.messaging.providers.extension.ChannelProducer;
+import io.smallrye.reactive.messaging.providers.extension.EmitterFactoryImpl;
+import io.smallrye.reactive.messaging.providers.extension.HealthCenter;
+import io.smallrye.reactive.messaging.providers.extension.LegacyEmitterFactoryImpl;
+import io.smallrye.reactive.messaging.providers.extension.MediatorManager;
+import io.smallrye.reactive.messaging.providers.extension.MutinyEmitterFactoryImpl;
+import io.smallrye.reactive.messaging.providers.extension.ReactiveMessagingExtension;
+import io.smallrye.reactive.messaging.providers.impl.ConfiguredChannelFactory;
+import io.smallrye.reactive.messaging.providers.impl.ConnectorFactories;
+import io.smallrye.reactive.messaging.providers.impl.InternalChannelRegistry;
+import io.smallrye.reactive.messaging.providers.metrics.MetricDecorator;
+import io.smallrye.reactive.messaging.providers.metrics.MicrometerDecorator;
+import io.smallrye.reactive.messaging.providers.wiring.Wiring;
+import io.smallrye.reactive.messaging.test.common.config.MapBasedConfig;
+
+public class WeldTestBase {
+
+    protected Weld weld;
+    protected WeldContainer container;
+
+    @BeforeEach
+    public void initWeld() {
+        weld = new Weld();
+
+        // SmallRye config
+        ConfigExtension extension = new ConfigExtension();
+        weld.addExtension(extension);
+
+        weld.addBeanClass(MediatorFactory.class);
+        weld.addBeanClass(MediatorManager.class);
+        weld.addBeanClass(InternalChannelRegistry.class);
+        weld.addBeanClass(ConnectorFactories.class);
+        weld.addBeanClass(ConfiguredChannelFactory.class);
+        weld.addBeanClass(ChannelProducer.class);
+        weld.addBeanClass(ExecutionHolder.class);
+        weld.addBeanClass(WorkerPoolRegistry.class);
+        weld.addBeanClass(HealthCenter.class);
+        weld.addBeanClass(Wiring.class);
+        weld.addExtension(new ReactiveMessagingExtension());
+
+        weld.addBeanClass(EmitterFactoryImpl.class);
+        weld.addBeanClass(MutinyEmitterFactoryImpl.class);
+        weld.addBeanClass(LegacyEmitterFactoryImpl.class);
+
+        weld.addBeanClass(MyConnector.class);
+        weld.addBeanClass(MyMessageConverter.class);
+        weld.addBeanClass(MetricDecorator.class);
+        weld.addBeanClass(MicrometerDecorator.class);
+        weld.disableDiscovery();
+    }
+
+    @AfterEach
+    public void stopContainer() {
+        if (container != null) {
+            // TODO Explicitly close the connector
+            getBeanManager().createInstance()
+                    .select(MyConnector.class, ConnectorLiteral.of(MyConnector.CONNECTOR_NAME)).get();
+            container.close();
+        }
+        // Release the config objects
+        SmallRyeConfigProviderResolver.instance().releaseConfig(ConfigProvider.getConfig());
+    }
+
+    public BeanManager getBeanManager() {
+        if (container == null) {
+            runApplication(new MapBasedConfig());
+        }
+        return container.getBeanManager();
+    }
+
+    public void addBeans(Class&lt;?&gt;... clazzes) {
+        weld.addBeanClasses(clazzes);
+    }
+
+    public &lt;T&gt; T get(Class&lt;T&gt; clazz) {
+        return getBeanManager().createInstance().select(clazz).get();
+    }
+
+    public &lt;T&gt; T runApplication(MapBasedConfig config, Class&lt;T&gt; clazz) {
+        weld.addBeanClass(clazz);
+        runApplication(config);
+        return get(clazz);
+    }
+
+    public void runApplication(MapBasedConfig config) {
+        if (config != null) {
+            config.write();
+        } else {
+            MapBasedConfig.cleanup();
+        }
+
+        container = weld.initialize();
+    }
+
+    public static void addConfig(MapBasedConfig config) {
+        if (config != null) {
+            config.write();
+        } else {
+            MapBasedConfig.cleanup();
+        }
+    }
+
+    public HealthCenter getHealth() {
+        if (container == null) {
+            throw new IllegalStateException("Application not started");
+        }
+        return container.getBeanManager().createInstance().select(HealthCenter.class).get();
+    }
+
+    public boolean isStarted() {
+        return getHealth().getStartup().isOk();
+    }
+
+    public boolean isReady() {
+        return getHealth().getReadiness().isOk();
+    }
+
+    public boolean isAlive() {
+        return getHealth().getLiveness().isOk();
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You would need following test dependencies for enabling Weld in tests:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">    &lt;dependency&gt;
+      &lt;groupId&gt;io.smallrye.reactive&lt;/groupId&gt;
+      &lt;artifactId&gt;test-common&lt;/artifactId&gt;
+      &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.jboss.weld.se&lt;/groupId&gt;
+      &lt;artifactId&gt;weld-se-shaded&lt;/artifactId&gt;
+      &lt;version&gt;${weld.version}&lt;/version&gt;
+      &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.jboss.weld&lt;/groupId&gt;
+      &lt;artifactId&gt;weld-core-impl&lt;/artifactId&gt;
+      &lt;version&gt;${weld.version}&lt;/version&gt;
+      &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.awaitility&lt;/groupId&gt;
+      &lt;artifactId&gt;awaitility&lt;/artifactId&gt;
+      &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Your test classes can therefore extend the <code>WeldTestBase</code> and provide configuration and application beans:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package connectors.test;
+
+import static org.awaitility.Awaitility.await;
+
+import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+import jakarta.enterprise.context.ApplicationScoped;
+
+import org.eclipse.microprofile.reactive.messaging.Incoming;
+import org.junit.jupiter.api.Test;
+
+import connectors.MyConnector;
+import io.smallrye.reactive.messaging.test.common.config.MapBasedConfig;
+
+public class MyConnectorTest extends WeldTestBase {
+
+    @Test
+    void incomingChannel() {
+        String host = "";
+        int port = 0;
+        String myTopic = UUID.randomUUID().toString();
+        MapBasedConfig config = new MapBasedConfig()
+                .with("mp.messaging.incoming.data.topic", myTopic)
+                .with("mp.messaging.incoming.data.host", host)
+                .with("mp.messaging.incoming.data.port", port)
+                .with("mp.messaging.incoming.data.connector", MyConnector.CONNECTOR_NAME);
+        MyApp app = runApplication(config, MyApp.class);
+
+        int expected = 10;
+        // produce expected number of messages to myTopic
+
+        // wait until app received
+        await().until(() -&gt; app.received().size() == expected);
+    }
+
+    @ApplicationScoped
+    public static class MyApp {
+
+        List&lt;String&gt; received = new CopyOnWriteArrayList&lt;&gt;();
+
+        @Incoming("data")
+        void consume(String msg) {
+            received.add(msg);
+        }
+
+        public List&lt;String&gt; received() {
+            return received;
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<div class="title">Awaitility</div>
+<div class="paragraph">
+<p>Because connector tests are usually asynchronous, <a href="https://github.com/awaitility/awaitility">awaitility</a>
+provides a DSL to await on expressed assertions.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="common-tests-for-validating-the-connector"><a class="anchor" href="#common-tests-for-validating-the-connector"></a>Common tests for validating the connector</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Message consumption through incoming channels</p>
+</li>
+<li>
+<p>Message producing through outgoing channels</p>
+</li>
+<li>
+<p>Ack and failure handler strategies test</p>
+</li>
+<li>
+<p>Message Context propagation test <code>LocalPropagationTest</code></p>
+</li>
+<li>
+<p><code>HealthCheckTest</code></p>
+</li>
+<li>
+<p><code>MessageConverterTest</code></p>
+</li>
+<li>
+<p><code>TracingPropagationTest</code></p>
+</li>
+<li>
+<p>Configuration test</p>
+</li>
+<li>
+<p>Authentication test</p>
+</li>
+<li>
+<p>Tests for</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>    <!--docs-version--><p class="docs-source" data-pagefind-ignore>
+    </p><!--/docs-version-->
+  </article>
+  <nav class="docs-toc" aria-label="On this page">
+    <details open data-docs-toc>
+      <summary class="toc-title">On this page</summary>
+      <nav class="roq-toc" aria-label="Table of contents">
+<ul>
+<li data-level="1"><a href="#implementing-inbound-channels">Implementing Inbound Channels</a>
+<ul>
+<li data-level="2"><a href="#connector-threading-and-vert-x">Connector Threading and Vert.x</a></li>
+<li data-level="2"><a href="#custom-message-and-metadata-implementations">Custom Message and Metadata implementations</a></li>
+<li data-level="2"><a href="#acknowledgment-strategies">Acknowledgment strategies</a></li>
+<li data-level="2"><a href="#failure-handling-strategies">Failure handling strategies</a></li>
+<li data-level="2"><a href="#message-converters">Message Converters</a></li>
+</ul>
+</li>
+<li data-level="1"><a href="#implementing-outbound-channels">Implementing Outbound Channels</a>
+<ul>
+<li data-level="2"><a href="#outgoing-message-builder">Outgoing Message Builder</a></li>
+<li data-level="2"><a href="#outgoing-message-acknowledgement">Outgoing message acknowledgement</a></li>
+</ul>
+</li>
+<li data-level="1"><a href="#smallrye-health-integration">Smallrye Health Integration</a></li>
+<li data-level="1"><a href="#opentelemetry-tracing-integration">OpenTelemetry Tracing Integration</a></li>
+<li data-level="1"><a href="#testing-the-connector">Testing the connector</a>
+<ul>
+<li data-level="2"><a href="#common-tests-for-validating-the-connector">Common tests for validating the connector</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+
+    </details>
+  </nav>
+</div>
+<dialog class="docs-search" data-docs-search aria-label="Search SmallRye Reactive Messaging">
+  <div class="docs-search-bar" role="search">
+    <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <input type="search" data-docs-search-input placeholder="Search SmallRye Reactive Messaging 4.13.0" aria-label="Search SmallRye Reactive Messaging documentation" autocomplete="off" spellcheck="false">
+    <button type="button" class="docs-search-close" data-docs-search-close>Esc</button>
+  </div>
+  <p class="docs-search-status" data-docs-search-status aria-live="polite"></p>
+  <ul class="docs-search-results" data-docs-search-results></ul>
+</dialog>
+
+  </main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-about">
+      <a class="footer-logo" href="/"><img src="/images/logo-dark.svg" alt="SmallRye" width="140" height="36" loading="lazy"></a>
+      <p>SmallRye is open source under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache Software License 2.0</a>.</p>
+      <p>This website is built with <a href="https://iamroq.dev/">Quarkus Roq</a>, hosted on <a href="https://pages.github.com/">GitHub Pages</a> and is completely open source. If you want to make it better, <a href="https://github.com/smallrye/smallrye.github.io">fork the website</a> and show us what you've got.</p>
+    </div>
+    <nav aria-label="Site">
+      <p class="footer-head">Navigation</p>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/docs/">Documentation</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Contribute and get help">
+      <p class="footer-head">Contribute</p>
+      <ul>
+        <li><a href="https://github.com/smallrye">GitHub</a></li>
+        <li><a href="https://twitter.com/smallrye_io">Follow us</a></li>
+      </ul>
+      <p class="footer-head">Get help</p>
+      <ul>
+        <li><a href="https://quarkusio.zulipchat.com">Chatroom</a></li>
+        <li><a href="https://groups.google.com/d/forum/smallrye">Google Groups</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="External links">
+      <p class="footer-head">External links</p>
+      <ul>
+        <li><a href="https://microprofile.io/">Eclipse MicroProfile</a></li>
+        <li><a href="https://github.com/eclipse?q=microprofile">Eclipse MicroProfile on GitHub</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <div class="container footer-bottom-bar">
+      <p><a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></p>
+      <p class="sponsor">A <a href="https://www.commonhaus.org/">Commonhaus Foundation</a> project <a href="https://www.commonhaus.org/"><img src="/assets/images/commonhaus_reversed.svg" alt="Commonhaus Foundation" width="200" height="21" loading="lazy"></a></p>
+      <p class="footer-trademark">Copyright &copy; SmallRye. For details on our trademarks, please visit our <a href="https://www.commonhaus.org/policies/trademark-policy/">Trademark Policy</a> and <a href="https://www.commonhaus.org/trademarks/">Trademark List</a>. Trademarks of third parties are owned by their respective holders and their mention here does not suggest any endorsement or association.</p>
+    </div>
+  </div>
+</footer>
+<!-- Light/dark switch. Hidden until the script wires it, so a no-JS visitor
+     never sees a dead button. Every site has it: keep it. -->
+<button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark theme" hidden>
+  <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
+  <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/></svg>
+</button>
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.querySelector('.theme-toggle');
+    if (!btn) return;
+    btn.hidden = false;
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    function isDark() { var t = root.getAttribute('data-theme'); return t ? t === 'dark' : mq.matches; }
+    function sync() {
+      btn.setAttribute('aria-pressed', isDark() ? 'true' : 'false');
+      btn.setAttribute('aria-label', isDark() ? 'Switch to light theme' : 'Switch to dark theme');
+    }
+    btn.addEventListener('click', function () {
+      var next = isDark() ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('site-theme', next); } catch (e) { /* not fatal */ }
+      sync();
+    });
+    mq.addEventListener('change', sync);
+    sync();
+  })();
+</script>
+</body>
+</html>

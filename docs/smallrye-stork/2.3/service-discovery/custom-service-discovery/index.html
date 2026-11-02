@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://api.github.com; base-uri 'none'; object-src 'none'; form-action 'none'">
+
+  <!-- SEO TITLE -->
+  
+  <title>Implement your own service discovery mechanism - SmallRye</title>
+  <meta property="og:title" content="Implement your own service discovery mechanism" />
+  <meta name="twitter:title" content="Implement your own service discovery mechanism">
+  <meta property="og:site_name" content="SmallRye">
+  <!-- SEO DESCRIPTION -->
+  <meta name="description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+  <meta property="og:description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile." />
+  <meta name="twitter:description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+
+  <!-- SEO URL -->
+  <link rel="canonical" href="https://smallrye.io/docs/smallrye-stork/2.3/service-discovery/custom-service-discovery/" />
+  <meta property="og:url" content="https://smallrye.io/docs/smallrye-stork/2.3/service-discovery/custom-service-discovery/" />
+  <meta name="twitter:url" content="https://smallrye.io/docs/smallrye-stork/2.3/service-discovery/custom-service-discovery/">
+
+  <!-- SEO TYPE -->
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2026-11-02T00:30:18.788499582Z[UTC]" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image" content="https://smallrye.io/images/rye-field-og.jpg">
+  <meta name="twitter:image" content="https://smallrye.io/images/rye-field-og.jpg">
+  <!-- SEO COLLECTION PAGES -->
+  <link rel="prev" href="https://smallrye.io/docs/smallrye-stork/2.3/service-discovery/dns/" />
+  <link rel="next" href="https://smallrye.io/docs/smallrye-stork/2.3/service-discovery/consul/" />
+  <!-- SEO TWITTER -->
+  <meta name="twitter:site" content="@smallrye_io" />
+  <meta name="twitter:creator" content="@smallrye_io" />
+  <!-- SEO LOCALE -->
+  <meta property="og:locale" content="en" />
+  <!-- SEO GENERATOR -->
+  <meta name="generator" content="Quarkus Roq v2.1.9" />
+
+<link rel="alternate" type="application/rss+xml" title="SmallRye" href="https://smallrye.io/rss.xml"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <script>
+    try {
+      var t = localStorage.getItem('site-theme');
+      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    } catch (e) { /* private mode: follow the OS preference */ }
+  </script>
+  <link rel="stylesheet" href="/css/main.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://smallrye.io/#organization",
+      "name": "SmallRye",
+      "url": "https://smallrye.io/",
+      "logo": "https://smallrye.io/images/logo.svg",
+      "description": "SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.",
+      "email": "smallrye@googlegroups.com",
+      "sameAs": [
+        "https://github.com/smallrye",
+        "https://twitter.com/smallrye_io",
+        "https://groups.google.com/d/forum/smallrye"
+      ],
+      "parentOrganization": { "@type": "Organization", "name": "Commonhaus Foundation", "url": "https://www.commonhaus.org/" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://smallrye.io/#website",
+      "name": "SmallRye",
+      "url": "https://smallrye.io/",
+      "publisher": { "@id": "https://smallrye.io/#organization" }
+    }
+  ]
+}
+</script>
+    <script type="module" src="/static/bundle/app-KFNV2DMD.js"></script>
+      <!-- no style found for key 'app' in Bundler mapping !-->
+<script>
+  try {
+    if (matchMedia('(min-width: 60rem)').matches && localStorage.getItem('docs-nav') === 'open') document.documentElement.classList.add('docs-nav-open');
+    if (localStorage.getItem('docs-toc') === 'closed') document.documentElement.classList.add('docs-toc-closed');
+  } catch (e) { /* storage blocked: closed */ }
+</script>
+<noscript><style>.docs-nav { display: block !important; } .docs-nav-button { display: none !important; }</style></noscript>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand" href="/">
+      <img class="logo-light" src="/images/logo.svg" alt="SmallRye" width="160" height="41">
+      <img class="logo-dark" src="/images/logo-dark.svg" alt="SmallRye" width="160" height="41">
+    </a>
+<div class="docs-brand">
+  <a class="docs-brand-project" href="/docs/smallrye-stork/2.3/"><span class="project-logo" style="--logo: url('/images/projects/smallrye-stork.png')" aria-hidden="true"></span><span class="docs-brand-name">Stork</span></a>
+  <!--docs-version--><label class="docs-version">
+    <span class="visually-hidden">Version</span>
+    <select data-docs-version data-current="2.3" data-base="/docs/smallrye-stork/">
+      
+      <option value="latest">3.0.3 (latest)</option>
+      
+                  <optgroup label="2.x">
+      
+      <option value="2.7">2.7.11</option>
+      
+                  
+      
+      <option value="2.6">2.6.3</option>
+      
+                  
+      
+      <option value="2.5">2.5.0</option>
+      
+                  
+      
+      <option value="2.4">2.4.0</option>
+      
+                  
+      
+      <option value="2.3" selected>2.3.2</option>
+      
+                  
+      
+      <option value="2.2">2.2.1</option>
+      
+                  
+      
+      <option value="2.1">2.1.0</option>
+      
+                  
+      
+      <option value="2.0">2.0.1</option>
+      
+                  </optgroup><optgroup label="1.x">
+      
+      <option value="1">1.4.2</option>
+      
+      </optgroup>
+      <option value="main">main (snapshot)</option>
+      
+      
+    </select>
+  </label><!--/docs-version-->
+  <div class="docs-tools">
+    <button type="button" class="docs-search-button" data-docs-search-open aria-haspopup="dialog" aria-keyshortcuts="/">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <span>Search</span><kbd aria-hidden="true">/</kbd>
+    </button>
+    <a class="docs-github" href="https://github.com/smallrye/smallrye-stork" title="smallrye/smallrye-stork on GitHub" data-docs-github="smallrye/smallrye-stork">
+      <svg aria-hidden="true" viewBox="0 0 16 16" width="26" height="26"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      <span class="docs-github-text">
+        <span class="docs-github-name">GitHub<span class="visually-hidden">: smallrye/smallrye-stork</span></span>
+        <span class="docs-github-facts"><span title="Latest release">3.0.3</span><span data-docs-github-stars hidden></span><span data-docs-github-forks hidden></span></span>
+      </span>
+    </a>
+  </div>
+</div>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-input" aria-label="Toggle menu">
+    <label for="nav-toggle" class="nav-toggle"><span></span></label>
+    <nav class="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/docs/" aria-current="page">Documentation</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+  <main id="main">
+
+<div class="container docs-layout">
+  <aside class="docs-side">
+    <button type="button" class="docs-nav-button" aria-controls="docs-nav" aria-expanded="false" data-docs-nav-button>
+      <span class="docs-nav-icon" aria-hidden="true"></span><span class="docs-nav-label">Contents</span>
+    </button>
+    <nav id="docs-nav" class="docs-nav" aria-label="SmallRye Stork documentation">
+      <!--docs-version-->
+<ul>
+  <li><a href="/docs/smallrye-stork/2.3/">Overview</a></li>
+  <li><a href="/docs/smallrye-stork/2.3/concepts/">Concepts</a></li>
+  <li><a href="/docs/smallrye-stork/2.3/programmatic-api/">Programmatic API</a></li>
+  <li><a href="https://javadoc.io/doc/io.smallrye.stork/smallrye-stork-api/latest/index.html">Javadoc</a></li>
+  <li><a href="/docs/smallrye-stork/2.3/quarkus/">Using Stork with Quarkus</a></li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Service Discovery</summary>
+<ul>
+  <li><a href="/docs/smallrye-stork/2.3/service-discovery/consul/">Consul</a></li>
+  <li><a href="/docs/smallrye-stork/2.3/service-discovery/dns/">DNS</a></li>
+  <li><a href="/docs/smallrye-stork/2.3/service-discovery/kubernetes/">Kubernetes</a></li>
+  <li><a href="/docs/smallrye-stork/2.3/service-discovery/knative/">KNative</a></li>
+  <li><a href="/docs/smallrye-stork/2.3/service-discovery/eureka/">Eureka</a></li>
+  <li><a href="/docs/smallrye-stork/2.3/service-discovery/composite/">Composite</a></li>
+  <li><a href="/docs/smallrye-stork/2.3/service-discovery/static-list/">Static List</a></li>
+  <li><a href="/docs/smallrye-stork/2.3/service-discovery/custom-service-discovery/" aria-current="page">Custom Service Discovery</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Load-Balancing</summary>
+<ul>
+  <li><a href="/docs/smallrye-stork/2.3/load-balancer/round-robin/">Round Robin</a></li>
+  <li><a href="/docs/smallrye-stork/2.3/load-balancer/random/">Random</a></li>
+  <li><a href="/docs/smallrye-stork/2.3/load-balancer/least-requests/">Least Requests</a></li>
+  <li><a href="/docs/smallrye-stork/2.3/load-balancer/response-time/">Response Time</a></li>
+  <li><a href="/docs/smallrye-stork/2.3/load-balancer/power-of-two-choices/">Power Of Two Choices</a></li>
+  <li><a href="/docs/smallrye-stork/2.3/load-balancer/sticky/">Sticky</a></li>
+  <li><a href="/docs/smallrye-stork/2.3/load-balancer/custom-load-balancer/">Custom Load Balancer</a></li>
+</ul>
+    </details>
+  </li>
+</ul>
+      <!--/docs-version-->
+    </nav>
+  </aside>
+  <article class="docs-main prose" data-pagefind-body>
+    <!--docs-version-->
+    <span data-pagefind-filter="version:2.3" hidden></span>
+    <p class="docs-notice" data-pagefind-ignore>This is the documentation of SmallRye Stork 2.3.2, released <time datetime="2023-07-26">2023-07-26</time>. It is not the latest release: <a href="/docs/smallrye-stork/latest/" data-docs-same-page>read the documentation of 3.0.3</a>.</p>
+    <!--/docs-version-->
+    <h1>Implement your own service discovery mechanism</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Stork is extensible, and you can implement your own service discovery mechanism.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="dependencies"><a class="anchor" href="#dependencies"></a>Dependencies</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To implement your <em>Service Discovery Provider</em>, make sure your project depends on Core and Configuration Generator.
+The former brings classes necessary to implement custom discovery, the latter contains an <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.compiler/javax/annotation/processing/Processor.html">annotation processor</a> that generates classes needed by Stork.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;io.smallrye.stork&lt;/groupId&gt;
+    &lt;artifactId&gt;stork-core&lt;/artifactId&gt;
+    &lt;version&gt;2.3.2&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;io.smallrye.stork&lt;/groupId&gt;
+    &lt;artifactId&gt;stork-configuration-generator&lt;/artifactId&gt;
+    &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;!-- provided scope is sufficient for the annotation processor --&gt;
+    &lt;version&gt;2.3.2&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="implementing-a-service-discovery-provider"><a class="anchor" href="#implementing-a-service-discovery-provider"></a>Implementing a service discovery provider</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Service discovery implementation consists of three elements:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ServiceDiscovery</code> which is responsible for locating service instances for a single Stork service.</p>
+</li>
+<li>
+<p><code>ServiceDiscoveryProvider</code> which creates instances of <code>ServiceDiscovery</code> for a given service discovery <em>type</em>.</p>
+</li>
+<li>
+<p><code>$typeConfiguration</code> which is a configuration for the discovery. This class is automatically generated during the compilation (using an annotation processor).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A <em>type</em>, for example, <code>acme</code>, identifies each provider.
+This <em>type</em> is used in the configuration to reference the provider:</p>
+</div>
+<div class="exampleblock tabs">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">stork standalone</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">stork.my-service.service-discovery.type=acme</code></pre>
+</div>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">stork in quarkus</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">quarkus.stork.my-service.service-discovery.type=acme</code></pre>
+</div>
+</div>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>A <code>ServiceDiscoveryProvider</code> implementation needs to be annotated with <code>@ServiceDiscoveryType</code> that defines the <em>type</em>.
+Any configuration properties that the provider expects should be defined with <code>@ServiceDiscoveryAttribute</code> annotations placed on the provider.
+Optionally, you can also add <code>@ApplicationScoped</code> annotation in order to provide the service discovery implementation as CDI bean.</p>
+</div>
+<div class="paragraph">
+<p>A service discovery provider class should look as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package examples;
+
+import io.smallrye.stork.api.ServiceDiscovery;
+import io.smallrye.stork.api.config.ServiceConfig;
+import io.smallrye.stork.api.config.ServiceDiscoveryAttribute;
+import io.smallrye.stork.api.config.ServiceDiscoveryType;
+import io.smallrye.stork.spi.StorkInfrastructure;
+import io.smallrye.stork.spi.ServiceDiscoveryProvider;
+import jakarta.enterprise.context.ApplicationScoped;
+
+@ServiceDiscoveryType("acme")
+@ServiceDiscoveryAttribute(name = "host",
+        description = "Host name of the service discovery server.", required = true)
+@ServiceDiscoveryAttribute(name = "port",
+        description = "Hort of the service discovery server.", required = false)
+@ApplicationScoped
+public class AcmeServiceDiscoveryProvider
+        implements ServiceDiscoveryProvider&lt;AcmeConfiguration&gt; {
+
+    @Override
+    public ServiceDiscovery createServiceDiscovery(
+            AcmeConfiguration config,
+            String serviceName,
+            ServiceConfig serviceConfig,
+            StorkInfrastructure storkInfrastructure) {
+        return new AcmeServiceDiscovery(config);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note, that the <code>ServiceDiscoveryProvider</code> interface takes a configuration class as a parameter. This configuration class
+is generated automatically by the <em>Configuration Generator</em>.
+Its name is created by appending <code>Configuration</code> to the service discovery type, such as <code>AcmeConfiguration</code>.</p>
+</div>
+<div class="paragraph">
+<p>The next step is to implement the <code>ServiceDiscovery</code> interface:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package examples;
+
+import java.util.Collections;
+import java.util.List;
+
+import io.smallrye.mutiny.Uni;
+import io.smallrye.stork.api.ServiceDiscovery;
+import io.smallrye.stork.api.ServiceInstance;
+import io.smallrye.stork.impl.DefaultServiceInstance;
+import io.smallrye.stork.utils.ServiceInstanceIds;
+
+public class AcmeServiceDiscovery implements ServiceDiscovery {
+
+    private final String host;
+    private final int port;
+
+    public AcmeServiceDiscovery(AcmeConfiguration configuration) {
+        this.host = configuration.getHost();
+        this.port = Integer.parseInt(configuration.getPort());
+    }
+
+    @Override
+    public Uni&lt;List&lt;ServiceInstance&gt;&gt; getServiceInstances() {
+        // Proceed to the lookup...
+        // Here, we just return a DefaultServiceInstance with the configured host and port
+        // The last parameter specifies whether the communication with the instance should
+        // happen over a secure connection
+        DefaultServiceInstance instance =
+                new DefaultServiceInstance(ServiceInstanceIds.next(), host, port, false);
+        return Uni.createFrom().item(() -&gt; Collections.singletonList(instance));
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This implementation is simplistic.
+Typically, instead of creating a service instance with values from the configuration, you would connect to a service discovery backend, look for the service and build the list of service instance accordingly.
+That&#8217;s why the method returns a <code>Uni</code>.
+Most of the time, the lookup is a remote operation.</p>
+</div>
+<div class="paragraph">
+<p>As you can see, the <code>AcmeConfiguration</code> class gives access to the configuration attribute.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="using-your-service-discovery"><a class="anchor" href="#using-your-service-discovery"></a>Using your service discovery</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the project using it, don&#8217;t forget to add the dependency on the module providing your implementation.
+Then, in the configuration, just add:</p>
+</div>
+<div class="exampleblock tabs">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">stork standalone</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">stork.my-service.service-discovery.type=acme
+stork.my-service.service-discovery.host=localhost
+stork.my-service.service-discovery.port=1234</code></pre>
+</div>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">stork in quarkus</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">quarkus.stork.my-service.service-discovery.type=acme
+quarkus.stork.my-service.service-discovery.host=localhost
+quarkus.stork.my-service.service-discovery.port=1234</code></pre>
+</div>
+</div>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Then, Stork will use your implementation to locate the <code>my-service</code> service.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="using-your-service-discovery-using-the-programmatic-api"><a class="anchor" href="#using-your-service-discovery-using-the-programmatic-api"></a>Using your service discovery using the programmatic API</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When building your service discovery project, the configuration generator creates a configuration class.
+This class can be used to configure your service discovery using the Stork programmatic API.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package examples;
+
+import io.smallrye.mutiny.Uni;
+import io.smallrye.stork.api.ServiceDefinition;
+import io.smallrye.stork.api.ServiceInstance;
+import io.smallrye.stork.api.StorkServiceRegistry;
+
+public class AcmeDiscoveryApiUsage {
+
+    public void example(StorkServiceRegistry stork) {
+        stork.defineIfAbsent("my-service", ServiceDefinition.of(
+                new AcmeConfiguration().withHost("my-host"))
+        );
+
+        Uni&lt;ServiceInstance&gt; uni = stork.getService("my-service").selectInstance();
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Remember that attributes, like <code>host</code>, are declared using the <code>@ServiceDiscoveryAttribute</code> annotation on the <code>ServiceDiscoveryProvider</code> implementation.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="caching-the-service-instances"><a class="anchor" href="#caching-the-service-instances"></a>Caching the service instances</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Your <code>ServiceDiscovery</code> implementation can extend <code>io.smallrye.stork.impl.CachingServiceDiscovery</code> to automatically <em>cache</em> the service instances.
+In this case, the retrieved set of <code>ServiceInstance</code> is cached and only updated after some time.
+This duration is an additional configuration attribute.
+For homogeneity, we recommend the following attribute:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@ServiceDiscoveryAttribute(name = "refresh-period", description = "Service discovery cache refresh period.",
+        defaultValue = CachingServiceDiscovery.DEFAULT_REFRESH_INTERVAL)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following snippet extends the <em>acme</em> service discovery with the <code>refresh-period</code> attribute:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package examples;
+
+import io.smallrye.stork.api.ServiceDiscovery;
+import io.smallrye.stork.api.config.ServiceConfig;
+import io.smallrye.stork.api.config.ServiceDiscoveryAttribute;
+import io.smallrye.stork.api.config.ServiceDiscoveryType;
+import io.smallrye.stork.impl.CachingServiceDiscovery;
+import io.smallrye.stork.spi.ServiceDiscoveryProvider;
+import io.smallrye.stork.spi.StorkInfrastructure;
+import jakarta.enterprise.context.ApplicationScoped;
+
+@ServiceDiscoveryType("cached-acme")
+@ServiceDiscoveryAttribute(name = "host",
+        description = "Host name of the service discovery server.", required = true)
+@ServiceDiscoveryAttribute(name = "port",
+        description = "Hort of the service discovery server.", required = false)
+@ServiceDiscoveryAttribute(name = "refresh-period",
+        description = "Service discovery cache refresh period.",
+        defaultValue = CachingServiceDiscovery.DEFAULT_REFRESH_INTERVAL)
+@ApplicationScoped
+public class CachedAcmeServiceDiscoveryProvider
+        implements ServiceDiscoveryProvider&lt;CachedAcmeConfiguration&gt; {
+
+    @Override
+    public ServiceDiscovery createServiceDiscovery(
+            CachedAcmeConfiguration config,
+            String serviceName,
+            ServiceConfig serviceConfig,
+            StorkInfrastructure storkInfrastructure) {
+        return new CachedAcmeServiceDiscovery(config);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Extending <code>io.smallrye.stork.impl.CachingServiceDiscovery</code> changes the structure of the service discovery implementation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package examples;
+
+import io.smallrye.mutiny.Uni;
+import io.smallrye.stork.api.ServiceDiscovery;
+import io.smallrye.stork.api.ServiceInstance;
+import io.smallrye.stork.impl.CachingServiceDiscovery;
+import io.smallrye.stork.impl.DefaultServiceInstance;
+import io.smallrye.stork.utils.ServiceInstanceIds;
+
+import java.util.Collections;
+import java.util.List;
+
+public class CachedAcmeServiceDiscovery extends CachingServiceDiscovery {
+
+    private final String host;
+    private final int port;
+
+    public CachedAcmeServiceDiscovery(CachedAcmeConfiguration configuration) {
+        super(configuration.getRefreshPeriod()); // (1)
+        this.host = configuration.getHost();
+        this.port = Integer.parseInt(configuration.getPort());
+    }
+
+    @Override  // (2)
+    public Uni&lt;List&lt;ServiceInstance&gt;&gt; fetchNewServiceInstances(List&lt;ServiceInstance&gt; previousInstances) {
+        // Retrieve services...
+        DefaultServiceInstance instance =
+                new DefaultServiceInstance(ServiceInstanceIds.next(), host, port, false);
+        return Uni.createFrom().item(() -&gt; Collections.singletonList(instance));
+    }
+}</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Call the <code>super</code> constructor with the <code>refresh-period</code> value</p>
+</li>
+<li>
+<p>Implement <code>fetchNewServiceInstances</code> instead of <code>getServiceInstances</code>.
+The method is called periodically, and the retrieved instances are cached.
+This implementation is simplistic.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>If the retrieval fails, the error is reported, and Stork keeps the previously retrieved list of instances.</p>
+</div>
+<div class="sect2">
+<h3 id="customizing-the-caching-strategy"><a class="anchor" href="#customizing-the-caching-strategy"></a>Customizing the caching strategy</h3>
+<div class="paragraph">
+<p>Sometimes it can be useful to change this behaviour and customize the cache expiration strategy.</p>
+</div>
+<div class="paragraph">
+<p>For example, imagine you are using a backend service discovery where service instances can change very frequently.</p>
+</div>
+<div class="paragraph">
+<p>Moreover, contacting the backend service discovery can be expensive in terms of computing,
+thus finding a good value for the refreshing time can be mission impossible.</p>
+</div>
+<div class="paragraph">
+<p>For these situations, Stork allows to implement a better expiration strategy for the cache.</p>
+</div>
+<div class="paragraph">
+<p>If you want to customize the expiration strategy, you need:
+1. Implement the <code>cache</code> method where the expiration strategy should be defined.
+2. Invalidate the cache when expiration condition evaluates to true.</p>
+</div>
+<div class="paragraph">
+<p>Take a look to the <a href="/docs/smallrye-stork/2.3/service-discovery/kubernetes/#caching-the-service-instances">Kubernetes Service Discovery</a> for further details about this feature.</p>
+</div>
+</div>
+</div>
+</div>    <!--docs-version--><p class="docs-source" data-pagefind-ignore>
+    </p><!--/docs-version-->
+  </article>
+  <nav class="docs-toc" aria-label="On this page">
+    <details open data-docs-toc>
+      <summary class="toc-title">On this page</summary>
+      <nav class="roq-toc" aria-label="Table of contents">
+<ul>
+<li data-level="1"><a href="#dependencies">Dependencies</a></li>
+<li data-level="1"><a href="#implementing-a-service-discovery-provider">Implementing a service discovery provider</a></li>
+<li data-level="1"><a href="#using-your-service-discovery">Using your service discovery</a></li>
+<li data-level="1"><a href="#using-your-service-discovery-using-the-programmatic-api">Using your service discovery using the programmatic API</a></li>
+<li data-level="1"><a href="#caching-the-service-instances">Caching the service instances</a>
+<ul>
+<li data-level="2"><a href="#customizing-the-caching-strategy">Customizing the caching strategy</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+
+    </details>
+  </nav>
+</div>
+<dialog class="docs-search" data-docs-search aria-label="Search SmallRye Stork">
+  <div class="docs-search-bar" role="search">
+    <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <input type="search" data-docs-search-input placeholder="Search SmallRye Stork 2.3.2" aria-label="Search SmallRye Stork documentation" autocomplete="off" spellcheck="false">
+    <button type="button" class="docs-search-close" data-docs-search-close>Esc</button>
+  </div>
+  <p class="docs-search-status" data-docs-search-status aria-live="polite"></p>
+  <ul class="docs-search-results" data-docs-search-results></ul>
+</dialog>
+
+  </main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-about">
+      <a class="footer-logo" href="/"><img src="/images/logo-dark.svg" alt="SmallRye" width="140" height="36" loading="lazy"></a>
+      <p>SmallRye is open source under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache Software License 2.0</a>.</p>
+      <p>This website is built with <a href="https://iamroq.dev/">Quarkus Roq</a>, hosted on <a href="https://pages.github.com/">GitHub Pages</a> and is completely open source. If you want to make it better, <a href="https://github.com/smallrye/smallrye.github.io">fork the website</a> and show us what you've got.</p>
+    </div>
+    <nav aria-label="Site">
+      <p class="footer-head">Navigation</p>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/docs/">Documentation</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Contribute and get help">
+      <p class="footer-head">Contribute</p>
+      <ul>
+        <li><a href="https://github.com/smallrye">GitHub</a></li>
+        <li><a href="https://twitter.com/smallrye_io">Follow us</a></li>
+      </ul>
+      <p class="footer-head">Get help</p>
+      <ul>
+        <li><a href="https://quarkusio.zulipchat.com">Chatroom</a></li>
+        <li><a href="https://groups.google.com/d/forum/smallrye">Google Groups</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="External links">
+      <p class="footer-head">External links</p>
+      <ul>
+        <li><a href="https://microprofile.io/">Eclipse MicroProfile</a></li>
+        <li><a href="https://github.com/eclipse?q=microprofile">Eclipse MicroProfile on GitHub</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <div class="container footer-bottom-bar">
+      <p><a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></p>
+      <p class="sponsor">A <a href="https://www.commonhaus.org/">Commonhaus Foundation</a> project <a href="https://www.commonhaus.org/"><img src="/assets/images/commonhaus_reversed.svg" alt="Commonhaus Foundation" width="200" height="21" loading="lazy"></a></p>
+      <p class="footer-trademark">Copyright &copy; SmallRye. For details on our trademarks, please visit our <a href="https://www.commonhaus.org/policies/trademark-policy/">Trademark Policy</a> and <a href="https://www.commonhaus.org/trademarks/">Trademark List</a>. Trademarks of third parties are owned by their respective holders and their mention here does not suggest any endorsement or association.</p>
+    </div>
+  </div>
+</footer>
+<!-- Light/dark switch. Hidden until the script wires it, so a no-JS visitor
+     never sees a dead button. Every site has it: keep it. -->
+<button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark theme" hidden>
+  <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
+  <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/></svg>
+</button>
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.querySelector('.theme-toggle');
+    if (!btn) return;
+    btn.hidden = false;
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    function isDark() { var t = root.getAttribute('data-theme'); return t ? t === 'dark' : mq.matches; }
+    function sync() {
+      btn.setAttribute('aria-pressed', isDark() ? 'true' : 'false');
+      btn.setAttribute('aria-label', isDark() ? 'Switch to light theme' : 'Switch to dark theme');
+    }
+    btn.addEventListener('click', function () {
+      var next = isDark() ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('site-theme', next); } catch (e) { /* not fatal */ }
+      sync();
+    });
+    mq.addEventListener('change', sync);
+    sync();
+  })();
+</script>
+</body>
+</html>

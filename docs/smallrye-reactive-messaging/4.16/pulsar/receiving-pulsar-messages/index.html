@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://api.github.com; base-uri 'none'; object-src 'none'; form-action 'none'">
+
+  <!-- SEO TITLE -->
+  
+  <title>Receiving messages from Pulsar - SmallRye</title>
+  <meta property="og:title" content="Receiving messages from Pulsar" />
+  <meta name="twitter:title" content="Receiving messages from Pulsar">
+  <meta property="og:site_name" content="SmallRye">
+  <!-- SEO DESCRIPTION -->
+  <meta name="description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+  <meta property="og:description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile." />
+  <meta name="twitter:description" content="SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.">
+
+  <!-- SEO URL -->
+  <link rel="canonical" href="https://smallrye.io/docs/smallrye-reactive-messaging/4.16/pulsar/receiving-pulsar-messages/" />
+  <meta property="og:url" content="https://smallrye.io/docs/smallrye-reactive-messaging/4.16/pulsar/receiving-pulsar-messages/" />
+  <meta name="twitter:url" content="https://smallrye.io/docs/smallrye-reactive-messaging/4.16/pulsar/receiving-pulsar-messages/">
+
+  <!-- SEO TYPE -->
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2026-11-02T00:30:18.771172088Z[UTC]" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image" content="https://smallrye.io/images/rye-field-og.jpg">
+  <meta name="twitter:image" content="https://smallrye.io/images/rye-field-og.jpg">
+  <!-- SEO COLLECTION PAGES -->
+  <!-- SEO TWITTER -->
+  <meta name="twitter:site" content="@smallrye_io" />
+  <meta name="twitter:creator" content="@smallrye_io" />
+  <!-- SEO LOCALE -->
+  <meta property="og:locale" content="en" />
+  <!-- SEO GENERATOR -->
+  <meta name="generator" content="Quarkus Roq v2.1.9" />
+
+<link rel="alternate" type="application/rss+xml" title="SmallRye" href="https://smallrye.io/rss.xml"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <script>
+    try {
+      var t = localStorage.getItem('site-theme');
+      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    } catch (e) { /* private mode: follow the OS preference */ }
+  </script>
+  <link rel="stylesheet" href="/css/main.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://smallrye.io/#organization",
+      "name": "SmallRye",
+      "url": "https://smallrye.io/",
+      "logo": "https://smallrye.io/images/logo.svg",
+      "description": "SmallRye is a project to share and collaborate on implementing specifications that are part of Eclipse MicroProfile.",
+      "email": "smallrye@googlegroups.com",
+      "sameAs": [
+        "https://github.com/smallrye",
+        "https://twitter.com/smallrye_io",
+        "https://groups.google.com/d/forum/smallrye"
+      ],
+      "parentOrganization": { "@type": "Organization", "name": "Commonhaus Foundation", "url": "https://www.commonhaus.org/" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://smallrye.io/#website",
+      "name": "SmallRye",
+      "url": "https://smallrye.io/",
+      "publisher": { "@id": "https://smallrye.io/#organization" }
+    }
+  ]
+}
+</script>
+    <script type="module" src="/static/bundle/app-KFNV2DMD.js"></script>
+      <!-- no style found for key 'app' in Bundler mapping !-->
+<script>
+  try {
+    if (matchMedia('(min-width: 60rem)').matches && localStorage.getItem('docs-nav') === 'open') document.documentElement.classList.add('docs-nav-open');
+    if (localStorage.getItem('docs-toc') === 'closed') document.documentElement.classList.add('docs-toc-closed');
+  } catch (e) { /* storage blocked: closed */ }
+</script>
+<noscript><style>.docs-nav { display: block !important; } .docs-nav-button { display: none !important; }</style></noscript>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand" href="/">
+      <img class="logo-light" src="/images/logo.svg" alt="SmallRye" width="160" height="41">
+      <img class="logo-dark" src="/images/logo-dark.svg" alt="SmallRye" width="160" height="41">
+    </a>
+<div class="docs-brand">
+  <a class="docs-brand-project" href="/docs/smallrye-reactive-messaging/4.16/"><span class="project-logo" style="--logo: url('/images/projects/smallrye-reactive-messaging.png')" aria-hidden="true"></span><span class="docs-brand-name">Reactive Messaging</span></a>
+  <!--docs-version--><label class="docs-version">
+    <span class="visually-hidden">Version</span>
+    <select data-docs-version data-current="4.16" data-base="/docs/smallrye-reactive-messaging/">
+      
+      <option value="latest">5.0.0-RC2 (latest)</option>
+      
+                  <optgroup label="4.x">
+      
+      <option value="4.37">4.37.1</option>
+      
+                  
+      
+      <option value="4.36">4.36.0</option>
+      
+                  
+      
+      <option value="4.35">4.35.0</option>
+      
+                  
+      
+      <option value="4.34">4.34.0</option>
+      
+                  
+      
+      <option value="4.33">4.33.1</option>
+      
+                  
+      
+      <option value="4.32">4.32.1</option>
+      
+                  
+      
+      <option value="4.31">4.31.0</option>
+      
+                  
+      
+      <option value="4.30">4.30.0</option>
+      
+                  
+      
+      <option value="4.29">4.29.0</option>
+      
+                  
+      
+      <option value="4.28">4.28.0</option>
+      
+                  
+      
+      <option value="4.27">4.27.0</option>
+      
+                  
+      
+      <option value="4.26">4.26.0</option>
+      
+                  
+      
+      <option value="4.25">4.25.0</option>
+      
+                  
+      
+      <option value="4.24">4.24.1</option>
+      
+                  
+      
+      <option value="4.23">4.23.0</option>
+      
+                  
+      
+      <option value="4.22">4.22.0</option>
+      
+                  
+      
+      <option value="4.21">4.21.0</option>
+      
+                  
+      
+      <option value="4.20">4.20.0</option>
+      
+                  
+      
+      <option value="4.19">4.19.0</option>
+      
+                  
+      
+      <option value="4.18">4.18.1</option>
+      
+                  
+      
+      <option value="4.17">4.17.0</option>
+      
+                  
+      
+      <option value="4.16" selected>4.16.2</option>
+      
+                  
+      
+      <option value="4.15">4.15.0</option>
+      
+                  
+      
+      <option value="4.14">4.14.0</option>
+      
+                  
+      
+      <option value="4.13">4.13.0</option>
+      
+                  
+      
+      <option value="4.12">4.12.0</option>
+      
+                  
+      
+      <option value="4.11">4.11.0</option>
+      
+                  
+      
+      <option value="4.10">4.10.2</option>
+      
+                  
+      
+      <option value="4.9">4.9.0</option>
+      
+                  
+      
+      <option value="4.8">4.8.0</option>
+      
+                  
+      
+      <option value="4.7">4.7.0</option>
+      
+                  
+      
+      <option value="4.6">4.6.1</option>
+      
+                  
+      
+      <option value="4.5">4.5.0</option>
+      
+                  
+      
+      <option value="4.4">4.4.0</option>
+      
+                  
+      
+      <option value="4.3">4.3.0</option>
+      
+                  
+      
+      <option value="4.2">4.2.0</option>
+      
+                  
+      
+      <option value="4.1">4.1.1</option>
+      
+                  
+      
+      <option value="4.0">4.0.0</option>
+      
+                  </optgroup><optgroup label="3.x">
+      
+      <option value="3">3.25.0</option>
+      
+      </optgroup>
+      <option value="main">main (snapshot)</option>
+      
+      
+    </select>
+  </label><!--/docs-version-->
+  <div class="docs-tools">
+    <button type="button" class="docs-search-button" data-docs-search-open aria-haspopup="dialog" aria-keyshortcuts="/">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <span>Search</span><kbd aria-hidden="true">/</kbd>
+    </button>
+    <a class="docs-github" href="https://github.com/smallrye/smallrye-reactive-messaging" title="smallrye/smallrye-reactive-messaging on GitHub" data-docs-github="smallrye/smallrye-reactive-messaging">
+      <svg aria-hidden="true" viewBox="0 0 16 16" width="26" height="26"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      <span class="docs-github-text">
+        <span class="docs-github-name">GitHub<span class="visually-hidden">: smallrye/smallrye-reactive-messaging</span></span>
+        <span class="docs-github-facts"><span title="Latest release">5.0.0-RC2</span><span data-docs-github-stars hidden></span><span data-docs-github-forks hidden></span></span>
+      </span>
+    </a>
+  </div>
+</div>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-input" aria-label="Toggle menu">
+    <label for="nav-toggle" class="nav-toggle"><span></span></label>
+    <nav class="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/docs/" aria-current="page">Documentation</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+  <main id="main">
+
+<div class="container docs-layout">
+  <aside class="docs-side">
+    <button type="button" class="docs-nav-button" aria-controls="docs-nav" aria-expanded="false" data-docs-nav-button>
+      <span class="docs-nav-icon" aria-hidden="true"></span><span class="docs-nav-label">Contents</span>
+    </button>
+    <nav id="docs-nav" class="docs-nav" aria-label="SmallRye Reactive Messaging documentation">
+      <!--docs-version-->
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/">Home</a></li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Core</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/getting-started/">Getting Started</a></li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Concepts</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/concepts/concepts/">Introduction</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/concepts/model/">Development Model</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/concepts/emitter/">Emitters and Channel</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/concepts/connectors/">Connectors</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/concepts/contributing-connectors/">Contributing Connectors</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/concepts/acknowledgement/">Acknowledgement</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/concepts/blocking/">Blocking Processing</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/concepts/signatures/">Method Signatures</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/concepts/skipping/">Skipping Messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/concepts/converters/">Message Converters</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/concepts/keyed-multi/">Keyed Streams</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/concepts/decorators/">Channel Decorators and Interceptors</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/concepts/broadcast/">Broadcast</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/concepts/merge/">Merge channels</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/concepts/incoming-concurrency/">Incoming Channel Concurrency</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/concepts/incomings/">@Incomings</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/concepts/outgoings/">@Outgoings</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/concepts/testing/">Testing</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/concepts/logging/">Logging</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/concepts/observability/">Observability API</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/concepts/advanced-config/">Advanced Configuration</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/concepts/message-context/">Message Context</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/concepts/incoming-metadata-injection/">Metadata Injection</a></li>
+</ul>
+    </details>
+  </li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Kafka</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/kafka/kafka/">Apache Kafka Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/kafka/receiving-kafka-records/">Receiving records</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/kafka/writing-kafka-records/">Writing records</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/kafka/health/">Health Checks</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/kafka/avro-configuration/">Using Avro</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/kafka/protobuf-configuration/">Using Protobuf</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/kafka/consumer-rebalance-listener/">Rebalance Listeners</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/kafka/kerberos/">Kerberos authentication</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/kafka/client-service/">Accessing the client</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/kafka/default-configuration/">Customizing Default Kafka Configuration</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/kafka/test-companion/">Test Companion for Kafka</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/kafka/transactions/">Kafka Transactions and Exactly-Once Processing</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/kafka/request-reply/">Kafka Request/Reply</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">AMQP 1.0</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/amqp/amqp/">AMQP 1.0 Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/amqp/receiving-amqp-messages/">Receiving messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/amqp/sending-amqp-messages/">Sending messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/amqp/health/">Health Checks</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/amqp/client-customization/">Client Customization</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/amqp/rabbitmq/">Using RabbitMQ</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">RabbitMQ</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/rabbitmq/rabbitmq/">RabbitMQ Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/rabbitmq/receiving-messages-from-rabbitmq/">Receiving messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/rabbitmq/sending-messages-to-rabbitmq/">Sending messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/rabbitmq/rabbitmq-health/">Health Checks</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/rabbitmq/rabbitmq-client-customization/">Client Customization</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/rabbitmq/rabbitmq-cloud/">Connecting to managed instances</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Pulsar</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/pulsar/pulsar/">Apache Pulsar Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/pulsar/receiving-pulsar-messages/" aria-current="page">Receiving messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/pulsar/sending-messages-to-pulsar/">Sending messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/pulsar/schema-configuration/">Configuring the Schema</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/pulsar/client-configuration/">Configuring the Pulsar client</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/pulsar/health/">Health Checks</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/pulsar/client-service/">Accessing the client</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/pulsar/transactions/">Pulsar Transactions and Exactly-Once Processing</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">Apache Camel</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/camel/camel/">Apache Camel Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/camel/receiving-messages-from-camel/">Receiving messages from Camel</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/camel/sending-messages-to-camel/">Sending messages to Camel</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/camel/camel-processor/">Implementing Camel processor</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/camel/using-existing-routes/">Using existing Camel routes</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">JMS</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/jms/jms/">The JMS connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/jms/receiving-jms-messages/">Receiving JMS messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/jms/sending-jms-messages/">Sending JMS messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/jms/advanced-jms/">Advanced configuration</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="docs-nav-section">
+    <details>
+      <summary class="docs-nav-heading">MQTT</summary>
+<ul>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/mqtt/mqtt/">MQTT Connector</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/mqtt/receiving-mqtt-messages/">Receiving MQTT messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/mqtt/sending-messages-to-mqtt/">Sending MQTT messages</a></li>
+  <li><a href="/docs/smallrye-reactive-messaging/4.16/mqtt/client-customization/">Customizing the MQTT client</a></li>
+</ul>
+    </details>
+  </li>
+</ul>
+      <!--/docs-version-->
+    </nav>
+  </aside>
+  <article class="docs-main prose" data-pagefind-body>
+    <!--docs-version-->
+    <span data-pagefind-filter="version:4.16" hidden></span>
+    <p class="docs-notice" data-pagefind-ignore>This is the documentation of SmallRye Reactive Messaging 4.16.2, released <time datetime="2024-02-09">2024-02-09</time>. It is not the latest release: <a href="/docs/smallrye-reactive-messaging/latest/" data-docs-same-page>read the documentation of 5.0.0-RC2</a>.</p>
+    <!--/docs-version-->
+    <h1>Receiving messages from Pulsar</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Pulsar Connector connects to a Pulsar broker using a Pulsar client and creates consumers to
+receive messages from Pulsar brokers and it maps each of them into Reactive Messaging <code>Messages</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="example"><a class="anchor" href="#example"></a>Example</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let’s imagine you have a Pulsar broker running, and accessible
+using the <code>pulsar:6650</code> address (by default it would use
+<code>localhost:6650</code>). Configure your application to receive Pulsar messages
+on the <code>prices</code> channel as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">mp.messaging.incoming.prices.connector=smallrye-pulsar # <b class="conum">(1)</b>
+mp.messaging.incoming.prices.serviceUrl=pulsar://pulsar:6650 # <b class="conum">(2)</b>
+mp.messaging.incoming.prices.schema=DOUBLE # <b class="conum">(3)</b>
+mp.messaging.incoming.prices.subscriptionInitialPosition=Earliest # <b class="conum">(4)</b></code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Sets the connector for the <code>prices</code> channel</p>
+</li>
+<li>
+<p>Configure the Pulsar broker service url.</p>
+</li>
+<li>
+<p>Configure the schema to consume prices as Double.</p>
+</li>
+<li>
+<p>Make sure consumer subscription starts receiving messages from the <code>Earliest</code> position.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You don’t need to set the Pulsar topic, nor the consumer name.
+By default, the connector uses the channel name (<code>prices</code>).
+You can configure the <code>topic</code> and <code>consumerName</code> attributes to override them.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>In Pulsar, consumers need to provide a <code>subscriptionName</code> for topic subscriptions.
+If not provided the connector is generating a unique <strong>subscription name</strong>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Then, your application can receive the <code>double</code> payload directly:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package pulsar.inbound;
+
+import jakarta.enterprise.context.ApplicationScoped;
+
+import org.eclipse.microprofile.reactive.messaging.Incoming;
+
+@ApplicationScoped
+public class PulsarPriceConsumer {
+
+    @Incoming("prices")
+    public void consume(double price) {
+        // process your price.
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or, you can retrieve the <code>Message&lt;Double&gt;</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package pulsar.inbound;
+
+import java.util.concurrent.CompletionStage;
+
+import jakarta.enterprise.context.ApplicationScoped;
+
+import org.eclipse.microprofile.reactive.messaging.Incoming;
+import org.eclipse.microprofile.reactive.messaging.Message;
+
+@ApplicationScoped
+public class PulsarPriceMessageConsumer {
+
+    @Incoming("prices")
+    public CompletionStage&lt;Void&gt; consume(Message&lt;Double&gt; price) {
+        // process your price.
+
+        // Acknowledge the incoming message
+        return price.ack();
+    }
+
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="consumer-configuration"><a class="anchor" href="#consumer-configuration"></a>Consumer Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Pulsar Connector allows flexibly configuring the underlying Pulsar consumer.
+One of the ways is to set consumer properties directly on the channel configuration.
+The list of available configuration properties are listed in <a href="#configuration-reference">Configuration Reference</a>.</p>
+</div>
+<div class="paragraph">
+<p>See the <a href="/docs/smallrye-reactive-messaging/4.16/pulsar/client-configuration/">Configuring Pulsar consumers&#44; producers and clients</a> for more information.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="deserialization-and-pulsar-schema"><a class="anchor" href="#deserialization-and-pulsar-schema"></a>Deserialization and Pulsar Schema</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Pulsar Connector allows configuring Schema configuration for the underlying Pulsar consumer.
+See the <a href="/docs/smallrye-reactive-messaging/4.16/pulsar/schema-configuration/">Configuring the schema used for Pulsar channels</a> for more information.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="inbound-metadata"><a class="anchor" href="#inbound-metadata"></a>Inbound Metadata</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The incoming Pulsar messages include an instance of <code>PulsarIncomingMessageMetadata</code> in the metadata.
+It provides the key, topic, partitions, headers and so on:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">PulsarIncomingMessageMetadata metadata = incoming.getMetadata(PulsarIncomingMessageMetadata.class).orElse(null);
+if (metadata != null) {
+    // The topic
+    String topic = metadata.getTopicName();
+
+    // The key
+    String key = metadata.getKey();
+
+    // The event time
+    long timestamp = metadata.getEventTime();
+
+    // The raw data
+    byte[] rawData = metadata.getData();
+
+    // The underlying message
+    org.apache.pulsar.client.api.Message&lt;?&gt; message = metadata.getMessage();
+
+    // ...
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="acknowledgement"><a class="anchor" href="#acknowledgement"></a>Acknowledgement</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When a message produced from a Pulsar Message is <em>acknowledged</em>, the connector sends an <a href="https://pulsar.apache.org/docs/3.0.x/concepts-messaging/#acknowledgment">acknowledgement request</a> to the Pulsar broker.
+All Reactive Messaging messages need to be <em>acknowledged</em>, which is handled automatically in most cases.
+Acknowledgement requests can be sent to the Pulsar broker using the following two strategies:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Individual acknowledgement</strong> is the default strategy, an acknowledgement request is to the broker for each message.</p>
+</li>
+<li>
+<p><strong>Cumulative acknowledgement</strong>, configured using <code>ack-strategy=cumulative</code>, the consumer only acknowledges the last message it received.
+All messages in the stream up to (and including) the provided message are not redelivered to that consumer.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="failure-management"><a class="anchor" href="#failure-management"></a>Failure Management</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If a message produced from a Pulsar message is <em>nacked</em>, a failure strategy is applied.
+The Pulsar connector supports 4 strategies:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>nack</code> <em>(default)</em> sends <a href="https://pulsar.apache.org/docs/3.0.x/concepts-messaging/#negative-acknowledgment">negative acknowledgment</a> to the broker, triggering the broker to redeliver this message to the consumer.
+The negative acknowledgment can be further configured using <code>negativeAckRedeliveryDelayMicros</code> and <code>negativeAck.redeliveryBackoff</code> properties.</p>
+</li>
+<li>
+<p><code>fail</code> fail the application, no more messages will be processed.</p>
+</li>
+<li>
+<p><code>ignore</code> the failure is logged, but the acknowledgement strategy will be applied and the processing will continue.</p>
+</li>
+<li>
+<p><code>continue</code> the failure is logged, but processing continues without applying acknowledgement or negative acknowledgement. This strategy can be used with <a href="#acknowledgement-timeout">acknowledgement timeout</a> configuration.</p>
+</li>
+<li>
+<p><code>reconsume-later</code> sends the message to the <a href="https://pulsar.apache.org/docs/3.0.x/concepts-messaging/#retry-letter-topic">retry letter topic</a> using the <code>reconsumeLater</code> API to be reconsumed with a delay.
+The delay can be configured using the <code>reconsumeLater.delay</code> property and defaults to 3 seconds.
+Custom delay or properties per message can be configured by adding an instance of <a href="https://javadoc.io/doc/io.smallrye.reactive/smallrye-reactive-messaging-api/4.16.2/io/smallrye/reactive/messaging/pulsar/PulsarReconsumeLaterMetadata.html"><code>PulsarReconsumeLaterMetadata</code></a> to the failure metadata.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example the following configuration for the incoming channel <code>data</code> uses <code>reconsumer-later</code> failure strategy with default delays of 60 seconds:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">mp.messaging.incoming.data.connector=smallrye-pulsar
+mp.messaging.incoming.data.serviceUrl=pulsar://localhost:6650
+mp.messaging.incoming.data.topic=data
+mp.messaging.incoming.data.schema=INT32
+mp.messaging.incoming.data.failure-strategy=reconsume-later
+mp.messaging.incoming.data.retryEnable=true
+mp.messaging.incoming.data.reconsumeLater.delay=60 // in seconds
+mp.messaging.incoming.data.deadLetterPolicy.retryLetterTopic=data-retry
+mp.messaging.incoming.data.deadLetterPolicy.maxRedeliverCount=2</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="acknowledgement-timeout"><a class="anchor" href="#acknowledgement-timeout"></a>Acknowledgement timeout</h3>
+<div class="paragraph">
+<p>Similar to the negative acknowledgement, with the <a href="https://pulsar.apache.org/docs/3.0.x/concepts-messaging/#acknowledgment-timeout">acknowledgment timeout</a> mechanism, the Pulsar client tracks the unacknowledged messages,
+for the given <em>ackTimeout</em> period and sends <em>redeliver unacknowledged messages request</em> to the broker, thus the broker resends the unacknowledged messages to the consumer.</p>
+</div>
+<div class="paragraph">
+<p>To configure the timeout and redelivery backoff mechanism you can set <code>ackTimeoutMillis</code> and <code>ackTimeout.redeliveryBackoff</code> properties.
+The <code>ackTimeout.redeliveryBackoff</code> value accepts comma separated values of min delay in milliseconds, max delay in milliseconds and multiplier respectively:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">mp.messaging.incoming.data.connector=smallrye-pulsar
+mp.messaging.incoming.data.failure-strategy=continue
+mp.messaging.incoming.data.ackTimeoutMillis=10000
+mp.messaging.incoming.data.ackTimeout.redeliveryBackoff=1000,60000,2</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="dead-letter-topic"><a class="anchor" href="#dead-letter-topic"></a>Dead-letter topic</h3>
+<div class="paragraph">
+<p>The <a href="https://pulsar.apache.org/docs/3.0.x/concepts-messaging/#dead-letter-topic">dead letter topic</a> pushes messages that are not consumed successfully to a dead letter topic an continue message consumption.
+Note that dead letter topic can be used in different message redelivery methods, such as acknowledgment timeout, negative acknowledgment or retry letter topic.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">mp.messaging.incoming.data.connector=smallrye-pulsar
+mp.messaging.incoming.data.failure-strategy=nack
+mp.messaging.incoming.data.deadLetterPolicy.maxRedeliverCount=2
+mp.messaging.incoming.data.deadLetterPolicy.deadLetterTopic=my-dead-letter-topic
+mp.messaging.incoming.data.deadLetterPolicy.initialSubscriptionName=my-dlq-subscription
+mp.messaging.incoming.data.subscriptionType=Shared</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><em>Negative acknowledgment</em> or <em>acknowledgment timeout</em> methods for redelivery will redeliver the whole batch of messages containing at least an unprocessed message.
+See <a href="/docs/smallrye-reactive-messaging/4.16/pulsar/sending-messages-to-pulsar/#producer-batching">producer batching</a> for more information.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="receiving-pulsar-messages-in-batches"><a class="anchor" href="#receiving-pulsar-messages-in-batches"></a>Receiving Pulsar Messages in Batches</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By default, incoming methods receive each Pulsar message individually.
+You can enable batch mode using <code>batchReceive=true</code> property, or setting a <code>batchReceivePolicy</code> in consumer configuration.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Incoming("prices")
+public CompletionStage&lt;Void&gt; consumeMessage(PulsarIncomingBatchMessage&lt;Double&gt; messages) {
+    for (PulsarMessage&lt;Double&gt; msg : messages) {
+        msg.getMetadata(PulsarIncomingMessageMetadata.class).ifPresent(metadata -&gt; {
+            String key = metadata.getKey();
+            String topic = metadata.getTopicName();
+            long timestamp = metadata.getEventTime();
+            //... process messages
+        });
+    }
+    // ack will commit the latest offsets (per partition) of the batch.
+    return messages.ack();
+}
+
+@Incoming("prices")
+public void consumeRecords(Messages&lt;Double&gt; messages) {
+    for (Message&lt;Double&gt; msg : messages) {
+        //... process messages
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or you can directly receive the list of payloads to the consume method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Incoming("prices")
+public void consume(List&lt;Double&gt; prices) {
+    for (double price : prices) {
+        // process price
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuration-reference"><a class="anchor" href="#configuration-reference"></a>Configuration Reference</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute (<em>alias</em>)</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Type</th>
+<th class="tableblock halign-center valign-top">Mandatory</th>
+<th class="tableblock halign-left valign-top">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>ack-strategy</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specify the commit strategy to apply when a message produced from a record is acknowledged. Values can be <code>ack</code>, <code>cumulative</code>.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ack</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>ackTimeout.redeliveryBackoff</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Comma separated values for configuring ack timeout MultiplierRedeliveryBackoff, min delay, max delay, multiplier.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>batchReceive</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether batch receive is used to consume messages</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>client-configuration</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Identifier of a CDI bean that provides the default Pulsar client configuration for this channel. The channel configuration can still override any attribute. The bean must have a type of Map&lt;String, Object&gt; and must use the @io.smallrye.common.annotation.Identifier qualifier to set the identifier.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>consumer-configuration</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Identifier of a CDI bean that provides the default Pulsar consumer configuration for this channel. The channel configuration can still override any attribute. The bean must have a type of Map&lt;String, Object&gt; and must use the @io.smallrye.common.annotation.Identifier qualifier to set the identifier.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>deadLetterPolicy.deadLetterTopic</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the dead letter topic where the failing messages will be sent</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>deadLetterPolicy.initialSubscriptionName</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the initial subscription name of the dead letter topic</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>deadLetterPolicy.maxRedeliverCount</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maximum number of times that a message will be redelivered before being sent to the dead letter topic</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>deadLetterPolicy.retryLetterTopic</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the retry topic where the failing messages will be sent</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>failure-strategy</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specify the failure strategy to apply when a message produced from a record is acknowledged negatively (nack). Values can be <code>nack</code> (default), <code>fail</code>, <code>ignore</code> or `reconsume-later</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>nack</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>health-enabled</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether health reporting is enabled (default) or disabled</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>negativeAck.redeliveryBackoff</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Comma separated values for configuring negative ack MultiplierRedeliveryBackoff, min delay, max delay, multiplier.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>reconsumeLater.delay</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default delay for reconsume failure-strategy, in seconds</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">long</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>3</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>schema</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Pulsar schema type of this channel. When configured a schema is built with the given SchemaType and used for the channel. When absent, the schema is resolved searching for a CDI bean typed <code>Schema</code> qualified with <code>@Identifier</code> and the channel name. As a fallback AUTO_CONSUME or AUTO_PRODUCE are used.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>serviceUrl</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The service URL for the Pulsar service</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pulsar://localhost:6650</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>topic</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The consumed / populated Pulsar topic. If not set, the channel name is used</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>tracing-enabled</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether tracing is enabled (default) or disabled</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>In addition to the configuration properties provided by the connector,
+following Pulsar consumer properties can also be set on the channel:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 13%;">
+<col style="width: 42%;">
+<col style="width: 17%;">
+<col style="width: 17%;">
+<col style="width: 11%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Type</th>
+<th class="tableblock halign-center valign-top">Config file</th>
+<th class="tableblock halign-left valign-top">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>topicNames</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Topic name</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Set</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[]</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>topicsPattern</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Topic pattern</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Pattern</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>subscriptionName</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Subscription name</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>subscriptionType</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Subscription type.<br>
+Four subscription types are available:<br>
+* Exclusive<br>
+* Failover<br>
+* Shared<br>
+* Key_Shared</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">SubscriptionType</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exclusive</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>subscriptionProperties</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Map</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>subscriptionMode</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">SubscriptionMode</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Durable</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>messageListener</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">MessageListener</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>consumerEventListener</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">ConsumerEventListener</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>negativeAckRedeliveryBackoff</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interface for custom message is negativeAcked policy. You can specify <code>RedeliveryBackoff</code> for a consumer.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">RedeliveryBackoff</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>ackTimeoutRedeliveryBackoff</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interface for custom message is ackTimeout policy. You can specify <code>RedeliveryBackoff</code> for a consumer.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">RedeliveryBackoff</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>receiverQueueSize</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Size of a consumer&#8217;s receiver queue.<br>
+<br>
+For example, the number of messages accumulated by a consumer before an application calls <code>Receive</code>.<br>
+<br>
+A value higher than the default value increases consumer throughput, though at the expense of more memory utilization.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>acknowledgementsGroupTimeMicros</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Group a consumer acknowledgment for a specified time.<br>
+<br>
+By default, a consumer uses 100ms grouping time to send out acknowledgments to a broker.<br>
+<br>
+Setting a group time of 0 sends out acknowledgments immediately.<br>
+<br>
+A longer ack group time is more efficient at the expense of a slight increase in message re-deliveries after a failure.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">long</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">100000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>maxAcknowledgmentGroupSize</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Group a consumer acknowledgment for the number of messages.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>negativeAckRedeliveryDelayMicros</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delay to wait before redelivering messages that failed to be processed.<br>
+<br>
+When an application uses <code>Consumer#negativeAcknowledge(Message)</code>, failed messages are redelivered after a fixed timeout.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">long</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">60000000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>maxTotalReceiverQueueSizeAcrossPartitions</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The max total receiver queue size across partitions.<br>
+<br>
+This setting reduces the receiver queue size for individual partitions if the total receiver queue size exceeds this value.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">50000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>consumerName</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Consumer name</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>ackTimeoutMillis</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timeout of unacked messages</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">long</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>tickDurationMillis</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Granularity of the ack-timeout redelivery.<br>
+<br>
+Using an higher <code>tickDurationMillis</code> reduces the memory overhead to track messages when setting ack-timeout to a bigger value (for example, 1 hour).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">long</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>priorityLevel</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Priority level for a consumer to which a broker gives more priority while dispatching messages in Shared subscription type.<br>
+<br>
+The broker follows descending priorities. For example, 0=max-priority, 1, 2,&#8230;&#8203;<br>
+<br>
+In Shared subscription type, the broker <strong>first dispatches messages to the max priority level consumers if they have permits</strong>. Otherwise, the broker considers next priority level consumers.<br>
+<br>
+<strong>Example 1</strong><br>
+If a subscription has consumerA with <code>priorityLevel</code> 0 and consumerB with <code>priorityLevel</code> 1, then the broker <strong>only dispatches messages to consumerA until it runs out permits</strong> and then starts dispatching messages to consumerB.<br>
+<br>
+<strong>Example 2</strong><br>
+Consumer Priority, Level, Permits<br>
+C1, 0, 2<br>
+C2, 0, 1<br>
+C3, 0, 1<br>
+C4, 1, 2<br>
+C5, 1, 1<br>
+<br>
+Order in which a broker dispatches messages to consumers is: C1, C2, C3, C1, C4, C5, C4.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>maxPendingChunkedMessage</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The maximum size of a queue holding pending chunked messages. When the threshold is reached, the consumer drops pending messages to optimize memory utilization.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>autoAckOldestChunkedMessageOnQueueFull</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to automatically acknowledge pending chunked messages when the threshold of <code>maxPendingChunkedMessage</code> is reached. If set to <code>false</code>, these messages will be redelivered by their broker.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>expireTimeOfIncompleteChunkedMessageMillis</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The time interval to expire incomplete chunks if a consumer fails to receive all the chunks in the specified time period. The default value is 1 minute.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">long</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">60000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>cryptoKeyReader</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">CryptoKeyReader</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>messageCrypto</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">MessageCrypto</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>cryptoFailureAction</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Consumer should take action when it receives a message that can not be decrypted.<br>
+* <strong>FAIL</strong>: this is the default option to fail messages until crypto succeeds.<br>
+* <strong>DISCARD</strong>:silently acknowledge and not deliver message to an application.<br>
+* <strong>CONSUME</strong>: deliver encrypted messages to applications. It is the application&#8217;s responsibility to decrypt the message.<br>
+<br>
+The decompression of message fails.<br>
+<br>
+If messages contain batch messages, a client is not be able to retrieve individual messages in batch.<br>
+<br>
+Delivered encrypted message contains <code>EncryptionContext</code> which contains encryption and compression information in it using which application can decrypt consumed message payload.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">ConsumerCryptoFailureAction</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FAIL</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>properties</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A name or value property of this consumer.<br>
+<br>
+<code>properties</code> is application defined metadata attached to a consumer.<br>
+<br>
+When getting a topic stats, associate this metadata with the consumer stats for easier identification.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">SortedMap</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{}</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>readCompacted</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If enabling <code>readCompacted</code>, a consumer reads messages from a compacted topic rather than reading a full message backlog of a topic.<br>
+<br>
+A consumer only sees the latest value for each key in the compacted topic, up until reaching the point in the topic message when compacting backlog. Beyond that point, send messages as normal.<br>
+<br>
+Only enabling <code>readCompacted</code> on subscriptions to persistent topics, which have a single active consumer (like failure or exclusive subscriptions).<br>
+<br>
+Attempting to enable it on subscriptions to non-persistent topics or on shared subscriptions leads to a subscription call throwing a <code>PulsarClientException</code>.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>subscriptionInitialPosition</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Initial position at which to set cursor when subscribing to a topic at first time.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">SubscriptionInitialPosition</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Latest</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>patternAutoDiscoveryPeriod</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Topic auto discovery period when using a pattern for topic&#8217;s consumer.<br>
+<br>
+The default and minimum value is 1 minute.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">60</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>regexSubscriptionMode</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When subscribing to a topic using a regular expression, you can pick a certain type of topics.<br>
+<br>
+* <strong>PersistentOnly</strong>: only subscribe to persistent topics.<br>
+* <strong>NonPersistentOnly</strong>: only subscribe to non-persistent topics.<br>
+* <strong>AllTopics</strong>: subscribe to both persistent and non-persistent topics.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">RegexSubscriptionMode</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PersistentOnly</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>deadLetterPolicy</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dead letter policy for consumers.<br>
+<br>
+By default, some messages are probably redelivered many times, even to the extent that it never stops.<br>
+<br>
+By using the dead letter mechanism, messages have the max redelivery count. <strong>When exceeding the maximum number of redeliveries, messages are sent to the Dead Letter Topic and acknowledged automatically</strong>.<br>
+<br>
+You can enable the dead letter mechanism by setting <code>deadLetterPolicy</code>.<br>
+<br>
+<strong>Example</strong><br>
+<br>
+client.newConsumer()<br>
+.deadLetterPolicy(DeadLetterPolicy.builder().maxRedeliverCount(10).build())<br>
+.subscribe();<br>
+<br>
+Default dead letter topic name is <code>{TopicName}-{Subscription}-DLQ</code>.<br>
+<br>
+To set a custom dead letter topic name:<br>
+<br>
+client.newConsumer()<br>
+.deadLetterPolicy(DeadLetterPolicy.builder().maxRedeliverCount(10)<br>
+.deadLetterTopic("your-topic-name").build())<br>
+.subscribe();<br>
+<br>
+When specifying the dead letter policy while not specifying <code>ackTimeoutMillis</code>, you can set the ack timeout to 30000 millisecond.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">DeadLetterPolicy</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>retryEnable</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>batchReceivePolicy</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">BatchReceivePolicy</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>autoUpdatePartitions</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If <code>autoUpdatePartitions</code> is enabled, a consumer subscribes to partition increasement automatically.<br>
+<br>
+<strong>Note</strong>: this is only for partitioned consumers.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>autoUpdatePartitionsIntervalSeconds</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">long</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">60</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>replicateSubscriptionState</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If <code>replicateSubscriptionState</code> is enabled, a subscription state is replicated to geo-replicated clusters.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>resetIncludeHead</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>keySharedPolicy</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">KeySharedPolicy</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>batchIndexAckEnabled</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>ackReceiptEnabled</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>poolMessages</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>payloadProcessor</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">MessagePayloadProcessor</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>startPaused</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>autoScaledReceiverQueueSizeEnabled</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>topicConfigurations</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">List</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[]</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>    <!--docs-version--><p class="docs-source" data-pagefind-ignore>
+    </p><!--/docs-version-->
+  </article>
+  <nav class="docs-toc" aria-label="On this page">
+    <details open data-docs-toc>
+      <summary class="toc-title">On this page</summary>
+      <nav class="roq-toc" aria-label="Table of contents">
+<ul>
+<li data-level="1"><a href="#example">Example</a></li>
+<li data-level="1"><a href="#consumer-configuration">Consumer Configuration</a></li>
+<li data-level="1"><a href="#deserialization-and-pulsar-schema">Deserialization and Pulsar Schema</a></li>
+<li data-level="1"><a href="#inbound-metadata">Inbound Metadata</a></li>
+<li data-level="1"><a href="#acknowledgement">Acknowledgement</a></li>
+<li data-level="1"><a href="#failure-management">Failure Management</a>
+<ul>
+<li data-level="2"><a href="#acknowledgement-timeout">Acknowledgement timeout</a></li>
+<li data-level="2"><a href="#dead-letter-topic">Dead-letter topic</a></li>
+</ul>
+</li>
+<li data-level="1"><a href="#receiving-pulsar-messages-in-batches">Receiving Pulsar Messages in Batches</a></li>
+<li data-level="1"><a href="#configuration-reference">Configuration Reference</a></li>
+</ul>
+</nav>
+
+    </details>
+  </nav>
+</div>
+<dialog class="docs-search" data-docs-search aria-label="Search SmallRye Reactive Messaging">
+  <div class="docs-search-bar" role="search">
+    <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <input type="search" data-docs-search-input placeholder="Search SmallRye Reactive Messaging 4.19.0" aria-label="Search SmallRye Reactive Messaging documentation" autocomplete="off" spellcheck="false">
+    <button type="button" class="docs-search-close" data-docs-search-close>Esc</button>
+  </div>
+  <p class="docs-search-status" data-docs-search-status aria-live="polite"></p>
+  <ul class="docs-search-results" data-docs-search-results></ul>
+</dialog>
+
+  </main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-about">
+      <a class="footer-logo" href="/"><img src="/images/logo-dark.svg" alt="SmallRye" width="140" height="36" loading="lazy"></a>
+      <p>SmallRye is open source under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache Software License 2.0</a>.</p>
+      <p>This website is built with <a href="https://iamroq.dev/">Quarkus Roq</a>, hosted on <a href="https://pages.github.com/">GitHub Pages</a> and is completely open source. If you want to make it better, <a href="https://github.com/smallrye/smallrye.github.io">fork the website</a> and show us what you've got.</p>
+    </div>
+    <nav aria-label="Site">
+      <p class="footer-head">Navigation</p>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/docs/">Documentation</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Contribute and get help">
+      <p class="footer-head">Contribute</p>
+      <ul>
+        <li><a href="https://github.com/smallrye">GitHub</a></li>
+        <li><a href="https://twitter.com/smallrye_io">Follow us</a></li>
+      </ul>
+      <p class="footer-head">Get help</p>
+      <ul>
+        <li><a href="https://quarkusio.zulipchat.com">Chatroom</a></li>
+        <li><a href="https://groups.google.com/d/forum/smallrye">Google Groups</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="External links">
+      <p class="footer-head">External links</p>
+      <ul>
+        <li><a href="https://microprofile.io/">Eclipse MicroProfile</a></li>
+        <li><a href="https://github.com/eclipse?q=microprofile">Eclipse MicroProfile on GitHub</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <div class="container footer-bottom-bar">
+      <p><a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></p>
+      <p class="sponsor">A <a href="https://www.commonhaus.org/">Commonhaus Foundation</a> project <a href="https://www.commonhaus.org/"><img src="/assets/images/commonhaus_reversed.svg" alt="Commonhaus Foundation" width="200" height="21" loading="lazy"></a></p>
+      <p class="footer-trademark">Copyright &copy; SmallRye. For details on our trademarks, please visit our <a href="https://www.commonhaus.org/policies/trademark-policy/">Trademark Policy</a> and <a href="https://www.commonhaus.org/trademarks/">Trademark List</a>. Trademarks of third parties are owned by their respective holders and their mention here does not suggest any endorsement or association.</p>
+    </div>
+  </div>
+</footer>
+<!-- Light/dark switch. Hidden until the script wires it, so a no-JS visitor
+     never sees a dead button. Every site has it: keep it. -->
+<button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark theme" hidden>
+  <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
+  <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/></svg>
+</button>
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.querySelector('.theme-toggle');
+    if (!btn) return;
+    btn.hidden = false;
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    function isDark() { var t = root.getAttribute('data-theme'); return t ? t === 'dark' : mq.matches; }
+    function sync() {
+      btn.setAttribute('aria-pressed', isDark() ? 'true' : 'false');
+      btn.setAttribute('aria-label', isDark() ? 'Switch to light theme' : 'Switch to dark theme');
+    }
+    btn.addEventListener('click', function () {
+      var next = isDark() ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('site-theme', next); } catch (e) { /* not fatal */ }
+      sync();
+    });
+    mq.addEventListener('change', sync);
+    sync();
+  })();
+</script>
+</body>
+</html>

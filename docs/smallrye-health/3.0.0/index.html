@@ -1,12 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<title>Moved</title>
-<meta name="robots" content="noindex">
-<link rel="canonical" href="https://smallrye.io/docs/smallrye-health/3.0/">
-<meta http-equiv="refresh" content="0; url=/docs/smallrye-health/3.0/">
-<script>location.replace("/docs/smallrye-health/3.0/" + location.hash)</script>
-</head>
-<body><p>This page has moved to <a href="/docs/smallrye-health/3.0/">/docs/smallrye-health/3.0/</a>.</p></body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>SmallRye Health Documentation :: SmallRye documentation</title>
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">SmallRye documentation</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Projects</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="../../index/index/index.html">Index</a>
+            <a class="navbar-item" href="../../smallrye-config/main/index.html">SmallRye Config</a>
+            <a class="navbar-item" href="../../smallrye-fault-tolerance/5.0.0/index.html">SmallRye Fault Tolerance</a>
+            <a class="navbar-item" href="index.html">SmallRye Health</a>
+            <a class="navbar-item" href="../../smallrye-jwt/index.html">SmallRye JWT</a>
+            <a class="navbar-item" href="../../smallrye-metrics/3.0.0/index.html">SmallRye Metrics</a>
+          </div>
+        </div>
+        <a class="navbar-item" href="https://smallrye.io/">SmallRye.io main website</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="smallrye-health" data-version="3.0.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">SmallRye Health</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="index.html">Index</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Features on top of the specification</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="async-checks.html">Asynchronous health checks</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="health-groups.html">Health Groups</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="health-registry.html">Health Registry</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="wellness.html">Wellness</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index/index/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">SmallRye Health</a></li>
+    <li><a href="index.html">Index</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/smallrye/smallrye-health/edit/3.0.x/doc/modules/ROOT/pages/index.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">SmallRye Health Documentation</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>SmallRye Health 3.0 is an implementation of the MicroProfile Health 3.0 specification.</p>
+</div>
+<div class="paragraph">
+<p>Runtimes that currently use it as their health monitoring implementation include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://quarkus.io/">Quarkus</a></p>
+</li>
+<li>
+<p><a href="https://wildfly.org/">WildFly</a></p>
+</li>
+<li>
+<p><a href="https://thorntail.io/">Thorntail</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="more-resources"><a class="anchor" href="#more-resources"></a>More Resources</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/smallrye/smallrye-health/">SmallRye Health GitHub project repository</a></p>
+</li>
+<li>
+<p><a href="https://github.com/eclipse/microprofile-health/">Eclipse MicroProfile Health repository</a></p>
+</li>
+<li>
+<p><a href="https://download.eclipse.org/microprofile/microprofile-health-3.0/microprofile-health-spec-3.0.html">MicroProfile 3.0 specification text</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the SmallRye Antora UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
 </html>

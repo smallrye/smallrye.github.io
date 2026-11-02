@@ -1,0 +1,21 @@
+# Written by tools/docs/Docs.java sync: pages stored in a newer version (see Inherit.java)
+howto/asynchronous: latest
+howto/begin: latest
+howto/bulkhead: latest
+howto/circuit-breaker: latest
+howto/fallback: latest
+howto/multiple: latest
+howto/rate-limit: latest
+howto/retry: latest
+howto/timeout: latest
+integration/async-types: latest
+integration/context-propagation: latest
+integration/kotlin: latest
+integration/thread-pool: latest
+internals/config: latest
+internals/core: latest
+internals/instructions: latest
+internals/logging: latest
+reference/config: latest
+reference/fallback: latest
+reference/non-compat: latest

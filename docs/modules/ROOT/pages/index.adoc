@@ -1,8 +1,0 @@
-= SmallRye documentation
-
-Welcome to the SmallRye documentation site. Pick the project you're interested in from the list below.
-
-* xref:smallrye-jwt:ROOT:index.adoc[SmallRye JWT]
-* xref:smallrye-metrics:ROOT:index.adoc[SmallRye Metrics]
-* xref:smallrye-fault-tolerance:ROOT:index.adoc[SmallRye Fault Tolerance]
-* xref:smallrye-health:ROOT:index.adoc[SmallRye Health]

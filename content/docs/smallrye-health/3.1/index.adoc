@@ -1,0 +1,17 @@
+= SmallRye Health Documentation
+include::_attributes.adoc[]
+
+SmallRye Health 3.1 is an implementation of the MicroProfile Health 3.1 specification.
+
+Runtimes that currently use it as their health monitoring implementation include:
+
+* https://quarkus.io/[Quarkus]
+* https://wildfly.org/[WildFly]
+
+
+[[more-resources]]
+== More Resources
+
+* https://github.com/smallrye/smallrye-health/[SmallRye Health GitHub project repository]
+* https://github.com/eclipse/microprofile-health/[Eclipse MicroProfile Health repository]
+* https://download.eclipse.org/microprofile/microprofile-health-3.0/microprofile-health-spec-3.0.html[MicroProfile 3.0 specification text]

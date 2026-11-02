@@ -1,0 +1,37 @@
+site:
+  title: SmallRye documentation
+  start_page: index::index.adoc
+content:
+  sources:
+  - url: .. # common module containing just the main index
+    start_path: docs
+    branches: HEAD
+  - url: https://github.com/smallrye/smallrye-jwt.git
+    # main no longer has doc/ (docs moved out of Antora in smallrye-jwt#935); pin the last tag that does
+    branches: ~
+    tags: 5.0.0-RC4
+    start_path: doc
+  - url: https://github.com/smallrye/smallrye-metrics.git
+    branches: [2.4.x, main]
+    start_path: doc
+  - url: https://github.com/smallrye/smallrye-fault-tolerance.git
+    branches: ~
+    tags:
+    - '5*'
+    - '6*'
+    - '!*-RC*'
+    start_path: doc
+  - url: https://github.com/smallrye/smallrye-health.git
+    branches: 3.0.x
+    start_path: doc
+ui:
+  bundle:
+    url: https://raw.githubusercontent.com/smallrye/smallrye-antora-ui/refs/heads/main/build/ui-bundle.zip
+    snapshot: true
+asciidoc:
+  extensions:
+  - asciidoctor-kroki
+  attributes:
+    page-pagination: ''
+    kroki-fetch-diagram: true
+    kroki-server-url: http://localhost:8000

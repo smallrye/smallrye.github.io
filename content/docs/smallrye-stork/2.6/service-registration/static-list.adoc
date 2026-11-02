@@ -1,5 +1,0 @@
-= Service Registration/Static List
-:version-root: ../
-include::{version-root}_attributes.adoc[]
-
-

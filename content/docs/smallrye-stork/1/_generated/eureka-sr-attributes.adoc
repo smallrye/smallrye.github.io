@@ -1,9 +1,0 @@
-[cols=",,,",options="header",]
-|===
-|Attribute |Mandatory |Default Value |Description
-|`eureka-host` |No |`localhost` |The Eureka host.
-|`eureka-port` |No |`8761` |The Eureka port.
-|`eureka-context-path` |No |`/` |The Eureka server root context path.
-|`eureka-trust-all` |No |`false` |Enable/Disable the TLS certificate verification
-|`eureka-tls` |No |`false` |Use TLS to connect to the Eureka server
-|===

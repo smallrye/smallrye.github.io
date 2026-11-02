@@ -72,8 +72,8 @@ Comparison of `@ApplyFaultTolerance` and `@ApplyGuard`:
 
 For more information about migrating to the new programmatic API, see the migration guides:
 
-* link:https://smallrye.io/docs/smallrye-fault-tolerance/6/reference/programmatic-api/#migration_from_faulttolerance[Migration from `FaultTolerance`]
-* link:https://smallrye.io/docs/smallrye-fault-tolerance/6/reference/reusable/#migration_from_applyfaulttolerance[Migration from `@ApplyFaultTolerance`]
+* link:https://smallrye.io/docs/smallrye-fault-tolerance/6.7.0/reference/programmatic-api.html#migration_from_faulttolerance[Migration from `FaultTolerance`]
+* link:https://smallrye.io/docs/smallrye-fault-tolerance/6.7.0/reference/reusable.html#migration_from_applyfaulttolerance[Migration from `@ApplyFaultTolerance`]
 
 Further, the `MutinyFaultTolerance` API has no replacement.
 The `Guard` and `TypedGuard` APIs support `Uni` out of the box, if the Mutiny support library is present.

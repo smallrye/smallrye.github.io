@@ -1,9 +1,0 @@
-[cols=",,,",options="header",]
-|===
-|Attribute |Mandatory |Default Value |Description
-|`knative-host` |No | |The Knative API host.
-|`knative-namespace` |No | |The namespace of the service. Use all to discover all namespaces.
-|`application` |No | |The Knative application Id; if not defined Stork service name will be used.
-|`refresh-period` |No |`5M` |Service discovery cache refresh period.
-|`secure` |No | |Whether the connection with the service should be encrypted with TLS.
-|===

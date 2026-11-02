@@ -1,5 +1,0 @@
-[cols=",,,",options="header",]
-|===
-|Attribute |Mandatory |Default Value |Description
-|`services` |Yes | |A comma-separated list of services that this services consists of.
-|===

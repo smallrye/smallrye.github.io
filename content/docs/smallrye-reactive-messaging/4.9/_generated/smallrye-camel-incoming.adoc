@@ -1,6 +1,0 @@
-[cols="<,<,^,^,<",options="header",]
-|===
-|Attribute (_alias_) |Description |Type |Mandatory |Default
-|_endpoint-uri_ |The URI of the Camel endpoint (read from or written to) |string |true |
-|_failure-strategy_ |Specify the failure strategy to apply when a message produced from a Camel exchange is nacked. Values can be `fail` (default) or `ignore` |string |false |`fail`
-|===

@@ -1,5 +1,0 @@
-= Service Registration/Consul
-:version-root: ../
-include::{version-root}_attributes.adoc[]
-
-

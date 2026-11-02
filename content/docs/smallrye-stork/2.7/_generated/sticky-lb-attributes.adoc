@@ -1,5 +1,0 @@
-[cols=",,,",options="header",]
-|===
-|Attribute |Mandatory |Default Value |Description
-|`failure-backoff-time` |No |`0` |After how much time, a service instance that has failed can be reused.
-|===

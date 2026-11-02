@@ -21,7 +21,7 @@ This release also upgrades to the Jakarta EE 10 dependencies.
 
 Previously, the documentation contained numerous references to the {microprofile-ft} specification, and all {smallrye-ft} improvements on top of the specification were described in a single, long, hard to read document.
 
-In {smallrye-ft} 6.2.0, the https://smallrye.io/docs/smallrye-fault-tolerance/6/[documentation] has been thoroughly restructured and revised.
+In {smallrye-ft} 6.2.0, the https://smallrye.io/docs/smallrye-fault-tolerance/6.2.0/[documentation] has been thoroughly restructured and revised.
 It should contain all the necessary information, so that you no longer have to refer to the specification for pretty basic stuff.
 The improvements on top of the specification are now placed in the same guide that describes the basic feature.
 

@@ -1,6 +1,0 @@
-# Written by tools/docs/Docs.java sync: pages stored in a newer version (see Inherit.java)
-config/config-value: latest
-config/expressions: '3.15'
-config/indexed-properties: '3.9'
-config/map-support: '3.2'
-extensions/logging: latest

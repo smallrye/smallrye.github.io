@@ -6,13 +6,14 @@
 :page-author: lthon
 :smallrye-ft: SmallRye Fault Tolerance
 :microprofile-ft: MicroProfile Fault Tolerance
+:uri-smallrye-ft-docs: https://smallrye.io/docs/smallrye-fault-tolerance/5.0.0
 
 = Fault Tolerance 5.0
 
 Roughly a year ago, we link:/blog/fault-tolerance-4-0/[announced] the release of {smallrye-ft} 4.0, the new implementation of Eclipse {microprofile-ft}.
 Today, we bring you version 5.0, an evolution of the 4.x stream that fully implements {microprofile-ft} 3.0 and brings a lot of improvements and even new features.
 These new features are not present in the {microprofile-ft} specification, but were requested by users, especially in the Quarkus community.
-In addition, the API for integrators has been simplified significantly, and the first version of https://smallrye.io/docs/smallrye-fault-tolerance/5/[documentation] is also ready.
+In addition, the API for integrators has been simplified significantly, and the first version of {uri-smallrye-ft-docs}/index.html[documentation] is also ready.
 Let's take a look.
 
 == {microprofile-ft} 3.0
@@ -83,7 +84,7 @@ Afterwards, you can `@Inject` a `CircuitBreakerMaintenance` and use its `current
 
 In addition, `CircuitBreakerMaintenance` also allows you to reset any given named circuit breaker (`reset`), or all circuit breakers (`resetAll`), to the initial state.
 
-Read the https://smallrye.io/docs/smallrye-fault-tolerance/5/usage/extra/#circuit-breaker-maintenance[documentation] for more information and examples.
+Read the {uri-smallrye-ft-docs}/usage/extra.html#_circuit_breaker_maintenance[documentation] for more information and examples.
 
 === `@Blocking` and `@NonBlocking`
 
@@ -97,7 +98,7 @@ On the other hand, `@NonBlocking` means that the annotated method doesn't block 
 Note that these annotations are only taken into account if the annotated method also applies some other fault tolerance strategy, such as `@Fallback` or `@Retry`, _and_ if the method returns `CompletionStage` (or some of the additional asynchronous types as described below).
 If there's no fault tolerance annotation, or if the method doesn't return `CompletionStage`, {smallrye-ft} will ignore the `@Blocking` and `@NonBlocking` annotations completely.
 
-Read the https://smallrye.io/docs/smallrye-fault-tolerance/5/usage/extra/#async-nonblocking[documentation] for more information and examples.
+Read the {uri-smallrye-ft-docs}/usage/extra.html#blocking-nonblocking[documentation] for more information and examples.
 
 === Additional asynchronous types
 
@@ -107,7 +108,7 @@ Note that only single-valued types, such as `Single` or `Uni`, are supported; st
 This support is based on the https://github.com/smallrye/smallrye-reactive-utils/tree/main/reactive-converters[SmallRye Reactive Converters] project, so you have to make sure that the corresponding converter library is present.
 Integrators may include some converters by default if they choose so.
 
-Read the https://smallrye.io/docs/smallrye-fault-tolerance/5/usage/extra/#async-types[documentation] for more information and examples.
+Read the {uri-smallrye-ft-docs}/usage/extra.html#_additional_asynchronous_types[documentation] for more information and examples.
 
 === Other improvements
 
@@ -155,7 +156,7 @@ As described above, the SmallRye Reactive Converters project is used to add supp
 This means that {smallrye-ft} requires the `io.smallrye.reactive:smallrye-reactive-converter-api` artifact to be present.
 Presence of Reactive Converter API implementations is optional, but the API itself is mandatory.
 
-Read the https://smallrye.io/docs/smallrye-fault-tolerance/5/integration/intro/[integration documentation] for more information.
+Read the {uri-smallrye-ft-docs}/integration/intro.html[integration documentation] for more information.
 
 == Summary
 

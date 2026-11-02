@@ -1,8 +1,0 @@
-title: SmallRye JWT
-nav:
-- title: Overview
-  page: index
-- title: Configuration
-  page: configuration
-- title: Generate JWT Tokens
-  page: generate-jwt

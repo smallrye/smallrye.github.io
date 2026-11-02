@@ -1,0 +1,14 @@
+[cols=",,,",options="header",]
+|===
+|Attribute |Mandatory |Default Value |Description
+|`dns-servers` |No |`none` |Comma separated list of dns servers. Servers can either be in the `server:port` or just `server` form. Use `none` to use the system resolver.
+|`hostname` |No | |The hostname to look up; if not defined Stork service name will be used.
+|`record-type` |No |`SRV` |Type of the DNS record. A, AAAA and SRV records are supported
+|`port` |No | |Port of the service instances. Required if the record type is other than SRV.
+|`refresh-period` |No |`5M` |Service discovery cache refresh period.
+|`secure` |No | |Whether the connection with the service should be encrypted with TLS.
+|`recursion-desired` |No |`true` |Whether DNS recursion is desired
+|`resolve-srv` |No |`true` |Whether DNS resolution for SRV records is desired
+|`dns-timeout` |No |`5s` |Timeout for DNS queries
+|`fail-on-error` |No |`false` |Whether an error in retrieving service instances from one of the DNS servers should cause a failure of the discovery attempt.
+|===

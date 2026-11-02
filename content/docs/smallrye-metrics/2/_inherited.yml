@@ -1,0 +1,5 @@
+# Written by tools/docs/Docs.java sync: pages stored in a newer version (see Inherit.java)
+base-and-vendor-metrics: '3'
+cdi-extension: '3'
+extended-metadata: '3'
+metric-registry-lifecycle: '3'

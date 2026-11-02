@@ -1,4 +1,6 @@
 {! Content Security Policy carried over from the Jekyll site, minus what nothing loads any more
    (jQuery, Font Awesome, Google Fonts, ad services, analytics). There are no third-party scripts
-   left. 'unsafe-inline' is for the theme script and the inlined stylesheet. !}
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self'; base-uri 'none'; object-src 'none'; form-action 'none'">
+   left. 'unsafe-inline' is for the theme script and the inlined stylesheet; 'wasm-unsafe-eval' for
+   the documentation search (Pagefind), and api.github.com for a project's stars and forks in its
+   docs header. !}
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://api.github.com; base-uri 'none'; object-src 'none'; form-action 'none'">

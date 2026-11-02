@@ -1,0 +1,25 @@
+# Written by tools/docs/Docs.java sync: pages stored in a newer version (see Inherit.java)
+howto/asynchronous: '6.9'
+howto/bulkhead: latest
+howto/circuit-breaker: latest
+howto/fallback: latest
+howto/multiple: latest
+howto/rate-limit: latest
+howto/retry: latest
+howto/timeout: latest
+integration/async-types: '6.9'
+integration/context-propagation: latest
+integration/event-loop: '6.8'
+integration/intro: '6.8'
+integration/kotlin: latest
+integration/opentracing: '6.11'
+integration/thread-pool: latest
+internals/config: '6.7'
+internals/core: '6.6'
+internals/instructions: latest
+internals/logging: '6.6'
+internals/project-structure: '6.6'
+reference/asynchronous: '6.9'
+reference/fallback: latest
+reference/non-compat: latest
+reference/reusable: '6.5'

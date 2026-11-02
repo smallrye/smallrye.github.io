@@ -83,7 +83,7 @@ Not every interceptor is registered by default. Only the `ProfileConfigSourceInt
 Other interceptors require manual registration via the `ServiceLoader` mechanism.
 
 To learn more about all the built-in interceptors, please refer to the
-https://smallrye.io/docs/smallrye-config/interceptors/interceptors.html#_built_in_interceptors[documentation page].
+https://smallrye.io/smallrye-config/Latest/extensions/interceptors/[documentation page].
 
 === Expression Expansion
 
@@ -152,4 +152,4 @@ Please, feel free to drop us any feedback in the mailto:smallrye@googlegroups.co
 == Additional Resources
 
 * https://github.com/smallrye/smallrye-config/releases/tag/1.8.0[Release Notes]
-* https://smallrye.io/docs/smallrye-config/index.html[Documentation]
+* https://smallrye.io/smallrye-config/Latest/[Documentation]

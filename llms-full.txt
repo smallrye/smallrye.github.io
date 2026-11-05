@@ -4,6 +4,23 @@
 
 ## Posts
 
+### [Fault Tolerance 7.1.0](/blog/fault-tolerance-7-1-0/)
+
+Today, we announce the release of SmallRye Fault Tolerance 7.1.0.
+This release contains several improvements in the area of metrics, as well as a few bug fixes.
+
+Previous versions of SmallRye Fault Tolerance emitted metrics about what happened during guarded executions, but there was no way to correlate the runtime behavior with the current configuration, besides hardcoding the configuratoin values.
+In this release, all strategies that have a meaningful configuration also expose that configuration through metrics.
+That is: bulkhead (ft.bulkhead.config.*), timeout (ft.timeout.config.*), rate limit (ft.ratelimit.config.*), circuit breaker (ft.circuitbreaker.config.*) and retry (ft.retry.config.*).
+
+Additionally, a new general metric ft.invocations.duration is emitted for all guarded methods.
+It is a histogram of execution times that spans the whole guarded execution, including all fault tolerance strategies such as fallback and retries.
+
+This release also fixes two bugs.
+Fallback metrics were not emitted correctly when fallback was configured through TypedGuard, and thread context was not propagated correctly for asynchronous bulkhead tasks that had to be queued before execution.
+
+As usual, if you have any ideas for improvements, please file an issue!
+
 ### [Fault Tolerance 7.0.0](/blog/fault-tolerance-7-0-0/)
 
 Today, we announce the release of SmallRye Fault Tolerance 7.0.0.
@@ -4257,7 +4274,14 @@ Provides an API to convert a String type to something else
 
 ### [Blog](/blog/)
 
-Fault Tolerance 7.0.0
+Fault Tolerance 7.1.0
+
+ Ladislav Thon
+ 5 November 2026
+
+ SmallRye Fault Tolerance 7.1.0 released!
+
+ Fault Tolerance 7.0.0
 
  Ladislav Thon
  16 September 2026
@@ -4320,20 +4344,20 @@ Fault Tolerance 7.0.0
 
  SmallRye Fault Tolerance 6.9.3 released!
 
- Jandex 3.5.0
-
- Ladislav Thon
- 12 September 2025
-
- Jandex 3.5.0 released!
-
  Page 1 of 9
 
  Older &amp;rarr;
 
 ### [Blog](/blog/page/2/)
 
-Fault Tolerance 6.9.2
+Jandex 3.5.0
+
+ Ladislav Thon
+ 12 September 2025
+
+ Jandex 3.5.0 released!
+
+ Fault Tolerance 6.9.2
 
  Ladislav Thon
  31 July 2025
@@ -4396,13 +4420,6 @@ Fault Tolerance 6.9.2
 
  Jandex 3.2.6 released!
 
- Jandex 3.2.5
-
- Ladislav Thon
- 7 February 2025
-
- Jandex 3.2.5 released!
-
  &amp;larr; Newer
 
  Page 2 of 9
@@ -4411,7 +4428,14 @@ Fault Tolerance 6.9.2
 
 ### [Blog](/blog/page/3/)
 
-Fault Tolerance 6.8.0
+Jandex 3.2.5
+
+ Ladislav Thon
+ 7 February 2025
+
+ Jandex 3.2.5 released!
+
+ Fault Tolerance 6.8.0
 
  Ladislav Thon
  4 February 2025
@@ -4474,13 +4498,6 @@ Fault Tolerance 6.8.0
 
  SmallRye Fault Tolerance 6.6.1 released!
 
- Fault Tolerance 6.6.0
-
- Ladislav Thon
- 24 October 2024
-
- SmallRye Fault Tolerance 6.6.0 released!
-
  &amp;larr; Newer
 
  Page 3 of 9
@@ -4489,7 +4506,14 @@ Fault Tolerance 6.8.0
 
 ### [Blog](/blog/page/4/)
 
-Jandex 3.2.3
+Fault Tolerance 6.6.0
+
+ Ladislav Thon
+ 24 October 2024
+
+ SmallRye Fault Tolerance 6.6.0 released!
+
+ Jandex 3.2.3
 
  Ladislav Thon
  24 October 2024
@@ -4552,13 +4576,6 @@ Jandex 3.2.3
 
  SmallRye Fault Tolerance 6.3.0 released!
 
- Jandex 3.1.7
-
- Ladislav Thon
- 14 March 2024
-
- Jandex 3.1.7 released!
-
  &amp;larr; Newer
 
  Page 4 of 9
@@ -4567,7 +4584,14 @@ Jandex 3.2.3
 
 ### [Blog](/blog/page/5/)
 
-Jandex 3.1.6
+Jandex 3.1.7
+
+ Ladislav Thon
+ 14 March 2024
+
+ Jandex 3.1.7 released!
+
+ Jandex 3.1.6
 
  Ladislav Thon
  27 November 2023
@@ -4630,13 +4654,6 @@ Jandex 3.1.6
 
  Jandex 3.1.0 released!
 
- Fault Tolerance 6.2.2
-
- Ladislav Thon
- 6 April 2023
-
- SmallRye Fault Tolerance 6.2.2 released!
-
  &amp;larr; Newer
 
  Page 5 of 9
@@ -4645,7 +4662,14 @@ Jandex 3.1.6
 
 ### [Blog](/blog/page/6/)
 
-Fault Tolerance 6.2.1
+Fault Tolerance 6.2.2
+
+ Ladislav Thon
+ 6 April 2023
+
+ SmallRye Fault Tolerance 6.2.2 released!
+
+ Fault Tolerance 6.2.1
 
  Ladislav Thon
  3 March 2023
@@ -4708,13 +4732,6 @@ Fault Tolerance 6.2.1
 
  SmallRye Fault Tolerance 6.0.0 released!
 
- Jandex 3.0.0
-
- Ladislav Thon
- 25 August 2022
-
- Jandex found a new home in SmallRye and version 3.0.0 is available!
-
  &amp;larr; Newer
 
  Page 6 of 9
@@ -4723,7 +4740,14 @@ Fault Tolerance 6.2.1
 
 ### [Blog](/blog/page/7/)
 
-Fault Tolerance 5.5
+Jandex 3.0.0
+
+ Ladislav Thon
+ 25 August 2022
+
+ Jandex found a new home in SmallRye and version 3.0.0 is available!
+
+ Fault Tolerance 5.5
 
  Ladislav Thon
  11 July 2022
@@ -4786,13 +4810,6 @@ Fault Tolerance 5.5
 
  SmallRye Fault Tolerance 5.2 released!
 
- Fault Tolerance 5.1
-
- Ladislav Thon
- 18 May 2021
-
- SmallRye Fault Tolerance 5.1 released!
-
  &amp;larr; Newer
 
  Page 7 of 9
@@ -4801,7 +4818,14 @@ Fault Tolerance 5.5
 
 ### [Blog](/blog/page/8/)
 
-Fault Tolerance 5.0
+Fault Tolerance 5.1
+
+ Ladislav Thon
+ 18 May 2021
+
+ SmallRye Fault Tolerance 5.1 released!
+
+ Fault Tolerance 5.0
 
  Ladislav Thon
  18 January 2021
@@ -4864,13 +4888,6 @@ Fault Tolerance 5.0
 
  How does SmallRye go beyond just implementing Eclipse MicroProfile specifications?
 
- SmallRye on GraalVM with Quarkus!
-
- Ken Finnigan
- 7 March 2019
-
- Quarkus utilizes SmallRye on GraalVM. Marvel at its supersonic subatomic speed!
-
  &amp;larr; Newer
 
  Page 8 of 9
@@ -4879,7 +4896,14 @@ Fault Tolerance 5.0
 
 ### [Blog](/blog/page/9/)
 
-SmallRye adds MicroProfile 2.2 support!
+SmallRye on GraalVM with Quarkus!
+
+ Ken Finnigan
+ 7 March 2019
+
+ Quarkus utilizes SmallRye on GraalVM. Marvel at its supersonic subatomic speed!
+
+ SmallRye adds MicroProfile 2.2 support!
 
  Ken Finnigan
  6 March 2019

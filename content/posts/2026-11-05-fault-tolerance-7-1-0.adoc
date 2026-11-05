@@ -1,0 +1,25 @@
+:page-layout: post
+:page-title: Fault Tolerance 7.1.0
+:page-synopsis: SmallRye Fault Tolerance 7.1.0 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2026-11-05 17:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 7.1.0
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/7.1.0[release] of {smallrye-ft} 7.1.0.
+This release contains several improvements in the area of metrics, as well as a few bug fixes.
+
+Previous versions of {smallrye-ft} emitted metrics about what happened during guarded executions, but there was no way to correlate the runtime behavior with the current configuration, besides hardcoding the configuratoin values.
+In this release, all strategies that have a meaningful configuration also expose that configuration through metrics.
+That is: bulkhead (`ft.bulkhead.config.\*`), timeout (`ft.timeout.config.*`), rate limit (`ft.ratelimit.config.\*`), circuit breaker (`ft.circuitbreaker.config.*`) and retry (`ft.retry.config.*`).
+
+Additionally, a new general metric `ft.invocations.duration` is emitted for all guarded methods.
+It is a histogram of execution times that spans the whole guarded execution, including all fault tolerance strategies such as fallback and retries.
+
+This release also fixes two bugs.
+Fallback metrics were not emitted correctly when fallback was configured through `TypedGuard`, and thread context was not propagated correctly for asynchronous bulkhead tasks that had to be queued before execution.
+
+As usual, if you have any ideas for improvements, please https://github.com/smallrye/smallrye-fault-tolerance/issues[file an issue]!

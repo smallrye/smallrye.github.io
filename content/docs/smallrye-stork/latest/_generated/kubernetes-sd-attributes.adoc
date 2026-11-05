@@ -1,0 +1,14 @@
+[cols=",,,",options="header",]
+|===
+|Attribute |Mandatory |Default Value |Description
+|`k8s-host` |No | |The Kubernetes API host.
+|`k8s-namespace` |No | |The namespace of the service. Use all to discover all namespaces.
+|`application` |No | |The Kubernetes application Id; if not defined Stork service name will be used.
+|`port-name` |No | |The Kubernetes application port name. If not defined, when exposing multiple ports, Stork will use the first one.
+|`refresh-period` |No |`5M` |Service discovery cache refresh period.
+|`secure` |No | |Whether the connection with the service should be encrypted with TLS.
+|`request-retry-backoff-limit` |No | |Maximum number of retry attempts allowed after a request failure.
+|`request-retry-backoff-interval` |No | |Amount of time to wait between retry attempts after a request fails.
+|`use-endpoint-slices` |No | |Use the EndpointSlice API instead
+|`use-cluster-ip` |No |`false` |Use the Kubernetes Service ClusterIP instead of pod IPs. Stork returns a single instance with the ClusterIP and resolved port.
+|===

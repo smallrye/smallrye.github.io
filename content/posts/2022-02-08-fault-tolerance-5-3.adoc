@@ -19,7 +19,7 @@ Since the very beginning, {smallrye-ft} has implemented the {microprofile-ft} de
 It also has several SmallRye-specific additions to this API, such as retry backoff strategies or circuit breaker maintenance.
 
 With this release, {smallrye-ft} adds an alternative, programmatic API.
-It has https://smallrye.io/docs/smallrye-fault-tolerance/5.3.0/usage/programmatic-api.html[extensive documentation], so we'll just provide a short overview here.
+It has https://smallrye.io/docs/smallrye-fault-tolerance/5/usage/programmatic-api/[extensive documentation], so we'll just provide a short overview here.
 Let's start with an example:
 
 [source,java]
@@ -101,7 +101,7 @@ In certain contexts, the true exceptions are often (or always) wrapped into anot
 In such situation, configuring when a fault tolerance strategy should apply or be ignored becomes nearly impossible.
 
 In this release, {smallrye-ft} adds a non-standard feature to solve this problem.
-In the https://smallrye.io/docs/smallrye-fault-tolerance/5.3.0/usage/extra.html#_non_compatible_mode[non-compatible mode], if the class of the thrown exception isn't present in either of the two sets, the cause chain of the exception is inspected automatically.
+In the https://smallrye.io/docs/smallrye-fault-tolerance/5/usage/extra/#noncompatible-mode[non-compatible mode], if the class of the thrown exception isn't present in either of the two sets, the cause chain of the exception is inspected automatically.
 
 == Revamped async types support
 

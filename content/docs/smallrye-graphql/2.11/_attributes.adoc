@@ -1,0 +1,20 @@
+:project-version: 2.11.0
+// Attributes shared by every page. smallrye.io overrides the ones it needs when it publishes.
+// Pages in subdirectories set :version-root: (../ per level) before including this file.
+ifndef::version-root[:version-root:]
+:idprefix:
+:idseparator: -
+:sectanchors:
+:examples-dir: {version-root}_examples
+:partialsdir: {version-root}_partials
+:project-name: SmallRye GraphQL
+:javadoc-version: latest
+:generated-dir: {version-root}_generated
+
+// Added by smallrye.io (tools/docs/Docs.java sync)
+:javadoc-version: 2.11.0
+:relfileprefix: /docs/smallrye-graphql/2.11/
+:imagesdir: /docs/smallrye-graphql/2.11
+:docs-project: smallrye-graphql
+:docs-version: 2.11
+:docs-ref: 2.11.0

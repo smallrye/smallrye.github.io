@@ -1,0 +1,49 @@
+---
+layout: page
+title: Documentation
+description: Guides and reference for every SmallRye project. Each project's documentation covers its latest release, older releases and the main branch; pick a version in its header.
+eyebrow: SmallRye
+link: /docs/
+---
+{@io.quarkiverse.roq.frontmatter.runtime.model.Site site}
+{! The projects come from data/docs.yml, their latest release from data/docversions.yml. A card per
+   project, newest release first (the sync writes that order, _by-release-date), linking to its latest
+   documentation: the other versions are in its version picker. !}
+{#let order=cdi:docversions.getJsonArray('_by-release-date')}
+{#for g in cdi:docs.getJsonArray('groups')}
+<h2>{=g.getString('name')}</h2>
+<ul class="tile-grid">
+  {#for key in order}
+  {#for p in cdi:docs.getJsonArray('projects')}{#if p.getString('key') == key && p.getString('group') == g.getString('key') && p.containsKey('path')}
+  {#let first=cdi:docversions.getJsonObject(key).getJsonArray('versions').getJsonObject(0)}
+  <li class="tile">
+    <h3>{#if p.containsKey('logo')}<span class="project-logo" style="--logo: url('{=site.url(p.getString('logo'))}')" aria-hidden="true"></span>{/if}{=p.getString('name')}</h3>
+    <p>{=p.getString('description')}</p>
+    <p class="tile-meta">
+      {#if p.containsKey('archived')}<span class="tile-tag">Archived</span> {=first.getString('ref')}{#else}<span class="tile-tag">{=first.getString('ref')}</span> latest release{/if}{#if first.getString('date')}, <time datetime="{=first.getString('date')}">{=first.getString('date')}</time>{/if}
+    </p>
+    <a class="tile-link tile-link-whole" href="{=site.url('docs/' + key + '/' + first.getString('id') + '/')}">Documentation<span class="visually-hidden"> of {=p.getString('name')}</span> <span aria-hidden="true">&rarr;</span></a>
+  </li>
+  {/let}
+  {/if}{/for}
+  {/for}
+  {! projects documented elsewhere for now, or not synced yet !}
+  {#for p in cdi:docs.getJsonArray('projects')}{#if p.getString('group') == g.getString('key') && !order.contains(p.getString('key'))}
+  <li class="tile">
+    <h3>{=p.getString('name')}</h3>
+    <p>{=p.getString('description')}</p>
+    {#if p.containsKey('url')}<a class="tile-link tile-link-whole" href="{=p.getString('url')}">Documentation<span class="visually-hidden"> of {=p.getString('name')}</span> <span aria-hidden="true">&nearr;</span></a>{/if}
+  </li>
+  {/if}{/for}
+</ul>
+{/for}
+{/let}
+{! Release dates (yyyy-mm-dd in the page) read as "22 June 2026", as on the documentation pages !}
+<script>{|
+  for (const time of document.querySelectorAll('.tile-grid time[datetime]')) {
+    const date = new Date(time.getAttribute('datetime') + 'T00:00:00');
+    if (!Number.isNaN(date.getTime())) {
+      time.textContent = date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+  }
+|}</script>

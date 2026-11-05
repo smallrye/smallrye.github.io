@@ -1,0 +1,21 @@
+[cols="<,<,^,^,<",options="header",]
+|===
+|Attribute (_alias_) |Description |Type |Mandatory |Default
+|_client-id_ |The client id |String |false |
+|_connection-factory-name_ |The name of the JMS connection factory (`jakarta.jms.ConnectionFactory`) to be used. If not set, it uses any exposed JMS connection factory |String |false |
+|_correlation-id_ |The JMS Message correlation id |string |false |
+|_delivery-delay_ |The delivery delay |long |false |
+|_delivery-mode_ |The delivery mode. Either `persistent` or `non++_++persistent` |string |false |
+|_destination_ |The name of the JMS destination. If not set the name of the channel is used |String |false |
+|_destination-type_ |The type of destination. It can be either `queue` or `topic` |string |false |`queue`
+|_disable-message-id_ |Omit the message id in the outbound JMS message |boolean |false |
+|_disable-message-timestamp_ |Omit the message timestamp in the outbound JMS message |boolean |false |
+|_merge_ |Whether the connector should allow multiple upstreams |boolean |false |`false`
+|_password_ |The password to connect to to the JMS server |String |false |
+|_priority_ |The JMS Message priority |int |false |
+|_reply-to_ |The reply to destination if any |string |false |
+|_reply-to-destination-type_ |The type of destination for the response. It can be either `queue` or `topic` |string |false |`queue`
+|_session-mode_ |The session mode. Accepted values are AUTO++_++ACKNOWLEDGE, SESSION++_++TRANSACTED, CLIENT++_++ACKNOWLEDGE, DUPS++_++OK++_++ACKNOWLEDGE |String |false |`AUTO++_++ACKNOWLEDGE`
+|_ttl_ |The JMS Message time-to-live |long |false |
+|_username_ |The username to connect to to the JMS server |String |false |
+|===

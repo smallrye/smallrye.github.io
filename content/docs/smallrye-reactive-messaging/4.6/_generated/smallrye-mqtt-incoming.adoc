@@ -1,0 +1,37 @@
+[cols="<,<,^,^,<",options="header",]
+|===
+|Attribute (_alias_) |Description |Type |Mandatory |Default
+|_auto-clean-session_ |Set to start with a clean session (`true` by default) |boolean |false |`true`
+|_auto-generated-client-id_ |Set if the MQTT client must generate clientId automatically |boolean |false |`true`
+|_auto-keep-alive_ |Set if the MQTT client must handle `PINGREQ` automatically |boolean |false |`true`
+|_broadcast_ |Whether or not the messages should be dispatched to multiple consumers |boolean |false |`false`
+|_buffer-size_ |The size buffer of incoming messages waiting to be processed |int |false |`128`
+|_client-id_ |Set the client identifier |string |false |
+|_client-options-name_ _(mqtt-client-options-name)_ |The name of the MQTT Client Option bean (`io.smallrye.reactive.messaging.mqtt.session.MqttClientSessionOptions`) used to customize the MQTT client configuration |string |false |
+|_connect-timeout-seconds_ |Set the connect timeout (in seconds) |int |false |`60`
+|_failure-strategy_ |Specify the failure strategy to apply when a message produced from a MQTT message is nacked. Values can be `fail` (default), or `ignore` |string |false |`fail`
+|_health-enabled_ |Whether health reporting is enabled (default) or disabled |boolean |false |`true`
+|_host_ |Set the MQTT server host name/IP |string |true |
+|_keep-alive-seconds_ |Set the keep alive timeout in seconds |int |false |`30`
+|_max-inflight-queue_ |Set max count of unacknowledged messages |int |false |`10`
+|_max-message-size_ |Set max MQTT message size in bytes |int |false |`8092`
+|_password_ |Set the password to connect to the server |string |false |
+|_port_ |Set the MQTT server port. Default to 8883 if ssl is enabled, or 1883 without ssl |int |false |
+|_qos_ |Set the QoS level when subscribing to the topic or when sending a message |int |false |`0`
+|_reconnect-interval-seconds_ |Set the reconnect interval in seconds |int |false |`1`
+|_server-name_ |Set the SNI server name |string |false |
+|_ssl_ |Set whether SSL/TLS is enabled |boolean |false |`false`
+|_ssl.keystore.location_ |Set the keystore location. In case of `pem` type this is the server ca cert path |string |false |
+|_ssl.keystore.password_ |Set the keystore password. In case of `pem` type this is the key path |string |false |
+|_ssl.keystore.type_ |Set the keystore type ++[++`pkcs12`, `jks`, `pem`++]++ |string |false |`pkcs12`
+|_ssl.truststore.location_ |Set the truststore location. In case of `pem` type this is the client cert path |string |false |
+|_ssl.truststore.password_ |Set the truststore password. In case of `pem` type this is not necessary |string |false |
+|_ssl.truststore.type_ |Set the truststore type ++[++`pkcs12`, `jks`, `pem`++]++ |string |false |`pkcs12`
+|_topic_ |Set the MQTT topic. If not set, the channel name is used |string |false |
+|_trust-all_ |Set whether all server certificates should be trusted |boolean |false |`false`
+|_unsubscribe-on-disconnection_ |This flag restore the old behavior to unsubscribe from the broken on disconnection |boolean |false |`false`
+|_username_ |Set the username to connect to the server |string |false |
+|_will-flag_ |Set if will information are provided on connection |boolean |false |`false`
+|_will-qos_ |Set the QoS level for the will message |int |false |`0`
+|_will-retain_ |Set if the will message must be retained |boolean |false |`false`
+|===

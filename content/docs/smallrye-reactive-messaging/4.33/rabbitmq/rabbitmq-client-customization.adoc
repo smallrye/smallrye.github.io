@@ -1,0 +1,20 @@
+= Customizing the underlying RabbitMQ client
+:version-root: ../
+include::{version-root}_attributes.adoc[]
+
+You can customize the underlying RabbitMQ Client configuration by
+_producing_ an instance of
+https://vertx.io/docs/apidocs/io/vertx/rabbitmq/RabbitMQOptions.html[`RabbitMQOptions`]:
+
+[source,java]
+----
+include::{examples-dir}/rabbitmq/customization/RabbitMQProducers.java[tags=named,indent=0]
+----
+
+This instance is retrieved and used to configure the client used by the
+connector. You need to indicate the name of the client using the
+`client-options-name` attribute:
+
+....
+mp.messaging.incoming.prices.client-options-name=my-named-options
+....

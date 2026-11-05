@@ -1,0 +1,18 @@
+[cols="<,<,^,^,<",options="header",]
+|===
+|Attribute (_alias_) |Description |Type |Mandatory |Default
+|_ack.delete_ |Whether the acknowledgement deletes the message from the queue |boolean |false |`true`
+|_credentials-provider_ |The credential provider to be used in the client |string |false |
+|_endpoint-override_ |The endpoint override |string |false |
+|_health-enabled_ |Whether health reporting is enabled (default) or disabled |boolean |false |`true`
+|_max-number-of-messages_ |The maximum number of messages to receive |int |false |`10`
+|_queue_ |The name of the SQS queue, defaults to channel name if not provided |string |false |
+|_queue.url_ |The url of the SQS queue |string |false |
+|_receive.request.customizer_ |The identifier for the bean implementing a customizer to receive requests, defaults to channel name if not provided |string |false |
+|_receive.request.message-attribute-names_ |The message attribute names to retrieve when receiving messages. |string |false |
+|_receive.request.pause.resume_ |Whether the polling must be paused when the application does not request items and resume when it does. This allows implementing back-pressure based on the application capacity. Note that polling is not stopped, but will not retrieve any records when paused. |boolean |false |`true`
+|_receive.request.retries_ |If set to a positive number, the connector will try to retry the request that was not delivered successfully (with a potentially transient error) until the number of retries is reached. If set to 0, retries are disabled. |long |false |`2147483647`
+|_region_ |The name of the SQS region |string |false |
+|_visibility-timeout_ |The duration in seconds that the received messages are hidden from subsequent retrieve requests after being retrieved by a receive request |int |false |
+|_wait-time-seconds_ |The maximum amount of time in seconds to wait for messages to be received |int |false |`1`
+|===

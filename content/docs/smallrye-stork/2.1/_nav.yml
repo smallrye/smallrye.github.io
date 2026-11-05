@@ -1,0 +1,46 @@
+title: SmallRye Stork
+nav:
+- title: Overview
+  page: index
+- title: Concepts
+  page: concepts
+- title: Programmatic API
+  page: programmatic-api
+- title: Javadoc
+  url: https://javadoc.io/doc/io.smallrye.stork/smallrye-stork-api/latest/index.html
+- title: Using Stork with Quarkus
+  page: quarkus
+- title: Service Discovery
+  items:
+  - title: Consul
+    page: service-discovery/consul
+  - title: DNS
+    page: service-discovery/dns
+  - title: Kubernetes
+    page: service-discovery/kubernetes
+  - title: KNative
+    page: service-discovery/knative
+  - title: Eureka
+    page: service-discovery/eureka
+  - title: Composite
+    page: service-discovery/composite
+  - title: Static List
+    page: service-discovery/static-list
+  - title: Custom Service Discovery
+    page: service-discovery/custom-service-discovery
+- title: Load-Balancing
+  items:
+  - title: Round Robin
+    page: load-balancer/round-robin
+  - title: Random
+    page: load-balancer/random
+  - title: Least Requests
+    page: load-balancer/least-requests
+  - title: Response Time
+    page: load-balancer/response-time
+  - title: Power Of Two Choices
+    page: load-balancer/power-of-two-choices
+  - title: Sticky
+    page: load-balancer/sticky
+  - title: Custom Load Balancer
+    page: load-balancer/custom-load-balancer

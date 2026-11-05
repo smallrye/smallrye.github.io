@@ -1,0 +1,17 @@
+[cols="<,<,^,^,<",options="header",]
+|===
+|Attribute (_alias_) |Description |Type |Mandatory |Default
+|_batch_ |When set, sends messages in batches of maximum 10 messages |boolean |false |`false`
+|_batch-delay_ |In batch send mode, the maximum delay in milliseconds to wait for messages to be included in the batch. Defaults to 3000 ms |int |false |`3000`
+|_batch-size_ |In batch send mode, the maximum number of messages to include in batch, currently SNS maximum is 10 messages |int |false |`10`
+|_credentials-provider_ |The credential provider to be used in the client, defaults to AWS default provider chain |string |false |
+|_email.subject_ |When set, sends messages with the specified subject |string |false |
+|_endpoint-override_ |The endpoint override |string |false |
+|_group.id_ |When set, sends messages with the specified group id |string |false |
+|_health-enabled_ |Whether health reporting is enabled (default) or disabled |boolean |false |`true`
+|_message-structure_ |Set to json if you want to send a different message for each protocol. |string |false |
+|_region_ |The name of the SNS region, defaults to AWS region resolver |string |false |
+|_sms.phoneNumber_ |When set, sends messages to the specified phone number. Not supported in combination with batching. |string |false |
+|_topic_ |The name of the SNS topic, defaults to channel name if not provided |string |false |
+|_topic.arn_ |The arn of the SNS topic |string |false |
+|===

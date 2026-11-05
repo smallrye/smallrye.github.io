@@ -1,0 +1,23 @@
+# Written by tools/docs/Docs.java sync: pages stored in a newer version (see Inherit.java)
+client-configuration: latest
+client-standalone: '2.10'
+custom-error-extensions: latest
+custom-scalar: latest
+directives: latest
+dynamic-client-error-handling: latest
+dynamic-client-usage: '2.17'
+extensions: '2.17'
+gradle-plugin: latest
+handling-init-payload-from-the-websocket: latest
+maven-plugin: latest
+mutation-void: latest
+server-configuration: latest
+typesafe-client-accessing-metadata-of-responses: latest
+typesafe-client-custom-scalars: latest
+typesafe-client-error-handling: latest
+typesafe-client-headers: latest
+typesafe-client-logging: latest
+typesafe-client-multiple-queries: latest
+typesafe-client-reactive-types: latest
+typesafe-client-usage: '2.9'
+using-smallrye-stork: latest

@@ -1,0 +1,5 @@
+= Service Registration/Eureka
+:version-root: ../
+include::{version-root}_attributes.adoc[]
+
+

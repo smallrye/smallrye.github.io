@@ -1,0 +1,48 @@
+[cols="<,<,^,^,<",options="header",]
+|===
+|Attribute (_alias_) |Description |Type |Mandatory |Default
+|_addresses_ _(rabbitmq-addresses)_ |The multiple addresses for cluster mode, when given overrides the host and port |string |false |
+|_automatic-recovery-enabled_ |Whether automatic connection recovery is enabled |boolean |false |`false`
+|_automatic-recovery-on-initial-connection_ |Whether automatic recovery on initial connections is enabled |boolean |false |`true`
+|_client-options-name_ _(rabbitmq-client-options-name)_ |The name of the RabbitMQ Client Option bean used to customize the RabbitMQ client configuration |string |false |
+|_connection-timeout_ |The TCP connection timeout (ms); 0 is interpreted as no timeout |int |false |`60000`
+|_credentials-provider-name_ _(rabbitmq-credentials-provider-name)_ |The name of the RabbitMQ Credentials Provider bean used to provide dynamic credentials to the RabbitMQ client |string |false |
+|_default-routing-key_ |The default routing key to use when sending messages to the exchange |string |false |++``++
+|_default-ttl_ |If specified, the time (ms) sent messages can remain in queues undelivered before they are dead |long |false |
+|_exchange.arguments_ |The identifier of the key-value Map exposed as bean used to provide arguments for exchange creation |string |false |`rabbitmq-exchange-arguments`
+|_exchange.auto-delete_ |Whether the exchange should be deleted after use |boolean |false |`false`
+|_exchange.declare_ |Whether to declare the exchange; set to false if the exchange is expected to be set up independently |boolean |false |`true`
+|_exchange.durable_ |Whether the exchange is durable |boolean |false |`true`
+|_exchange.name_ |The exchange that messages are published to or consumed from. If not set, the channel name is used. If set to "", the default exchange is used. |string |false |
+|_exchange.type_ |The exchange type: direct, fanout, headers or topic (default) |string |false |`topic`
+|_handshake-timeout_ |The AMQP 0-9-1 protocol handshake timeout (ms) |int |false |`10000`
+|_health-enabled_ |Whether health reporting is enabled (default) or disabled |boolean |false |`true`
+|_health-readiness-enabled_ |Whether readiness health reporting is enabled (default) or disabled |boolean |false |`true`
+|_host_ _(rabbitmq-host)_ |The broker hostname |string |false |`localhost`
+|_include-properties_ |Whether to include properties when a broker message is passed on the event bus |boolean |false |`false`
+|_lazy-client_ |Whether the RabbitMQ client is created lazily or eagerly. |boolean |false |`true`
+|_max-inflight-messages_ |The maximum number of messages to be written to RabbitMQ concurrently; must be a positive number |long |false |`1024`
+|_max-outgoing-internal-queue-size_ |The maximum size of the outgoing internal queue |int |false |
+|_network-recovery-interval_ |How long (ms) will automatic recovery wait before attempting to reconnect |int |false |`5000`
+|_password_ _(rabbitmq-password)_ |The password used to authenticate to the broker |string |false |
+|_port_ _(rabbitmq-port)_ |The broker port |int |false |`5672`
+|_publish-confirms_ |If set to true, published messages are acknowledged when the publish confirm is received from the broker |boolean |false |`false`
+|_reconnect-attempts_ _(rabbitmq-reconnect-attempts)_ |The number of reconnection attempts |int |false |`100`
+|_reconnect-interval_ _(rabbitmq-reconnect-interval)_ |The interval (in seconds) between two reconnection attempts |int |false |`10`
+|_requested-channel-max_ |The initially requested maximum channel number |int |false |`2047`
+|_requested-heartbeat_ |The initially requested heartbeat interval (seconds), zero for none |int |false |`60`
+|_retry-on-fail-attempts_ |The number of tentative to retry on failure |int |false |`6`
+|_retry-on-fail-interval_ |The interval (in seconds) between two sending attempts |int |false |`5`
+|_shared-connection-name_ |Optional identifier allowing multiple channels to share the same RabbitMQ connection when set to the same value |string |false |
+|_ssl_ _(rabbitmq-ssl)_ |Whether or not the connection should use SSL |boolean |false |`false`
+|_ssl.hostname-verification-algorithm_ |Set the hostname verifier algorithm for the TLS connection. Accepted values are `HTTPS`, and `NONE` (defaults). `NONE` disables the hostname verification. |string |false |`NONE`
+|_tracing.attribute-headers_ |A comma-separated list of headers that should be recorded as span attributes. Relevant only if tracing.enabled=true |string |false |++``++
+|_tracing.enabled_ |Whether tracing is enabled (default) or disabled |boolean |false |`true`
+|_trust-all_ _(rabbitmq-trust-all)_ |Whether to skip trust certificate verification |boolean |false |`false`
+|_trust-store-password_ _(rabbitmq-trust-store-password)_ |The password of the JKS trust store |string |false |
+|_trust-store-path_ _(rabbitmq-trust-store-path)_ |The path to a JKS trust store |string |false |
+|_use-nio_ |Whether usage of NIO Sockets is enabled |boolean |false |`false`
+|_user_ |The user name to use when connecting to the broker |string |false |`guest`
+|_username_ _(rabbitmq-username)_ |The username used to authenticate to the broker |string |false |
+|_virtual-host_ _(rabbitmq-virtual-host)_ |The virtual host to use when connecting to the broker |string |false |`/`
+|===

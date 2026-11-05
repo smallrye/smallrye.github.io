@@ -1,0 +1,49 @@
+package genericpayload;
+
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+
+import org.eclipse.microprofile.reactive.messaging.Channel;
+import org.eclipse.microprofile.reactive.messaging.Incoming;
+import org.eclipse.microprofile.reactive.messaging.Metadata;
+import org.eclipse.microprofile.reactive.messaging.Outgoing;
+
+import io.smallrye.mutiny.Multi;
+import io.smallrye.reactive.messaging.GenericPayload;
+import io.smallrye.reactive.messaging.MutinyEmitter;
+import messages.MyMetadata;
+
+@ApplicationScoped
+public class GenericPayloadExample {
+
+    // tag::code[]
+    @Outgoing("out")
+    Multi<GenericPayload<String>> produce() {
+        return Multi.createFrom().range(0, 100)
+                .map(i -> GenericPayload.of(">> " + i, Metadata.of(new MyMetadata())));
+    }
+    // end::code[]
+
+    // tag::injection[]
+    @Incoming("in")
+    @Outgoing("out")
+    GenericPayload<String> process(int payload, MyMetadata metadata) {
+        // use the injected metadata
+        String id = metadata.getId();
+        return GenericPayload.of(">> " + payload + " " + id,
+                Metadata.of(metadata, new MyMetadata("Bob", "Alice")));
+    }
+    // end::injection[]
+
+    // tag::emitter[]
+    @Inject
+    @Channel("out")
+    MutinyEmitter<GenericPayload<String>> emitter;
+
+    public void emitWithMetadata(String payload) {
+        emitter.sendAndForget(
+                GenericPayload.of(payload, Metadata.of(new MyMetadata())));
+    }
+    // end::emitter[]
+
+}

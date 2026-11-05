@@ -1,0 +1,6 @@
+# Written by tools/docs/Docs.java sync: pages stored in a newer version (see Inherit.java)
+core/browsing: latest
+core/getting: latest
+core/indexing: latest
+maven/basic: latest
+maven/shading: latest

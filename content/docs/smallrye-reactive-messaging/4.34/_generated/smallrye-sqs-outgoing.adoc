@@ -1,0 +1,15 @@
+[cols="<,<,^,^,<",options="header",]
+|===
+|Attribute (_alias_) |Description |Type |Mandatory |Default
+|_batch_ |When set, sends messages in batches of maximum 10 messages |boolean |false |`false`
+|_batch-delay_ |In batch send mode, the maximum delay in milliseconds to wait for messages to be included in the batch |int |false |`3000`
+|_batch-size_ |In batch send mode, the maximum number of messages to include in batch, currently SQS maximum is 10 messages |int |false |`10`
+|_credentials-provider_ |The credential provider to be used in the client |string |false |
+|_endpoint-override_ |The endpoint override |string |false |
+|_group.id_ |When set, sends messages with the specified group id |string |false |
+|_health-enabled_ |Whether health reporting is enabled (default) or disabled |boolean |false |`true`
+|_queue_ |The name of the SQS queue, defaults to channel name if not provided |string |false |
+|_queue.url_ |The url of the SQS queue |string |false |
+|_region_ |The name of the SQS region |string |false |
+|_tracing-enabled_ |Whether tracing is enabled (default) or disabled |boolean |false |`true`
+|===

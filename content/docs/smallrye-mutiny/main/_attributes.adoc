@@ -1,0 +1,22 @@
+:project-version: 3.3.1
+// Attributes shared by every page. smallrye.io overrides the ones it needs when it publishes.
+// Pages in subdirectories set :version-root: (../ per level) before including this file.
+ifndef::version-root[:version-root:]
+:idprefix:
+:idseparator: -
+:sectanchors:
+:examples-dir: {version-root}_examples
+:partialsdir: {version-root}_partials
+:project-name: SmallRye Mutiny
+:javadoc-version: latest
+:versions-mutiny: 3.3.1
+:versions-vertx-bindings: 3.23.1
+:generated-dir: {version-root}_generated
+
+// Added by smallrye.io (tools/docs/Docs.java sync)
+:javadoc-version: 3.3.1
+:relfileprefix: /docs/smallrye-mutiny/main/
+:imagesdir: /docs/smallrye-mutiny/main
+:docs-project: smallrye-mutiny
+:docs-version: main
+:docs-ref: main

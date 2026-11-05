@@ -1,0 +1,123 @@
+= Advanced Maven Plugin Usage
+:version-root: ../
+include::{version-root}_attributes.adoc[]
+
+If you need to process more than one directory of classes, you can specify multiple `fileSets` like this:
+
+[source,xml]
+----
+<build>
+    <plugins>
+        <plugin>
+            <groupId>io.smallrye</groupId>
+            <artifactId>jandex-maven-plugin</artifactId>
+            <version>${version.jandex}</version>
+            <executions>
+                <execution>
+                    <id>make-index</id>
+                    <goals>
+                        <goal>jandex</goal>
+                    </goals>
+                    <configuration>
+                        <fileSets>
+                            <fileSet>
+                                <directory>${project.build.directory}/generated-classes/foo</directory>
+                            </fileSet>
+                            <fileSet>
+                                <directory>${project.build.directory}/generated-classes/bar</directory>
+                            </fileSet>
+                        </fileSets>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+----
+
+To turn _off_ processing of `target/classes`, add the following configuration:
+
+[source,xml]
+----
+<processDefaultFileSet>false</processDefaultFileSet>
+----
+
+For any `fileSet`, you can also fine-tune the classes that are processed using the following options:
+
+[source,xml]
+----
+<fileSet>
+    <directory>${project.build.directory}/somedir</directory>
+    <!-- included globs -->
+    <includes>
+        <include>**/indexed/*.class</include>
+        <include>**/idxd/*.class</include>
+    </includes>
+    <!-- excluded globs -->
+    <excludes>
+        <exclude>**/*NotIndexed.class</exclude>
+    </excludes>
+    <!-- normally true, this excludes things like the CVS/ and .svn/ directories, log files, etc. -->
+    <useDefaultExcludes>false</useDefaultExcludes>
+</fileSet>
+----
+
+A `fileSet` may specify a _dependency_ instead of a directory.
+That dependency must exist among the set of dependencies of the Maven project being built.
+A `groupId` and `artifactId` are mandatory, a `classifier` is optional:
+
+[source,xml]
+----
+<fileSet>
+    <dependency>
+        <groupId>com.example</groupId>
+        <artifactId>my-project</artifactId>
+    </dependency>
+    <includes>
+        <include>com/example/my/project/api/**/*.class</include>
+    </includes>
+    <excludes>
+        <exclude>com/example/**/_private/*.class</exclude>
+    </excludes>
+</fileSet>
+----
+
+== Index Location and Version
+
+To change where the persistent index is located, the `indexDir` and `indexName` configuration properties can be used.
+
+CAUTION: These properties should be left unchanged.
+Jandex consumers typically look for a persistent Jandex index in the default location.
+
+The `indexDir` property defaults to `${project.build.outputDirectory}/META-INF` (so `target/classes/META-INF` by default), while `indexName` defaults to `jandex.idx`.
+Therefore, the index is by default stored to `target/classes/META-INF/jandex.idx`.
+
+This example moves the index to `target/classes/index.dat`:
+
+[source,xml]
+----
+<plugin>
+    <groupId>io.smallrye</groupId>
+    <artifactId>jandex-maven-plugin</artifactId>
+    <version>${version.jandex}</version>
+    <executions>
+        <execution>
+            <id>make-index</id>
+            <goals>
+                <goal>jandex</goal>
+            </goals>
+            <configuration>
+                <indexDir>${project.build.outputDirectory}</indexDir>
+                <indexName>index.dat</indexName>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+----
+
+The `indexVersion` property can be used to produce an older index version.
+By default, the index version produced is the latest version supported by the Jandex version.
+Possible values of the `indexVersion` property can be found in link:/docs/jandex/3.5/#persistent_index_format_versions[the table of persistent index format versions].
+
+CAUTION: It is usually best to leave the index version unchanged.
+Exercise care when upgrading Jandex itself.

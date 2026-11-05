@@ -1,0 +1,44 @@
+title: SmallRye Fault Tolerance
+nav:
+- title: Overview
+  page: index
+- title: Usage
+  items:
+  - title: Basic Usage
+    page: usage/basic
+  - title: Extra Features
+    page: usage/extra
+  - title: Programmatic API
+    page: usage/programmatic-api
+- title: Integration
+  items:
+  - title: Introduction
+    page: integration/intro
+  - title: Metrics
+    page: integration/metrics
+  - title: Thread Pool
+    page: integration/thread-pool
+  - title: Context Propagation
+    page: integration/context-propagation
+  - title: OpenTracing
+    page: integration/opentracing
+  - title: Event Loop
+    page: integration/event-loop
+  - title: Additional Asynchronous Types Integration Concerns
+    page: integration/async-types
+  - title: Kotlin Integration Concerns
+    page: integration/kotlin
+  - title: Programmatic API Integration Concerns
+    page: integration/programmatic-api
+- title: Internals
+  items:
+  - title: Project Structure
+    page: internals/project-structure
+  - title: Instructions
+    page: internals/instructions
+  - title: Fault Tolerance Core
+    page: internals/core
+  - title: Configuration System
+    page: internals/config
+  - title: Logging
+    page: internals/logging

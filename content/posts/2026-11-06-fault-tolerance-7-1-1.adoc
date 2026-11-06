@@ -1,0 +1,23 @@
+:page-layout: post
+:page-title: Fault Tolerance 7.1.1
+:page-synopsis: SmallRye Fault Tolerance 7.1.1 released!
+:page-tags: [announcement, microprofile]
+:page-date: 2026-11-06 16:00:00.000 +0100
+:page-author: lthon
+:smallrye-ft: SmallRye Fault Tolerance
+:microprofile-ft: MicroProfile Fault Tolerance
+
+= Fault Tolerance 7.1.1
+
+Today, we announce the https://github.com/smallrye/smallrye-fault-tolerance/releases/tag/7.1.1[release] of {smallrye-ft} 7.1.1.
+This release contains one bugfix.
+
+Both the Micrometer integration and the OpenTelemetry integration register their metrics eagerly, based on which fault tolerance strategies the guarded operation declares.
+However, whether a fallback is present is not always known at that point: a method annotated `@ApplyGuard` may also declare `@Fallback`, in which case the fallback is only known when the method is actually invoked.
+Similarly, if multiple ``Guard``s (or ``TypedGuard``s) have the same description, their metrics are shared, but the metrics integration only registered the metrics based on the first guarded operation.
+In these situations, the guard would attempt to emit a metric that wasn't registered, which resulted in a `NullPointerException` and a failure of the entire guarded invocation.
+
+With this release, the invocation metrics are always registered for all possible outcomes, and the remaining metrics are registered on demand when missing.
+The interception point also passes its own fallback information to the guard, so that eager registration is correct for the combination of `@ApplyGuard` and `@Fallback`.
+
+As usual, if you have any ideas for improvements, please https://github.com/smallrye/smallrye-fault-tolerance/issues[file an issue]!

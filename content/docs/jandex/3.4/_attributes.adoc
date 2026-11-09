@@ -1,0 +1,18 @@
+:project-version: 3.4.0
+// Attributes shared by every page. smallrye.io overrides the ones it needs when it publishes.
+// Pages in subdirectories set :version-root: (../ per level) before including this file.
+ifndef::version-root[:version-root:]
+:idprefix:
+:idseparator: -
+:sectanchors:
+:partialsdir: {version-root}_partials
+:examples-dir: {version-root}_examples
+:generated-dir: {version-root}_generated
+
+// Added by smallrye.io (tools/docs/Docs.java sync)
+:javadoc-version: 3.4.0
+:relfileprefix: /docs/jandex/3.4/
+:imagesdir: /docs/jandex/3.4
+:docs-project: jandex
+:docs-version: 3.4
+:docs-ref: 3.4.0

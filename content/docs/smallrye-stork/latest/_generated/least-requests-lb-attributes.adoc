@@ -1,0 +1,4 @@
+[cols=",,,",options="header",]
+|===
+|Attribute |Mandatory |Default Value |Description
+|===

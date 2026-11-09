@@ -1,0 +1,6 @@
+[cols="<,<,^,^,<",options="header",]
+|===
+|Attribute (_alias_) |Description |Type |Mandatory |Default
+|_endpoint-uri_ |The URI of the Camel endpoint (read from or written to) |string |true |
+|_merge_ |Whether the connector should allow multiple upstreams |boolean |false |`false`
+|===

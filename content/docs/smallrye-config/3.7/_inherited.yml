@@ -1,0 +1,17 @@
+# Written by tools/docs/Docs.java sync: pages stored in a newer version (see Inherit.java)
+config-sources/custom: '3.9'
+config-sources/json: latest
+config-sources/locations: latest
+config/config-value: latest
+config/customizer: latest
+config/environment-variables: '3.14'
+config/expressions: '3.15'
+config/getting-started: '3.8'
+config/indexed-properties: '3.9'
+config/map-support: latest
+config/mappings: '3.9'
+converters/custom: '3.15'
+extensions/fallback: '3.9'
+extensions/interceptors: '3.18'
+extensions/logging: latest
+extensions/relocate: '3.9'

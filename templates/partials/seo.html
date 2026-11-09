@@ -2,7 +2,7 @@
 {@io.quarkiverse.roq.frontmatter.runtime.model.Page page}
 {! Roq's {#seo} tag, assembled here so posts can use their Jekyll-era :page-synopsis: as the
    description and their author key resolves to a name from data/authors.yml. !}
-{#let description=(page.description ?: page.data.synopsis ?: site.description)}
+{#let description=(page.description ?: page.data.getString('summary') ?: page.data.getString('synopsis') ?: site.description)}
 {#if page.url.path.startsWith('/blog/page/')}
 {! Later pages of the blog listing: say which page, so no two pages share a title or description. !}
 {#let n=page.url.path.replace('/blog/page/', '').replace('/', '')}

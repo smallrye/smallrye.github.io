@@ -1,0 +1,5 @@
+[cols=",,,",options="header",]
+|===
+|Attribute |Mandatory |Default Value |Description
+|`address-list` |Yes | |A comma-separated list of addresses (host:port). The default port is 80.
+|===

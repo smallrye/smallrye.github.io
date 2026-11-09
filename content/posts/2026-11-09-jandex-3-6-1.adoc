@@ -1,0 +1,24 @@
+:page-layout: post
+:page-title: Jandex 3.6.1
+:page-synopsis: Jandex 3.6.1 released!
+:page-tags: [announcement]
+:page-date: 2026-11-09 20:00:00.000 +0100
+:page-author: lthon
+
+= Jandex 3.6.1
+
+Today, we announce the https://github.com/smallrye/jandex/releases/tag/3.6.1[release] of Jandex 3.6.1.
+This release contains a few small improvements and optimizations.
+
+Comparing two componentized ``DotName``s via `DotName.compareTo()` used to flatten both names into freshly allocated component arrays before walking them.
+This is a hot path: during indexing, annotations on every class, method, and field are sorted by name, and frameworks subsequently look up annotations via binary search over those sorted arrays, calling `compareTo()` repeatedly.
+The comparison algorithm was reworked to add a fast path for common prefixes and to avoid allocatons, making all measured cases faster, sometimes remarkably so.
+Thanks Guillaume Smet for the pull request!
+
+The `getAllKnownSubclasses()`, `getAllKnownSubinterfaces()`, and `getAllKnownImplementations()` (and by delegation `getAllKnownImplementors()`) methods on `Index` and `CompositeIndex` previously returned their internal `HashSet` accumulators directly.
+This allowed callers to mutate those sets, which was neither intended nor consistent with sibling methods such as `getKnownDirectSubclasses()`.
+All of these methods now return an unmodifiable set view (`Collections.unmodifiableSet()`).
+This is technically a breaking change, but only for users that break the documented contract.
+Thanks Tiziano Basile for the pull request!
+
+If you experience any troubles, or if you have any ideas for Jandex improvements, please https://github.com/smallrye/jandex/issues[file an issue].

@@ -4,6 +4,24 @@
 
 ## Posts
 
+### [Jandex 3.6.1](/blog/jandex-3-6-1/)
+
+Today, we announce the release of Jandex 3.6.1.
+This release contains a few small improvements and optimizations.
+
+Comparing two componentized DotNames via DotName.compareTo() used to flatten both names into freshly allocated component arrays before walking them.
+This is a hot path: during indexing, annotations on every class, method, and field are sorted by name, and frameworks subsequently look up annotations via binary search over those sorted arrays, calling compareTo() repeatedly.
+The comparison algorithm was reworked to add a fast path for common prefixes and to avoid allocatons, making all measured cases faster, sometimes remarkably so.
+Thanks Guillaume Smet for the pull request!
+
+The getAllKnownSubclasses(), getAllKnownSubinterfaces(), and getAllKnownImplementations() (and by delegation getAllKnownImplementors()) methods on Index and CompositeIndex previously returned their internal HashSet accumulators directly.
+This allowed callers to mutate those sets, which was neither intended nor consistent with sibling methods such as getKnownDirectSubclasses().
+All of these methods now return an unmodifiable set view (Collections.unmodifiableSet()).
+This is technically a breaking change, but only for users that break the documented contract.
+Thanks Tiziano Basile for the pull request!
+
+If you experience any troubles, or if you have any ideas for Jandex improvements, please file an issue.
+
 ### [Fault Tolerance 7.1.1](/blog/fault-tolerance-7-1-1/)
 
 Today, we announce the release of SmallRye Fault Tolerance 7.1.1.
@@ -4289,7 +4307,14 @@ Provides an API to convert a String type to something else
 
 ### [Blog](/blog/)
 
-Fault Tolerance 7.1.1
+Jandex 3.6.1
+
+ Ladislav Thon
+ 9 November 2026
+
+ Jandex 3.6.1 released!
+
+ Fault Tolerance 7.1.1
 
  Ladislav Thon
  6 November 2026
@@ -4352,20 +4377,20 @@ Fault Tolerance 7.1.1
 
  Jandex 3.5.2 released!
 
- Jandex 3.5.1
-
- Ladislav Thon
- 23 October 2025
-
- Jandex 3.5.1 released!
-
  Page 1 of 9
 
  Older &amp;rarr;
 
 ### [Blog](/blog/page/2/)
 
-Fault Tolerance 6.9.3
+Jandex 3.5.1
+
+ Ladislav Thon
+ 23 October 2025
+
+ Jandex 3.5.1 released!
+
+ Fault Tolerance 6.9.3
 
  Ladislav Thon
  12 September 2025
@@ -4428,13 +4453,6 @@ Fault Tolerance 6.9.3
 
  SmallRye Fault Tolerance 6.9.0 released!
 
- Jandex 3.2.7
-
- Ladislav Thon
- 17 February 2025
-
- Jandex 3.2.7 released!
-
  &amp;larr; Newer
 
  Page 2 of 9
@@ -4443,7 +4461,14 @@ Fault Tolerance 6.9.3
 
 ### [Blog](/blog/page/3/)
 
-Jandex 3.2.6
+Jandex 3.2.7
+
+ Ladislav Thon
+ 17 February 2025
+
+ Jandex 3.2.7 released!
+
+ Jandex 3.2.6
 
  Ladislav Thon
  11 February 2025
@@ -4506,13 +4531,6 @@ Jandex 3.2.6
 
  SmallRye Fault Tolerance 6.6.3 released!
 
- Fault Tolerance 6.6.2
-
- Ladislav Thon
- 14 November 2024
-
- SmallRye Fault Tolerance 6.6.2 released!
-
  &amp;larr; Newer
 
  Page 3 of 9
@@ -4521,7 +4539,14 @@ Jandex 3.2.6
 
 ### [Blog](/blog/page/4/)
 
-Fault Tolerance 6.6.1
+Fault Tolerance 6.6.2
+
+ Ladislav Thon
+ 14 November 2024
+
+ SmallRye Fault Tolerance 6.6.2 released!
+
+ Fault Tolerance 6.6.1
 
  Ladislav Thon
  29 October 2024
@@ -4584,13 +4609,6 @@ Fault Tolerance 6.6.1
 
  Jandex 3.2.0 released!
 
- Jandex 3.1.8
-
- Ladislav Thon
- 7 May 2024
-
- Jandex 3.1.8 released!
-
  &amp;larr; Newer
 
  Page 4 of 9
@@ -4599,7 +4617,14 @@ Fault Tolerance 6.6.1
 
 ### [Blog](/blog/page/5/)
 
-Fault Tolerance 6.3.0
+Jandex 3.1.8
+
+ Ladislav Thon
+ 7 May 2024
+
+ Jandex 3.1.8 released!
+
+ Fault Tolerance 6.3.0
 
  Ladislav Thon
  11 April 2024
@@ -4662,13 +4687,6 @@ Fault Tolerance 6.3.0
 
  SmallRye Fault Tolerance 6.2.3 released!
 
- Jandex 3.1.1
-
- Ladislav Thon
- 13 April 2023
-
- Jandex 3.1.1 released!
-
  &amp;larr; Newer
 
  Page 5 of 9
@@ -4677,7 +4695,14 @@ Fault Tolerance 6.3.0
 
 ### [Blog](/blog/page/6/)
 
-Jandex 3.1.0
+Jandex 3.1.1
+
+ Ladislav Thon
+ 13 April 2023
+
+ Jandex 3.1.1 released!
+
+ Jandex 3.1.0
 
  Ladislav Thon
  6 April 2023
@@ -4740,13 +4765,6 @@ Jandex 3.1.0
 
  SmallRye Fault Tolerance 5.6.0 and 6.1.0 released!
 
- Jandex 3.0.1
-
- Ladislav Thon
- 16 September 2022
-
- Jandex 3.0.1 released!
-
  &amp;larr; Newer
 
  Page 6 of 9
@@ -4755,7 +4773,14 @@ Jandex 3.1.0
 
 ### [Blog](/blog/page/7/)
 
-Fault Tolerance 6.0.0
+Jandex 3.0.1
+
+ Ladislav Thon
+ 16 September 2022
+
+ Jandex 3.0.1 released!
+
+ Fault Tolerance 6.0.0
 
  Ladislav Thon
  7 September 2022
@@ -4818,13 +4843,6 @@ Fault Tolerance 6.0.0
 
  Log4j2 Vulnerability and SmallRye
 
- Fault Tolerance 5.2.1
-
- Ladislav Thon
- 16 July 2021
-
- SmallRye Fault Tolerance 5.2.1 released!
-
  &amp;larr; Newer
 
  Page 7 of 9
@@ -4833,7 +4851,14 @@ Fault Tolerance 6.0.0
 
 ### [Blog](/blog/page/8/)
 
-Fault Tolerance 5.2
+Fault Tolerance 5.2.1
+
+ Ladislav Thon
+ 16 July 2021
+
+ SmallRye Fault Tolerance 5.2.1 released!
+
+ Fault Tolerance 5.2
 
  Ladislav Thon
  2 July 2021
@@ -4896,13 +4921,6 @@ Fault Tolerance 5.2
 
  SmallRye Fault Tolerance 4.1 released!
 
- Fault Tolerance 4.0
-
- Ladislav Thon
- 22 January 2020
-
- Why we reimplemented SmallRye Fault Tolerance from scratch and how does it look like?
-
  &amp;larr; Newer
 
  Page 8 of 9
@@ -4911,7 +4929,14 @@ Fault Tolerance 5.2
 
 ### [Blog](/blog/page/9/)
 
-SmallRye Innovation
+Fault Tolerance 4.0
+
+ Ladislav Thon
+ 22 January 2020
+
+ Why we reimplemented SmallRye Fault Tolerance from scratch and how does it look like?
+
+ SmallRye Innovation
 
  Ken Finnigan
  27 November 2019

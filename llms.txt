@@ -4,6 +4,7 @@
 
 ## Posts
 
+- [Jandex 3.6.1](/blog/jandex-3-6-1/)
 - [Fault Tolerance 7.1.1](/blog/fault-tolerance-7-1-1/)
 - [Fault Tolerance 7.1.0](/blog/fault-tolerance-7-1-0/)
 - [Fault Tolerance 7.0.0](/blog/fault-tolerance-7-0-0/)

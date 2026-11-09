@@ -5,7 +5,15 @@
     <link>https://smallrye.io/</link>
     <atom:link href="https://smallrye.io/rss.xml" rel="self" type="application/rss+xml"/>
     <generator>Quarkus Roq</generator>
-    <lastBuildDate>Fri, 06 Nov 2026 15:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 09 Nov 2026 19:00:00 +0000</lastBuildDate>
+      <item>
+        <title><![CDATA[Jandex 3.6.1]]></title>
+        <link>https://smallrye.io/blog/jandex-3-6-1/</link>
+        <guid isPermaLink="false">https://smallrye.io/blog/jandex-3-6-1/</guid>
+        <pubDate>Mon, 09 Nov 2026 19:00:00 +0000</pubDate>
+        <description><![CDATA[]]></description>
+        <content:encoded><![CDATA[<p></p><div style="margin-top: 50px; font-style: italic;"><strong><a href="https://smallrye.io/blog/jandex-3-6-1/">Keep reading</a>.</strong></div><br /> <br />]]></content:encoded>
+      </item>
       <item>
         <title><![CDATA[Fault Tolerance 7.1.1]]></title>
         <link>https://smallrye.io/blog/fault-tolerance-7-1-1/</link>
